@@ -1,0 +1,52 @@
+<view>
+	<!--  用户登录-->
+	<view class="user-info-wrapper">
+		<block a:if="{{!userInfo}}">
+			<view class="avatar-wrapper">
+				<image src="/images/avatar.png" class="avatar"/>
+			</view>
+			<view class="login-wrapper">
+				<button class="login" open-type="getAuthorize" onGetAuthorize="onGetAuthorize" onError="onAuthError"
+				        scope="userInfo">登录</button>
+			</view>
+		</block>
+		<block a:else>
+			<view class="avatar-wrapper">
+				<image a:if="{{userInfo['avatar_url']}}" src="{{userInfo['avatar_url']}}" class="avatar"/>
+				<image a:if="{{!userInfo['avatar_url']}}" src="/images/avatar.png" class="avatar"/>
+			</view>
+			<view class="user-wrapper">
+				<view class="user-name">Hi,{{userInfo["nickname"]}}</view>
+				<view class="user-cate-wrapper" a:if="{{cardType.length}}">
+					<block a:for="{{cardType}}">
+						<view class="user-cate" a:key="{{index}}">{{item}}卡用户</view>
+					</block>
+				</view>
+				<view class="user-cate-wrapper" a:else>
+					<view class="user-cate" a:key="{{index}}">未关联ETC卡</view>
+				</view>
+			</view>
+		</block>
+	</view>
+	<view class="tips"/>
+	<view class="body">
+		<view class="row" onTap="next" data-idx="mineEtc">
+			<view class="item-txt">关联ETC卡</view>
+			<view class="item-arrow">
+				<image src="/images/arrow.png" style="width:14rpx;height:24rpx;padding-left:15rpx;"/>
+			</view>
+		</view>
+		<view class="tips"/>
+		<view class="row" onTap="next" data-idx="bindPhone">
+			<view class="item-txt">绑定手机号</view>
+			<view class="item-txt" style="justify-content:flex-end;color:#999;" a:if="{{userInfo && userInfo['mobile']}}">{{userInfo["mobile"]}}</view>
+			<view class="item-arrow">
+				<image src="/images/arrow.png" style="width:14rpx;height:24rpx;padding-left:15rpx;"/>
+			</view>
+		</view>
+		<view class="tips"/>
+		<view class="row">
+			<view class="item-txt">软件版本v1.0.0</view>
+		</view>
+	</view>
+</view>

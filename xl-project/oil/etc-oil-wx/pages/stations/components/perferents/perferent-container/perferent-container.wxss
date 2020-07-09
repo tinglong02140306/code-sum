@@ -1,0 +1,7 @@
+/* pages/station/components/perferents/perferent-container/perferent-container.wxss */
+.perferent-container-box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+}

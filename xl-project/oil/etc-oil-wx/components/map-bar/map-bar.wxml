@@ -1,0 +1,22 @@
+<!--
+ * @Author: sunmingmao
+ * @Date: 2020-04-02 08:50:18
+ * @LastEditors: sunmingmao
+ * @LastEditTime: 2020-04-10 21:53:21
+ * @Description: 地图导航栏
+ -->
+ <navigation-bar background_style="background-color:#00A170">
+    <view class="map-back-box" bind:tap="onBackClick">
+      <image class="map-back-image" src="/assets/static/map-back.png"></image>
+    </view>
+    <nav-menu list="{{list}}"
+              selected_index="{{selected_index}}"
+      class="map-bar"
+      color="rgba(255,255,255,.65)" 
+      selected_color="#ffffff" 
+      border_color="#ffffff"
+      border_width = "{{3}}"
+      bind:menu="onMenuClick"
+      style="height: {{height}}px;"
+    ></nav-menu>
+ </navigation-bar>

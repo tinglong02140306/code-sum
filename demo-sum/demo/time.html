@@ -1,0 +1,32 @@
+<span style="font-size:14px;"><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">   
+<html xmlns="http://www.w3.org/1999/xhtml">   
+<head>   
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />   
+<title>JS实现倒计时(时、分，秒)</title>   
+<SCRIPT LANGUAGE="JavaScript">    
+   
+	var mintime = 0 //一个小时，按秒计算，自己调整!    
+	function CountDown(){    
+		if(mintime <= 900){    
+			minutes = Math.floor(mintime/60);    
+			seconds = Math.floor(mintime%60);    
+			minute = (minutes < 10)? '0' + minutes : minutes;
+			second = (seconds < 10)? '0' + seconds : seconds;
+			msg = minute+":"+second;    
+			document.all["timer"].innerHTML=msg;    
+			++mintime;    
+		}else{    
+			clearInterval(timer); 
+		}    
+	}   
+	 
+	setInterval(function(){
+		CountDown();
+
+	},1000);    
+   
+</SCRIPT>    
+<div id="timer" style="color:red" mce_style="color:red"></div>    
+</body>   
+</html>   
+</span> 

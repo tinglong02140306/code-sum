@@ -1,0 +1,84 @@
+.c65 {
+	color: #656565;
+}
+.ca3 {
+	color: #a3a3a3;
+}
+.f34 {
+	font-size: 0.76rem;
+}
+.f30 {
+	font-size: 0.67rem;
+}
+.content-wrap {
+	position: absolute;
+	top: 2.1rem;
+	bottom: 0;
+	width: 100%;
+	height: auto;
+}
+.car-list {
+	padding: 0 2%;
+	margin: 0 auto;
+	width: 96%;
+}
+.car-item {
+	margin-top: .44rem;
+	height: 4.44rem;
+	width: 100%;
+	font-size: 0;
+	border-radius: 0.44rem;
+}
+.item-icon {
+	display: inline-block; 	
+	padding: 0 .67rem;
+	width: 2.64rem;
+	height: 100%;
+	background: url(../images/remove-car/icon-car.png) center no-repeat;
+	background-size: 2.64rem;
+}
+.item-instruct {
+	display: inline-block;
+	padding: 0.44rem 0;
+	height: 100%;
+	width: calc(100% - 3.98rem);
+	vertical-align: top;
+}
+.car-no-state,
+.location {
+	padding: 0.2rem 0;
+}
+.car-no,
+.car-state {
+	display: inline-block;
+}
+.date,
+.location {
+	line-height: .62rem;
+}
+.car-no {
+	width: 60%;
+	text-align: left;
+}
+.car-no-state {
+	padding-right: 4.6%;
+	font-size: 0;
+}
+.car-state {
+	width: calc(35.4% - 0.27rem);
+	padding-right: 0.5rem;
+	background: url(../images/remove-car/arrow-right.png) right center no-repeat; 
+	background-size: 0.27rem 0.49rem;
+	text-align: right;
+}
+.date {
+	padding-left: .74rem;
+	background: url(../images/remove-car/icon-date.png) left center no-repeat; 
+	background-size: 0.44rem;
+
+}
+.location {
+	padding-left: .74rem;
+	background: url(../images/remove-car/icon-locate.png) left top .2rem no-repeat; 
+	background-size: 0.36rem 0.53rem;
+}

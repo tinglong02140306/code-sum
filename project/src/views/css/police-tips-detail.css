@@ -1,0 +1,122 @@
+/**
+ * @author hmxue
+ * @time 2017-11-09
+ * @description 警方提示详情
+ */
+body {
+    background-color: #fff;
+}
+.wrap {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+}
+
+
+/* ================ 警营提示详情样式 start =====================*/
+
+.detail-view {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.police-tip-title {
+    padding: 3% 3% 0rem 3%;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #333;
+    line-height: 1.2rem;
+    text-align: center;
+}
+
+.police-tip-datetime {
+    padding: 0 3%;
+    font-size: 0.58rem;
+    color: #666;
+    line-height: 1.5rem;
+    text-align: right;
+}
+
+.police-tip-content {
+    padding: 0 3%;
+}
+
+.police-tip-content,
+.police-tip-content p,
+.police-tip-content span,
+.police-tip-content li,
+.police-tip-content ul,
+.police-tip-content i,
+.police-tip-content ol,
+.police-tip-content dd,
+.police-tip-content dt,
+.police-tip-content em,
+.police-tip-content a,
+.police-tip-content td,
+.police-tip-content strong {
+    /*font-size: 0.62rem !important;*/
+    font-size: 0.69rem !important;
+    color: #333;
+    line-height: 1rem !important;
+}
+
+.police-tip-content p {
+    margin: 0.3rem 0;
+}
+
+.police-tip-content a {
+    color: #0000ff;
+    text-decoration: underline;
+}
+
+.police-tip-content img {
+    display: block;
+    padding: 0.2rem 0;
+    max-width: 100%;
+}
+
+
+/* ================ 警营提示详情样式 end =====================*/
+
+.empty p {
+    padding-top: 0.68rem;
+    font-size: 0.62rem;
+    color: #666;
+    text-align: center;
+    line-height: 0.68rem;
+}
+
+.empty-ad {
+    height: 10rem;
+    background: url(./public/wcportal/0.0.1/img/common/404.png) no-repeat 50% bottom;
+    background-size: 4.1rem 4.04rem;
+}
+
+
+.empty .refresh-btn {
+    margin: 1.64rem auto 0.70rem;
+    width: 7.1rem;
+    height: 1.78rem;
+    background: #4c72ff;
+    border: 1px solid #4c72ff;
+    border-radius: 10px;
+    text-align: center;
+    line-height: 1.78rem;
+    font-size: 0.66rem;
+    color: #fff;
+}
+
+.empty .close-btn {
+    margin: 0 auto;
+    width: 7.1rem;
+    height: 1.78rem;
+    background-color: #fff;
+    border: 1px solid #d8d8d8;
+    border-radius: 10px;
+    line-height: 1.78rem;
+    font-size: 0.66rem;
+    color: #666;
+    text-align: center;
+}

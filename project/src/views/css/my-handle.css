@@ -1,0 +1,92 @@
+/**
+ * @author hmxue
+ * @time 2017-11-09
+ * @description 我的办理
+ */
+.wrap {
+    overflow: hidden;
+}
+.handle-wrap {
+    padding: 0.68rem 0.68rem;
+    position: absolute;
+    bottom: 0;  
+    overflow: auto;
+    width: calc(100% - 1.36rem);
+    height: auto;
+}
+.handle-ul ul li {
+	margin-bottom: 0.46rem;
+    background-color: #fff;
+    border-radius: 0.22rem;
+}
+.handle-ul ul li:last-child {
+    margin-bottom: 0rem;
+}
+.handle-item p {
+	padding: 0.44rem 0.71rem;
+}
+.handle-item .type-name-warp {
+	border-bottom: 1px solid #e5e5e5;
+    font-size: 0.666667rem;
+    color: #666;
+}
+.handle-item .type-name-warp .type-name {
+    display: inline-block;
+    width: 78%;
+    height: 1.06rem;
+    line-height: 1.06rem;
+
+}
+.handle-item .type-name-warp .status {
+    display: inline-block;
+    width: 2.44rem;
+    height: 1.06rem;
+    border-radius: 0.11rem;
+    font-size: 0.53rem;
+    line-height: 1.06rem;
+    text-align: center;
+    vertical-align: middle;
+}
+.in-handle {
+    border: 1px solid #8aa3ff;
+    background-color: #edf1ff;
+    color: #4c72ff;
+}
+.already-handle {
+    background-color: #fef4e9;
+    border: 1px solid #fab972;
+    color: #f79327;
+}
+.no-handle {
+    background-color: #efefef;
+    border: 1px solid #9b9b9b;
+    color: #666666;
+}
+.handle-item .name {
+    padding: 0.6rem 0.72rem;
+    font-size: 0.70rem;
+	color: #333;
+}
+.handle-item .time {
+    padding: 0rem 0.72rem 0.6rem;
+	font-size: 0.54rem;
+	color: #808080;
+}
+.empty p {
+    font-size: 0.58rem;
+    color: #999;
+}
+.handle-empty-ad {
+    height: 10rem;
+    background: url(./public/wcportal/0.0.1/img/my-handle/no-handle.png) no-repeat 49% bottom;
+    background-size: 3.84rem 4.28rem;
+}
+.no-net {
+    /*padding-top: 2.7rem;
+    position: relative;
+    z-index: 9;*/
+}
+.mescroll-upwarp {
+    padding: 0.68rem 0.68rem 0rem;
+    background: transparent;
+}

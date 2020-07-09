@@ -1,0 +1,116 @@
+<view>
+  <view class="index-wrapper" a:if="{{loaded}}">
+    <view class="scroll-view">
+      <!--  用户登录-->
+      <view class="user-info-wrapper">
+        <block a:if="{{!userInfo}}">
+          <view class="avatar-wrapper">
+            <image src="/images/avatar.png" class="avatar"/>
+          </view>
+          <view class="login-wrapper">
+            <button class="login" open-type="getAuthorize" onGetAuthorize="onGetAuthorize" onError="onAuthError"
+                    scope="userInfo">登录</button>
+          </view>
+        </block>
+        <block a:else>
+          <view class="avatar-wrapper">
+            <image src="{{userInfo['avatar_url']}}" class="avatar"/>
+          </view>
+          <view class="user-wrapper">
+            <view class="user-name">Hi,{{userInfo["nickname"]}}</view>
+            <view class="user-cate-wrapper" a:if="{{cardType.length}}">
+              <block a:for="{{cardType}}">
+                <view class="user-cate" a:key="{{index}}">{{item}}卡用户</view>
+              </block>
+            </view>
+            <view class="user-cate-wrapper" a:else>
+              <view class="user-cate" a:key="{{index}}">未关联ETC卡</view>
+            </view>
+          </view>
+        </block>
+        <view class="right-arrow-wrapper" onTap="next" data-idx="my">
+          <image src="/images/white-arrow.png" class="right-arrow"/>
+        </view>
+      </view>
+      <!--  通知公告-->
+      <view class="notice-wrapper">
+        <notice list="{{list}}" onClick="onTap"/>
+      </view>
+      <!--  搜索-->
+      <view class="search-wrapper">
+        <view class="search-box" onTap="onSearch">
+          <view class="search-input">
+            <input disabled placeholder="请输入问题" placeholder-style="color:rgb(173,184,203);"/>
+          </view>
+          <image src="/images/search.png" class="search-icon"/>
+        </view>
+      </view>
+      <!--  猜您想问-->
+      <view class="card-guess">
+        <card type="guess" onRefresh="onRefresh">
+          <view slot="card-body">
+            <block a:for="{{problems}}" a:key="{{index}}">
+              <view onTap="showDetail" data-item="{{item}}">
+                <list-item title="{{item['question']}}" bottom="{{index!==problems.length-1}}" />
+              </view>
+            </block>
+          </view>
+        </card>
+      </view>
+      <!--  问题分类-->
+      <view class="card-guess">
+        <card type="category">
+          <view slot="card-body" class="category-body">
+            <view data-idx="apply" onTap="next">
+              <category>
+                <text slot="category-title">ETC办理领取</text>
+<!--                <text slot="category-subtitle">免费线上办理</text>-->
+                <image slot="category-icon" src="/images/etc.png" class="category-icon"/>
+              </category>
+            </view>
+            <view data-idx="active" onTap="next">
+              <category>
+                <text slot="category-title">ETC安装激活</text>
+<!--                <text slot="category-subtitle">免费线上办理</text>-->
+                <image slot="category-icon" src="/images/etc-active.png" class="category-icon"/>
+              </category>
+            </view>
+            <view data-idx="service" onTap="next">
+              <category>
+                <text slot="category-title">ETC售后服务</text>
+<!--                <text slot="category-subtitle">免费线上办理</text>-->
+                <image slot="category-icon" src="/images/etc-service.png" class="category-icon"/>
+              </category>
+            </view>
+            <view data-idx="bill" onTap="next">
+              <category>
+                <text slot="category-title">通行费与账单</text>
+<!--                <text slot="category-subtitle">免费线上办理</text>-->
+                <image slot="category-icon" src="/images/bill.png" class="category-icon"/>
+              </category>
+            </view>
+          </view>
+        </card>
+      </view>
+      <!--  建议与投诉-->
+      <view class="suggest-service-wrapper">
+        <image src="/images/suggest-service.png" class="suggest-service"/>
+        <view class="suggest-mask" onTap="onSuggest"/>
+        <view class="service-mask" onTap="onService"/>
+      </view>
+    </view>
+    <!--  tab-->
+    <view class="tab-wrapper">
+      <view class="rel-tab-bar">
+        <image src="/images/tab-bar.png" class="tab-bar"/>
+        <view class="abs-count" a:if="{{count>0}}">{{count}}</view>
+        <view class="abs-e" onTap="next" data-idx="eroad"/>
+        <view class="abs-msg" onTap="next" data-idx="msg"/>
+        <button class="abs-online" open-type="contact"/>
+      </view>
+    </view>
+  </view>
+  <view a:else>
+    <skeleton/>
+  </view>
+</view>

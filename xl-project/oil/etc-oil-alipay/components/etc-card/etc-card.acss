@@ -1,0 +1,199 @@
+.etc-card-component-container{
+    /*display: inline-block;*/
+
+    width: 622rpx;
+    height: 260rpx;
+}
+.etc-card-component-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    box-sizing: border-box;
+    /*width: 100%;*/
+    width: 622rpx;
+    /*height: 260rpx;*/
+    border-radius: 12rpx;
+    background: linear-gradient(to bottom, rgb(255, 255, 255) , #EDFAF9);
+    background: linear-gradient(to right, rgb(255, 255, 255) , #EDFAF9);
+    /*box-shadow: 0rpx 4rpx 32rpx 0rpx rgba(41, 69, 89, 0.12);*/
+    padding-left: 40rpx;
+}
+.etc-card-component-box-no-enough{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    box-sizing: border-box;
+    /*width: 100%;*/
+    width: 622rpx;
+    height: 260rpx;
+    border-radius: 12rpx;
+    background: linear-gradient(to top, rgb(255, 255, 255) , rgba(255, 255, 255, 0.5));
+    box-shadow: 0rpx 4rpx 32rpx 0rpx rgba(41, 69, 89, 0.12);
+    padding-left: 40rpx;
+}
+.etc-card-component-box-enough{
+    display: none;
+}
+.etc-card-component-top{
+    margin-top: 20rpx;
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    justify-content: space-between;
+    width: 100%;
+}
+.etc-card-plate-no-text{
+    color: rgba(51, 51, 51, 1);
+    font-size: 48rpx;
+    text-align: left;
+    font-family: PingFangSC-Medium;
+}
+.etc-card-type{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.etc-card-type-poi{
+    width: 12rpx;
+    height: 12rpx;
+    border-radius: 100%;
+    background-color: #00A170;
+    margin-right: 12rpx;
+}
+.etc-card-type-text{
+    /*width: 96px;*/
+    /*height: 45px;*/
+    /*color: rgba(255, 255, 255, 1);*/
+    color: #00A170;
+    font-size: 32rpx;
+    text-align: left;
+    font-family: PingFangSC-Semibold;
+    margin-right: 30rpx;
+}
+
+.etc-card-component-center{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: left;
+    width: 100%;
+    color: rgba(51, 51, 51, 1);
+    font-size: 28rpx;
+    font-family: PingFang-SC-Medium;
+}
+.etc-card-component-bottom-line{
+    margin-left: -40rpx;
+    width: 622rpx;
+    height: 2rpx;
+    background-color: rgba(0, 0, 0, 0.05);
+    margin-top: 20rpx;
+}
+.etc-card-component-bottom{
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 10rpx;
+}
+.etc-card-component-bottom-left{
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    align-items: center;
+}
+.etc-card-component-bottom-left-icon{
+    width: 30rpx;
+    height: 30rpx;
+    margin-right: 10rpx;
+}
+.etc-card-component-bottom-left-text{
+    color: rgba(51, 51, 51, 1);
+    font-size: 26rpx;
+    text-align: left;
+    font-family: PingFangSC-Regular;
+}
+.etc-card-component-bottom-right-icon{
+    width: 14rpx;
+    height: 24rpx;
+    margin-right: 20rpx;
+}
+/*添加*/
+.etc-card-component-box-add{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    box-sizing: border-box;
+    /*width: 100%;*/
+    width: 622rpx;
+    height: 260rpx;
+    border-radius: 12rpx;
+    background: linear-gradient(to top, rgb(255, 255, 255) , rgba(255, 255, 255, 0.5));
+    box-shadow: 0rpx 4rpx 32rpx 0rpx rgba(41, 69, 89, 0.12);
+    /*padding-left: 40rpx;*/
+}
+.mine-etc-card-add-top{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 54rpx;
+    margin-top: 80rpx;
+}
+.mine-etc-card-add-icon{
+    width: 52rpx;
+    height: 52rpx;
+}
+.mine-etc-card-add-text{
+    color: rgba(51, 51, 51, 1);
+    font-size: 36rpx;
+    margin-left: 16rpx;
+    font-family: PingFangSC-Medium;
+}
+.etc-card-component-bottom{
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+.etc-card-component-bottom-left-icon{
+    width: 30rpx;
+    height: 30rpx;
+    margin-right: 10rpx;
+}
+.component-etc-card-add-bottom{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.component-etc-card-add-bottom-items{
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.mine-etc-card-add-steps{
+    width: 32rpx;
+    height: 32rpx;
+    border-radius: 100%;
+    font-size: 20rpx;
+    color: #ffffff;
+    text-align: center;
+    background-color: rgba(128, 208, 183, 1);
+    margin: 0 10rpx;
+}
+.mine-etc-card-add-steps-text{
+    color: rgba(128, 128, 128, 1);
+    font-size: 24rpx;
+    font-family: PingFang-SC-Medium;
+}

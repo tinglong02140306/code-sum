@@ -1,0 +1,18 @@
+<template name="consume-list">
+    <view class="consume-list-template-container">
+        <view class="consume-list-template-box">
+            <image class="consume-list-template-select" wx:if="{{is_invoiced===true}}" src="{{item.isSelect?'https://oilmag.etcsd.com.cn/oilcoreserver/static//resource/icon-seleced-radio1586867507286.png':'https://oilmag.etcsd.com.cn/oilcoreserver/static//resource/jskp-ali-uncheck1569379191862.png'}}"></image>
+            <view class="consume-template-item-center">
+                <text class="consume-template-station">加油-{{item.order_title}}</text>
+                <text class="consume-template-oil">{{item.order_detail}}</text>
+                <text class="consume-template-oil">{{item.invoice_create_time_str}}</text>
+            </view>
+            <view class="consume-template-detail-box">
+                <view wx:if="{{bill_type===1}}" class="consume-template-invoice">已开票</view>
+                <text class="{{bill_type===1?'consume-template-item-right':''}}">￥{{item.actual_amount?item.actual_amount:0.00}}</text>
+            </view>
+        </view>
+
+        <view class="consume-list-template-line"></view>
+    </view>
+</template>

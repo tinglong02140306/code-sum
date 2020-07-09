@@ -1,0 +1,24 @@
+.plate-color-container {
+    margin: 40rpx 0 16rpx 0;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+}
+
+.plate-color-image-select {
+    width: 133rpx;
+    height: 46rpx;
+    border: 2rpx solid #5ac262;
+    border-radius: 4rpx;
+}
+
+.plate-color-image {
+    width: 133rpx;
+    height: 46rpx;
+    border-radius: 4rpx;
+    border: 2rpx solid #d1d1d1;
+}

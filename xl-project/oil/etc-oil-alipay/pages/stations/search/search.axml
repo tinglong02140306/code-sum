@@ -1,0 +1,30 @@
+<!--
+ * @Author: sunmingmao
+ * @Date: 2020-04-07 15:06:59
+ * @LastEditors: longting
+ * @LastEditTime: 2020-05-19 
+ * @Description: 搜索页面
+ -->
+<import src="../../../templates/stations/station-item/station-item.axml"></import>
+<view class="search-container">
+    <!--搜索框-->
+    <search-bar onSearch="onSearch"></search-bar>
+    <!--筛选条件-->
+    <view class="search-menu-container">
+        <filter-tabs class="search-menu-box" source="{{tabs_oil}}" onSelect="onOilSelectClick"
+            tab_height="{{tab_height}}" tab_list_top="{{tab_list_top}}" height="{{drop_down_height}}">
+        </filter-tabs>
+    </view>
+    <!--油站列表-->
+    <scroll-list height="{{scroll_height}}" onRefresh="onOilRefresh" onLoadMore="onOilLoadMore"
+        load_status="{{load_status_oil}}" refresher_triggered="{{refresher_oil}}">
+        <view class="search-list-box">
+            <block a:for="{{station_list}}" a:key="stations">
+                <station-item item="{{item}}" onStationClick="onStationClick" onPayClick="onPayClick"></station-item>
+                <!--<template is="station-item" data="{{item, openid}}"></template> --> 
+            </block>
+            <status a:if="{{oil_status}}" type="{{oil_status}}" text="{{oil_status==1?'没有搜到相关加油站':'好像断网了哦～'}}"
+                onRetryClick="onRetryClick"></status>
+        </view>
+    </scroll-list>
+</view>

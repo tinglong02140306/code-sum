@@ -1,0 +1,9 @@
+<view class="input-item">
+	<view class="input-label">{{label}}</view>
+	<view class="input">
+		<input password="{{password}}" data-idx="{{idx}}" maxlength="{{maxlength}}" value="{{value}}" style="width:100%;" onInput="bindInput" type="{{type}}" placeholder="{{placeholder}}" placeholder-style="text-align:left;font-size:28rpx;" onFocus="onFocus" onBlur="onBlur" disabled="{{disabled}}"/>
+	</view>
+	<view class="clear" a:if="{{value && focus}}" onTap="clear">
+		<image style="width:20rpx;height:20rpx" src="/images/close.png" mode="widthFix"/>
+	</view>
+</view>

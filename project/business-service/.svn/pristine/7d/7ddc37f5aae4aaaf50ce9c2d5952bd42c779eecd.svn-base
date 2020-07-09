@@ -1,0 +1,124 @@
+@charset "utf-8";
+body, div {
+    margin: 0;
+    padding: 0;
+}
+html, body {
+    margin: 0;
+    padding: 0;
+    font: normal 14px "Microsoft YaHei";
+}
+body {
+    background: #f5f5f5;
+}
+
+/* 常用元素 */
+
+body, div, p, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, form {
+    margin: 0;
+    padding: 0;
+}
+img, abbr, acronym {
+    border: none;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+}
+ol, ul {
+    list-style: none;
+}
+a {
+    outline: 0;
+    _blr: expression(this.onFocus=this.blur());
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: none;
+}
+p {
+    text-indent: 20px;
+}
+input {
+    outline: none;
+}
+textarea {
+    resize: none;
+}
+.hide, .hidden {
+    display: none;
+}
+
+/* 浮动 */
+
+.fl {
+    float: left;
+}
+.fr {
+    float: right;
+}
+.fn {
+    float: none;
+}
+
+/* 清除浮动 */
+
+.clear {
+    clear: both;
+    overflow: hidden;
+    height: 0;
+}
+.clearfix {
+    display: block;
+    zoom: 1;
+}
+.clearfix:after {
+    content: " ";
+    display: block;
+    font-size: 0;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+/* IE6 fixed 解决闪动 */
+
+*html {
+    background-image: url(about:blank);
+    background-attachment: fixed;
+}
+
+/* 文字溢出省略 */
+
+.ell, .ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* 文字对齐方式 */
+
+.text-left {
+    text-align: left !important;
+}
+.text-center {
+    text-align: center;
+}
+.text-right {
+    text-align: right;
+}
+
+/* table */
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+table tr, table th, table td {
+    border-collapse: collapse;
+}
+
+/* 去除圆角处理 */
+
+.btn {
+    border-radius: 0px !important;
+}

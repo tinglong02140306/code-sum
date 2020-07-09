@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <link type="text/css" rel="styleSheet" href="./static/styles/iview.css" />
+    <link type="text/css" rel="styleSheet" href="./static/styles/element/index.css" />
+    <link type="text/css" rel="styleSheet" href="./static/styles/element/index-bak.css" />
+    <link type="text/css" rel="styleSheet" href="./static/styles/element/index-bak2.css" />
+    <title>智能收件</title>
+    <script>
+        var Sys = {};
+        var ua = navigator.userAgent.toLowerCase();
+        if (window.ActiveXObject) {
+            Sys.ie = ua.match(/msie ([\d.]+)/)[1];
+            if (Sys.ie.indexOf("8") > -1 || Sys.ie.indexOf("7") > -1) {
+                window.location.href = "/bog-receive-web/upgrade/html/index.html";
+            }
+        }
+        if (!('classList' in document.documentElement)) {
+            Object.defineProperty(HTMLElement.prototype, 'classList', {
+                get: function () {
+                    var self = this;
+                    function update(fn) {
+                        return function (value) {
+                            var classes = self.className.split(/s+/g);
+                            var index = classes.indexOf(value);
+        
+                            fn(classes, index, value);
+                            self.className = classes.join(' ');
+                        };
+                    }
+        
+                    return {
+                        add: update(function (classes, index, value) {
+                            if (!~index) classes.push(value);
+                        }),
+        
+                        remove: update(function (classes, index) {
+                            if (~index) classes.splice(index, 1);
+                        }),
+        
+                        toggle: update(function (classes, index, value) {
+                            if (~index) { classes.splice(index, 1); } else { classes.push(value); }
+                        }),
+        
+                        contains: function (value) {
+                            return !!~self.className.split(/s+/g).indexOf(value);
+                        },
+        
+                        item: function (i) {
+                            return self.className.split(/s+/g)[i] || null;
+                        },
+                    };
+                },
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <div id="app"></div>
+</body>
+
+</html>

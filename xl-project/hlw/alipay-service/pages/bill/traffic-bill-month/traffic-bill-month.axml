@@ -1,0 +1,35 @@
+<view class="wrapper">
+	<view class="header">
+		<view style="font-size:32rpx;">{{plateNo}}</view>
+		<view style="font-size:30rpx;">
+			<picker mode="date" value="{{gmtYear}}" start="2020" end="{{gmtEndYear}}" bindchange="bindYearChange" fields="year">
+				<view class="picker">
+					{{gmtYear}}
+					<view class="item-arrow">
+						<image src="/images/bill/arrow.png" style="width:14rpx;height:24rpx;padding-left:15rpx;"/>
+					</view>
+				</view>
+			</picker>
+		</view>
+	</view>
+	<view class="body">
+		<scroll-view class="scroll-view" bindscroll="scroll" scroll-y="{{true}}">
+			<block a:for="{{list}}">
+				<view class="scroll-view-item" bindtap="showDetail" data-item="{{item}}">
+					<image src="/images/bill/etc-big.png" class="etc-big"/>
+					<view class="item-body">
+						<view class="item-body-title">{{item["year"]}}年{{item["month"]}}月ETC月度账单</view>
+						<view class="item-body-subtitle">账单区间：{{item["startDate"]}}至{{item["endDate"]}}</view>
+					</view>
+					<view class="item-arrow">
+						<image src="/images/bill/arrow.png" class="arrow"/>
+					</view>
+				</view>
+			</block>
+			<view class="no-more">没有更多了</view>
+		</scroll-view>
+	</view>
+	<view class="footer">
+		<view class="btn" bindtap="showDayBill">查看日账单</view>
+	</view>
+</view>

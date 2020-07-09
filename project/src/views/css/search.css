@@ -1,0 +1,268 @@
+/**
+ * @author chaozhang5
+ * @time 2016-08-22
+ * @description 系统搜索
+ */
+
+@charset "utf-8";
+/*=================== 系统搜索start ===================*/
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+.body-search {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+}
+.wrap {
+    height: 100%;
+}
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 2.1rem;
+    background-color: #ff833a;
+    z-index: 999;
+}
+.history-wrap {
+    width: 100%;
+}
+.search-main {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    bottom: 0;
+    top: 2.1rem;
+    -webkit-overflow-scrolling: touch;
+}
+.search-title {
+    padding: 0 3.5%;
+    height: 1.7rem;
+    background-color: #f5f5f5;
+    font-size: 0.6rem;
+    line-height: 1.7rem;
+    color: #808080;
+}
+.list-search-item {
+    background-color: #fff;
+}
+.history-search {
+    font-size: 0;
+}
+.history-search input {
+    display: block;
+    float: left;
+    margin: 0.45rem 0;
+    padding-left: 12%;
+    width: 65%;
+    height: 1.2rem;
+    background: url(./public/wcportal/0.0.1/img/question/icon-search.png) 8% center no-repeat;
+    background-size: 0.6rem;
+    background-color: #ff833a;
+    border: none;
+    outline: none;
+    font-size: 0.7rem;
+    line-height: 1.2rem;
+    color: #fff;
+} 
+input::-webkit-input-placeholder {
+    padding-left: 0.2rem;
+    color: rgba(255,255,255,0.6);
+}
+.history-search i {
+    position: absolute;
+    top: 0.7rem;
+    right: 19%;
+    height: 0.6rem;
+    width: 0.6rem;
+    border-radius: 50%;
+    background-color: #ccc;
+    font-size: 0.5rem;
+    line-height: 0.6rem;
+    text-align: center;
+    color: #fff;
+}
+.history-search a {
+    display: block;
+    float: right;
+    margin-right: 4%;
+    height: 2.1rem;
+    font-size: 0.67rem;
+    line-height: 2.1rem;
+    text-align: center;
+    color: #fff;
+}
+.history-search img {
+    position: absolute;
+    top: 1.35rem;
+    left: 3%;
+    width: 80%;
+}
+.history-clear {
+    height: 2.6rem;
+    font-size: 0.67rem;
+    line-height: 2.6rem;
+    text-align: center;
+    color: #808080;
+}  
+
+/* 热门搜索 */
+.search-hot {
+    width: 100%;
+}
+.search-hot-list {
+    padding: 0.35rem 2.5%;
+    width: 95%;
+    background-color: #fff;
+    font-size: 0;
+}
+.hot-list-item {
+    display: inline-block;
+    margin: 0.35rem 0;
+    width: 33.333333%;
+    height: 1.5rem;
+    font-size: 0.67rem;
+    text-align: center;
+    line-height: 1.5rem;
+    color: #333;
+}
+.hot-list-item a {
+    display: inline-block;
+    margin: 0 4%;
+    width: 92%;
+    border: 1px solid #e2e2e2;
+    border-radius: 0.75rem;
+    box-sizing: border-box;
+}
+
+/* 搜索结果 */
+.list-news-item {
+    position: absolute;
+    top: 0;
+    bottom: 0px;
+    width: 100%;
+    height: auto;
+}
+.list-more-news {
+    background-color: #fff;
+}
+.history-title {
+    padding: 0 3.5%;
+    height: 1.8rem;
+    background-color: #f6f6f6;
+    font-size: 0.6rem;
+    line-height: 1.8rem;
+    color: #808080;
+}
+.list-item-main {
+    display: block;
+    padding: 0.6rem 3.5%;
+    border-bottom: 1px solid #e2e2e2;
+}
+.list-item-main:last-child {
+    border: none;
+}
+.list-img {
+    width: 30%;
+}
+.list-work-img,
+.list-service-img {
+    width: 16%;
+}
+.list-img img {
+    display: block;
+    padding-top: 0.1rem;
+    width: 100%;
+    height: 3.08rem;
+    max-height: 3.08rem;
+}
+.list-work-img img,
+.list-service-img img {
+    display: block;
+    padding-top: 0.1rem;
+    width: 100%;
+    height: 2.15rem;
+    max-height: 2.15rem;
+}
+.list-main {
+    margin-left: 4%;
+    width: 66%;
+}
+.list-work-main,
+.list-service-main {
+    margin-left: 4%;
+    width: 80%;
+}
+.list-work-main {
+    display: table;
+    margin-top: 0.1rem;
+    height: 2.15rem;
+}
+.list-title,
+.list-work-title {
+    font-size: 0.71rem;
+    line-height: 0.8rem;
+    color: #333;
+}
+.list-work-title {
+    display: table-cell;
+    vertical-align: middle;
+}
+.list-time {
+    font-size: 0.53rem;
+    line-height: 0.9rem;
+    color: #999;
+}
+.list-desc {
+    font-size: 0.58rem;
+    color: #666;
+    line-height: 0.8rem;
+}
+.list-more {
+    display: block;
+    height: 2rem;
+    font-size: 0.67rem;
+    line-height: 2rem;
+    text-align: center;
+    color: #ff833a;
+}
+.history-list-item {
+    font-size: 0;
+    background-color: #fff;
+    border-bottom: 1px solid #e5e5e5;
+}
+.history-list-item a {
+    background: url(./public/wcportal/0.0.1/img/common/icon-history.png) 4% center no-repeat;
+    background-size: 0.5rem;
+}
+/*.list-content-icon {
+    display: inline-block;
+    width: 10%;
+    height: 2.2rem;
+    background: url(./public/wcportal/0.0.1/img/common/icon-history.png) center center no-repeat;
+    background-size: 0.5rem;
+}*/
+.list-content-desc {
+    display: inline-block;
+    padding: 0 5% 0 10%;
+    width: 85%;
+    font-size: 0.67rem;
+    line-height: 2.2rem;
+    color: #333;
+}
+/* 暂无数据 */
+.list-data-no {
+    height: 100%;
+    font-size: 0.67rem;
+    line-height: 1.4rem;
+    text-align: center;
+    color: #999;
+}
+.list-data-no img {
+    width: 20%;
+    margin-top: 5rem;
+}
+/*=================== 系统搜索end ===================*/

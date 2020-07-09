@@ -1,0 +1,8 @@
+{
+    "defaultTitle": "开具发票",
+    "backgroundColor": "#eeeeee",
+    "titleBarColor": "#ffffff",
+    "usingComponents": {
+        "scroll-list": "../../../../components/scroll-list/scroll-list"
+    }
+}

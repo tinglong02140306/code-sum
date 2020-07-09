@@ -1,0 +1,11 @@
+<!--pages/login/login.axml-->
+<view class="login-container">
+    <image class="login-logo" src="/assets/static/logo.png"></image>
+    <text class="login-title">ETC加油助手</text>
+    <view class="login-button-view-box">
+        <!-- scope userInfo(getOpenUserInfo)  phoneNumber(getPhoneNumber) -->
+        <text>立即登录</text>
+        <button class="login-button-over" open-type="getAuthorize" onGetAuthorize="onGetAuthorize" onError="onAuthError" scope='phoneNumber'></button>
+        <!--<button class="login-button-over" open-type="getAuthorize" onGetAuthorize="onGetAuthorize" onError="onAuthError" scope='phoneNumber'></button> -->
+    </view>
+</view>

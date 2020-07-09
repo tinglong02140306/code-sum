@@ -1,0 +1,27 @@
+<view>
+  <steps activeIndex="{{activeIndex}}" items="{{items}}"/>
+  <view class="wrapper">
+    <view>
+      <view class="page">
+        <view class="title">
+          <text>签约支付宝免密支付\n\n</text>
+          <text>签约说明\n\n</text>
+        </view>
+        <text>如在您的ETC设备激活后60天内未产生ETC消费，我们认为您并没有使用ETC设备，我们将从您的支付宝账户代扣100元设备费用。费用代扣后，如您又使用了ETC通行了高速，我们会将100元费用原路返回至支付宝账户。\n</text>
+       </view>
+    </view>
+  </view>
+  <view class="apply-content">
+   <view class="apply" onTap="goSign">
+      <view class="apply-one">
+         <image src="/images/index/apply.png" alt="" style="width:60rpx;margin-bottom:18rpx;" mode="widthFix"/>
+         <view>点击前往开通支付宝免密支付</view>
+      </view>
+      <view>
+         <image src="/images/index/right-arrow.png" alt="" style="width:30rpx;height:30rpx;" mode="widthFix"/>
+      </view>
+   </view>
+  </view>
+</view>
+
+

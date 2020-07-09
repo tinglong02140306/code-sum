@@ -1,0 +1,30 @@
+<!--
+ * @Author: sunmingmao
+ * @Date: 2020-04-11 13:45:22
+ * @LastEditors: longting
+ * @LastEditTime: 2020-05-24 16:41:58
+ * @Description: ETC =卡号输入
+ -->
+<view class="etc-input-container">
+    <!-- onTap="onClick" -->
+    <view class="etc-input-box">
+        <input 
+            class="etc-input"
+            placeholder-class="etc-input-placeholder"
+            placeholder="请输入您的ETC卡号" 
+            maxlength="{{20}}"
+            type="number"
+            value='{{value}}'
+            onInput="onBindInput"
+            a:if="{{!input_disabled}}"/>
+        <text class="etc-input" 
+            a:if="{{input_disabled}}" 
+            style="color:{{value?'#333333':'#999999'}}">{{value||"请选择要修改的ETC卡"}}</text>
+        <view class="etc-input-type-box" a:if="{{etc_type}}">
+            <text class="etc-input-type-text">{{etc_type}}</text>
+            <image class="etc-input-type-icon" src="{{icon}}"></image>
+        </view>
+        <image a:if="{{input_disabled}}" class="etc-input-next" src="{{next_icon}}"></image>
+    </view>
+    <view class="etc-input-separation"></view>
+</view>

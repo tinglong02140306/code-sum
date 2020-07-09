@@ -1,0 +1,18 @@
+<template name="invoice-history">
+    <view class="invoice-history-template-container">
+        <view class="invoice-history-template-box">
+            <view class="invoice-history-template-item-center">
+                <text class="invoice-history-template-type">加油消费电子发票</text>
+                <text class="invoice-history-template-name">{{item.invoice_title}}</text>
+                <text class="invoice-history-template-name">{{item.invoice_create_time_str}}</text>
+            </view>
+            <view class="invoice-history-template-detail-box">
+                <view class="invoice-history-template-detail-item" >
+                    <text class="invoice-history-template-detail-item-text">发票详情</text>
+                    <image class="invoice-history-template-detail-item-image" src="https://oilmag.etcsd.com.cn/oilcoreserver/static//resource/icon-invoice-next1587007642632.png"></image>
+                </view>
+                <text class="invoice-history-template-item-right">￥{{item.invoice_total_money}}</text>
+            </view>
+        </view>
+    </view>
+</template>

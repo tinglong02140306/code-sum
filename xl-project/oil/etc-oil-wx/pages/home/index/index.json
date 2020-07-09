@@ -1,0 +1,12 @@
+{
+  "navigationBarBackgroundColor": "#ffffff",
+  "navigationBarTextStyle": "black",
+  "navigationBarTitleText": "推荐",
+  "backgroundColor": "#eeeeee",
+  "backgroundTextStyle": "light",
+  "enablePullDownRefresh":false,
+  "usingComponents": {
+    "scroll-list":"../../../components/scroll-list/scroll-list",
+    "login-status":"../../../components/login-status/login-status"
+  }
+}

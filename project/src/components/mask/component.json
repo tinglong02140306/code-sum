@@ -1,0 +1,12 @@
+ {
+   "name": "mask",
+   "version": "0.1.0",
+   "description": "flymo mask",
+   "main": "mask.js",
+   "files": [
+     "mask.js",
+     "mask.css"
+   ],
+   "dependencies": {
+   }
+ }

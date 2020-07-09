@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body{
+			width: 100%;
+        	background:#fff;
+	    }
+	/*     .wrap {
+		margin: 0 auto;
+		width: 50px;
+		height: 50px;
+	} */
+	    .btn-audio{
+	        margin: 20px auto;
+	        width: 330px;
+	        height: 50px;
+	        background:url(icon-voice.png) no-repeat center bottom;
+	        background-size:cover;
+	    }
+	</style>	
+</head>
+<body>
+	<!-- <div class="wrap"> -->
+		<div class="btn-audio">
+			<audio id="mp3Btn">
+				<source src="ww.aac" type="audio/mpeg" />
+			</audio>
+		</div>
+	<!-- </div> -->
+	
+	<!-- <div style="margin-left:40px;">
+		<audio controls="true" autoplay="true" src="ww.aac">
+		        HTML5 audio not supported 
+		</audio>
+	</div> -->
+	<script type="text/javascript" src="../jquery-1.8.2.min.js"></script>
+	<script>
+		$(function(){
+            //播放完毕
+            $('#mp3Btn').on('ended', function() {
+                console.log("音频已播放完成");
+                /*$('.btn-audio').css({'background':'url(icon-stop.png) no-repeat center bottom','background-size':'cover'});*/
+            })
+            //播放器控制
+            var audio = document.getElementById('mp3Btn');
+            audio.volume = .3;
+            $('.btn-audio').click(function() {
+                event.stopPropagation();//防止冒泡
+                if(audio.paused){ //如果当前是暂停状态
+                    // $('.btn-audio').css({'background':'url(icon-play.png) no-repeat center bottom','background-size':'cover'});
+                    audio.play(); //播放
+                    return;
+                }else{//当前是播放状态
+                    // $('.btn-audio').css({'background':'url(icon-play.png) no-repeat center bottom','background-size':'cover'});
+                    audio.pause(); //暂停
+                }
+            });
+        })
+	</script>
+</body>
+</html>

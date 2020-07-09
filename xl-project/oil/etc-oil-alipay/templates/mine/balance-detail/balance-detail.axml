@@ -1,0 +1,19 @@
+<template name="balance">
+    <view class="balance-detail-box">
+        <image class="balance-detail-image"
+            src='{{item.flow_type==0?"https://oilmag.etcsd.com.cn/oilcoreserver/static//resource/refurling-gold-rz1574822409595.png":"https://oilmag.etcsd.com.cn/oilcoreserver/static//resource/refurling-gold-xf.png"}}'>
+        </image>
+        <view class="balance-detail-right">
+            <view class="balance-detail-title-top">
+                <text
+                    class="balance-detail-title-text">{{item.flow_type==0?"加油金入账":item.flow_type==1?"加油消费":"账单"}}</text>
+                <view class="balance-detail-title-bottom">
+                    <text class="balance-detail-amount"
+                        style='color:{{item.flow_type==0?"#FE7E00":"#000000"}}'>{{item.flow_type==0?"+":"-"}}{{item.amount}}</text>
+                    <text class="balance-detail-title-sub">{{item.create_time}}</text>
+                </view>
+            </view>
+            <view class="balance-detail-line" a:if="{{balance_list.length - 1 != index}}"></view>
+        </view>
+    </view>
+</template>

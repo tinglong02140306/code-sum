@@ -1,0 +1,103 @@
+<view>
+	<!--<steps-->
+			<!--activeIndex="{{activeIndex}}" items="{{items}}">-->
+	<!--</steps>-->
+	<!--申请人信息-->
+  <view class="title">
+       请添加{{userName}}的中国工商银行的银行卡
+  </view>
+	<block>
+		<view>
+			<input-item
+					data-field="userName"
+					clear="{{true}}"
+					value="{{userName}}"
+					placeholder="必填"
+					onInput="onItemInput"
+					onClear="onClear"
+                    disabled="{{true}}"
+			>
+				账户名
+			</input-item>
+			<input-item
+					data-field="certNo"
+					clear="{{true}}"
+					value="{{certNo}}"
+					placeholder="必填"
+					onInput="onItemInput"
+					onClear="onClear"
+					type="idcard"
+                    disabled="{{true}}"
+			>
+				身份证号
+			</input-item>
+			<input-item
+					data-field="cardNo"
+					clear="{{true}}"
+					value="{{cardNo}}"
+					placeholder="必填"
+					onInput="onItemInput"
+					onClear="onClear"
+					type="number"
+					disabled="{{disableInput}}"
+			>
+				银行卡号
+			</input-item>
+			<input-item
+					data-field="mobile"
+					clear="{{true}}"
+					value="{{mobile}}"
+					placeholder="请填写银行预留手机号"
+					onInput="onItemInput"
+					onClear="onClear"
+					type="number"
+					maxlength="11"
+					disabled="{{disableInput}}"
+			>
+				手机号
+			</input-item>
+			<input-item
+					data-field="captcha"
+					clear="{{true}}"
+					value="{{captcha}}"
+					placeholder="请填写验证码"
+					onInput="onItemInput"
+					onClear="onClear"
+					type="number"
+			>
+				验证码
+				<view slot="extra" catchTap="sendMsg">
+					<button size="mini" type="primary" disabled="{{!enableSmallButton}}">{{smallButtonText}}</button>
+				</view>
+			</input-item>
+     
+		</view>
+	</block>
+	<!--同意办理-->
+	<block a:if="{{CreditCardIcbc}}">
+		<view style="margin-left:30rpx;margin-top:50rpx;" class="Agreement">
+			<!-- <am-checkbox checked="{{checked}}" onChange="onChange" /> -->
+			<text>查看</text>
+			<text style="color:#3E72ED" onTap="CreditCard">《货车ETC信用卡产品须知》</text>
+		</view>
+    </block>
+	<view class="btn-wrapper">
+		<button class="btn bg-primary" onTap="sign">确认</button>
+	</view>
+	<!-- <view class="btn-wrapper">
+		<button class="btn bg-primary" onTap="signHousehold">没有一类户，开通二类户</button>
+	</view> -->
+  <view style="padding-left:15rpx;">
+      （只能绑定申请人的银行卡号）
+  </view>
+	<block a:if="{{CreditCardIcbc}}">
+		<view class="page1">
+			<text class="item-title1">办理本业务需开通工商银行电子信用卡\n</text>
+			<text class="">*本信用卡不收取年费及其他费用\n</text>
+			<text>*本信用卡仅用于向山东高速支付通行费</text>
+		</view>
+   </block>
+</view>
+
+
+

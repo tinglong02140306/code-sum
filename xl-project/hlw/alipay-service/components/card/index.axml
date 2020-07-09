@@ -1,0 +1,23 @@
+<view class="card-wrapper">
+  <view class="card-title-wrapper">
+    <block a:if="{{type==='guess'}}">
+      <view class="card-title">
+        猜您想问
+      </view>
+      <view class="card-subtitle" onTap="onCardRefresh">
+        换一批
+        <view class="refresh-wrapper">
+          <image src="/images/refresh.png" class="refresh"/>
+        </view>
+      </view>
+    </block>
+    <block a:if="{{type==='category'}}">
+      <view class="card-title">
+        问题分类
+      </view>
+    </block>
+  </view>
+  <view class="card-body-wrapper">
+    <slot name="card-body"></slot>
+  </view>
+</view>

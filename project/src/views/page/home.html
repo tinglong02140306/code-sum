@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="../../../../">
+    <meta charset="UTF-8">
+    <!-- 添加到主屏幕后，全屏显示 -->
+    <meta name="apple-touch-fullscreen" content="YES"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <!-- iphone 运行在全屏模式 -->
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="viewport" content="width=device-width"/>
+    <title>首页</title>
+    <script src="../lib/remCacul/remCacul.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/mui-preview-pic.css?__inline" />
+    <link rel="stylesheet" type="text/css" href="../lib/mui-pre-pic/mui.min.css">
+    <link rel="stylesheet" type="text/css" href="../lib/mescroll/mescroll.min.css">
+    <link rel="stylesheet" type="text/css" href="../lib/swiper/swiper.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/base.css?__inline"/>
+    <link rel="stylesheet" type="text/css" href="../css/all.css?__inline"/>
+    <link rel="stylesheet" type="text/css" href="../css/home.css?__inline"/>
+    <link rel="stylesheet" type="text/css" href="../css/news-list.css?__inline"/>
+</head>
+<body>
+<div class="home-wrap wrap">
+    <!--头部-->
+    <header class="home-top">
+        <div class="top-content clearfix">
+            <div class="area-wrap fl">
+                <div id="areaName" class="area-name ell fl"></div>
+                <i class="fl"></i>
+            </div>
+            <div class="search-wrap fl">
+                <div class="search-content">搜索服务项、办事项、资讯</div>
+            </div>
+            <div class="message-wrap fl">
+                <i class="hide"></i>
+            </div>
+
+            <div class="scan-wrap fr"></div>
+        </div>
+    </header>
+    <div class="top-tab-wrap hide">
+        <div class="tab-item tab-item0" data-index="0"> 
+            <span>推荐</span>
+        </div> 
+        <div class="tab-item tab-item1" data-index="1"> 
+            <span>合肥</span>
+        </div>
+        <div class="tab-item tab-item2" data-index="2"> 
+            <span>警微热点</span>
+        </div>
+    </div>
+
+    <div class="home-view mescroll home-cont"  id="wrapper" >
+
+        <!-- 轮播图 -->
+        <div class="home-banner">
+            <div id="swiperContainerLunbo" class="swiper-container"><!--swiper容器[可以随意更改该容器的样式-->  
+                <div id="swiperWrapperLunbo" class="swiper-wrapper">   
+                </div>  
+                <div id="swiperPaginationLunbo" class="swiper-pagination"></div><!--分页器--> 
+            </div>
+            <!-- <div class="slider clearfix">
+                        
+            </div> -->
+        </div>
+        <!-- app入口 -->
+        <div class="home-app-entrance">
+            <div class="app-slider clearfix">
+        
+            </div>
+        </div>
+        <div class="service-interval interval-f5"></div>
+        <!-- 运营位 -->
+        <div class="home-activity clearfix">
+            <div class="title-wrap clearfix">
+                <div class="title-name fl">便民服务</div>
+                <span class="more fr">全部</span>
+            </div>
+            <div class="activity-content"></div>
+        </div>
+        <div class="convenience-interval interval-f5"></div>
+        
+        <div class="tab-wrapper">
+            <div id="swiperPagination" class="swiper-pagination">
+            </div>
+        </div>
+        <!-- 网警头条 -->
+        <div id="swiperContainer" class="swiper-container">
+            <div class="swiper-wrapper">
+                <!-- 推荐 -->
+                <div id="recommNews" class="swiper-slide" data-index="0"> 
+                    <div id="wrapper0" class="recom-wrapper">
+                        <section class="home-news">
+                            <div class="home-notify-content">
+                                <ul id="dataList0" class="city-news recom-news">
+                                </ul>
+                                <div class="no-line hide">网络无法连接，请检查您的网络</div>
+                            </div>
+                        </section>
+                    </div> 
+                    <!-- 暂无数据 -->
+                    <div class="empty empty0 hide">
+                      <div class="empty-ad"></div>
+                      <p>暂无数据~</p>
+                  </div>       
+                </div>
+            
+                <!-- 本地 -->
+                <div id="localNews" class="swiper-slide de-tab-graph" data-index="1">
+                   <div id="wrapper1" class="local-wrapper">
+                        <section class="home-news"> 
+                            <div class="home-notify-content">
+                                <ul id ="dataList1" class="city-news local-news">
+                                </ul>
+                                <div class="no-line hide">网络无法连接，请检查您的网络</div>
+                            </div>
+                        </section>
+                    </div>
+                    <!-- 暂无数据 -->
+                    <div class="empty empty1 hide">
+                       <div class="empty-ad"></div>
+                       <p>暂无数据~</p>
+                   </div> 
+                </div>
+            
+                <!-- 警微热点 -->
+                <div id="blogNews" class="swiper-slide" data-index="2">
+                    <div id="wrapper2" class="blog-wrapper">
+                        <div id="dataList2" class="blog-news-content city-news">
+                        </div>
+                        <div class="no-line hide">网络无法连接，请检查您的网络</div>
+                    </div> 
+                    <!-- 暂无数据 -->
+                    <div class="empty empty2 hide">
+                       <div class="empty-ad"></div>
+                       <p>暂无数据~</p>
+                   </div>
+                </div>
+            </div>    
+        </div>
+        </div> 
+    </div>
+    <div class="to-top hide"></div>
+</div>
+<share data-bind="source: OP"></share>
+
+
+<!-- 轮播图 -->
+<script id="bannerTmpl" type="text/html">
+        {{each $data.scroll as item index}}
+        <div class="swiper-slide" data-url="{{item.url}}" data-type="{{item.serviceAddrType}}">
+            <img src="{{item.imgUrl}}">
+        </div> 
+       <!--  <li class="clearfix" data-url="{{item.url}}" data-type="{{item.serviceAddrType}}">
+           <img src="{{item.imgUrl}}">
+       </li> -->
+        {{/each}}
+</script>
+
+<!-- app入口模板 -->
+<script id="appTmpl" type="text/html">
+    <ul class="clearfix">
+        {{each $data as item i}}
+        <li class="quick-entry-nav clearfix">
+            {{each $data[i] as item j}}
+            <a href="javascript:void(0)" data-id="{{item.id}}" data-url="{{item.info}}"
+               data-type="{{item.androidDetail.serviceAddrType}}">
+                <div class="home-app-img">
+                    <div class="download">
+                        <div class="home-tag-holder">
+                            <div class="download-progress">
+                                <div class="fliter"></div>
+                                <div class="progress-info">
+                                    <p>58%</p>
+
+                                    <div class="progress">
+                                        <div class="progress-bar"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <img src="{{item.iconUrl}}">
+                        </div>
+                    </div>
+                </div>
+                <p class="ell">{{item.serviceName}}</p>
+            </a>
+            {{/each}}
+            <div class="app-blank"></div>
+        </li>
+        {{/each}}
+    </ul>
+</script>
+
+<!-- 活动模块 -->
+<script id="activityTmpl" type="text/html">
+    {{each $data as item index}}
+    <div class="activity-item {{if index != 0}}even{{/if}}" data-url="{{item.url}}" data-type="{{item.serviceAddrType}}">
+        <div class="operation-name fl">{{item.name}}</div>
+        <img class="fl" data-src="" src="{{item.imgUrl}}">
+    </div>
+    {{/each}}
+</script>
+
+<!-- 城市快讯 -->
+<script id="notifyTmpl" type="text/html">
+    {{each $data as item index}}
+    {{if item.tag == 1}}
+    <li class="unloaded {{if item.visited}}visited{{/if}}" data-id="{{item.id}}" data-url="{{item.appLinkUrl}}" data-type="{{item.type}}" data-title="{{item.title}}"
+        data-img="{{item.imgUrl1}}">
+        <a class="news-banner flex type{{item.tag}}" href="javascript:void(0)">
+            <div class="ul-content flex-one">
+                <p class="recommend-ul-theme two-ell">{{item.title}}</p>
+                <p class="news-info clearfix"><span class="resource ell fl">{{item.infoSource}}</span><span class="num fl">{{item.clickCount}}条浏览</span><span class="time ell fl">{{item.releaseDate}}</span></p>
+            </div>
+            <img class="lazy" data-original="{{item.imgUrl1}}">
+        </a>
+    </li>
+    {{else if item.tag == 0}}
+    <li class="unloaded {{if item.visited}}visited{{/if}}" data-id="{{item.id}}" data-url="{{item.appLinkUrl}}" data-type="{{item.type}}" data-title="{{item.title}}"
+        data-img="{{item.imgUrl1}}">
+        <a class="type{{item.tag}}" href="javascript:void(0)">
+            <p class="recommend-ul-theme two-ell">{{item.title}}</p>
+            {{if item.content}}<p class="news-content two-ell">{{item.content}}</p>{{/if}}
+            <p class="news-info clearfix"><span class="resource ell fl">{{item.infoSource}}</span><span class="num fl">{{item.clickCount}}条浏览</span><span class="time ell fl">{{item.releaseDate}}</span></p>
+        </a>
+    </li>
+    {{else}}
+        <li class="unloaded {{if item.visited}}visited{{/if}}" data-id="{{item.id}}" data-url="{{item.appLinkUrl}}" data-type="{{item.type}}" data-title="{{item.title}}"
+        data-img="{{item.imgUrl1}}">
+            <a class="type{{item.tag}}" href="javascript:void(0)">
+                <p class="recommend-ul-theme two-ell">{{item.title}}</p>
+                <div class="img-list flex">
+                    <div class="img-item flex-one"><img class="lazy" data-original="{{item.imgUrl1}}"></div>
+                    <div class="img-item flex-one"><img class="lazy" data-original="{{item.imgUrl2}}"></div>
+                    <div class="img-item flex-one"><img class="lazy" data-original="{{item.imgUrl3}}"></div>
+                </div>
+                <p class="news-info clearfix"><span class="resource ell fl">{{item.infoSource}}</span><span class="num fl">{{item.clickCount}}条浏览</span><span class="time ell fl">{{item.releaseDate}}</span></p>
+            </a>
+        </li>
+    {{/if}}
+    {{/each}}
+</script>
+
+<!-- 警徽热点 -->
+<script id="blogTmpl" type="text/html">
+    {{each $data as item index}}
+    <div class="blog-news-item blog-news-item{{item.multiple}}" data-index="{{item.multiple}}" data-id="{{item.id}}" data-wbname="{{item.wbName}}" data-weburl="{{item.wbImageUrl}}" data-type="{{item.appendixType}}">
+        <!-- 主要内容模块 -->
+        <div class="item-content mui-content" data-id="{{item.id}}" data-wbname="{{item.wbName}}" data-weburl="{{item.wbImageUrl}}">
+            <p class="item-header" data-id="{{item.id}}" data-wbname="{{item.wbName}}" data-weburl="{{item.wbImageUrl}}">
+                <img src="{{item.wbImageUrl}}" alt="" class="my-photo">
+                <span class="item-title f28">{{item.wbName}}</span>
+                <span class="item-date f22 c9">{{item.releaseTime}}</span>
+            </p>
+            <p class="article-sec f32" data-id="{{item.id}}" data-wbname="{{item.wbName}}" data-weburl="{{item.wbImageUrl}}">
+                <span class="c3 content-text content-text{{item.multiple}}">{{item.content}}</span>
+                <span class="full-text {{if item.notFull}} hide {{/if}}" data-id="{{item.id}}" data-index="{{item.multiple}}">全文</span>
+            </p>
+            {{if item.appendixType == 1}}
+            <!--  appendixType 1 图片 2视频 -->
+            <div id="imgList{{item.multiple}}" class="mui-content-padded img-list blog-img-list img-list{{multiple}} unloaded flex" data-index="{{item.multiple}}" data-imgarr="{{item.imgList}}">
+                {{each item.appendixList as list i}}
+                <div class="img-item img-item-btom {{if item.appendixList.length == 1}}img-item-one {{else if item.appendixList.length == 4}} img-item-two {{if i%2 == 1 }} img-item-two-mar {{/if}} {{else if item.appendixList.length > 1 && item.appendixList.length != 4}} img-item-three {{if i%3 != 0}} img-item-mar {{/if}} {{/if}}" data-index="{{i}}"><img src="{{list}}" data-preview-src="" data-preview-group="{{item.multiple}}"  data-id="{{item.id}}" data-wbname="{{item.wbName}}" data-weburl="{{item.wbImageUrl}}"  data-title="{{item.title}}" data-flag="2"></div>
+                {{/each}}
+            </div>
+            {{else if item.appendixType == 2}}
+                <div class="vedio-unit" data-detailid="{{item.detailsId}}" data-name="{{item.wbName}}" data-poster="{{item.appendixAddress}}">
+                    <span></span>
+                    <img src="{{item.appendixAddress}}">
+                </div>
+            {{/if}}
+        </div>
+        <!-- 分享、喜欢、点赞按钮 -->
+        <div class="btn-wrap c8e" data-id="{{item.id}}" data-wbname="{{item.wbName}}" data-weburl="{{item.wbImageUrl}}">
+            <!-- 分享图标 -->
+            <a href="javascript:;" class="btn-share f28" data-id="{{item.id}}" data-wbname="{{item.wbName}}" data-weburl="{{item.wbImageUrl}}"  data-title="{{item.title}}" data-flag="1" data-index="{{item.multiple}}">
+                <span class="icon"></span>
+                <span class="num">{{item.shareCount}}</span>
+            </a>
+            <!-- 收藏图标 -->
+            <a href="javascript:;" class="btn-collect f28" data-id="{{item.id}}" data-collect="{{item.collection}}">
+                <span class="icon {{if item.collection == 'true'}} collected {{else item.collection == 'false'}} uncollected {{/if}}"></span>
+                <span class="num">{{item.collectionCount}}</span> 
+            </a>
+            <!-- 点赞图标 -->
+            <a href="javascript:;" class="btn-praise f28" data-index="{{item.multiple}}" data-id="{{item.id}}" data-prise="{{item.prise}}">
+                <span class="icon {{if item.prise == 'true'}} praised {{else if item.prise == 'false'}} unpraised {{/if}}"></span>
+                <span class="num">{{item.priseCount}}</span>
+            </a>
+        </div>
+    </div>
+    {{/each}}
+</script>
+<!-- <script src="../lib/jquery/jquery-1.8.2.min.js"></script>
+<script src="../lib/croods/croods-1.3.1.min.js"></script> -->
+<script src="../lib/app.js"></script>
+<script src="../lib/mui-pre-pic/mui.min.js"></script>
+<script src="../lib/mui-pre-pic/mui.zoom.js"></script>
+<script src="../lib/mui-pre-pic/mui.previewimage.js"></script>
+<script src="../lib/mescroll/mescroll.min.js"></script>
+<script src="../lib/swiper/swiper.min.js"></script>
+<script src="../lib/jquery.lazyload.min.js"></script>
+<script src="../lib/fly/fly.js"></script>
+<script src="../lib/gps-convert.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=FPTNyn1QvwkNGaX86RGSDAjL">
+</script>
+<script src="../app/index.js"></script>
+
+</body>
+</html>

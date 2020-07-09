@@ -1,0 +1,98 @@
+.invoice-regular-container{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.invoice-regular-search-container{
+  background-color: white;
+  padding: 10px 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 10px;
+  width: 100%;
+  justify-content: center;
+}
+
+.invoice-regular-btn-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.invoice-regular-search-double{
+  display: flex;
+  flex-direction: column;
+  //justify-content: center;
+  align-self: flex-start;
+  margin: 0 1px;
+}
+
+.invoice-regular-input-item{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 2px 5px;
+  input{
+    width: 150px;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.invoice-regular-input-date-picker-item{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 2px;
+}
+
+.invoice-regular-input-title{
+  display: flex;
+  flex-direction: row;
+  font-weight: bold;
+  font-size: 14px;
+  color: black;
+  margin-right: 5px;
+}
+
+.invoice-regular-search-btn-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.table-regular-container{
+  background-color: white;
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.table-item{
+  width: 100%;
+}
+.invoice-regular-table{
+  width: 100%;
+  table{
+    thead{
+      th{
+        font-weight: 600;
+        letter-spacing: 1px;
+      }
+    }
+  }
+}
+.row-class{
+  color: #d15a52;
+}

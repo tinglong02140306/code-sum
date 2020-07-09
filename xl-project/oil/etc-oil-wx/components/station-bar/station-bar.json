@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "nav-menu":"../nav-menu/nav-menu",
+    "navigation-bar":"../navigation-bar/navigation-bar"
+  }
+}

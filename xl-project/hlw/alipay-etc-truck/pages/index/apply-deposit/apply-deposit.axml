@@ -1,0 +1,58 @@
+<view class="wrapper">
+	<!--title区域-->
+  <view style="background: #F7F9FC;margin-left:32rpx;margin-right:32rpx;width:686rpx;">
+	<view class="car-container">
+	</view>
+      <view class="card-list">
+        <view class="card-list-title">
+          <view class="card-flex card-flex-one">车牌号</view>
+          <view class="card-flex card-flex-one">车辆类型</view>
+          <view class="card-flex card-flex-one">保证金</view>
+        </view>
+        <block a:for="{{carList}}">
+          <view class="card-list-title">
+            <view class="card-flex">{{item["vlp"]}}</view>
+            <view class="card-flex">{{vehicleTypeMap[item["vclass"]]}}</view>
+            <view class="card-flex">￥{{item["deposit"]}}元</view>
+          </view>
+        </block>
+      </view>
+      <view class="total" style="font-family:'PingFangSC-Medium';font-size: 32rpx;color: #333333;">合计金额：{{total}}元</view>
+  </view>
+	<view class="describe">
+      <view class="describeOne">
+          <view class="total-charge">
+          <view style="font-size: 36rpx;color: #333333;">
+              合计金额：{{total}}元
+          </view>
+          <button class="bg-primary next-charge" size="default" onTap="charge">去充值</button>
+        </view>
+        <view style="font-size: 36rpx;color: #666666;">
+           <text style="font-size: 28rpx;color: #888888;text-align: justify;line-height: 42rpx;">
+            1.您需向已绑定银行账户内转入{{total}}元保证金，确保银行账户内资金充足，以便完成下列的保证金缴纳。
+            2.如您已绑定的银行账户有充足资金，建议您直接发起保证金缴纳步骤。
+          </text>
+        </view>
+      </view>
+     <view class="describeOne">
+      <view class="total-charge">
+        <view style="font-size: 36rpx;color: color: #333333;;">
+           保证金缴纳
+        </view>
+        <button class="bg-primary next-charge" size="default" onTap="next" >去缴纳</button>
+      </view>
+		
+       <text style="font-size: 28rpx;color: #888888;text-align: justify;line-height: 42rpx;">
+        <text style="font-size: 28rpx;">
+          1.您需缴纳保证金{{total}}元。请您点击“去缴纳”完成保证金缴纳流程。
+          2.如您已绑定的银行账户资金不足，导致保证金缴纳失败，系统会弹窗提示，届时请您重新尝试，先完成账户充值，再进行保证金缴纳。
+        </text>
+      
+      </view>
+    </view>
+	</view>
+	
+	
+</view>
+
+

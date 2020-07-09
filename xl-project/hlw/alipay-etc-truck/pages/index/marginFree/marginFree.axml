@@ -1,0 +1,12 @@
+
+<view>
+	<block>
+		<message
+				title="{{waitingTitle}}"
+				subTitle="{{waitingSubtitle}}"
+				mainButton="{{waitingButton.mainButton}}"
+				onTapMain="next"
+				type="success">
+		</message>
+	</block>
+</view>

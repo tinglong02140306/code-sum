@@ -1,0 +1,22 @@
+<view class="body-wrapper">
+  <view class="image-wrapper">
+    <image src="/assets/obu/step-1.png" style="width:500rpx;height:450rpx" mode="widthFix" a:if="{{currentStep===1}}"/>
+    <image src="/assets/obu/step-2.png" style="width:500rpx;height:450rpx" mode="widthFix" a:if="{{currentStep===2}}"/>
+    <image src="/assets/obu/step-3.png" style="width:500rpx;height:450rpx" mode="widthFix" a:if="{{currentStep===3}}"/>
+  </view>
+  <view class="split"/>
+  <view class="image-wrapper" catchTap="nextStep">
+    <image src="/assets/obu/btn-1.png" style="width:500rpx;height:80rpx" mode="widthFix" a:if="{{currentStep===1}}"/>
+    <image src="/assets/obu/btn-2.png" style="width:500rpx;height:80rpx" mode="widthFix" a:if="{{currentStep===2}}"/>
+    <image src="/assets/obu/btn-3.png" style="width:500rpx;height:80rpx" mode="widthFix" a:if="{{currentStep===3}}"/>
+  </view>
+  <view class="devices-mask" a:if="{{showDeviceMask}}">
+    <view class="devices-box">
+      <view class="devices-box-title bg-primary">请选择设备</view>
+      <block a:for="{{devices}}">
+        <view class="device-item" data-device="{{item}}" onTap="connect">{{item.name}}</view>
+      </block>
+    </view>
+  </view>
+</view>
+

@@ -1,0 +1,118 @@
+.ticket-points-container{
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.ticket-points-btn{
+    width: 120px;
+    margin-top: 8px;
+}
+
+.ticket-points-table-box{
+    width: 400px;
+    margin-top: 16px;
+    background-color: #f7f7f7;
+    display: flex;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+.ticket-points-table{
+    width: 100%;
+}
+
+/*modal*/
+.ticket-points-modal-box{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.ticket-points-modal-trees{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+    box-sizing: border-box;
+    .ant-spin-nested-loading {
+        width: auto;
+        height: auto;
+    }
+}
+
+.ticket-points-modal-trees-item{
+    width: 180px;
+    height: 420px;
+    max-height: 420px;
+    vertical-align: middle;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+    
+}
+
+.ticket-points-modal-checkbox-group{
+    height: 378px;
+    overflow-y: auto;
+    overflow-x: auto;
+    display: flex;
+    flex-direction: column;
+    margin-left: 12px;
+    padding: 12px 0;
+}
+
+.ticket-points-modal-trees-item-header{
+    width: 100%;
+    padding: 8px 12px 9px;
+    overflow: hidden;
+    color: rgba(0, 0, 0, 0.65);
+    background: #fff;
+    border-bottom: 1px solid #e8e8e8;
+    border-radius: 4px 4px;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#title{
+    font-weight: bolder;
+}
+
+.ticket-points-modal-trees-item-header-left{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+
+.ticket-points-modal-transfer{
+    .ant-transfer-list-header-title{
+        font-weight: bolder;
+    }
+    .ant-transfer-list{
+        height: 420px;
+        max-height: 420px;
+    }
+
+    .ant-transfer-list-content{
+        width: 178px;
+        max-width: 178px;
+        overflow-x: auto;
+    }
+}
+
+.ticket-points-modal-btns{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    button{
+        margin: 0 10px;
+    }
+}

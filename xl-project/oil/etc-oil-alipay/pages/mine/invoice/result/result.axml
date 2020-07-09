@@ -1,0 +1,17 @@
+<view class="invoice-result-container">
+    <view class="invoice-result-image-box">
+        <image class="invoice-result-image" src="{{result_image}}"></image>
+        <text class="invoice-result-text">{{result}}</text>
+    </view>
+
+    <view class="invoice-result-button">
+        <view class="invoice-result-theme-button" a:if="{{isSuccess}}" onTap="onSeeInvoiceClick">查看发票</view>
+        <view class="invoice-result-theme-button" a:if="{{!isSuccess}}" onTap="onResendClick">重新开具</view>
+    </view>
+    <view class="invoice-result-button">
+        <view class="invoice-result-disable-button" a:if="{{isSuccess}}" onTap="onHistoryClick">开票历史</view>
+        <view class="invoice-result-disable-button" a:if="{{!isSuccess}}">
+            <contact-button tnt-inst-id="vOI_Kbsg" scene="SCE00167654" size="630*90rpx" icon="/assets/static/btn-kefu.png"/>
+        </view>
+    </view>
+</view>

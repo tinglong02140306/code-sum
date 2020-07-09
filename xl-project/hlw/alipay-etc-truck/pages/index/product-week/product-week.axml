@@ -1,0 +1,63 @@
+  
+  <view style="height:162rpx;">
+    	<steps activeIndex="{{activeIndex}}" items="{{items}}" a:if="{{!appendCar}}"/>
+   </view>
+  <view class="wrapper">
+	<!--title区域-->
+	<view style="display: flex;justify-content: center;align-items: center;">
+		<view class="page">
+        <view class="pageTitle">
+           	<view style="width:708rpx;margin-bottom:20rpx;position: relative;">
+                <image src="/images/index/weekday.png" alt="" style="width:708rpx;height:266rpx;" mode="widthFix"/>
+                <view style="position: absolute;left:40rpx;bottom:30rpx;font-size: 36rpx;color: #FFFFFF;text-align: right;">{{creditLimit}} 元  <text style="font-size: 28rpx;color: #FFFFFF;opacity: 0.7;margin-left:20rpx;">信用额度</text></view>
+             </view>
+        </view>
+      
+			<view class="title">
+				<text class="explain" style="font-size: 36rpx;color: #333333;z-index:999;">签约说明\n\n</text>
+        <view class="BackgroundColor"></view>
+			</view>
+      <view style="margin-top:150rpx;"></view>
+        <view style="margin-left:25rpx;margin-bottom:300rpx;">
+            <view class="weekday">
+              <view class="spot"></view>
+              <view class="titleOne">周结卡日常使用</view>
+            </view>
+            <view class="textline">
+                <text>用户可使用周结卡信用额度，用于每周内高速通行后第二天，贷款支付通行费；同时，固定每周一出上周通行费贷款账单，且每周二系统自动批扣还款。</text>
+            </view>
+            <view class="weekday">
+              <view class="spot"></view>
+              <view class="titleOne">周结卡收费内容</view>
+            </view>
+            <view class="textline">
+                <text>用户使用周结卡，每周需支付固定服务费用，12元/周/车。自办理之日起至2019年12月31日，只需要8.8元/周/车。\n</text>
+            </view>  
+            <view class="weekday">
+               <view class="spot"></view>
+              <view class="titleOne">周结卡切换日结卡</view>
+            </view>
+            <view class="textline">
+                <text>对于已有周结卡信用额度的用户，同时具有日结卡免交保证金权益。用户可选择，优先使用周结卡或日结卡来结算通行费。</text>
+            </view>
+            <view class="weekday">
+              <view class="spot"></view>
+              <view class="titleOne">日结卡日常使用</view>
+            </view>
+            <view class="textline">
+                <text>用户需提前向银行卡内转入足够余额，用于高速通行后第二天，正常扣费使用。\n</text>
+            </view>
+        </view>
+		</view>
+	</view>
+  <view class="footer">
+      <view class="dayagreen">
+          <view style="width:10%;">同意</view>
+          <view style="color:#00a5ff;width:50%;" onTap="showProtocol">《周结卡及日结卡签约》</<view>
+      </view>	
+      </view>
+      <button class="next-btn bg-primary" onTap="next">同意签约并使用</button>
+  </view>
+  
+
+

@@ -1,0 +1,21 @@
+<view>
+	<block a:if="{{status==='REFUSED'}}">
+		<message
+				title="{{waitingTitle}}"
+				subTitle="{{waitingSubtitle}}"
+				mainButton="{{waitingButton.mainButton}}"
+				onTapMain="next"
+				type="info">
+		</message>
+	</block>
+
+	<block a:if="{{status==='ACCEPTED'}}">
+		<message
+				title="{{acceptTitle}}"
+				subTitle="{{acceptSubtitle}}"
+				type="success"
+				mainButton="{{acceptButton.mainButton}}"
+				onTapMain="apply">
+		</message>
+	</block>
+</view>

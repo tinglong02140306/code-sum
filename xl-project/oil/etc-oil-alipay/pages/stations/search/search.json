@@ -1,0 +1,13 @@
+{
+    "disableScroll": true,
+    "transparentTitle": "always",
+    "titlePenetrate": "YES",
+    "defaultTitle": "",
+    "usingComponents": {
+        "scroll-list": "../../../components/scroll-list/scroll-list",
+        "search-bar": "../../../components/search-bar/search-bar",
+        "status": "../../../components/status/status",
+        "filter-tabs": "../components/filter-tabs/filter-tabs",
+        "station-item": "../components/station-item/station-item"
+    }
+}

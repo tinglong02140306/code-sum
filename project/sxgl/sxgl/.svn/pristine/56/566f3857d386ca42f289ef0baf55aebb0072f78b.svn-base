@@ -1,0 +1,272 @@
+/*
+ * @Author: tinglong
+ * @Date: 2018-12-17 15:07:00
+ * @Last Modified by: kkfan2
+ * @Last Modified time: 2019-01-17 14:16:00
+ */
+<template>
+    <!-- 基本信息 -->
+    <div id="extendInfo" class="pb10">
+        <div class="basic-info-wrap">
+            <div @click="extendInfoShow = !extendInfoShow" style="cursor: pointer;display: inline-block;">
+                <i class="icon-nav inline-block"></i>
+                <span class="fz14 inline-block">扩展信息</span>
+            </div>
+            <Icon class="icon-up-down fz12 inline-block h100_" style="cursor: pointer;vertical-align: top;line-height: 32px; " :type="extendInfoShow ? 'ios-arrow-up' : 'ios-arrow-down'" :name="extendInfoShow ? 'ios-arrow-down' : 'ios-arrow-up'" @click="extendInfoShow = !extendInfoShow"/>
+        </div>
+        <div class="form-wrap" v-show="extendInfoShow">
+            <el-form :model="ruleForm" :rules="rules" ref="extendInfoForm" label-width="123px" size="small">
+                <el-row>
+                    <el-col :span="11" :push="0">
+                        <el-form-item label="高频一件事" prop="isHighFrequency">
+                            <el-radio-group v-model="ruleForm.isHighFrequency" :disabled="isDisabled">
+                                <el-radio label="1">是</el-radio>
+                                <el-radio label="0">否</el-radio>
+                            </el-radio-group>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="10" :push="0">
+                        <el-form-item label="排序值" prop="sortNo">
+                            <el-input v-model="ruleForm.sortNo" maxlength="50" :disabled="isDisabled" placeholder="请输入排序值"></el-input>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <el-row>
+                    <el-col :span="10" :push="0">
+                        <el-form-item label="专题服务" prop="specialService">
+                            <el-select v-model="ruleForm.specialService" :disabled="isDisabled" placeholder="请选择" clearable filterable class="xzqhWt">
+                                <el-option-group
+                                v-for="group in specialSerData"
+                                :key="group.label"
+                                :label="group.label">
+                                <el-option
+                                    v-for="item in group.options"
+                                    :key="item.value"
+                                    :label="item.label"
+                                    :value="item.value">
+                                </el-option>
+                                </el-option-group>
+                            </el-select>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+            </el-form>
+        </div>
+    </div>
+</template>
+<script>
+import unit from '@/api/index';
+export default {
+    name:"extendInfo",
+    components: {
+        
+    },
+    props: {
+        isDisabled: {
+            type: Boolean,
+            default: false
+        },
+        matterCode:{
+            type:String,
+            default:''
+        },
+        matterVersion: {
+            type: [Number,String],
+            default: '',
+        },
+        id: {
+            type: String,
+            default: '',
+        }
+    },
+    data() {
+        let that = this,
+            validSortNum = (rule, value, callback) => {
+            if (value) {//有值才检验
+                let reg = /^[0]$|^[1-9]{1}\d{0,4}$/;
+                if (!reg.test(value)) {
+                    callback(new Error('请输入0-99999之间的正整数'));
+                } else {
+                    callback();
+                }
+            } else {
+                callback();
+            }
+        };
+        return {
+            ruleForm: {
+                // 是否是高频一件事
+                isHighFrequency: '0',
+                // 排序值
+                sortNo: 0,
+                // 专题服务
+                specialService: '',
+            },
+            rules: {
+                isHighFrequency: [
+                    { required: true, message: '请勾选高频事项', trigger: 'change' }
+                ],
+                sortNo: [
+                    { required: false, message: '请填写排序值', trigger: 'blur' },
+                    { validator: validSortNum , trigger: 'blur' }
+                ],
+            },
+            extendInfoShow: false,
+            // 民政社会组织：基金会、民办非企业、社会团体、慈善组织；人社综合业务：医疗业务、养老业务、就业业务
+            specialSerData: [{
+                label: '民政社会组织',
+                options: [{
+                    value: '00',
+                    label: '基金会'
+                }, {
+                    value: '01',
+                    label: '民办非企业'
+                }, {
+                    value: '02',
+                    label: '社会团体'
+                }, {
+                    value: '03',
+                    label: '慈善组织'
+                }]
+                }, {
+                label: '人社综合业务',
+                options: [{
+                    value: '10',
+                    label: '医疗业务'
+                }, {
+                    value: '11',
+                    label: '养老业务'
+                }, {
+                    value: '12',
+                    label: '就业业务'
+                }]
+            }],
+        }
+    },
+    methods: {
+        /**
+         * 请求拓展信息
+         */
+        getExtendInfo() {
+            let that = this;
+            unit.ajaxMerPost('/bog-matter-mgr/result/file/findByMatter', {
+                id: that.ids,  // 事项id
+            },function(res) {
+            },function(error) {
+                that.$Message.error('服务端错误');
+            }, that);
+        },
+        /**
+         * 专题服务
+         */
+        getSpecialSerData: function() {
+            let that = this;
+            unit.ajaxMerPost('/znsj-web/dic/getAssociatDictionarys', {
+                pinYinType: 'ZTWHP',
+                childPinYinType: 'ZTWH',
+            }, function (res) {
+                that.specialSerData = res.data;
+            }, function (res) {
+                that.$message.warning('服务端错误');
+            }, that);
+        },
+        /**
+         * 初始化信息
+         */
+        init() {
+            let that = this;
+            that.ids = that.$route.query.id;
+            // if(that.ids != null && that.ids != '') {
+            //     that.extendInfoShow = true;
+            //     // that.getExtendInfo();
+            // }
+        }
+    },
+    mounted() {
+        this.init();
+    }
+};
+</script>
+<style lang="less">
+@import "../../../assets/styles/theme.less";
+#extendInfo {
+    overflow-y: auto;
+    height: 100%;
+    background-color: #fff;
+    border-top: 0;
+    .xzqhWt.el-select {
+        line-height: 32px;    
+    }
+    .xzqhWt{
+        width:100%;
+    }
+    .basic-info-wrap {
+        i.icon-up-down {
+            background: none !important;
+        }
+    }
+    // 标题栏样式
+    .basic-info-wrap {
+        padding-bottom: 5px;
+        margin: 0 0 15px;
+        height: 35px;
+        width: 100%;
+        border-bottom: 1px dashed #d8d8d8;
+        .icon-nav {
+            width: 20px;
+            height: 30px;
+            background-position: center center;
+            background-size: 18px;
+        }
+        span {
+            line-height: 30px;
+            font-weight: bold;
+            vertical-align: top;
+        }
+    }
+    // 说明文件表单
+    .result-file-title {
+        padding: 0px 0 6px 5px;
+        font-size: 14px;
+        color:#606266;
+    }
+    .el-table__row {
+        .el-form-item__content {
+            margin-left: 0px !important;
+        }
+        td {
+            padding-bottom: 0px !important;
+            padding-top: 14px !important;
+        }
+    }
+    .el-tag.el-tag--info.el-tag--mini {
+        max-width: 100%;
+        height: auto;
+        .el-select__tags-text {
+            width: 100%;
+            white-space: pre-wrap;
+        }
+    }
+
+}
+.el-select-dropdown {
+    max-width: 500px !important;
+}
+#maskId {
+    display: none;
+}
+.el-scrollbar {
+    .el-select-dropdown__wrap {
+        .el-select-group__title {
+            font-size: 14px !important;
+            
+        }
+        .el-select-group { 
+            .el-select-dropdown__item {
+                padding-left: 40px !important;
+            }
+        }
+    }
+}
+</style>
+

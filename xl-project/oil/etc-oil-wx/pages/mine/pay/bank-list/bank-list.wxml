@@ -1,0 +1,34 @@
+<!--pages/person/payment/bank-list/bank-list.wxml-->
+<import src="../../../../templates/mine/bank-card/bank-card.wxml"/>
+
+<view class="bank-card-list-container" >
+    <view class="bank-card-list-cell" wx:for="{{bank_card_list}}" wx:for-index="index" wx:for-item="item" wx:key="bank" wx:if="{{!is_empty}}">
+        <view bindtap="onCardClick" data-item="{{item}}" data-index="{{index}}" style="width: 100%">
+            <template is="bank-card" data="{{...item}}"/>
+        </view>
+    </view>
+    <popup show="{{is_show_modal}}">
+        <view class="bank-card-click-box" style='padding-bottom: {{isIphoneX?"30rpx":"10rpx"}}'>
+            <view class="bank-card-click-item">
+                <text class="click-text1">您可对{{bank_name}}尾号{{tail_no}}的{{bank_card_type=='0'?"储蓄卡":bank_card_type=='1'?"信用卡":'银行卡'}}进行操作</text>
+            </view>
+            <view class="bank-card-click-line1"></view>
+            <view class="bank-card-click-item" bindtap="unSign">
+                <text class="click-text2">解除绑定</text>
+            </view>
+            <view class="bank-card-click-line2"></view>
+            <view class="bank-card-click-item" bindtap="onCancel">
+                <text class="click-text3">取消</text>
+            </view>
+        </view>
+    </popup>
+    <view class="result-container" wx:if="{{is_empty}}">
+        <image class="no-card-image" src="https://oilmag.etcsd.com.cn/oilcoreserver/static/resource/icon-bank-none.png"></image>
+        <text class="no-card-text">您尚未添加银行卡</text>
+    </view>
+    <view class="card-bottom-blank"></view>
+    <view class="bank-card-add" bindtap="onCardAdd" style='bottom: {{isIphoneX?"68rpx":"40rpx"}}'>
+        <image class="bank-card-add-img" src="https://oilmag.etcsd.com.cn/oilcoreserver/static/resource/bank-card-add.png"></image>
+        <text class="bank-card-add-text">添加银行卡</text>
+    </view>
+</view>

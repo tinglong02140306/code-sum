@@ -1,0 +1,20 @@
+.crud{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.crud-item{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    margin: 0 2px;
+
+    span{
+        margin: 0 2px;
+    }
+}

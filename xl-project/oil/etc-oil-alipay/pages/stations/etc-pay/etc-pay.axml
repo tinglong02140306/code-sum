@@ -1,0 +1,59 @@
+<!--
+ * @Author: sunmingmao
+ * @Date: 2020-04-09 19:23:53
+ * @LastEditTime: 2020-04-30 14:05:18
+ * @LastEditors: longting
+ * @Description: ETC无感支付界面
+ * @FilePath: /etc-oil-wx/pages/stations/etc-pay/etc-pay.axml
+ -->
+<view class="etc-pay-contaienr">
+    <!--视频-->
+    <view class="etc-pay-video-box">
+        <video class="etc-pay-video" id="video" src="{{url}}" onPlay="onPlay" onPause="onPause" onEnded="onEnd"
+            show-center-play-btn="{{false}}" controls="{{controls}}" onTap="onPauseClick"></video>
+        <image class="etc-video-background" a:if="{{show_background}}" src="/assets/static/video-background.png">
+        </image>
+        <image class="etc-video-image" a:if="{{pause}}" onTap="onPlayClick" src="/assets/static/video-stop.png"></image>
+    </view>
+    <!--加油支付流程-->
+    <view class="etc-pay-flow-box">
+        <text class="etc-pay-flow-title">加油支付流程</text>
+        <view class="etc-pay-flow">
+            <view class="etc-pay-flow-shadow"></view>
+            <view class="etc-pay-flow-move" animation="{{animation_move}}"></view>
+            <view class="etc-pay-flow-content" id="flow">
+                <view class="etc-pay-flow-content-item">
+                    <image class="etc-pay-flow-content-item-image" src="{{first_image}}"></image>
+                    <text class="etc-pay-flow-content-item-text"
+                        style="color: {{index==0?'#fff':'rgba(5, 186, 125, 1)'}};">ETC识别</text>
+                    <text class="etc-pay-flow-content-item-hint"
+                        style="visibility: {{index==0?'visible':'hidden'}};">{{count}}秒</text>
+                </view>
+                <view class="etc-pay-flow-content-item">
+                    <image class="etc-pay-flow-content-item-image" src="{{second_image}}"></image>
+                    <text class="etc-pay-flow-content-item-text"
+                        style="color: {{index==1?'#fff':'rgba(5, 186, 125, 1)'}};">完成加油</text>
+                    <text class="etc-pay-flow-content-item-hint"
+                        style="visibility: {{index==1?'visible':'hidden'}};">{{count}}秒</text>
+                </view>
+                <view class="etc-pay-flow-content-item">
+                    <image class="etc-pay-flow-content-item-image" src="{{third_image}}"></image>
+                    <text class="etc-pay-flow-content-item-text"
+                        style="color: {{index==2?'#fff':'rgba(5, 186, 125, 1)'}};">自动扣款</text>
+                    <text class="etc-pay-flow-content-item-hint" style="visibility: hidden">{{count}}秒</text>
+                </view>
+            </view>
+        </view>
+        <text class="etc-pay-flow-hint">请在ETC加油车道完成加油，并告知加油员使用ETC支付。</text>
+    </view>
+    <!--专属优惠-->
+    <!-- <view class="etc-pay-preference-box">
+        <text class="etc-pay-flow-title">专属优惠</text>
+        <view class="etc-pay-preference-ticket"></view>
+    </view> -->
+    <!--导航前往-->
+    <view class="etc-pay-go-box" style="padding-bottom: {{isIphoneX?64:24}}rpx;">
+        <view class="{{is_support_no_sense?'theme-button':'disable-button'}} etc-pay-go" onTap="onNavigationClick">
+            {{is_support_no_sense?'导航前往':'本站暂不支持'}}</view>
+    </view>
+</view>

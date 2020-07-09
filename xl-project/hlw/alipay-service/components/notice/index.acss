@@ -1,0 +1,48 @@
+/*通知公告*/
+.notice-wrapper{
+  width: 100vw;
+  height: 124rpx;
+  display: flex;
+  align-items: center;
+  background-color: rgb(80,127,248);
+}
+.notice-image-wrapper{
+  width: 72rpx;
+  height: 68rpx;
+  margin: 0 30rpx 0 48rpx;
+}
+.notice-image{
+  width: 72rpx;
+  height: 68rpx;
+}
+.notice-info-wrapper{
+  flex: 1;
+  margin: 10rpx 56rpx 0 30rpx;
+  display: flex;
+  flex-direction: column;
+}
+.notice-info{
+  width: 100%;
+  height: 46rpx;
+}
+.swiper-info{
+  width: 100%;
+  height: 46rpx;
+}
+.notice-txt{
+  font-family: SourceHanSansCN-Normal;
+  font-size: 26rpx;
+  color: white;
+  display: inline-block;
+  width: 100%;
+  display:-webkit-box;
+  -webkit-line-clamp:1;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  -webkit-box-orient:vertical;
+  word-break:break-all;
+}
+.txt-wrapper{
+  display: flex;
+  align-items: center;
+}

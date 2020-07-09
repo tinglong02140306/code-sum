@@ -1,0 +1,42 @@
+<view class="wrapper">
+<!--title区域-->
+	<view style="display: flex;justify-content: center;align-items: center;">
+		<view class="page">
+			<view class="pageTitle">
+				<view style="width:708rpx;margin-bottom:20rpx;position: relative;">
+					<image src="/images/index/day.png" alt="" style="width:708rpx;" mode="widthFix"/>
+				</view>
+			</view>
+			<view class="title">
+				<text class="explain" style="font-size: 36rpx;color: #333333;z-index:999;">签约说明\n\n</text>
+				<view class="bg-color"/>
+			</view>
+			<view style="margin-top:150rpx;"/>
+			<view style="margin-left:25rpx;margin-bottom:300rpx;">
+				<view class="weekday">
+					<view class="spot"/>
+					<view class="titleOne">日结卡在线激活</view>
+				</view>
+				<view class="textline">
+					<text>用户需向银行账户内转入保证金（货五车辆2000元/车，货四货三车辆1000元，货二货一车辆500元/车），用于激活日结卡。如不需要使用ETC服务时，可发起保证金退回。</text>
+				</view>
+				<view class="weekday">
+					<view class="spot"/>
+					<view class="titleOne">日结卡日常使用</view>
+				</view>
+				<view class="textline">
+					<text>用户需提前向银行卡内转入足够余额，用于高速通行后第二天，正常扣费使用。\n</text>
+				</view>
+
+			</view>
+		</view>
+	</view>
+	<view class="footer">
+		<view class="dayagreen">
+			<view style="width:10%;">同意</view>
+			<view style="color:#00a5ff;width:50%;" onTap="showProtocol">《日结卡使用协议》</view>
+		</view>
+		<button class="next-btn bg-primary" onTap="next">同意签约并缴纳保证金</button>
+	</view>
+</view>
+

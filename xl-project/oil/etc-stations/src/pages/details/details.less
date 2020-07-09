@@ -1,0 +1,141 @@
+@staion-details: staion-details;
+
+.@{staion-details} {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &-top {
+    width: 100%;
+    height: 300px;
+  }
+
+  &-center {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 32px;
+    background-color: white;
+
+    &-name {
+      width: 100%;
+      font-size: 32px;
+      color: #090506;
+      letter-spacing: 2px;
+    }
+
+    &-info {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 32px;
+      overflow: hidden;
+
+      &-icon {
+        width: 70px;
+        height: 70px;
+        margin-right: 16px;
+        border-radius: 50%;
+      }
+
+      &-address {
+        font-size: 28px;
+        color: #6b6b6b;
+        flex: 1;
+      }
+
+      &-separation {
+        color: #d9d9d9;
+        margin: 0 32px;
+      }
+
+      &-distance {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        &-icon {
+          width: 30px;
+          height: 40px;
+          margin-bottom: 8px;
+        }
+
+        &-num {
+          font-size: 28px;
+          color: #6b6b6b;
+          flex: 1;
+        }
+      }
+    }
+
+  }
+
+  &-bottom {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 32px;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    margin-top: 10px;
+
+    .sub{
+      background-color: white;
+    }
+
+    &-price {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        box-sizing: border-box;
+        flex-wrap: wrap;
+        padding-top: 32px;
+        
+      &-item {
+            width: 33%;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+            padding: 10px 0;
+
+        &-info {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+          &-oil {
+            color: #757575;
+            font-size: 28px;
+            margin-bottom: 4px;
+          }
+
+          &-price {
+            color: #ed411d;
+            font-size: 36px;
+          }
+        }
+
+        &-separation {
+            width: 2px;
+            height: 50px;
+            background-color: #e4e4e4;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>chatRoom</title>
+    <script type="text/javascript" src="socket.io.js"></script>
+</head>
+<body>
+<input id="sendText" type="text">
+<button id="sendBtn">发送</button>
+<script type="text/javascript">
+    var socket = io("ws://localhost:3000"); 
+    function showMessage(type, str) {
+        var ele = document.createElement('div');
+        if(type == 'enter') {
+            ele.style.color = 'blue';
+        }else if(type == 'leave') {
+            ele.style.color = 'red';
+        }
+        ele.innerHTML = str;
+        document.body.appendChild(ele);
+    }
+    document.getElementById("sendBtn").onclick = function() {
+        var txt = document.getElementById('sendText').value;
+        if(txt) {
+            socket.emit('message',txt);
+        }   
+    }
+    socket.on('enter', function(data) {
+        showMessage('enter', data);
+    });
+    socket.on('message', function(data) {
+        showMessage('message', data);
+    });
+    socket.on('leave', function(data) {
+        showMessage('leave', data);
+    });
+</script>
+    
+</body>
+</html>

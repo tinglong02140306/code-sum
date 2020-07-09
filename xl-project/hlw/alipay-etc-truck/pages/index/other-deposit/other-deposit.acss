@@ -1,0 +1,104 @@
+.wrapper{
+ width: 100%;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ flex-direction: column;
+}
+.car-container{
+	flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size:34rpx;
+}
+.next-btn{
+	width: 686rpx;
+  text-align: center;
+	outline: none;
+  border-radius: 10rpx;
+}
+.card-list{
+  width: 690rpx;
+  display: flex;
+  margin-top: 60rpx;
+  flex-direction: column;
+  margin-bottom: 60rpx;
+  align-items: flex-start;
+  background: #F7F9FC;
+}
+.card-list-title{
+  width: 690rpx;
+  height: 80rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.card-flex{
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "PingFangSC-Regular";
+  font-size: 28rpx;
+  color: #333333;
+  text-align: center;
+  }
+.describe{
+  width: 660rpx;
+}
+.describe view{
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+  line-height: 50rpx;
+}
+.total{
+  width: 640rpx;
+  box-sizing: border-box;
+  margin-left:24rpx;
+  padding: 52rpx 52rpx;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-top: 1px dashed #979797;
+  opacity: 0.5;
+  background: #F7F9FC;
+  font-size: 32rpx;
+  color: #333333;
+  font-family: PingFangSC-Medium;
+}
+.total-charge{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #EEEEEE;
+}
+.next-charge{
+  font-size: 30rpx;
+  width:132rpx;
+  height:54rpx;
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  font-family: PingFangSC-Regular;
+  font-size: 28rpx;
+  color: #FFFFFF;
+  text-align: center;
+}
+.describeOne{
+    background: #FFFFFF;
+    box-shadow: 0 2px 14px 0 rgba(110,127,150,0.13);
+    border-radius: 8px;
+    border-radius: 8px;
+    padding: 20rpx 20rpx;
+}
+.card-flex-one{
+  font-family: "PingFangSC-Regular";
+  font-size: 28rpx;
+  color: #999999;
+  text-align: center;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

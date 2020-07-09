@@ -1,0 +1,150 @@
+$order-input: 150px;
+
+.waybill-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+}
+
+.waybill-top-container{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  justify-content: center;
+  padding: 10px 0;
+}
+
+.waybill-search-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.waybill-search-column-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.waybill-table-container {
+  background-color: white;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.waybill-search-item-container{
+  display: flex;
+  flex-direction: row;
+}
+
+.waybill-table{
+  width: 100%;
+  table{
+    thead{
+      th{
+        color: black;
+        font-weight: 600;
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+.waybill-input-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  div {
+    width: 90px;
+    color: black;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 14px;
+    margin-right: 5px;
+    font-weight: bold;
+  }
+  input{
+    width: 60%;
+    margin: 0;
+  }
+  span{
+    div{
+      input{
+        width: 60%;
+        margin: 0;
+      }
+    }
+  }
+}
+
+.waybill-date-picker-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  div {
+    width: 70px;
+    color: black;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 14px;
+    margin-right: 5px;
+    font-weight: bold;
+  }
+  span{
+    div{
+      min-width: 100px;
+    }
+  }
+}
+
+.waybill-input-bottom-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5px;
+  padding: 0;
+  div {
+    width: 90px;
+    color: black;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 14px;
+    margin-right: 5px;
+    font-weight: bold;
+  }
+  input{
+    width: 60%;
+    margin: 0;
+  }
+  span{
+    width: 60%;
+    margin: 0;
+  }
+}
+
+
+.waybill-btn-container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 15px;
+}

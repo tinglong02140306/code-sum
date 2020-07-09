@@ -1,0 +1,32 @@
+.category-wrapper{
+  width: 310rpx;
+  height: 150rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 18rpx auto;
+}
+.category-info-wrapper{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.category-title{
+  font-family: SourceHanSansCN-Normal;
+  font-size: 28rpx;
+  color: rgb(59,66,87);
+  margin-top: 14rpx;
+  margin-bottom: 14rpx;
+}
+.category-subtitle{
+  font-family: SourceHanSansCN-Normal;
+  font-size: 22rpx;
+  color: rgb(135,141,156);
+}
+.category-icon-wrapper{
+  flex: 0 0 115rpx;
+  height: 94rpx;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}

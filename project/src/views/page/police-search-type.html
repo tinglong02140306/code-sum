@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="../../../../" >
+    <meta charset="UTF-8">
+    <!-- 添加到主屏幕后，全屏显示 -->
+    <meta name="apple-touch-fullscreen" content="YES"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <!-- iphone 运行在全屏模式 -->
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="viewport" content="width=device-width"/>
+    <title>皖警搜索</title>
+    <link rel="stylesheet" type="text/css" href="../css/mui-preview-pic.css?__inline" />
+    <link rel="stylesheet" type="text/css" href="../lib/mui-pre-pic/mui.min.css">
+    <link rel="stylesheet" type="text/css" href="../lib/swiper/swiper.min.css">
+    <link rel="stylesheet" type="text/css" href="../lib/mescroll/mescroll.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/base.css?__inline"/>
+    <link rel="stylesheet" type="text/css" href="../css/all.css?__inline"/>
+    <link rel="stylesheet" type="text/css" href="../css/police-search-common.css?__inline"/>
+    <link rel="stylesheet" type="text/css" href="../css/swiper-blogs.css?__inline" />
+    <link rel="stylesheet" type="text/css" href="../css/police-search-type.css?__inline"/>
+    <link rel="stylesheet" type="text/css" href="../css/news-list.css?__inline"/>
+</head>
+<body>
+    <div class="wrap police-search-wrap bfg">
+       <!-- 头部 -->
+        <header class="topic-bg">
+            <div class="header-item topic-bg clearfix">
+                <a href="javascript:void(0)" class="arrow-left header-back fl" data-bind="click: back"></a>
+                <div class="searchs-wrap fl">
+                    <div class="search">
+                        <div class="search-input bf clearfix">
+                            <a href="javascript:void(0)" class="btn-search fl" ></a>
+                            <input id="searchInput" type="text" placeholder="" class="f26 c3 fl" maxlength="100">
+                            <label class="f26 c9" data-flag="1"></label>
+                            <a href="javascript:void(0)" class="btn-delete fl hide" data-bind="click: deleteEvent"></a>
+                        </div>   
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <!-- 搜索结果列表 -->
+        <div id="conwrapper" class="content content-result content-results top-7">
+            <!-- <div id="wrapper" class="mescroll"> -->
+            <div id="serviceItem" class="service-item-list hide">
+                <p class="f28 content-result-list-p">服务项</p>
+                <div id="content-list" class="result-list-detailss result-list-details service-list-details">
+                </div>
+            </div> 
+
+            <div id="WorksItem" class="service-item-list hide">
+                <p class="f28 content-result-list-p">办事项</p>
+                <div id="content-list" class="result-list-detailss result-list-details work-list-details">
+                </div>
+            </div> 
+
+            <div class="swiper-container newsTabWrapper hide">
+                <div class="swiper-pagination"></div>
+                <div class="swiper-wrapper">  <!-- id wrapper -->
+                    <!-- 综合 -->
+                    <div id="compreNews" class="swiper-slide swiper-slide0" data-index="0"> 
+                        <div id="wrapper0" class="mescroll compre-wrapper">  <!-- recomWrapper wrapper -->
+                            <section class="home-news">
+                                <div class="home-notify-content">
+                                    <ul id="dataList0" class="city-news recom-news">
+                                    </ul>
+                                    <div class="no-line hide">网络无法连接，请检查您的网络</div>
+                                </div>
+                            </section>
+                        </div> 
+                        <!-- 暂无数据 -->
+                        <div class="empty empty0 top-7 hide">
+                            <div class="empty-ad"></div>
+                            <p>暂无数据~</p>
+                        </div>       
+                    </div>
+                    <!--警微热点-->
+                    <div id="blogNews" class="swiper-slide swiper-slide1" data-index="1">
+                        <div id="wrapper1" class="mescroll blog-wrapper">
+                            <div id="dataList1" class="blog-news-content city-news">
+                            </div>
+                        </div> 
+                        <!-- 暂无数据 -->
+                        <div class="empty empty1 top-7 hide">
+                            <div class="empty-ad"></div>
+                            <p>暂无数据~</p>
+                        </div>
+                    </div>
+                </div>   
+            </div>
+
+        <div class="empty top-7 hide">
+            <div class="empty-ad"></div>
+            <p>未搜索到相关内容</p>
+        </div>
+    </div>
+    <share data-bind="source: OP"></share>
+<!-- 资讯 -->
+<script id="notifyTmpl" type="text/html">
+    {{each $data as item index}}
+    {{if item.tag == 1}}
+    <li class="unloaded new-details" data-id="{{item.id}}" data-url="{{item.appLinkUrl}}" data-type="{{item.type}}" data-title="{{item.title}}"
+        data-img="{{item.imgUrl1}}">
+        <a class="news-banner flex type{{item.tag}}" href="javascript:void(0)">
+            <div class="ul-content flex-one">
+                 {{if item.titleHighet}}
+                    <p class="recommend-ul-theme ell" title="{{item.title}}">{{item.titleHighet}}</p>
+                    {{else if item.title}}
+                    <p class="recommend-ul-theme ell " title="{{item.title}}">{{item.title}}</p>
+                {{/if}}
+
+                {{if item.contentHighet}}
+                    <p class="recommend-ul-theme two-ell themes f26" title="{{item.content}}">{{item.contentHighet}}</p>
+                    {{else if item.content}}
+                    <p class="recommend-ul-theme two-ell themes f26" title="{{item.content}}">{{item.content}}</p>
+                {{/if}}
+
+                <p class="news-info clearfix"><span class="resource resource-one ell fl">{{item.infoSource}}</span><span class="time time-one fl ell">{{item.releaseTime}}</span></p>
+            </div>
+            <img class="lazy" data-original="{{item.imgUrl1}}">
+        </a>
+    </li>
+    {{else if item.tag == 0}}
+    <li class="unloaded new-details" data-id="{{item.id}}" data-url="{{item.appLinkUrl}}" data-type="{{item.type}}" data-title="{{item.title}}"
+        data-img="{{item.imgUrl1}}">
+        <a class="type{{item.tag}}" href="javascript:void(0)">
+            {{if item.titleHighet != ""}}
+                <p class="recommend-ul-theme two-ell">{{item.titleHighet}}</p>
+                {{else if item.title != ""}}
+                <p class="recommend-ul-theme two-ell">{{item.title}}</p>
+            {{/if}}
+
+            {{if item.contentHighet != ""}}                    
+                <p class="news-content two-ell">{{item.contentHighet}}</p>
+                {{else if item.content != ""}}
+                <p class="news-content two-ell">{{item.content}}</p>
+            {{/if}}
+
+            <p class="news-info clearfix"><span class="resource ell fl">{{item.infoSource}}</span><span class="time fl ell">{{item.releaseTime}}</span></p>
+        </a>
+    </li>
+    {{else}}
+        <li class="unloaded new-details" data-id="{{item.id}}" data-url="{{item.appLinkUrl}}" data-type="{{item.type}}" data-title="{{item.title}}"
+        data-img="{{item.imgUrl1}}">
+            <a class="type{{item.tag}}" href="javascript:void(0)">
+                {{if item.titleHighet != ""}}
+                    <p class="recommend-ul-theme two-ell">{{item.titleHighet}}</p>
+                    {{else if item.title != ""}}
+                    <p class="recommend-ul-theme two-ell">{{item.title}}</p>
+                {{/if}}
+
+                {{if item.contentHighet != ""}}                    
+                    <p class="news-content two-ell">{{item.contentHighet}}</p>
+                    {{else if item.content != ""}}
+                    <p class="news-content two-ell">{{item.content}}</p>
+                {{/if}}
+
+                <div class="img-list flex">
+                    <div class="img-item flex-one"><img class="lazy" data-original="{{item.imgUrl1}}"></div>
+                    <div class="img-item flex-one"><img class="lazy" data-original="{{item.imgUrl2}}"></div>
+                    <div class="img-item flex-one"><img class="lazy" data-original="{{item.imgUrl3}}"></div>
+                </div>
+                <p class="news-info clearfix"><span class="resource ell fl">{{item.infoSource}}</span><span class="time fl ell">{{item.releaseTime}}</span></p>
+            </a>
+        </li>
+    {{/if}}
+    {{/each}}
+</script>
+
+<!-- 警徽热点 -->
+<script id="blogTmpl" type="text/html">
+    {{each $data as item index}}
+    <div class="blog-news-item blog-news-item{{item.multiple}}" data-index="{{item.multiple}}" data-id="{{item.id}}" data-wbname="{{item.wbName}}" data-weburl="{{item.wbImageUrl}}" data-type="{{item.appendixType}}">
+        <!-- 主要内容模块 -->
+        <div class="item-content mui-content" data-id="{{item.id}}" data-wbname="{{item.wbName}}" data-weburl="{{item.wbImageUrl}}">
+            <p class="item-header" data-id="{{item.id}}" data-wbname="{{item.wbName}}" data-weburl="{{item.wbImageUrl}}">
+                <img src="{{item.wbImageUrl}}" alt="" class="my-photo">
+                <span class="item-title f28">{{item.wbName}}</span>
+                <span class="item-date f22 c9">{{item.releaseTime}}</span>
+            </p>
+            <p class="article-sec f32" data-id="{{item.id}}" data-wbname="{{item.wbName}}" data-weburl="{{item.wbImageUrl}}">
+                <span class="c3 content-text content-text{{item.multiple}}">{{item.content}}</span>
+                <span class="full-text {{if item.notFull}} hide {{/if}}" data-id="{{item.id}}" data-index="{{item.multiple}}">全文</span>
+            </p>
+            {{if item.appendixType == 1}}
+            <!--  appendixType 1 图片 2视频 -->
+            <div id="imgList{{item.multiple}}" class="mui-content-padded img-list blog-img-list img-list{{multiple}} unloaded flex" data-index="{{item.multiple}}" data-imgarr="{{item.imgList}}">
+                {{each item.appendixList as list i}}
+                <div class="img-item img-item-btom {{if item.appendixList.length == 1}}img-item-one {{else if item.appendixList.length == 4}} img-item-two {{if i%2 == 1 }} img-item-two-mar {{/if}} {{else if item.appendixList.length > 1 && item.appendixList.length != 4}} img-item-three {{if i%3 != 0}} img-item-mar {{/if}} {{/if}}" data-index="{{i}}"><img src="{{list}}" data-preview-src="" data-preview-group="{{item.multiple}}"  data-id="{{item.id}}" data-wbname="{{item.wbName}}" data-weburl="{{item.wbImageUrl}}"  data-title="{{item.title}}" data-flag="2"></div>
+                {{/each}}
+            </div>
+            {{else if item.appendixType == 2}}
+                <div class="vedio-unit" data-detailid="{{item.detailsId}}" data-name="{{item.wbName}}" data-poster="{{item.appendixAddress}}">
+                    <span></span>
+                    <img src="{{item.appendixAddress}}">
+                </div>
+            {{/if}}
+        </div>
+        <!-- 分享、喜欢、点赞按钮 -->
+        <div class="btn-wrap c8e" data-id="{{item.id}}" data-wbname="{{item.wbName}}" data-weburl="{{item.wbImageUrl}}">
+            <!-- 分享图标 -->
+            <a href="javascript:;" class="btn-share f28" data-id="{{item.id}}" data-wbname="{{item.wbName}}" data-weburl="{{item.wbImageUrl}}"  data-title="{{item.title}}" data-flag="1" data-index="{{item.multiple}}">
+                <span class="icon"></span>
+                <span class="num">{{item.shareCount}}</span>
+            </a>
+            <!-- 收藏图标 -->
+            <a href="javascript:;" class="btn-collect f28" data-id="{{item.id}}" data-collect="{{item.collection}}">
+                <span class="icon {{if item.collection == 'true'}} collected {{else item.collection == 'false'}} uncollected {{/if}}"></span>
+                <span class="num">{{item.collectionCount}}</span> 
+            </a>
+            <!-- 点赞图标 -->
+            <a href="javascript:;" class="btn-praise f28" data-index="{{item.multiple}}" data-id="{{item.id}}" data-prise="{{item.prise}}">
+                <span class="icon {{if item.prise == 'true'}} praised {{else if item.prise == 'false'}} unpraised {{/if}}"></span>
+                <span class="num">{{item.priseCount}}</span>
+            </a>
+        </div>
+    </div>
+    {{/each}}
+</script>
+
+<!-- 办事项 -->
+<script id="workInfoTmpl" type="text/html">
+    {{each $data as item index}}
+    <a href="javascript:void(0)" class="work-list-details-a" data-index="{{index}}" data-id="{{item.id}}" data-type="{{item.projectYwType}}" data-title="{{item.title}}" data-url="{{item.deatilUrl}}" data-projectname="{{item.projectName}}">
+        {{if item.projectYwType ==='1'}}
+            <span class="handle fl">可办理</span>
+        {{else if item.projectYwType === '2'}}
+            <span class="searchs fl">查询</span>
+        {{else if item.projectYwType === '3'}}
+            <span class="guide fl">指南</span>
+        {{/if}}
+        <span class="f30 c3 detail-txt ell" title="{{item.projectName}}">{{item.projectNameHighet}}</span>
+    </a>
+    {{/each}}
+</script>
+
+<!-- 服务项 -->
+<script id="serviceInfoTmpl" type="text/html">
+    {{each $data as item index}}
+    <a class="service-link" href="javascript:void(0)" class="clearfix" data-id="{{item.id}}" data-type="{{item.serviceAddrType}}" data-index="{{index}}">
+        {{if item.iconUrl}}
+            <img src="{{item.iconUrl}}" alt="" class="detail-icon fl">
+        {{/if}}
+        <span class="f30 c3 fl detail-txt ell" title="{{item.serviceName}}">{{item.serviceNameHighet}}</span>
+    </a>
+    {{/each}}
+</script>
+<script src="../lib/app.js"></script>
+<script src="../lib/mui-pre-pic/mui.min.js"></script>
+<script src="../lib/mui-pre-pic/mui.zoom.js"></script>
+<script src="../lib/mui-pre-pic/mui.previewimage.js"></script>
+<script src="../lib/swiper/swiper.min.js"></script>
+<script src="../lib/mescroll/mescroll.min.js"></script>
+<script src="../lib/jquery.lazyload.min.js"></script>
+<script src="../lib/fly/fly.js"></script>
+<script src="../app/police-search-type.js?__inline"></script>
+</body>
+</html>

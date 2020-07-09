@@ -1,0 +1,18 @@
+<view class="wrapper">
+	<!--title区域-->
+	<view class="car-container">
+    <view class="title">
+        <image src="/assets/images/success.png" style="width:130rpx;height:130rpx"/>
+     </view>
+    <view style="margin-top:50rpx;" class="success">银行账户绑定成功</view>
+		<view style="margin-top:50rpx;" class="successContent">现在请前往网商银行进行授信额度申请。</view>
+		<view style="margin-top:10rpx; text-align: center; line-height:48rpx;" class="successContent">该信用额度可用于免保证金办理货车ETC，且资金不足时可用于垫付通行费</view>
+	</view>
+</view>
+<view>
+
+</view>
+<view class="button">
+  <button class="next-btn bg-primary" onTap="creditApply">前往信用额度申请</button>
+  <button a:if="{{flagOne}}" class="next-btn bg-primary" onTap="next">我已申请授信</button>
+</view>

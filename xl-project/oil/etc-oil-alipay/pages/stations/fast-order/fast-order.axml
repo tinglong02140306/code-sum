@@ -1,0 +1,93 @@
+<!--
+ * @Author: sunmingmao
+ * @Date: 2020-03-04 13:55:03
+ * @LastEditTime: 2020-04-10 18:02:04
+ * @LastEditors: longting
+ * @Description: 一键加油下单页面
+ -->
+<view class="fast-order-box">
+    <view class="fast-order-container">
+        <!--订单信息-->
+        <view class="fast-order-info-container">
+            <view class="fast-order-info-background"></view>
+            <view class="fast-order-info-box">
+                <view class="fast-order-info-items">
+                    <text class="fast-order-info-hint-text">订单状态</text>
+                    <text class="fast-order-info-data-text">{{order_status=='00'?'待付款':'待付款'}}</text>
+                </view>
+                <view class="fast-order-info-items">
+                    <text class="fast-order-info-hint-text">交易订单号</text>
+                    <text class="fast-order-info-data-text">{{order_no}}</text>
+                </view>
+                <view class="fast-order-info-items">
+                    <text class="fast-order-info-hint-text">加油站名称</text>
+                    <text class="fast-order-info-data-text">{{station_name}}</text>
+                </view>
+                <view class="fast-order-info-items">
+                    <text class="fast-order-info-hint-text">油号</text>
+                    <text class="fast-order-info-data-text">{{oil_no}}</text>
+                </view>
+                <view class="fast-order-info-items">
+                    <text class="fast-order-info-hint-text">油枪</text>
+                    <text class="fast-order-info-data-text">{{oil_gun}}</text>
+                </view>
+            </view>
+        </view>
+        <!--价格信息-->
+        <view class="fast-order-discounts-container">
+            <view class="fast-order-discounts-box">
+                <view class="fast-order-info-items">
+                    <text class="fast-order-info-hint-text">原价</text>
+                    <text class="fast-order-info-data-text">{{order_amount}}</text>
+                </view>
+                <view class="fast-order-info-items">
+                    <text class="fast-order-info-hint-text">ETC会员优惠</text>
+                    <text class="fast-order-info-data-text" style="color:{{'#FA5F50'}}">-￥{{discount_amount}}</text>
+                </view>
+                <view class="fast-order-info-items-line"></view>
+                <view class="fast-order-info-items">
+                    <text class="fast-order-info-hint-text">优惠价</text>
+                    <text class="fast-order-info-data-text" style="font-size:{{'34rpx'}}">￥{{payable_amount}}</text>
+                </view>
+            </view>
+        </view>
+        <!--优惠券信息-->
+        <view class="fast-order-coupon-container" onTap="onChangeCoupon">
+            <view class="fast-order-coupon-box">
+                <text class="fast-order-info-hint-text">优惠券</text>
+                <text class="fast-order-info-data-text"
+                    style="color:{{available? '#ff0000':'#938F98'}}">{{coupon_value?'-￥'+coupon_value:preferent?available?available+'张':'无可用优惠券':'暂无优惠券'}}</text>
+            </view>
+        </view>
+        <!--加油金-->
+        <view class="fast-order-coupon-container" a:if="{{balance_amount}}">
+            <view class="fast-order-coupon-box">
+                <text class="fast-order-info-hint-text">加油金</text>
+                <text class="fast-order-info-data-text"
+                      style="color:{{balance_amount? '#ff0000':'#938F98'}}">{{balance_amount?'-'+balance_amount:'0.00'}}</text>
+            </view>
+        </view>
+        <!--支付-->
+        <view class="fast-order-confirm-box" style="padding-bottom:{{isIphoneX?42:30}}rpx">
+            <text class="fast-order-confirm-hint">实付款:</text>
+            <view class="fast-order-confirm-money-box">
+                <text class="fast-order-confirm-mark">￥</text>
+                <text class="fast-order-confirm-money">{{real_amount}}</text>
+            </view>
+            <button class="fast-order-confirm-button theme-button" onTap="onSubmitClick">确认支付</button>
+        </view>
+    </view>
+    <!--优惠券列表-->
+    <popup show="{{is_show_coupon}}" outside="{{false}}" ref="popupRef" onCancel="onCloseClick">
+        <view class="fast-order-preferent-container" style="height:{{isIphoneX?1000:870}}rpx">
+            <view class="fast-order-preferent-header">
+                <text class="fast-order-preferent-header-text">优惠券</text>
+                <image class="fast-order-preferent-header-image" src="{{close_icon}}" onTap="onCloseClick"></image>
+            </view>
+            <!-- <scroll-view class="fast-order-preferent-list" scroll-y style="height:{{isIphoneX?860:730}}rpx"></scroll-view> -->
+            <view style="height:{{isIphoneX?860:730}}rpx;overflow-y: auto">
+                <perferent-container list="{{perferentList}}" onCheckPergerent="onCheckPergerent"></perferent-container>
+            <view>
+        </view>
+    </popup>
+</view>

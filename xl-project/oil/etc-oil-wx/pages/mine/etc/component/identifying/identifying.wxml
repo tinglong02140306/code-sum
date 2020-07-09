@@ -1,0 +1,36 @@
+<view class="identifying-container" wx:if="{{isShow}}">
+    <view class="identifying-input-container" animation="{{animationInput}}">
+        <image class="identifying-close" 
+            bind:tap="onCloseClick"
+            src="../../images/icon-identifying-close.png"></image>
+        <text class="identifying-title">请填写手机短信验证码</text>
+        <text class="identifying-phone">已发送到手机号:{{mobile}}</text>
+        <view class="identifying-text-box">
+            <block wx:for="{{identify_code}}" wx:item="item" wx:key="key">
+                <text class="identifying-text-item" style="color:{{item!=='-'?'#000000':'#dedcdf'}}">{{item}}</text>
+            </block> 
+        </view>
+        <text class="identifying-count" style="color:{{isCanClick?'#18ac1a':'#b6b4b7'}}" bind:tap="onObtainClick">{{countText}}</text>
+    </view>
+    <view class="identifying-keyboard-container identifying-keyboard-pos"
+        style="padding-bottom:{{isFix}}rpx"
+        id="keyboard"
+        animation="{{animationKeyboard}}">
+        <block wx:for="{{keyboard}}" wx:key="key" wx:item="item">
+            <view  wx:if="{{item==='d'}}"
+                bind:tap="onKeyboardDelete"
+                class="identifying-keyboard-delete"
+                style="width: {{itemKeyboardWidth}}px">
+                <image class="identifying-keyboard-delete-icon"
+                    src="../../images/icon-keyboard-delete.png"
+                    mode="widthFix"></image>
+            </view>
+            <view wx:if="{{item!=='d'}}" class="{{item!==''?'identifying-keyboard-item':'identifying-keyboard-item-empty'}}"
+                bind:tap="onKeyboardItemClick"
+                data-item="{{item}}"
+                style="width: {{itemKeyboardWidth}}px">
+                <text class="identifying-keyboard-item-text">{{item}}</text>
+            </view>
+        </block>
+    </view>
+</view>

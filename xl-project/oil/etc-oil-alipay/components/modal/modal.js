@@ -1,0 +1,36 @@
+Component({
+    props:{
+        //提示的标题
+        title: "标题",
+        //提示的内容
+        content:"内容",
+        //取消按钮的文字
+        cancel_text:"取消",
+        //确认按钮的文字
+        confirm_text:"确定",
+        //是否显示取消按钮
+        show_cancel:true,
+        //取消按钮的文字颜色
+        cancel_color:"#303030",
+        //确认按钮的文字颜色
+        confirm_color:"#303030",
+        custom_content:false,
+        is_show_modal:false,
+        //modal 内容显示样式 0:代表纯文本 1:代表冲红内容
+        type:0,
+        //冲红数据
+        redaction:{},
+        //自定义
+        custom:false
+    },
+    methods:{
+        //用户点击了确定按钮
+        confirm:function(){
+            this.props.onConfirm({})
+        },
+        //用户点击了取消
+        cancel:function(){
+            this.setData({is_show_modal:false});
+        }
+    }
+});

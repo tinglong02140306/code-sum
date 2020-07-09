@@ -1,0 +1,131 @@
+<view>
+  <view style="background:#fff">
+    <!-- 顶部信息 -->
+    <view class="header">
+      <image class="avatar" src="{{avatar}}" a:if="{{avatar}}"/>
+      <image class="avatar" style="width:140rpx;height:140rpx" mode="scaleToFill" src="/image/my/avatar.png" a:if="{{!avatar}}"/>
+      <view class="head-right">
+        <view class="name">{{name}}</view>
+        <view class="subname" a:if="{{user_id}}">{{user_id}}</view>
+      </view>
+    </view>
+    <!-- 推荐好友、联系客服 -->
+
+    <!-- 缴纳保证金 -->
+    <!--<view class="bgff">
+		 <view class="item" onTap="bond">
+			 <image class="licon ml30 mr30" src="/images/my/sign_info.png"/>
+			 <text class="item-name">缴纳保证金</text>
+			 <image class="ricon" src="/images/my/right_arrow.png"/>
+		 </view>
+	 </view>-->
+    <!--  -->
+    <view class="bgff">
+      <view class="item" onTap="mySign">
+        <image class="licon ml30 mr30" src="/images/my/sign_info.png"/>
+        <text class="item-name">我的ETC</text>
+        <image class="ricon" src="/images/my/right_arrow.png"/>
+      </view>
+    </view>
+    <view class="bgff">
+      <view class="block-1"/>
+      <view class="item" onTap="billManage">
+        <image class="licon ml30 mr30" src="/images/my/share_friend.png"/>
+        <text class="item-name">账单管理</text>
+        <image class="ricon" src="/images/my/right_arrow.png"/>
+      </view>
+    </view>
+    <view class="bgff" a:if="{{intentionProduct=='56'||intentionProduct=='62'||intentionProduct=='64'||intentionProduct=='69'||intentionProduct=='81'||intentionProduct=='83' || intentionProduct=='85'}}">
+      <view class="block-1"/>
+      <view class="item" onTap="bond">
+        <image class="licon ml30 mr30" src="/images/my/sign_info.png"/>
+        <text class="item-name">缴纳保证金</text>
+        <image class="ricon" src="/images/my/right_arrow.png"/>
+      </view>
+    </view>
+    <!--<view class="bgff"><view class="block-1"></view><view class="item" onTap="repayment"><image class="licon ml30 mr30" src="/images/my/contact.png"/><text class="item-name">缴纳惩治金</text><image class="ricon" src="/images/my/right_arrow.png"/></view></view>-->
+    <!-- 列表 -->
+    <view class="bgff">
+      <view class="block-1"/>
+      <view class="item" onTap="repaymentcopy">
+        <image class="licon ml30 mr30" src="/images/my/sign_info.png"/>
+        <text class="item-name">还款方式提醒</text>
+        <image class="ricon" src="/images/my/right_arrow.png"/>
+      </view>
+    </view>
+    <!-- 关于我们 -->
+    <view class="bgff">
+      <view class="block-1"/>
+      <view class="item" onTap="aboutUs">
+        <image class="licon ml30 mr30" src="/images/my/about_us.png"/>
+        <text class="item-name">账户充值</text>
+        <image class="ricon" src="/images/my/right_arrow.png"/>
+      </view>
+    </view>
+    <view class="bgff">
+      <view class="block-1"/>
+      <view class="item" onTap="install">
+        <image class="licon ml30 mr30" src="/images/my/install.png"/>
+        <text class="item-name">账户提现</text>
+        <image class="ricon" src="/images/my/right_arrow.png"/>
+      </view>
+    </view>
+    <view class="bgff" a:if="{{intentionProduct=='55'||intentionProduct=='61'||intentionProduct=='65'||intentionProduct=='70'||intentionProduct=='82'||intentionProduct=='84' || intentionProduct=='86'}}">
+      <view class="block-1"/>
+      <view class="item" onTap="openModa21">
+        <image class="licon ml30 mr30" src="/images/my/install-1.png"/>
+        <text class="item-name">调整支付顺序</text>
+        <image class="ricon" src="/images/my/right_arrow.png"/>
+      </view>
+    </view>
+    <view class="block-1"/>
+    <view class="bill-wrapper" style="margin-bottom:100rpx;">
+      <view class="bill-wrapper-inner">
+        <view class="icon_des">
+          <view class="ev" onTap="myAccount">
+            <view class="icon-name">
+              <view>
+                日结卡
+              </view>
+              <view>
+                0元/车
+              </view>
+              <view>当前免费</view>
+            </view>
+          </view>
+          <view class="ev-1" onTap="myTicket" style="margin-left:50rpx;" a:if="{{intentionProduct=='55'||intentionProduct=='61'||intentionProduct=='65'||intentionProduct=='70'||intentionProduct=='82'||intentionProduct=='84' || intentionProduct=='86'}}">
+            <view class="icon-name">
+              <view>
+                周结卡
+              </view>
+              <view>
+                8.8元/车/周
+              </view>
+              <view>2019.09.26-2020.03.01</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="block-1"/>
+  </view>
+  <view class="contact-btn">
+    <contact-button tnt-inst-id="QGMARDCN" scene="SCE00160438" size="25" color="#00A3FF" icon="/assets/icons/kefu.png" />
+    <!-- <image mode="scaleToFill" style="width:100%;height:100%;" src="/assets/icons/kefu.png" onTap="CustomerService"/> -->
+  </view>
+<modal show="{{modalOpened21}}" onModalClick="onModalClick21" onModalClose="onModalClose21">
+  <view slot="header">调整支付顺序</view>
+  <view onTap="week" class="week {{weekActive?'active':''}}" data-idx="week">
+    <view>周结卡</view>
+    <view>8.8元
+      <text>/车/周</text></view>
+      <view class="icon {{weekActive?'':'hide'}}"></view>
+  </view>
+  <view class="week {{dayActive?'active':''}}" onTap="week" data-idx="day">
+    <view>日结卡</view>
+    <view>0元
+      <text>/车</text></view>
+      <view class="icon {{dayActive?'':'hide'}}"></view>
+  </view>
+  <view slot="footer">确定修改</view>
+</modal>

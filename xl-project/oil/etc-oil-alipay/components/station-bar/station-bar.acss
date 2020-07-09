@@ -1,0 +1,7 @@
+/* components/station-bar/station-bar.acss */
+
+.station-bar {
+    margin-left: 80rpx;
+    font-size: 38rpx;
+    font-weight: bold;
+}

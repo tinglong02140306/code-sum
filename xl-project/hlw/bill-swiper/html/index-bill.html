@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- 添加到主屏幕后，全屏显示 -->
+    <meta name="apple-touch-fullscreen" content="YES" />
+    <meta name="format-detection" content="telephone=no" />
+    <!-- iphone 运行在全屏模式 -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+    <link href="../js/plugins/mescroll/mescroll.min.css" rel="stylesheet" />
+    <link href="../js/plugins/swiper/swiper.min.css" rel="stylesheet" />
+    <link href="../js/plugins/picker/picker.min.css" rel="stylesheet" />
+    <!-- <link href="../js/plugins/select-picker/picker.css" rel="stylesheet" /> -->
+    <link href="../css/base.css" rel="stylesheet" />
+    <link href="../css/index.css" rel="stylesheet" />
+    <script type="text/javascript" src="../js/plugins/remCacul/remCacul.js"></script>
+    <script>
+        var baseUrl = 'http://szper.test.etcsd.cn/isp/alipay/';
+    </script>
+    <title>通行账单</title>
+</head>
+
+<body>
+    <div id="wrapper" class="wrap mescroll">
+        <!-- 账单查询 -->
+        <div class="bill-search-wrap">
+            <p class="title pd3">通行账单查询</p>
+            <div class="con-item pd3 bor-bom">
+                <span class="">卡号</span>
+                <select id="cardNo" class="card-no"></select>
+                <!-- <div id="picker" class="bor-bom card-no" style="width: 200px;height: 100px;"></div> -->
+                <!-- <input id="picker" class="bor-bom card-no" type="text" value="" readonly="readonly"> -->
+                <!-- <option value="1" style="font-size: 0.67rem;color: #3b4257;">1</option>
+                    <option value="3" style="font-size: 0.67rem;color: #3b4257;">3</option>
+                    <option value="7" style="font-size: 0.67rem;color: #3b4257;">7</option>
+                    <option value="9" style="font-size: 0.67rem;color: #3b4257;">9</option> -->
+                <!-- <div class="select">
+                    <ul class="hide">
+                        <li><span>1111</span></li>
+                        <li><span>2222</span></li>
+                        <li><span>333</span></li>
+                    </ul>
+                </div> -->
+            </div>
+            <div class="con-item pd3">
+                <span>账期</span>
+                <input id="time" class="time" type="text" value="">
+            </div>
+            <div class="btn-wrap">
+                <span>查询</span>
+            </div>
+        </div>
+        <!-- 账单列表 -->
+        <div class="bill-list-wrap">
+            <div id="tabWrap" class="tab-wrap">
+                <div class="tab-content">
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+            <div id="swiperContainer" class="swiper-container">
+                <!--分页器-->
+                <!--swiper容器[可以随意更改该容器的样式-->
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div id="listWrap0" class="swiper-list-wrap"></div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div id="listWrap1" class="swiper-list-wrap"></div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div id="listWrap2" class="swiper-list-wrap"></div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div id="listWrap3" class="swiper-list-wrap"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="../js/plugins/jquery/jquery-1.8.2.min.js"></script>
+    <script src="https://gw.alipayobjects.com/as/g/h5-lib/alipayjsapi/3.1.1/alipayjsapi.min.js"></script>
+    <script type="text/javascript" src="../js/plugins/mescroll/mescroll.min.js"></script>
+    <script type="text/javascript" src="../js/plugins/swiper/swiper.min.js"></script>
+    <script type="text/javascript" src="../js/plugins/picker/picker.js"></script>
+    <script type="text/javascript" src="../js/util.js"></script>
+    <script type="text/javascript" src="../js/index.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "steps": "mini-antui/es/steps/index"
+  },
+   "defaultTitle": "车辆信息"
+}

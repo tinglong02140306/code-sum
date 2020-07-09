@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+     "steps": "mini-antui/es/steps/index"
+  }
+}

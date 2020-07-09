@@ -1,0 +1,9 @@
+{
+    "defaultTitle": "订单列表",
+    "backgroundColor": "#eeeeee",
+    "titleBarColor": "#ffffff",
+    "usingComponents": {
+        "scroll-list": "../../../../components/scroll-list/scroll-list",
+        "status": "../../../../components/status/status"
+    }
+}

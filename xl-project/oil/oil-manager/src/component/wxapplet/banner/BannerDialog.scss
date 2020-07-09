@@ -1,0 +1,196 @@
+.etc-oil-dialog-container{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.etc-oil-dialog-box-container{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.etc-oil-dialog-box{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.etc-oil-dialog-box-line{
+  width: 3px;
+  height: 280px;
+  background-color: #e8e8e8;
+  margin: 20px 0;
+}
+
+.etc-oil-dialog-item-box{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.etc-oil-dialog-item-content{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 4px;
+  margin-top: 5px;
+  .ant-select{
+    width: 250px;
+  }
+  input{
+    width: 250px;
+  }
+}
+.etc-oil-dialog-box-city{
+  margin-left: 250px;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+.etc-oil-dialog-item-content-city{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  //align-items: center;
+  margin-bottom: 4px;
+  margin-top: 4px;
+  //.ant-select{
+  //    width: 250px;
+  //}
+  //input{
+  //    width: 250px;
+  //}
+  //.ant-tree-treenode-switcher-open{
+  //    width: 350px;
+  //    margin: 0;
+  //    padding: 0;
+  //}
+  //.ant-tree-title{
+  //
+  //}
+}
+
+.etc-oil-dialog-item-label-city{
+  width: 200px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  font-weight: 600;
+  margin: 10px 4px 0 0;
+  span{
+    color: red;
+  }
+}
+.etc-oil-dialog-item-label{
+  width: 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  font-weight: 600;
+  margin: 0 4px 0 0;
+  span{
+    color: red;
+  }
+}
+
+.etc-oil-dialog-item-placeholder{
+  align-self: flex-start;
+  margin: 0 0 0 104px;
+  color: red;
+  margin-bottom: 2px;
+}
+
+
+.etc-oil-dialog-form-item{
+  .ant-form-item-label{
+    width: 100px;
+    font-weight: 600;
+  }
+
+  .ant-select{
+    width: 250px;
+  }
+
+  input{
+    width: 250px;
+  }
+}
+
+.etc-oil-dialog-form-file-input{
+  .ant-form-item-control-wrapper{
+    width: 250px;
+  }
+  input{
+    width: 150px;
+    height: 150px;
+  }
+
+  .ant-form-item-label{
+    width: 100px;
+    font-weight: 600;
+  }
+}
+
+.etc-oil-dialog-file-box{
+  margin:10px 0;
+  width: 250px;
+  height: 150px;
+  position: relative;
+}
+
+.etc-oil-dialog-file-content-box{
+  width: 150px;
+  height: 150px;
+  border: 1px solid rgba(19, 19, 19, 0.2);;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.etc-oil-dialog-file-add{
+  width: 80px;
+  height: 80px;
+  z-index: 100;
+}
+
+.etc-oil-dialog-file-image{
+  width: 150px;
+  height: 150px;
+  border-radius: 10px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 200;
+}
+
+.etc-oil-dialog-file-input{
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  z-index: 300;
+}
+
+.etc-oil-dialog-button-box{
+  width: 500px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}

@@ -1,0 +1,17 @@
+/* components/navigation-bar/navigation-bar.acss */
+
+.navigation-bar-container {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.title-bar-container {
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    box-sizing: border-box;
+}

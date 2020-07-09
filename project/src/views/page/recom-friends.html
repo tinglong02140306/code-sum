@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="../../../../" >
+    <meta charset="UTF-8">
+    <!-- 添加到主屏幕后，全屏显示 -->
+    <meta name="apple-touch-fullscreen" content="YES"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <!-- iphone 运行在全屏模式 -->
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="viewport" content="width=device-width"/>
+    <title>推荐给好友</title>
+    <script src="../lib/remCacul/remCacul.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/base.css?__inline"/>
+    <link rel="stylesheet" type="text/css" href="../css/all.css?__inline"/>
+    <link rel="stylesheet" type="text/css" href="../css/recom-friends.css?__inline"/> 
+</head>
+<body>
+    <div class="wrap recom-friends-wrap">  
+        <!-- 头部 -->
+        <header class="topic-bg">
+            <div class="header-item topic-bg">
+                <a href="javascript:void(0)" class="arrow-left header-back" data-bind="click: back"></a>
+                <span class="f36 cf title">推荐给好友</span>
+            </div>
+        </header>
+
+        <!-- 主要内容 -->
+        <div class="recom-friends-content hide top-7">
+            <div class="recom-friends-code">
+
+                <div class="code-value tc">
+                    <p class="f30 c3 tc  fw code-value-text hide">您的邀请码</p>
+                    <p class="f40 corange fw tc code-value-num hide" data-bind="text: query.num"></p>
+
+                    <p href="javascript:void(0)" class="f32 tc code-value-login topic-fc hide fw" data-bind="click: loginEvent">点击登录查看您的邀请码</p>
+                </div>
+
+                <div class="qr-code-wrap">
+                    <div class="qr-code-pic">
+                        <p class="pic"></p>
+                        <p class="pic-txt tc f30 c3">面对面下载皖警便民服务e网通 </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-wrap">
+                <a href="javascript:void(0)" class="f36 cf tc recommend-share topic-bg">分享</a>
+            </div>
+        </div>
+    </div>
+    <share data-title="去邀请好友" data-bind="source: OP"></share>
+<script src="../lib/lib.js?__inline"></script>
+<script src="../app/recom-friends.js?__inline"></script>
+</html>

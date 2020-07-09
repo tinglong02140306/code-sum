@@ -1,0 +1,174 @@
+@import "./color.less";
+
+// iview  menu样式  start
+.layout {
+  .ivu-layout {
+    
+    .ivu-layout-sider{
+      background: #fff !important;
+    }
+    .ivu-menu-submenu {
+      border-bottom: 1px solid @basBorderColor;
+    }
+  }
+  .ivu-layout-sider-children {
+    position: relative;
+  }
+}
+// iview  menu样式  end
+
+//iview tooltip样式 start
+.ivu-tooltip-inner {
+  background-color: #2d8cf0;
+}
+.ivu-tooltip-popper[x-placement^="top"] .ivu-tooltip-arrow {
+  border-top-color: #2d8cf0;
+}
+.ivu-tooltip-popper[x-placement^="left"] .ivu-tooltip-arrow {
+  border-left-color: #2d8cf0;
+}
+//iview tooltip样式 end
+
+// border 样式
+.el-table--border::after,
+.el-table--group::after,
+.el-table::before {
+  background: #1255b3;
+}
+.el-table--border,
+.el-table--group {
+  border: 1px solid #ddd !important;
+  border-bottom: 0 !important;
+  border-right: 0 !important;
+}
+.el-table td,
+.el-table th.is-leaf {
+  border-bottom: 1px solid #e0e6f1 !important;
+}
+
+.el-table--border td,
+.el-table--border th,
+.el-table__body-wrapper .el-table--border.is-scrolling-left ~ .el-table__fixed {
+  border-right: 1px solid #ddd !important;
+}
+.el-input__inner {
+  border: 1px solid #ddd !important;
+}
+.el-table thead {
+    color: #656e7f;
+}
+
+.el-table td {
+  padding: 10px 0;
+}
+.el-table th {
+  background-color: #f4f6f9;
+}
+.el-table--border::after,
+.el-table--group::after,
+.el-table::before {
+  background-color: #ddd;
+}
+
+
+.ivu-table-border th,
+.ivu-table-border td {
+  border-right: 1px solid #ddd !important;
+}
+.ivu-table th,
+.ivu-table td {
+  border-bottom: 1px solid #ddd !important;
+}
+.ivu-table-header th {
+  background-color: #f4f6f9;
+}
+
+.ivu-input {
+  border: 1px solid #ddd !important;
+}
+
+// button
+.el-button--mini, .el-button--mini.is-round {
+  padding: 5px 9px;
+}
+.el-button--primary {
+  background-color: #137ddf !important;
+  border-color: #137ddf !important;
+}
+.el-button--default {
+  // background: #f8f9fb;
+  border-color: #ced5e3;
+  color: #17233d;
+}
+
+.ivu-btn-default {
+  // background: #f8f9fb;
+  border-color: #ced5e3;
+  color: #17233d;
+}
+//表格按钮间距
+.el-button+.el-button {
+    margin-left:5px;
+}
+
+//表格hover
+.el-table--enable-row-hover .el-table__body tr:hover > td {
+  background-color: #e2f0ff;
+}
+
+//表格展开项背景色
+.el-table__expanded-cell[class*=cell] {
+    background-color: #f8f9fb!important;
+}
+
+.el-table__expanded-cell tr.el-table__row {
+  background-color: #f8f9fb !important;
+}
+
+//mask遮罩
+.el-mask {
+  .el-icon-loading {
+    font-size: 20px;
+  }
+  .el-loading-spinner {
+    .el-loading-text {
+      font-size: 20px;
+    }
+  }
+}
+.ivu-cascader-menu:last-child {
+  background-color: #fff;
+}
+.ivu-select-dropdown.ivu-cascader-transfer {
+  z-index: 4000 !important;
+}
+//改提示语z-index
+.ivu-message{
+  z-index: 10000!important;
+}
+.ivu-select-dropdown {
+  width: 120px !important;
+}
+// 确认删除提示框
+.el-message-box__status {
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+// select选择器 下拉箭头ie兼容
+.el-select__caret {
+  -webkit-transition: -webkit-transform .3s;
+  -ms-transition: -ms-transform .3s;
+  transition: -webkit-transform .3s;
+  transition: transform .3s;
+  transition: transform .3s, -webkit-transform .3s;
+  -webkit-transform: rotateZ(180deg);
+  -ms-transform: rotateZ(180deg);
+  transform: rotateZ(180deg);
+}
+// 区划树箭头
+.ivu-tree-arrow-open i {
+  -webkit-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+}

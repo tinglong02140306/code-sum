@@ -1,0 +1,47 @@
+<view id="keyboard">
+	<view class="province" a:if="{{isProvince}}">
+		<block a:for="{{provinces}}" a:for-item="province" a:key="index">
+			<view class="province-line" a:if="{{province.length==10}}">
+				<block a:for="{{province}}" a:key="index">
+					<view class="province-line-item" data-idx="{{item}}" onTap="selectProvince">{{item}}</view>
+				</block>
+			</view>
+			<view class="province-line" a:else>
+				<block a:for="{{province}}" a:key="index">
+					<view class="province-line-item" style="margin-left:10rpx;" data-idx="{{item}}" onTap="selectProvince">{{item}}</view>
+				</block>
+				<view class="placeholder"></view>
+				<view class="del" data-idx="del" onTap="selectProvince">
+					<image src="/images/index/del.png" style="width:56rpx;height:55rpx;"></image>
+				</view>
+				<view class="confirm" data-idx="confirm" onTap="selectProvince">确定</view>
+			</view>
+		</block>
+	</view>
+	<view a:if="{{!isProvince}}">
+		<view class="number">
+			<block a:for="{{number}}" a:key="index">
+				<view class="province-line-item {{tapNum?'':'disabled'}}" data-idx="{{item}}" onTap="selectNumber">{{item}}</view>
+			</block>
+		</view>
+		<view class="province">
+			<block a:for="{{alphas}}" a:for-item="alpha" a:key="index">
+				<view class="province-line" a:if="{{alpha.length==10}}">
+					<block a:for="{{alpha}}" a:key="index">
+						<view class="province-line-item" data-idx="{{item}}" onTap="selectAlpha">{{item}}</view>
+					</block>
+				</view>
+				<view class="province-line" a:else>
+					<block a:for="{{alpha}}" a:key="index">
+						<view class="province-line-item" style="margin-left:10rpx;" data-idx="{{item}}" onTap="selectAlpha">{{item}}</view>
+					</block>
+					<view class="placeholder"></view>
+					<view class="del" data-idx="del" onTap="selectAlpha">
+						<image src="/images/index/del.png" style="width:56rpx;height:55rpx;"></image>
+					</view>
+					<view class="confirm" data-idx="confirm" onTap="selectAlpha">确定</view>
+				</view>
+			</block>
+		</view>
+	</view>
+</view>

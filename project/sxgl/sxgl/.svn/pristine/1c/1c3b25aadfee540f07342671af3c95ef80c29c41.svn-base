@@ -1,0 +1,990 @@
+/*
+ * @Author: qianju
+ * @Date: 2018-10-29 9:46:42 
+ * @Last Modified by: qianju
+ * @Last Modified time: 2018-12-28 17:25:59
+ */
+ <template>
+    <div class="clearfix" id="division">
+        <tabNavigate :tabs="tabs"></tabNavigate>
+        <div class="main-wrap clearfix">
+             <!-- 左侧 -->
+            <div class="left-wrap fl">
+                <!-- 搜索 -->
+                <div class="division-search clearfix">
+                    <el-row class="clearfix">
+                        <el-col :span="15">
+                            <div class="inline-block common-width">
+                                <el-input v-model="divisionName" :maxlength="10" size="small" placeholder="请选中省或以下节点" @change="changeDivisionName"></el-input>
+                            </div>
+                        </el-col>
+                        <!-- 搜索按钮 -->
+                        <el-col :span="2" class="left-13">
+                            <div class="division-search-btn" @click="searchBtn()">
+                                <i class="iconfont icon-sousuo"></i>
+                            </div>
+                        </el-col>
+                        <el-col :span="2" class="jiahao">
+                            <i class="iconfont icon-jiahao1" @click="showTree"></i>
+                        </el-col>
+                        <el-col :span="2" class="jianhao">
+                            <i class="iconfont icon-jianhao" @click="closeTree"></i>
+                        </el-col>
+                        <el-col :span="2" class="fresh clearfix">
+                            <span class="fresh-icon" @click="freshTree">
+                                <i class="iconfont icon-shuaxin1"></i>
+                            </span>
+                        </el-col>
+                    </el-row>
+                </div>
+                <!-- 区划树 -->
+                <tree :treeData="divisionTree" v-if="!isSearch" ref="xzqhTree"></tree>
+                <Tree :data="divisionTree" v-if="isSearch" ref="searchTree" :render="saerchRenderCont" empty-text='暂无数据'></Tree>
+            </div>
+            <div class="right-wrap fr">
+                <!-- 删除 -->
+                <el-row class="clearfix">
+                    <el-col>
+                        <span class="btn-del font-min"  @click="delDivisionEvt('','0')">删除</span>
+                    </el-col>
+                </el-row>
+                <!-- 区划列表 -->
+                <el-table  :data="divisionData" @selection-change="divisionSelChange">
+                    <el-table-column class="font-max" align="center" type="selection" width="55">
+                    </el-table-column>
+                    <el-table-column class="font-max" align="left" width='140' label="区划代码">
+                        <template scope="scope" >
+                            <span class="item-text" v-if="scope.row.status == '1'">{{scope.row.dm}}</span>
+                            <el-input v-model.trim="scope.row.dm" placeholder="" maxlength='12' :disabled="scope.row.status == '0' && scope.row.isNew == '0'? true : false "  v-if="scope.row.status == '0'"></el-input>
+                        </template>
+                    </el-table-column> 
+                    <el-table-column class="font-max" class-name="el-tooltip" align="left" label="区划名称">
+                        <template scope="scope">
+                            <span class="item-text" :title="scope.row.mc" v-if="scope.row.status == '1'">{{scope.row.mc}}</span>
+                            <el-input v-model.trim="scope.row.mc" placeholder="" maxlength='50' v-if="scope.row.status == '0'"></el-input>
+                        </template>
+                    </el-table-column> 
+                    <el-table-column class="font-max" class-name="el-tooltip" align="left" label="上级区划">
+                        <template scope="scope" >
+                            <span class="item-text" :title="scope.row.sjmc" v-if="scope.row.status == '1'">{{scope.row.sjmc}}</span>
+                            <!-- 下拉树 -->
+                            <selectTree v-model="scope.row.sjdm" :options="options" :props="defaultProps" ref='selectTree' v-if="scope.row.status == '0' && scope.row.isNew == '1'" />
+                            <el-input  v-model="scope.row.sjmc" :disabled="scope.row.status == '0' && scope.row.isNew == '0'? true : false" v-if="scope.row.status == '0' && scope.row.isNew == '0'"></el-input>
+                        </template>
+                    </el-table-column> 
+                    <el-table-column class="font-max" align="center" label="区划类型">
+                        <template scope="scope" >
+                            <span class="item-text" v-if="scope.row.status == '1'">{{scope.row.qhlxName}}</span>
+                            <el-select v-model="scope.row.xn" v-if="scope.row.status == '0'">
+                                <el-option
+                                    v-for="item in divisionTypeOptions"
+                                    :key="item.value"
+                                    :label="item.label"
+                                    :value="item.value">
+                                </el-option>
+                            </el-select>
+                        </template>
+                    </el-table-column> 
+                    <el-table-column class="font-max" align="center" width='80' label="排序">
+                        <template scope="scope" >
+                            <span class="item-text" v-if="scope.row.status == '1'">{{scope.row.pxzd}}</span>
+                            <el-input v-model.trim="scope.row.pxzd" v-if="scope.row.status == '0'"></el-input>
+                        </template>
+                    </el-table-column> 
+                    <el-table-column class="font-max" align="center" width='80' label="状态">
+                        <template scope="scope">
+                            <!-- <i-switch v-model="scope.row.cxfl==1?true:false" @on-change="cxflChange(scope.row)" >
+                                <span slot="open">开</span>
+                                <span slot="close">关</span>
+                            </i-switch> -->
+                             <el-switch active-color="#00c1c8" active-text="开" inactive-color="#ccc" inactive-text="关" v-model="scope.row.cxfl=='1'?true:false"  @change='cxflChange(scope.row)'></el-switch>
+                        </template>
+                    </el-table-column> 
+                    <el-table-column class="font-max" align="center" label="操作">
+                        <template scope="scope">
+                            <el-button class="font-max" type="text" size="small" @click="editDivisionEvt(scope.row, scope.$index)"  v-if="scope.row.status == '1'">编辑</el-button>
+                            <el-button class="font-max" type="text" size="small" :disabled="isDisable" @click="editDivisionEvt(scope.row, scope.$index)" v-if="scope.row.status == '0'">保存</el-button>
+                            <el-button class="font-max" type="text" size="small" @click="delDivisionEvt(scope.row,scope.row.isNew)">删除</el-button>
+                        </template>
+                    </el-table-column> 
+                </el-table>
+                <div class="btn-add-wrap">
+                    <!--  @click="addDivisionevt" -->
+                    <Button class="font-min" type="dashed" size="large" icon="md-add" @click="addDivisionevt">新增</Button>
+                </div>
+            </div>
+        </div>
+    </div>
+ </template>
+ <script>
+ import unit from '@/api/index';
+ import tabNavigate from "@/components/common/tabNavigate";   // 页签导航
+ import tree from "@/components/tree/tree";   // 区划树
+ import selectTree from "@/components/tree/iSelectTree.vue";   // 下拉树组件
+ export default {
+    components: {
+        tree: tree,
+        tabNavigate: tabNavigate,
+        selectTree:selectTree
+    },
+    data(){
+        return{
+            tabs: ['基础信息管理', '行政区划管理'],
+            curId:'',
+            divisionName:'',
+            xzqhVal: [], // 行政区划
+            isSearch:false,//是否是搜索查询
+            // 区划树*********************
+            divisionTree: [
+                {
+                    label: '行政区划',
+                    value:'000000000000',
+                    expand: true,
+                    loading: false,
+                    render: (h, { root, node, data }) => {
+                        let that = this;
+                        return h('span', {
+                            style: {
+                                display: 'inline-block',
+                                // width: '100%'
+                            },
+                            on:{
+                                click: (e) => {
+                                    if(that.notSaveFlag){
+                                        that.$Message.warning('有尚未保存的数据');
+                                        return;
+                                    }
+                                    that.sjdm = data.value;
+                                    that.selected = data.label;
+                                    that.getXzqhData();
+                                    $.each(root,function(idx,val){
+                                        that.$set(val.node,'highLight',false)
+                                    })
+                                    data.highLight = true;
+                                },
+                            }
+                        }, [
+                            h('span',{
+                                class:{
+                                    'tree-til':true,
+                                    'high-light':data.highLight ? true:false
+                                }
+                            }, [
+                                h('i', {
+                                    class: {
+                                        'iconfont': true,
+                                        'icon-folder_icon':true
+                                    },
+                                    style: {
+                                        marginRight: '8px'
+                                    }
+                                }),
+                                h('span', data.label)
+                            ]),
+                        ]);
+                    },
+                    children: []
+                }
+            ],
+            childrenTree:[],
+            // 区划列表数据*********
+            divisionData:[],
+            sjdm:'',//上级区划默认值
+            
+            notSaveChildData:[],   
+            notSaveFlag: false,//是否保存
+            isDisable:false,
+            lastDivisionOptions:[],//上级区划字典项
+            divisionTypeOptions:[],//区划类型
+            
+            // 下拉树******************************************************
+            // 默认选中值
+            selected:'',
+            // 数据默认字段
+            defaultProps: {
+                parent: 'parentId',   // 父级唯一标识
+                value: 'id',          // 唯一标识
+                label: 'label',       // 标签显示
+                children: 'children', // 子级
+            },
+            // xzqhFlag:false,
+            // 数据列表
+            divisionSeldArr:[],//列表复选 id集合
+            options: [
+                 {
+                    label: '中华人民共和国',
+                    value:'000000000000',
+                    expand: true,
+                    render: (h, { root, node, data }) => {
+                        let that = this;
+                        return h('span', {
+                            style: {
+                                display: 'inline-block',
+                                // width: '100%'
+                            },
+                            on:{
+                                click: (e) => {
+                                    that.$refs.selectTree.labelModel = data.label;
+                                    that.$refs.selectTree.valueModel = data.value;
+                                    that.sjdm = data.value;
+                                    that.$refs.selectTree.onCloseTree();
+                                },
+                            }
+                        }, [
+                         h('span',{
+                                // class:{
+                                //     'tree-til':true,
+                                //     'high-light':data.highLight ? true:false
+                                // }
+                            }, [
+                                h('i', {
+                                    class: {
+                                        'iconfont': true,
+                                        'icon-folder_icon':true
+                                    },
+                                    style: {
+                                        marginRight: '8px'
+                                    }
+                                }),
+                                h('span', data.label)
+                            ]),
+                        ]);
+                    },
+                    children: []
+                }
+            ],
+        }
+    },
+    methods:{
+         //修复ie记忆问题
+        changeDivisionName(val) {
+            this.divisionName = val == '' ? '' : val;
+        },
+        mySelect(val) {
+            this.divisionName = val == '' ? '' : val;
+        },
+        // 搜索结果下拉树
+        saerchRenderCont (h, { root, node, data }) {
+                let that = this;
+                return h('span', {
+                    style: {
+                        display: 'inline-block',
+                        // width: '100%'
+                    },
+                    on: {
+                        click: (e) => {
+                            if(data.existChild){
+                                if(that.notSaveFlag){
+                                    that.$Message.warning('有尚未保存的数据');
+                                    return;
+                                }
+                                that.sjdm =  data.value;
+                                that.selected =  data.label;
+                                that.getXzqhData();
+                                $.each(root,function(idx,val){
+                                    that.$set(val.node,'highLight',false)
+                                })
+                                data.highLight = true;
+                            }else{
+                                that.$message.error('最末级的行政区划不可点击');
+                            }
+                        },
+                    }
+                }, [
+                    h('span',{
+                            class:{
+                                'tree-til':true,
+                                'high-light':data.highLight ? true:false
+                            }
+                        }, [
+                        h('i', {
+                            class: {
+                                'iconfont': true,
+                                'icon-wenjian':data.isFolder ? false:true,
+                                'icon-folder_icon':data.isFolder ? true:false
+                            },
+                            style: {
+                                marginRight: '8px',
+                                cursor:'pointer',
+                            },
+                        }),
+                        h('span', data.label)
+                    ]),
+                   
+                ]);
+            },
+        //关闭树结构
+        closeTree() {
+            this.divisionTree[0].expand = false;
+        },
+        //展开树结构
+        showTree() {
+            this.divisionTree[0].expand = true;
+        },
+        // 刷新
+        freshTree(){
+            let that = this;
+            unit.ajaxPost('/znsj-web/xzqh/updateRedis').then(function(res){
+                res = typeof res == 'string' ? JSON.parse(res) : res;
+                let data = res.data;
+                if(data.flag){
+                   that.$Message.success(data.data);
+                }else{
+                    that.$Message.warning(data.data || '刷新失败！')
+                }
+            }).catch(function(error){
+                that.$Message.error('数据加载失败！');
+            });
+        },
+        // 区划列表复选框chang事件
+        divisionSelChange(val) {
+            let that = this;
+            that.divisionSeldArr = [];
+            if(val.length >  0) {
+                for(let i in val) {
+                    that.divisionSeldArr.push(val[i].id);
+                }
+            }
+        },
+        // 状态开关 启用/停用
+        cxflChange(row){
+            let that = this;
+            if(that.notSaveFlag && row.status == '1'){
+                that.$Message.warning('有尚未保存的数据');
+                return;
+            }else{
+                if(row.status == '0'){
+                    if(row.cxfl=='1'){
+                        row.cxfl='0'
+                    }else if(row.cxfl=='0'){
+                        row.cxfl='1'
+                    }
+                }else{
+                    let url,  
+                    param = {
+                        id : row.id
+                    };
+                    if(row.cxfl=='1'){
+                        url = '/xzqh/disableXzqh'
+                    }else if(row.cxfl=='0'){
+                        url = '/xzqh/enableXzqh'
+                    }
+                    unit.ajaxMerPost('/znsj-web' + url, param, function(res) {
+                        if(res.flag) {
+                            that.$Message.success(res.data);
+                            that.getXzqhData()
+                        }else {
+                            that.$Message.error(res.data || '数据加载失败！');
+                        }
+                    },function(error) {
+                        that.$Message.error('数据加载失败！');
+                    }, that);
+                }
+            }
+        },
+        // 获取区划类型字典项
+        getDictionarys(){
+            let that = this, 
+                url = '/dic/getDictionarys',
+                param = {
+                    pinYinType : 'QHLX'
+                };
+            unit.ajaxMerPost('/znsj-web' + url, param, function(res) {
+                res = typeof res == 'string' ? JSON.parse(res) : res;
+                let data = res.data;
+                if(res.flag) {
+                    that.divisionTypeOptions = data;
+                }else {
+                    that.$Message.error(data.data || '数据加载失败！');
+                }
+            },function(error) {
+                that.$Message.error('数据加载失败！');
+            }, that);
+        },
+        // 获取行政区划table列表
+        getXzqhData() {
+            let that = this,
+                url = '/xzqh/getXzqhList';
+            unit.ajaxMerPost('/znsj-web' + url, {
+               sjdm:that.sjdm
+            },function (res) {
+                let data = res.data;
+                that.divisionData = data;
+                for(let i = 0; i < that.divisionData.length; i++) {
+                    that.divisionData[i].status = '1';
+                    that.divisionData[i].isNew = '0';
+                }
+                // if(type == '1' && that.notSaveChildData.length > 0) {
+                //     that.batchObj.batchAnswerData.push(that.notSaveChildData[0]);
+                // }
+            },
+            function (res) {
+                that.$Message.warning('数据加载失败');
+            }, that);
+        },
+        // 新增按钮点击事件
+        addDivisionevt() {
+            let that = this;
+            that.getDictionarys();
+            that.getXzqhTreeData('selectTree') 
+            if(!that.notSaveFlag) {
+                that.status = "0";
+                that.notSaveChildData = [{
+                    status:"0",
+                    xn:'0',//区划类型  默认值
+                    cxfl:'1',//状态
+                    isNew:'1',
+                    sjdm: that.sjdm
+                }];
+                setTimeout(()=>{//使用延时,等子组件初始化完成
+                    that.$refs.selectTree.labelModel = that.selected=='行政区划'?'中华人民共和国':that.selected;
+                    that.$refs.selectTree.valueModel = that.sjdm;
+                },10)
+                that.divisionData.push(that.notSaveChildData[0]);
+                that.notSaveFlag = true;
+            }else {
+              that.$Message.warning('有尚未保存的数据');
+          } 
+        },
+        // 编辑/保存
+        editDivisionEvt(row, index){
+            let that = this, 
+                addDto = {},
+                updateDto = {},
+                data = that.divisionData[index];
+                that.curId = row.id ? row.id : '';
+            if(row.status == '1') {//编辑
+                if(!that.notSaveFlag) {
+                    that.$set(data, 'status', '0');
+                    that.divisionData.splice(index, 1, data);
+                    that.getDictionarys();
+                    that.notSaveChildData = data;
+                    that.notSaveFlag = true;
+                }else {
+                    that.$Message.warning('有尚未保存的数据');
+                    return;
+                }
+            }else if(row.status == '0'){//保存
+                let rule = /^([1-9][0-9]{0,4}|0)$/,
+                    xzqhCodeRule = /\b\d{12}\b/;
+                    // row.sjdm = that.sjdm;
+                    if(!row.dm){//区划代码
+                        that.$Message.warning('请填写区划代码！');
+                        return;
+                    }
+                    if(!xzqhCodeRule.test(row.dm)){
+                        that.$Message.warning('区划代码请输入12位整数！');
+                        return;
+                    }
+                    if(!row.mc){//区划名称
+                        that.$Message.warning('请填写区划名称！');
+                        return;
+                    }
+                    if(!row.sjdm){//上级区划
+                        that.$Message.warning('请选择上级区划！');
+                        return;
+                    }
+                    if(!row.xn){//区划类型
+                        that.$Message.warning('请选择区划类型！');
+                        return;
+                    }
+                    if(row.pxzd && !rule.test(row.pxzd)){//排序
+                        that.$Message.warning('排序请输入0-99999之间整数');
+                        return;
+                    }
+                    // if(!row.cxfl){//状态
+                    //     that.$Message.warning('请选择状态！');
+                    //     return;
+                    // }
+                if (row.isNew == '1') {
+                    addDto = {
+                        id:that.curId,
+                        dm: row.dm,//区划代码
+                        mc: row.mc,//区划名称
+                        sjdm: row.sjdm,//上级区划
+                        pxzd: row.pxzd?row.pxzd : 0,//排序
+                        cxfl: row.cxfl,//状态
+                        xn: row.xn,//区划类型
+                    }
+                    //新增子分类
+                    this.typeSave('/xzqh/addXzqh', addDto, 'addXzqh');
+                } else {
+                    updateDto = {
+                        id:that.curId,
+                        dm: row.dm,//区划代码
+                        mc: row.mc,//区划名称
+                        sjdm:row.sjdm,//上级区划
+                        pxzd: row.pxzd,//排序
+                        cxfl: row.cxfl,//状态
+                        xn: row.xn,//区划类型
+                    }
+                    //编辑子分类
+                    that.typeSave('/xzqh/updateXzqh', updateDto, 'addXzqh');
+                }
+            }
+
+        },
+        // 保存
+        typeSave(url, data, option) {
+            let that = this;
+            that.sjdm = data.sjdm;
+            that.isDisable = true;
+            unit.ajaxObjPost('/znsj-web' + url, data, function (res) {
+                if (res.flag) {
+                    that.$Message.success(res.data);
+                    // 刷新父页面列表
+                    setTimeout(function () {
+                        if(option == 'addXzqh') {//新增
+                            that.notSaveFlag = false;
+                            that.notSaveChildData = [];
+                            that.getXzqhData();
+                            // 刷新区划树
+                            that.getXzqhTreeData("leftTree");
+                            // that.xzqhFlag = true;
+
+                            // that.xzqhVal.push(that.sjdm)
+                            // that.$refs.xzqhTree.xzqhLoadData()
+                            
+                            // if(that.isSearch){//搜索树
+                            //     that.getSearchTree();
+                            // }else{//未搜索
+                            //     // 刷新区划树
+                            //     // that.xzqhVal.push('000000000000')
+                            //     that.getXzqhTreeData("leftTree");
+                            //     that.xzqhVal.push(that.sjdm)
+                            //     that.$refs.xzqhTree.xzqhLoadData()
+                            // }
+                            
+                            that.isDisable = false;
+                        }else {
+                            that.addModal = false;
+                            that.addModalChild = false;
+                            that.option = false;
+                        }
+                    }, 500);
+                } else {
+                    that.isDisable = false;
+                    that.$Message.warning(res.errMsg ||'数据加载失败');
+                }
+            }, function (res) {
+                that.isDisable = false;
+                that.$Message.warning(res.data.errMsg ||'数据加载失败');
+            }, this);
+        },
+        /*
+         * 删除  弹框触发事件
+         * id: 记录id
+         * 
+         */
+        delDivisionEvt(row,isNew) {  
+            let that = this,
+                idData,tips='确定要删除这条记录吗?';
+            that.curId = row.id;
+            if(isNew=='0'){
+                if(that.notSaveFlag && row.status == '1'){
+                    that.$Message.warning('有尚未保存的数据');
+                    return;
+                }else{
+                     if(row.id) {
+                        tips = '确定要删除这条记录吗?';
+                    }else {
+                        idData = that.divisionSeldArr;
+                        if(!that.notSaveFlag){
+                            if(idData.length == 0) {
+                                that.$Message.warning('请选择要删除的记录！');
+                            return;
+                            }else {
+                                // that.delPromTips = '确定要删除选中的记录吗？';
+                                tips="确定要删除选中的记录吗？";
+                                that.curId = idData.join(',');    
+                            }
+                        }else{
+                            that.$Message.warning('有尚未保存的数据');
+                            return;
+                        }
+                    }
+                }
+                
+            }
+           that.$confirm(tips,'提示',{
+                confirmButtonText: '确 定',
+                cancelButtonText: '取 消',
+                cancelButtonClass:'fr ml10',
+                type: 'warning'
+            }).then(()=>{
+                if(isNew == '1') {
+                    that.divisionData.splice(that.divisionData.length - 1, 1);
+                    that.notSaveFlag = false;
+                }else {
+                    that.sureDelEvt();
+                }
+               
+            }).catch(()=>{
+               
+            });
+            
+        },
+        /*
+         * 确定删除选中记录项
+         */
+        sureDelEvt() {
+            let that = this,
+                url = '/xzqh/deleteXzqh',
+                param = {
+                    ids: that.curId
+                }; 
+            unit.ajaxMerPost('/znsj-web' + url , param, function(res) {
+                res = typeof res == 'string' ? JSON.parse(res) : res;
+                let data = res.data;
+                if(res.flag) {
+                  //  that.deleteVis = false;
+                    that.notSaveFlag=false;
+                    that.$Message.success('删除成功！');
+                    // 刷新数据
+                    that.getXzqhData();
+                    // 刷新区划树
+                    that.getXzqhTreeData("leftTree");
+                }else {
+                    that.$Message.error(res.data.errMsg || '数据加载失败！');
+                }
+            },function(error) {
+                that.$Message.error(error.data.errMsg || '数据加载失败！');
+            }, that);
+        },
+        // 上级区划模拟下拉框
+        myOptionToggle(e){
+            let iEle = $(e.target).parents('.el-select').find('i');
+            let optionBox = $(e.target).parents('.select-box').find('.my-option');
+            let inputBox = $(e.target).parents('.el-input--suffix');
+            iEle.hasClass('is-reverse')
+                ? iEle.removeClass('is-reverse')
+                : iEle.addClass('is-reverse');
+            inputBox.hasClass('is-focus')
+                ? inputBox.removeClass('is-focus')
+                : inputBox.addClass('is-focus');
+        },
+        /*
+        ** 获取行政区划树
+        */
+        getXzqhTreeData(treeType) {
+            let that = this,
+                obj = {
+                    value: that.xzqhVal[0]
+                };
+                that.isSearch = false;
+            unit.ajaxMerPost('/znsj-web/xzqh/getXzqhTreeData', obj, function (res) {
+                if (res.flag == true) {
+                    $.each(res.data, function (index, item) {
+                        if(item.existChild){
+                            item.children = [];
+                            item.loading = false;
+                        }
+                        item.isFolder = true;//图标显示文件夹
+                        item.highLight = false;
+                        res.data[0].highLight = true;
+                    });
+                    if(treeType == 'leftTree'){
+                        that.sjdm = res.data[0].value;//默认第一个
+                        that.selected = res.data[0].label;
+                        that.divisionTree[0].children = res.data;
+                        that.getXzqhData();
+                    }else{
+                        that.options[0].children = res.data;
+                    }
+                } else {
+                    that.$Message.warning('服务端错误');
+                }
+            }, function (res) {
+                that.$Message.warning('服务端错误');
+            }, that);
+        },
+        // 行政区划模糊查询
+        searchBtn(){
+            let that = this;
+                if(!that.notSaveFlag) {
+                    if(that.selected == '行政区划'){
+                        that.$Message.warning('请选中省或以下节点')
+                    }else{
+                        let that = this,
+                            divisionName = that.divisionName.trim()
+                        if(divisionName == ''){
+                            that.isSearch = false;
+                            that.getXzqhTreeData('leftTree')
+                        }else{
+                            that.isSearch = true;
+                            that.getSearchTree();
+                        }
+                        
+                    }
+                }else {
+                    that.$Message.warning('有尚未保存的数据');
+                } 
+            
+        },
+        // 获取搜索区划树
+        getSearchTree(){
+            let that = this,
+                param = {
+                    xzqhCode:that.sjdm,
+                    xzqhName:that.divisionName.trim()
+                };
+            unit.ajaxMerPost('/znsj-web/xzqh/queryXzqhTree', param, function (res) {
+                res = typeof res == 'string' ? JSON.parse(res) : res;
+                if (res.flag) {
+                    let data = res.data;
+                    if(data){
+                        for(let j = 0;j<data.length;j++){
+                            res.data[0].highLight = true;
+                            data[j].isFolder = true;//图标显示文件夹
+                            that.$set(data[j],'expand',true);
+                            for(let i=0;i<data[j].children.length;i++){
+                                that.$set(data[j].children[i],'expand',true)
+                            }
+                        }
+                        that.divisionTree[0].children = data;
+                    }else{
+                        that.$Message.error('未搜到到你要查找的行政区划，请重新输入');
+                        that.getXzqhTreeData('leftTree');
+                    }
+                } else {
+                    that.$Message.warning('服务端错误');
+                    that.getXzqhTreeData('leftTree');
+                }
+            }, function (res) {
+                that.$Message.warning('服务端错误');
+                that.getXzqhTreeData('leftTree');
+            }, that);
+        },
+        /*
+         * 初始化数据
+         */ 
+        init() {
+            let that = this;       
+            that.getXzqhTreeData("leftTree"); 
+            // that.getXzqhData();  
+        },
+    },
+    mounted(){
+        let that = this;
+        that.init();
+    }
+ }
+ </script>
+ 
+ <style lang="less">
+    #division{
+        height: 100%;
+        // overflow: auto;
+        padding: 0 20px 0 20px;
+        background-color: #edf0f6;
+        .main-wrap {
+            // height: 100%;
+            height:-moz-calc(~"100% - 42px");
+            height: -webkit-calc(~"100% - 42px");
+            height: calc(~"100% - 42px");
+            padding: 20px 10px 15px 20px;
+            background-color: #fff;
+        }
+        .hide{
+            display: none;
+        }
+        .left-wrap {
+            overflow: auto;
+            padding-right: 10px;
+            width: 25%;
+            height: 100%;
+            // min-height: 600px;
+            border-right: 1px solid #ddd;
+            .left-13 {
+                margin-left: -13px;
+                margin-right: 0;
+            }
+            .jiahao,.jianhao {
+                height: 32px;
+                line-height: 32px;
+                text-align: center;
+                i {
+                    font-size: 20px;
+                    color: #2d8cf0;
+                    cursor: pointer;
+                    font-weight: 700;
+                }
+            }
+            .jiahao{
+                // margin-left: 20px;
+                margin-left: 17px;
+            }
+            .fresh{
+                position: relative;
+                height: 32px;
+            }
+            .fresh-icon{
+                // display: inline-block;
+                position: absolute;
+                top: 0;
+                margin-top: 7px;
+                left: 50%;
+                margin-left: -8px;
+                width: 17px;
+                height: 17px;
+                border-radius: 4px;
+                background-color:#2d8cf0;
+                cursor: pointer;
+                text-align: center;
+                .icon-shuaxin1{
+                    color: #fff;
+                    line-height: 1;
+                    font-size: 14px;
+                }
+            }
+            .common-width {
+                width: 100%;
+            }
+            .ivu-tree ul{
+                height: auto !important;
+            }
+            // .ivu-tree ul li{
+            //     @iehack: \9;
+            //     height: 24px@iehack;
+            //     line-height: 24px@iehack;
+            // }
+            .division-search-btn {
+                position: relative;
+                height: 32px;
+                width: 32px;
+                background-color: #2d8cf0;
+                border: 1px solid #2d8cf0;
+                line-height: 32px;
+                border-radius: 0 5px 5px 0;
+                border: 1px solid #e0e6f1;
+                z-index: 99;
+                cursor: pointer;
+                text-align: center;
+                i {
+                    font-size: 20px;
+                    color: #fff;
+                }
+            }
+            // 区划树
+            .ivu-tree {
+                & > .ivu-tree-children > li > .ivu-checkbox-wrapper {
+                    display: none;
+                }
+            }
+        }
+        .right-wrap{
+            padding: 0px 10px 15px 10px;
+            width:75%;
+            height: 100%;
+            overflow:auto;
+            .btn-del {
+                // display: inline-block;
+                float: right;
+                width:75px;
+                height: 30px;
+                // font-size: 13px;
+                color: #fff;
+                border-radius: 3px;
+                line-height: 30px;
+                text-align: center;
+                background: #ed3f14;
+                cursor: pointer;
+            }
+            // 区划列表
+            .el-table {
+                border-top:1px solid #ddd;
+                border-left:1px solid #ddd;
+                border-right:1px solid #ddd;   
+                // font-size: 14px !important;
+                color: #515a6e;
+                margin-top: 10px;
+                 // 超出截断
+                .el-tooltip>.cell{
+                    white-space: nowrap;
+                    min-width: 50px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+                th{
+                    height: 40px;
+                    padding:0!important;
+                    background-color: #f4f6f9;
+                    border-bottom: 1px solid #ddd !important;
+                    color: #515a6e;
+                }
+                td{
+                    height:48px;
+                    padding: 0;
+                }
+                .el-button.is-disabled{
+                    color: #409EFF;
+                    cursor: pointer;
+                }
+                .el-select{
+                    width: 100%;
+                    .my-option{
+                        position: absolute;
+                        top: 40px;
+                        width: 100%;
+                        height: 180px;
+                        overflow: auto;
+                    }
+                }
+                .select-box{
+                    position: relative;
+                    .my-select{
+                        position: relative;
+                        .el-input input{
+                            width: 100%;
+                            padding-right: 21px;
+                        }
+                        i.iconfont{
+                            position: absolute;
+                            top: 0;
+                            margin-top: 11px;
+                            right:5px;
+                            color: #c0c4cc;
+                        }
+                    }
+                }
+                // 开关
+                .el-switch__label {
+                    position: absolute;
+                    display: none;
+                    color: #fff;
+                    top: 0;
+                }
+                .el-switch__label--left {
+                    z-index: 9;
+                    left: 6px;
+                }
+                .el-switch__label--right {
+                    z-index: 9;
+                    left: -14px;
+                    // right: 6px;
+                }
+                .el-switch__label.is-active {
+                    display: block;
+                    background: transparent;
+                    color: #fff;
+                }
+                .el-switch .el-switch__core,
+                    .el-switch .el-switch__label {
+                    width: 50px !important;
+                }
+            }
+            // 新增按钮
+            .btn-add-wrap{ 
+                height:40px;
+                margin-top: 10px;
+                .ivu-btn {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+        }
+        
+    }
+ </style>
+ 
+ 

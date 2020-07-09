@@ -1,0 +1,50 @@
+{
+    "PICDATA" : {
+        "operationContent": [{
+            "htmlUrl": "",
+            "id": "2c9f819f5b18332a015b18b71199000e",
+            "imgUrl": "http://192.168.58.134:8888/group1/M00/29/96/wKg6hljbUaKAGC2FAABalGkw-Bc793.jpg",
+            "name": "4",
+            "operationAlias": "APP_HOME_RIGHTTWO",
+            "operationBlockId": "",
+            "operationName": "APP运营位",
+            "sn": 1
+        }],
+        "scroll": [{
+            "htmlUrl": "",
+            "id": "2c9f819f5af4d5a1015af52a48d103c6",
+            "imgUrl": "http://192.168.58.134:8888/group1/M00/27/D5/wKg6hljSN9uAFTp4AAL9L6qHjbM499.jpg",
+            "name": "轮番3",
+            "operationAlias": "APP_HOME_SCROLL",
+            "operationBlockId": "",
+            "operationName": "Android测试轮播图展示",
+            "sn": 4
+        }]
+    },
+    "NEWSDATA" : [{
+        "appLinkUrl": "",
+        "areaId": "2c9f81985a7e35ee015a83dce2360000",
+        "extContents": [],
+        "id": "2c9f819f5b861503015b8e7273660c8e",
+        "imgUrl1": "http://192.168.58.134:8888/oss-server/picconvert?id=group1/M00/2F/F0/wKg6hlj5dFmAWTymAABX8RI46Og196.jpg",
+        "mid": "2c9f819f5aa69fc6015aad08ac0f0dbd",
+        "releaseDate": "20170421105800",
+        "tagOptions": ["看视频"],
+        "title": "便民通知",
+        "type": "1"
+    }],
+    "CARDDATA": [{
+        "SNAME": "廉租房申请",
+        "NUM": 1
+    }],
+    "NOTIFYDATA": [{
+        "appLinkUrl": "",
+        "areaId": "2c9f81985a7e35ee015a83dce2360000",
+        "id": "2c9f819f5b861503015b8e70f3310c8b",
+        "mid": "2c9f819f5aa69fc6015aad0cae0e0dc4",
+        "releaseDate": "20170421105600",
+        "tagOptions": ["睡觉"],
+        "title": "ios",
+        "type": "1"
+    }]
+}

@@ -1,0 +1,20 @@
+<view class="wrapper" a:if="{{loaded}}">
+	<view class="title">添加企业</view>
+	<view class="hr"/>
+	<view style="margin-top:50rpx;">
+		<input-item
+				data-field="companyName"
+				placeholder="请录入完整企业名称"
+				type="text"
+				value="{{companyName}}"
+				clear="{{true}}"
+				onInput="onItemInput"
+				onClear="onClear"
+				placeholderClass="placeholderClass"
+				focus="{{true}}"
+		/>
+	</view>
+	<view class="btn-wrapper">
+		<button type="primary" disabled="{{!companyName}}" onTap="next">查询</button>
+	</view>
+</view>

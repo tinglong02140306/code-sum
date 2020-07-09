@@ -1,0 +1,33 @@
+<view class="wrapper" a:if="{{loaded}}">
+	<view class="title">已签约银行</view>
+	<view class="hr"/>
+	<view class="desc">{{companyName}}</view>
+	<view class="desc-2">已通过批量系统签约如下银行账户，请确认</view>
+	<!-- 账户信息 -->
+	<block>
+		<view class="label">银行账户名</view>
+		<view class="list" a:if="{{signInfo}}">
+			<block a:if="{{signInfo['account_type'] === 'QYHC_ICBC_MA'}}">
+				<view class="list-tile">
+					<view class="list-tile-name">开户行：</view>
+					<view class="list-tile-value">中国工商银行股份有限公司济南市中支行</view>
+				</view>
+				<view class="list-tile">
+					<view class="list-tile-name">账户名：</view>
+					<view class="list-tile-value">山东高速信联科技有限公司</view>
+				</view>
+			</block>
+			<view class="list-tile">
+				<view class="list-tile-name">账号：</view>
+				<view class="list-tile-value">{{signInfo["account"]}}</view>
+			</view>
+		</view>
+		<view a:else class="list" style="margin-top:20rpx;color:#999;">
+			暂无数据
+		</view>
+	</block>
+	<!-- 提交 -->
+	<view class="btn-wrapper">
+		<button type="primary" disabled="{{!signInfo}}" onTap="next">确认</button>
+	</view>
+</view>

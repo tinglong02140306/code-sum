@@ -1,0 +1,51 @@
+<!--
+ * @Author: sunmingmao
+ * @Date: 2020-04-11 16:26:29
+ * @LastEditors: sunmingmao
+ * @LastEditTime: 2020-04-27 14:14:04
+ * @Description: 微信车主服务开通
+ -->
+<!--pages/mine/pay/vehicle/vehicle.wxml-->
+<view class="bind-etc-container">
+    <!--开通ETC支付界面-->
+    <view class="bind-vehicle-box">
+        <view class="bind-etc-box">
+            <image class="bind-etc-image" src="https://oilmag.etcsd.com.cn/oilcoreserver/static//resource/icon-flow.png"></image>
+            <view class="bind-etc-content-box">
+                <view class="bind-etc-content">
+                    <view class="headline-box">
+                        <view class="headline-separation"></view>
+                        <text class="headline-text">车牌号</text>
+                    </view>
+                    <plate-input class="bind-etc-plate-input" default_index="{{plate_no_index}}" input_value="{{car_plate_input}}" bind:plateinput="onPlateChange"></plate-input>
+                </view>
+                <view class="bind-etc-content">
+                    <view class="headline-box">
+                        <view class="headline-separation"></view>
+                        <text class="headline-text">选择您的车牌颜色</text>
+                    </view>
+                    <plate-color class="bind-etc-plate-color" bind:platecolor="onPlateColorChange" select="{{car_plate_color}}"></plate-color>
+                    <view class="bind-etc-separation"></view>
+                </view>
+            </view>
+        </view>
+        <view class="bind-bottom-box" style="padding-bottom: {{isIphoneX?64:20}}rpx;">
+            <text class="btn-margin {{car_plate_no?'theme-button':'disable-button'}}" bind:tap="onNextClick">下一步</text>
+        </view>
+    </view>
+    <!--开通ETC支付 成功界面-->
+    <!-- <view wx:if="{{vehicle_success}}">
+        <result status="{{vehicle_success?1:2}}" success1="返回" bind:success1="onBackClick"></result>
+    </view> -->
+    <popup show="{{show_pop}}">
+        <view class="bind-plate-number-list" style="padding-bottom: {{isIphoneX?32:0}}rpx;">
+            <text class="bind-plate-number-list-title">系统检测到您有以下车牌号,点击添加</text>
+            <view class="bind-plate-number-list-box">
+                <block wx:for="{{plate_number_list}}" wx:key="plate_number_list" wx:for-item="item">
+                    <text class="bind-plate-number-list-item" bind:tap="onItemClick" data-item="{{item}}">{{item.plate_number_formate}}</text>
+                </block>
+            </view>
+            <text class="bind-plate-number-list-cancel" bind:tap="onCancelClick">取消</text>
+        </view>
+    </popup>
+</view>

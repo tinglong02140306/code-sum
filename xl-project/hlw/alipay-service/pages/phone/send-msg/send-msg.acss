@@ -1,0 +1,146 @@
+.container {
+	padding: 120rpx 60rpx 0rpx;
+	font-family: SourceHanSansCN-Normal;
+}
+
+.tip-title {
+	font-size: 36rpx;
+	font-weight: normal;
+	font-stretch: normal;
+	letter-spacing: 0rpx;
+	color: #3b4257;
+}
+
+.tip-text {
+	font-size: 28rpx;
+	font-weight: normal;
+	font-stretch: normal;
+	letter-spacing: 0rpx;
+	color: #8087a9;
+}
+
+.notice {
+	font-size: 24rpx;
+	color: #999;
+	height: 60rpx;
+	line-height: 60rpx;
+
+}
+
+.note_box {
+	background: #fff;
+	margin: 20rpx 0;
+}
+
+.ntb_head {
+	line-height: 120rpx;
+	width: 75%;
+	margin: 40rpx auto;
+}
+
+.nt_input {
+	display: flex;
+	flex-flow: row;
+	margin-bottom: 40rpx;
+	font-size: 80rpx;
+	margin: 0 auto;
+}
+
+.nt_input input {
+	text-align: center;
+	margin: 0 9rpx;
+	width: 90rpx;
+	height: 92rpx;
+	background-color: #ffffff;
+	border-bottom: solid 1rpx #bbbfd2;
+	outline: none;
+}
+
+/*提示信息 */
+.note_hint {
+	text-align: center;
+	color: #999;
+	line-height: 120rpx;
+}
+
+.note_anmiteTime {
+	text-align: center;
+	color: #999;
+}
+
+.note_anmiteTime text {
+	color: #fb9357;
+	font-size: 36rpx;
+}
+
+/*数字键盘 */
+.numModal {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+	background: #fff;
+}
+
+.numModal > view {
+	display: flex;
+	flex-flow: row;
+	line-height: 120rpx;
+	border-bottom: 2rpx solid #ccc;
+}
+
+.numModal > view > view {
+	width: 33.33%;
+	text-align: center;
+	font-size: 40rpx;
+	border-right: 2rpx solid #ddd;
+	border-radius: 5rpx;
+}
+
+.color_e {
+	background: #f1f1f1;
+}
+
+.bg-primary {
+	background-color: #2c8afd;
+}
+
+.color-white {
+	color: white;
+}
+
+.small-button {
+	height: 60rpx;
+	margin: 20rpx 15rpx;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+
+.active {
+	-webkit-animation: glow 800ms ease-out infinite alternate;
+	animation: glow 800ms ease-out infinite alternate;
+}
+
+/*以下定义动画帧*/
+@-webkit-keyframes glow {
+	0% {
+		border-bottom: 2rpx solid #000;
+	}
+	100% {
+		border-bottom: 2rpx solid #eee;
+	}
+}
+
+@keyframes glow {
+	0% {
+		border-bottom: 2rpx solid #000;
+	}
+	100% {
+		border-bottom: 2rpx solid #eee;
+	}
+}
+
+

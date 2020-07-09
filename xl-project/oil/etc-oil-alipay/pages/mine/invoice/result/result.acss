@@ -1,0 +1,81 @@
+/* pages/mine/invoice/result/result.acss */
+
+.invoice-result-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    /*padding: 200rpx 0 0 0;*/
+}
+
+.invoice-result-image-box {
+    background-color: #ffffff;
+    width: 100%;
+    height: 500rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.invoice-result-image {
+    width: 228rpx;
+    height: 206rpx;
+}
+
+.invoice-result-text {
+    margin-top: 40rpx;
+    /*color: #000004;*/
+    color: rgba(94, 94, 94, 1);
+    font-size: 42rpx;
+    text-align: center;
+    font-family: PingFang-SC-Heavy;
+}
+
+.invoice-result-button {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 36rpx 0 10rpx 0;
+}
+
+.invoice-result-success {
+    width: 100%;
+    height: 90rpx;
+}
+
+.invoice-result-theme-button {
+    background-color: #05BA7D;
+    border-radius: 100rpx;
+    color: white;
+    font-size: 36rpx;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 630rpx;
+    height: 90rpx;
+    box-shadow: 0rpx 10rpx 40rpx 0rpx rgba(5, 186, 125, 0.2);
+}
+
+.invoice-result-disable-button {
+    background-color: #e8e8e8;
+    border-radius: 100rpx;
+    color: #666666;
+    font-size: 36rpx;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 90rpx;
+    width: 630rpx;
+    border-radius: 56rpx;
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: 0px 2rpx 10rpx 0rpx rgba(0, 0, 0, 0.05);
+}

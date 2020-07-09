@@ -1,0 +1,12 @@
+{
+  "usingComponents": {
+    "notice": "../../components/notice/index",
+    "card": "../../components/card/index",
+    "list-item": "../../components/list-item/index",
+    "category": "../../components/category/index",
+    "skeleton": "../../components/skeleton/index"
+  },
+  "window": {
+    "backgroundColor": "#3568eb"
+  }
+}

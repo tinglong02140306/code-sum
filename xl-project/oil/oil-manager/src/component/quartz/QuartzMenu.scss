@@ -1,0 +1,57 @@
+$stop-color: #ff6f25;
+$recover-color: #1890FF;
+$revise-color: #16b922;
+$delete-color: #ff2b08;
+$item-margin: 3px;
+$icon-margin: 2px;
+
+@mixin flex-center($direction:column) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: center;
+  align-items: center;
+}
+
+.quartz-menu-container {
+  min-width: 200px;
+  width: 100%;
+  @include flex-center(row);
+  a {
+    text-decoration: none
+  }
+}
+
+.quartz-menu-item {
+  @include flex-center(row);
+  font-size: 12px;
+  margin: 0 $item-margin;
+  #quartz-menu-stop-icon {
+    color: $stop-color;
+  }
+  #quartz-menu-recover-icon {
+    color: $recover-color;
+  }
+  #quartz-menu-delete-icon {
+    color: $delete-color;
+  }
+  #quartz-menu-revise-icon {
+    color: $revise-color;
+  }
+
+  #quartz-menu-stop {
+    color: $stop-color;
+    margin: 0 $icon-margin;
+  }
+  #quartz-menu-recover {
+    color: $recover-color;
+    margin: 0 $icon-margin;
+  }
+  #quartz-menu-delete {
+    color: $delete-color;
+    margin: 0 $icon-margin;
+  }
+  #quartz-menu-revise {
+    color: $revise-color;
+    margin: 0 $icon-margin;
+  }
+}

@@ -1,0 +1,46 @@
+/* pages/login/login.wxss */
+.login-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.login-logo{
+    margin-top: 200rpx;
+    width: 120rpx;
+    height: 120rpx;
+    border-radius: 100%;
+}
+.login-title{
+    margin: 30rpx;
+    font-size: 30rpx;
+}
+.login-button-view-box{
+    margin-top: 200rpx;
+    width: 65%;
+    height: 80rpx;
+    position: relative;
+
+    background-color: #05BA7D;
+    border-radius: 40rpx;
+    color: white;
+    font-size: 32rpx;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0rpx 10rpx 40rpx 0rpx rgba(79, 221, 128, 0.3);
+    font-family: PingFangSC-Regular;
+
+}
+.login-button-text{
+    width: 100%;
+    height: 80rpx;
+    text-align: center;
+}
+.login-button-over{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    opacity: 0;
+}

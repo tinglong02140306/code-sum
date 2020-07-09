@@ -1,0 +1,6 @@
+/*可以在这里添加你自己的css*/
+
+/*初始语句置灰*/
+.view #initContent {
+	color: #ccc;
+}

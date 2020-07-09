@@ -1,0 +1,13 @@
+{
+  "navigationBarTitleText":"开通ETC支付",
+  "backgroundColor":"#f8f8f8",
+  "enablePullDownRefresh":false,
+  "navigationBarBackgroundColor": "#00A170",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "etc-input":"../../../../components/etc-input/etc-input",
+    "plate-color":"../../../../components/plate-color/plate-color",
+    "plate-input":"../../../../components/plate-input/plate-input",
+    "popup":"../../../../components/popup/popup"
+  }
+}

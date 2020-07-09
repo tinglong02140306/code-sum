@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "ant-skeleton": "../../components/skeleton/skeleton"
+  },
+  "transparentTitle": "auto"
+}

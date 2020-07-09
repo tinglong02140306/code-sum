@@ -1,0 +1,149 @@
+.vehicle-brand-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 16px;
+}
+
+/*查询条件*/
+.vehicle-brand-search-container{
+    width: 100%;
+    background-color: #ffffff;
+    padding: 10px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+.vehicle-brand-search-item{
+    flex: 0 0 35%;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+/*查询按钮*/
+.vehicle-brand-search-item-btn{
+    position: absolute;
+    right: 0;
+}
+
+/*Table*/
+.vehicle-brand-table{
+    width: 100%;
+    background-color: #ffffff;
+    margin-top: 10px;
+}
+
+/*操作*/
+.vehicle-brand-options-box{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.vehicle-brand-options-item{
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.see{
+    color: #1890ff;
+}
+
+.update{
+    color: #0d965d;
+}
+
+.delete{
+    color: #e73838;
+}
+
+/*modal*/
+.vehicle-brand-modal{
+   .ant-modal-body{
+       padding: 24px 0px 0 0px;
+   }
+}
+
+/*modal form*/
+.vehicle-brand-modal-form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    .ant-form-item{
+        margin-right: 0;
+    }
+
+    .ant-form-item-with-help{
+        margin-bottom: 0;
+    }
+}
+
+/*modal form item*/
+.vehicle-brand-modal-form-item{
+    margin-bottom: 24px;
+    position: relative;
+    box-sizing: border-box;
+    .ant-form-item-label{
+        width: 120px;
+        font-weight: bolder;
+    }
+    .ant-form-item-control-wrapper{
+        min-width: 200px;
+    }
+
+    textarea{
+        max-width: 200px;
+    }
+
+    .upload-container{
+        max-width: 200px;
+    }
+
+    .ant-input[disabled]{
+        color: rgba($color: #000000, $alpha: 0.65);
+    }
+}
+
+.vehicle-brand-modal-other{
+    margin-left: 120px;
+}
+
+.no-require{
+    padding-left: 10px;
+}
+
+.other{
+    margin-left: 220px;
+}
+
+/*modal form footer*/
+.vehicle-brand-modal-form-footer{
+    width: 100%;
+    padding: 10px 16px;
+    text-align: right;
+    border-top: 1px solid #e8e8e8;
+    border-radius: 0 0 4px 4px;
+    box-sizing: border-box;
+    margin-top: 24px;
+
+    button{
+        margin-left: 16px;
+    }
+}
+
+.vehicle-brand-logo{
+    width: 20px;
+    height: 20px;
+}

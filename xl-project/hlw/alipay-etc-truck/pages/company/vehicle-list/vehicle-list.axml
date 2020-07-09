@@ -1,0 +1,41 @@
+<view class="wrapper" a:if="{{loaded}}">
+	<view class="title">确认车辆</view>
+	<view class="hr"/>
+	<view class="desc">{{companyName}}</view>
+	<view class="desc-2">已通过批量系统上传以下车辆，请确认</view>
+	<!-- 车辆列表 -->
+	<block a:if="{{vehicles.length}}">
+		<picker-item
+				data-field="bank"
+				placeholder="选择领取方式"
+				value="{{receiveMode}}"
+				onPickerTap="onPickerTap"
+				last="{{true}}"
+		>
+			领取方式
+		</picker-item>
+		<view class="car-list">
+			<view class="car-list-row">
+				<view class="car-id">序号</view>
+				<view class="car-plate">车牌号</view>
+				<view class="car-plate">车牌颜色</view>
+			</view>
+			<block a:for="{{vehicles}}">
+				<view class="car-list-row">
+					<view class="car-id">{{index + 1}}</view>
+					<view class="car-plate">{{item["vlp"]}}</view>
+					<view class="car-plate">{{plateColorMap[item["vlpc"]]}}</view>
+				</view>
+			</block>
+		</view>
+	</block>
+	<block a:else>
+		<view class="car-list" style="text-align:center;">
+			暂无信息
+		</view>
+	</block>
+	<!-- 确认 -->
+	<view class="btn-wrapper">
+		<button type="primary" disabled="{{!vehicles.length}}" onTap="next">确认</button>
+	</view>
+</view>

@@ -1,0 +1,46 @@
+<view class="wrapper" a:if="{{loaded}}">
+	<view class="title">授信确认</view>
+	<view class="hr"/>
+	<block a:if="{{!showLegal}}">
+		<view class="desc">发起网商银行授信审批须以<block a:if="{{companyName}}"> {{companyName}} </block>企业的法定代表人的支付宝账号进行申请。</view>
+		<view class="desc-2">请确认当前支付宝所有人是否是<block a:if="{{companyName}}"> {{companyName}} </block>企业的法定代表人。</view>
+		<!-- 选择 -->
+		<block>
+			<view class="select" onTap="next">
+				<view style="text-align:center;">我是 <block a:if="{{companyName}}"> {{companyName}} </block> 企业的法定代表人</view>
+				<view style="margin-top:10rpx;">前往授信额度申请</view>
+			</view>
+			<view class="select" onTap="showImg">
+				<view style="text-align:center;">我不是 <block a:if="{{companyName}}"> {{companyName}} </block> 企业的法定代表人</view>
+				<view style="margin-top:10rpx;">点击生成二维码</view>
+			</view>
+		</block>
+	</block>
+	<block a:if="{{showLegal}}">
+		<view class="desc">发起网商银行授信审批须以 <block a:if="{{companyName}}"> {{companyName}} </block>企业的法定代表人的支付宝账号进行申请。</view>
+		<view class="desc-2">请确认当前支付宝所有人是否是<block a:if="{{companyName}}"> {{companyName}} </block>企业的法定代表人。</view>
+		<view class="desc-2">您将发起为<block a:if="{{companyName}}"> {{companyName}} </block>企业的车辆申请货车ETC专用信用额度审批。</view>
+		<!-- 选择 -->
+		<block>
+			<view class="select" onTap="next">
+				<view style="text-align:center;">我是<block a:if="{{companyName}}"> {{companyName}} </block>企业的法定代表人</view>
+				<view style="margin-top:10rpx;">同意前往授信额度申请</view>
+			</view>
+			<view class="select" onTap="exit">
+				<view style="text-align:center;">我不是<block a:if="{{companyName}}"> {{companyName}} </block>企业的法定代表人</view>
+				<view style="margin-top:10rpx;">退出</view>
+			</view>
+		</block>
+	</block>
+	<!-- 二维码 -->
+	<modal
+			show="{{showModal}}"
+			onModalClick="saveImg"
+			onModalClose="closeModal"
+	>
+		<view style="margin: 20px 0 10px 0;">
+			请用<block a:if="{{companyName}}"> {{companyName}} </block>法定代表人的支付宝扫描下方专属二维码</view>
+		<image mode="widthFix" style="width:100%;" src="{{qrCode}}" />
+		<view slot="footer">保存到本地</view>
+	</modal>
+</view>

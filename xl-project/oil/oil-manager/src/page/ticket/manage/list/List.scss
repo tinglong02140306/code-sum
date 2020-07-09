@@ -1,0 +1,124 @@
+.ticket-manage-list-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 16px;
+}
+
+.ticket-manage-list-form{
+    width: 100%;
+    background-color: white;
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    position: relative;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+.ticket-manage-list-form-item{
+    flex: 0 0 30%;
+    text-align: center;
+    .ant-form-item-control{
+        min-width: 250px;
+        box-sizing: border-box;
+    }
+
+    .ant-form-item-label{
+        font-weight: bolder;
+        min-width: 70px;
+    }
+}
+
+.range-picker{
+    .ant-form-item-control{
+        width: 250px;
+    }
+}
+
+.ticket-manage-list-form-btns{
+    width: 30%;
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+    text-align: right;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.ticket-manage-list-table{
+    width: 100%;
+    background-color: white;
+    thead{
+        background-color: #fafafa;
+    }
+}
+
+.ticket-manage-options-box{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.ticket-manage-options-item{
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.see{
+    color: #1890ff;
+}
+
+.update{
+    color: #0d965d;
+}
+
+.delete{
+    color: #e73838;
+}
+
+.ticket-manage-modal-container{
+    box-sizing: border-box;
+    .ant-modal-body{
+        padding-bottom: 0;
+        padding-left: 8px;
+        padding-right: 0;
+        box-sizing: border-box;
+    }
+}
+
+.ticket-manage-modal-add-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    .ant-form-item-with-help{
+        margin-bottom: 0;
+    }  
+}
+
+.ticket-manage-modal-add-form-item{
+    min-width: 200px;
+}
+
+.ticket-manage-modal-submit{
+    width: 100%;
+    display: flex !important;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 8px 10px 10px 10px;
+    margin-top: 20px;
+    border-top: 1px solid #e8e8e8;
+    box-sizing: border-box;
+}

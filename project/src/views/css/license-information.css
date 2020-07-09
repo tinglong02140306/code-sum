@@ -1,0 +1,162 @@
+/**
+ * @author tinglong
+ * @time 2017-01-05
+ * @description 我的驾照
+ */
+/*主体容器*/
+.wrapper {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+/*===========头部 ==========start*/
+/*解除绑定按钮*/
+.del-bind {
+    display: inline-block;
+    width: 21%;
+    height: 2.1rem;
+    vertical-align: top;
+    text-align: right;
+    line-height: 2.2rem;
+}
+/*===========头部 ==========end*/
+
+/*=======驾驶人查询 图例=======start*/
+.drivers-title {
+    position: relative;
+    overflow: hidden;
+    padding-bottom: .5rem;
+    background: #fff;
+}
+.driver-info p {
+    display: inline-block;
+    padding: 0.44rem 0  0.44rem 0.68rem;
+    background: url(./public/wcportal/0.0.1/img/my-drivers/icon-doc-photo.png) left center no-repeat;
+    background-size: 0.68rem 0.52rem;
+
+}
+.driver-name {
+    display: inline-block;
+    padding: 0 1.0rem 0 0.68rem;
+    background: url(./public/wcportal/0.0.1/img/my-drivers/icon-person.png) left center no-repeat;
+    background-size: 0.48rem 0.52rem;
+
+}
+/*累计积分图标*/
+.charts-wrap {
+    width: 100%;
+    height: 6.22rem;
+}
+/*标题*/
+.charts-title {
+    position: absolute;
+    top: 34%;
+    left: 25%;
+    width: 50%;
+}
+.charts-title .score-num {
+    font-size:2.22rem;
+    color: #40405a;
+}
+.analysis-charts {
+    margin: auto;
+    height: 100%;
+    width: 50%;
+}
+.del-date {
+    display: inline-block;
+    padding-left: 0.6rem;
+    background: url(./public/wcportal/0.0.1/img/my-drivers/icon-time.png) left center no-repeat;
+    background-size: 0.52rem;
+}
+.drivers-list {
+    margin-top: .44rem;
+    background: #fff;
+}
+/*=======驾驶人查询 图例=======end*/
+
+/*=======列表=======start*/
+.list-item {
+    padding: .78rem 4.2%;
+    width: 91.6%;
+    background: url(./public/wcportal/0.0.1/img/common/border-icon.png) left bottom 1px repeat-x;
+}
+.list-item span {
+    font-size: 0.67rem;
+}
+.jszzt-title {
+    padding: 0.21rem 0 0.11rem 0;
+}
+.list-item .jszss {
+    padding: 0.16rem 0;
+    width: 2.18rem;
+    font-size: 0.62rem;
+    border: 1px solid transparent;
+    text-align: center;
+    border-radius: 0.22rem;
+}
+.list-item  .jszzt-normal {
+    color: #4c72ff;
+    background: #edf1ff;
+    border-color: #94aaff;
+}
+/*=======列表=======end*/
+
+
+/*background颜色值*/
+.color-b {
+    background: #49c887;
+}
+.color-y {
+    background: #f2a135;
+}
+.color-g {
+    background: #999;
+}
+.color-r {
+    background: #f77572;
+}
+.fzjg{
+    max-width: 50%;
+}
+
+
+/* 信息删除提示框样式 */
+.mark {
+    position: fixed;
+    display: none;
+    top: 0;
+    z-index: 15;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .3);
+}
+.quit {
+    position: absolute;
+    top: calc(50% - 2.9rem);
+    left: 15%;
+    width: 70%;
+    height: 5.8rem;
+    background: #fff;
+    border-radius: 0.22rem;
+}
+.quit-notice {
+    border-bottom: 1px solid #eaeaea;
+    height: calc(3.8rem - 1px);
+    line-height: calc(3.8rem - 1px);
+}
+.quit .quit-btn {
+    display: flex;
+    height: 2.0rem;
+    line-height: 2.0rem; 
+}
+
+.quit .quit-btn span:nth-child(1) {
+    border-right: 1px solid #eaeaea;
+}
+
+.quit .quit-btn span {
+    flex: 1;
+    text-align: center;
+}
+

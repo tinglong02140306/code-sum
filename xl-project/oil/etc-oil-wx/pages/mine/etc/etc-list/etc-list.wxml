@@ -1,0 +1,53 @@
+<!--etc-list-->
+<view class="etc-list-container">
+    <view class="etc-list-container-title-box" bind:tap="onSelfBandClick">
+        <text class="etc-list-container-title">添加ETC卡</text>
+        <text class="etc-list-container-title-sub">查询到您办理的ETC信息，请核实信息无误后勾选添加，您也可以<text style="color: #03abfd">自助填写ETC信息></text></text>
+    </view>
+    <view class="etc-list-container-list">
+        <block wx:for="{{etc_list}}" wx:key="etc_list">
+            <view class="etc-list-container-list-item" data-item="{{item}}" bind:tap="onItemClick" wx:if="{{item.car_plate_no&&item.etc_card_no&&item.car_plate_color!=null}}">
+<!--                <view class="{{item.etcIsBank&&item.select?'etc-list-container-list-item-card':'etc-list-container-list-item-card-no-bank'}}">-->
+                <view class="etc-list-container-list-item-card-no-bank">
+                    <view class="etc-list-container-list-item-row">
+                        <text class="etc-list-container-list-item-card-bank">{{item.etc_card_no_str_before?item.etc_card_no_str_before:''}} **** **** {{item.etc_card_no_str_after?item.etc_card_no_str_after:''}}</text>
+                        <text class="etc-list-container-list-item-card-name">{{item.card_name}}</text>
+                    </view>
+                  <view class="etc-list-container-list-item-row">
+                      <text class="etc-list-container-list-item-card-car">{{item.car_plate_no?item.car_plate_no:''}}</text>
+                      <image class="etc-list-container-list-item-icon" src="{{item.select?icon_select:icon_unselect}}"></image>
+                  </view>
+                </view>
+<!--                notice静默签约暂时不上-->
+<!--                <view class="etc-list-container-list-item-bottom" wx:if="{{item.etcIsBank&&item.select}}">-->
+<!--&lt;!&ndash;                <view class="etc-list-container-list-item-bottom">&ndash;&gt;-->
+<!--                    <view class="etc-list-container-list-item-bottom-row">-->
+<!--                        <image class="etc-list-item-bank-type" src="{{item.bank_title_logo_url}}"></image>-->
+<!--                        <text class="etc-list-item-bank-info">{{item.bank_name?item.bank_name:'银行卡'}} | {{item.bank_card_type==0?'借记卡':item.bank_card_type==1?'信用卡':''}}</text>-->
+<!--                    </view>-->
+<!--                    <text class="etc-list-item-plate">{{item.bank_account_before?item.bank_account_before:''}} ** **** {{item.bank_account_after?item.bank_account_after:''}}</text>-->
+<!--                </view>-->
+            </view>
+        </block>
+    </view>
+    <view class="etc-list-container-footer" style="padding-bottom: {{isIphoneX?64:24}}rpx">
+        <view class="etc-list-container-footer-text">
+            <image class="etc-list-container-footer-icon" src="{{serverAgree?icon_select:icon_unselect}}" bind:tap="serverAgreeClick"></image>
+            <text>我同意并遵守<text style="color: #1C1A24">《ETC免密支付协议》</text></text>
+        </view>
+        <view class="etc-list-container-footer-btn-item theme-button" bind:tap="onNextClick"> 下一步 </view>
+    </view>
+
+    <modal-super show="{{isShowVerify}}">
+        <view class="verify-container">
+            <image class="verify-container-close" src="{{icon_close}}" bind:tap="onCloseClick" ></image>
+            <text class="verify-container-title">身份验证</text>
+            <view class="verify-container-phone-content">
+                <text class="verify-container-phone">请输入您的居民身份证号后六位</text>
+                <!--                <text class="verify-container-phone">{{mobile}}</text>-->
+<!--                <text class="verify-container-time" style="color: {{countText==''?'35968B':'1C1A24'}}" bind:tap="onResent">{{countText}}</text>-->
+            </view>
+            <verify showKeyBord="isShowVerify" password="{{verify_code}}" value="{{verify_code}}" bind:complated="onInput"></verify>
+        </view>
+    </modal-super>
+</view>

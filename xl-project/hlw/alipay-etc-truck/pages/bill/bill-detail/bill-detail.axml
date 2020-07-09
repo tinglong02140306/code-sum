@@ -1,0 +1,66 @@
+<view class="body-wrapper">
+	<block a:if="{{!type}}">
+		<view class="drop-down-menu-wrapper">
+			<view onTap="toggleMenu" class="menu">
+				<view style="font-weight:bold;">{{car}}</view>
+				<image src="/assets/images/down-arrow.png" mode="scaleToFill" style="width:20rpx;height:20rpx" a:if="{{!showMenu}}"/>
+				<image src="/assets/images/up-arrow.png" mode="scaleToFill" style="width:20rpx;height:20rpx" a:if="{{showMenu}}"/>
+			</view>
+			<view class="split"/>
+			<view
+					class="input-item"
+					mode="date"
+					onTap="selectDate"
+					data-idx="startDate"
+			>
+				<view class="display-txt">
+					{{startDate}}
+					<view class="right"><view class="right-arrow"/></view>
+				</view>
+			</view>
+			<view style="width:30rpx;height:100rpx;display:flex;justify-content:center;align-items:center;">至</view>
+			<view
+					class="input-item"
+					mode="date"
+					onTap="selectDate"
+					data-idx="endDate"
+			>
+				<view class="display-txt">
+					{{endDate}}
+					<view class="right"><view class="right-arrow"/></view>
+				</view>
+			</view>
+			<image onTap="loadData" src="/images/my/search.png" style="width:60rpx;height:60rpx;margin:0 10rpx;" mode="widthFix"/>
+		</view>
+		<view class="fixed-menu-mask" a:if="{{showMenu}}" onTap="toggleMenu">
+			<view class="fixed-menu" animation="{{animationData}}">
+				<view class="fixed-menu-item" onTap="select" data-car="{{item}}" a:for="{{cars}}" a:key="{{index}}">
+					<view class="{{car== item ? 'color-primary':''}}">{{item}}</view>
+					<image src="/assets/images/right.png" mode="scaleToFill" style="width:30rpx;height:30rpx" a:if="{{car == item}}"/>
+				</view>
+			</view>
+		</view>
+	</block>
+	<!--列表区-->
+	<block>
+		<view class="{{!type ? 'container' : 'container-a'}}">
+			<block a:for="{{list}}" a:if="{{list.length}}">
+				<view class="bill-item" onTap="showDetail" data-idx="{{index}}">
+					<image src="/images/my/wallet.png" style="width:50rpx;height:50rpx" mode="widthFix"/>
+					<view class="bill-date">
+						<view class="bill-date-station">{{item["title"][1]}}-{{item["title"][3]}}</view>
+						<view class="bill-date-plate">{{item["vlp"]}}</view>
+						<view class="bill-date-time">{{item["title"][2]}}</view>
+					</view>
+					<view class="bill-money">￥{{item["amount"]}}</view>
+				</view>
+			</block>
+			<block a:if="{{!list.length}}">
+				<view class="no-list">
+					当前区间暂无记录
+				</view>
+			</block>
+		</view>
+	</block>
+
+</view>

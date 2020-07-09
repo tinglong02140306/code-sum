@@ -1,0 +1,82 @@
+<view>
+  <view class="my-content">
+    <view class="my-title">
+      <view class="my-add">保证金管理</view>
+    </view>
+    <view class="bond">
+      <view class="bond-title">
+        <view>
+          已冻结保证金
+        </view>
+        <view style="margin-top:15rpx">
+          {{PayBack}} 元
+        </view>
+      </view>
+      <view class="bond-title">
+        <view>
+          需充值保证金
+        </view>
+        <view style="margin-top:15rpx">
+          {{money}} 元
+        </view>
+      </view>
+
+      <view class='bond-button'>
+        <view onTap="chargeWs" a:if="{{condition}}">
+          充值
+        </view>
+        <view onTap="charge">
+          保证金补缴
+        </view>
+        <view style=" margin-right: 0rpx;" onTap="Refresh">
+          刷新查询
+        </view>
+      </view>
+      <!--         <view class='bond-button'>-->
+      <!--            <view onTap="Return">-->
+      <!--               注销设备并退还保证金-->
+      <!--            </view>-->
+      <!--        </view>-->
+    </view>
+  </view>
+  <view class="my-content">
+    <view class="car-list">
+      <view class="car-item" a:for="{{carList}}">
+        <view class="car-vlp">
+          <view>{{item["vlp"]}}</view>
+          <view class="car-btn-group">
+            <button size="mini" type="primary" onTap="refund" data-id="{{item['vehicle_id']}}">退还保证金</button>
+          </view>
+        </view>
+        <view class="car-deposit">
+          保证金： {{item["deposit_amount"]}}元
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="modal" a:if="{{showModal}}">
+    <view class="modal-box">
+      <view class="modal-title">系统已向当前支付宝绑定的手机号发送了一条验证码，请输入验证码</view>
+      <view class="modal-content">
+        <input-item
+            clear="{{true}}"
+            data-field="captcha"
+            placeholder="必填"
+            value="{{captcha}}"
+            onInput="onItemInput"
+            onClear="onClear"
+            type="number"
+        >
+          验证码
+          <view slot="extra" class="extra" catchTap="sendMsg">
+            <button size="mini" type="primary" disabled="{{msgSent}}" catchTap="sendMsg">{{sendText}}</button>
+          </view>
+        </input-item>
+      </view>
+      <view class="modal-btns">
+        <view class="modal-btn" catchTap="cancel">取消</view>
+        <view class="modal-btn color-primary" style="border-left:2rpx solid #eee;" catchTap="confirm">确定</view>
+      </view>
+    </view>
+  </view>
+</view>

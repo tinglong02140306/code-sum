@@ -1,0 +1,118 @@
+/* pages/stations/filter/filter.wxss */
+.station-filter-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    padding-top: 24rpx;
+}
+
+.station-filter-box{
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.station-filter-title{
+    font-size: 32rpx;
+    font-weight: bolder;
+    color: rgba(0, 0, 0, .85);
+    align-self: flex-start;
+    margin-left: 32rpx;
+    margin-bottom: 24rpx;
+}
+
+.station-filter-content-box{
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.station-filter-content-title{
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 26rpx;
+    align-self: flex-start;
+    font-weight: bolder;
+    margin-left: 32rpx;
+    margin-bottom: 24rpx;
+}
+
+.station-filter-content{
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0 16rpx;
+}
+
+.station-filter-content-item{
+    flex: 0 0 25%;
+    height: 70rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    margin-bottom: 24rpx;
+}
+
+.station-filter-content-item-text{
+    width: 86%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    border-radius: 12rpx;
+    font-size: 26rpx;
+}
+
+.check{
+    border: 2rpx solid #05BA7D;
+    color: #ffffff;
+    background-color: #05BA7D;
+    box-shadow: 0rpx 10rpx 40rpx 0rpx rgba(79, 221, 128, 0.3);
+}
+
+.uncheck{
+    border-radius: 12rpx;
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: 0rpx 2rpx 10rpx 0rpx rgba(0, 0, 0, 0.05);
+    color: rgba(0, 0, 0, 0.45);
+}
+
+.station-filter-finish{
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    padding-left: 32rpx;
+    padding-right: 32rpx;
+    padding-top: 20rpx;
+    padding-bottom: 20rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.station-filter-finish-btn{
+    width: 686rpx;
+    height: 90rpx;
+    font-size: 32rpx;
+    letter-spacing: 2rpx;
+}
+

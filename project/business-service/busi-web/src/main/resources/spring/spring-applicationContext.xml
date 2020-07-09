@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.alibaba.com/schema/stat"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+
+        http://www.alibaba.com/schema/stat http://www.alibaba.com/schema/stat.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+
+    <mvc:annotation-driven/>
+    <context:component-scan base-package="com.iflytek.sgy" >
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="maxActive" value="${jdbc.pool.maxActive}"/>
+        <property name="minIdle" value="${jdbc.pool.minIdle}"/>
+        <property name="initialSize" value="${jdbc.pool.initialSize}"/>
+    </bean>
+
+    <!-- hibernate 4 配置 -->
+    <bean id="sessionFactory"
+          class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="namingStrategy">
+            <bean class="org.hibernate.cfg.ImprovedNamingStrategy" />
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">${hibernate.dialect}</prop>
+                <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+                <prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
+                <prop key="hibernate.connection.release_mode">after_transaction</prop>
+                <prop key="hibernate.jdbc.use_streams_for_binary">true</prop>
+                <prop key="hibernate.jdbc.batch_size">50</prop>
+                <prop key="connection.autocommit">true</prop>
+                <prop key="hibernate.cache.provider_class">org.hibernate.cache.ehcache.management.impl.EhcacheHibernate
+                </prop>
+                <prop key="hibernate.cache.provider_configuration_file_resource_path">${hibernate.ehcache_config_file}</prop>
+            </props>
+        </property>
+        <!-- 自动扫描注解方式配置的hibernate类文件 -->
+        <property name="packagesToScan">
+            <list>
+                <value>com.iflytek.sgy.wjewt.domain.entity</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 事务管理器配置,单数据源事务 -->
+    <bean id="transactionManager"
+          class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <!-- SpringMVC上传文件时，需要配置MultipartResolver处理器 -->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="UTF-8" />
+        <!-- 指定所上传文件的总大小不能超过15MB。注意maxUploadSize属性的限制不是针对单个文件，而是所有文件的容量之和 -->
+        <property name="maxUploadSize" value="15728640" />
+    </bean>
+
+
+	<bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
+		<property name="messageConverters">
+			<list>
+				<bean class="org.springframework.http.converter.FormHttpMessageConverter" />
+				<!-- <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter"/> -->
+				<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+					<property name="supportedMediaTypes">
+						<list>
+							<value>text/plain;charset=UTF-8</value>
+						</list>
+					</property>
+				</bean>
+				<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
+			</list>
+		</property>
+	</bean>
+
+
+    <!--短信通知-->
+    <bean id="smsEventHandler" class="com.iflytek.sgy.wjewt.services.yjnc.service.events.SMSEventHandler" scope="prototype"/>
+    <!--电话通知-->
+    <bean id="telEventHandler" class="com.iflytek.sgy.wjewt.services.yjnc.service.events.TELEventHandler" scope="prototype"/>
+    <!--消息推送通知-->
+    <bean id="msgEventHandler" class="com.iflytek.sgy.wjewt.services.yjnc.service.events.MSGEventHandler" scope="prototype"/>
+
+
+
+    <bean class="com.iflytek.sgy.wjewt.services.yjnc.service.events.EventHandlerFactory">
+        <property name="eventHandlers">
+            <list>
+                <ref bean="smsEventHandler"/>
+                <ref bean="telEventHandler"/>
+                <ref bean="msgEventHandler"/>
+            </list>
+        </property>
+    </bean>
+
+
+    <!-- 定义受环境影响易变的配置 -->
+    <beans profile="local">
+        <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+            <property name="locations">
+                <list>
+                    <value>classpath*:config/config.properties</value>
+                    <value>classpath*:config/jmt-config.xml</value>
+                </list>
+            </property>
+        </bean>
+        <context:property-placeholder location="classpath*:config/config.properties"/>
+    </beans>
+    <beans profile="test">
+        <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+            <property name="locations">
+                <list>
+                    <value>classpath*:config/config.properties</value>
+                    <value>classpath*:config/jmt-config.xml</value>
+                </list>
+            </property>
+        </bean>
+        <bean id="request" class="org.springframework.mock.web.MockHttpServletRequest"/>
+    </beans>
+    <beans profile="deploy">
+        <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+            <property name="locations">
+                <list>
+                    <value>file:/iflytek/zhcs/config/busi-web/config.properties</value>
+                    <value>file:/iflytek/zhcs/config/busi-web/jmt-config.xml</value>
+                </list>
+            </property>
+        </bean>
+    </beans>
+
+</beans>

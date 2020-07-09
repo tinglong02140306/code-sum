@@ -1,0 +1,2053 @@
+/*
+ * @Author: kkfan2 
+ * @Date: 2019-01-02 14:14:41 
+ * @Last Modified by: kkfan2
+ * @Last Modified time: 2019-01-18 17:31:10
+ * @description: 字典管理
+ */
+<template>
+    <div id="container">
+        <tabNavigate :tabs="tabs"></tabNavigate>
+        <div class="main-wrap">
+            <Row>
+                <Col span="12">
+                    <div class="item-title ml20 mb15 fz18">字典类型</div>
+                    <Form ref="formValidate1" :model="formValidate1" :rules="ruleValidate" :label-width="10">
+                        <Row class="mr20 ml10">
+                            <Col span="7">
+                                <FormItem label="" prop="systemName">
+                                    <!-- <Select v-model="formValidate1.systemName" placeholder="请选择系统名称">
+                                        <Option v-for="item in sysNameData" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                                    </Select> -->
+                                    <!-- <el-form-item label="请选择系统名称" prop="systemName"> -->
+                                        <el-select v-model="formValidate1.systemName" size="small">
+                                            <el-option v-for="(item,key) in sysNameData" :key="key" :label="item.label" :value="item.value">
+                                            </el-option>
+                                        </el-select>
+                                    <!-- </el-form-item> -->
+                                </FormItem>
+                            </Col>
+                            <Col span="8">
+                                <FormItem label="" prop="typeName">
+                                    <Input  v-model="formValidate1.typeName" search enter-button placeholder="请输入类型名称" :maxlength="15" @on-search="handleSub1('formValidate1')" />
+                                </FormItem>
+                            </Col>
+                            <Col span="9">
+                                <FormItem label="" prop="" class="fr">
+                                    <Button type="primary" @click="typeAddBtn">新增</Button>
+                                    <Button type="error" @click="typeDeleteBtn">删除</Button>
+                                    <Button type="info" @click="handleSubmit1('formValidate1')">刷新</Button>
+                                </FormItem>
+                            </Col>
+                        </Row>
+                        <div class=" ml20">
+                            <Table ref="selection" highlight-row :columns="tableDate1.columns" :data="tableDate1.data" @on-selection-change="selectionChange" @on-current-change="currentChange" @on-select="trSelect" @on-select-all="trSelectAll"></Table>
+                            <div class="clearfix mt10">
+                                <el-pagination :total="pageDate1.pageTotal" small :page-size="pageDate1.pageSize" @size-change="handlePageSize1" @current-change="handlePage1" :current-page.sync="pageDate1.currentPageNo" layout="total, sizes, prev, pager, next, jumper">
+                                </el-pagination>
+                                <!-- <Page :total="pageDate1.pageTotal"  size="small"  :current="pageDate1.currentPageNo" :page-size="pageDate1.pageSize" show-total show-elevator show-sizer class="fr "  @on-change="handlePage1" @on-page-size-change='handlePageSize1'/> -->
+                            </div>
+                        </div>
+                    </Form>
+                </Col>
+                <Col span="12">
+                    <div class="item-title ml20 mb15 fz18">字典数据</div>
+                    <Form ref="formValidate2" :model="formValidate2" :rules="ruleValidate" :label-width="10">
+                        <Row class="mr20 ml10">
+                            <Col span="8">
+                                <FormItem label="" prop="dictName">
+                                    <Input  v-model="formValidate2.dictName" search enter-button placeholder="请输入数据名称" :maxlength="15" @on-search="handleSub2('formValidate2')" />
+                                </FormItem>
+                            </Col>
+                            <Col span="16">
+                                <FormItem label="" prop="" class="fr">
+                                    <Button type="primary" @click="valueAddBtn">新增</Button>
+                                    <Button type="error" @click="valueDeleteBtn">删除</Button>
+                                    <Button type="info" @click="showTreeHandle(true)">{{btnText}}</Button>
+                                </FormItem>
+                            </Col>
+                        </Row>
+                        <div v-show="!showTree" class="pr20 pl20">
+                      <el-table :data="tableDate2.data" @selection-change="handleSelectionChange" tooltip-effect="light" :row-class-name="getRowClass" @select-all="switchChildrenTable" ref="parentTable" style="width: 100% !important" class="parent-table">
+                        <!-- 展开项 -->
+                        <el-table-column type="expand" width="30" class="exp-table" >
+                            <template scope="scope">
+                                <el-table :data="scope.row.children" tooltip-effect="light"  @selection-change="handleSelectionChangeChild" :show-header="false" style="width: 100% !important" ref="childrenTable" class="children-table">
+                                    <el-table-column
+                                      type=""
+                                      width="30" align="center">
+                                    </el-table-column>
+                                    <el-table-column
+                                      type="selection"
+                                      width="35" align="center">
+                                    </el-table-column>
+                                    <el-table-column label="数据代码">
+                                        <template scope="scope">
+                                            <span class="text-one mattLink" :title="scope.row.dictCode" href="javascript:void(0);">{{scope.row.dictCode}}</span>
+                                        </template>
+                                    </el-table-column>
+                                    <el-table-column label="数据名称">
+                                        <template scope="scope">
+                                            <span class="text-one" :title="scope.row.dictName" href="javascript:void(0);">{{scope.row.dictName}}</span>
+                                        </template>
+                                    </el-table-column>
+                                    <el-table-column label="排序">
+                                        <template scope="scope">
+                                            <span class="text-one" :title="scope.row.rankItem" href="javascript:void(0);">{{scope.row.rankItem}}</span>
+                                        </template>
+                                    </el-table-column>
+                                    <el-table-column align="center" label="操作" width="200">
+                                        <template slot-scope="scope">
+                                            <el-button type="text" @click="valueSort(scope.row.dictId, '0')">
+                                                <span>上移</span>
+                                            </el-button>
+                                            <el-button title="下移" type="text" @click="valueSort(scope.row.dictId, '1')">下移</el-button>
+                                            <el-button title="编辑" type="text"  @click="editValueHandle(scope.row.dictId)">编辑</el-button>
+                                            <el-button title="删除" type="text" @click="oneOfValueDeleteBtn(scope.row.dictId)">删除</el-button>
+                                        </template>
+                                    </el-table-column>
+                                </el-table>
+                            </template>
+                        </el-table-column>
+                        <!-- 展开项结束 -->
+                          <el-table-column
+                            type="selection"
+                            width="35">
+                          </el-table-column>
+                        <el-table-column label="数据代码">
+                            <template scope="scope">
+                                <span class="text-one" :title="scope.row.dictCode" href="javascript:void(0);">{{scope.row.dictCode}}</span>
+                            </template>
+                        </el-table-column>
+                        <el-table-column label="数据名称">
+                            <template scope="scope">
+                                <span class="text-one" :title="scope.row.dictName" href="javascript:void(0);">{{scope.row.dictName}}</span>
+                            </template>
+                        </el-table-column>
+                        <el-table-column label="排序">
+                            <template scope="scope">
+                                <span class="text-one" :title="scope.row.rankItem" href="javascript:void(0);">{{scope.row.rankItem}}</span>
+                            </template>
+                        </el-table-column>
+                        <el-table-column align="center" label="操作" width="200">
+                            <template slot-scope="scope">
+                                <el-button type="text" @click="valueSort(scope.row.dictId, '0')">
+                                    <span>上移</span>
+                                </el-button>
+                                <el-button title="下移" type="text" @click="valueSort(scope.row.dictId, '1')">下移</el-button>
+                                <el-button title="编辑" type="text"  @click="editValueHandle(scope.row.dictId)">编辑</el-button>
+                                <el-button title="删除" type="text" @click="oneOfValueDeleteBtn(scope.row.dictId)">删除</el-button>
+                            </template>
+                        </el-table-column>
+                    </el-table>
+                            <!-- <Table ref="selection" highlight-row :columns="tableDate2.columns" :data="tableDate2.data" @on-select="trSelect2" @on-select-all="trSelectAll2" ></Table> -->
+                            <div class="clearfix mt10">
+                                <!-- <Page :total="pageDate2.pageTotal"  size="small"  :current="pageDate2.currentPageNo" :page-size="pageDate2.pageSize" show-total show-elevator show-sizer class="fr mr20"  @on-change="handlePage2" @on-page-size-change='handlePageSize2'/> -->
+                                <el-pagination :total="pageDate2.pageTotal" small :page-size="pageDate2.pageSize" @size-change="handlePageSize2" @current-change="handlePage2" :current-page.sync="pageDate2.currentPageNo" layout="total, sizes, prev, pager, next, jumper">
+                                </el-pagination>
+                            </div>
+                        </div>
+                        <div class="ml20" v-show="showTree" style="min-height: 350px;border: 1px solid #dcdee2;padding: 5px 15px;margin-right: 20px;">
+                            <Tree class="tree" :data="treeData" :render="treeRenderContent"></Tree>
+                        </div>
+                    </Form>   
+                </Col>
+            </Row>
+        </div>
+
+    <!--字典类型-新增-->
+    <Modal id="dictionaryAddDialogModal" v-model="typeAddDialogModal" :title="typeTitle" :mask-closable="false" @on-visible-change="typeAddDialogVisibleChange">
+      <Form :model="typeAddDialogFormItem" :rules="typeAddDialogRuleValidate" ref="typeAddDialogRuleValidate" :label-width="80">
+        <FormItem label="类型代码" prop="dictCode">
+          <Input v-model="typeAddDialogFormItem.dictCode"  :maxlength="20"></Input>
+        </FormItem>
+        <FormItem label="类型名称" prop="dictName">
+          <Input v-model="typeAddDialogFormItem.dictName" :maxlength="50"></Input>
+        </FormItem>
+        <!-- <FormItem label="来源配置" prop="dictDataSql">
+          <Input v-model="typeAddDialogFormItem.dictDataSql" type="textarea" :autosize="{minRows: 2,maxRows: 5}" :maxlength="500"></Input>
+        </FormItem> -->
+        <FormItem label="字典类型" prop="dictType">
+            <el-select v-model="typeAddDialogFormItem.dictType" size="small" style="width: 100%" :disabled="disabled">
+                <el-option v-for="(item,key) in dictTypeList" :key="key" :label="item.label" :value="item.value">
+                </el-option>
+            </el-select>
+           <!-- <Select v-model="typeAddDialogFormItem.dictType">
+            <Option v-for="(item, key) in dictTypeList" :value="item.value" :key="key">{{ item.label }}</Option>
+          </Select> -->
+        </FormItem>
+        <FormItem label="加载方式" prop="loadType">
+            <el-select v-model="typeAddDialogFormItem.loadType" size="small" style="width: 100%">
+                <el-option v-for="(item,key) in loadTypeList" :key="key" :label="item.label" :value="item.value">
+                </el-option>
+            </el-select>
+          <!-- <Select v-model="typeAddDialogFormItem.loadType">
+            <Option v-for="(item, key) in loadTypeList" :value="item.value" :key="key">{{ item.label }}</Option>
+          </Select> -->
+        </FormItem>
+        <FormItem label="说明" prop="dictDes">
+          <Input v-model="typeAddDialogFormItem.dictDes" type="textarea" :autosize="{minRows: 2,maxRows: 5}" :maxlength="500"></Input>
+        </FormItem>
+      </Form>
+      <div slot="footer">
+        <el-button type="primary" size="small" @click="typeAddDialogOk('typeAddDialogRuleValidate')">确定</el-button>
+        <el-button type="text" size="small" style="border: 1px solid #dcdfe6;width: 56px;" @click="typeAddDialogModal = false">取消</el-button>
+        
+      </div>
+    </Modal>
+
+    <!--字典值-新增/编辑-->
+    <Modal id="dictionaryAddDialogModal" v-model="valueAddDialogModal" :title="valueTitle" :mask-closable="false" @on-visible-change="valueAddDialogVisibleChange">
+      <Form :model="valueAddDialogFormItem" :rules="valueAddDialogRuleValidate"  :label-width="80"  ref="valueAddDialogRuleValidate">
+        <FormItem label="数据代码" prop="dictCode">
+          <Input v-model="valueAddDialogFormItem.dictCode" :maxlength="20"/>
+        </FormItem>
+        <FormItem label="数据名称" prop="dictName">
+          <Input v-model="valueAddDialogFormItem.dictName" :maxlength="100"/>
+        </FormItem>
+        <FormItem label="简称" prop="shortName">
+          <Input v-model="valueAddDialogFormItem.shortName" :maxlength="50"/>
+        </FormItem>
+        <FormItem label="上级名称" prop="parentName">
+          <Select v-model="valueAddDialogFormItem.sjxh" filterable clearable transfer ref="valueAddDialogRuleValidate1"> 
+            <Option v-for="(item, key) in lastName" :value="item.dictId" :key="key">{{ item.dictName }}</Option>
+          </Select>
+        </FormItem>
+        <FormItem label="排序值" prop="rankItem">
+          <Input v-model="valueAddDialogFormItem.rankItem"/>
+        </FormItem>
+      </Form>
+      <div slot="footer">
+        <el-button type="primary" size="small" @click="valueAddDialogOk('valueAddDialogRuleValidate')">确定</el-button>
+        <el-button type="text" size="small"  style="border: 1px solid #dcdfe6;width: 56px;" @click="valueAddDialogModal = false">取消</el-button>
+      </div>
+    </Modal>
+    
+    <!--配置应用-->
+    <Modal id="pzyyMoudal" v-model="pzyyMoudal" footer-hide title="配置应用" :mask-closable="false" width="1200px" @on-cancel="refershSelect" @on-ok="refershSelect">
+        <div>
+            <Row>
+                <Col span="11" class="pzyy-l">
+                  <div class="item">
+                    <div class="dxyy">待选应用</div>
+                    <Form class="form-style" ref="formValidate3" :model="formValidate3" :rules="ruleValidate" :label-width="10">
+                        <Row class="">
+                            <Col span="10">
+                                <FormItem label="" prop="systemName">
+                                    <Input v-model="formValidate3.systemName" search enter-button placeholder="请输入应用名称" :maxlength="30" @on-search="handleSub3('formValidate3')" />
+                                </FormItem>
+                            </Col>
+                            <Col span="14">
+                                <FormItem label="" prop="" class="fr">
+                                    <Button type="primary"@click="showManageDialog">应用管理</Button>
+                                </FormItem>
+                            </Col>
+                        </Row>
+                        <div class="clearfix">
+                            <Table ref="selection" highlight-row :columns="tableDate3.columns" :data="tableDate3.data" @on-current-change="currentChange3" @on-select="trSelect3" @on-select-all="trSelectAll3"></Table>
+                            <div class="fr mt10">
+                                <!-- <Page :total="pageDate3.pageTotal" :current="pageDate3.currentPageNo" :page-size="pageDate3.pageSize" show-total show-elevator show-sizer class="fr"  @on-change="handlePage3" @on-page-size-change='handlePageSize3'/> -->
+                                <el-pagination :total="pageDate3.pageTotal" small :page-size="pageDate3.pageSize" @size-change="handlePageSize3" @current-change="handlePage3" :current-page.sync="pageDate3.currentPageNo" layout="total, sizes, prev, pager, next, jumper">
+                                </el-pagination>
+                            </div>
+                        </div>
+                    </Form>
+                  </div>
+                    
+                </Col>
+                
+                <Col span="11" class="pzyy-r">
+                  <div class="switch-box">
+                    <div class="moveRight" @click="toRight"></div> 
+                    <br> 
+                    <div class="moveLeft" @click="toLeft"></div>
+                  </div>
+                  <div class="item">
+                    <div class="dxyy">已选应用</div>
+                    <Form class="form-style" ref="formValidate4" :model="formValidate4" :rules="ruleValidate" :label-width="10">
+                        <Row class="">
+                            <Col span="10">
+                                <FormItem label="" prop="systemName">
+                                    <Input v-model="formValidate4.systemName" search enter-button placeholder="请输入应用名称" :maxlength="30" @on-search="handleSub4('formValidate4')" />
+                                </FormItem>
+                            </Col>
+                        </Row>
+                        <div class="clearfix">
+                            <Table ref="selection" highlight-row :columns="tableDate4.columns" :data="tableDate4.data" @on-current-change="currentChange4" @on-select="trSelect4" @on-select-all="trSelectAll4"></Table>
+                            <div class="fr mt10">
+                                <!-- <Page :total="pageDate4.pageTotal" :current="pageDate4.currentPageNo" :page-size="pageDate4.pageSize" show-total show-elevator show-sizer class="fr "  @on-change="handlePage4" @on-page-size-change='handlePageSize4'/> -->
+                                <el-pagination :total="pageDate4.pageTotal" small :page-size="pageDate4.pageSize" @size-change="handlePageSize4" @current-change="handlePage4" :current-page.sync="pageDate4.currentPageNo" layout="total, sizes, prev, pager, next, jumper">
+                                </el-pagination>
+                            </div>
+                        </div>
+                    </Form>
+                  </div>
+                </Col>
+            </Row>
+        </div>
+    </Modal>
+
+    <!-- 应用管理弹框 -->
+        <el-dialog class="manage" :close-on-click-modal="false" title="应用管理" :visible.sync="showDialog" width="600px" height="600px">
+            <el-form :model="manageDataFile" :rules="rules" ref="manageDataFile" label-width="0" size="small">
+                <el-table :data="manageDataFile.manageData">
+                    <el-table-column class="font-max" label="应用编码" prop="systemCode" align="left">
+                        <template slot-scope="scope">
+                            <el-form-item label-width="0" :prop="'manageData.'+scope.$index+'.systemCode'" :rules="rules.systemCode">
+                                <span class="cell el-tooltip" :title="scope.row.systemCode" v-if="scope.row.status == '1'">{{scope.row.systemCode}}</span>
+                                <el-input v-else :class="{inputBorder: scope.row.status == '0'}" class="inputPadding" v-model="scope.row.systemCode" :title="scope.row.systemCode" maxlength="100%" size="small" autosize placeholder="请输入应用编码"></el-input>
+                            </el-form-item>
+                            <!-- <span class="cell el-tooltip" :title="scope.row.systemCode" v-if="scope.row.status == '1'">{{scope.row.systemCode}}</span>
+                            <el-input v-if="scope.row.status == '0'" class="" v-model="scope.row.systemCode" :maxlength="200" placeholder="请输入"></el-input> -->
+                        </template>
+                    </el-table-column>
+                    <el-table-column class="font-max" label="应用名称" prop="systemName" align="left">
+                        <template slot-scope="scope">
+                            <el-form-item label-width="0" :prop="'manageData.'+scope.$index+'.systemName'" :rules="rules.systemName">
+                                <span class="cell el-tooltip" :title="scope.row.systemName" v-if="scope.row.status == '1'">{{scope.row.systemName}}</span>
+                                <el-input v-else :class="{inputBorder: scope.row.status == '0'}" class="inputPadding" v-model="scope.row.systemName" :title="scope.row.systemName" maxlength="100%" size="small" autosize placeholder="请输入应用名称"></el-input>
+                            </el-form-item>
+                            <!-- <span class="cell el-tooltip" :title="scope.row.systemName" v-if="scope.row.status == '1'">{{scope.row.systemName}}</span>
+                            <el-input v-if="scope.row.status == '0'" class="" v-model="scope.row.systemName"  :maxlength="30" placeholder="请输入"></el-input> -->
+                        </template>
+                    </el-table-column>
+                    <el-table-column class="font-max" label="应用密码" prop="systemPwd" align="left">
+                        <template slot-scope="scope">
+                            <el-form-item label-width="0" :prop="'manageData.'+scope.$index+'.systemPwd'" :rules="rules.systemPwd">
+                                <span class="cell el-tooltip" :title="scope.row.systemPwd" v-if="scope.row.status == '1'">{{scope.row.systemPwd}}</span>
+                                <el-input v-else :class="{inputBorder: scope.row.status == '0'}" class="inputPadding" v-model="scope.row.systemPwd" :title="scope.row.systemPwd" maxlength="100%" size="small" autosize placeholder="请输入应用密码"></el-input>
+                            </el-form-item>
+                            <!-- <span class="cell el-tooltip" :title="scope.row.systemPwd" v-if="scope.row.status == '1'">{{scope.row.systemPwd}}</span>
+                            <el-input v-if="scope.row.status == '0'" class="" v-model="scope.row.systemPwd" :maxlength="8" placeholder="请输入"></el-input> -->
+                        </template>
+                    </el-table-column>
+                    <el-table-column align="center" label="操作" width="200">
+                        <template slot-scope="scope">
+                            <el-button class="font-max" type="text" size="small" @click="editManage(scope.row, scope.$index)" :disabled="scope.row.status =='0'">编辑</el-button>
+                            <el-button class="font-max" type="text" size="small" @click="deleteManage(scope.row)">删除</el-button>
+                        </template>
+                    </el-table-column>
+                </el-table>
+            </el-form>
+            <!-- 添加按钮 -->
+            <div class="btn-add-wrap">
+                <!-- iview按钮 -->
+                <Button style="width:100%;margin-top:5px" type="dashed" icon="md-add" @click="addManage">新增</Button>
+            </div>
+            <!-- 指南内容 -->
+            <div class="footer" style="text-align:right">
+                <el-button type="primary" size="small" @click="submitManage">确 定</el-button>
+                <el-button size="small" @click="showDialog = false">取 消</el-button>
+            </div>   
+            
+        </el-dialog>
+
+    </div>
+</template>
+<script>
+import util from "@/api";
+import unit from '@/api/index';
+import tabNavigate from "@/components/common/tabNavigate";   // 页签导航
+// import tabSwitch from "@/components/common/tabSwitch";   // 表格头部切换
+
+export default {
+    components: {
+        tabNavigate: tabNavigate,
+        // tabSwitch: tabSwitch,
+    },
+    data() {
+        //排序值校验
+        var vlilegalSort = (rule, value, callback) => {
+          if (value) {//有值才检验
+            let reg = /^(0|([1-9]\d{0,4}))$/;
+            if (!reg.test(value)) {
+              callback(new Error('请输入0-99999之间的正整数'));
+            } else {
+              callback();
+            }
+          } else {
+            callback();
+          }
+        };
+        return {
+                typeTitle: '',    // 字典类型弹窗title
+                valueTitle: '',   // 字典数据弹窗title
+                disabled: false, // 字典类型禁用
+              typeSelectItem:[],
+              valueSelectItem:[],
+              valueSelectItemChild:[],
+
+              typeSelectItem3:[],
+              typeSelectItem4:[],
+
+              btnText: '图形',
+              
+              //字典类型-新增
+              isTypeAdd: 0,
+              showTree: false,
+              typeAddDialogModal: false,
+
+              // 上级名称
+              lastName: [],
+
+              // 配置应用
+              pzyyMoudal: false,
+              pzyyData: [],
+              targetKeys: [],
+              
+              // 应用管理
+              showDialog: false,
+              manageDataFile: {
+                  manageData: [
+                    {"id":"7E7632CBF3345EB3E05346011FACFB70","groupName":"1111","matterCode":"72df61646080454392c7209acc97daed","matterVersion":1,"isDelete":"0", "status":"1"}
+                ],
+              },
+              // 配置应用穿梭框样式
+              listStyle: {
+                    width: '450px',
+                    height: '500px'
+                },
+
+              typeAddDialogFormItem: {
+                dictCode: '',
+                dictName: '',
+                // dictDataSql: '',
+                loadType: '',
+                dictType: '',
+                dictDes: ''
+              },
+                // 应用管理rules
+                rules: {
+                    systemCode: [
+                        // {validator: validResultName, trigger: 'blur'},
+                        { required: true, message: '请输入应用编码', trigger: 'blur' },
+                        { min: 0, max: 200, message: '长度不大于200字符', trigger: 'blur'},
+                        
+                    ],
+                    systemName: [
+                        { required: true, message: '请输入应用名称', trigger: 'blur' },
+                        { min: 0, max: 30, message: '长度不大于30字符', trigger: 'blur'}
+                    ],
+                    systemPwd: [],
+
+                },
+              typeAddDialogRuleValidate: {
+                dictCode: [{
+                  required: true,
+                  message: '类型代码不能为空',
+                  trigger: 'change'
+                }, {
+                  message: '长度最大不能超过20',
+                  max: 20,
+                  trigger: 'change'
+                }, {
+                  message: '只允许输入字母、数字、和符号',
+                  pattern: /^[^\u4e00-\u9fa5]+$/,
+                  trigger: 'change'
+                }],
+                dictName: [{
+                  required: true,
+                  message: '类型名称不能为空',
+                  trigger: 'change'
+                }, {
+                  message: '长度最大不能超过50',
+                  max: 50,
+                  trigger: 'change'
+                }],
+                // dictDataSql: [{
+                //   required: true,
+                //   message: '来源配置不能为空',
+                //   trigger: 'change'
+                // }, 
+                // {
+                //   message: '长度最大不能超过500',
+                //   max: 500,
+                //   trigger: 'change'
+                // }],
+                loadType: [{
+                  required: true,
+                  message: '加载方式不能为空',
+                  trigger: 'change'
+                }],
+                dictType: [{
+                  required: true,
+                  message: '字典类型不能为空',
+                  trigger: 'change'
+                }],
+                dictDes: [{
+                  max: 500,
+                  message: '长度最大不能超过500',
+                  trigger: 'change'
+                }]
+              },
+
+              //字典展示模块
+              treeData: [{
+                title: '字典展示',
+                expand: true,
+                render: (h, { root, node, data }) => {
+                  return h('span', {
+                    style: {
+                      display: 'inline-block',
+                      width: '100%'
+                    }
+                  }, [
+                      h('span', [
+                        h('Icon', {
+                          props: {
+                            type: 'ios-folder-outline'
+                          },
+                          style: {
+                            marginRight: '8px'
+                          }
+                        }),
+                        h('span', data.title)
+                      ])
+                    ]);
+                },
+                children: []
+                
+                }
+              ],
+              //字典类型-删除
+              typeDeleteDialogModal: false,
+              //字典值-新增
+              isValueAdd: 0,
+              valueAddDialogModal: false,
+              valueAddDialogFormItem: {
+                dictCode: '',
+                dictName: '',
+                shortName: '',
+                sjxh: '',
+                rankItem: '0'
+              },
+              valueAddDialogRuleValidate: {
+                dictCode: [{
+                  required: true,
+                  message: '代码不能为空',
+                  trigger: 'change'
+                }, {
+                  message: '长度最大不能超过20',
+                  max: 20,
+                  trigger: 'change'
+                }, {
+                  message: '只允许输入字母、数字、和符号',
+                  pattern: /^[^\u4e00-\u9fa5]+$/,
+                  trigger: 'change'
+                }],
+                dictName: [{
+                  required: true,
+                  message: '名称不能为空',
+                  trigger: 'change'
+                }, {
+                  message: '长度最大不能超过100',
+                  max: 100,
+                  trigger: 'change'
+                }],
+                shortName: [{
+                  message: '长度最大不能超过50',
+                  max: 50,
+                  trigger: 'change'
+                }],
+                rankItem: [{
+                  validator: vlilegalSort, trigger: 'change'
+                }]
+              },
+            /** 面包屑 搜索统计 > 搜索分词统计 */
+            tabs: ['基础信息管理', '字典管理'],
+            /** 字典类型搜索表单内容 */
+            formValidate1: {
+                currentPageNo: 1,  // 当前页
+                pageSize: 10,   // 每页大小
+                systemName: '',    // 系统名称
+                typeName: ''    // 类型名称
+            },
+            /** 字典数据搜索表单内容 */
+            formValidate2: {
+                currentPageNo: 1,  // 当前页
+                pageSize: 10,   // 每页大小
+                dictName: '', // 数据名称
+                id: '', // 数据类型ID
+            },
+            /** 待选列表 */
+            formValidate3: {
+                pageNum: 1,  // 当前页
+                pageSize: 10,   // 每页大小
+                systemName: '', // 数据名称
+                typeId: '', // 数据类型ID
+            },
+            /** 已选列表 */
+            formValidate4: {
+                pageNum: 1,  // 当前页
+                pageSize: 10,   // 每页大小
+                systemName: '', // 数据名称
+                typeId: '', // 数据类型ID
+            },
+            sysNameData: [],
+            /** 数据校验规则 */
+            ruleValidate: {
+               
+            },
+            /** 字典类型table数据 */
+            tableDate1: {
+                /** 字典类型用 */
+                columns: [
+                    {
+                        type: 'selection',
+                        width: 40,
+                        align: 'center',
+                    },
+                    {
+                        title: '类型代码',
+                        key: 'dictCode',
+                        // width: 120,s
+                        align: 'left',
+                        ellipsis: 'true',
+                        render: (h, params) => {
+                            return h('div', [
+                                h('span', {
+                                    style: {
+                                       display: 'block',
+                                        width: '100%',
+                                        overflow: 'hidden',
+                                        textOverflow: 'ellipsis',
+                                        whiteSpace: 'nowrap',
+                                        textAlign: 'left',
+                                    },
+                                    domProps: {
+                                        title: params.row.dictCode == null ? '' : params.row.dictCode,
+                                    }
+                                }, params.row.dictCode == null ? '' : params.row.dictCode)
+                            ])
+                        }
+                    },
+                    {
+                        title: '类型名称',
+                        key: 'dictName',
+                        width: 120,
+                        align: 'left',
+                        ellipsis: 'true',
+                        render: (h, params) => {
+                            return h('div', [
+                                h('span', {
+                                    style: {
+                                       display: 'block',
+                                        width: '100%',
+                                        overflow: 'hidden',
+                                        textOverflow: 'ellipsis',
+                                        whiteSpace: 'nowrap',
+                                        textAlign: 'left',
+                                    },
+                                    domProps: {
+                                        title: params.row.dictName == null ? '' : params.row.dictName,
+                                    }
+                                }, params.row.dictName == null ? '' : params.row.dictName)
+                            ])
+                        }
+                    },
+                    
+                    {
+                        title: '加载方式',
+                        key: 'loadTypeValue',
+                        align: 'center',
+                        // width: 120,
+                        ellipsis: 'true',
+                        render: (h, params) => {
+                            return h('div', [
+                                h('span', {
+                                    style: {
+                                       display: 'block',
+                                        width: '100%',
+                                        overflow: 'hidden',
+                                        textOverflow: 'ellipsis',
+                                        whiteSpace: 'nowrap',
+                                        textAlign: 'center',
+                                    },
+                                    domProps: {
+                                        title: params.row.loadTypeValue == null ? '' : params.row.loadTypeValue,
+                                    }
+                                }, params.row.loadTypeValue == null ? '' : params.row.loadTypeValue)
+                            ])
+                        }
+                    },
+                    
+                    {
+                        title: '字典类型',
+                        key: 'dictTypeName',
+                        align: 'center',
+                        width: 70,
+                        ellipsis: 'true',
+                        render: (h, params) => {
+                            return h('div', [
+                                h('span', {
+                                    style: {
+                                       display: 'block',
+                                        width: '100%',
+                                        overflow: 'hidden',
+                                        textOverflow: 'ellipsis',
+                                        whiteSpace: 'nowrap',
+                                        textAlign: 'center',
+                                    },
+                                    domProps: {
+                                        title: params.row.dictTypeName == null ? '' : params.row.dictTypeName,
+                                    }
+                                }, params.row.dictTypeName == null ? '' : params.row.dictTypeName)
+                            ])
+                        }
+                    },
+                    
+                    {
+                        title: '操作',
+                        key: '',
+                        align: 'center',
+                        width: 150,
+                        // ellipsis: 'true',
+                        render: (h, params) => {
+                            let dictType = {
+                                "1":{
+                                    style: {
+                                        display: 'inline-block',
+                                        padding: '5px',
+                                        color: '#515a6e',
+                                        cursor: 'text !important'
+                                    }
+                                },
+                                "2":{
+                                    style: {
+                                        display: 'inline-block',
+                                        padding: '5px',
+                                        color: '#2d8cf0'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            this.pzyyHandle(params.index)
+                                        }
+                                        
+                                    }
+                                }
+                            } 
+                            //特定字典
+                            return h('div', [
+                                h('a', {
+                                    style: {
+                                        display: 'inline-block',
+                                        padding: '5px',
+                                        color: '#2d8cf0'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            this.editTypeHandle(params.index)
+                                        }
+                                    }
+                                }, '编辑'),
+                                h('a', {
+                                    style: {
+                                        display: 'inline-block',
+                                        padding: '5px',
+                                        color: '#2d8cf0'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            this.oneOfTypeDeleteBtn(params.index)
+                                        }
+                                    }
+                                }, '删除'),
+                                h('a',dictType[params.row.dictType] , '配置应用'),
+                            ])
+                            
+                        }
+                    }
+                ],
+                data:[],
+            },
+            /** 字典数据table数据 */
+            tableDate2: {
+                data:[]
+            },
+            /** 字典数据table数据 */
+            tableDate3: {
+                columns: [
+                    {
+                        type: 'selection',
+                        width: 60,
+                        align: 'center',
+                    },
+                    {
+                        title: '应用名称',
+                        key: 'systemName',
+                        // align: 'left',
+                        ellipsis: 'true',
+                        render: (h, params) => {
+                            return h('div', [
+                                h('span', {
+                                    style: {
+                                    },
+                                    domProps: {
+                                        title: params.row.systemName == null ? '' : params.row.systemName,
+                                    }
+                                }, params.row.systemName == null ? '' : params.row.systemName)
+                            ])
+                        }
+                    }
+                ],
+                data:[]
+            },
+            /** 字典数据table数据 */
+            tableDate4: {
+                columns: [
+                    {
+                        type: 'selection',
+                        width: 60,
+                        align: 'center',
+                    },
+                    {
+                        title: '应用名称',
+                        key: 'systemName',
+                        // align: 'left',
+                        ellipsis: 'true',
+                        render: (h, params) => {
+                            return h('div', [
+                                h('span', {
+                                    style: {
+                                    },
+                                    domProps: {
+                                        title: params.row.systemName == null ? '' : params.row.systemName,
+                                    }
+                                }, params.row.systemName == null ? '' : params.row.systemName)
+                            ])
+                        }
+                    }
+                ],
+                data:[]
+            },
+            /** 字典类型分页数据 */
+            pageDate1: {
+                pageTotal: 0,
+                currentPageNo: 1,
+                pageSize: 10,
+            },
+            /** 字典数据分页数据 */
+            pageDate2: {
+                pageTotal: 0,
+                currentPageNo: 1,
+                pageSize: 10,
+            },
+            /** 已选列表 */
+            pageDate3: {
+                pageTotal3: 0,
+                currentPageNo3: 1,
+                pageSize3: 10,
+            },
+            /** 未选列表 */
+            pageDate4: {
+                pageTotal4: 0,
+                currentPageNo4: 1,
+                pageSize4: 10,
+            },
+          //字典类型加载方式
+          loadTypeList: [{label:"启动加载",value:"2"}],
+          dictTypeList: [],
+        };
+    },
+    methods: {
+        // 字典类型选中事件
+        selectionChange(selection) {
+            let that = this;
+            that.typeSelectItem =  selection;
+        },
+        switchChildrenTable(){
+            // this.$refs.childrenTable.toggleAllSelection()
+            var parentChecked = $('.parent-table').find(':checkbox:eq(0)').prop("checked");
+            var childrenChecked = $('.children-table').find(':checkbox:eq(0)').prop("checked");
+            if((parentChecked && childrenChecked) || (!parentChecked && !childrenChecked)) {
+                this.$refs.childrenTable.toggleAllSelection()
+            }
+            // $('.children-table').find(':checkbox:eq(0)').attr("checked", checked);
+        },
+        /** 字典类型新增 */
+        typeAddBtn() {
+            this.disabled = false;
+            this.typeTitle = '新增字典类型';
+          this.$refs['typeAddDialogRuleValidate'].resetFields();
+          this.typeAddDialogModal = true;
+          this.typeAddDialogFormItem = {};
+          this.isTypeAdd = 0;
+        },
+        typeAddDialogOk(name) {
+           let flag = true,
+                _that = this;
+            this.$refs[name].validate((valid) => {
+                if (!valid)  {
+                    flag = false;
+                    this.$Message.error('数据校验失败,请检查表单输入!');
+                }
+            })
+
+            if(!flag) return ;
+            
+            const loading = this.$loading({
+                lock: true,
+                text: '加载中',
+                spinner: 'el-icon-loading',
+                background: 'rgba(0, 0, 0, 0.5)',
+                customClass: 'el-mask'
+            });
+            unit.ajaxPost('/bog-matter-mgr/dic/typeSave', _that.typeAddDialogFormItem).then(function(res){
+                res = typeof res == 'string' ? JSON.parse(res) : res;
+                let data = res.data;
+                loading.close();
+                if(data.flag) {
+                    _that.handleSubmit1('formValidate1');
+                    _that.typeAddDialogModal = false;
+                } else {
+                    _that.$Message.warning(data.errMsg || '新增失败，请重试！');
+                }
+                
+                // if (data.flag) {
+                    
+                // }
+            });
+        },
+
+        /** 字典类型编辑 */
+        editTypeHandle(index) {
+            let _that = this;
+            _that.disabled = true;
+            _that.typeTitle = '编辑字典类型';
+            _that.$refs['typeAddDialogRuleValidate'].resetFields();
+            _that.typeAddDialogModal = true;
+            _that.typeAddDialogFormItem = {};
+            // this.isTypeAdd = 0;
+            let id = _that.tableDate1.data[index].id;
+            setTimeout(function(){
+              unit.ajaxMerPost('/bog-matter-mgr/dic/typeDetail', {typeId: id}, function (res) {
+                  // loading.close();
+                  if (res.flag) {
+                      _that.typeAddDialogFormItem = res.data
+                  }
+                  
+              }, function (res) {
+                  // loading.close();
+                  // _that.$message.warning('服务端错误');
+                  return ;
+              }, _that);
+            },0)
+        },
+
+        //字典值新增
+        valueAddBtn() {
+            let _that = this;
+            _that.valueTitle = '新增字典数据';
+            _that.$refs['valueAddDialogRuleValidate'].resetFields();
+            _that.valueAddDialogModal = true;
+            let query = this.$refs['valueAddDialogRuleValidate1'].$data.query;
+            if (query) {
+                this.$refs['valueAddDialogRuleValidate1'].$data.query = ''
+            }
+            if(_that.valueAddDialogFormItem.dictId) {
+                _that.valueAddDialogFormItem.dictId = null;
+            }
+            // _that.valueAddDialogFormItem.dictCode= '';
+            // _that.valueAddDialogFormItem.dictName= '';
+            // _that.valueAddDialogFormItem.shortName= '';
+            // _that.valueAddDialogFormItem.sjxh= '';
+            // _that.valueAddDialogFormItem.rankItem= 0;
+        //   _that.valueAddDialogFormItem = {
+        //     rankItem: '0'
+        //   };
+            _that.valueAddDialogFormItem.rankItem = '0';
+          _that.valueAddDialogFormItem.sjxh = '';
+          _that.lastName = [];
+          
+          _that.isValueAdd = 0;
+          _that.getLastName();
+        },
+        /** 字典值新增编辑 */
+        editValueHandle(index) {
+            let _that = this;
+            _that.valueTitle = '编辑字典数据';
+            _that.$refs['valueAddDialogRuleValidate'].resetFields();
+            _that.valueAddDialogModal = true;
+            _that.valueAddDialogFormItem = {};
+            _that.getLastName();
+            let id = index;
+            //固定id
+            // let id = "7E88388D19CE651EE05346011FACE50D";
+            setTimeout(function(){
+              unit.ajaxMerPost('/bog-matter-mgr/dic/valueDetail', {id: id}, function (res) {
+                  if (res.flag) {
+                      _that.valueAddDialogFormItem = res.data;
+                    
+                  }    
+              }, function (res) {
+                  return ;
+              }, _that);
+            },0)
+            
+        },
+        valueAddDialogOk(name) {
+           let flag = true,
+                _that = this;
+            this.$refs[name].validate((valid) => {
+                if (!valid)  {
+                    flag = false;
+                    this.$Message.error('数据校验失败,请检查表单输入!');
+                }
+            })
+
+
+            if(!flag) return ;
+            
+            const loading = this.$loading({
+                lock: true,
+                text: '加载中',
+                spinner: 'el-icon-loading',
+                background: 'rgba(0, 0, 0, 0.5)',
+                customClass: 'el-mask'
+            });
+            
+            _that.valueAddDialogFormItem.typeId = _that.formValidate2.id;
+            unit.ajaxPost('/bog-matter-mgr/dic/valueSave', _that.valueAddDialogFormItem).then(function(res){
+              res = typeof res == 'string' ? JSON.parse(res) : res;
+                let data = res.data;
+                  loading.close();
+                if (data.flag) {
+                    _that.handleSubmit2('formValidate2');
+                    _that.valueAddDialogModal = false;
+                } else {
+                    _that.$Message.warning(data.errMsg || '新增失败，请重试！');
+                }
+                _that.showTree = true;
+                _that.showTreeHandle(true);
+              });
+        },
+
+        //字典类型模块删除
+        typeDeleteBtn() {
+          let that = this;
+          let typeSelectItem = that.typeSelectItem;
+          let len = typeSelectItem.length;
+          let deleId = "";
+          if (len <= 0) {
+            this.$Message.warning('请选择要删除的记录！');
+          } else {
+            for (var i = 0; i < typeSelectItem.length; i++) {
+                deleId += typeSelectItem[i].id + ","
+            }
+            deleId = deleId.substring(0, deleId.length-1);
+              that.$confirm('确定要删除选中的记录吗?', '提示', {
+                cancelButtonText: '取消',
+                confirmButtonText: '确定',
+                cancelButtonClass: 'fr ml10',
+                type: 'warning'
+            }).then(() => {
+              that.typeDeleteDialogOk(deleId);
+            }).catch(() => { 
+            });
+          }       
+        },
+        oneOfTypeDeleteBtn(index) {
+            let _that = this;
+            let id = this.tableDate1.data[index].id;
+
+            if (id) {
+                _that.$confirm('确定删除该记录', '提示', {
+                  cancelButtonText: '取消',
+                  confirmButtonText: '确定',
+                  cancelButtonClass: 'fr ml10',
+                  type: 'warning'
+              }).then(() => {
+                _that.typeDeleteDialogOk(id);
+              }).catch(() => { 
+              });
+            }  
+        },
+        typeDeleteDialogOk(deleId) {
+            let _that = this,
+                url = '/bog-matter-mgr/dic/typeRemove';
+
+            unit.ajaxMerPost(url, {ids: deleId}, function (res) {
+                // loading.close();
+                if (res.flag) {
+                    _that.$message.success('删除成功');
+                    _that.handleSubmit1('formValidate1');
+                } else {
+                    _that.$message.warning(res.errMsg || '删除失败');
+                }
+                
+            }, function (res) {
+                // loading.close();
+                // _that.$message.warning('服务端错误');
+                return ;
+            }, _that);
+        },
+
+        //字典值模块
+        valueDeleteBtn() {
+          let that = this;
+          let valueSelectItem = that.valueSelectItem;
+          valueSelectItem = valueSelectItem.concat(that.valueSelectItemChild);
+
+          let len = valueSelectItem.length;
+          let deleId = "";
+          if (len <= 0) {
+            this.$Message.warning('请选择要删除的记录！');
+          } else {
+            for (var i = 0; i < valueSelectItem.length; i++) {
+                deleId += valueSelectItem[i].dictId + ","
+            }
+            deleId = deleId.substring(0, deleId.length-1);
+              that.$confirm('确定要删除选中的记录吗?', '提示', {
+                cancelButtonText: '取消',
+                confirmButtonText: '确定',
+                cancelButtonClass: 'fr ml10',
+                type: 'warning'
+            }).then(() => {
+              that.valueDeleteDialogOk(deleId);
+            }).catch(() => { 
+            });
+          }
+        },
+        oneOfValueDeleteBtn(index) {
+            let _that = this;
+            // let id = this.tableDate2.data[index].id;
+            let id = index;
+
+            if (id) {
+                _that.$confirm('确定删除该记录', '提示', {
+                  cancelButtonText: '取消',
+                  confirmButtonText: '确定',
+                  cancelButtonClass: 'fr ml10',
+                  type: 'warning'
+              }).then(() => {
+                _that.valueDeleteDialogOk(id);
+              }).catch(() => { 
+              });
+            }  
+        },
+        valueDeleteDialogOk(deleId) {
+            let _that = this,
+                url = '/bog-matter-mgr/dic/valueRemove';
+
+            unit.ajaxMerPost(url, {ids: deleId}, function (res) {
+                // loading.close();
+                if (res.flag) {
+                    _that.$message.success('删除成功');
+                    _that.handleSubmit2('formValidate2');
+                } else {
+                    _that.$message.warning(res.errMsg || '删除失败');
+                }
+                
+            }, function (res) {
+                // loading.close();
+                // _that.$message.warning('服务端错误');
+                return ;
+            }, _that);
+        },
+        getRowClass(row,rowIndex){
+            if (row.row.children == null || row.row.children.length == 0) { // 无子项
+                return 'row-expand-cover';
+            }
+        },
+        // 排序
+        valueSort(index, num) {
+            let _that = this;
+            //  let id = this.tableDate2.data[index].id;
+             let id = index;
+
+
+              unit.ajaxMerPost('/bog-matter-mgr/dic/valueSort', {id: id, movePositon: num}, function (res) {
+                if (res.flag) {
+                    _that.handleSubmit2('formValidate2');
+                } else {
+                    _that.$message.warning(res.errMsg || '移动失败');
+                }
+                  
+              }, function (res) {
+                  _that.$message.warning(res.data.errMsg || '移动失败');
+                  return ;
+              }, _that);
+        },
+
+        // 图形
+        showTreeHandle (flag) {
+            let _that = this,
+            // id = "7E88388D19CE651EE05346011FACE50D";
+            id = _that.formValidate2.id || "";
+            
+            if (flag) {
+                _that.showTree = !_that.showTree;
+                _that.btnText = _that.btnText == '图形' ? '列表' : '图形';
+            }
+            unit.ajaxMerPost('/bog-matter-mgr/dic/valueTree', {id: id}, 
+                function (res) {
+                // loading.close();
+                if (res.flag) {
+                    // _that.showTree = true;
+                    _that.treeData = res.data;
+                }
+                
+            }, function (res) {
+                // loading.close();
+                // _that.$message.warning('服务端错误');
+                return ;
+            }, _that);
+           //_that.showTree = !_that.showTree
+        },
+
+        // 穿梭框事件 begin
+        toRight () {
+          let _that = this;
+          let typeSelectItem3 = _that.typeSelectItem3;
+          let len = typeSelectItem3.length;
+          let ids = "";
+          
+          if(len <= 0) {
+              _that.$Message.warning('请选择应用名称！');
+              return ;
+          }
+            for (var i = 0; i < typeSelectItem3.length; i++) {
+                ids += typeSelectItem3[i].id + ","
+            }
+            ids = ids.substring(0, ids.length-1);
+            
+            const loading = this.$loading({
+                lock: true,
+                text: '加载中',
+                spinner: 'el-icon-loading',
+                background: 'rgba(0, 0, 0, 0.5)',
+                customClass: 'el-mask'
+            });
+
+            unit.ajaxMerPost('/bog-matter-mgr/dictSystem/rightAddSystem', 
+              {systemIds: ids, typeId: _that.formValidate3.typeId}, function (res) {
+                loading.close();
+                if (res.flag) {
+                    _that.typeSelectItem3 = [];
+                    _that.handleSubmit3('formValidate3');
+                    _that.handleSubmit4('formValidate4');
+                }
+                
+            }, function (res) {
+                loading.close();
+                // _that.$message.warning('服务端错误');
+                return ;
+            }, _that);
+        },
+        toLeft () {
+          let _that = this;
+          let typeSelectItem4 = _that.typeSelectItem4;
+          let len = typeSelectItem4.length;
+          let ids = "";
+
+          if(len <= 0) {
+              _that.$Message.warning('请选择应用名称！');
+              return ;
+          }
+
+            for (var i = 0; i < typeSelectItem4.length; i++) {
+                ids += typeSelectItem4[i].id + ","
+            }
+            ids = ids.substring(0, ids.length-1);
+            
+            const loading = this.$loading({
+                lock: true,
+                text: '加载中',
+                spinner: 'el-icon-loading',
+                background: 'rgba(0, 0, 0, 0.5)',
+                customClass: 'el-mask'
+            });
+
+            unit.ajaxMerPost('/bog-matter-mgr/dictSystem/leftRemoveSystem', 
+              {systemIds: ids, typeId: _that.formValidate4.typeId}, function (res) {
+                loading.close();
+                if (res.flag) {
+                    _that.typeSelectItem4 = [];
+                    _that.handleSubmit3('formValidate3');
+                    _that.handleSubmit4('formValidate4');
+                }
+                
+            }, function (res) {
+                loading.close();
+                // _that.$message.warning('服务端错误');
+                return ;
+            }, _that);
+        },
+        // 编辑
+        editManage(row,index){
+            let that = this;
+            that.manageDataFile.manageData[index].status = "0";
+        },
+
+        // 删除一行
+        deleteManage(row){
+            let that = this;
+            let ids = row.id
+            let param = {
+                systemId:ids
+            };
+            
+            that.$confirm("确定删除吗?", "提示", {
+              confirmButtonText: "确 定",
+              cancelButtonText: "取 消",
+              cancelButtonClass:'fr ml10',
+              type: "warning"
+            })
+            .then(() => {
+                if(row.id == ""){   //如果是新加的关联组则不调用接口
+                    let index = that.manageDataFile.manageData.indexOf(row);
+                    that.manageDataFile.manageData.splice(index,1)
+                    return
+                }
+              unit.ajaxMerPost('/bog-matter-mgr/dictSystem/systemRemove', param, function(res) {
+                    res = typeof res == 'string' ? JSON.parse(res) : res;
+                    let data = res.data;
+                    if(res.flag) {
+                        that.getManageData()
+                    }else {
+                        that.$Message.error(data.data || '数据加载失败！');
+                    }
+                },function(error) {
+                    that.$Message.error(error.data.errMsg || '数据加载失败！');
+                }, that);  
+            })
+            .catch(() => {});
+        },
+        // 增加一行
+        addManage(){
+            let that = this;
+            let data = {
+                systemName: '',
+                systemCode: '',
+                id: '',
+                status:'0',
+                systemPwd: ''
+                // matteCode:that.code,
+                // matteVersion:that.version
+            };
+            that.manageDataFile.manageData.push(data);
+        },
+        // 提交
+        submitManage(){
+            let that = this;
+            let param = [],
+                flag = true;
+            this.$refs['manageDataFile'].validate((valid) => {
+                if (!valid)  {
+                    flag = false;
+                    this.$Message.error('数据校验失败,请检查表单输入!');
+                }
+            })
+            if(!flag) {
+                return ;
+            }
+            unit.ajaxObjPost('/bog-matter-mgr/dictSystem/systemSave', that.manageDataFile.manageData, function(res) {
+                res = typeof res == 'string' ? JSON.parse(res) : res;
+                let data = res.data;
+                if(res.flag) {
+                    that.getManageData();
+                    // that.getAccConData() 
+                    that.handleSubmit3('formValidate3')
+                    that.handleSubmit4('formValidate4')
+
+                    that.showDialog = false
+                }else {
+                    that.$Message.error(data.errMsg || '数据加载失败！');
+                }
+            },function(error) {
+                that.$Message.error(error.data.errMsg || '数据加载失败！');
+            }, that);     
+        },
+        // 穿梭框事件 end
+
+        // 应用管理
+        showManageDialog(){
+            let that = this;
+            // that.pzyyMoudal = false;
+            that.showDialog = true;
+            that.getManageData();
+        },
+
+        refershSelect(){
+            let that = this;
+            that.pzyyMoudal = false;
+            that.systemListForAll();
+        },
+        // 应用管理列表
+        getManageData(){
+            let that = this;
+           
+            unit.ajaxMerPost('/bog-matter-mgr/dictSystem/systemListForAll', {}, function(res) {
+                res = typeof res == 'string' ? JSON.parse(res) : res;
+                let data = res.data;
+                if(res.flag) {
+                    that.manageDataFile.manageData = res.data;
+                    for(let item of that.manageDataFile.manageData){
+                        that.$set(item,'status','1')
+                    }
+                }else {
+                    that.$Message.error(data.data || '数据加载失败！');
+                }
+            },function(error) {
+                that.$Message.error(error.data.errMsg || '数据加载失败！');
+            }, that);
+        },
+
+        // 配置应用
+        pzyyHandle (index) {
+            let id = this.tableDate1.data[index].id, 
+                _that = this,
+                systemName;
+
+            _that.formValidate3.typeId = id;
+            _that.formValidate4.typeId = id;
+
+            _that.pzyyMoudal = true;
+            _that.handleSubmit3('formValidate3')
+            _that.handleSubmit4('formValidate4')
+            return false;
+        },
+
+        // 加载方式字典序
+        getDictionarys(){
+            let _that = this;
+            unit.ajaxMerPost('/bog-matter-mgr/dic/getDictionarys?pinYinType=ZDLX', {}, function (res) {
+                
+                if(res.flag) {
+                    _that.dictTypeList = res.data
+                }
+                // return ;
+            }, function (res) {
+                // return ;
+            }, _that);
+
+            unit.ajaxMerPost('/bog-matter-mgr/dic/getDictionarys?pinYinType=JZLX', {}, function (res) {
+                
+                if(res.flag) {
+                    _that.loadTypeList = res.data
+                }
+                // return ;
+            }, function (res) {
+                // return ;
+            }, _that);
+        },
+
+        // 加载方式字典序
+        getLastName(){
+            let _that = this;
+            // 固定id
+            unit.ajaxMerPost('/bog-matter-mgr/dic/valueForLastName', 
+              // {id: "7E88388D19CE651EE05346011FACE50D"}, function (res) {
+              {id: _that.formValidate2.id}, function (res) {
+                
+                if(res.flag) {
+                    _that.lastName = res.data
+                }
+                // return ;
+            }, function (res) {
+                // return ;
+            }, _that);
+        },
+       
+        //监听对话框显示变化
+        valueAddDialogVisibleChange(isVisible) {
+          if (isVisible) {
+          } else {
+            if (this.isValueAdd == 0) {
+              this.$refs['valueAddDialogRuleValidate'].resetFields();
+            }
+          }
+        },
+        //监听对话框显示变化
+        typeAddDialogVisibleChange(isVisible) {
+          //true:Modal visivle; false:Modal dismiss
+          if (isVisible) {
+          } else {
+            //对整个表单进行重置，将所有字段值重置为空并移除校验结果
+            if (this.isTypeAdd == 0) {
+              this.$refs['typeAddDialogRuleValidate'].resetFields();
+            }
+          }
+        },
+
+        //字典展示模块
+        treeRenderContent(h, { root, node, data }) {
+          return h('span', {
+            style: {
+              display: 'inline-block',
+              width: '100%'
+            }
+          }, [
+              h('span', [
+                h('Icon', {
+                  props: {
+                    type: 'ios-paper-outline'
+                  },
+                  style: {
+                    marginRight: '8px'
+                  }
+                }),
+                h('span', data.dictName)
+              ])
+            ]);
+        },
+        systemListForAll () {
+            let _that = this;
+            unit.ajaxMerPost('/bog-matter-mgr/dictSystem/systemListForAll', {}, function (res) {
+                if(res.flag) {
+                   var sysNameData = [{value:"",label:"请选择"}], data = res.data;
+                    for (var i = 0; i < data.length; i++) {
+                        sysNameData.push({label: data[i].systemName,
+                                        value: data[i].systemName})
+                    }
+                    _that.sysNameData = sysNameData;
+                }
+                return ;
+            }, function (res) {
+                // _that.$message.warning('服务端错误');
+                return ;
+            }, _that);
+        },
+        /** 字典类型搜索 */
+        handleSubmit1 (name) {
+            let flag = true,
+                _that = this;
+            this.$refs[name].validate((valid) => {
+                if (!valid) {
+                    flag = false;
+                    this.$Message.error('数据校验失败,请检查表单输入!');
+                }
+            })
+
+            if(!flag) return ;
+            
+            const loading = this.$loading({
+                lock: true,
+                text: '加载中',
+                spinner: 'el-icon-loading',
+                background: 'rgba(0, 0, 0, 0.5)',
+                customClass: 'el-mask'
+            });
+            unit.ajaxMerPost('/bog-matter-mgr/dic/typeList', _that.formValidate1, function (res) {
+                loading.close();
+                if(res.flag) {
+                    _that.tableDate1.data = res.data.rows;
+                    if (res.data.rows.length>0) {
+                        _that.tableDate1.data[0]._highlight = true;
+                        _that.tableDate1.data[0]._checked = true;
+                        _that.typeSelectItem.push(_that.tableDate1.data[0]);
+                        _that.formValidate2.id =  _that.tableDate1.data[0].id;
+                        _that.handleSubmit2('formValidate2');
+                    } else {
+                        //字典类型列表清空
+                        _that.typeSelectItem = [];
+                        _that.formValidate2.id =  "";
+                        //字典值列表清空
+                        _that.tableDate2.data = []; 
+                        _that.pageDate2.pageTotal = 0;
+                    }
+                    _that.pageDate1.pageTotal = parseInt(res.data.total);
+                    
+                    
+                }
+                return ;
+            }, function (res) {
+                loading.close();
+                _that.$message.warning('服务端错误');
+                return ;
+            }, _that);
+        },
+        /** 字典数据搜索 */
+        handleSubmit2 (name) {
+            let flag = true,
+                _that = this;
+            this.$refs[name].validate((valid) => {
+                if (!valid)  {
+                    flag = false;
+                    this.$Message.error('数据校验失败,请检查表单输入!');
+                }
+            })
+
+            if(!flag) return ;
+            
+            const loading = this.$loading({
+                lock: true,
+                text: '加载中',
+                spinner: 'el-icon-loading',
+                background: 'rgba(0, 0, 0, 0.5)',
+                customClass: 'el-mask'
+            });
+            // 固定id
+            // unit.ajaxMerPost('/bog-matter-mgr/dic/valueList', 
+            //   {
+            //     currentPageNo: 1,
+            //     pageSize: 10,
+            //     dictName: _that.formValidate2.dictName,
+            //     id: "7E88388D19CE651EE05346011FACE50D"
+            //   }, function (res) {
+            unit.ajaxMerPost('/bog-matter-mgr/dic/valueList', _that.formValidate2, function (res) {
+                loading.close();
+                if(res.flag) {
+                    _that.tableDate2.data = res.data.rows;
+                    _that.pageDate2.pageTotal = parseInt(res.data.total);
+                }
+                return ;
+            }, function (res) {
+                loading.close();
+                _that.$message.warning('服务端错误');
+                return ;
+            }, _that);
+        },
+        /** 字典类型应用管理 获取待选列表 */
+        handleSubmit3 (name) {
+            let flag = true,
+                _that = this;
+            this.$refs[name].validate((valid) => {
+                if (!valid)  {
+                    flag = false;
+                    this.$Message.error('数据校验失败,请检查表单输入!');
+                }
+            })
+
+            if(!flag) return ;
+            
+            const loading = this.$loading({
+                lock: true,
+                text: '加载中',
+                spinner: 'el-icon-loading',
+                background: 'rgba(0, 0, 0, 0.5)',
+                customClass: 'el-mask'
+            });
+            unit.ajaxMerPost('/bog-matter-mgr/dictSystem/systemListForUnSelect', _that.formValidate3, function (res) {
+                loading.close();
+                if(res.flag) {
+                    _that.tableDate3.data = res.data.rows;
+                    _that.pageDate3.pageTotal = parseInt(res.data.total);
+                }
+                return ;
+            }, function (res) {
+                loading.close();
+                // _that.$message.warning('服务端错误');
+                return ;
+            }, _that);
+        },
+        /** 字典类型应用管理 获取已选列表 */
+        handleSubmit4 (name) {
+            let flag = true,
+                _that = this;
+            this.$refs[name].validate((valid) => {
+                if (!valid)  {
+                    flag = false;
+                    this.$Message.error('数据校验失败,请检查表单输入!');
+                }
+            })
+
+            if(!flag) return ;
+            
+            const loading = this.$loading({
+                lock: true,
+                text: '加载中',
+                spinner: 'el-icon-loading',
+                background: 'rgba(0, 0, 0, 0.5)',
+                customClass: 'el-mask'
+            });
+            unit.ajaxMerPost('/bog-matter-mgr/dictSystem/systemListForSelect', _that.formValidate4, function (res) {
+                loading.close();
+                if(res.flag) {
+                    _that.tableDate4.data = res.data.rows;
+                    _that.pageDate4.pageTotal = parseInt(res.data.total);
+                }
+                return ;
+            }, function (res) {
+                loading.close();
+                // _that.$message.warning('服务端错误');
+                return ;
+            }, _that);
+        },
+        /** 字典类型搜索事件 */
+        handleSub1(name) {
+            this.pageDate1.currentPageNo = 1;
+            this.formValidate1.currentPageNo = 1;
+            this.handleSubmit1('formValidate1');
+        },
+          /** 字典数据搜索事件 */
+        handleSub2(name) {
+            this.pageDate2.currentPageNo = 1;
+            this.formValidate2.currentPageNo = 1;
+            this.handleSubmit2('formValidate2');
+        },
+        handleSub3(name) {
+            this.pageDate3.currentPageNo = 1;
+            this.formValidate3.pageNum = 1;
+            this.handleSubmit3('formValidate3');
+        },
+          /** 字典数据搜索事件 */
+        handleSub4(name) {
+            this.pageDate4.currentPageNo = 1;
+            this.formValidate4.pageNum = 1;
+            this.handleSubmit4('formValidate4');
+        },
+        /** 字典类型列选择事件 begin */
+        currentChange(currentRow, oldCurrentRow) {
+            let _that = this;
+            _that.pageDate2.currentPageNo = 1;
+            _that.formValidate2.currentPageNo = 1;
+            _that.formValidate2.id =  currentRow.id;
+            _that.valueAddDialogFormItem.typeId =  currentRow.id;
+            _that.handleSubmit2('formValidate2');
+            _that.showTreeHandle(false);
+        },
+        trSelect(selection, row) {
+          
+            this.typeSelectItem = selection;
+        },
+        trSelectAll(selection) {
+          
+            this.typeSelectItem = selection;
+        },
+        /** 字典类型列选择事件 end */
+
+        /** 字典类型应用管理 获取待选列表选择事件 begin */
+        currentChange3(currentRow, oldCurrentRow) {
+            let _that = this;
+            _that.formValidate3.id =  currentRow.id;
+            // _that.handleSubmit2('formValidate2');
+        },
+        trSelect3(selection, row) {
+            this.typeSelectItem3 = selection;
+        },
+        trSelectAll3(selection) {
+            this.typeSelectItem3 = selection;
+        },
+        /** 字典类型应用管理 获取待选择事件 end */
+
+        /** 字典类型应用管理 获取已选列表选择事件 begin */
+        currentChange4(currentRow, oldCurrentRow) {
+            let _that = this;
+            _that.formValidate4.id =  currentRow.id;
+            // _that.handleSubmit2('formValidate2');
+        },
+        trSelect4(selection, row) {
+            this.typeSelectItem4 = selection;
+        },
+        trSelectAll4(selection) {
+            this.typeSelectItem4 = selection;
+        },
+        /** 字典类型应用管理 获取已选择事件 end */
+
+        /** 字典值列选择事件 begin */
+        // trSelect2(selection, row) {
+        //     this.valueSelectItem = selection;
+        // },
+        // trSelectAll2(selection) {
+        //     this.valueSelectItem = selection;
+        // },
+        handleSelectionChange(selection) {
+            this.valueSelectItem = selection;
+        },
+        trSelectChild2(selection, row) {
+            this.valueSelectItemChild = selection;
+        },
+        trSelectAllChild2(selection) {
+            this.valueSelectItemChild = selection;
+        },
+        handleSelectionChangeChild(selection) {
+            this.valueSelectItemChild = selection;
+        },
+        /** 字典值列选择事件 end */
+
+      
+        /** 字典类型分页事件 */
+        handlePage1(value) {
+            this.formValidate1.currentPageNo = parseInt(this.pageDate1.currentPageNo = value);
+            this.handleSubmit1('formValidate1');
+        },
+        handlePageSize1(value) {
+            this.formValidate1.pageSize = parseInt(this.pageDate1.pageSize = value);
+            this.handleSubmit1('formValidate1');
+        },
+        /** 字典数据分页事件 */
+        handlePage2(value) {
+            this.formValidate2.currentPageNo = parseInt(this.pageDate2.currentPageNo = value);
+            this.handleSubmit2('formValidate2');
+        },
+        handlePageSize2(value) {
+            this.formValidate2.pageSize = parseInt(this.pageDate2.pageSize = value);
+            this.handleSubmit2('formValidate2');
+        },
+
+        /** 已选列表 */
+        handlePage3(value) {
+            this.formValidate3.pageNum = parseInt(this.pageDate3.currentPageNo = value);
+            this.handleSubmit3('formValidate3');
+        },
+        handlePageSize3(value) {
+            this.formValidate3.pageSize = parseInt(this.pageDate3.pageSize = value);
+            this.handleSubmit3('formValidate3');
+        },
+
+        /** 未选列表 */
+        handlePage4(value) {
+            this.formValidate4.pageNum = parseInt(this.pageDate4.currentPageNo = value);
+            this.handleSubmit4('formValidate4');
+        },
+        handlePageSize4(value) {
+            this.formValidate4.pageSize = parseInt(this.pageDate4.pageSize = value);
+            this.handleSubmit4('formValidate4');
+        },
+        
+        /** 初始化 */
+        init() {
+            let _that = this;
+            _that.handleSubmit1('formValidate1'); // 触发搜索事件,获取列表数据
+            _that.systemListForAll(); // 系统名称下拉
+            _that.getDictionarys();
+        }
+    },
+    watch: {
+        /** 字典类型用 */
+        'pageDate1.currentPageNo': function(newName, oldName) {
+            this.formValidate1.currentPageNo = this.pageDate1.currentPageNo;
+        },
+        'pageDate1.pageSize': function(newName, oldName) {
+            this.formValidate1.pageSize = this.pageDate1.pageSize;
+        },
+
+        /** 字典数据用 */
+        'pageDate2.currentPageNo': function(newName, oldName) {
+            this.formValidate2.currentPageNo = this.pageDate2.currentPageNo;
+        },
+        'pageDate2.pageSize': function(newName, oldName) {
+            this.formValidate2.pageSize = this.pageDate2.pageSize;
+        },
+
+        /** 已选列表 */
+        'pageDate3.currentPageNo': function(newName, oldName) {
+            this.formValidate3.pageNum = this.pageDate3.currentPageNo;
+        },
+        'pageDate3.pageSize': function(newName, oldName) {
+            this.formValidate3.pageSize = this.pageDate3.pageSize;
+        },
+
+        /** 未选列表 */
+        'pageDate4.currentPageNo': function(newName, oldName) {
+            this.formValidate4.pageNum = this.pageDate4.currentPageNo;
+        },
+        'pageDate4.pageSize': function(newName, oldName) {
+            this.formValidate4.pageSize = this.pageDate4.pageSize;
+        },
+    },
+    mounted() {
+        this.init();
+    }
+};
+</script>
+<style lang="less">
+    #container {
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        min-width: 1100px;
+        padding: 0px 20px 0px 20px;
+        .ivu-input-search::before {
+            height: 32px !important;
+            width: 4px !important;
+        }
+        .ivu-tree .ivu-tree-children .ivu-tree-children {
+            height: auto !important;
+        }
+        .manage {
+            .inputPadding {
+                .el-input__inner {
+                    padding: 0px 5px;
+                    height: 27px;;
+                }
+            }
+            .el-input--small .el-input__inner {
+                margin-top: 17px;
+            }
+            .el-tooltip {
+                position: relative;
+                top: 10px;
+                display: inline-block;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                width: 100%;
+            }
+        }
+        
+        .el-table__header-wrapper,
+        .el-table__body-wrapper {
+            .el-checkbox {
+                width: 100% !important;
+                min-width: 12px!important
+            }
+        }
+        .el-table-column--selection .cell {
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+        .el-table__empty-block {
+            line-height: 48px;
+            min-height: 48px;
+        }
+        .el-table__empty-text {
+            color: #515a6e;
+        }
+        .ivu-form-item-content {
+            position: relative;
+            top: 1px;
+        }
+        .ivu-table-tbody {
+            .ivu-checkbox-wrapper {
+                width: 23px !important;
+            }
+        }
+        .ivu-table-body  {
+            .ivu-table-cell {
+                padding: 0px;
+            }
+            overflow-x: hidden;
+        }
+        .ivu-table-header {
+           .ivu-table-cell {
+                padding: 0px;
+            } 
+        }
+        .main-wrap {
+            background-color: #fff;
+            padding: 20px 0;
+            .item-title {
+                font-size: 16px;
+                font-weight: 600;
+            }
+        }
+        .text-one {
+            display: inline-block;
+            width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    }
+
+    .ivu-table-cell {
+        padding-left: initial !important; 
+        padding-right: initial !important; 
+    }
+
+    .item{
+      border: 1px solid #e4e4e4;
+    }
+
+    .dxyy{
+      background: #f2f2f2;
+      padding: 10px;
+      border: 1px solid #e4e4e4;
+    }
+
+    .item .ivu-form-item{
+      margin-top: 10px !important;
+      margin-bottom: 10px !important;
+    }
+
+    form.form-style {
+      padding: 5px;
+      height: 662px;
+    overflow-y: auto;
+    }
+
+    .pzyy-r{
+      position: relative;
+      margin-left: 80px;
+    }
+
+    .switch-box{
+      position: absolute;
+      left: -60px;
+      top: 0;
+      text-align: center;
+      margin-top: 260px;
+    }
+
+    .moveRight,.moveLeft{
+              width:38px;
+              height:38px;
+              display: inline-block;
+              border: 1px solid #ddd;
+              border-radius: 50%;
+              cursor: pointer;          
+          }
+
+    .moveLeft {
+            background: url(../../assets/images/common/left-icon.png) center
+            center no-repeat;
+          }
+
+    .moveRight {
+            background: url(../../assets/images/common/right-icon.png) center
+                    center no-repeat;
+          }
+
+    .ivu-btn-dashed {
+      color: #515a6e;
+      background-color: #fff;
+      border-color: #dcdee2;
+      border-style: dashed;
+    }
+
+    .footer {
+      background: #fff;
+    }
+
+    .el-dialog__header {
+    border-bottom: 1px solid #ddd;
+    }
+    .el-dialog__header {
+        padding: 20px 20px 10px;
+    }
+    .el-dialog__body {
+      padding: 10px 10px 20px;
+      color: #606266;
+      font-size: 14px;
+    }
+    .el-table {
+        border-top: 1px solid #e4e4e4;
+        border-left: 1px solid #e4e4e4;
+        border-right: 1px solid #e4e4e4;
+        overflow: hidden;
+    }
+
+    .el-table__expanded-cell,
+    .el-table__expanded-cell[class*=cell]{
+        padding: 0
+    }
+    .el-table th{
+        height: 40px;
+    }
+    .el-table td{
+        height: 48px;
+    }
+    .el-table th, .el-table td{
+        padding: 0;
+    }
+    .el-table__expanded-cell tr.el-table__row {
+        background-color: #fff !important;
+    }
+    
+    .row-expand-cover {
+        td:first-child .el-table__expand-icon {
+            display: none;
+        }
+    }
+
+    .el-table th {
+        background-color: #f4f6f9;
+    }
+
+    .el-table td, .el-table th.is-leaf {
+        border-bottom: 1px solid #ddd !important;
+    }
+
+</style>

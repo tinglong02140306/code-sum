@@ -1,0 +1,9 @@
+{
+    "defaultTitle": "一键加油",
+    "backgroundColor": "#00A170",
+    "titleBarColor": "#00A170",
+    "pullRefresh": false,
+    "usingComponents": {
+        "modal-super": "../../../components/modal-super/modal-super"
+    }
+}

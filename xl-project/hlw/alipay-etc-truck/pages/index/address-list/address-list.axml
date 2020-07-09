@@ -1,0 +1,24 @@
+<view>
+  <view class="list-wrapper">
+    <block a:for="{{list}}">
+      <view class="list-item" onTap="select" data-idx="{{index}}">
+        <view class="item-first">
+          <view class="item-name">{{item["addressee"]}}</view>
+          <view class="item-mobile">{{item["addressee_mobile"]}}</view>
+          <!-- <view class="item-icon" catchTap="delete" data-idx="{{index}}">
+            <am-icon type="delete" color="#00a5ff"/>
+          </view> -->
+          <view class="item-icon" catchTap="edit" data-idx="{{index}}">
+            <am-icon type="share" color="#00a5ff"/>
+          </view>
+        </view>
+        <view class="item-second">
+          {{item["address"]}}
+        </view>
+      </view>
+    </block>
+  </view>
+  <view class="btn-wrapper">
+    <button class="next-btn bg-primary" onTap="addNew">添加新地址</button>
+  </view>
+</view>

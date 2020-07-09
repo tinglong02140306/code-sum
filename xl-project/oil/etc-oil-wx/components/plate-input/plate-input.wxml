@@ -1,0 +1,24 @@
+<!--
+ * @Author: sunmingmao
+ * @Date: 2020-04-11 13:45:22
+ * @LastEditors: sunmingmao
+ * @LastEditTime: 2020-04-11 13:55:13
+ * @Description: 车牌号输入
+ -->
+<view class="plate-input-container">
+    <view class="plate-input-header">  
+        <picker mode="multiSelector" range="{{multiArray}}" bindchange="onPickerChange" value="{{index}}">
+            <text class="plate-input-header-text">{{header}}</text>
+        </picker>
+        <image class="plate-input-header-icon" src="https://oilmag.etcsd.com.cn/oilcoreserver/static//resource/plate-pull.png"></image>
+    </view>
+    <view class="plate-input-content">
+        <input class="plate-input" 
+            maxlength="{{6}}" 
+            bindinput="onInputChange"
+            value="{{input_value}}"
+            placeholder-class="plate-input-placeholder" 
+            placeholder="请输入您的车牌号"/>
+        <view class="plate-input-separation"></view>
+    </view>
+</view>

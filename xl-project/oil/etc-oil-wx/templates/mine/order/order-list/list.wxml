@@ -1,0 +1,15 @@
+<template name="order-list">
+    <view class="order-list-template-container">
+        <view class="order-list-template-box">
+            <image class="order-template-item-left" src="{{item.logo_url?item.logo_url:item.order_type=='GAS'?'https://oss.etcsd.com/object/03e883e1f4ff4f3583d9120de429c1ae':'https://oss.etcsd.com/object/261ccf0cb5e441d591c10454842d7a93'}}"></image>
+            <view class="order-template-item-center">
+<!--                <text class="order-template-station">加油-{{item.gas_station_name=='N/A'?"":item.gas_station_name}}</text>-->
+                <text class="order-template-station">{{item.order_type=='GAS'?'加油':item.order_type=='WASH'?'洗车':item.order_type=='COUPON_PACKAGE'?'券包':''}}-{{item.order_title=='N/A'?"":item.order_title}}</text>
+                <text class="order-template-oil">{{item.order_detail}}</text>
+                <text class="order-template-oil">{{item.invoice_create_time_str}}</text>
+            </view>
+            <view class="order-template-item-right"><text class="order-template-money">￥{{item.actual_amount?item.actual_amount:'0.00'}}</text></view>
+        </view>
+        <view class="order-list-template-line"></view>
+    </view>
+</template>

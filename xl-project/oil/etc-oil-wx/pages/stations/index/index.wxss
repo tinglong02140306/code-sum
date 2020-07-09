@@ -1,0 +1,85 @@
+/* pages/stations/index/index.wxss */
+@import "../../../templates/stations/station-item/station-item.wxss";
+@import "../../../templates//stations/clean-item/clean-item.wxss";
+@import "../../../templates/stations/station-item-loading/station-item-loading";
+
+.station-box{
+   width: 100%;
+   display: flex;
+   flex-direction: column;
+}
+
+/**油站列表**/
+.station-list-box{
+   width: 100vw;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   box-sizing: border-box;
+   /*z-index: 0;*/
+}
+
+/**筛选条件**/
+.station-menu-container{
+   width: 100%;
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   align-items: center;
+   box-sizing: border-box;
+   margin-bottom: 20rpx;
+   background-color: #ffffff;
+}
+
+.station-filter-tabs{
+   width: 500rpx;
+}
+
+.station-search{
+   width: 200rpx;
+   display: flex;
+   flex-direction: row;
+   justify-content: flex-end;
+   align-items: center;
+   font-size: 28rpx;
+   color: rgba(0, 0, 0, .85);
+   margin-right: 32rpx;
+   margin-left: 32rpx;
+}
+
+.station-search-image{
+   width: 28rpx;
+   height: 28rpx;
+   margin-right: 10rpx;
+}
+
+.station-menu-box{
+   width: 100%;
+   height: 84rpx;
+   box-sizing: border-box;
+   font-size: 28rpx;
+   color: rgba(0, 0, 0, .45);
+   margin-left: 32rpx;
+}
+
+/**切换地图模式**/
+.station-to-map{
+   position: fixed;
+   z-index: 200;
+   bottom: 200rpx;
+   right: 32rpx;
+   width: 150rpx;
+   height: 150rpx;
+   animation: move 1s ease 1 ;
+   animation-fill-mode:forwards
+}
+
+@keyframes move{
+   0% { right:-32rpx; }
+  50% { right:64rpx;}
+  100% { right:0; }
+}
+
+.clean-filter-margin{
+   padding-left: 28rpx;
+}

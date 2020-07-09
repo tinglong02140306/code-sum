@@ -1,0 +1,36 @@
+.mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, .6);
+    z-index: 99;
+}
+
+.picker-content-wrap {
+    /* position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 100; */
+    width: 100%;
+    background: #fff;
+    /* transition: bottom .5s ease-in; */
+}
+
+.btn-wrap {
+    display: flex;
+    justify-content: space-between;
+    height: 68rpx;
+    border-bottom: 1px solid #e9e9e9;
+}
+
+.btn-wrap text {
+    display: inline-block;
+    width: 100rpx;
+    height: 100%;
+    font-size: 30rpx;
+    color: #1890ff;
+    line-height: 68rpx;
+    text-align: center;
+}

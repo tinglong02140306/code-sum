@@ -1,0 +1,60 @@
+.wrapper {
+	width: 750rpx;
+	box-sizing: border-box;
+	padding: 0rpx 32rpx;
+	margin-top: 32rpx;
+}
+
+.title {
+	font-family: "PingFangSC-Regular";
+	font-size: 36rpx;
+	color: #333333;
+	letter-spacing: 0.61px;
+	text-align: left;
+}
+
+.subtitle {
+	margin-top: 20rpx;
+	font-family: "PingFangSC-Regular";
+	font-size: 28rpx;
+	color: #888888;
+}
+
+.car-container {
+	width: 686rpx;
+	height: 100rpx;
+	box-sizing: border-box;
+	margin-bottom: 35rpx;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 10rpx;
+}
+
+.next-btn {
+	width: 686rpx;
+	margin: 60rpx 32rpx;
+	outline: none;
+	color: #fff;
+	border-radius: 10rpx;
+}
+
+.add {
+	font-family: "PingFangSC-Medium";
+	font-size: 32rpx;
+	color: #108EE9;
+	letter-spacing: 0.52rpx;
+	text-align: center;
+}
+.am-picker-item,.am-input-item{
+	padding-left: 0!important;
+}
+text{
+	font-size:17px;
+}
+.am-picker-label {
+	margin-left: 25px;
+}
+.am-input-label{
+	margin-left: 25px;
+}

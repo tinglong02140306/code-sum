@@ -1,0 +1,11 @@
+<view class="list-item-wrapper {{bottom?'border-bottom':''}}">
+  <view class="dot-wrapper" a:if="{{dot}}">
+    <image src="/images/dot.png" class="dot"/>
+  </view>
+  <view class="title-wrapper">
+    {{title}}
+  </view>
+  <view class="arrow-wrapper" a:if="{{arrow}}">
+    <image src="/images/arrow.png" class="arrow"/>
+  </view>
+</view>

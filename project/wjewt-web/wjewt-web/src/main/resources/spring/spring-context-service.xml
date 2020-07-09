@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
+	default-lazy-init="true" default-autowire="byName">
+	<!-- 引入其他jar包中的配置文件 -->
+	<import resource="classpath*:redis/*.xml"/>
+	
+	<!-- uaac client 参数 -->
+	<!-- <bean id="uaacConstant" class="com.iflytek.uaac.client.constant.UaacConstant">
+		<property name="appCode" value="${uaac.client.appCode}" />
+		<property name="appAuthCode" value="${uaac.client.appCode}" />
+		<property name="appSecurityCode" value="${uaac.client.appCode}" />
+		<property name="casContext" value="${cas.context}" />
+		<property name="casValidContext" value="${cas.valid.context}" />
+		<property name="casContextLogin" value="${cas.context.login:/login}" />
+		<property name="casContextLogout" value="${cas.context.logout:/logout}" />
+		<property name="resturl" value="${uaac.service.url}" />
+		<property name="casClientContext" value="${cas.client.context}" />
+	</bean>
+	<bean id="uaacClientFilter" class="com.iflytek.uaac.client.rest.filter.FilterChainProxy">
+		<property name="uaacConstant" ref="uaacConstant" />
+	</bean> -->
+	<!-- <bean id="userBMBMFilter" class="com.iflytek.sgy.wjewt.web.filter.UserBMBMFilter">
+		<property name="businessSecurityService" ref="uaacSecurityService"></property>
+	</bean> -->
+	<!-- <bean id="uaacSecurityService" class="com.iflytek.sc.uaac.service.impl.UaacSecurityService">
+
+	</bean> -->
+</beans>

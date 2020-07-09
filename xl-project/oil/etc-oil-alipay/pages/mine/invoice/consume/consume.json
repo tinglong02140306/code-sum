@@ -1,0 +1,9 @@
+{
+    "defaultTitle": "按订单开票",
+    "backgroundColor": "#eeeeee",
+    "titleBarColor": "#ffffff",
+    "usingComponents": {
+        "scroll-list": "../../../../components/scroll-list/scroll-list",
+        "status": "../../../../components/status/status"
+    }
+}

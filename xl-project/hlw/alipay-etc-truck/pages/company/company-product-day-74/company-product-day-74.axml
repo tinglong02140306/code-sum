@@ -1,0 +1,10 @@
+<view class="wrapper">
+	<view class="title">免保证金日结</view>
+	<view class="hr"/>
+	<view class="desc">您可办理免保证金日结产品</view>
+	<view class="desc-2">免保证金日结产品，是指您可按日结算通行费，在您通行高速后的第二天为您出具通行账单，您需要在当天完成通行费账单的还款。</view>
+	<!-- 提交 -->
+	<view class="btn-wrapper">
+		<button type="primary" onTap="next">确认办理</button>
+	</view>
+</view>

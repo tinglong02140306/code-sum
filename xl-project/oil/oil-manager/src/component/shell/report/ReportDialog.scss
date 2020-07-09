@@ -1,0 +1,40 @@
+.report-dialog-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.report-dialog-left{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  //justify-content: center;
+}
+
+.report-dialog-input-item{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.report-dialog-input-title{
+  display: flex;
+  flex-direction: row;
+  font-weight: bold;
+  font-size: 14px;
+  color: black;
+  margin-right: 5px;
+  justify-content: flex-end;
+  width: 80px;
+}
+
+.report-dialog-center{
+  background-color: #e7e7e7;
+  width: 1px;
+  height: 320px;
+  //margin: 0 30px;
+  margin: 0 15px 0 35px;
+  align-self: center;
+}

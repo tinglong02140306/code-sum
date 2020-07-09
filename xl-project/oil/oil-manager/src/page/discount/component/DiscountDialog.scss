@@ -1,0 +1,160 @@
+.discount-dialog-box{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+.discount-dialog-item{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.discount-dialog-item-content{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 4px;
+  .ant-select{
+    width: 250px;
+  }
+  input{
+    width: 250px;
+  }
+}
+.discount-dialog-item-label{
+  width: 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  font-weight: 600;
+  margin: 0 4px 0 0;
+  span{
+    color: red;
+  }
+}
+.discount-dialog-item-placeholder{
+  align-self: flex-start;
+  margin: 0 0 2px 104px;
+  color: red;
+}
+
+.discount-station-dialog-box{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.discount-station-dialog-item{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.discount-station-dialog-item-content{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 4px;
+}
+.discount-station-dialog-item-label{
+  width: 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  font-weight: 600;
+  margin: 0 4px 0 0;
+  span{
+    color: red;
+  }
+}
+
+.discount-station-item-placeholder{
+  align-self: flex-start;
+  margin: 0 0 2px 104px;
+  color: red;
+}
+
+.discount-activity-steps-content2{
+  width: 80%;
+  //margin: 30px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  ant-transfer{
+    width: 100%;
+  }
+}
+.discount-activity-steps-content2-box{
+  margin-right: 20px;
+  width: 178px;
+  height: 197px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border:1px solid #d3d3d3;
+}
+
+.discount-activity-steps-content2-item{
+  width: 100%;
+  height: 39px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.discount-activity-steps-content2-line{
+  width: 100%;
+  height: 1px;
+  background-color: #dedede;
+}
+.discount-activity-steps-content2-tree{
+  width: 100%;
+  height: 158px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.discount-activity-steps-content2-Spin {
+  width: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  .ant-spin-nested-loading {
+    width: auto;
+  }
+}
+.discount-station-dialog-item-hint{
+  margin-left: 85px;
+  margin-bottom: 10px;
+  width: 100%;
+  font-size: 15px;
+  color: #ff832e;
+}
+.discount-result-container{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+.discount-result-hint{
+  margin-left: 30px;
+  margin-bottom: 15px;
+  color: #ff832e;
+  width: 100%;
+}

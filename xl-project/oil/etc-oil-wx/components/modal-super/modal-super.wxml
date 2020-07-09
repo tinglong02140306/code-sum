@@ -1,0 +1,7 @@
+<view class="modal-super-container" wx:if="{{is_show}}" bind:tap="onModalClick" catchtouchmove="preventTouchMove">
+    <view class="modal-super-box" animation="{{animation_opacity}}">
+        <view class="modal-slot-container" catch:tap="onContentClick" animation="{{animation}}">
+            <slot></slot>
+        </view>
+    </view>
+</view>

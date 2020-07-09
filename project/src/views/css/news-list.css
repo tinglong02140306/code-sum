@@ -1,0 +1,187 @@
+.city-news li {
+    /*border-bottom: 1px solid #eaeaea;*/
+    position: relative;
+    border: none!important;
+}
+
+.city-news li a {
+    background: url(./public/wcportal/0.0.1/img/common/border-icon.png) left bottom 1px repeat-x;
+}
+
+.city-news li.visited .recommend-ul-theme {
+    color: #888!important;
+}
+
+
+/*.city-news li:after {
+    content: " ";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #eaeaea;
+    -webkit-transform-origin: 0 0;
+    -ms-transform-origin: 0 0;
+    transform-origin: 0 0;
+    -webkit-transform: scaleY(0.5);
+    -ms-transform: scaleY(0.5);
+    transform: scaleY(0.5);
+}
+
+.city-news li:last-child:after {
+    height: 0;
+}*/
+
+.city-news li:last-child {
+    /*border-bottom: none;*/
+    /*background: none;*/
+}
+
+.city-news li a {
+    position: relative;
+    display: block;
+}
+
+.city-news li a.type1 {
+    padding: 0.64rem 0;
+}
+
+.city-news li a.type0,
+.city-news li a.type3 {
+    padding: 0.36rem 0;
+}
+
+.news-banner img {
+    display: block;
+}
+
+.city-news li a.type1 img {
+    width: 4.70rem;
+    height: 3.52rem;
+}
+
+.ul-content {
+    margin-right: 0.62rem;
+    height: 3.66rem;
+}
+
+.flex {
+    display: box !important;
+    display: flex !important;
+    display: -webkit-box !important;
+    display: -webkit-flex !important;
+    -webkit-box-orient: horizontal !important;
+}
+
+.flex-one {
+    display: block !important;
+    -webkit-box-flex: 1 !important;
+    -webkit-flex: 1 !important;
+    flex: 1 !important;
+}
+
+.two-ell {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.recommend-ul-theme {
+    font-size: 0.76rem;
+    color: #000;
+    line-height: .9rem;
+    /*line-height: .88rem;*/
+}
+
+.news-content {
+    margin-top: .4rem;
+    margin-bottom: .3rem;
+    line-height: .8rem;
+    font-size: 0.62rem;
+    color: #666;
+}
+
+.news-info {
+    position: absolute;
+    bottom: 0.6rem;
+    /*width: 100%;*/
+    font-size: 0.53rem;
+    line-height: 1.02rem;
+    color: #808080;
+}
+
+.city-news li a.type0 .news-info,
+.city-news li a.type3 .news-info {
+    position: relative;
+    bottom: 0;
+    margin-top: 0.14rem;
+}
+
+.city-news li a.type3 .news-info {
+    margin-top: 0.4rem;
+}
+
+.city-news li a.type3 .img-list {
+    margin: 0.3rem 0 0.22rem;
+}
+
+.city-news li a.type3 .img-item {
+    margin-right: 0.44rem;
+}
+
+.city-news li a.type3 .img-list img {
+    width: 100%;
+    height: 3.6rem;
+}
+
+.city-news li a.type3 .img-list .img-item:last-child {
+    margin-right: 0;
+}
+
+.news-info .resource {
+    margin-right: .3rem;
+    max-width: 3.8rem;
+}
+
+.city-news li a.type0 .news-info .resource,
+.city-news li a.type3 .news-info .resource {
+    max-width: 7rem;
+}
+
+.news-info .num {
+    margin-right: .3rem;
+    /*padding-left: 0.91rem;
+    background: url(./public/wcportal/0.0.1/img/home/see-icon.png) left 0.28rem no-repeat;*/
+    background-size: 0.64rem 0.4rem;
+}
+
+.news-info .time {
+    max-width: 3.2rem;
+}
+
+.news-title,
+.news-time {
+    display: block;
+}
+
+.news-title {
+    font-size: 0.67rem;
+    color: #333;
+}
+
+.news-time {
+    font-size: 0.53rem;
+    color: #808080;
+}
+
+.empty-news {
+    font-size: 0.6rem;
+    text-align: center;
+    color: #999;
+    line-height: 4rem;
+}
+
+

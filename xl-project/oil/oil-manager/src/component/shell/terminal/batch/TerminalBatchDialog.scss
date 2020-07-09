@@ -1,0 +1,45 @@
+.terminal-batch-dialog-container{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.terminal-batch-dialog-item-container{
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.terminal-batch-dialog-item{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.terminal-batch-dialog-item-label{
+  width: 85px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  font-weight: 600;
+  color: black;
+  margin: 0 6px 4px 0;
+  span{
+    color: red;
+    margin-right: 2px;
+  }
+}
+
+.terminal-batch-dialog-item-input{
+  width: 200px;
+}
+
+.terminal-batch-dialog-item-hint{
+  height: 22px;
+  color: red;
+  padding-left: 90px;
+  margin: 1px 0;
+}

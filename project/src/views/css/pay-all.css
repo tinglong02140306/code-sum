@@ -1,0 +1,315 @@
+@charset "utf-8";
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    color: #333;
+    background-color: #f1f1f1;
+}
+
+.wrap {
+    width: 100%;
+}
+
+.hide {
+    display: none !important;
+}
+
+.flex {
+    display: box;
+    /* OLD - Android 4.4- */
+    display: flex;
+    /* NEW, Spec - Opera 12.1, Firefox 20+ */
+    display: -webkit-box;
+    /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -webkit-flex;
+    /* NEW - Chrome */
+    -webkit-box-orient: horizontal;
+}
+
+.flex-one {
+    display: block;
+    -webkit-box-flex: 1;
+    /* OLD - iOS 6-, Safari 3.1-6 */
+    -webkit-flex: 1;
+    /* Chrome */
+    /* IE 10 */
+    flex: 1;
+}
+
+.flex-two {
+    display: block;
+    -webkit-box-flex: 2;
+    /* OLD - iOS 6-, Safari 3.1-6 */
+    -webkit-flex: 2;
+    /* Chrome */
+    /* IE 10 */
+    flex: 2;
+}
+
+.flex-three {
+    display: block;
+    -webkit-box-flex: 3;
+    /* OLD - iOS 6-, Safari 3.1-6 */
+    -webkit-flex: 3;
+    /* Chrome */
+    /* IE 10 */
+    flex: 3;
+}
+
+.flex-four {
+    display: block;
+    -webkit-box-flex: 4;
+    /* OLD - iOS 6-, Safari 3.1-6 */
+    -webkit-flex: 4;
+    /* Chrome */
+    /* IE 10 */
+    flex: 4;
+}
+
+.two-ell {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    /* number of lines to show */
+    -webkit-box-orient: vertical;
+}
+
+.three-ell {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    /* number of lines to show */
+    -webkit-box-orient: vertical;
+}
+
+
+/*===============================列表暂无数据样式start==================================  */
+
+.no-data {
+    height: 100%;
+}
+
+.empty {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    bottom: 0;
+    background: #f5f5f5;
+}
+
+.empty-ad {
+    height: 10rem;
+    background: url('./public/wcportal/0.0.1/img/common/search-no.png') no-repeat 50% bottom;
+    background-size: 5.73rem 6.62rem;
+}
+
+.empty p {
+    padding-bottom: 0;
+    line-height: 2.88rem;
+    font-size: 0.577rem;
+    color: #999;
+    text-align: center;
+}
+
+.nothing {
+    color: #A9A9A9 !important;
+}
+
+
+
+
+/*===============================列表暂无数据样式end====================================  */
+
+
+/*===================公用头部start============================*/
+header {
+    /*padding-top: 0.9rem !important;*/
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+}
+.header-item {
+    position: relative;
+    width: 100%;
+    height: 2.1rem;
+    background: #4c72ff;
+    font-size: 0;
+    line-height: 2.1rem;
+    color: #fff;
+    z-index: 10;
+}
+
+.header-item .header-back {
+    display: inline-block;
+    width: 12%;
+    height: 2.1rem;
+    background: url(../img/common/back-icon.png) center center no-repeat;
+    background-size: 0.67rem 0.67rem;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.header-item .header-title {
+    display: inline-block;
+    width: 63%;
+    vertical-align: top;
+    font-size: 0.8rem;
+    text-align: center;
+    text-indent: 13%;
+    line-height: 2.2rem;
+}
+
+/*===================公用头部end============================*/
+
+/*===============请求数据遮罩start======================*/
+#mask {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 100;
+    width: 100%;
+    background: rgba(0,0,0,0.5);
+}
+#mask .please-hold {
+    position: absolute;
+    left: 37%;
+    top: 37%;
+    z-index: 99999;
+    width: 5rem;
+    height: 6rem;
+}
+#mask img {
+    width: 3.71rem;
+    position: absolute;
+    left: 0;
+}
+#mask p {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    line-height: 1.5rem;
+    color: #fff;
+    font-size: .7rem;
+    text-align: center;
+}
+#mask .loading {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url(../img/pay/icon_loading1.png) top center no-repeat;
+    background-size: 3.71rem 4.37rem;
+    -webkit-animation: loading .8s linear infinite alternate;
+            animation: loading .8s linear infinite alternate;
+}
+
+@keyframes loading {
+    0% { 
+        background: url(../img/pay/icon_loading1.png) top center no-repeat;
+        background-size: 3.71rem 4.37rem;
+    }
+    33% {
+        background: url(../img/pay/icon_loading2.png) top center no-repeat;
+        background-size: 3.71rem 4.37rem;
+    }
+    66% { 
+        background: url(../img/pay/icon_loading3.png) top center no-repeat;
+        background-size: 3.71rem 4.37rem;
+    }
+    100% { 
+        background: url(../img/pay/icon_loading1.png) top center no-repeat;
+        background-size: 3.71rem 4.37rem; 
+    }
+}
+@-webkit-keyframes loading {
+     0% { 
+        background: url(../img/pay/icon_loading1.png) top center no-repeat;
+        background-size: 3.71rem 4.37rem;
+    }
+    33% {
+        background: url(../img/pay/icon_loading2.png) top center no-repeat;
+        background-size: 3.71rem 4.37rem;
+    }
+    66% { 
+        background: url(../img/pay/icon_loading3.png) top center no-repeat;
+        background-size: 3.71rem 4.37rem;
+    }
+    100% { 
+        background: url(../img/pay/icon_loading1.png) top center no-repeat;
+        background-size: 3.71rem 4.37rem; 
+    }
+}
+/*===============请求数据遮罩start======================*/
+
+
+.f24 {
+    font-size: 0.54rem;
+}
+
+.f26 {
+    font-size: 0.58rem;
+}
+
+.f28 {
+    font-size: 0.62rem;
+}
+
+.f30 {
+    font-size: 0.66rem;
+}
+
+.f32 {
+    font-size: 0.72rem;
+}
+
+.f36 {
+    font-size: 0.8rem;
+}
+
+.cf {
+    color: #fff;
+}
+
+.c3 {
+    color: #333;
+}
+
+.c6 {
+    color: #666;
+}
+
+.c9 {
+    color: #999;
+}
+
+.c0 {
+    color: #000;
+}
+
+.bf {
+    background: #fff;
+}
+
+/*===============缴费模块定制样式start======================*/
+.pay-btn-content {
+    margin-top: 1rem;
+    text-align: center;
+}
+.pay-btn {
+    display: inline-block;
+    padding: .3rem 1rem;
+    border: 1px solid #efefef;
+    font-size: .6rem;
+}
+/*===============缴费模块定制样式end======================*/

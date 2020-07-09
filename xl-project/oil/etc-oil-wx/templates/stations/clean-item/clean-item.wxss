@@ -1,0 +1,203 @@
+.clean-item-container{
+    width: 710rpx;
+    box-sizing: border-box;
+    padding: 32rpx;
+    margin-bottom: 20rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    overflow: hidden;
+}
+
+/**左侧图片**/
+.clean-item-image{
+    width: 82rpx;
+    height: 82rpx;
+    min-width: 82rpx;
+    border-radius: 8rpx;
+    /*border: 2rpx solid rgba(0, 0, 0, .45);*/
+    /*background-color: #eeeeee;*/
+    margin-right: 24rpx;
+}
+
+.clean-item-box{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+/**详情信息**/
+.clean-item-box-top{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.clean-item-box-info{
+    flex:1;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+/**名称**/
+.clean-item-name{
+    width: 100%;
+    font-size: 32rpx;
+    color: #333333;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap
+}
+
+/**地址**/
+.clean-item-address{
+    width: 100%;
+    color: #999999;
+    font-size: 26rpx;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    padding-right: 30rpx;
+    box-sizing: border-box;
+    margin-top: 24rpx;
+}
+
+/**立即洗车**/
+.clean-item-clean{
+    width: 130rpx;
+    height: 44rpx;
+    font-size: 24rpx;
+    margin-left: 10rpx;
+    background-color: #05BA7D;
+    border-radius: 100rpx;
+    color: white;
+    font-size: 24rpx;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+/**价格状态**/
+.clean-item-box-bottom{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    box-sizing: border-box;
+    align-items: flex-end;
+    overflow: hidden;
+    margin-top: 8rpx;
+}
+
+.clean-item-box-bottom-left{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+
+/**价格**/
+.clean-item-price-box{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.clean-item-price-marker{
+    font-size: 28rpx;
+    color: rgba(0, 0, 0, .85);
+}
+
+.clean-item-price-money{
+    font-weight: bold;
+    font-size: 40rpx;
+    color: rgba(0, 0, 0, .85);
+     position: relative;
+    bottom: -6rpx;
+}
+
+/**状态**/
+.clean-item-status-box{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-left: 8rpx;
+}
+
+.clean-item-status-image{
+    width: 26rpx;
+    height: 26rpx;
+}
+
+.clean-item-status-text{
+    font-size: 24rpx;
+    color: rgba(0, 0, 0, .85);
+    margin-left: 4rpx;
+}
+
+/**导航距离**/
+.clean-item-box-bottom-right{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+/**距离**/
+.clean-item-distance{
+    color: #333333;
+    font-size: 24rpx;
+}
+
+/**导航**/
+.clean-item-navigation{
+    width: 40rpx;
+    height: 40rpx;
+    margin-left: 20rpx;
+}
+
+/*停车*/
+.clean-item-stop-box{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-end;
+    margin-top: 14rpx;
+}
+
+.clean-details-stop-bg{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 82rpx;
+    height: 40rpx;
+    border-radius: 2rpx;
+    background-color: rgba(5, 127, 255, 0.05);
+    border: 2rpx solid rgba(22, 136, 255, 0.25);
+    color: rgba(5, 127, 255, 1);
+    font-size: 24rpx;
+    text-align: left;
+    font-family: PingFangSC-Regular;
+}
+
+.clean-details-stop{
+    height: 40rpx;
+    color: rgba(5, 127, 255, 1);
+    font-size: 26rpx;
+    text-align: left;
+    font-family: PingFang-SC-Medium;
+    margin-left: 10rpx;
+}
+

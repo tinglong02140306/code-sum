@@ -1,0 +1,116 @@
+<!--
+ * @Author: sunmingmao
+ * @Date: 2020-02-20 15:35:47
+ * @LastEditTime: 2020-04-15 10:18:23
+ * @LastEditors: longting
+ * @Description: 一键加油
+ -->
+<!--pages/station/fast-oil/fast-oil.axml-->
+<view class="fast-oil-box">
+    <view class="fast-oil-container" style="padding-bottom: {{isShowPrice?500:200}}rpx">
+        <!--油站信息-->
+        <view class="fast-oil-info-conatainer">
+            <view class="fast-oil-info-background"></view>
+            <view class="fast-oil-info-box">
+                <view class="fast-oil-info-left">
+                    <text class="fast-oil-info-name">{{oil_info.name}}</text>
+                    <view class="fast-oil-info-address">
+                        <image class="fast-oil-info-address-logo" src="{{icon_nav}}"></image>
+                        <text class="fast-oil-info-address-text">{{oil_info.address}}</text>
+                    </view>
+                    <view class="fast-oil-info-price">
+                        <view class="fast-oil-info-price-now" a:if="{{current_price}}">
+                            <text class="fast-oil-info-price-now-text">￥</text>
+                            <text class="fast-oil-info-price-now-text-money">{{current_price}}</text>
+                        </view>
+                        <!-- <text class="fast-oil-info-price-pre">油站价:￥6.45</text> -->
+                    </view>
+                </view>
+                <image class="fast-oil-info-logo" src="{{oil_info.brand_icon_url}}"></image>
+            </view>
+        </view>
+        <!--油号-->
+        <view class="fast-oil-num-conatiner">
+            <text class="fast-oil-num-text">油号</text>
+            <view class="fast-oil-single-box" a:if="{{oil_nums.length}}">
+                <block a:for="{{oil_nums}}" a:key="oilnums">
+                    <view class="fast-oil-single-item" onTap="onChangeOilNum" data-item="{{index}}">
+                        <text class="{{checkOilNum==index?'single-checked':'single-unchecked'}}">{{oil_nums[index].oil_no}}</text>
+                    </view>
+                </block>
+            </view>
+            <text a:if="{{!oil_nums.length}}" class="fast-oil-num-text-empty">暂无可用油号</text>
+        </view>
+        <!--油枪-->
+        <view class="fast-oil-num-conatiner">
+            <text class="fast-oil-num-text">油枪</text>
+            <view class="fast-oil-single-box" a:if="{{oil_guns.length}}">
+                <block a:for="{{oil_guns}}" a:key="oilguns">
+                    <view a:if="{{item!=-1}}" class="fast-oil-single-item" onTap="onChangeOilGun" data-item="{{index}}">
+                        <view class="{{checkOilGun==index?'single-checked':'single-unchecked'}}">{{index+1}}</view>
+                    </view>
+                    <!--其他-->
+                    <picker a:if="{{item==-1}}" value="{{picker_index}}" range="{{picker_guns}}" onChange="onPickerChange">
+                        <view class="fast-oil-single-item" style="width: 179rpx;">
+                            <view class="{{is_picker?'single-checked':'single-unchecked'}}">{{picker_value}}</view>
+                        </view>
+                    </picker>
+                </block>
+            </view>
+        </view>
+        <!--交易提示-->
+        <view class="fast-oil-hint-conatiner" id="order">
+            <view class="fast-oil-hint-title">
+                <image class="fast-oil-hint-logo" src="{{icon_hint}}"></image>
+                <text class="fast-oil-hint-text">温馨提示</text>
+            </view>
+            <text class="fast-oil-hint-content">您可在现场与油站工作人员确认后再完成支付</text>
+        </view>
+        <!--悬浮部分-->
+        <!-- <view class="fast-oil-submit-input-money-fiex" id="input" style="display: {{showBottom?'none':'flex'}};">
+            ¥
+            <input class="fast-oil-submit-input" placeholder="请输入加油金额" placeholder-style="font-size:28rpx" type="digit"
+                value="{{inputMoney}}" onInput="onInputMoney" />
+        </view> -->
+        <!--提交订单-->
+        <view class="fast-oil-submit-conatiner">
+            <view class="fast-oil-submit-input-money">
+                ¥
+                <input class="fast-oil-submit-input" placeholder="请输入加油金额" placeholder-style="font-size:28rpx"
+                    type="digit" value="{{inputMoney}}" onInput="onInputMoney" onBlur="onInputBlur" />
+            </view>
+            <view class="fast-oil-submit-select-money" a:if="{{isShowPrice}}">
+                <view class="fast-oil-single-money-box">
+                    <block a:for="{{moneys}}" a:key="list" a:index="index">
+                        <view class="fast-oil-single-money-item {{checkMoney==moneys[index]?'single-checked':'single-money-unchecked'}}" onTap="onChangeMoney" data-item="{{item}}">
+                            <text class="fast-oil-single-money-mark">¥</text>
+                            {{item}}
+                        </view>
+                    </block>
+                </view>
+            </view>
+            <view class="fast-oil-preferential-container" a:if="{{isShowPrice && discount_amount&&discount_amount!=0}}">
+                <block a:for="{{1}}" a:key="preferential">
+                    <view class="fast-oil-preferential-item">
+                        <view class="fast-oil-preferential-item-content">
+                            <image class="fast-oil-preferential-item-logo" src="{{icon_perfer}}"></image>
+                            <text class="fast-oil-preferential-item-name">ETC会员特权优惠</text>
+                        </view>
+                        <text class="fast-oil-preferential-item-money">-￥{{discount_amount}}</text>
+                    </view>
+                </block>
+            </view>
+            <view class="{{isCanSubmit?'theme-button':'disable-button'}} fast-oil-submit-btn" style="margin-bottom: {{isIphoneX?64:40}}rpx;" onTap="onSubmitClick" a:if="{{isShowPrice}}">提交订单</view>
+        </view>
+    </view>
+    <modal-super show="{{isShowFar}}" ref="modalSuperRef">
+        <view class="fast-oil-far-container">
+            <text class="fast-oil-far-name">{{oil_info.name}}</text>
+            <text class="fast-oil-far-hint">当前位置距离油站过远，请确认是否支付</text>
+            <view class="fast-oil-far-btns">
+                <text class="fast-oil-far-go" onTap="onContinuePay">继续支付</text>
+                <text class="theme-button fast-oil-far-return" onTap="onReSelect">重选油站</text>
+            </view>
+        </view>
+    </modal-super>
+</view>

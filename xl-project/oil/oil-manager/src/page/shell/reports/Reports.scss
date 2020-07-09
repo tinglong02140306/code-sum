@@ -1,0 +1,69 @@
+.reports-container{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 10px;
+}
+.reports-top-container{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  background-color: white;
+  padding:10px 0;
+  margin-bottom: 10px;
+}
+.reports-form{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.reports-form-item {
+  color: black;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: 14px;
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.reports-table{
+  width: 100%;
+  background-color: white;
+  box-sizing: border-box;
+  table{
+    thead{
+      th{
+        font-weight: 600;
+        letter-spacing: 1px;
+      }
+    }
+  }
+}
+
+.reports-header-container{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.reports-form-item{
+  .ant-select{
+    width: 150px;
+  }
+}
+
+.reports-button{
+  margin: 0 10px;
+  font-size: 12px;
+}

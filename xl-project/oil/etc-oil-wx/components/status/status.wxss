@@ -1,0 +1,40 @@
+/* components/status/status.wxss */
+.status-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.status-item{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 180rpx;
+}
+
+.status-image{
+    width: 310rpx;
+    height: 310rpx;
+}
+
+.status-text{
+    font-size: 28rpx;
+    color: #999999;
+    margin-top: 32rpx;
+}
+
+.status-item-button{
+    background-color: #05BA7D;
+    border-radius: 100rpx;
+    color: white;
+    font-size: 28rpx;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 8rpx 32rpx;
+    margin-top: 32rpx;
+}

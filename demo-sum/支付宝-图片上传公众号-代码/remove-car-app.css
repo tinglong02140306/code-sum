@@ -1,0 +1,650 @@
+/*========一键挪车======== start */
+* {
+    box-sizing: border-box;
+}
+::-webkit-scrollbar {  
+    width: 0px;
+} 
+input {
+   border: none;
+   outline: none;
+   padding: 0;
+   margin: 0;
+}
+.nearby-address-wrap,
+.search-address-wrap {
+    width: 100%;
+}
+.bind-car {
+    display: inline-block;
+    width: 22%;
+    height: 2.1rem;
+    font-size: 0.70rem;
+    color: #fff;
+    vertical-align: top;
+    text-align: right;
+}
+.content,
+.nearby-address,
+.search-address {
+    position: absolute;
+    top: 0 ;
+    bottom: 0;
+    width: 100%;
+    overflow: scroll;
+    -webkit-overflow-scrolling:touch;
+}
+#carForm {
+    margin-top: 0.44rem;
+    padding: 0rem 4.2%;
+}
+.car-num-wrap ,
+.car-color-wrap {
+    height: 1.94rem;
+    background: url(../images/remove-car/border-bg.png) left bottom 1px repeat-x;
+}
+.car-num-wrap .in-label, 
+.car-color-wrap .in-label,
+.remove-car-reason .in-label,
+.picture-tip .in-label {
+    width: 25.3%;
+    height: 1.94rem;
+    font-size: 0.76rem;
+    color: #222;
+    text-align: left;
+    line-height: 1.94rem;
+}
+.picture-tip {
+    padding: 0 4.2% 0.3rem;
+    height: 1.94rem;
+}
+.separate-warp {
+    background-color: #f5f5f5;
+    height: 0.44rem;
+}
+.car-num-wrap .in-value, 
+.car-color-wrap .in-value,
+.picture-tip .in-value {
+    width: 74%;
+    height: 1.94rem;
+    font-size: 0.76rem;
+    color: #646464;
+}
+.in-value .tip {
+    display: inline-block;
+    font-size: 0.66rem;
+    color: #999;
+    line-height: 1.94rem;
+}
+.wan-span {
+    margin: 0.52rem 0rem;
+    width: 1rem;
+    border: 1px solid #646464;
+    border-radius: 0.2rem;
+    font-size: 0.66rem;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 0.88rem;
+}
+.car-num {
+    margin: 0.58rem 0rem 0rem 0.38rem;
+    width: 85%;
+    font-size: 0.76rem;
+    color: #646464;
+    line-height: 0.8rem;
+    text-transform: uppercase;
+    -webkit-touch-callout:text;
+    -webkit-user-select:text;
+    -khtml-user-select:text;
+    -moz-user-select:text;
+    -ms-user-select:text;
+    user-select:text; 
+}
+.input-label {
+    position: absolute;
+    top: 0rem;
+    left: 1.6rem;
+    font-size: 0.76rem;
+    color: #c8c8c8;
+    line-height: 1.94rem;
+}
+.car-color {
+    display: inline-block;
+    width: 100%;
+    padding-right: 1.4rem;
+    background: url('../images/remove-car/car-color.png') no-repeat right center; 
+    background-size: 0.34rem 0.6rem;
+    box-sizing: border-box;
+    font-size: 0.76rem;
+    color: #646464;
+    line-height: 1.94rem;
+}
+.address-bg {
+    background: url('../images/remove-car/car-color.png') no-repeat right center; 
+    background-size: 0.34rem 0.6rem;
+}
+.address {
+    background: none;
+}
+.item-reason {
+    display: inline-block;
+    margin: 0rem 0.44rem 0.44rem 0rem;
+    padding: 0rem 0.66rem;
+    border: 1px solid #c5c5c5;
+    border-radius: 4px;
+    font-size: 0.62rem;
+    color: #646464;
+    line-height: 1.22rem;
+}
+.second-reason {
+    margin-right: 0rem;
+}
+.item-reason-select {
+    border: 1px solid #4c72ff;
+    background-color: #e4eaff;
+    color: #4c72ff;
+}
+.add-picture-wrap {
+    padding-bottom: 0.72rem;
+}
+.attachment-div {
+    padding: 0rem 4.2%;
+}
+.document {
+    float: left;
+    position: relative;
+    margin-right: 0.25rem;
+}
+.document img {
+    position: relative;
+    z-index: 0;
+    width: 3.04rem;
+    height: 2.88rem;
+}
+.delete-pic {
+    display: inline-block;
+    position: absolute;
+    top: -.25rem;
+    right: -.25rem;
+    z-index: 1;
+    width: 0.7rem;
+    height: 0.7rem;
+    background: url(../images/remove-car/delete.png) no-repeat;
+    background-size: 100% 100%;
+}
+.add-photo {
+    display: inline-block;
+    margin-right: .23333rem;
+    width: 3.04rem;
+    height: 2.88rem;
+    background: url(../images/remove-car/add-picture.png) no-repeat;
+    background-size: 100% 100%;
+}
+.save-apply {
+    margin: 0.62rem auto 0.66rem;
+    width: 91.8%;
+    height: 1.78rem;
+    background: #c8c8c8;
+    border-radius: 4px;
+    font-size: 0.74rem;
+    color: #fff;
+    line-height: 1.78rem;
+    text-align: center;
+
+}
+.may-save-apply {
+    background: #4c72ff;
+    border-radius: 4px;
+
+}
+.bottom-tip {
+    margin: 0rem auto;
+    padding-bottom: 0.48rem;
+    position: static;
+    bottom: 0.68rem;
+    width: 100%;
+    font-size: 0;
+}
+.bottom-tip span {
+    display: inline-block;
+    width: 50%;
+    font-size: 0.62rem;
+    color: #646464;
+    box-sizing: border-box;
+}
+.bottom-tip .remove-record {
+    padding-right: 0.86rem;
+   /*  background: url(../images/remove-car/separate.png) no-repeat right center;
+   background-size: 2px 0.8rem; */
+    border-right: 1px solid #d3d3d3;
+    text-align: right;
+}
+.bottom-tip .remove-instructe {
+    padding-left: 0.86rem;
+    text-align: left;
+}
+.attachment-div .span3 {
+    float: left;
+    padding: 0rem;
+    margin: 0rem 0.6rem 0.2rem 0rem;
+    width: 3.16rem;
+    height: 3rem;
+}
+.attachment-div .upload-add {
+    margin: 0 auto;
+    width: 3.1rem;
+    height: 2.9rem;
+    line-height: 2.88rem;
+    text-align: center;
+}
+.attachment-div #upload-plus,
+.attachment-div .upload-plus-a {
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0;
+    z-index: 2;
+    width: 3.04rem;
+    height: 2.88rem;
+}
+.icon-plus {
+    display: inline-block;
+    position: relative;
+    width: 2.9rem;
+    height: 2.88rem;
+    background: url(../images/remove-car/add-picture.png) no-repeat;
+    background-size: 100% 100%;
+    z-index: 1;
+}
+/* =====一键挪车======== end */
+
+/* =====车牌颜色======== start */
+.mask {
+    position: fixed;
+    z-index: 998;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, .4);
+    transition: all 0.4s;
+    touch-action: none;
+}
+.license-list-item {
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 11rem;
+    padding: 0 4.2%;
+    height: 11rem;
+    background: #fff;
+    z-index: 999;
+    transform: translate3d(0,100%,0);
+    -webkit-transform: translate3d(0,100%,0);
+}
+.license-list-item .license-title {
+    width: 100%;
+    height: 2.2rem;
+    background: url(../images/common/border-icon.png) left bottom 1px repeat-x;
+    font-size: 0.76rem;
+    color: #222;
+    line-height: 2.2rem;
+    text-align: center;
+}
+.license-content div {
+    width: 100%;
+    height: 2.2rem;
+    background: url(../images/common/border-icon.png) left bottom 1px repeat-x;
+    font-size: 0.76rem;
+    color: #222;
+    line-height: 2.2rem;
+    text-align: left;
+}
+.license-list-item p:last-child{
+    background: none;
+}
+.license-item i.color-select {
+    padding: 0.8rem 0rem;
+    display: inline-block;
+    width: 0.8rem;
+    height: 2.2rem;
+    background: url(../images/remove-car/color-select.png) no-repeat right center;
+    background-size:  0.8rem 0.58rem;
+}
+.license-item span {
+    display: inline-block;
+    padding-right: 1.50rem;
+    width: 92%;
+    box-sizing: border-box;
+}
+/* =====车牌颜色======== end */
+
+/* =======挪车说明====== start */
+
+.remove-car-description {
+    padding: 0 5.8%;
+}
+.description-wrap {
+    padding: 0rem 0.66rem;
+    width: calc(100% - 11.6%);
+    height: 12.32rem;
+    border-radius: 4px;
+    font-size: 0.70rem;
+    color: #646464;
+    background: #fff
+}
+.description-wrap .description-title {
+    padding: 0.6rem 0rem;
+    font-size: 0.84rem;
+    color: #222;
+}
+.description-wrap .description-item {
+    padding: 0.3rem  0rem 0rem 0.6rem;
+    background: url(../images/remove-car/description-icon.png) no-repeat left 0.6rem;
+    background-size: 0.22rem 0.22rem;
+    line-height: 0.9rem;
+}
+.description-wrap .description-item:first-child {
+    background: url(../images/remove-car/description-icon.png) no-repeat left 0.4rem;
+    background-size: 0.22rem 0.22rem;
+    padding-top: 0rem;
+}
+.description-btn {
+    margin: 1rem auto;
+    height: 1.78rem;
+    width: 5.6rem;
+    background: #4c72ff;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    color: #fff;
+    text-align: center;
+    line-height: 1.78rem;
+
+}
+/* =======挪车说明====== end */
+/* =======确认挪车申请====== start */
+.sure-tip-wrap  .sure-tip {
+    height: 7.14rem;
+}
+.sure-tip,
+.delete-picture {
+    margin-left: 5.8%;
+    padding: 0rem 1.08rem;
+    height: 7.14rem;
+    width: calc(100% - 11.6%);
+    background: #fff;
+    border-radius: 4px;
+    font-size: 0.70rem;
+    color: #222;
+}
+.delete-picture {
+    height: 7.14rem;
+}
+
+.sure-tip p,
+.delete-picture p {
+    padding: 1.77rem 0;
+    text-align: center;
+}
+.sure-btn,
+.delete-btn {
+    padding-bottom: 0.90rem;
+    font-size: 0;
+}
+.sure-btn span,
+.delete-btn span {
+    padding: 0rem 1.08rem;
+    display: inline-block;
+    height: 1.78rem;
+    width: 5.6rem;
+    border-radius: 4px;
+    font-size: 0.76rem;
+    color: #fff;
+    text-align: center;
+    line-height: 1.78rem;
+}
+.sure-btn span:first-child,
+.delete-btn span:first-child {
+    border: 1px solid #4c72ff;
+    color: #4c72ff;
+}
+/* =======确认挪车申请====== end */
+/* =======取消挪车====== start */
+
+.remove-cancle-wrap .sure-tip {
+  /*   margin-left: 4.2%; */
+    height: 7.2rem;
+}
+/* =======取消挪车====== end */
+/* =======附近位置====== start */
+.search-btn {
+    display: inline-block;
+    width: 20.8%;
+    height: 2.1rem;
+    background: url(../images/remove-car/search-btn.png) no-repeat right center;
+    background-size: 0.68rem 0.68rem;
+    vertical-align: top;
+}
+.nearby-address .item-list,
+.search-address .item-list {
+    padding: 0.6rem 4.2%;
+    background: url(../images/common/border-icon.png) left bottom 1px repeat-x;
+}
+.nearby-address .item-list:last-child,
+.search-address .item-list:last-child {
+   background: none;
+}
+.nearby-address .address-title,
+.search-address .address-title {
+    padding-left: 1rem;
+    background: url('../images/remove-car/adress-icon.png') no-repeat left top .1rem;
+    background-size: 0.66rem 0.76rem;
+    font-size: 0.76rem;
+    color: #222;
+    line-height: 1rem;
+}
+.nearby-address .address-details,
+.search-address .address-details {
+    padding-left: 1rem;
+    font-size: 0.57rem;
+    color: #969696;
+}
+/* =======附近位置====== end */
+/* =======搜索位置====== start */
+.search-address-wrap .header-item div {
+    display: inline-block;
+    margin: 0.33rem 0rem;
+}
+.search-address-wrap .header-item {
+    line-height: 2.1rem;
+}
+.search-address-wrap .header-item .search-wrap {
+    position: relative;
+    margin-left: 4.2%;
+    width: 78%;
+    height: 1.44rem;
+    background-color: #fff;
+    border-radius: 1.44rem;
+}
+.search-address-wrap .header-item .cancle-search-btn {
+    margin-right: 4.2%;
+    width: 13%;
+    height: 1.44rem;
+    font-size: 0.71rem;
+    color: #fff;
+    line-height: 1.44rem;
+    text-align: right;
+    vertical-align: top;
+}
+.keywords {
+    display: block;
+   /*  padding: 0.41rem 0rem; */
+    margin: 0.41rem 0.4rem;
+    width: 82%;
+    /* height: 100%; */
+    background: url('../images/remove-car/keyword-search-btn.png') no-repeat left top 0.04rem;
+    background-size: 0.56rem 0.56rem;
+    font-size: 0.62rem;
+    color: #222222;
+    text-indent: 0.8rem;
+    line-height: 0.64rem;
+    -webkit-touch-callout:text;
+    -webkit-user-select:text;
+    -khtml-user-select:text;
+    -moz-user-select:text;
+    -ms-user-select:text;
+    user-select:text; 
+
+}
+.clear-keyword {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 88%;
+    width: 10%;
+    height: 100%;
+    background: url('../images/remove-car/clear-keyword-icon.png') no-repeat center center;
+    background-size: 0.66rem 0.62rem; 
+}
+.hide {
+    display: none;
+}
+.icon {
+    margin: 0;
+    margin-right: 0.2rem;
+    width: 0.74rem;
+    height: 0.74rem;
+    font-size: .4rem;
+    background: url('../images/remove-car/deletePic-icon.png') no-repeat center center;
+    background-size: 100%;
+    line-height: 0.54rem;
+    text-align: center;
+}
+
+.car-num-wrap .in-value {
+    position: relative;
+}
+.search-wrap {
+    position: relative;
+}
+.serach-label {
+    position: absolute;
+    top: 0rem;
+    left: 1.4rem;
+    font-size: 0.62rem;
+    color: #c8c8c8;
+    line-height: .62rem;
+    padding: 0.46rem 0rem 0.22rem 0rem;
+
+}
+/* =======搜索位置====== end */
+.notice-type {
+    margin-top: 0.44rem; 
+    padding: 0rem 4.2%;
+    height: 2.18rem;
+    background: #fff;
+    line-height: 2.18rem;
+}
+.notice-label {
+    width: 25.3%;
+    height: 2.18rem;
+    font-size: 0.76rem;
+    color: #222;
+    line-height: 2.18rem;
+}
+.sms-wrap,
+.tel-wrap {
+    width: 4.2rem;
+    height: 2.18rem;
+}
+.sms-wrap {
+    background: url(../images/remove-car/sms-icon.png) no-repeat 0.8rem center;
+    background-size: 0.58rem 0.50rem;
+}
+.sms-wrap-select {
+    background: url(../images/remove-car/sms-icon-select.png) no-repeat 0.8rem center;
+    background-size: 0.58rem 0.50rem;
+}
+.notice-type .sms {
+    margin: 0.46rem 0rem;
+    padding: 0rem 1rem 0rem 1.7rem;
+    height: 1.22rem;
+    background: none;
+    border: 1px solid #c8c8c8;
+    border-radius: 4px;
+    font-size: 0.62rem;
+    color: #c8c8c8;
+    line-height: 1.22rem;
+}
+.notice-type .sms-select {
+    background: url(../images/remove-car/sms-select.png) no-repeat 3.38rem 0.46rem,
+                url(../images/remove-car/sms-bg.png) repeat;
+    background-size: 0.7rem 0.84rem;
+    border: 1px solid #d2dcff;
+    color: #4c72ff;
+    opacity: 0.6;
+}
+
+.tel-wrap {
+    margin-left: 0.44rem;
+    background: url(../images/remove-car/tel-icon.png) no-repeat 0.42rem center;
+    background-size: 0.50rem 0.6rem;
+}
+.tel-wrap-select {
+    background: url(../images/remove-car/tel-select.png) no-repeat 0.42rem center;
+    background-size: 0.50rem 0.6rem;
+}
+.notice-type .tel {
+    margin: 0.46rem 0rem;
+    padding: 0rem 0.42rem 0rem 1.16rem;
+    height: 1.22rem;
+    background: none;
+    border: 1px solid #c8c8c8;
+    border-radius: 4px;
+    font-size: 0.62rem;
+    color: #c8c8c8;
+    line-height: 1.22rem;
+}
+.notice-type .tel-select {
+    background: url(../images/remove-car/sms-select.png) no-repeat 3.52rem 0.45rem;
+    background-size: 0.7rem 0.84rem;
+    border: 1px solid #4c72ff;
+    border-radius: 4px;
+    color: #4c72ff;
+}
+.notice-value {
+    width: 74%;
+}
+.car-info {
+    color: red;
+}
+.reason {
+    font-size: 0rem;
+}
+.wrap .relative-driver-wrap .sure-tip {
+    height: 7.16rem;
+}
+.relative-driver-wrap .sure-tip .driver-btn {
+    margin: 0rem auto 0.9rem;
+    height: 1.78rem;
+    width: 5.6rem;
+    background: #4c72ff;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    color: #fff;
+    text-align: center;
+    line-height: 1.78rem;
+}
+.index-warp header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+body {
+    overflow: hidden;
+}
+.wrap {
+    height: 100%;
+}

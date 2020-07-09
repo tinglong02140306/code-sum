@@ -1,0 +1,124 @@
+.f20 {
+	font-size: 0.44rem;
+}
+.f22 {
+	font-size: 0.49rem;
+}
+.cd4 {
+	color: #d4d4d4;
+}
+.c8e {
+	color: #8e8e8e;
+}
+.top-7 {
+	top: 3rem !important;
+}
+.wrap {
+	height: 100%;
+}
+.head-top {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: .9rem;
+	width: 100%;
+	background: #4c72ff;
+}
+.wrap header {
+	top: 0.9rem !important;
+	padding-top: 0 !important;
+	height: auto;
+	background: #fff;
+}
+.header-items {
+	padding: .33rem 4.2% .33rem 0;
+	height: 1.44rem;
+	width: 95.8%;
+	font-size: 0;
+	background: #fff; 
+}
+/* 头部返回按钮 */
+.header-backs {
+	display: inline-block;
+	padding: 0 3%;
+	width: .36rem;
+	height: 100%;
+	background: url('../img/police-headline/icon-back.png') no-repeat center;
+    background-size: .36rem .66rem;
+}
+.head-title {
+	display: inline-block;
+	margin: 0 .67rem;
+	width: 3.78rem;
+	height: 100%;
+	background: url('../img/police-headline/icon-title.png') no-repeat left center;
+    background-size: 3.78rem .89rem;
+}
+/*搜索框部分*/
+.search-wrap {
+	display: inline-block;
+	width: calc(94% - 5.48rem);
+	height: 100%;
+	background: #f6f6f6;
+	border-radius: 0.16rem;
+}
+.icon-search {
+	display: inline-block;
+	margin: 0 .67rem 0 .33rem;
+	width: 0.69rem;
+	height: 100%;
+	background: url('../img/police-headline/icon-search.png') no-repeat left center;
+    background-size: 0.69rem;
+}
+.notice {
+	display: inline-block;
+	width: calc(100% - 1.69rem);
+	line-height: 1.44rem;
+	vertical-align: top;
+}
+.content {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+/*=====上拉刷新下拉加载背景小图标样式修改===== start*/
+.wrap .mescroll-downwarp .downwarp-progress {
+    width: 1rem;
+    height: 1rem;
+    background: url(./public/wcportal/0.0.1/img/common/news.png) no-repeat;
+    background-size: 100%;
+    border-radius: inherit;
+    border: none;
+    border-bottom-color: inherit;
+    opacity: 0;
+}
+
+.wrap .mescroll-downwarp .downwarp-progress.mescroll-rotate {
+    background: url(./public/wcportal/0.0.1/img/common/news-load.gif) no-repeat;
+    background-size: 100%;
+    -webkit-animation: inherit;
+    animation: inherit;
+}
+.wrap .mescroll-downwarp .downwarp-tip {
+    line-height: 1rem;
+}
+/*=====上拉刷新下拉加载背景小图标样式修改===== end*/
+.mescroll-fade-in {
+	display: none;
+}
+.empty {
+	background: #fff;
+}
+/*警微热点内容样式*/
+.content-text {
+    font-size: .72rem;
+    line-height: .72rem;
+}
+.mui-preview-btn,
+.save-logo {
+	cursor:pointer;
+}
+.article-sec img {
+	height: .72rem;
+}
+

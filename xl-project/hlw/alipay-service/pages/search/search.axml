@@ -1,0 +1,49 @@
+<view style="background-color:rgb(240,243,248)">
+  <!--  搜索-->
+  <view class="search-wrapper">
+    <view class="search-box">
+      <view class="search-input">
+        <input value="{{inputValue}}" onBlur="onBlur" onFocus="onFocus" onInput="bindKeyInput" onConfirm="search" placeholder="请输入问题" placeholder-style="color:rgb(173,184,203);" style="color:#000" focus="{{focused}}"/>
+      </view>
+      <image src="/images/search.png" class="search-icon" bindtap="search"/>
+    </view>
+  </view>
+  <!--  tips-->
+  <view class="search-tips" a:if="{{(focused || !hide) && (hotList.length || historyList.length )}}">
+    <block a:if="{{hotList.length}}">
+      <view class="search-card">
+        <view class="search-card-title">热门搜索</view>
+        <view class="search-card-body">
+          <block a:for="{{hotList}}">
+            <view class="search-item" a:key="{{index}}" catchTap="quickSearch" data-idx="{{item}}">{{item}}</view>
+          </block>
+        </view>
+      </view>
+    </block>
+    <block a:if="{{historyList.length}}">
+      <view class="search-card">
+        <view class="search-card-title">搜索历史</view>
+        <view class="search-card-body">
+          <block a:for="{{historyList}}">
+            <view class="search-item" a:key="{{index}}" catchTap="quickSearch" data-idx="{{item}}">{{item}}</view>
+          </block>
+        </view>
+      </view>
+    </block>
+  </view>
+  <!--  search-result-->
+  <block a:else>
+    <block a:if="{{result.length}}">
+      <view class="search-result-wrapper">
+        <block a:for="{{result}}">
+          <list-item title="{{item['question']}}" a:key="{{index}}" onTap="select" data-idx="{{index}}"/>
+        </block>
+      </view>
+    </block>
+    <block a:else>
+      <view class="search-result-no-data">
+        暂无数据
+      </view>
+    </block>
+  </block>
+</view>

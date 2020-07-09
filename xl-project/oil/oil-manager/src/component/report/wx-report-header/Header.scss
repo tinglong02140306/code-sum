@@ -1,0 +1,42 @@
+.wx-recharge-header{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.wx-recharge-header-text{
+    font-size: 15px;
+    margin: 0;
+    // font-weight: 600;
+    color: rgba(0, 0, 0, 0.85);
+    letter-spacing: 1px;
+}
+
+.wx-recharge-header-date{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+
+    .ant-calendar-picker{
+       
+        position: relative;
+        top: 2px;
+        left: 0;
+        .ant-input{
+            border-color: transparent;
+        }
+        i{
+            display: none;
+        }
+
+        svg{
+            display: none;
+        }
+    }
+    
+}

@@ -1,0 +1,260 @@
+/*
+* @Author: gaoxiong
+* @Date: 2018-10-23
+* 事项情形配置模块
+*/
+<template>
+  <div id="matterSituationConfigureInfos" class="pl20 pr20 pt15" style="background: #ffffff">
+    <!-- 头部标题部分 -->
+    <div class="title-top" v-if="showTop">
+      <p class="title-left">
+        <span class="t-div mr5"></span>
+        <span style="margin-top: 0px" :title="matterTitles" class="ell title-ell">{{ matterTitles }}</span>
+      </p>
+      <p class="btn-groups inline-block ml30">
+        <Button size="small" class="cursor-p w80" @click="$router.back(-1)">
+          <i class="iconfont icon-back"></i>
+          <span>返回</span>
+        </Button>
+      </p>
+    </div>
+
+    <div class="radio-wrap">
+      <div class="radio-group switch-navigate mt10" v-model="tabView">
+        <span class="switch-default font-min" v-for="(tab ,index) in tabs" :class="{cur:iscur==index,  'br': index == tabs.length - 1, 'ml5': index != 0,'ml20': index == 0}" @click="iscur=index,tabChange('select' + (index + 1))">{{tab.name}}</span>
+        <div v-if="iscur == 0" class="btn-wrap">
+          <span class="btn-sure font-min" @click="addEvent('')">新增</span>
+          <span class="btn-del font-min" @click="deleteEvt('')">删除</span>
+        </div>
+      </div>
+      <div style="margin:10px 0;"></div>
+      <keep-alive>
+        <component v-bind:is="tabView" ref="children"></component>
+      </keep-alive>
+    </div>
+  </div>
+</template>
+<script>
+// 情形分类及答案配置
+import classConfigure from '@/pages/issuesSetting/configuration/classifiyAndAnswerConfigure.vue';
+// 分类与材料关系配置
+import matterConfigure from '@/pages/issuesSetting/configuration/classifiyAndRelationshipConfigure.vue';
+// 情形配置
+import caseConfiguration from '@/pages/issuesSetting/configuration/caseConfiguration.vue';
+export default {
+  props: {
+    showTop: {
+      type: Boolean,
+      default: true
+    },
+    oneThingArr: {
+      type: Object,
+      default: function() {
+        return {};
+      }
+    }
+  },
+  components: {
+    select1: classConfigure,
+    select2: matterConfigure,
+    select3: caseConfiguration,
+  },
+  computed: {
+    eventCode: {
+      get: function() {
+        if(!this.oneThingArr.eventCode) {
+          return this.$route.query.eventCode;
+        }
+      }
+    },
+    version: {
+      get: function() {
+        if(!this.oneThingArr.version) {
+          return this.$route.query.version;
+        }
+      }
+    },
+    titles: {
+      get: function() {
+        if(!this.oneThingArr.titles) {
+          return this.$route.query.titles;
+        }
+      }
+    },
+    id: {
+      get: function() {
+        if(!this.oneThingArr.id) {
+          return this.$route.query.id;
+        }
+      }
+    },
+  },
+  data() {
+    return {
+      matterCode: this.$route.query.matteCode,
+      matterVersion: this.$route.query.matteVersion,
+      matterTitles: this.$route.query.name,
+      matterId: this.$route.query.id,
+      tabView: 'select1',
+      tabs: [{
+        name: "情形分类及答案配置"
+      }, {
+        name: "分类与材料关系配置"
+      }, {
+        name: "事项情形配置"
+      }],
+      iscur: 0
+    }
+  },
+  methods: {
+    tabChange: function (tab) {
+      this.tabView = tab;
+      for (let i = 0; i < this.$children.length; i++) {
+        if (this.$children[i].init) {
+          this.$children[i].init();
+        }
+      }
+    },
+    /*
+         * 配置项新增
+         * curIndex: 0: 受理条件配置 1：材料配置 2： 指南配置
+         * type: 1: 受理条件配置 2：材料配置 3： 指南配置
+         */
+    addEvent(id) {
+      let that = this,
+        index = that.iscur;
+      if (index == '0') {
+        that.$refs.children.addEvt(id);
+      }
+    },
+    /*
+     * 配置项删除
+     * type: 1: 受理条件配置 3： 指南配置
+     */
+    deleteEvt(id, type) {
+      let that = this,
+        index = that.iscur;
+      if (index == '0') {
+        that.$refs.children.delEvt(id);
+      }
+    }
+  }
+}
+
+</script>
+<style lang="less" rel="stylesheet/less">
+@import "../../../assets/styles/color.less";
+#matterSituationConfigureInfos {
+    // padding: 20px;
+    overflow-y: auto;
+    height: 100%;
+
+    .title-top {
+        height: 42px;
+        border-bottom: 1px dashed #d8d8d8;
+        // margin-bottom: 10px;
+        .title-left {
+            display: inline-block;
+            position: relative;
+            height: 25px;
+            vertical-align: middle;
+            .title-ell {
+                display: inline-block;
+                max-width: 850px;
+            }
+            .t-div {
+                display: inline-block;
+                width: 7px;
+                height: 100%;
+                background-color: #078fea;
+                vertical-align: sub;
+            }
+            span:last-child {
+                vertical-align: top;
+                display: inline-block;
+                height: 100%;
+                margin-top: 4%;
+                color: #333;
+                font-size: 14px;
+                font-weight: 1000;
+            }
+        }
+    }
+    .radio-wrap{
+      padding: 20px;
+      padding-top: 0;
+    }
+    .radio-group {
+        font-size: 0;
+        height: 26px;
+        line-height: 26px;
+        .btn-wrap {
+            float: right;
+            // width: 500px;
+            cursor: pointer;
+            text-align: right;
+            line-height: 1;
+            span {
+                display: inline-block;
+                width: 60px;
+                height: 30px;
+                font-size: 14px;
+                color: #fff;
+                border-radius: 3px;
+                line-height: 30px;
+                text-align: center;
+            }
+            .btn-sure {
+                margin-right: 10px;
+                // background: #1255b3;
+                background: @baseColor;
+            }
+            .btn-del {
+                background: #ed3f14;
+            }
+        }
+    }
+
+    .radio-group > span {
+        cursor: pointer;
+        display: inline-block;
+        // font-size: 16px;
+        font-size: 14px;
+        text-align: center;
+        // width: auto;
+        // padding: 0 15px;
+        width: 160px;
+        border-top: 3px solid transparent;
+    }
+
+    // .cur {
+    //     // background-color: @baseColor !important;
+    //     // color: #fffffc !important;
+    // }
+    .br {
+        border-right: 1px solid #e4e4e4;
+    }
+    .radio-group .cur {
+        border-left: 1px solid #e4e4e4;
+        border-right: 1px solid #e4e4e4;
+        border-bottom: 1px solid transparent;
+        // border-color: #3399ff #e4e4e4 transparent #e4e4e4;
+        border-top-color: #3399ff;
+        background-color: #fff !important;
+    }
+    .switch-navigate {
+        // height: 43px;
+        // line-height: 43px;
+        height: 37px;
+        line-height: 33px;
+        font-size: 13px;
+        border-top: none;
+        border-right: none;
+        border-bottom: 1px solid #e4e4e4;
+    }
+    .switch-default {
+        background-color: #f2f2f2;
+        color: #5e5e5e;
+    }
+}
+</style>

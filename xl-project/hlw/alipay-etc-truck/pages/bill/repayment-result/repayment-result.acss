@@ -1,0 +1,35 @@
+.next-btn{
+  width: 600rpx;
+  outline: none;
+}
+.desc-area{
+  width: 750rpx;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.btn-area{
+  width: 750rpx;
+  height: 20vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.title{
+  font-size: 34rpx;
+  font-weight: bold;
+  margin-top: 50rpx;
+}
+.subtitle{
+  font-size: 30rpx;
+  color: #999;
+  margin-top: 50rpx;
+}
+.tip{
+  font-size: 30rpx;
+  margin: 100rpx 50rpx 0;
+  text-align: center;
+  line-height: 60rpx;
+}

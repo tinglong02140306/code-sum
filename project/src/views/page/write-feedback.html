@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <base href="../../../../">
+    <meta charset="UTF-8">
+    <!-- 添加到主屏幕后，全屏显示 -->
+    <meta name="apple-touch-fullscreen" content="YES" />
+    <meta name="format-detection" content="telephone=no" />
+    <!-- iphone 运行在全屏模式 -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="viewport" content="width=device-width" />
+    <title>我要反馈</title>
+    <link rel="stylesheet" type="text/css" href="../css/base.css?__inline" />
+    <link rel="stylesheet" type="text/css" href="../css/all.css?__inline" />
+    <link rel="stylesheet" type="text/css" href="../css/feedback.css?__inline" />
+    <script src="../lib/remCacul/remCacul.js"></script>
+</head>
+
+<body>
+    <div class="write-wrapper">
+        <!-- 头部start -->
+        <header class="topic-bg">
+            <div class="header-wrap header-item header-other-item topic-bg">
+                <a class="header-back back" data-bind="click: back" href="javascript:void(0)"></a>
+                <span class="ell">意见反馈</span>
+            </div>
+        </header>
+        <!-- 头部end -->
+        <div class="textarea-wrap top-7">
+            <textarea placeholder="请填写反馈意见" id="feedback" cols="5" rows="10" maxlength="200" class="write-feedback"></textarea>
+            <div class="word-info"><span id="wordNum">0</span>/200</div>
+            <div class="img-content clearfix">
+                <label class="fl">
+                    <p>相关照片</p>
+                    <p class="grey">最多上传3张照片</p>
+                </label>
+                <div class="img-upload-content fl">
+                    <div class="more fr" data-bind="click: more">
+                        <img src="../img/common/add.png" alt="">
+                    </div>
+                    <div class="fr img-list">
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="input-div">
+                <input placeholder="联系手机号（选填）" maxlength="11" />
+            </div>
+            <a class="submit-btn nothingg topic-bg" data-bind="click: submitEvent" href="javascript:void(0)">确定</a>
+        </div>
+    </div>
+    <div class="mark">
+        <div class="quit">
+            <p>确定返回？</p>
+            <div>
+                <span data-bind="click: cancel">取消</span>
+                <span data-bind="click: sure">确定</span>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="../lib/lib.js"></script>
+<script src="../app/write-feedback.js?__inline"></script>
+
+</html>

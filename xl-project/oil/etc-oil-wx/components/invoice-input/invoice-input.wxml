@@ -1,0 +1,33 @@
+<view class="label-input-container">
+    <text class="label-input-text" style="{{labelStyle}}">{{label}}</text>
+    <div class="label-input-right" bind:tap="bindItemClick">
+        <input class="label-input"
+               wx:if="{{input_type}}"
+               placeholder-class="label-input-placeholder"
+               placeholder="{{placeholder}}"
+               value="{{value}}"
+               type="{{type}}"
+               style="{{inputStyle}}"
+               password="{{password}}"
+               disabled="{{disabled}}"
+               maxlength="{{maxlength}}"
+               focus="{{focus}}"
+               selection-start="{{selectionStart}}"
+               selection-end="{{selectionEnd}}"
+               bindinput="bindInput"></input>
+        <textarea class="label-textarea"
+                  placeholder-class="label-input-placeholder"
+                  placeholder="{{placeholder}}"
+                  value="{{value}}"
+                  style="{{inputStyle}}"
+                  disabled="{{disabled}}"
+                  maxlength="{{maxlength}}"
+                  auto-height="{{true}}"
+                  wx:if="{{!input_type}}"
+                  bindinput="bindInput"
+                  fixed="{{false}}">
+
+        </textarea>
+        <slot></slot>
+    </div>
+</view>

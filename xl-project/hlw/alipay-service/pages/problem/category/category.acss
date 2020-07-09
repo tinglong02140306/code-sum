@@ -1,0 +1,112 @@
+.bf {
+    background-color: #fff;
+}
+
+.wrap {
+    font-family: SourceHanSansCN-Regular;
+}
+
+.wrap {
+    width: 100%;
+    min-height: 100vh;
+    background: #f1f1f6;
+    font-family: SourceHanSansCN-Regular;
+}
+
+.tab {
+    display: inline-block;
+    height: 120rpx;
+    width: 250rpx;
+    background-color: #3568eb;
+    text-align: center;
+    vertical-align: top;
+}
+
+.tab text {
+    display: inline-block;
+    margin-top: 40rpx;
+    width: 250rpx;
+    font-size: 30rpx;
+    color: #fff;
+}
+
+.tab image {
+    position: relative;
+    top: -10rpx;
+    overflow: hidden;
+    width: 18rpx;
+    height: 10rpx;
+}
+
+.content {
+    min-height: 100rpx;
+    color: #3b4257;
+}
+
+.active-wrap {
+    margin-top: 22rpx;
+    background-color: #fff;
+}
+
+.title-wrap {
+    margin: 0 4%;
+    width: 92%;
+    height: 85rpx;
+    /* background-color: pink; */
+    line-height: 85rpx;
+    font-size: 0;
+}
+
+.title text {
+    display: inline-block;
+    font-size: 32rpx;
+    text-indent: 15rpx;
+    font-weight: bold;
+}
+
+.title,
+.btn-view-all {
+    display: inline-block;
+    width: 49%;
+}
+
+.title image {
+    width: 5rpx;
+    height: 24rpx;
+}
+
+.btn-view-all {
+    font-size: 28rpx;
+    color: #3568eb;
+    text-align: right;
+}
+
+.btn-view-all text {
+    display: inline-block;
+    height: 100%;
+}
+
+.title-wrap {
+    border-bottom: 2rpx solid #f3f3f3;
+}
+
+.list-wrap {
+    padding: 0 4%;
+}
+
+.no-data {
+    width: 100vw;
+    height: calc(100vh - 120rpx);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.data-nomore {
+    height: 80rpx;
+    font-size: 28rpx;
+    color: rgb(59, 66, 87);
+    line-height: 80rpx;
+    text-align: center;
+    background-color: #f2f2f2;
+}

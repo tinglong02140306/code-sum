@@ -1,0 +1,13 @@
+.identify-button-box{
+    height: 90rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.identify-text{
+    width: 140rpx;
+    color: #08CC8A;
+    font-size: 28rpx;
+}

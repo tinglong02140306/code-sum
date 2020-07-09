@@ -1,0 +1,88 @@
+.oil-product-container{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  box-sizing: border-box;
+}
+.oil-product-top-container{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: white;
+  padding: 10px 0;
+}
+.oil-product-table-box{
+  background-color: white;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+.oil-product-table-container{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: white;
+}
+.oil-product-table{
+  width: 100%;
+  background-color: white;
+  table{
+    thead{
+      th{
+        color: black;
+        font-weight: 600;
+        font-size: 14px;
+      }
+    }
+  }
+}
+.oil-product-btn-container{
+  display: flex;
+  flex-direction: row;
+  margin:10px 20px 3px 20px;
+  //margin-right: 20px;
+  justify-content: flex-end;
+  align-items: center;
+}
+.oil-product-form{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  .ant-form-item{
+    width: 16%;
+    display: flex;
+    flex-direction: row;
+    font-family: "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 14px;
+    font-variant: tabular-nums;
+    line-height: 1.5;
+    color: rgba(0, 0, 0, 0.65);
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    list-style: none;
+    vertical-align: top;
+    margin: 0 10px;
+  }
+
+  .ant-form-item-label{
+    width: 80px;
+    font-weight: 700;
+  }
+
+  .ant-form-item-control-wrapper{
+    flex: 1;
+  }
+}
+.oil-product-form-btn{
+  font-size: 12px;
+  margin: 0 10px;
+}

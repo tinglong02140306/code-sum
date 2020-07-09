@@ -1,0 +1,30 @@
+.refresh-view{
+    width: 100%;
+    height: 100%;
+}
+
+.refresh-view-box{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.refresh-view-header{
+    width: 100%;
+    height: 90rpx;
+    line-height: 90rpx;
+    margin-top: -90rpx;
+    text-align: center;
+    font-size: 28rpx;
+    color: #666666;
+}
+
+.refresh-view-footer{
+    width: 100%;
+    height: 90rpx;
+    line-height: 90rpx;
+    text-align: center;
+    font-size: 28rpx;
+    color: #666666;
+}

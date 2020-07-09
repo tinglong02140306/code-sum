@@ -1,0 +1,107 @@
+<template name="bind-bank">
+    <form class="bind-bank-container"  bindsubmit="onBindBankClick">
+        <view class="bind-bank-box">
+            <label-input class="bind-bank-input" 
+                labelStyle="width:170rpx" 
+                label="银行卡类型" 
+                placeholder="请选择银行卡类型" 
+                disabled="{{true}}"
+                value="{{bank_card_type_str}}"
+                bindItemClick="onBankCardTypeClick"
+                name="sign_bank_account_type">
+                <image class="bind-bank-next-icon" src="https://oilmag.etcsd.com.cn/oilcoreserver/static/resource/icon-next.png"></image>
+            </label-input>
+            <view class="bind-bank-input-line"></view>
+            <label-input class="bind-bank-input" 
+                labelStyle="width:170rpx" 
+                label="银行卡卡号" 
+                placeholder="请输入银行卡卡号"
+                type="number"
+                maxlength="{{25}}"
+                name="sign_account_no">
+            </label-input>
+            <view class="bind-bank-input-line"></view>
+            <label-input class="bind-bank-input" 
+                labelStyle="width:170rpx" 
+                label="用户姓名" 
+                placeholder="请输入用户姓名"
+                maxlength="{{10}}"
+                name="user_real_name">
+            </label-input>
+            <view class="bind-bank-input-line"></view>
+<!--            <label-input class="bind-bank-input" -->
+<!--                labelStyle="width:170rpx" -->
+<!--                label="证件类型" -->
+<!--                value="身份证" -->
+<!--                disabled="{{true}}">-->
+<!--            </label-input>-->
+<!--            <view class="bind-bank-input-line"></view>-->
+            <label-input class="bind-bank-input" 
+                labelStyle="width:170rpx" 
+                label="身份证号"
+                placeholder="请输入证件号码"
+                type="idcard"
+                maxlength="{{18}}"
+                name="user_id_card">
+            </label-input>
+            <view class="bind-bank-input-line"></view>
+            <label-input class="bind-bank-input" 
+                labelStyle="width:170rpx" 
+                label="手机号码"
+                value="{{bank_reserve_mobile}}"
+                placeholder="请输入银行预留手机号"
+                type="number"
+                maxlength="{{11}}"
+                bind:inputObserver="onBankMobileInput"
+                name="bank_reserve_mobile"
+            >
+            </label-input>
+            <view class="bind-bank-input-line"></view>
+            <label-input class="bind-bank-input" 
+                labelStyle="width:170rpx" 
+                label="验证码" 
+                placeholder="请输入验证码"
+                type="number"
+                maxlength="{{6}}"
+                name="verify_code">
+                <identify-button control="{{isStartIdentify}}" bind:identify="onIdentifyClick"></identify-button>
+            </label-input>
+            <view class="bind-bank-input-line"></view>
+            <popup show="{{is_show_modal}}">
+                <view class="bank-type-list-box" style='padding-bottom: {{isIphoneX?"68rpx":"10rpx"}}'>
+                    <block wx:for='{{[{card:"借记卡",id:"0"},{card:"信用卡",id:"1"}]}}' wx:item="item" wx:key="bank">
+                        <view class="bank-type-item" data-item="{{item}}" bind:tap="onBandCardItemClick">
+                            <text class="bank-type-text">{{item.card}}</text>
+                            <image class="bank-type-image" 
+                                src="/assets/static/icon-flow-right.png"
+                                style='visibility:{{bank_card_type==item.id?"visibility":"hidden"}}'></image>
+                        </view>
+                    </block>
+                </view>
+            </popup>
+        </view>
+        <view class="etc-list-container-footer" style="padding-bottom: {{isIphoneX?64:24}}rpx">
+            <view class="etc-list-container-footer-text">
+                <checkbox-group bindchange="onProxyChange">
+                    <checkbox class="bind-bank-checkbox" value="1"  color="#08CC8A"></checkbox>
+                </checkbox-group>
+<!--                <image class="etc-list-container-footer-icon" src="{{isAgreeProxy?icon_select:icon_unselect}}" bind:tap="onProxyChange"></image>-->
+                <text>我同意并遵守<text style="color: #1C1A24">《ETC免密支付协议》</text></text>
+            </view>
+            <view class="etc-list-container-footer-btns">
+                <view class="etc-list-container-footer-btn-item theme-button">绑定银行卡</view>
+                <button form-type="submit" style="width:100vw" class="over-button"></button>
+            </view>
+        </view>
+<!--        <view class="bind-bank-checkbox-box">-->
+<!--            <checkbox-group bindchange="onProxyChange">-->
+<!--                <checkbox class="bind-bank-checkbox" value="1"  color="#08CC8A"></checkbox>-->
+<!--            </checkbox-group>-->
+<!--            <text class="bind-back-agree-text">我同意并遵守</text>-->
+<!--            <text class="bind-bank-proxy-text" bind:tap="onProxyClick">《快捷支付授权委托书》</text>-->
+<!--        </view>-->
+<!--        <view class="bind-bank-button">-->
+<!--            <button class="button-style" form-type="submit">开通银行卡快捷支付</button>-->
+<!--        </view>  -->
+    </form>
+</template>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.1.xsd 
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-3.1.xsd 
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+	http://www.springframework.org/schema/context 
+    http://www.springframework.org/schema/context/spring-context-3.1.xsd
+    http://www.springframework.org/schema/mvc  
+	http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd">
+	<!-- 开启mvc注解 -->
+	<context:annotation-config />
+
+	<!-- 对web包中的所有类进行扫描，以完成bean的创建和自动依赖注入功能 -->
+	<!-- <context:component-scan base-package="com.iflytek"/> -->
+	<context:component-scan base-package="com.iflytek" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+	<!-- 启动Spring mvc的注解功能，完成请求和注解POJO的映射 -->
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
+
+	<!-- 使用fastjson序列化对象 -->
+	<mvc:annotation-driven>
+		<mvc:message-converters register-defaults="true">
+			<bean class="com.iflytek.sgy.wjewt.support.FastJsonMessageConverter" />
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+
+	<!-- 容器默认的DefaultServletHandler处理 所有静态内容与无RequestMapping处理的URL -->
+	<mvc:default-servlet-handler />
+
+	<!-- 对模型视图的名称的解析 -->
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="order" value="0" />
+		<!-- 使用JSP页面进行输出 -->
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+		<!-- 指定了表示层的前缀 -->
+		<property name="prefix" value="/WEB-INF/view/" />
+		<!-- 指定了表示层的后缀 -->
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+</beans>

@@ -1,0 +1,57 @@
+
+<view style="background:#f5f5f5;">
+<view class="wrapper">
+	<!--输入车牌号-->
+	<view class="tip">输入要办理ETC的车辆车牌号</view>
+	<view class="plate">
+		<view class="plate-item {{active == 0 ? 'active':''}}" onTap="selectPlateNum" data-idx="0">{{plateNum[0]}}
+		</view>
+		<view class="plate-item {{active == 1 ? 'active':''}}" onTap="selectPlateNum" data-idx="1">{{plateNum[1]}}
+		</view>
+		<view class="plate-dot"/>
+		<view class="plate-item {{active == 2 ? 'active':''}}" onTap="selectPlateNum" data-idx="2">{{plateNum[2]}}
+		</view>
+		<view class="plate-item {{active == 3 ? 'active':''}}" onTap="selectPlateNum" data-idx="3">{{plateNum[3]}}
+		</view>
+		<view class="plate-item {{active == 4 ? 'active':''}}" onTap="selectPlateNum" data-idx="4">{{plateNum[4]}}
+		</view>
+		<view class="plate-item {{active == 5 ? 'active':''}}" onTap="selectPlateNum" data-idx="5">{{plateNum[5]}}
+		</view>
+		<view class="plate-item {{active == 6 ? 'active':''}}" onTap="selectPlateNum" data-idx="6">{{plateNum[6]}}
+		</view>
+		<view class="plate-xny {{active == 7 ? 'active':''}}" onTap="selectPlateNum" data-idx="7">
+			<image src="/images/index/xny.png" style="width:60rpx;height:80rpx;" mode="scaleToFill"
+			       a:if="{{!plateNum[7]}}"/>
+			<text a:if="{{plateNum[7]}}">{{plateNum[7]}}</text>
+		</view>
+	</view>
+	<block>
+		<view class="tip" style="margin-top:50rpx;">请选择车牌颜色</view>
+		<view class="plate-1">
+			<view class="plate-color" data-idx="1"
+			      catchTap="selectColor">
+			  <image src="/assets/images/yellow.png" style="width:170rpx;height:62rpx;" mode="scaleToFill"/>
+				<icon type="success" size="20" color="yellow" class="abs-icon" a:if="{{plateColor=='1'}}"/>
+			</view>
+			<view style="margin-left:50rpx;" class="plate-color" data-idx="0"
+			      catchTap="selectColor">
+				 <image src="/assets/images/blue.png" style="width:170rpx;height:62rpx;" mode="scaleToFill"/>
+				<icon type="success" size="20" color="blue" class="abs-icon" a:if="{{plateColor=='0'}}"/>
+			</view>
+     <view style="margin-left:50rpx;" class="plate-color" data-idx="4"
+			      catchTap="selectColor">
+			 <image src="/assets/images/green.png" style="width:170rpx;height:62rpx;" mode="scaleToFill"/>
+				<icon type="success" size="20" color="green" class="abs-icon" a:if="{{plateColor=='4'}}"/>
+			</view>
+
+		</view>
+	</block>
+</view>
+<view class="button">
+   <block>
+	   	<button class="next-btn bg-primary" onTap="search">提交</button>
+	  </block>
+</view>
+</view>
+<keyboard tapNum="{{tapNum}}" isProvince="{{isProvince}}" a:if="{{showKeyboard}}" onDel="del" onInput="input"
+          onConfirm="confirm"></keyboard>

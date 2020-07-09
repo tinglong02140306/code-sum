@@ -1,0 +1,29 @@
+
+<view id="pickerMulti" class="picker-content-wrap">
+    <view class="btn-wrap">
+        <text catchTap="cancelEvt">取消</text>
+        <text catchTap="confirmEvt">确定</text>
+    </view>
+    <picker-view value="{{indexValue}}" onChange="onChange" class="my-picker">
+        <picker-view-column a:for="{{multiArray}}" a:for-index="idx" a:for-item="multiItem">
+            <view a:for="{{multiItem}}" a:for-index="index" a:for-item="item">{{item}}</view>
+        </picker-view-column>
+    </picker-view>
+</view>
+<!-- 
+<view class="picker-view-container" a:if="{{show}}">
+    <view class="mask" onTap="cancelEvt">
+        <view id="pickerMulti" class="picker-content-wrap" animation="{{animation}}">
+            <view class="btn-wrap">
+                <text catchTap="cancelEvt">取消</text>
+                <text catchTap="confirmEvt">确定</text>
+            </view>
+            <picker-view value="{{indexValue}}" onChange="onChange" class="my-picker">
+                <picker-view-column a:for="{{multiArray}}" a:for-index="idx" a:for-item="multiItem">
+                    <view a:for="{{multiItem}}" a:for-index="index" a:for-item="item">{{item}}</view>
+                </picker-view-column>
+            </picker-view>
+        </view>
+    </view>
+</view>
+--> 

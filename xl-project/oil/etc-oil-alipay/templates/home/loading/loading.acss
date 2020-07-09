@@ -1,0 +1,199 @@
+.home-loading-container{
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    background-color: #f8f8f8;
+}
+
+.home-loading-box{
+    width: 100%;
+    height: 198rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    padding: 32rpx;
+}
+
+.home-loading-weather-box{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-end;
+    position: relative;
+}
+
+.home-loading-city{
+    width: 96rpx;
+    height: 67rpx;
+    background-color: #eeeeee;
+}
+
+.home-loading-temperature{
+    margin-left: 32rpx;
+    width: 400rpx;
+    height: 45rpx;
+    background-color: #eeeeee;
+}
+
+.home-loading-price-box{
+    width: 600rpx;
+    height: 64rpx;
+    margin-top: 32rpx;
+    background-color: #eeeeee;
+}
+
+.home-loading-server-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0 32rpx;
+    margin-top: 40rpx;
+}
+
+.home-loading-server-text{
+    width: 128rpx;
+    height: 45rpx;
+    background-color: #eeeeee;
+    margin-bottom: 40rpx;
+    align-self: flex-start;
+}
+
+.home-loading-server-box{
+    width: 686rpx;
+    margin: 0 32rpx;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    padding:32rpx 20rpx;
+    position: relative;
+}
+
+.home-loading-server-logo{
+    width: 224rpx;
+    height: 164rpx;
+    box-shadow: 0rpx 4rpx 10rpx 0rpx rgba(0, 0, 0, .1);
+    background-color: #eeeeee;
+}
+
+.home-loading-server-station-info{
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    margin-left: 20rpx;
+}
+
+.home-loading-server-station-name{
+    width: 372rpx;
+    height: 50rpx;
+    background-color: #eeeeee;
+}
+
+.home-loading-server-station-address{
+    width: 394rpx;
+    height: 38rpx;
+    background-color: #eeeeee;
+    margin-top: 8rpx;
+}
+
+.home-loading-server-station-price-box{
+    width: 394rpx;
+    height: 50rpx;
+    background-color: #eeeeee;
+    margin-top: 16rpx;
+}
+
+.home-loading-server-station-near{
+    width: 250rpx;
+    height: 60rpx;
+    background-color: #eeeeee;
+    margin-top: 24rpx;
+}
+
+.home-loading-banner-container{
+    width: 686rpx;
+    height: 180rpx;
+    margin-top: 40rpx;
+    background-color: #eeeeee;
+    align-self: center;
+}
+
+.home-loading-bank-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40rpx;
+    padding: 0 32rpx;
+    box-sizing: border-box;
+}
+
+.home-loading-bank-text{
+    width: 128rpx;
+    height: 45rpx;
+    background-color: #eeeeee;
+    margin-bottom: 40rpx;
+    align-self: flex-start;
+}
+
+.home-loading-bank-list{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40rpx;
+    box-sizing: border-box;
+}
+
+.home-loading-bank-list-item{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    padding: 32rpx;
+    overflow: hidden;
+    margin-bottom: 32rpx;
+}
+
+.home-loading-bank-list-item-image{
+    width: 64rpx;
+    height: 64rpx;
+    background-color: #eeeeee;
+}
+
+.home-loading-bank-list-item-info{
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    box-sizing: border-box;
+    margin: 0 32rpx;
+}
+
+.home-loading-bank-list-item-info-top{
+    width: 252rpx;
+    height: 50rpx;
+    background-color: #eeeeee;
+}
+
+.home-loading-bank-list-item-info-bottom{
+    width: 320rpx;
+    height: 40rpx;
+    background-color: #eeeeee;
+    margin-top: 8rpx;
+}
+
+.home-loading-bank-list-item-see{
+    width: 164rpx;
+    height: 52rpx;
+    background-color: #eeeeee;
+}

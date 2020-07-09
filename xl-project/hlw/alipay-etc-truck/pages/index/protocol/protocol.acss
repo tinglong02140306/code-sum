@@ -1,0 +1,138 @@
+.hide {
+    display: none !important;
+}
+
+text {
+    line-height: 150%;
+    text-indent: 20rpx;
+    text-align: left;
+}
+
+.title {
+    text-align: center;
+    font-size: 28rpx;
+    font-weight: bold;
+    margin-top: 20rpx;
+}
+
+.item-title {
+    font-size: 26rpx;
+    font-weight: bold;
+}
+
+.page {
+    padding: 30rpx;
+    color: #333;
+    font-family: 'PingFang SC', "Arial", "Microsoft YaHei", '黑体', sans-serif;
+}
+
+.bottom-line {
+    display: inline-block;
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 20rpx;
+}
+
+.wrapper {
+    margin-top: 20rpx;
+    margin-bottom: 20rpx;
+}
+
+.title-content {
+    position: relative;
+}
+
+
+/* .account {
+    position: absolute;
+    top: 110rpx;
+    left: 150rpx;
+    color: #fff;
+    font-size: 36rpx;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
+
+.content-wrap {
+    box-sizing: border-box;
+    padding-left: 150rpx;
+    position: absolute;
+    top: 110rpx;
+    font-size: 0;
+    width: 100%;
+}
+
+.content-wrap .item {
+    display: inline-block;
+    color: #fff;
+    font-size: 30rpx;
+    height: 50rpx;
+    vertical-align: top;
+    line-height: 50rpx;
+}
+
+.content-wrap .item-wrap {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.content-wrap .account {
+    width: 60%;
+}
+
+.content-wrap .link,
+.content-wrap .net-money {
+    margin-right: 10rpx;
+    font-size: 30rpx;
+    padding: 0 10rpx;
+    border-radius: 5rpx;
+    text-align: center;
+}
+
+.content-wrap .money {
+    width: 100%;
+}
+
+.icbc-item {
+    background: #c40819;
+}
+
+.ccb-item {
+    background: #1152a8;
+}
+
+.abc-item {
+    background: #00a7a0;
+}
+
+.view-account-wrap {
+    text-align: right;
+}
+
+.view-account {
+    display: inline-block;
+    /* position: relative; */
+    /* right: 0; */
+    /* top: 110rpx; */
+    font-size: 30rpx;
+    color: #fff;
+    padding-right: 30rpx;
+    width: 30%;
+    height: 50rpx;
+    /* font-weight: bold; */
+    line-height: 50rpx;
+}
+
+.icon-right {
+    margin-left: 10rpx;
+    width: 11rpx;
+    height: 17rpx;
+}
+
+.bank-img {
+    width: 690rpx;
+    height: 250rpx
+}

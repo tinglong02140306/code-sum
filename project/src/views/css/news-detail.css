@@ -1,0 +1,764 @@
+/**
+ * @author hmxue
+ * @time 2017-11-13
+ * @description 资讯详情页模板样式
+ */
+ .wrap {
+    /*margin-bottom: 2rem;*/
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    /*position: absolute;*/
+}
+
+.fixheight {
+    height: 101% !important;
+}
+
+/* ================ 头部分享和收藏样式start =====================*/
+header {
+    position: absolute;
+    top: 0;
+}
+
+.news-top-bg {
+    background: #fff;
+    color: #8e8e8e !important;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.share-collection {
+    position: absolute;
+    display: inline-block;
+    top: 0.6rem;
+    right: 0.88rem;
+    width: 0.2rem;
+    height: 0.8rem;
+    background: url('../img/news-detail/more.png') no-repeat;
+    background-size: 0.2rem 0.8rem;
+}
+.share-bomb-mask {
+    position: absolute;
+    overflow: auto;
+    top: 2.1rem;
+    bottom: 0;
+    width: 100%;
+    height: calc(100% - 2.1rem);
+    background: rgba(0,0,0,0.4);
+}
+.share-bomb {
+    position: absolute;
+    right: 0.45rem;
+    width: 4.73rem;
+    height: 4.22rem;
+    background: url('../img/news-detail/more-bg.png') no-repeat;
+    background-size: 4.73rem 4.22rem;
+    text-align: center;
+}
+.share-bomb span {
+    display: block;
+    width: 100%;
+    height: 2.12rem;
+    font-size: 0.62rem;
+    color: #333;
+    line-height: 2.12rem;
+    text-indent: 1rem;
+}
+.share-btn {
+    margin: 0 0 0 2.5%;
+    display: inline-block;
+    width: 12.5%;
+    height: 2.1rem;
+    background: url(./public/wcportal/0.0.1/img/news-detail/share2.png) 10% center no-repeat;
+    background-size: 0.68rem 0.73rem;
+    float: right;
+}
+.collection-btn {
+    display: inline-block;
+    width: 13%;
+    height: 2.1rem;
+    background: url(./public/wcportal/0.0.1/img/news-detail/collection.png) center center no-repeat;
+    background-size: 0.75rem 0.71rem;
+    float: right;
+}
+
+.header-item .title-text {
+    width: auto;
+    text-align: left;
+    text-indent: 0;
+    color: #000 !important;
+    line-height: 2.1rem;
+    padding-top: 0.1rem;
+}
+
+.news-header-back {
+    display: inline-block;
+    width: 12%;
+    height: 2.1rem;
+    background: url(./public/wcportal/0.0.1/img/news-detail/back-icon2.png) center center no-repeat;
+    background-size: 0.37rem 0.67rem;
+}
+
+.zx-zan {
+    width: auto !important;
+    text-align: right !important;
+    font-size: 0.533333rem !important;
+    text-indent: 8% !important;
+    float: right;
+    color: #8e8e8e !important;
+}
+.zx-zan-unselect {
+    background: url(./public/wcportal/0.0.1/img/news-detail/icon_zxzan_unselect.png) 30% 50% / 0.75rem 0.71rem no-repeat;
+}
+.zx-zan-select {
+    background: url(./public/wcportal/0.0.1/img/news-detail/icon_zxzan_select.png) 30% 50% / 0.75rem 0.71rem no-repeat;
+}
+/* ================ 头部分享和收藏样式 end =====================*/
+
+/* ================ 资讯样式 end =====================*/
+
+.news-view {
+    position: absolute;
+    top: 2.7rem;
+    bottom: 2rem;
+    width: 100%;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    background: #F6F6F6;    
+    /*position: absolute;
+    overflow: auto;*/
+}
+.pullDown {
+    display: none;
+    height: 0;
+}
+.news-main {
+    padding: 0.5rem 0;
+    background-color: #fff;
+}
+.news-title {
+    padding: 0 4%;
+    font-size: 0.9rem !important;
+    line-height: 1.2rem;
+    color: #333;
+    text-align: justify;
+}
+.news-item {
+    padding: 0 4%;
+    font-size: 0.58rem;
+    line-height: 1.5rem;
+    text-align: justify;
+    color: #666;
+}
+.news-item-source {
+    float: left;
+    padding-right: 0.8rem;
+    color: #666;
+    max-width: 56%;
+}
+.news-item-time {
+    float: left;
+}
+.news-content,.video-content {
+    padding: 0 4%;
+}
+.news-content,
+.news-content p,
+.news-content span,
+.news-content li,
+.news-content ul,
+.news-content i,
+.news-content ol,
+.news-content dd,
+.news-content dt,
+.news-content em,
+.news-content a ,
+.news-content td,
+.news-content strong {
+    font-size: 0.74rem !important;
+    line-height: 1rem !important;
+    text-align: justify;
+    color: #333;
+}
+.news-content img {
+    display: block;
+    margin: 0.4rem auto;
+    width: 100%;
+}
+.news-more {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 2rem;
+    background-color: #f5f5f5;
+    font-size: 0.7rem;
+    text-align: center;
+    line-height: 2rem;
+    color: #666;
+}
+.like {
+    padding: .44rem 0 .8rem 0;
+    text-align: center;
+    background-color: #fff;
+}
+.like img {
+    width: 3.48rem;
+    height: 3.48rem;
+}
+.like p {
+    text-align: center;
+    font-size: .53rem;
+    /*  line-height: 2.22rem;*/
+    color: #666;
+}
+.judge-area h1 {
+    padding: 0 .56rem;
+    font-size: .58rem;
+    color: #808080;
+    line-height: 1.7rem;
+}
+.judge-area h1 span {
+    margin-left: .44rem;
+}
+.user-judge li {
+    padding: .67rem .56rem;
+    border-bottom: 1px solid #EEE;
+    background-color: #fff;
+}
+.user-wrap {
+    position: relative;
+}
+.user-wrap .head-icon {
+    width: 1.78rem;
+    height: 1.78rem;
+    border-radius: 50%;
+}
+.praise {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.praise img {
+    width: .67rem;
+}
+.praise span {
+    display: inline-block;
+    font-size: .53rem;
+    vertical-align: middle;
+}
+.not-pass {
+    position: absolute;
+    top: .2rem;
+    right: 0;
+    font-size: .62rem;
+    color: #666;
+}
+.judge-info {
+    margin-left: .33rem;
+    width: 11.8rem;
+}
+.user-name, .judge-time {
+    margin-bottom: .2rem;
+    font-size: .53rem;
+    color: #999;
+}
+.judge-content,
+.all-article,
+.judge-content span {
+    font-size: .62rem;
+    color: #333;
+    line-height: 1rem;
+}
+.judge-content {
+    position: relative;
+}
+.all-article {
+    margin: .3rem 0;
+    color: #ff833a;
+    text-align: right;
+}
+.response-area {
+    padding: .56rem;
+    background-color: #F6F6F6;
+}
+.response-area .judge-info {
+    width: 11rem;
+}
+.response-area .user-wrap {
+    margin-top: 1rem;
+}
+.response-area .user-wrap:first-child {
+    margin-top: 0;
+}
+.see-more {
+    padding: .3rem 0 .89rem 0;
+    background-color: #F6F6F6;
+    font-size: .53rem;
+    color: #999;
+    text-align: center;
+}
+.news-video {
+    width: 100%;
+    height: 250px;
+}
+.notice-wrap {
+ /* height: 100%;*/
+ position: absolute;
+ top: 2.1rem;
+ bottom: 0;
+ overflow: auto;
+ width: 100%;
+ background: #fff;
+}
+.notice-wrap .news-content a {
+    color: #0000FF;
+}
+
+.jump-url {
+    padding-bottom: .5rem;
+    display: block;
+    font-size: .67rem;
+    text-decoration: underline;
+}
+.video-content audio {
+    margin: .5rem 0;
+    width: 100%;
+    height: 2rem;
+}
+.video-content iframe {
+    width: 100%;
+    height: 550px;
+}
+.audio-name {
+    margin-bottom: .5rem;
+    color: #3FC1AE;
+    font-size: .62rem;
+    text-indent: .5rem;
+}
+.full-bg {
+    position: absolute;
+    z-index: 111;
+    width: 100%;
+    height: 100%;
+    background-color: #101018;
+    opacity: .5;
+    filter: progid:DXImageTransform.Microsoft.Alph;
+}
+/* ================ 资讯样式 end =====================*/
+
+
+.empty p {
+    padding-top: 0.68rem;
+    font-size: 0.62rem;
+    color: #666;
+    text-align: center;
+    line-height: 0.68rem;
+}
+
+.empty-ad {
+    height: 10rem;
+    background: url(./public/wcportal/0.0.1/img/common/404.png) no-repeat 50% bottom;
+    background-size: 4.1rem 4.04rem;
+}
+
+
+.empty .refresh-btn {
+    margin: 1.64rem auto 0.70rem;
+    width: 7.1rem;
+    height: 1.78rem;
+    background-color: #4c72ff;
+    border: 1px solid #4c72ff;
+    border-radius: 10px;
+    text-align: center;
+    line-height: 1.78rem;
+    font-size: 0.66rem;
+    color: #fff;
+}
+
+.empty .close-btn {
+    margin: 0 auto;
+    width: 7.1rem;
+    height: 1.78rem;
+    background-color: #fff;
+    border: 1px solid #d8d8d8;
+    border-radius: 10px;
+    line-height: 1.78rem;
+    font-size: 0.66rem;
+    color: #666;
+    text-align: center;
+}
+/*.no-net .no-net-img {
+    height: 11rem;
+    }*/
+
+    /* ===============警网头条样式 start =================*/
+
+    .title-wrap {
+        overflow: hidden;
+        padding: .5rem 0;
+        height: 1.04rem;
+    }
+
+    .title-wrap .title-name {
+        padding-left: 4%;
+        margin-top: .08rem;
+    /*background: url(./public/wcportal/0.0.1/img/home/title-icon.png) 0.57rem center no-repeat;
+    background-size: 0.13rem 0.66rem;*/
+    font-size: 0.76rem;
+    /*font-weight: 600;*/
+    color: #333;
+}
+
+.home-news,.news-comment {
+    /* margin-top: 0.44rem; */
+    /*padding: 0.66rem 0.53rem 0;*/
+    background-color: #fff;
+    margin-top: 0.444444rem;
+    padding-bottom: 
+    /*overflow: hidden;*/
+}
+
+.common-border {
+    background: url(./public/wcportal/0.0.1/img/common/border-icon.png) left bottom 1px repeat-x;
+}
+
+.home-news .title-wrap {
+    /*padding-bottom: 0.3rem;*/
+    background: url(./public/wcportal/0.0.1/img/common/border-icon.png) left bottom 1px repeat-x;
+}
+
+.city-news, .news-comment-ul, .add-commnet {
+    padding: 0 3.61%;
+}
+
+.city-news li a {
+    /*padding-left: 3.61% !important;
+    padding-right: 3.61% !important;*/
+}
+
+/* ===============警网头条样式 end =================*/
+
+/* ===============评论 start =======================*/
+.people-first {
+    display: inline-block;
+    width: 1.777778rem;
+    height: 1.777778rem;
+    background: url(./public/wcportal/0.0.1/img/my/default-photo.png) no-repeat;
+    background-size: 100%;
+    float: left;
+    top: 0.666667rem;
+    position: relative;
+    border-radius: 50%
+}
+.people-second {
+    display: inline-block;
+    width: 1.333333rem;
+    height: 1.333333rem;
+    background: url(./public/wcportal/0.0.1/img/my/default-photo.png) no-repeat;
+    background-size: 100%;
+    float: left;
+    top: 0.666667rem;
+    position: relative;
+    border-radius: 50%
+}
+.score-way-content {
+    /*width: 100%;*/
+    min-height: 3.777778rem;
+    /*background: url(./public/wcportal/0.0.1/img/common/border-icon.png) left bottom 1px repeat-x;*/
+
+}
+.score-way-item {
+    /*padding: 0 4.2%;
+    width: 91.6%;*/
+    width: 100%;
+    min-height: 3.777778rem;
+    padding-left: 3.2%;
+}
+.score-way-detail {
+    display: inline-block;
+    padding: 0.28rem 0;
+    margin-left: 2%;
+    width: 85%;
+}
+.recomment-detail {
+    display: inline-block;
+    padding: 0.28rem 0;
+    margin-left: 1%;
+    width: 86.42%;
+}
+.way-sum,
+.way-detail, .comment-time, .comment-content {
+    padding: 0.18rem 0;
+}
+.content-more,.content-pack {
+    color: #4c72ff;
+}
+.icon-comment-num {
+    margin-top: 0.18rem;
+}
+.bg-grey {
+    background: #f5f5f5;
+}
+.icon-comment-unzan {
+    display: inline-block;
+    width: 0.6rem;
+    height: 0.7rem;
+    background: url(./public/wcportal/0.0.1/img/news-detail/icon_zan.png) no-repeat;
+    background-size: 100%;
+    /*padding-right: 1%;*/
+    margin-top: 0.18rem;
+    margin-right: 0.3rem;
+}
+.icon-comment-zaned {
+    display: inline-block;
+    width: 0.6rem;
+    height: 0.7rem;
+    background: url(./public/wcportal/0.0.1/img/news-detail/icon_zan_select.png) no-repeat;
+    background-size: 100%;
+    /*padding-right: 1%;*/
+    margin-top: 0.18rem;
+    margin-right: 0.3rem;
+}
+
+.comment-zan-div {
+    display: inline-block;
+    float: right;
+    width: 25%;
+    height: 2rem;
+}
+
+.comment-child ul {
+    background-color: #f6f6f6;
+}
+.child-more-text {
+    width: 100%;
+    height: 2rem;
+    text-align: center;
+    font-size: 0.533333rem;
+    line-height: 2rem;
+    background-color: #f6f6f6;
+}
+.comment-child {
+    background-color: #fff;
+    padding: 0.5rem 0;
+}
+.comment-input-unselect {
+    background-color: #fff;
+    padding: 0.233333rem 0 0.433333rem 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    box-shadow: -0.1rem 0 0.333333rem #e3e3e3;
+}
+
+.comment-input-select {
+    background-color: #f6f6f6;
+    padding: 3.61% 3.61% 0.3rem 3.61%;
+    position: fixed;
+    bottom: 0;
+    width: 92.78%;
+}
+
+.input-comment-select {
+    width: 93.28%;
+    position: relative;
+    height: 2.5rem;
+    border: 1px #ececec solid;
+    padding: 0.5rem 0.5rem;
+    font-size: 0.6rem;
+}
+
+.comment-input-ll {
+    display: inline-block;
+    height: 1.333333rem;
+    position: relative;
+    left: 4.2%;
+    width: 95.8%;
+    line-height: 1.333333rem;
+}
+.comment-input {
+    border: none;
+    background-color: #ffffff;
+    height: 1.333333rem;
+    width: 69%;
+    padding-left: 0.5rem;
+    line-height: 1.333333rem;
+    padding-top: 0.1rem;
+}
+
+.comment-submit {
+    padding: 0.2rem 0.5rem;
+    /*border: 1px #666 solid;*/
+    color: #fff;
+    background: #4c72ff;
+}
+
+.info-comment-num {
+    width: 15%;
+    display: inline-block;
+    text-align: center;
+    margin-left: 0.5rem;
+    line-height: 1.333333rem;
+    height: 100%;
+}
+.icon-info-comment-pj { 
+    width: 0.8rem;
+    height: 100%;
+    background: url(./public/wcportal/0.0.1/img/news-detail/icon_comment.png) center no-repeat;
+    background-size: 0.7rem 0.7rem;
+    /* background-position-y: 0.1rem; */
+    display: inline-block;
+    line-height: 1.333333rem;
+    /*vertical-align: top;*/
+}
+.info-comment-zan {
+    width: 15%;
+    display: inline-block;
+    text-align: center;
+    margin-left: 0.3rem;
+    line-height: 1.333333rem;
+    height: 100%;
+}
+
+.icon-info-comment-zan {
+    width: .8rem;
+    height: 100%;
+    display: inline-block;
+    line-height: 1.33rem;
+    background: url(./public/wcportal/0.0.1/img/news-detail/zhenwen.png) center no-repeat;
+    background-size: .6rem .71rem;
+}
+
+.info-comment-zan span:nth-child(1) {
+    vertical-align: top;
+    position: relative;
+    top: .05rem;
+}
+
+.info-comment-num span:nth-child(1) {
+    vertical-align: top;
+    position: relative;
+    top: .05rem;
+}
+
+.info-comment-bottom {
+    /* border: 1px #ececec solid; */
+    /* height: 1rem; */
+    width: 100%;
+    /* text-align: center; */
+    margin-top: 0.2rem;
+}
+
+.info-comment-bottom span {
+    font-size: 0.5333rem;
+    line-height: 0.8333rem;
+}
+
+.comment-handle {
+    position: absolute;
+    /*height: 2.222222rem;*/
+    width: 6rem;
+    top: 50%;
+    left: 50%;
+    margin-left: -3rem;
+    margin-top: -3rem;
+    background-color: #ffffff;
+    z-index: 12;
+}
+.comment-handle p {
+    height: 2rem;
+    padding-left: 1rem;
+    line-height: 2rem;
+}
+.handle-delete, .handle-reply {
+    color: #3366cc;
+}
+.handle-delete {
+    background: url(./public/wcportal/0.0.1/img/common/border-icon.png) left bottom 1px repeat-x;
+}
+.common-mask {
+    position: absolute;
+    overflow: auto;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.3);
+    z-index: 11;
+}
+
+.comment-nikename {
+    width: 60%;
+    display: inline-block;
+}
+.input-edit {
+    width: .8rem;
+    height: 100%;
+    display: inline-block;
+    line-height: 1.33rem;
+    background: url(./public/wcportal/0.0.1/img/news-detail/icon_edit.png) center no-repeat;
+    background-size: .7rem .71rem;
+}
+/* ===============评论 end =========================*/
+
+/* ================ 删除确认框 start =====================*/
+
+.mark {
+    position: fixed;
+    /*display: none;*/
+    z-index: 11;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .3);
+}
+
+.delete-mask {
+    position: absolute;
+    top: 35%;
+    left: 15%;
+    width: 70%;
+    border-radius: .4rem;
+    font-size: .67rem;
+    background: #fff;
+}
+
+.delete-mask p {
+    height: 4rem;
+    border-bottom: 1px solid #e1e1e1;
+    font-size: 0.70rem;
+    color: #333;
+    text-align: center;
+    line-height: 4rem;
+}
+
+.delete-mask div {
+    display: flex;
+    height: 2.22rem;
+    line-height: 2.22rem;
+}
+
+.delete-mask div span {
+    flex: 1;
+    font-size: 0.66rem;
+    color: #333;
+    text-align: center;
+}
+
+.delete-mask div span:nth-child(1) {
+    border-right: 1px solid #e1e1e1;
+}
+/* ================ 删除确认框 end =====================*/
+
+.upwarp-nodata {
+    font-size: 0.58rem !important;
+}
+
+
+*{   
+    user-select:auto;   
+     -webkit-user-select:auto;
+} 
+
+::-webkit-input-placeholder { 
+    color: #999999;
+    font-size: 0.6rem;
+}

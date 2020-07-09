@@ -1,0 +1,32 @@
+<!--pages/activity/component/polygon/polygon.axml-->
+<view class="polygon-container">
+    <view class="polygon-box">
+        <!--顶部Tab布局-->
+        <view class="polygon-top">
+            <view class="polygon-top-left" a:if="{{type==0}}" data-type="0" onTap="onTabClick">
+                <text class="polygon-tab-title">权益介绍</text>
+                <text class="polygon-tab-hint">Introduction</text>
+                <view class="polygon-tab-sparation"></view>
+            </view>
+            <view class="polygon-top-right" a:if="{{type==1}}" data-type="1" onTap="onTabClick">
+                <text class="polygon-tab-title">常见问题</text>
+                <text class="polygon-tab-hint">FAQ</text>
+                <view class="polygon-tab-sparation"></view>
+            </view>
+            <view class="shadow-mask"></view>
+            <view class="polygon-unseleted">
+                <view data-type="0" onTap="onTabClick" class="polygon-unseleted-item">权益介绍</view>
+                <view data-type="1" onTap="onTabClick" class="polygon-unseleted-item">常见问题</view>
+            </view>
+        </view>
+        <!--tab对应的内容区域-->
+        <view class="polygon-content">
+            <view class="polygon-content-item" a:if="{{type==0}}">
+                <slot name="left"></slot>
+            </view>
+            <view class="polygon-content-item" a:if="{{type==1}}">
+                <slot name="right"></slot>
+            </view>
+        </view>
+    </view>
+</view>

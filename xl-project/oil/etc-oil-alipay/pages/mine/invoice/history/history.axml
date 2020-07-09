@@ -1,0 +1,15 @@
+<import src="../../../../templates/mine/invoice/history/history.axml"></import>
+<view class="invoice-history-container">
+    <scroll-list 
+        onRefresh="onRefresh" 
+        onLoadMore="onLoadMore" 
+        load_status="{{load_status}}"
+        refresher_triggered="{{refresher}}" 
+        show_finish="{{show_finish}}">
+        <view class="invoice-list-box" a:for="{{invoice_list}}" a:key="stations" onTap="onInvoiceItemClick"
+            data-item="{{item}}" data-index="{{index}}" a:if="{{!isEmptyList}}">
+            <template is="invoice-history" data="{{item}}"></template>
+        </view>
+        <status a:if="{{status}}" text="{{status==1?'没有历史数据哦～':'网络好像断了哦～'}}" onRetryClick="onRetryClick"></status>
+    </scroll-list>
+</view>

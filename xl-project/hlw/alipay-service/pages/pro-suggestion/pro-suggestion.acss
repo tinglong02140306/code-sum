@@ -1,0 +1,135 @@
+.ocr-desc {
+  font-family: SourceHanSansCN-Normal;
+  color:#3b4257;
+  background:#f1f1f6;
+  font-size:30rpx;
+  height:26rpx;
+  display:flex;
+  justify-content:flex-start;
+  align-items:center; 
+  padding:32rpx 30rpx 26rpx;
+}
+.suggestion_style_box {
+  width:690rpx;
+  min-height: 50rpx;
+  line-height: 60rpx;
+  display:flex;
+  justify-content:flex-start;
+  flex-wrap: wrap;
+  align-items:center; 
+  padding:36rpx 75rpx 36rpx 30rpx;
+}
+.radio-box {
+  box-sizing: border-box;
+  flex: 0 0 33%;
+}
+/* radio{ transform:scale(.8)  } */
+
+/* radio未选中时样式 */
+
+radio .wx-radio-input{
+  /* border-radius:50%;
+  height:27rpx;
+  width:28rpx;
+  margin-top: -4rpx; */
+  /* 自定义样式.... */
+  height: 40rpx; 
+  width: 40rpx;
+  margin-top: -4rpx;
+  border-radius: 50%;
+  border: 2rpx solid #999;
+  background: transparent;
+
+}
+  /* radio选中时样式 */
+radio .wx-radio-input.wx-radio-input-checked{
+  border:none;
+  background:#3568eb;
+}
+radio .wx-radio-input.wx-radio-input-checked::before{
+  background-color: #3568eb;
+  /* 自定义样式.... */
+  border-radius: 50%;/* 圆角 */
+  width: 40rpx; /* 选中后对勾大小，不要超过背景的尺寸 */
+  height:40rpx; /* 选中后对勾大小，不要超过背景的尺寸 */
+  line-height: 40rpx;
+  text-align: center;
+  font-size:30rpx; /* 对勾大小 30rpx */
+  color:#fff; /* 对勾颜色 白色 */
+  background: #3568eb;
+  transform:translate(-50%, -50%) scale(1);
+  -webkit-transform:translate(-50%, -50%) scale(1);
+}
+.suggestion_box {
+
+}
+textarea {
+  width:689rpx;
+  height: 174rpx;
+  padding:31rpx;
+  position: relative
+}
+.currentWordNumber {
+  font-size: 28rpx;
+  color: #3b4257;
+  position: absolute;
+  right: 31rpx;
+  bottom: 33rpx;
+}
+.img-list {
+  width:690rpx;
+  min-height: 50rpx;
+  line-height: 60rpx;
+  display:flex;
+  justify-content:flex-start;
+  flex-wrap: wrap;
+  align-items:center; 
+  padding:36rpx 75rpx 36rpx 30rpx;
+}
+.img-item {
+  width: 175rpx;
+  height: 175rpx;
+  margin: 10rpx;
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  top: -15rpx;
+  right: -15rpx;
+  width: 50rpx;
+  height: 50rpx;
+  z-index: 11;
+  background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAMAAAD04JH5AAAAq1BMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///+goKBgYGBwcHDQ0NDg4OBvb2/AwMBQUFCh/eQuAAAAL3RSTlMA9/u/YRhx4ScNkSCgWfHZpUf06XkcnIyHTjkwEgrJsJYHBTUp55gj639qQCxSqwsWjS8AAAOcSURBVHja7dvtUtpAGAXgk4SQhPAZQEARBFGq1h5B+3H/V9Y6ltnZqWV58yaBOn1+ZzxnyGZNsln89y+bDuOL8/OLeDhFxYa9+tmsTRrt2Vm9N0QV0lr3hn9x062lKFPYOovoEJ21pijHdaPPg/Qb1yhcOuhQoDMYokjhuE2h9jhEUdIrjzl4VymKcDnymZM/uoTaY0SF6BE664BKwRoKNY9qXg15JXMWopkgl88dFqTzGTm0PCroT0ONhbqHUJ0FG0BkxMKNBfHLLktwhYONqaH/DQbU0I+DFkvTwgEmPkvjT+AUt1mi9goOlx2WquO6Q+iyZE3NBFj+pHzhs3T+vnv2gBUIFP8BS54Nkk+sRJTgfQ1WpIF3XfusiB/jPU1q6CeDtc/K+CH+dMt9vr28fKPFdbR0FIQe93h++mXDA21ej37mHl4ovARenl5tBPlPL8K7o76rgGngzncX6C9heyAdp8A0cOc7TwHZE16DG7uB/sAmLMtM9of1RTN7Pp6Qkgb6fNJ+XJxT1kCfz7lVIKKsgT6fn6w7IRqiAS7PNy7Et4ImYltAPuvWENA3sKcK4SBoU91ga+ULB0FKKhoI840UOz0aggbKfPYcY9DZQJnPuuNexN1Al89b1/OIu4Ei33pCuaGMaaDJZ4QdipkG8nwDvy0oZhoo8rnAm5BipoEinyHexMxjo85njDfnzGWjzee5NRHKbZT5fFAW2GoL9HSnYKs/BapBuC1uEKbMYVvgZRhSzMx/G0WDqXMmdOeTigYL/JbRIspXNMiwM6MhzNc0mDmfTN35qgZN7NzREOfbTywSA/EaiZ3vuE90m9hPZvJ8bYMYOwsvT766AYwgR766QQDjTp6vb3AH40Ger2/wAGPhSfP1DdoLwAik+foGc3utRJqvb1CzF0t8Wb6+QXYJy1yWr2/QhW3CvX7IX9X+cM3DtmWf+3yXv6z+LntZjVG1r+tHp7dg4XhN8vz16zMtqqMb+FNc6aLVKS7bYc3KrE9z6fb4i9dHX74//gcMWLECqyN/xFI/8mc83VP/kAmrjCXK4vI/ptN/TnfP0tRxkDuW5BYHumIpgiWMI1yMswTGEX6DIIHEmAVrLiEzYKHGEKsV+nH7v/h5P5B8YSG+JMjr3qOaV4fCSr/JZQWd1g0VokeoJaqNTh9hq9ercJRRKGuEKNJ0EFEgGkwBfKgNj28mh2z5nKBUaa3bz7Xp9cNs+z2Jjc//FeknF7EqhAqAtdMAAAAASUVORK5CYII=')no-repeat center center;
+  background-size: 100% 100%;
+}
+.btn{
+  padding: 0;
+  margin-top:20rpx;
+  height: 89rpx;
+  display: flex;
+  width: 690rpx;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5rpx;
+  color: white;
+  letter-spacing: 2rpx;
+  border:none;
+  border-color: transparent;
+  font-family: SourceHanSansCN-Light;
+	font-size: 36rpx;
+}
+.bg-primary{
+  background-color: #3568eb;
+}
+
+.login-btn{
+  width: 690rpx !important;
+  margin: 30rpx auto;
+  padding: 10rpx;
+  background-color: #3568eb;
+  color:white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,0 +1,24 @@
+<!--pages/person/etc/etc.axml-->
+<import src="../../../../templates/mine/load-more/load-more.axml"></import>
+<view class="etc-card-scroll-view" style='padding-bottom: {{isIphoneX?"68rpx":"10rpx"}}'>
+    <view style="margin-bottom: {{'100rpx'}}">
+        <scroll-list
+            height="{{scroll_height}}"
+            onRefresh="onRefresh"
+            onLoadMore="onLoadMore"
+            load_status="{{load_status}}"
+            refresher_triggered="{{refresher}}"
+            show_finish="{{show_finish}}">
+            <view class="etc-list-container" a:if="{{!is_empty}}">
+                <block a:for="{{card_list}}" a:for-index="index" a:for-item="item" a:key="etc_card">
+                    <etc-card-type data="{{item}}" onETCItemClick="onETCItemClick" onCarChange="etcCarChange" onUnbindClick="onUnbindClick"></etc-card-type>
+                </block>
+            </view>
+            <status a:if="{{status}}"  text="{{status==1?'您尚未添加ETC卡哦～':'网络好像断了哦～'}}" onRetryClick="onRetryClick"></status>
+        </scroll-list>
+    </view>
+    <view class="etc-card-add-new" onTap="etcAddClick" style='bottom: {{isIphoneX?"68rpx":"40rpx"}}' a:if="{{router != 1}}">
+        <image class="etc-card-add-img" src="https://oilmag.etcsd.com.cn/oilcoreserver/static/resource/bank-card-add.png"></image>
+        <text class="etc-card-add-text">添加ETC卡</text>
+    </view>
+</view>

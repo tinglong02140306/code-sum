@@ -1,0 +1,82 @@
+<!--
+ * @Author: sunmingmao
+ * @Date: 2020-03-26 15:42:07
+ * @LastEditors: sunmingmao
+ * @LastEditTime: 2020-04-30 11:02:01
+ * @Description: 油站列表
+ -->
+<!--pages/stations/index/index.wxml-->
+<import src="../../../templates/stations/station-item/station-item.wxml"></import>
+<import src="../../../templates/stations/clean-item/clean-item.wxml"></import>
+<import src="../../../templates/stations/station-item-loading/station-item-loading"></import>
+<view class="station-container"> 
+    <!--导航栏-->
+    <station-bar bind:menu="onMenuClick" list="{{bar_list}}" selected_index="{{page_type}}"></station-bar>
+    <!--加油-->
+    <view class="station-box">
+        <!--筛选条件-->
+        <view class="station-menu-container" style="display:{{ page_type==0?'flex':'none'}};">
+            <filter-tabs 
+                class="station-filter-tabs"
+                source = "{{tabs_oil}}"
+                tab_height="{{tab_height}}" 
+                height="{{drop_down_height}}"
+                bind:select="onOilSelectClick"></filter-tabs>
+            <view class="station-search" bind:tap="onSearchClick"> 
+                <image class="station-search-image" src="/assets/static/map-search.png"></image>
+                搜索
+            </view>
+        </view>
+        <!--油站列表-->
+        <scroll-list height="{{scroll_height}}" 
+            bind:refresh="onOilRefresh" 
+            bind:loadmore="onOilLoadMore" 
+            load_status="{{load_status_oil}}"
+            refresher_triggered="{{refresher_oil}}"
+            wx:if="{{page_type==0}}"
+        >
+            <view class="station-list-box" wx:if="{{page_type==0}}">
+                <block wx:for="{{station_list}}" wx:key="stations" wx:if="{{load_page_oil==2}}">
+                    <template is="station-item" data="{{item,openid}}"></template>
+                </block>
+                <block wx:for="{{10}}" wx:key="stations_loasding" wx:if="{{load_page_oil==1}}">
+                    <template is="station-item-loading"></template>
+                </block>
+                <status wx:if="{{oil_status}}" type="{{oil_status}}" text="{{oil_status==1?'没有符合您条件的油站哦～':'网络好像断了哦～'}}" bind:retry="onRetryClick"></status>
+            </view>
+        </scroll-list>
+    </view>
+    <!--洗车-->
+    <view class="station-box">
+         <!--筛选条件-->
+         <view class="station-menu-container clean-filter-margin" style="display:{{ page_type==1?'flex':'none'}};">
+            <filter-tabs 
+                class="station-filter-tabs"
+                source = "{{tabs_clean}}"
+                tab_height="{{tab_height}}" 
+                height="{{drop_down_height}}"
+                bind:select="onCleanSelectClick"></filter-tabs>
+             <view class="station-search" bind:tap="onRefreshClick">
+                 <image class="station-search-image" src="https://oss.etcsd.com/object/d8048ebb9b1b4a4fa1e7d61d461bd426"></image>
+                 刷新
+             </view>
+        </view>
+        <!--洗车列表-->
+        <scroll-list height="{{scroll_height}}" 
+            bind:refresh="onCleanRefresh" 
+            bind:loadmore="onCleanLoadMore" 
+            load_status="{{load_status_clean}}"
+            refresher_triggered="{{refresher_clean}}"
+            wx:if="{{page_type==1}}">
+            <view class="station-list-box" wx:if="{{page_type==1}}">
+                <block wx:for="{{clean_list}}" wx:key="stations">
+                    <template is="clean-item" data="{{item,openid}}"></template>
+                </block>
+                <status wx:if="{{clean_status}}" type="{{clean_status}}" text="{{clean_status==1?'附近没有洗车服务':'网络好像断了哦～'}}" bind:retry="onRetryClick"></status>
+            </view>
+        </scroll-list>
+    </view>
+    <!--切换地图模式-->
+<!--    <image class="station-to-map" wx:if="{{station_list}}" src="{{icon_station_to_map}}" bind:tap="onMapClick"></image>-->
+    <image class="station-to-map"  src="{{icon_station_to_map}}" bind:tap="onMapClick"></image>
+</view>

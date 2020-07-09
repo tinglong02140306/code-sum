@@ -1,0 +1,87 @@
+.coupon-item-template-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10rpx 30rpx;
+}
+.coupon-item-template-image{
+    width: 684rpx;
+    height: 152rpx;
+    position: relative;
+}
+.coupon-item-template-box{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    box-sizing: border-box;
+    width: 684rpx;
+    height: 152rpx;
+    border-radius: 4rpx;
+    /*background-color: #EA4F48;*/
+    position: absolute;
+}
+.coupon-item-template-left{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    color: rgba(255, 217, 195, 1);
+    font-size: 62rpx;
+    /*text-align: center;*/
+    font-family: PingFangSC-Semibold;
+}
+.coupon-item-template-left-num{
+
+}
+.coupon-item-template-left-text{
+    color: rgba(255, 217, 195, 1);
+    font-size: 34rpx;
+    font-family: PingFangSC-Semibold;
+}
+.coupon-item-template-center{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+.coupon-item-template-center-name{
+    color: rgba(255, 217, 195, 1);
+    font-size: 30rpx;
+    text-align: left;
+    font-family: PingFang-SC-Heavy;
+}
+.coupon-item-template-center-time{
+    color: rgba(255, 217, 195, 1);
+    font-size: 26rpx;
+    text-align: left;
+    font-family: PingFangSC-Light;
+}
+.coupon-item-template-right{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+.coupon-item-template-right-image{
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: 100%;
+    /*background-color: #FEDBB5;*/
+    background-color: transparent;
+    /*box-shadow: 2rpx 2rpx 5rpx 0rpx rgba(214, 56, 55, 0.5);*/
+    /*position: relative;*/
+}
+.coupon-item-template-right-text{
+    color: rgba(215, 57, 56, 1);
+    font-size: 28rpx;
+    text-align: left;
+    font-family: PingFang-SC-Medium;
+    position: absolute;
+}

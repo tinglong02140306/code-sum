@@ -1,0 +1,81 @@
+.summary-report-container{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+}
+.summary-report-top-container{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: white;
+  padding: 10px 0;
+}
+.summary-report-table-box{
+  background-color: white;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border: solid 1px #f2f2f2;
+  margin-top: 10px;
+}
+.summary-report-table-container{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: white;
+  margin-top: 10px;
+}
+.summary-report-table{
+  width: 100%;
+  table{
+    thead{
+      th{
+        font-weight: 600;
+        letter-spacing: 1px;
+      }
+    }
+  }
+}
+.summary-report-form{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  .ant-form-item{
+    //width: 16%;
+    display: flex;
+    flex-direction: row;
+    font-family: "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 14px;
+    font-variant: tabular-nums;
+    line-height: 1.5;
+    color: rgba(0, 0, 0, 0.65);
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    list-style: none;
+    vertical-align: top;
+    margin: 0 10px;
+  }
+
+  .ant-form-item-label{
+    width: 80px;
+    font-weight: 700;
+  }
+
+  .ant-form-item-control-wrapper{
+    flex: 1;
+  }
+}
+.summary-report-form-btn{
+  font-size: 12px;
+  margin: 0 10px;
+}

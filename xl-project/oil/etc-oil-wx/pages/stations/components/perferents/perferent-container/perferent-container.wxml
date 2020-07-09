@@ -1,0 +1,14 @@
+<!--
+ * @Author: sunmingmao
+ * @Date: 2020-03-04 16:23:25
+ * @LastEditTime: 2020-03-04 20:45:34
+ * @LastEditors: sunmingmao
+ * @Description: 优惠券列表
+ * @FilePath: /oil-wechat-applet/pages/station/components/perferents/perferent-container/perferent-container.wxml
+ -->
+<!--pages/station/components/perferents/perferent-container/perferent-container.wxml-->
+<view class="perferent-container-box">
+    <block wx:for="{{list}}" wx:key="list" wx:item="item" wx:index="index">
+        <perferent-item item="{{item}}" index="{{index}}" bind:rule="onRuleClick" bind:check="onCheckClick"></perferent-item>
+    </block>
+</view>

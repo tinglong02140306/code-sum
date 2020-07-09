@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="../../../../">
+    <meta charset="UTF-8">
+    <!-- 添加到主屏幕后，全屏显示 -->
+    <meta name="apple-touch-fullscreen" content="YES"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <!-- iphone 运行在全屏模式 -->
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="viewport" content="width=device-width"/>
+    <title>我的驾照</title>
+    <link rel="stylesheet" type="text/css" href="../css/base.css?__inline"/>
+    <link rel="stylesheet" type="text/css" href="../css/all.css?__inline"/>
+    <link rel="stylesheet" type="text/css" href="../lib/picker/picker.css?__inline"/>
+    <link rel="stylesheet" type="text/css" href="../css/license-information.css?__inline"/>
+</head>
+<body>
+    <div class="wrap">  
+        <!-- 头部 -->
+        <header class="topic-bg">
+            <div class="header-item topic-bg">
+                <a href="javascript:void(0)" class="header-back" data-bind="click: back"></a>
+                <span class="f36 cf title">我的驾照</span>
+                <a href="javascript:void(0)" class="del-bind f32 cf" data-bind="click: delBindEvent">解除绑定</a>
+            </div>
+        </header> 
+        <!-- 主要内容 -->
+        <div class="wrapper top-7">
+
+            <div class="drivers-title">
+                <div class="driver-info f28 c3 tc">
+                    <span class="driver-name" data-bind="text: driverInfo.name"></span>
+                    <p>
+                        &nbsp&nbsp驾驶证号&nbsp&nbsp
+                        <span class="driver-num" data-bind="text: driverInfo.licenseNumber"></span>
+                    </p>  
+                </div>
+
+                <div class="charts-wrap">
+                    <div class="charts-title">
+                        <p class="score-title f26 c9 tc">累计记分</p>
+                        <p class="score-num f100 tc" data-bind="text: driverInfo.cumulativeIntegral"></p>
+                    </div>
+                    <div id='analysisCharts' class="analysis-charts">   
+                    </div>
+                </div>
+                
+
+                <div class="del-date-wrap tc">
+                    <p class="del-date f26 c9">
+                        清分日期&nbsp&nbsp&nbsp&nbsp<span data-bind="text: driverInfo.clearingDate"></span>
+                    </p>
+                    
+                </div>
+            </div>
+            <ul class="drivers-list f30">
+                <li class="list-item clearfix">
+                    <span class="fl jszzt-title c3">驾驶证状态</span>
+                    <span class="fr jszss" data-bind="text: driverInfo.licenseStatus"></span>
+                </li>
+                <li class="list-item clearfix">
+                    <span class="fl c3">准驾车型</span>
+                    <span class="fr c6" data-bind="text: driverInfo.allowModels"></span>
+                </li>
+                <li class="list-item clearfix">
+                    <span class="fl c3">档案编号</span>
+                    <span class="fr c6" data-bind="text: driverInfo.archivalCoding"></span>
+                </li>
+                <li class="list-item clearfix">
+                    <span class="fl c3">发证机关</span>
+                    <span class="fr fzjg c6" data-bind="text: driverInfo.issuingOrgan"></span>
+                </li>
+                <li class="list-item clearfix">
+                    <span class="fl c3">审验日期</span>
+                    <span class="fr c6" data-bind="text: driverInfo.checkDate"></span>
+                </li> 
+                <li class="list-item clearfix">
+                    <span class="fl c3">有效期至</span>
+                    <span class="fr c6" data-bind="text: driverInfo.effectiveDate"></span>
+                </li> 
+                <li class="list-item clearfix">
+                    <span class="fl c3">初次领证日期</span>
+                    <span class="fr c6" data-bind="text: driverInfo.firstLicensingDate"></span>
+                </li>
+            </ul>
+            
+        </div>
+    </div>
+    <!-- 弹框 -->
+    <div class="mark">
+        <div class="quit">
+            <div class="quit-notice">
+                <p class="f30 c6 tc">您要取消绑定我的驾照吗？</p>
+            </div>
+            <div class="quit-btn">
+                <span class="f28 c3" data-bind="click: cancelEvent">暂不解除</span>
+                <span class="f28 c3" data-bind="click: sureClick">解除绑定</span>
+            </div>
+        </div>
+    </div>
+
+<script src="../lib/lib.js"></script>
+<script src="../lib/echarts/echarts.min.js"></script>
+<script src="../app/license-information.js?__inline"></script>
+</html>

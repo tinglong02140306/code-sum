@@ -1,0 +1,33 @@
+body {
+    background: #fff;
+}
+
+.protocol-content .article {
+    padding-top: .8rem;
+}
+
+.protocol-content {
+    padding: 0 .56rem .56rem .56rem;
+    color: #F6F6F6;
+}
+.protocol-title {
+    /*padding: 20px 0 10px;*/
+    line-height: 1.7rem;
+    font-size: .7rem;
+    font-weight: 700;
+    text-align: center;
+    color: #333;
+}
+.indent {
+    text-indent: 2em;
+}
+.protocol-content .article div {
+    font-size: .6rem;
+    color: #333;
+    line-height: 0.9rem;
+}
+.protocol-content .article strong {
+    font-size: .6rem;
+    color: #333;
+    line-height: 1.5rem;
+}

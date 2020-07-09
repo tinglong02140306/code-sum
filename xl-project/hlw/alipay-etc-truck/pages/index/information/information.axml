@@ -1,0 +1,193 @@
+<view>
+	<steps
+			activeIndex="{{activeIndex}}" items="{{items}}">
+	</steps>
+	<!--申请人信息-->
+	<block>
+		<view>
+			<view class="title">申请人</view>
+			<view>
+				<input-item
+						data-field="idName"
+						clear="{{true}}"
+						value="{{idName}}"
+						placeholder="请输入申请人姓名"
+						onInput="onItemInput"
+						onClear="onClear"
+						disabled="{{true}}"
+				>
+					姓名
+				</input-item>
+				<input-item
+						data-field="idNumber"
+						clear="{{true}}"
+						value="{{idNumber}}"
+						placeholder="请填写身份证号码"
+						onInput="onItemInput"
+						onClear="onClear"
+						disabled="{{true}}"
+				>
+					身份证号
+				</input-item>
+				<!-- 工行信用卡 -->
+				<block a:if="{{CreditCard}}">
+					<block>
+						<input-item
+							data-field="firm"
+							clear="{{true}}"
+							value="{{firm}}"
+							placeholder="请填写工作单位名称"
+							onInput="onItemInput"
+							onClear="onClear"
+							maxlength="50"
+					>
+						工作单位名称
+						</input-item>
+					</block>	
+					<block>
+						<input-item
+							data-field="inCome"
+							clear="{{true}}"
+							value="{{inCome}}"
+							placeholder="请填写本人年收入（万元）"
+							onInput="onItemInput"
+							onClear="onClear"
+					>
+						本人年收入
+						</input-item>
+					</block>
+
+					<block>
+						<input-item
+							data-field="signOrganize"
+							clear="{{true}}"
+							value="{{signOrganize}}"
+							placeholder="请填写身份证签发机关"
+							onInput="onItemInput"
+							onClear="onClear"
+							maxlength="20"
+					>
+						身份证签发机关
+						</input-item>
+					</block>
+
+					<block>
+					<picker-item
+							placeholder="必填"
+							value="{{startDate}}"
+							data-idx="startDate"
+							onPickerTap="selectDate"
+					>
+						证件签发日期
+					</picker-item>
+					<picker-item
+							placeholder="长期有效可为空（选填）"
+							value="{{endDate}}"
+							data-idx="endDate"
+							onPickerTap="selectDate"
+					>
+						证件有效期
+						</picker-item>
+					</block>
+				</block>
+			</view>
+		</view>
+	</block>
+	<!--收货地址-->
+	<block a:if="{{flag}}">
+		<view>
+			<view class="title">收货地址（收取ETC设备）</view>
+			<view>
+				<input-item
+						data-field="receiver"
+						clear="{{true}}"
+						value="{{receiver}}"
+						placeholder="请填写收件人"
+						onInput="onItemInput"
+						onClear="onClear"
+           				disabled="{{true}}"
+				>
+					收件人
+					<!-- <view slot="extra" class="automatic">
+                 		自动填写
+					</view> -->
+				</input-item>
+				<input-item
+						data-field="mobile"
+						clear="{{true}}"
+						value="{{mobile}}"
+						placeholder="请填写收件人手机号"
+						onInput="onItemInput"
+						onClear="onClear"
+           				disabled="{{true}}"
+				>
+					手机号
+				</input-item>
+				<input-item
+						data-field="region"
+						placeholder="请选择您所在的地区"
+						value="{{region}}"
+						onPickerTap="selectRegion"
+						onClear="onClear"
+						disabled="{{true}}"
+				>
+					所在地区
+				</input-item>
+				<input-item
+						data-field="detailAddress"
+						clear="{{true}}"
+						value="{{detailAddress}}"
+						placeholder="请填写详细地址"
+						onInput="onItemInput"
+						onClear="onClear"
+                        disabled="{{true}}"
+				>
+					详细地址
+				</input-item>
+                <block a:if="{{stafflag}}">
+                    <input-item
+						data-field="staffId"
+						clear="{{true}}"
+						value="{{staffId}}"
+						placeholder="选填"
+						onInput="onItemInput"
+						onClear="onClear"
+                        disabled="{{true}}"
+				>
+					邀请人员编号
+					</input-item>
+				</block>
+				<block a:if="{{!stafflag}}">
+                    <input-item
+						data-field="staffId"
+						clear="{{true}}"
+						value="{{staffId}}"
+						placeholder="选填"
+						onInput="onItemInput"
+						onClear="onClear"
+
+				>
+					邀请人员编号
+					</input-item>
+				</block>	
+
+					
+
+			</view>
+		</view>
+	</block>
+	<!--同意办理-->
+	<view class="addContent" catchTap="selectAddress">
+		<view class="car-container" onTap="addCar" style="background: #FFFFFF;border: 2rpx solid #108EE9;box-shadow: 0 2rpx 14rpx 0 rgba(0,0,0,0.10);border-radius: 4px;">
+			<view class="add">+</view>
+			<view style="width:8rpx;height:1rpx;"></view>
+			<view class="color-primary add">添加收货地址</view>
+	 	</view>
+	</view>
+	<view class="btn-wrapper">
+		<button class="btn bg-primary" style="border-radius: 10rpx;" onTap="next">同意办理</button>
+	</view>
+</view>
+
+
+

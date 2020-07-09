@@ -1,0 +1,9 @@
+{
+    "titleBarColor": "#ffffff",
+    "defaultTitle": "洗车券礼包",
+    "backgroundColor": "#eeeeee",
+    "usingComponents": {
+        "scroll-list": "../../../../components/scroll-list/scroll-list",
+        "status": "../../../../components/status/status"
+    }
+}

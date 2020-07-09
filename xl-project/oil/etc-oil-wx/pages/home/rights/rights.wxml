@@ -1,0 +1,94 @@
+<!--
+ * @Author: sunmingmao
+ * @Date: 2020-04-10 08:34:55
+ * @LastEditors: sunmingmao
+ * @LastEditTime: 2020-04-13 11:34:39
+ * @Description: 权益(银行卡优惠)详情页面
+ -->
+ <view>
+    <web-view class="rights-webview" src="{{url}}" wx:if="{{page_type==1}}"></web-view>
+    <view class="rights-page" wx:if="{{page_type==2}}">
+        <view class="rights-header-box">
+            <!--信用卡办理-->
+            <view class="rights-header-point-box" bind:tap="onBankClick" wx:if="{{bankInfo.selling_area||bankInfo.url}}">
+                <image class="rights-header-point-icon" src="{{bankInfo.hint_icon}}"></image>
+                <text class="rights-header-point-text">{{bankInfo.hint}}</text>
+                <image class="rights-header-point-next" src="{{icon_next}}"></image>
+            </view>
+            <!--优惠-->
+            <view class="rights-header-preferent-box">
+                <image class="rights-header-preferent-image" src="{{bankInfo.activity_url}}" mode="widthFill"></image>
+            </view>
+            <!--轮播及分享-->
+            <view class="rights-header-function-box">
+                <swiper class="rights-header-swiper" wx:if="{{user_list&&user_list.length}}" vertical autoplay circular>
+                    <block wx:for="{{user_list}}" wx:key="users" wx:for-item="item">
+                        <swiper-item>
+                            <view class="rights-header-swiper-item">
+                                <image class="rights-header-swiper-item-image" src="{{item.url}}"></image>
+                                <text>{{item.name}}车主激活{{item.amount}}元优惠券</text>
+                            </view>
+                        </swiper-item>
+                    </block>
+                </swiper>
+                <view class="rights-header-function-share-box">
+                    <image class="rights-header-function-share-image" src="{{icon_share}}"></image>
+                    <text>分享</text>
+                    <button open-type="share" class="rights-header-function-share-btn">fenxiang</button>
+                </view>
+            </view>
+        </view>
+        <!--底部-->
+        <view class="rights-footer-box">
+            <!--激活权益-->
+            <view class="rights-footer-activate-box">
+                <text class="{{status?'disable-button':'theme-button'}} rights-footer-activate-btn" bind:tap="onRightsClick">{{status?'已领取':'领取优惠券'}}</text>
+            </view>
+            <!--tab-->
+            <view class="rights-footer-tabs-box">
+                <polygon>
+                    <view class="rights-footer-tabs-item" slot="left">
+                        <block wx:for="{{bankInfo.introduction}}" wx:key="introduction">
+                            <view class="rights-footer-introduction-box">
+                                <view class="rights-footer-introduction-title">
+                                    <image class="rights-footer-introduction-title-image" src="{{icon_left_mark}}"></image>
+                                    <text>{{item.title}}</text>
+                                    <image class="rights-footer-introduction-title-image" src="{{icon_right_mark}}"></image>
+                                </view>
+                                <image class="rights-footer-introduction-image" wx:if="{{item.image.url}}" src="{{item.image.url}}" style="width: {{item.image.width}};height: {{item.image.height}};"></image>
+                                <text class="rights-footer-introduction-content" wx:if="{{item.content}}">{{item.content}}</text>
+                                <text class="rights-footer-introduction-hint" wx:if="{{item.hint}}">{{item.hint}}</text>
+                            </view>
+                        </block>
+                        <!--在线客服-->
+                        <view class="rights-footer-tabs-service">
+                            <image class="rights-footer-tabs-service-image" src="{{icon_service}}"></image>
+                            <text class="rights-footer-tabs-service-text">在线客服</text>
+                            <button class="rights-footer-tabs-service-btn" open-type="contact"></button>
+                        </view>
+                    </view>
+                    <view class="rights-footer-tabs-item" slot="right"> 
+                        <block wx:for="{{bankInfo.faq}}" wx:key="faq">
+                            <view class="rights-footer-faq-box">
+                                <view class="rights-footer-faq-question">
+                                    <text class="rights-footer-faq-question-mark">Q</text>
+                                    <text>{{item.question}}</text>
+                                </view>
+                                <view class="rights-footer-faq-answer">
+                                    <text class="rights-footer-faq-answer-mark">A</text>
+                                    <text>{{item.answer}}</text>
+                                </view>
+                            </view>
+                        </block>
+                        <!--在线客服-->
+                        <view class="rights-footer-tabs-service">
+                            <image class="rights-footer-tabs-service-image" src="{{icon_service}}"></image>
+                            <text class="rights-footer-tabs-service-text">在线客服</text>
+                            <button class="rights-footer-tabs-service-btn" open-type="contact"></button>
+                        </view>
+                    </view>
+                </polygon>
+            </view>
+        </view>
+    </view>
+ </view>

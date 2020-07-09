@@ -1,0 +1,208 @@
+.vehicle-info-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 16px;
+}
+
+/*查询条件*/
+.vehicle-info-search-container{
+    width: 100%;
+    background-color: #ffffff;
+    padding: 10px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+.vehicle-info-search-item{
+    flex: 0 0 28%;
+    box-sizing: border-box;
+    text-align: center;
+    text-align: right;
+    label{
+        font-weight: bold;
+    }
+    .ant-select{
+        min-width: 169px;
+    }
+}
+
+/*查询按钮*/
+.vehicle-info-search-item-btn{
+    position: absolute;
+    right: 10px;
+}
+
+/*Table*/
+.vehicle-info-table{
+    width: 100%;
+    background-color: #ffffff;
+    margin-top: 10px;
+}
+
+.vehicle-info-table-header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.vehicle-info-table-header-item{
+    margin-right: 16px;
+}
+
+/*二维码*/
+.vehicle-info-qr-box{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.vehicle-info-qr-item{
+    cursor: pointer;
+}
+
+/*操作*/
+.vehicle-info-options-box{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.vehicle-info-options-item{
+    margin-right: 4px;
+    cursor: pointer;
+}
+
+.see{
+    color: #1890ff;
+    margin-left: 4px;
+}
+
+.update{
+    color: #00CC00;
+}
+
+.delete{
+    color: #e73838;
+}
+
+/*modal*/
+.vehicle-info-modal{
+   .ant-modal-body{
+       padding: 24px 0px 0 0px;
+   }
+}
+
+/*modal form*/
+.vehicle-info-modal-form{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+    .ant-form-item{
+        margin-right: 0;
+    }
+
+    .ant-form-item-with-help{
+        margin-bottom: 0;
+    }
+}
+
+.vehicle-info-modal-form-box{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+    box-sizing: border-box;
+}
+
+.vehicle-info-modal-form-box-side{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+/*modal form item*/
+.vehicle-info-modal-form-item{
+    flex: 0 0 46%;
+    margin-bottom: 24px;
+    position: relative;
+    margin: 0 10px;
+    .ant-form-item-control-wrapper{
+        min-width: 200px;
+    }
+    .ant-time-picker{
+        min-width: 200px;
+    }
+    .ant-input-number{
+        min-width: 200px;
+    }
+    .ant-form-item-label{
+        min-width: 96px;
+        font-weight: bolder;
+    }
+
+    .ant-input[disabled]{
+        color: rgba($color: #000000, $alpha: 0.65);
+    }
+
+    .ant-time-picker-input[disabled]{
+        color: rgba($color: #000000, $alpha: 0.65);
+    }
+}
+
+.upload{
+   margin-left: 104px;
+}
+
+.other{
+    padding-left: 82px;
+}
+
+/*modal form footer*/
+.vehicle-info-modal-form-footer{
+    width: 100%;
+    padding: 10px 16px;
+    text-align: right;
+    border-top: 1px solid #e8e8e8;
+    border-radius: 0 0 4px 4px;
+    box-sizing: border-box;
+    margin-top: 24px;
+
+    button{
+        margin-left: 16px;
+    }
+}
+
+.vehicle-info-modal-qrcode{
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.vehicle-info-modal-qrcode-img{
+    width: 340px;
+    height: 340px;
+    margin-bottom: 16px;
+}

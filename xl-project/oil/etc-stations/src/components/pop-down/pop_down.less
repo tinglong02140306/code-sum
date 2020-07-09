@@ -1,0 +1,115 @@
+@pop-down: pop-down;
+@top-height: 90px;
+
+.@{pop-down} {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  position: relative;
+  top: 0;
+  left: 0;
+
+  &-box {
+    width: 100%;
+    height: @top-height;
+    background-color: white;
+    position: relative;
+    top: 0;
+    left: 0;
+  }
+
+  &-container {
+    width: 100vw;
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    z-index: 2000;
+
+    &-mask {
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    &-info {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-sizing: border-box;
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      &-box {
+        width: 100%;
+        height: @top-height;
+        background-color: white;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        box-sizing: border-box;
+        border-bottom: 2px solid #f7f7f7;
+
+        &-item {
+          height: 100%;
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          box-sizing: border-box;
+
+          &-text {
+            font-size: 30px;
+            color: #333333;
+            letter-spacing: 2px;
+            font-weight: 400;
+          }
+
+          &-image {
+            width: 20px;
+            height: 12px;
+            margin-left: 4px;
+          }
+        }
+      }
+
+      &-content {
+        width: 100%;
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        box-sizing: border-box;
+
+        &-item {
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+          box-sizing: border-box;
+          padding: 28px 48px;
+
+          &-text {
+            font-size: 28px;
+            color: #333333;
+          }
+
+          &-image {
+            width: 32px;
+            height: 32px;
+          }
+        }
+      }
+    }
+  }
+
+}

@@ -1,0 +1,16 @@
+<!--refresh-view-->
+<scroll-view class="refresh-view" 
+    scroll-y 
+    bindscroll="onSroll"
+    bindscrolltolower="onSrollBottom"  
+    bindtouchstart="onTouchStart" 
+    bindtouchmove="onTouchMove" 
+    bindtouchend="onTouchEnd"> 
+    <view class="refresh-view-box" style="transform:{{transform}}">
+        <view class="refresh-view-header">
+            <text>{{refreshText}}</text>
+        </view>
+        <slot></slot>
+        <view class="refresh-view-footer">正在加载更多...</view>
+    </view>
+</scroll-view>

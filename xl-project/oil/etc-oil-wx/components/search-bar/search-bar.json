@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "navigation-bar":"../navigation-bar/navigation-bar"
+  }
+}

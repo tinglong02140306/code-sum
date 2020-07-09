@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="../../../../" >
+    <meta charset="UTF-8">
+    <!-- 添加到主屏幕后，全屏显示 -->
+    <meta name="apple-touch-fullscreen" content="YES"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <!-- iphone 运行在全屏模式 -->
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="viewport" content="width=device-width"/>
+    <title>消息类型</title>
+    <link rel="stylesheet" type="text/css" href="../lib/mescroll/mescroll.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/base.css?__inline"/>
+    <link rel="stylesheet" type="text/css" href="../css/all.css?__inline"/>
+    <link rel="stylesheet" type="text/css" href="../css/info-type-details.css?__inline"/>
+</head>
+<body>
+    <div class="wraps">
+        <div class="wrap infos-type-details-wrap">    
+            <!-- 头部 -->
+            <header class="topic-bg">
+                <div class="header-item topic-bg">
+                    <a href="javascript:void(0)" class="arrow-left header-back" data-bind="click: back"></a>
+                    <span class="f36 cf title"></span>
+                </div>
+            </header>
+
+            <!-- 主要内容 -->
+            <div class="infos-type-details-content top-7">
+                <div id="wrapper" class=" mescroll">
+                    <div class="info-type-wrap">
+                    </div>
+                    <div class="no-line hide">网络无法连接，请检查您的网络</div> 
+                </div>
+            </div>
+
+            
+
+            <!-- 暂无数据 -->
+            <div class="empty top-7 hide">
+                <div class="empty-ad"></div>
+                <p>暂无消息</p>
+            </div> 
+
+        </div>
+        <div class="set-mask"></div>
+        <a href="javascript:void(0)" class="f30 c3 tc btn-mask-delete">删除信息</a>
+        
+    </div>
+    
+<!-- 消息详情 -->
+<script id="infoDetailTmpl" type="text/html">
+    {{each $data as item index}}
+        <div class="infos-details-item" data-type="{{item.msgType}}" data-status="{{item.readStatus}}" data-id="{{item.mid}}" data-index="{{index}}"  data-state="deleted">
+            <p class="f24 c9 item-date">{{item.sendDate}}</p>
+            <div class="item-title-content" data-type="{{item.msgType}}" data-status="{{item.readStatus}}" data-id="{{item.mid}}" data-index="{{index}}">
+                <div class="item-wrap bf">
+                    <div class="item-title c3 f30 w-wrap">{{item.title}}</div> 
+                    <div class="item-content f28 c6">
+                        <div class="w-wrap">{{item.content}}</div>  
+                    </div>  
+                    
+                    <p class="view-detail tc f28 {{if !item.goPath}} hide {{/if}}" data-gopath="{{item.extendgoPath}}" data-type="{{item.extendtype}}" data-url="{{item.extendurl}}" data-index="{{index}}">查看详情</p>
+                    
+                    
+                </div>
+            </div>
+        </div>
+    {{/each}} 
+</script>
+<script>
+    var CONFIG = {
+        path: './public/wcportal/0.0.1/'
+    };
+</script>
+<script src="../lib/jquery/jquery-1.8.2.min.js"></script>
+<script src="../lib/croods/croods-1.3.1.min.js"></script>
+<script src="../lib/mescroll/mescroll.min.js"></script>
+<script src="../lib/jquery.lazyload.min.js"></script>
+<script src="../lib/fly/fly.js"></script>
+<script src="../app/infos-type-details.js?__inline"></script>
+</html>

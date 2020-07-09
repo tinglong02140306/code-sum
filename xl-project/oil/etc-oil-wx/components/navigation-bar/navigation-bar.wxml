@@ -1,0 +1,13 @@
+<!--
+ * @Author: sunmingmao
+ * @Date: 2020-03-26 15:42:07
+ * @LastEditors: sunmingmao
+ * @LastEditTime: 2020-04-17 17:04:15
+ * @Description: 自定义导航栏
+ -->
+<view class="navigation-bar-container" style="{{background_style}};">
+    <!--标题栏内容区域-->
+    <view class="title-bar-container" style="{{titleBarStyle}}">
+        <slot></slot>
+    </view>  
+</view>

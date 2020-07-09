@@ -1,0 +1,58 @@
+.ticket-configure-modal-container{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.ticket-configure-modal-item{
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.ticket-configure-modal-input-box{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  .ant-input{
+    width: 70%;
+  }
+}
+
+.ticket-configure-modal-input-hint{
+  width: 110px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  color: #000c17;
+  letter-spacing: 1px;
+  font-weight: 700;
+  text-align: right;
+  span{
+    color: red;
+  }
+}
+
+
+
+.ticket-configure-modal-input-error-hint{
+  align-self: flex-start;
+  margin: 2px 0 2px 110px;
+  font-size: 12px;
+  padding: 1px 0;
+  color: red;
+}
+
+.ticket-configure-modal-input-error-empty{
+  width: 100%;
+  height: 20px;
+}

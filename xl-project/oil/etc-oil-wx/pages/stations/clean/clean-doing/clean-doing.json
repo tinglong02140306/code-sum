@@ -1,0 +1,13 @@
+{
+  "navigationBarBackgroundColor": "#ededed",
+  "navigationBarTextStyle": "black",
+  "navigationBarTitleText": "洗车中",
+  "backgroundColor": "#eeeeee",
+  "backgroundTextStyle": "light",
+  "navigationStyle":"custom",
+  "usingComponents": {
+    "login-status":"/components/login-status/login-status",
+    "navigation-bar":"/components/navigation-bar/navigation-bar"
+
+  }
+}

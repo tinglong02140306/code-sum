@@ -1,0 +1,54 @@
+.permission-form {
+  width: 100%;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 8px 16px;
+  margin-bottom: 16px;
+}
+
+.permission-input{
+  width: 80%;
+}
+
+.permission-content{
+  background-color: #f2f2f2;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.permission-content-div{
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  width: 100%;
+  padding: 4px 10px;
+}
+
+.permission-operate-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  min-width: 160px;
+  a{
+    font-size: 10px;
+    padding: 2px;
+  }
+}
+
+.permission-table{
+  background-color: white;
+  width: 100%;
+  table{
+    thead{
+      th{
+        color: black;
+        font-weight: bold;
+        font-size: 14px;
+      }
+    }
+  }
+}

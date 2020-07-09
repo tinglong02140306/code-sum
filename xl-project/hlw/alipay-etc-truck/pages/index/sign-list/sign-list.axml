@@ -1,0 +1,31 @@
+<view class="body-wrapper">
+	<block wx:if="{{bank == 'ICBC'}}">
+		<view class="top-area">请使用中国工商银行借记卡签约</view>
+		<view class="split"/>
+	</block>
+	<block wx:if="{{bank == 'OTHER'}}">
+		<view class="top-area2">
+			<view>开通工商银行二类账户</view>
+			<view style="font-size:26rpx;color:#666;">您在成功开通工商银行二类账户后，系统将通过您的工行二类账户扣除高速公路通行费。</view>
+			<view style="font-size:26rpx;color:red;">请确保您使用的借记卡内有足够额度。</view>
+		</view>
+		<view class="split"/>
+	</block>
+	<!--信息区域-->
+	<view class="section-info">
+		<input-item label="姓名" placeholder="必填" idx="userName" value="{{applierInfo['userName']}}" disabled="{{true}}" />
+		<input-item label="身份证号" placeholder="必填" idx="cardNo" value="{{applierInfo['userId']}}" disabled="{{true}}"/>
+		<input-item label="银行卡号" disabled="{{disableInput}}" placeholder="请输入银行卡号" type="number" value="{{cardNo}}" idx="cardNo" bind:input="bindKeyInput" bind:clear="clear" />
+		<input-item label="手机号" disabled="{{disableInput}}" placeholder="银行预留手机号" type="number" value="{{mobile}}" maxlength="11" idx="mobile" bind:input="bindKeyInput"
+		            bind:clear="clear"/>
+		<view class="input-item">
+			<view class="input-label">验证码</view>
+			<view class="input">
+				<input placeholder="必填" data-idx="captcha" value="{{captcha}}" style="width:100%;" bindinput="update"
+				       type="number" placeholder-style="text-align:left;"/>
+			</view>
+			<button disabled="{{!enableSmallButton}}" bindtap="sendMsg" class="bg-primary color-white small-button" size="mini">{{smallButtonText}}</button>
+		</view>
+	</view>
+</view>
+<button disabled="{{!enableBtn}}" class="bg-primary next-btn" bindtap="next">下一步</button>

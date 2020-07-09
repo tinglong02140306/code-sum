@@ -1,0 +1,295 @@
+header {
+	position: relative;
+}
+
+.f60 {
+    font-size: 1.33rem;
+}
+.f34 {
+    font-size: 0.76rem;
+}
+.f42 {
+    font-size: 0.93rem; 
+}
+.c96 {
+    color: #969696;
+}
+.c4c {
+    color: #4c72ff;
+}
+html, body {
+    overflow: hidden;
+}
+.wrap {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+.header-wrap {
+	background: transparent;
+}
+.top-banner {
+    position: relative;
+    width: 100%;
+	height: 13.5rem;
+    border-bottom: 1px solid #eaeaea;
+}
+.bg-fir-state {
+    background: url(../images/remove-car/bg-move-car.png) left center no-repeat;
+    background-size: 100% 13.5rem;
+}
+.bg-sec-state {
+    background: url(../images/remove-car/bg-sec-state.png) left center no-repeat;
+    background-size: 100% 13.5rem;
+}
+.bg-third-state {
+    background: url(../images/remove-car/bg-third-state.png) left center no-repeat;
+    background-size: 100% 13.5rem;
+}
+.remove-car {
+    display: inline-block;
+    width: 21%;
+    vertical-align: top;
+    text-align: right;
+    line-height: 2.2rem;
+}
+/*======canvas定时器=====start*/
+.canvas-wrap {
+    margin-top: 1.7rem;
+    width: 100%;
+    height: 6.22rem;
+    text-align: center;
+}
+canvas {
+    margin: 0 auto;
+    width: 6.66rem;
+    height: 6.66rem;
+}
+/*======canvas定时器=====end*/
+
+/*定时图形*/
+.time-explain {
+    position: absolute;
+    top: 5.80rem;
+    width: 100%;
+    text-align: center;
+}
+.car-no {
+    position: absolute;
+    bottom: -.84rem;
+    z-index: 10;
+    height: 1.68rem;
+    color: #333; 
+    font-size: 0;
+    border: 1px solid #666;
+    border-radius: .18rem;
+    box-shadow: 0px 5px 5px #eaeaea;
+    text-align: center;
+    line-height: 1.68rem;
+
+}
+.car-no .sheng,
+.car-no .point,
+.car-no .number {
+    font-size: 0.93rem;
+}
+.car-no .sheng {
+    padding-right: .2rem;
+}
+.car-no .number {
+    padding-left: .2rem; 
+}
+/*车牌颜色*/
+/* 260*80 */
+.car-blue {
+    left: calc(50% - 2.82rem);
+    width: 5.64rem;
+    color: #fff;
+    background: #4c72ff;
+    border: 1px solid #fff; 
+}
+.car-ye {
+    left: calc(50% - 2.82rem);
+    width: 5.64rem;
+    background: #fdcb1f;
+}
+/* 292*80 */
+.car-green {
+    left: calc(50% - 3.2rem);
+    width: 6.4rem;
+    background: -webkit-linear-gradient(top, #fff, #14e89f);
+}
+.point {
+    display: inline-block;
+    width: .32rem;
+    height: .32rem; 
+}
+.pont-pic {
+    position: relative;
+    top: -.03rem;
+    background: url(../images/remove-car/icon-green-car-palte.png) no-repeat;
+    background-size: 100% 100%;
+}
+.point-text {
+    position: relative;
+    top: -0.28rem;
+    text-align: center;
+    line-height: .32rem;
+}
+/* 275*80 */
+.car-other {
+    left: calc(50% - 3.01rem);
+    width: 6.02rem;
+    background: #fff;
+    border-radius: 1.2rem;
+}
+/*===========主要内容========start*/
+
+/*========饼图定时器=======start*/
+.content-wrap {  
+    height: calc(100% - 13.5rem - 1px);
+}
+.wx-content-wrap {
+	height: calc(100% - 11.8rem - 1px);
+}
+.step-list {
+    padding: 1.4rem 4.16% 0 3.6%;
+    width: 92.24%;
+    height: calc(100% - 4.52rem);
+    background: #fff;
+    overflow-y: auto; /*超出部分滚动*/
+}
+.step-item {
+    height: 2.74rem;
+    width: 100%;
+    font-size: 0; 
+}
+.step-bg {
+    display: inline-block;
+    margin: .2rem .44rem 0 0;
+    width: .62rem;
+    height: 2.64rem;
+
+}
+.step-bg-fir {
+    width: .62rem;
+    height: .62rem; 
+    background: url(../images/remove-car/icon-fir-step.png) top center no-repeat;
+    background-size: 100%;  
+}
+.step-bg-fir-line {
+    background: url(../images/remove-car/icon-fir-step-line.png) top center no-repeat;
+    background-size: 100%;  
+}
+.step-bg-next {
+    height: 2.6rem;
+    background: url(../images/remove-car/icon-next-step-line.png) top center no-repeat;
+    background-size: 100%;
+}
+.step-bg-end {
+    width: .62rem;
+    height: .62rem;
+    background: url(../images/remove-car/icon-end-step.png) top center no-repeat;
+    background-size: 100%;
+}
+.notice-mode-time {
+    display: inline-block;
+    width: calc(100% - 1.08rem);
+    vertical-align: top;
+}
+.notice-text {
+    margin-top: .22rem;
+}
+/*========饼图定时器=======end*/
+
+/*=========催一催第三次提示语=======start*/
+.prompt-message {
+    margin-top: 2.2rem;
+}
+.banner-police {
+    display: inline-block;
+    margin: 2.89rem 0 0 18.8%;
+    width: 3.34rem;
+    height: 4.58rem;
+    background: url(../images/remove-car/icon-policeman.png) center no-repeat;
+    background-size: 100%; 
+}
+.notice-mes {
+    display: inline-block;
+    margin: 1.34rem 0 0 .44rem;
+    width: 6.47rem;
+    height: 3.82rem; 
+    background: url(../images/remove-car/bg-prompt.png) center no-repeat;
+    background-size: 100%; 
+    vertical-align: top;
+    text-align: center;
+}
+.notice-mes span {
+    display: inline-block;
+    padding: .44rem .8rem .44rem 1rem;
+    line-height: 1.0rem;
+}
+/*=========催一催第三次提示语=======end*/
+
+/*======按钮======start*/
+.btn-wrap {
+    position: fixed;
+    bottom: 0;
+    z-index: 11;
+    padding: .67rem;
+    width: 91.68%;
+    background: #f5f5f5;
+    font-size: 0;
+    text-align: center;
+}
+.btn-wrap span {
+    display: inline-block;
+    width: 48%;
+    height: 1.78rem;
+    border-radius: 0.4rem;
+    line-height: 1.78rem;
+    text-align: center;
+}
+.btn-left {
+    margin-left: 4%;
+    vertical-align: top;
+}
+.btn-blue {
+    background: #4c72ff;
+}
+.btn-nouse {
+    background: #d1d1d1;
+}
+.btn-use {
+    background: #4c72ff;
+}
+
+/*======按钮======end*/
+/*===========主要内容========end*/
+.hide {
+    display: none;
+}
+
+.wx-btn-wrap span:first-child {
+	margin-left: 0;
+}
+
+.wx-btn-wrap span {
+	margin-left: 2%;
+	width: 32%;
+}
+
+.wx-btn-wrap span.btn-cancel {
+	background: #f5f5f5;
+	border: 1px solid #4c72ff;
+	color: #4c72ff;
+}
+
+.wx-top-banner {
+	padding-top: .01rem;
+    height: 11.8rem;
+}
+
+.wx-top-banner .time-explain {
+	top: 3.7rem;
+}

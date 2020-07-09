@@ -1,0 +1,170 @@
+.wrap {
+    width: 100%;
+    height: 100%;
+}
+
+img {
+    display: block;
+    width: 100%;
+    height: 7.24rem;
+}
+
+.infos-wrap {
+    padding: 0 0.58rem;
+    width: 100%;
+}
+
+
+/* 车辆展示信息 */
+
+.car-info-wrap p {
+    margin-top: 0.33rem;
+    height: 2.07rem;
+    line-height: 2.07rem;
+}
+
+.car-item {
+    margin-bottom: 0.67rem;
+    width: 100%;
+    height: 2.13rem;
+    line-height: 2.18rem;
+}
+
+.bg-green {
+    background: url("../image/car-green-bg.png") center / 100% 2.13rem no-repeat;
+}
+
+.bg-yellow {
+    background: url("../image/car-yellow-bg.png") center / 100% 2.13rem no-repeat;
+}
+
+.bg-blue {
+    background: url("../image/car-blue-bg.png") center / 100% 2.13rem no-repeat;
+}
+
+.car-item span {
+    display: inline-block;
+    height: 100%;
+    vertical-align: top;
+}
+
+.car-item .car-no {
+    width: 87%;
+    text-indent: 3%;
+}
+
+.car-item .icon-del {
+    width: 10%;
+}
+
+.car-item .icon-del {
+    background: url("../image/icon-del.png") center / 0.76rem no-repeat;
+}
+
+.btn-add-car {
+    margin-bottom: 0.67rem;
+    width: 100%;
+    height: 2.36rem;
+    border-radius: 0.33rem;
+    border: 1px solid #ccc;
+    line-height: 2.36rem;
+    text-align: center;
+    background: #fff;
+}
+
+.btn-add-car span {
+    display: inline-block;
+    text-indent: 0.89rem;
+    background: url("../image/icon-add.png") left center / 0.8rem no-repeat;
+}
+
+
+/* 收件人信息 */
+
+.info-item {
+    display: flex;
+    margin-bottom: 0.67rem;
+    width: 100%;
+    height: 2.22rem;
+    line-height: 2.22rem;
+    border-bottom: 1px solid #ededed;
+}
+
+.info-item label {
+    display: inline-block;
+    width: 25%;
+    height: 100%;
+    color: #3b4257;
+    text-align: left;
+}
+
+.info-item .content {
+    display: flex;
+    width: 75%;
+}
+
+.info-item .content input {
+    display: inline-block;
+    width: calc(100% - 1.42rem);
+    background: transparent url("../image/icon-location.png") left center / 0.53rem 0.64rem no-repeat;
+    text-indent: 0.67rem;
+}
+
+.info-item .content i {
+    display: inline-block;
+    width: 1.42rem;
+    height: 100%;
+    background: url("../image/icon-right.png") center / 0.31rem 0.53rem no-repeat;
+}
+
+.info-item input,
+.info-item span,
+.info-item select {
+    display: inline-block;
+    width: 75%;
+    height: 100%;
+    border-radius: 0.33rem;
+    line-height: 2.18rem;
+}
+
+
+/* 禁止底层页面滑动 */
+
+.no-scroll {
+    height: 100vh;
+    overflow-y: hidden;
+}
+
+
+/* 区域级联样式覆盖 */
+
+.pickerExtend .content {
+    bottom: 0;
+}
+
+.pickerExtend .content .btnBar {
+    font-size: 0.58rem;
+    height: 2rem;
+    line-height: 2rem;
+}
+
+.pickerExtend .content .btnBar .cancel,
+.pickerExtend .content .btnBar .ensure {
+    height: 2rem;
+    width: 15%;
+}
+
+.pickerExtend .content .btnBar .title {
+    font-size: 0.58rem;
+}
+
+.pickerExtend .content .panel .wheels,
+.pickerExtend .content .panel .wheel {
+    height: 8.89rem;
+}
+
+.pickerExtend .content .panel .wheel .selectContainer li {
+    font-size: 0.58rem;
+    height: 2rem;
+    line-height: 2rem;
+}

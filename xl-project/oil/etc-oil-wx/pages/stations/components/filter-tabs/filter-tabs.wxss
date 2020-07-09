@@ -1,0 +1,128 @@
+/* pages/stations/components/filter-tabs/filter-tabs.wxss */
+.filter-tabs-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.filter-tabs-top-container{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.filter-tabs-top-item{
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    font-size: 28rpx;
+    color: rgba(0, 0, 0, 0.65);
+}
+
+.filter-tabs-icon{
+    width: 16rpx;
+    height: 16rpx;
+    margin-left: 8rpx;
+}
+
+.filter-mask-container{
+    width: 100vw;
+    position: fixed;
+    background-color: rgba(0, 0, 0, .4);
+    z-index: 1000;
+    bottom: 0;
+    left: 0;
+}
+
+.filter-mask-box{
+    width: 100%;
+    height: 100%; 
+}
+
+/**垂直列表模式**/
+.filter-mask-v{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.filter-mask-v-item{
+    width: 100%;
+    height: 90rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0 40rpx;
+    background-color: white;
+    border-bottom: 2rpx solid #f8f8f8;
+    font-size: 28rpx;
+}
+
+.filter-mask-v-icon{
+    width: 32rpx;
+    height: 32rpx;
+}
+
+/**横向列表模式**/
+.filter-mask-h{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 24rpx 16rpx 10rpx 16rpx;
+    background-color: white;
+}
+
+.filter-mask-h-item{
+    flex: 0 0 25%;
+    height: 70rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    margin-bottom: 24rpx;
+    font-size: 28rpx;
+}
+
+.filter-mask-h-item-text{
+    width: 86%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    border-radius: 12rpx;
+    font-size: 26rpx;
+}
+
+.check{
+    border: 2rpx solid #05BA7D;
+    color: #ffffff;
+    background-color: #05BA7D;
+    box-shadow: 0rpx 10rpx 40rpx 0rpx rgba(79, 221, 128, 0.3);
+}
+
+.uncheck{
+    border-radius: 12rpx;
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: 0rpx 2rpx 10rpx 0rpx rgba(0, 0, 0, 0.05);
+    color: rgba(0, 0, 0, 0.45);
+}

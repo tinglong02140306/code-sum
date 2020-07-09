@@ -1,0 +1,14 @@
+{
+  "navigationBarBackgroundColor":"#00A170",
+  "navigationBarTextStyle":"white",
+  "navigationBarTitleText": "我的",
+  "backgroundColor": "#eeeeee",
+  "backgroundTextStyle": "light",
+  "navigationStyle":"custom",
+  "usingComponents": {
+    "login-status":"../../../components/login-status/login-status",
+    "popup":"../../../components/popup/popup",
+    "etc-card": "../../../components/etc-card/etc-card",
+    "navigation-bar":"/components/navigation-bar/navigation-bar"
+  }
+}

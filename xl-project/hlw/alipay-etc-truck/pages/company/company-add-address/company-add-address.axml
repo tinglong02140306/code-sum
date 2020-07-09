@@ -1,0 +1,46 @@
+<view class="wrapper">
+  <view class="title">添加收货地址</view>
+  <view class="hr"/>
+  <input-item
+      clear="{{true}}"
+      data-field="receiver"
+      placeholder="必填"
+      value="{{receiver}}"
+      onInput="onItemInput"
+      onClear="onClear"
+  >
+    收货人
+  </input-item>
+  <input-item
+      clear="{{true}}"
+      data-field="telNumber"
+      placeholder="必填"
+      value="{{telNumber}}"
+      onInput="onItemInput"
+      onClear="onClear"
+      type="number"
+  >
+    手机号
+  </input-item>
+  <picker-item
+      data-field="region"
+      placeholder="请选择您所在的地区"
+      value="{{region}}"
+      onPickerTap="selectRegion"
+  >
+    所在地区
+  </picker-item>
+  <input-item
+      clear="{{true}}"
+      data-field="detail"
+      placeholder="必填"
+      value="{{detail}}"
+      onInput="onItemInput"
+      onClear="onClear"
+  >
+    详细地址
+  </input-item>
+  <view class="btn-wrapper">
+    <button type="primary" onTap="save">保存</button>
+  </view>
+</view>

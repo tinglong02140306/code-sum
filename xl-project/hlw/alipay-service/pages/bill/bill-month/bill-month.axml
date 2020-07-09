@@ -1,0 +1,79 @@
+<view class="wrapper" a:if="{{loaded}}">
+	<view class="header">
+		<view style="font-size:32rpx;">{{plateNo}}</view>
+		<view style="font-size:30rpx;">
+			{{gmtYear}}-{{gmtMonth}}
+		</view>
+	</view>
+	<view class="body">
+		<scroll-view class="scroll-view" bindscrolltolower="scrollToLower" scroll-y="{{true}}">
+			<block a:if="{{queryType==='1'}}">
+				<block a:if="{{list.length}}">
+					<block a:for="{{list}}">
+						<view class="b-item">
+							<view class="b-item-left">
+								<view class="b-item-left-row">
+									<view class="icon-wrapper">
+										<image src="/images/bill/start.png" class="icon-start"/>
+									</view>
+									<view>{{item["en_station"]}}({{item["gmt_en"]}})</view>
+								</view>
+								<view class="b-item-left-row" style="margin-top:10rpx">
+									<view class="icon-wrapper">
+										<image src="/images/bill/end.png" class="icon-end"/>
+									</view>
+									<view>{{item["ex_station"]}}({{item["gmt_ex"]}})</view>
+								</view>
+							</view>
+							<view class="b-item-right">{{item["toll"]}}</view>
+						</view>
+					</block>
+					<block a:if="{{!hasMore}}">
+						<view class="no-more">没有更多了</view>
+					</block>
+				</block>
+				<block a:else>
+					<view class="no-data">
+						<image src="/images/bill/no-data.png" style="width:280rpx;height:208rpx;"/>
+						<view class="no-data-1">暂无账单</view>
+						<view class="no-data-2">您还没有账单可显示~</view>
+					</view>
+				</block>
+			</block>
+			<block a:else>
+				<block a:if="{{list.length}}">
+					<block a:if="{{list.length}}">
+						<block a:for="{{list}}">
+							<view class="scroll-view-item-parking">
+								<view class="item-head-parking">
+									<image class="icon-parking" src="/images/bill/parking.png"/>
+									<text class="item-head-text-parking">{{item["ex_station"]}}(item["gmt_ex"])</text>
+								</view>
+								<view class="item-foot">
+									<text class="item-foot-text">￥{{item["toll"]}}元</text>
+								</view>
+							</view>
+						</block>
+						<block a:if="{{!hasMore}}">
+							<view class="no-more">没有更多了</view>
+						</block>
+					</block>
+					<block a:else>
+						<view class="no-data">
+							<image src="/images/bill/no-data.png" style="width:280rpx;height:208rpx;"/>
+							<view class="no-data-1">暂无账单</view>
+							<view class="no-data-2">您还没有账单可显示~</view>
+						</view>
+					</block>
+				</block>
+				<block a:else>
+					<view class="no-data">
+						<image src="/images/bill/no-data.png" style="width:280rpx;height:208rpx;"/>
+						<view class="no-data-1">暂无账单</view>
+						<view class="no-data-2">您还没有账单可显示~</view>
+					</view>
+				</block>
+			</block>
+		</scroll-view>
+	</view>
+</view>

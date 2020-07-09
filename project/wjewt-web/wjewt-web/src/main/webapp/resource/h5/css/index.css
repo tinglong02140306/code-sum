@@ -1,0 +1,427 @@
+html {
+	position: relative;
+}
+/* html,
+body {
+	height: auto;
+} */
+.wrap {
+    height: 100%;
+    /* position: relative; */
+    overflow-scrolling: touch;
+    -webkit-overflow-scrolling: touch;
+}
+header {
+    position: absolute;
+    top: 0;
+}
+section {
+	position: absolute;
+	top: 2.1rem;
+	bottom: 2.5rem;
+    padding: 0 .56rem;
+    overflow: auto;
+}
+.content {
+    /* position: releative;
+    top: 2.1rem;
+    left: .56rem;
+    right: .56rem; */
+    /* height: 100%;
+     height: calc(100% - 2.5rem);
+    height: -webkit-calc(100% - 2.5rem); */
+}
+.assistant, .question {
+    padding: .89rem 0 .44rem;
+    position: relative;
+}
+.assistant .head-picture,
+.question img {
+    width: 1.78rem;
+    height: 1.78rem;
+}
+.assistant .head-picture {
+    margin-right: .53rem;
+    background: url(../images/common/icon-head.png) no-repeat;
+    background-size: 100%;
+}
+.question img {
+    margin-left: .53rem;
+    display: block;
+    border-radius: 100%;
+   
+}
+.assistant .cont,
+.question .cont {
+    max-width: 65%;
+    max-width: calc(100% - 5.89rem);
+    max-width: -webkit-calc(100% - 5.89rem);
+    border-bottom-left-radius: 1.11rem;
+    border-bottom-right-radius: 1.11rem;
+}
+.assistant .cont {
+    padding: .3rem .89rem;
+    background: #fff;
+    border-top-right-radius: 1.11rem;
+    box-shadow: 3px 7px 12px #e1e1e1;
+}
+.assistant  p,
+.question p,
+.assistant  a {
+    font-size: .67rem;
+    line-height: 1rem;
+    min-height: 1rem;
+}
+.assistant a {
+	color: #2581cf;
+}
+.assistant  p {
+    color: #2d2d2d;
+}
+.assistant .jump {
+    margin-top: .2rem;
+    color: #ff833a;
+}
+.question p {
+    color: #fff;
+}
+.question .cont {
+    padding: .3rem .89rem;
+    /*position: absolute;*/
+    right: 2.31rem;
+    /*background: #58d0ad;*/
+    background: -webkit-gradient(linear, 0 0, 100% 0, from(#83c2f9), to(#2581cf));
+    border-top-left-radius: 1.11rem;
+    box-shadow: 0px 7px 10px #feece1;
+}
+footer {
+    padding-top: .1px;
+    position: relative;
+    overflow: hidden;
+    height: 7.22rem;
+    border-top: .1px solid #fff;
+}
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+}
+.voice,
+.distinguish-voice {
+    margin: 2.22rem auto 0;
+    position: relative;
+    width: 3.82rem;
+    height: 3.82rem;
+}
+.voice {
+    background: url(../images/common/icon-voice.png) no-repeat;
+    background-size: 100%;
+}
+.distinguish-voice {
+    background: url(../images/common/icon-distinguish-voice.png) no-repeat;
+    background-size: 100%;
+}
+.distinguish-voice i {
+    position: absolute;
+    top: 1.27rem;
+    left: 1.47rem;
+    z-index: 1;
+    width: .88rem;
+    height: 1.28rem;
+    background: url(../images/common/icon-microphone.png) no-repeat;
+    background-size: 100%;
+}
+.rotate-voice {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: url(../images/common/icon-rotate.png) no-repeat;
+    background-size: 100%;
+    -moz-animation:rotate 1.8s infinite linear;
+    -webkit-animation:rotate 1.8s infinite linear;
+}
+
+.radius {
+    position: absolute;
+    width: 3.73rem;
+    height: 3.73rem;
+    left: -0.25rem;
+    top: -0.45rem;
+}
+.circle {
+   
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+.radius-one,
+.radius-two,
+.radius-three {
+    position: absolute;
+}
+.radius-one {
+    width: 3.73rem;
+    height: 3.73rem;
+}
+.radius-two {
+    width: 4.33rem;
+    height: 4.33rem;
+    left: -0.3rem;
+    top: -0.3rem;
+}
+.radius-three {
+    width: 4.93rem;
+    height: 4.93rem;
+    left: -0.6rem;
+    top: -0.6rem;
+}
+.radius-one .draw-radius {
+    -webkit-animation: waveRaidus 2s ease-out 0s infinite; 
+    animation: waveRaidus 2s ease-out 0s infinite;
+}
+.radius-two .draw-radius {
+    -webkit-animation: waveRaidusTwo 2s ease-out 0s infinite; 
+    animation: waveRaidusTwo 2s ease-out 0s infinite;
+}
+.radius-three .draw-radius {
+     -webkit-animation: waveRaidusThree 2s ease-out 0s infinite; 
+    animation: waveRaidusThree 2s ease-out 0s infinite;
+}
+@keyframes waveRaidus {
+    0% {
+        width: 100%;
+        height: 100%;
+        opacity: 1;
+    }
+    
+
+    50% {
+        width: 140%;
+        height: 140%;
+        opacity: 0.7;
+    }
+   
+    100% {
+        width: 160%;
+        height: 160%;
+        opacity: 0.3;
+    }
+}
+@-webkit-keyframes waveRaidus {
+    0% {
+        width: 100%;
+        height: 100%;
+        opacity: 1;
+    }
+    
+
+    30% {
+        width: 140%;
+        height: 140%;
+        opacity: 0.6;
+    }
+   
+    100% {
+        width: 160%;
+        height: 160%;
+        opacity: 0.3;
+    }
+}
+@keyframes waveRaidusTwo {
+    0% {
+        width: 100%;
+        height: 100%;
+        opacity: 0.8;
+    }
+   
+
+    50% {
+        width: 140%;
+        height: 140%;
+        opacity: 0.5;
+    }
+   
+    100% {
+        width: 150%;
+        height: 150%;
+        opacity: 0.2;
+    }
+}
+@-webkit-keyframes waveRaidusTwo {
+    0% {
+        width: 100%;
+        height: 100%;
+        opacity: 0.8;
+    }
+   
+
+    50% {
+        width: 140%;
+        height: 140%;
+        opacity: 0.5;
+    }
+   
+    100% {
+        width: 150%;
+        height: 150%;
+        opacity: 0.2;
+    }
+}
+@keyframes waveRaidusThree {
+    0% {
+        width: 100%;
+        height: 100%;
+        opacity: 0.5;
+    }
+   
+
+    50% {
+        width: 140%;
+        height: 140%;
+        opacity: 0.3;
+    }
+   
+    100% {
+        width: 150%;
+        height: 150%;
+        opacity: 0;
+    }
+}
+@-webkit-keyframes waveRaidusThree {
+    0% {
+        width: 100%;
+        height: 100%;
+        opacity: 0.5;
+    }
+   
+
+    50% {
+        width: 140%;
+        height: 140%;
+        opacity: 0.3;
+    }
+   
+    100% {
+        width: 150%;
+        height: 150%;
+        opacity: 0;
+    }
+}
+@keyframes rotate {
+    0%{
+        transform:rotate(0deg);
+    }
+    100%{
+        transform:rotate(360deg);
+    }
+}
+.tip {
+    position: absolute;
+    left: 2.87rem;
+    right: 2.87rem;
+    top: 8.66rem;
+    
+}
+.tip span {
+    font-size: .67rem;
+    color: #666;
+    line-height: .8rem;
+}
+.box {
+    position: absolute;
+    top: -1.62rem;
+    left: 0.5rem;
+    width: 2.82rem;
+    height: 1.33rem;
+    background: url(../images/common/icon-border.png) no-repeat;
+    background-size: 100% 100%;
+    font-size: .62rem;
+    color: #666;
+    line-height: 1rem;
+}
+.line {
+    position: absolute;
+    top: 3.61rem;
+    z-index: 10;
+    width: 100%;
+    border-bottom: 3px solid #FCDDCB;
+    background: url(../images/common/icon-line.png);
+}
+.hide {
+	display: none;
+}
+.footer-content {
+	position: absolute;
+	bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    padding: 0.5rem 0.3rem;
+    background-color: #f6f6f6;
+	box-sizing: border-box;
+}
+.voice-btn {
+	float: left;
+	margin-left: 2%;
+	margin-right: 2%;
+	width: 5%;
+	height: 1.5rem;
+	background: url(../images/common/icon-microphone-small.png) no-repeat center center;
+	background-size: 100%;
+}
+.voice-btn.select {
+	background: url(../images/common/icon-microphone-small-select.png) no-repeat center center;
+	background-size: 100%;
+}
+.footer-input {
+	float: left;
+	padding: 4px 10px;
+	width: 70%;
+	height: 1.5rem;
+	line-height: 1.2rem;
+	font-size: .62rem;
+	border-radius: 4px;
+	border: 1px solid #ececec;
+	box-sizing: border-box;
+}
+.footer-input:focus {
+	outline: none;
+}
+.send-btn {
+	box-sizing: border-box;
+	float: right;
+	width: 15%;
+	height: 1.5rem;
+	line-height: 1.5rem;
+	text-align: center;
+	font-size: .62rem;
+	border-radius: 4px;
+	border: 1px solid #dddee2;
+    background: #dddee2;
+    color: #fff;
+}
+.send-btn.hover {
+	background: #2581cf;
+	border-color: #2581cf;
+}
+
+/* .content-scroll {
+	padding-bottom: 2.5rem;
+} */
+.content {
+	height: auto;
+}
+.voice-content {
+	-webkit-touch-callout:none;
+    -webkit-user-select:none;
+    -khtml-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+}

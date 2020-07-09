@@ -1,0 +1,17 @@
+<view class="wrapper">
+	<block a:if="{{curType==='deposit'}}">
+		<view class="title">缴纳结果查询</view>
+		<view class="hr"/>
+		<view class="desc">您已发起保证金缴纳，点击刷新缴纳结果。</view>
+	</block>
+	<block a:if="{{curType==='credit'}}">
+		<view class="title">授信结果查询</view>
+		<view class="hr"/>
+		<view class="desc">您已发起网商银行授信申请，点击刷新授信结果。</view>
+	</block>
+	<!-- 确认 -->
+	<view class="btn-wrapper">
+		<button type="primary" onTap="deposit" a:if="{{curType==='deposit'}}">刷新查看缴纳结果</button>
+		<button type="primary" onTap="credit" a:if="{{curType==='credit'}}">刷新查看授信结果</button>
+	</view>
+</view>

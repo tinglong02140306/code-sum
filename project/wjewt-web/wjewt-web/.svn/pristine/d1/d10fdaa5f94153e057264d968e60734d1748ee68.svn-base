@@ -1,0 +1,140 @@
+body {
+    background-color: #fff;
+}
+
+.top-banner .back {
+    position: absolute;
+    top: 0.9rem;
+    left: 0;
+    width: 1.82rem;
+    height: 2.15rem;
+    background: url(../images/anhui-110/back-icon-big.png) center center no-repeat;
+    background-size: 0.51rem 0.93rem;
+}
+
+.top-banner {
+    position: relative;
+    width: 100%;
+    height: 9.77rem;
+}
+
+.jmhd .top-banner {
+    background: url(../images/anhui-110/banner-anhui110.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+.service-list {
+   /*  padding-top: 0.4rem; */
+}
+
+.service-list .service-item {
+    float: left;
+    width: 33.33%;
+}
+
+.service-list .service-item img {
+    width: 2.22rem;
+    height: 2.22rem;
+    vertical-align: middle;
+}
+
+.service-list .service-item .ell {
+    font-size: 0.62rem;
+    line-height: 1.55rem;
+    color: #222;
+    text-align: center;
+}
+
+.app-blank {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 111;
+}
+
+.home-app-img {
+    padding-top: 0.4rem;
+    text-align: center;
+    position: relative;
+}
+
+.download {
+    display: inline-block;
+    width: 2.22rem;
+    height: 2.22rem;
+    border-radius: 40% / 19%;
+    text-align: center;
+}
+
+.download-progress {
+    display: none;
+}
+
+.download-progress .fliter {
+    width: 1.8rem;
+    height: 2rem;
+    background-color: #000;
+    opacity: .5;
+    position: absolute;
+    border-radius: 54% / 15%;
+    text-align: center;
+    text-indent: .1em;
+    z-index: 99;
+    left: 1.1rem;
+}
+
+.download-progress .progress-info {
+    position: absolute;
+    z-index: 100;
+    left: 1.2rem;
+    top: 1rem;
+}
+
+.download-progress .progress-info p {
+    color: #fff;
+    font-size: .58rem;
+    line-height: 1.2rem;
+}
+
+.download-progress .progress {
+    width: 1.6rem;
+    height: .16rem;
+    background-color: #006E89;
+    border-radius: 30px;
+}
+
+.download-progress .progress-bar {
+    height: 99%;
+    width: 1rem;
+    background-color: #369fef;
+    border-radius: inherit;
+}
+
+.jmhd .no-net .no-net-img,
+.wzcj .no-net .no-net-img {
+    height: 11rem;
+}
+.service-list .title-wrap {
+    padding:0.5rem  0rem;
+    background: url(../images/anhui-110/border-icon.png) left bottom 1px repeat-x;
+}
+.service-list .title-name {
+    padding-left: 1.04rem;
+    background: url(../images/anhui-110/title-icon.png) 0.57rem center no-repeat;
+    background-size: 0.13rem 0.66rem;
+    font-size: 0.66rem;
+    color: #333;
+}
+.interval-f5 {
+    margin-top: 0.4rem;
+    height: 0.44rem;
+    background: #f5f5f5;
+}
+.service-list-two {
+    padding-bottom: 0.4rem;
+}
+.call-help-content,
+.righteous-police {
+    padding-top: 0.4rem;
+}

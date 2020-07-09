@@ -1,0 +1,78 @@
+<view class="wrap">
+	<scroll-view scroll-x="true" scroll-with-animation="true" scroll-into-view="{{toView}}">
+		<view style="width: {{ childW }}rpx" class="tab-wrap">
+			<block a:for="{{ typeList }}" a:key="{{index}}">
+				<view id="tab{{index}}" class="tab" onTap="tabOn" data-index="{{ index }}" data-id="{{ index+1 }}">
+					<text>{{ item }}</text>
+					<image src="/images/problem/icon-down-arrow.png" a:if="{{curIndex == index}}"/>
+				</view>
+			</block>
+		</view>
+	</scroll-view>
+	<!-- <block a:for="{{items}}"></block> -->
+	<block a:if="{{loaded}}">
+		<view class="content" a:if="{{ curIndex == 3 }}">
+			<!-- <block a:for="{{items}}"></block> -->
+			<view class="active-wrap" a:if="{{problems.length > 0}}">
+				<view class="title-wrap">
+					<view class="title">
+						<image src="/images/problem/icon-line.png"/>
+						<text>首次激活</text>
+					</view>
+					<view class="btn-view-all">
+						<text onTap="viewAllList"  data-class1="4" data-class2="1">查看全部</text>
+					</view>
+				</view>
+				<view class="list-wrap">
+					<block a:for="{{problems}}" a:key="{{index}}">
+						<block a:if="{{item['class2']==='1'}}">
+                            <view onTap="viewAnswer" data-id="{{item.question_id}}">
+                                <list-item title="{{item.question}}" bottom="{{index!='4'}}"/>
+                            </view>
+						</block>
+					</block>
+				</view>
+			</view>
+			<view class="active-wrap" a:if="{{problems.length > 0}}">
+				<view class="title-wrap">
+					<view class="title">
+						<image src="/images/problem/icon-line.png"/>
+						<text>二次激活</text>
+					</view>
+					<view class="btn-view-all">
+						<text onTap="viewAllList" data-class1="4" data-class2="2">查看全部</text>
+					</view>
+				</view>
+				<view class="list-wrap">
+					<block a:for="{{problems}}" a:key="{{index}}">
+						<block a:if="{{item['class2']==='2'}}">
+                            <view onTap="viewAnswer" data-id="{{item.question_id}}">
+                                <list-item title="{{item.question}}" bottom="{{index!=9}}"/>
+                            </view>
+							<!-- <list-item title="{{item.question}}" bottom="{{index!=9}}" onTap="viewAnswer" data-id="{{item.question_id}}"/> -->
+						</block>
+					</block>
+				</view>
+
+            </view>
+            <view class="no-data" a:if="{{problems.length===0 && loaded}}">暂无数据~</view>
+		</view>
+		<view class="content bf" a:else>
+			<scroll-view class="scroll-view-container"
+                        scroll-y="true"
+                        lower-threshold="50"
+                        scroll-top="0"
+                        scroll-with-animation="true"
+                        bindscrolltolower="scrollToLower">
+                <block a:for="{{problems}}" a:key="{{index}}">
+                    <view data-id="{{item.question_id}}" onTap="viewAnswer">
+                        <list-item title="{{item.question}}" bottom="{{index!==problems.length-1}}"/>
+                    </view>
+                </block>
+                <!-- <view class="data-loading" hidden="{{hidden}}">数据加载中...</view> -->
+                <view class="data-nomore" a:if="{{page == totalPage && problems.length > 0}}">没有更多了</view>
+                <view class="no-data" a:if="{{problems.length===0 && loaded}}">暂无数据~</view>
+            </scroll-view>
+		</view>
+	</block>
+</view>

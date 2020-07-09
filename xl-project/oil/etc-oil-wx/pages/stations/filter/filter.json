@@ -1,0 +1,8 @@
+{
+  "navigationBarBackgroundColor":"#00A170",
+  "navigationBarTextStyle":"white",
+  "navigationBarTitleText":"加油站筛选",
+  "backgroundColor": "#eeeeee",
+  "backgroundTextStyle": "light",
+  "usingComponents": {}
+}

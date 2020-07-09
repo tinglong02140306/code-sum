@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="../../../../" >
+    <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <!-- 添加到主屏幕后，全屏显示 -->
+    <meta name="apple-touch-fullscreen" content="YES"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <!-- iphone 运行在全屏模式 -->
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="viewport" content="width=device-width"/>
+    <title>我的车辆</title>
+    <link rel="stylesheet" type="text/css" href="../css/base.css?__inline"/>
+    <link rel="stylesheet" type="text/css" href="../css/all.css?__inline"/>
+    <link rel="stylesheet" type="text/css" href="../css/my-car.css?__inline"/>
+</head>
+<body>
+    <div class="wrap my-car-wrap">  
+        <!-- 头部 -->
+        <header class="topic-bg">
+            <div class="header-item topic-bg">
+                <a href="javascript:void(0)" class="arrow-left header-back" data-bind="click: back"></a>
+                <span class="f36 cf title">我的车辆</span>
+            </div>
+        </header> 
+        <!-- 主要内容 -->
+        <div class="my-car-content top-7">
+            <div id="carRecord" class="my-car-list">
+                   
+            </div>
+            <div class="my-car-add hide bf tc">
+                <div class="add-icon-detail" data-bind="click: addRecordEvent">
+                    <p class="add-icon"></p>
+                    <p class="add-detail f36 tc cc0 pad-0">添加车辆，第一时间获取</p>
+                    <p class="add-detail f36 tc cc0">挪车提醒和违法信息</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script id="carRecordTmpl" type="text/html">
+    {{each $data as item index}}
+        <div href="javascript:void(0)" class="my-car-record clearfix {{if item.messageNum !==''}} records {{else}} norecords {{/if}}" data-id="{{item.id}}" data-license="{{item.licensePlateNum}}">
+            <div class="icon-num fl tc">
+                <img class="car-icon tc" src="./public/wcportal/0.0.1/img/service-hall/icon-car.png">
+                <p class="car-num f24 cf tc">{{item.licensePlateNum}}</p>
+            </div>
+            {{if item.messageNum !==''}}
+            <div class="record-money-score fl">
+                <p class="cf f28 records">
+                    <span>{{item.messageNum}}</span>
+                    <span>条新的交通违法记录</span>
+                </p> 
+                <p class="money-score clearfix">
+                    <div class="moneys fl">
+                        <p class="moneys-num f32 cf tl">{{item.fkje}}</p>
+                        <p class="moneys-txt f24 cf tl">罚款</p>
+                    </div>
+
+                    <div class="scores fl">
+                        <p class="scores-num f32 cf tl">{{item.wfjfs}}</p>
+                        <p class="scores-txt f24 cf tl">扣分</p> 
+                    </div>
+                </p>
+            </div>
+            {{else}}
+                <div class="no-records cf f28 fl">暂无交通违法信息</div>
+            {{/if}}
+        </div>
+    {{/each}}
+</script>
+
+
+<script src="../lib/lib.js"></script>
+<script src="../app/my-car.js"></script>
+</html>

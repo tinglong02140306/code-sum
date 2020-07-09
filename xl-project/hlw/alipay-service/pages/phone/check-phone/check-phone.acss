@@ -1,0 +1,47 @@
+.wrap {
+    padding:98rpx 60rpx 0rpx;
+    font-family: SourceHanSansCN-Normal;
+}
+.tip-title {
+	font-size: 36rpx;
+	font-weight: normal;
+	font-stretch: normal;
+	letter-spacing: 0rpx;
+	color: #3b4257;
+}
+.phone {
+	font-size: 66rpx;
+	font-weight: normal;
+	font-stretch: normal;
+	letter-spacing: 0rpx;
+	color: #3b4257;
+    margin-top:21rpx;
+} 
+.tip-text {
+    margin-top:54rpx;
+	font-size: 28rpx;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 46rpx;
+	letter-spacing: 0rpx; 
+	color: #8087a9;
+}
+.btn{
+    padding: 0;
+    margin-top:324rpx;
+    height: 89rpx;
+    display: flex;
+    width: 690rpx;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5rpx;
+    color: white;
+    letter-spacing: 2rpx;
+    border:none;
+    border-color: transparent;
+    font-family: SourceHanSansCN-Light;
+    font-size: 36rpx;
+}
+.bg-primary{
+    background-color: #3568eb;
+}

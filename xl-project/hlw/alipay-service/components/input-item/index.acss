@@ -1,0 +1,26 @@
+.input-item{
+	width: 100%;
+	height: 104rpx;
+	display: flex;
+	border-bottom: 1px solid rgb(238,238,238);
+}
+.input-label{
+	flex: 0 0 180rpx;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	font-size: 28rpx;
+	font-family: SourceHanSansCN-Light;
+}
+.input{
+	flex: 1;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+.clear{
+	flex: 0 0 60rpx;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}

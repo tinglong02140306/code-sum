@@ -1,0 +1,118 @@
+.terminal-add-dialog-box{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+.terminal-add-dialog-item{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+.terminal-add-dialog-item-content{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 4px;
+  .ant-select{
+    width: 250px;
+  }
+  input{
+    width: 250px;
+  }
+}
+.terminal-add-dialog-item-content1{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 4px;
+}
+.terminal-add-dialog-item-label{
+  width: 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  font-weight: 600;
+  margin: 0 4px 0 0;
+  span{
+    color: red;
+  }
+}
+.terminal-add-item-placeholder{
+  align-self: flex-start;
+  margin: 0 0 2px 104px;
+  color: red;
+}
+
+.station-info-container{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 16px;
+  background-color: #f7f7f7;
+}
+.station-info-top-container{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  background-color: white;
+  padding:10px 0;
+  margin-bottom: 10px;
+}
+.station-info-form{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.station-info-form-item{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  label{
+    font-weight: 600;
+  }
+}
+
+.station-info-button{
+  margin: 4px;
+}
+.station-info-table-container{
+  width: 100%;
+  box-sizing: border-box;
+  //padding: 10px;
+  background-color: #f7f7f7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.station-info-table{
+  width: 100%;
+  background-color: white;
+  box-sizing: border-box;
+  table{
+    thead{
+      th{
+        font-weight: 600;
+        letter-spacing: 1px;
+      }
+    }
+  }
+}
+
+.station-info-item-input{
+  width: 200px;
+}

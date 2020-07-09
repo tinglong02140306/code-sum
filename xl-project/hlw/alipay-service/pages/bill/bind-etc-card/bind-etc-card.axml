@@ -1,0 +1,17 @@
+<view class="wrapper">
+	<view class="subtitle">请填写绑定的ETC卡信息</view>
+	<view class="section-info">
+		<view class="car-owner">
+			<input-item label="卡号" type="number" maxlength="20" idx="cardNo" style="text-align:left;width:100%;" value="{{cardNo}}" bindinput="bindKeyInput" bind:clear="clear" placeholder="请输入20位ETC卡号" placeholder-style="font-size:28rpx;text-align:left;color:rgb(184,190,208);font-family:SourceHanSansCN-Light;"/>
+			<input-item label="持卡人" idx="userName" style="text-align:left;width:100%;" value="{{userName}}" bindinput="bindKeyInput" bind:clear="clear" placeholder="请输入ETC卡用户名称" placeholder-style="font-size:28rpx;text-align:left;color:rgb(184,190,208);font-family:SourceHanSansCN-Light;"/>
+			<input-item type="idcard" maxlength="18" label="证件号" idx="certNo" style="text-align:left;width:100%;" value="{{certNo}}" bindinput="bindKeyInput" bind:clear="clear" placeholder="请输入证件号码" placeholder-style="font-size:28rpx;text-align:left;color:rgb(184,190,208);font-family:SourceHanSansCN-Light;"/>
+		</view>
+	</view>
+	<view class="btn" bindtap="submit">确定</view>
+	<view class="tips">
+		<view class="tip" style="font-weight:bold;">提示：</view>
+		<view class="tip">· 您的信息仅用于本业务的ETC验证绑定使用；</view>
+		<view class="tip">· 仅支持山东高速信联科技有限公司（原山东高速集团有限公司电子收费中心）所发行的ETC；</view>
+		<view class="tip">· ETC新办用户请办理成功24小时以后进行绑定操作。</view>
+	</view>
+</view>

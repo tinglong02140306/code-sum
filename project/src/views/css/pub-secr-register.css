@@ -1,0 +1,215 @@
+.f30 {
+	font-size: 0.67rem;
+}
+.f24 {
+	font-size: 0.53rem;
+}
+.c9 {
+	color: #999;
+}
+.c80 {
+	color: #808080;
+}
+.cblue {
+	color: #35a5f7;
+}
+.c6 {
+	color: #666;
+}
+.c3 {
+	color: #333;
+}
+.inl {
+	display: inline-block;
+}
+.unit-pad {
+	padding: 0 4.2%;
+}
+.undeline {
+	background: #fff url(../img/common/border-icon.png) left bottom 1px repeat-x; 
+}
+.content,
+.nation-content {
+	position: absolute;
+	width: 100%;
+}
+.form-wrap {
+	padding-top: .44rem;
+	width: 100%;
+}
+.form-unit-key {
+	width: 100%;
+	background: #fff;
+}
+.form-unit {
+	width: 91.6%;
+	height: 2.2rem;
+	font-size: 0;
+}
+/* 26*40 */
+.form-unit .icon {
+	display: inline-block;
+	margin: .67rem .56rem .67rem 0;
+}
+.form-unit input {
+	display: inline-block;
+	padding: .65rem 0;
+	vertical-align: top;
+	outline: none;
+	border: none;
+}
+.form-unit-phone .icon {
+	width: .58rem;
+	height: .89rem;
+	background: url('../img/register/icon-phone.png') no-repeat;
+    background-size: 100%;
+} 
+.form-unit-code .icon {
+	position: relative;
+    top: .08rem;
+	width: .62rem;
+	height: .71rem;
+	background: url('../img/register/icon-message.png') no-repeat;
+    background-size: 100%;
+}
+.form-unit-pass .icon {
+	width: .68rem;
+	height: .8rem;
+	background: url('../img/register/icon-key.png') no-repeat;
+    background-size: 100%;
+}
+.form-unit-phone input {
+	width: calc(100% - 1.14rem);
+}
+.form-unit-code input {
+	width: 58%;
+}
+.form-unit-pass input {
+	width: 84%;
+}
+.icon-key {
+	height: 100%;
+	width: calc(16% - 1.24rem);
+}
+.icon-show-key {
+	background: url('../img/register/icon-show-key.png') no-repeat right center;
+    background-size: .78rem .47rem;
+}
+.icon-hide-key {
+	background: url('../img/register/icon-hide-key.png') no-repeat right center;
+    background-size: .73rem .47rem;
+}
+.line {
+	margin: .55rem .44rem .55rem 0;
+	vertical-align: top;
+	height: 1.1rem;
+	width: .1rem;
+	border-left: 1px solid #eaeaea;
+}
+.c-down-text {
+	display: inline-block;
+	vertical-align: top;
+	width: calc(40% - 1.72rem - 1px);
+	height: 2.2rem;
+	line-height: 2.2rem;
+	text-align: right;
+}
+.c-down-text span {
+	display: inline-block;
+}
+
+/*证件号码、民族、姓名等个人信息*/
+.form-unit-info {
+	margin-top: .44rem;
+	width: 100%;
+	background: #fff;
+}
+.form-unit-info .form-name,
+.form-invite-code .form-name {
+	display: inline-block;
+	width: 26%;
+	height: 2.2rem;
+	line-height: 2.2rem;
+}
+.form-unit-info input,
+.form-invite-code input  {
+	width: 74%;
+}
+.form-unit-nation span {
+	vertical-align: top;
+	height: 2.2rem;
+	line-height: 2.2rem;
+}
+.form-unit-nation .nation-text {
+	width: calc(74% - .88rem);
+}
+.arrow-right {
+	margin-left: .44rem;
+	width: .44rem;
+	height: 100%;
+	background: url('../img/register/icon-arrow-right.png') no-repeat left center;
+	background-size: .44rem .73rem;
+}
+/* 邀请码 */
+.form-invite-code {
+	margin-top: .44rem;
+	background: #fff;
+}
+/*按钮*/
+.btn-wrap {
+    padding: 0 4.2%;
+    margin-top: .89rem;
+}
+.btn-wrap a {
+	display: inline-block;
+	width: 100%;
+	height: 2.0rem;
+	color: #fff;
+	border-radius: .36rem;
+	line-height: 2.0rem;
+	text-align: center;
+}
+.use {
+	background: #4c72ff;
+	box-shadow: 0 5px 10px #cae2f3;
+}
+.unuse {
+	background: #c8c8c8;
+}
+/* 复选框协议 */
+.com-agree-wrap span {
+	vertical-align: top;
+}
+.com-agree-wrap {
+	 position: fixed;
+	bottom: 1.0rem; 
+	/* margin-top: 4.0rem; */
+	width: 100%;
+	height: .58rem;
+	line-height: .58rem;
+	text-align: center;
+}
+.agree-flag {
+	width: .56rem;
+	height: .56rem;
+	border: 1px solid #999;
+	border-radius: 0.1rem;
+}
+.right-f {
+	background: url('../img/register/icon-right.png') no-repeat center;
+	background-size: 0.46rem 0.48rem; 
+}
+
+/*民族列表页*/
+.nation-content a {
+	display: inline-block;
+	padding: 0 4.2%;
+	width: 91.6%;
+	background: #fff url(../img/common/border-icon.png) left bottom 1px repeat-x; 
+}
+.nation-content .text-item {
+	display: inline-block;
+	width: 100%;
+	height: 2.04rem;
+	line-height: 2.04rem;
+}

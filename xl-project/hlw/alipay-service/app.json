@@ -1,0 +1,31 @@
+{
+	"pages": [
+		
+		"pages/index/index",
+		"pages/search/search",
+		"pages/mine/mine",
+		"pages/problem/suggest/suggest",
+		"pages/problem/answer/answer",
+		"pages/problem/category/category",
+		"pages/problem/all-list/all-list",
+		"pages/news-list/news-list",
+		"pages/pro-suggestion/pro-suggestion",
+		"pages/com-suggestion/com-suggestion",
+		"pages/phone/check-phone/check-phone",
+		"pages/phone/set-phone/set-phone",
+		"pages/phone/send-msg/send-msg",
+		"pages/bill/bill-card/bill-card",
+		"pages/bill/traffic-bill-month/traffic-bill-month",
+		"pages/bill/traffic-bill-day/traffic-bill-day",
+		"pages/bill/bill-month-summary/bill-month-summary",
+		"pages/bill/bind-etc-card/bind-etc-card",
+		"pages/w-v/w-v"
+	],
+	"window": {
+		"titleBarColor": "#3568eb",
+		"defaultTitle": "山东高速ETC客服",
+		"backgroundImageColor": "#3568eb"
+	},
+	"style": "v2",
+	"sitemapLocation": "sitemap.json"
+}

@@ -1,0 +1,117 @@
+/* ========消息详情页======== start */
+
+.infos-type-details-content {
+    position: absolute;
+    top: 2.7rem;
+    bottom: 0;
+    width: 100%;
+}
+
+.infos-details-item {
+    display: inline-block;
+    width: 100%;
+}
+
+.item-wrap {
+    width: 100%;
+}
+
+.item-title,
+.item-content {
+    width: 91%;
+}
+
+.item-date {
+    padding: 0.44rem 0;
+    width: 100%;
+    text-align: center;
+}
+
+.item-title-content {
+    padding: 0 4.2%;
+}
+
+.item-wrap {
+    border-radius: 0.22rem;
+}
+
+.item-title {
+    background: url(./public/wcportal/0.0.1/img/common/border-icon.png) left bottom 1px repeat-x;
+}
+
+.item-title,
+.item-content {
+    padding: 0.44rem 4.5%;
+}
+
+.view-detail {
+    padding: 0.66rem 0;
+    background: url(./public/wcportal/0.0.1/img/common/border-icon.png) left top 1px repeat-x;
+    color: #808080;
+}
+
+.info-type-wrap {
+    width: 100%;
+}
+
+.w-wrap {
+    white-space: normal;
+    word-break: break-all;
+}
+
+ul.comment-content li span{
+    display: inline-block;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+/* ========消息详情页======== end */
+
+/*========消息置灰 弹框====== start*/
+
+.set-mask {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: none;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .3);  
+}
+
+.btn-mask-delete {
+    position: absolute;
+    top: 50%;
+    left: calc(50% - 5.3rem);
+    display: none;
+    z-index: 10;
+    width: 10.6rem;
+    height: 2.08rem;
+    background: #fff;
+    border-radius: 0.22rem;
+    color: #333;
+    line-height: 2.08rem; 
+    text-align: center;  
+}
+/*========消息置灰 弹框====== end*/
+
+.infos-type-details-wrap .mescroll-upwarp {
+    background: #f5f5f5;
+}
+.infos-type-details-wrap .empty {
+    background: transparent;
+}
+
+/*消息数据为空的情况*/
+.empty-ad {
+    height: 10rem;
+    background: url(./public/wcportal/0.0.1/img/service-hall/message-emptys.png) no-repeat center bottom;
+    background-size: 3.62rem 3.96rem;
+}
+.infos-type-details-wrap .empty p {
+    line-height: 1.56rem;
+}

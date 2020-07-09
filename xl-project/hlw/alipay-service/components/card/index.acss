@@ -1,0 +1,45 @@
+.card-wrapper{
+  width: 100%;
+  min-height: 200rpx;
+  box-sizing: border-box;
+  padding: 10rpx 22rpx 24rpx;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 10rpx;
+}
+.card-title-wrapper{
+  height: 100rpx;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-bottom: 2rpx solid #eff0f4;
+}
+.card-title{
+  flex: 1;
+  font-family: SourceHanSansCN-Regular;
+  font-size: 32rpx;
+  color: rgb(18,28,50);
+  margin-left: 20rpx;
+}
+.card-subtitle{
+  flex: 0 0 150rpx;
+  font-family: SourceHanSansCN-Regular;
+  font-size: 28rpx;
+  color: rgb(62,69,90);
+  margin-right: 20rpx;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.refresh-wrapper{
+  margin-left: 10rpx;
+}
+.refresh{
+  width: 26rpx;
+  height: 24rpx;
+}
+.card-body-wrapper{
+  width: 100%;
+  min-height: 50rpx;
+}

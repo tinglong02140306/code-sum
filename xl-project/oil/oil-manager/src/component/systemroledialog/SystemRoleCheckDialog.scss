@@ -1,0 +1,44 @@
+.check-dialog-container{
+  display: flex;
+  flex-direction: column;
+  align-self:center;
+  width: 100%;
+}
+.check-dialog-left-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.check-dialog-item-container{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: flex-start;
+}
+.check-dialog-item{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  div{
+    width: 80px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    color: black;
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 10px;
+    span{
+      color: #c90000;
+      margin-right: 5px;
+    }
+  }
+}
+.check-dialog-item-hint{
+  width: 100%;
+  color: red;
+  font-size: 10px;
+  padding: 2px 0 2px 90px;
+}

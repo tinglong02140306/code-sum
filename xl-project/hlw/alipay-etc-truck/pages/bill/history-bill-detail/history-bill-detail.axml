@@ -1,0 +1,64 @@
+<view class="body-wrapper">
+	<block>
+		<view class="bill-info-banner bg-primary">
+			<view a:if="{{billInfo['state'] == 'CLEARED'}}">本期账单已结清</view>
+			<view a:if="{{billInfo['state'] == 'ENABLED'}}">本期账单未结清</view>
+			<view a:if="{{billInfo['state'] == 'OVERDUE'}}">本期账单已逾期</view>
+			<view a:if="{{billInfo['state'] == 'TRANSFORMED'}}">已生成对应的账单</view>
+			<view class="show-more" onTap="showMore" a:if="{{!more}}">详情 ↓</view>
+		</view>
+		<view class="bill-info-banner bg-primary" style="padding:0;" a:if="{{more}}">
+			<view class="bill-detail">
+				<view class="bill-detail-banner">
+					<view style="color:#999">剩余应还金额</view>
+					<view style="font-size:38rpx;color:#000">￥{{billInfo["repayment_allowed"]}}</view>
+				</view>
+				<view class="bill-tabs">
+					<view class="bill-tab">
+						<view style="color:#999;font-size:24rpx;">账单总金额</view>
+						<view style="color:#000">￥{{billInfo["amount"]}}</view>
+					</view>
+					<view class="split"/>
+					<view class="bill-tab">
+						<view style="color:#999;font-size:24rpx;">还款中金额</view>
+						<view style="color:#000">￥{{billInfo["repayment_processing"]}}</view>
+					</view>
+					<view class="split"/>
+					<view class="bill-tab">
+						<view style="color:#999;font-size:24rpx;">已还款总金额</view>
+						<view style="color:#000">￥{{billInfo["repayment"]}}</view>
+					</view>
+				</view>
+
+				<view class="list-tile">
+					<view>还款时间</view>
+					<view a:if="{{billInfo['cleared_time']}}">{{billInfo["cleared_time"]}}</view>
+				</view>
+        <!--
+				<view class="list-tile">
+					<view>还款方式</view>
+					<view>{{item["channel_code_batch"]}}</view>
+				</view>
+        -->
+
+			</view>
+		</view>
+		<view class="hide-more bg-primary" onTap="hideMore" a:if="{{more}}">收起 ↑</view>
+	</block>
+	<!--列表区-->
+	<block>
+		<view class="container">
+			<block a:for="{{list}}">
+				<view class="bill-item" onTap="showDetail" data-item="{{item}}">
+					<image src="/images/index/wallet.png" style="width:50rpx;height:50rpx" mode="widthFix"/>
+					<view class="bill-date">账单日期：{{item["bill_date"]}}</view>
+					<view class="bill-money">￥{{item["amount"]}}</view>
+				</view>
+			</block>
+		</view>
+	</block>
+	<!--还款-->
+	<!--<block>-->
+		<!--<button class="bg-primary next-btn" onTap="pay" a:if="{{billInfo['repayment_allowed']>0}}">还款</button>-->
+	<!--</block>-->
+</view>

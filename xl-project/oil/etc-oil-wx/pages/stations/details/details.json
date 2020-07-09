@@ -1,0 +1,10 @@
+{
+  "navigationBarBackgroundColor": "#ededed",
+  "navigationBarTextStyle": "black",
+  "navigationBarTitleText": "加油站",
+  "backgroundColor": "#eeeeee",
+  "backgroundTextStyle": "light",
+  "usingComponents": {
+    "login-status":"/components/login-status/login-status"
+  }
+}

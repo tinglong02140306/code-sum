@@ -1,0 +1,95 @@
+/* pages/mine/order/details/details.acss */
+
+.order-details-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: #f8f8f8;
+}
+
+.order-details-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 50rpx;
+    margin-bottom: 18rpx;
+    background-color: #ffffff;
+    box-sizing: border-box;
+}
+
+.order-details-image {
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: 100%;
+    background-color: rgba(255, 255, 255, 1);
+    /*border: 2rpx solid rgba(0, 0, 0, 0.15);*/
+    margin: 32rpx;
+}
+
+.order-details-station {
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 32rpx;
+    text-align: center;
+    font-family: PingFang-SC-Medium;
+    margin-bottom: 24rpx;
+}
+
+.order-details-money-view {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40rpx;
+}
+
+.order-details-money-icon {
+    color: rgba(0, 0, 0, 1);
+    font-size: 32rpx;
+    text-align: center;
+    font-family: PingFangSC-Regular;
+}
+
+.order-details-money-num {
+    color: rgba(0, 0, 0, 1);
+    font-size: 46rpx;
+    text-align: center;
+    font-family: PingFangSC-Regular;
+}
+
+.order-details-line {
+    width: 100%;
+    height: 2rpx;
+    background-color: #F2F2F2;
+}
+
+.order-details-info-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    width: 100%;
+    height: 80rpx;
+}
+
+.order-details-info-title {
+    color: rgba(0, 0, 0, 0.45);
+    font-size: 28rpx;
+    text-align: left;
+    font-family: PingFangSC-Regular;
+}
+
+.order-details-info-content {
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 28rpx;
+    text-align: right;
+    font-family: PingFangSC-Regular;
+}
+
+.order-details-info-discount {
+    color: #FF1E1E;
+    font-size: 28rpx;
+    text-align: right;
+    font-family: PingFangSC-Regular;
+}

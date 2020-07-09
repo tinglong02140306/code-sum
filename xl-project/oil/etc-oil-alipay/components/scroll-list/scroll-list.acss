@@ -1,0 +1,42 @@
+/* components/scroll-list/scroll-list.acss */
+
+.scroll-list-container {
+    width: 100vw;
+    height: 100vh;
+}
+
+.scroll-list-box {
+    width: 100%;
+    height: 100%;
+}
+
+.scroll-list-load-more {
+    width: 100%;
+    padding: 20rpx 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.scroll-list-loading-img {
+    width: 40rpx;
+    height: 40rpx;
+    animation: rotate 1.8s linear infinite;
+    margin-right: 10rpx;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.scroll-list-load-text {
+    font-size: 24rpx;
+    color: #666666;
+}

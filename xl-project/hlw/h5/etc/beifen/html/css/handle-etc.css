@@ -1,0 +1,193 @@
+.hide {
+    display: none;
+}
+
+.add-carno-wrap {
+    padding: 0 0.58rem;
+    width: 100%;
+}
+
+.add-carno-wrap,
+.input-carno-wrap,
+.select-car-color-wrap {
+    width: 100%;
+}
+
+.input-carno-wrap .title {
+    margin-top: 0.56rem;
+    height: 2.04rem;
+    line-height: 2.04rem;
+}
+
+.input-carno-wrap .content {
+    display: flex;
+    justify-content: center;
+}
+
+.input-carno-wrap span {
+    display: inline-block;
+    margin: 0 0.38rem 0 0;
+    width: 1.47rem;
+    height: 1.87rem;
+    line-height: 1.87rem;
+    border-radius: 0.22rem;
+    border: 2px solid #a4a4b4;
+    text-align: center;
+}
+
+.input-carno-wrap .new-energy {
+    border: 2px dashed #a4a4b4;
+}
+
+.input-carno-wrap .dot {
+    width: 0.29rem;
+    background: #fff url("../image/icon-dot.png") center / 0.29rem 0.31rem no-repeat;
+    border: none;
+}
+
+.input-carno-wrap .xny-bg {
+    background: #fff url("../image/xny.png") center / 1.2rem 1.44rem no-repeat;
+}
+
+.input-carno-wrap .actived {
+    border-color: red;
+}
+
+.select-car-color-wrap .title {
+    display: inline-block;
+    width: 100%;
+    height: 2.67rem;
+    line-height: 2.67rem;
+}
+
+.select-car-color-wrap span {
+    display: inline-block;
+    margin-right: 0.56rem;
+    width: 3.62rem;
+    height: 1.82rem;
+}
+
+.plate-blue {
+    background: #fff url("../image/plate-blue.png") left top / 3.33rem 1.76rem no-repeat;
+}
+
+.plate-yellow {
+    background: #fff url("../image/plate-yellow.png") left top / 3.33rem 1.76rem no-repeat;
+}
+
+.plate-green {
+    background: #fff url("../image/plate-green.png") left top / 3.33rem 1.76rem no-repeat;
+}
+
+.plate-sel-blue {
+    background: #fff url("../image/plate-sel-blue.png") center /3.62rem 1.82rem no-repeat;
+}
+
+.plate-sel-yellow {
+    background: #fff url("../image/plate-sel-yellow.png") center /3.62rem 1.82rem no-repeat;
+}
+
+.plate-sel-green {
+    background: #fff url("../image/plate-sel-green.png") center /3.62rem 1.82rem no-repeat;
+}
+
+.select-car-color-wrap .selected {
+    border-color: green;
+    color: green;
+}
+
+
+/* .add-carno-wrap .btn-submit {
+    margin-top: 2rem;
+    height: 2.47rem;
+    width: 100%;
+    background: url("../image/btn-sure-bg.png") center / 100% 2.47rem no-repeat;
+}
+
+.add-carno-wrap .btn-submit span {
+    display: inline-block;
+    height: 2rem;
+    width: 100%;
+    text-align: center;
+    line-height: 2rem;
+} */
+
+
+/* 键盘样式 */
+
+.keyboard-wrapper {
+    position: fixed;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    z-index: 9999;
+}
+
+.keyboard-wrap {
+    padding: 0.8rem 0.44rem;
+    background-color: #dadada;
+}
+
+.area-keyboard span,
+.num-alp-keyboard span {
+    height: 1.33rem;
+    line-height: 1.33rem;
+    text-align: center;
+    font-size: 0.67rem;
+    border: 1px solid #ccc;
+    background-color: white;
+    border-radius: 0.22rem;
+    color: #272727;
+    font-weight: 700;
+}
+
+.keyboard-wrap .content {
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: center; */
+    /* padding: 0.16rem 0.08rem 0; */
+    /* align-content: center; */
+    align-content: flex-start;
+    width: 100%;
+    font-size: 0;
+}
+
+.keyboard-wrap .content span {
+    display: inline-block;
+    margin: 0 1% 0.16rem 0;
+    width: 9%;
+}
+
+
+/* 按钮 */
+
+.btn-wrap {
+    position: absolute;
+    min-width: 4rem;
+    height: 1.33rem;
+    /* background: #fff; */
+    right: .44rem;
+    bottom: 0.8rem;
+}
+
+.btn-wrap span {
+    display: inline-block;
+    width: 1.9rem;
+    height: 1.33rem;
+    vertical-align: top;
+}
+
+.btn-wrap .btn-del {
+    background: #fff url("../image/del.png") center / 1.24rem 1.22rem no-repeat;
+}
+
+.btn-cancel {
+    margin-top: 0.67rem;
+    width: 100%;
+    height: 2rem;
+    border-radius: 0.33rem;
+    border: 1px solid #ccc;
+    line-height: 2rem;
+    text-align: center;
+    background: #fff;
+}

@@ -1,0 +1,38 @@
+<!--
+ * @Author: sunmingmao
+ * @Date: 2020-04-20 08:51:56
+ * @LastEditors: sunmingmao
+ * @LastEditTime: 2020-04-20 09:42:09
+ * @Description: 油站 筛选条件
+ -->
+<view class="filter-tabs-container" catchtouchmove="preventTouchMove">
+    <view class="filter-tabs-top-container" style="height: {{tab_height}}rpx;">
+        <block wx:for="{{list}}" wx:key="menu">
+            <view class="filter-tabs-top-item" bind:tap="onMenuClick" data-item="{{index}}">
+                <text style="color:{{select_tab_index==index&&showMark?'#05BA7D':'rgba(0,0,0,.45)'}};">{{item.default_title}}</text>
+                <image class="filter-tabs-icon" mode="widthFix" src="{{select_tab_index==index&&showMark?icon_up:icon_pull}}"></image>
+            </view> 
+        </block>
+    </view>
+    <view class="filter-mask-container" style="height: {{height}};" wx:if="{{showMark}}" bind:tap="onMarskClick">
+        <scroll-view class="filter-mask-box" scroll-y>
+            <!--垂直列表模式-->
+            <view class="filter-mask-v" wx:if="{{mask_data.style==1}}">
+                <block wx:for="{{mask_data.list}}" wx:key="key" wx:item="item" wx:index="index">
+                    <view class="filter-mask-v-item" catch:tap="onItemClick" data-item="{{item}}">
+                        <text style="color:{{mask_data.default_id==item.id?'#05BA7D':'rgba(0,0,0,.45)'}};">{{item.title}}</text>
+                        <image class="filter-mask-v-icon" wx:if="{{mask_data.default_id==item.id}}" mode="widthFix" src="{{icon_check}}"></image>
+                     </view>
+                </block>
+            </view>
+             <!--横向列表模式-->
+             <view class="filter-mask-h" wx:if="{{mask_data.style==2}}">
+                <block wx:for="{{mask_data.list}}" wx:key="key" wx:item="item" wx:index="index">
+                    <view class="filter-mask-h-item" catch:tap="onItemClick" data-item="{{item}}">
+                        <text class="filter-mask-h-item-text {{mask_data.default_id==item.id?'check':'uncheck'}}">{{item.title}}</text>
+                     </view>
+                </block>
+            </view>
+         </scroll-view>
+    </view>
+</view>

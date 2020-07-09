@@ -1,0 +1,14 @@
+{
+    "defaultTitle": "",
+    "backgroundColor": "#eeeeee",
+    "transparentTitle": "always",
+    "pullRefresh": true,
+    "titlePenetrate": "YES",
+    "usingComponents": {
+        "scroll-list": "../../../components/scroll-list/scroll-list",
+        "station-bar": "../../../components/station-bar/station-bar",
+        "status": "../../../components/status/status",
+        "filter-tabs": "../components/filter-tabs/filter-tabs",
+        "station-item": "../components/station-item/station-item"
+    }
+}

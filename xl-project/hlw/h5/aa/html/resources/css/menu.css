@@ -1,0 +1,63 @@
+.wrap {
+    width: 100%;
+    height: 100%;
+}
+
+.menu-item {
+    margin: 0.67rem 5%;
+    width: 90%;
+    height: 3.56rem;
+    font-size: 0;
+    border: 2px solid transparent;
+}
+
+.menu-item span {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.item1 {
+    border-color: #34a9ef;
+}
+
+.item2 {
+    border-color: #81bb65;
+}
+
+.item3 {
+    border-color: #1296db;
+}
+
+.item4 {
+    border-color: #1296db;
+}
+
+.icon {
+    width: 25%;
+    height: 100%;
+}
+
+.item1 .icon {
+    background: url("../images/icon-etc.png") center / 2.22rem no-repeat;
+}
+
+.item2 .icon {
+    background: url("../images/icon-speed.png") center / 2.22rem no-repeat;
+}
+
+.item3 .icon {
+    background: url("../images/icon-tiny-etc.png") center / 2.22rem no-repeat;
+}
+
+.item4 .icon {
+    background: url("../images/icon-yun-etc.png") center / 2.22rem no-repeat;
+}
+
+.title {
+    width: 75%;
+    height: 100%;
+    font-size: 0.56rem;
+    color: #3b4257;
+    line-height: 3.51rem;
+    text-align: left;
+}

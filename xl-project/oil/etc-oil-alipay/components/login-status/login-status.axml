@@ -1,0 +1,15 @@
+<!--
+ * @Author: sunmingmao
+ * @Date: 2020-04-09 09:47:53
+ * @LastEditors: longting
+ * @LastEditTime: 2020-05-19 
+ * @Description: 判断用户登录状态
+ -->
+<view class="login-status-container">
+    <!-- scope userInfo(getOpenUserInfo)  phoneNumber(getPhoneNumber) -->
+    <button a:if="{{!openid}}" class="login-status-btn" style="width: {{width}}px;height{{height}}px"
+            open-type="getAuthorize" onGetAuthorize="onGetAuthorize" onError="onAuthError" scope='userInfo'></button>
+    <view class="login-status-box" catchTap="getClick" id="content">
+        <slot></slot>
+    </view>
+</view>

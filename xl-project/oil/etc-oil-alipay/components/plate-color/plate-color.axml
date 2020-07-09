@@ -1,0 +1,15 @@
+<!--
+ * @Author: sunmingmao
+ * @Date: 2020-04-11 13:45:23
+ * @LastEditors: longting
+ * @LastEditTime: 2020-05-24 13:53:48
+ * @Description: 车牌颜色
+ -->
+<view class="plate-color-container">
+    <block a:for="{{plate_color_list}}" a:key="key" a:index="index" >
+        <image class="{{select===item.id?'plate-color-image-select':'plate-color-image'}}"
+            onTap="onPlateColorClick"
+            data-item="{{item}}"
+            src="{{select===item.id?item.select_color:item.color}}"/>
+    </block>
+</view>

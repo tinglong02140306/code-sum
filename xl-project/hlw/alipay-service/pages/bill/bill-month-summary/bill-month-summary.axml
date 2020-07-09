@@ -1,0 +1,75 @@
+<view class="wrapper" a:if="{{loaded}}">
+	<view class="title">{{currentYear}}年{{currentMonth}}月份账单汇总</view>
+	<view class="section-a">
+		<view class="section-aa">
+			<view>尊敬的{{plateNo}}车主您好，您的{{currentYear}}年{{currentMonth}}月ETC月度账单已出，敬请查看。</view>
+			<view>{{currentYear}}年{{currentMonth}}月，您的ETC各场景消费汇总如下：</view>
+		</view>
+		<view class="section-ab">
+			<view style="display:flex;color:white;">
+				<view class="row-left-title">消费类型</view>
+				<view class="row-right-title">金额（元）</view>
+			</view>
+			<view style="border-bottom:2rpx solid rgb(237,237,237)" class="row">
+				<view class="row-left">通行消费</view>
+				<view class="row-right">{{trafficTotal}}</view>
+			</view>
+			<view class="row" style="border-bottom:2rpx solid rgb(237,237,237)">
+				<view class="row-left">停车场消费</view>
+				<view class="row-right">{{parkingTotal}}</view>
+			</view>
+			<view class="row" style="border-bottom:2rpx solid rgb(237,237,237);color:rgb(52,154,249)">
+				<view class="row-left">合计（元）</view>
+				<view class="row-right">{{total}}</view>
+			</view>
+		</view>
+	</view>
+	<view class="split split-1">通行消费明细</view>
+	<view class="section-b">
+		<block a:if="{{trafficBill.length}}">
+			<block a:for="{{trafficBill}}">
+				<view class="b-item">
+					<view class="b-item-left">
+						<view class="b-item-left-row">
+							<view class="icon-wrapper">
+								<image src="/images/bill/start.png" style="width:34rpx;height:34rpx;"/>
+							</view>
+							<view>{{item["en_station"]}}({{item["gmt_en"]}})</view>
+						</view>
+						<view class="b-item-left-row" style="margin-top:10rpx">
+							<view class="icon-wrapper">
+								<image src="/images/bill/end.png" style="width:30rpx;height:36rpx;"/>
+							</view>
+							<view>{{item["ex_station"]}}({{item["gmt_ex"]}})</view>
+						</view>
+					</view>
+					<view class="b-item-right">{{item["toll"]}}元</view>
+				</view>
+			</block>
+		</block>
+		<block a:else>
+			<view class="no-data">暂无数据</view>
+		</block>
+	</view>
+	<view class="more" bindtap="showMoreTrafficBill" a:if="{{trafficBill.length}}">点击查看全部</view>
+	<view class="split split-2">停车场消费明细</view>
+	<view class="section-c">
+		<block a:if="{{parkingBill.length}}">
+			<block a:for="{{parkingBill}}">
+				<view class="scroll-view-item">
+					<view class="item-head">
+						<image class="icon-parking" src="/images/bill/parking.png"/>
+						<text class="item-head-text">{{item["ex_station"]}}({{item["gmt_ex"]}})</text>
+					</view>
+					<view class="item-foot">
+						<text class="item-foot-text">￥{{item["toll"]}}元</text>
+					</view>
+				</view>
+			</block>
+		</block>
+		<block a:else>
+			<view class="no-data">暂无数据</view>
+		</block>
+	</view>
+	<view class="more" bindtap="showMoreParkingBill" a:if="{{parkingBill.length}}">点击查看全部</view>
+</view>

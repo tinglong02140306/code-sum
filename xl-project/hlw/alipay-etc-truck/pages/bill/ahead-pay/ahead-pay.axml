@@ -1,0 +1,12 @@
+<view>
+	<view class="total-money">
+		<view>本期还款金额</view>
+		<view>￥{{sum}}</view>
+	</view>
+	<view class="wrapper-a">
+		<list-tile text="待还款业务" tip="货车ETC业务" showRight="{{false}}"/>
+		<list-tile text="还款状态" tip="待还款" showRight="{{false}}"/>
+		<list-tile text="还款方式" tip="{{channelCodeMap[channels[0]]}}" showRight="{{false}}"/>
+	</view>
+	<button class="next-btn bg-primary" onTap="payNow">立即还款</button>
+</view>

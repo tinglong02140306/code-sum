@@ -1,0 +1,64 @@
+<!--
+ * @Author: sunmingmao
+ * @Date: 2020-03-31 14:49:14
+ * @LastEditors: sunmingmao
+ * @LastEditTime: 2020-04-14 20:12:30
+ * @Description: 油站列表item
+ -->
+ <template name="station-item">
+<!--    <login-status openid="{{openid}}" bind:click="onStationClick" source="{{item}}">-->
+        <view class="card-box station-item-container" data-item="{{item}}" bind:tap="onStationClick">
+            <view class="station-item-box">
+                <!--左侧logo-->
+                <image class="station-item-left" src="{{item.brand_icon_url}}"></image>
+                <!--右侧油站详情-->
+                <view class="station-item-center">
+                    <view class="station-item-center-top">
+                        <!--油站名称-->
+                        <text class="station-item-center-name">{{item.name}}</text>
+                        <!--立即加油-->
+<!--                        <login-status openid="{{openid}}" catch:click="onPayClick" source="{{item}}">-->
+                            <view class="station-item-center-oil theme-button" catch:tap="onPayClick" data-item="{{item}}">立即加油</view>
+<!--                        </login-status>-->
+                    </view>
+                    <!--油站位置-->
+                    <text class="station-item-center-address-text">{{item.address}}</text>
+                    <!--优惠信息 暂不支持-->
+                    <!-- <view class="station-item-full-box">
+                        <view class="station-item-full-item">
+                            <text class="station-item-full-tag">满赠</text>
+                            <text class="station-item-full-item-text">加油满200免费洗车</text>
+                        </view>
+                    </view> -->
+                    <view class="station-item-center-bottom">
+                        <!--油价信息-->
+                        <view class="station-item-center-price" style="visibility: {{item.current_station_price?'visible':'hidden'}};">
+                            <view class="station-item-center-price-current" wx:if="{{item.current_station_price}}">
+                                <text class="station-item-center-price-mark">￥</text>
+                                <text class="station-item-center-price-money">{{item.current_station_price.xl_price?item.current_station_price.xl_price:item.current_station_price.list_price?item.current_station_price.list_price:'--'}}</text>
+                            </view>
+                            <!--降价信息-->
+                            <view class="station-item-center-price-down" wx:if="{{item.current_station_price.oil_price_difference}}">
+                                <image class="station-item-center-price-down-image" src="/assets/static/station-item-down.png"></image>
+                                <text>已降￥{{item.current_station_price.oil_price_difference}}</text>
+                            </view>
+                        </view>
+                        <!--定位-->
+                        <view class="station-item-navigation" catch:tap="onNavigationClick" data-item="{{item}}">
+                            <text class="station-item-right-text">{{item.distance}}km</text>
+                            <image class="station-item-right-image" src="/assets/static/station-item-navigation.png"></image>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <!--ETC无感支付-->
+            <view class="station-item-nosence-container" wx:if="{{item.no_sence}}">
+                <text class="station-item-nosence-text">ETC无感支付</text>
+                <view class="station-item-nosence3"></view>
+                <view class="station-item-nosence4"></view>
+                <view class="station-item-nosence5"></view>
+            </view>
+        </view>
+<!--    </login-status>-->
+ </template>
+

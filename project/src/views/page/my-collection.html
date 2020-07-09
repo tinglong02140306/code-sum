@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="../../../../" >
+    <meta charset="UTF-8">
+    <!-- 添加到主屏幕后，全屏显示 -->
+    <meta name="apple-touch-fullscreen" content="YES" />
+    <meta name="format-detection" content="telephone=no" />
+    <!-- iphone 运行在全屏模式 -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="viewport" content="width=device-width"/>
+    <title>我的收藏</title>
+    <script src="../lib/remCacul/remCacul.js"></script>
+    <script src="../lib/remCacul/remCacul.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/mui-preview-pic.css?__inline" />
+    <link rel="stylesheet" type="text/css" href="../lib/mui-pre-pic/mui.min.css">
+    <link rel="stylesheet" type="text/css" href="../lib/swiper/swiper.min.css">
+    <link rel="stylesheet" type="text/css" href="../lib/mescroll/mescroll.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/base.css?__inline" />
+    <link rel="stylesheet" type="text/css" href="../css/all.css?__inline" />
+    <link rel="stylesheet" type="text/css" href="../css/swiper-blogs.css?__inline" />
+    <link rel="stylesheet" type="text/css" href="../css/my-collection.css?__inline" />
+    <link rel="stylesheet" type="text/css" href="../css/news-list.css?__inline" />
+</head>
+<body>
+    <div id="wrapper" class="wrap my-collect-wrap">
+        <!-- 头部start -->
+        <header class="topic-bg">
+            <div class="header-item topic-bg">
+                <a class="header-back back" data-bind="click: back" href="javascript:void(0)"></a>
+                <span class="ell">我的收藏</span>
+                <span class="edit hide" data-bind="click:editClickEvent" data-editflag="0">编辑</span>
+            </div>
+        </header>
+        <!-- 头部end -->
+        <!-- 收藏内容 start -->
+        <div class="collection-wrap top-7">
+            <div class="swiper-container">
+                <div class="swiper-pagination"></div>
+                <div class="swiper-wrapper">
+                    <!-- 综合 -->
+                    <div id="totalNews" class="swiper-slide de-tab-graph" data-index="0">
+                        <div id="wrapper0" class="mescroll total-wrapper">
+                            <!-- localWrapper -->
+                            <section class="home-news">
+                                <div class="home-notify-content">
+                                    <ul id="dataList0" class="city-news local-news">
+                                    </ul>
+                                    <div class="no-line hide">网络无法连接，请检查您的网络</div>
+                                </div>
+                            </section>
+                        </div>
+                        <!-- 暂无数据 -->
+                        <div class="empty empty0 hide">
+                            <div class="empty-ad"></div>
+                            <p>暂无数据~</p>
+                        </div>
+                    </div>
+                    <!--警微热点-->
+                    <div id="blogNews" class="swiper-slide" data-index="1">
+                        <div id="wrapper1" class="mescroll blog-wrapper">
+                            <div id="dataList1" class="blog-news-content city-news">
+                            </div>
+                        </div>
+                        <!-- 暂无数据 -->
+                        <div class="empty empty1 hide">
+                            <div class="empty-ad"></div>
+                            <p>暂无数据~</p>
+                        </div>
+                    </div>
+                </div>   
+            </div>
+        </div>
+        <div class="delete-btn-wapper hide"><span class="delete-btn">删除(<span class="delete-number">0</span>)</span></div>
+        <div class="empty hide top-7">
+            <div class="empty-ad"></div>
+            <p>您还未添加收藏</p>
+        </div>
+         <!-- 收藏内容 end -->
+
+    </div>  
+    <div class="mark">
+        <div class="delete-mask">
+            <p>确定删除<span class="delete-number-tip">0</span>条收藏吗？</p>
+            <div>
+                <span data-bind="click: cancel">取消</span>
+                <span data-bind="click: deleteClickEvent">删除</span>
+            </div>
+        </div>
+    </div>
+    <share data-bind="source: OP"></share>
+</body>
+
+
+<!-- 收藏模板  start-->
+<script id="collectionTmpl" type="text/html">
+    {{each $data as item index}}
+    {{if item.tag == 1}}
+    <li class="unloaded collection-item" data-resid="{{item.resId}}" data-id="{{item.id}}" data-url="{{item.appLinkUrl}}" data-type="{{item.type}}" data-title="{{item.title}}"
+        data-img="{{item.imgUrl1}}">
+        <a class="news-banner news-banners type{{item.tag}} flex clearfix" href="javascript:void(0)">
+            <div class="delete-status  hide fl" data-id="{{item.id}}"></div>
+            <div class="content flex fr">
+                <div class="ul-content flex-one">
+                    <p class="recommend-ul-theme two-ell">{{item.title}}</p>
+                    <p class="news-info clearfix"><span class="resource resource-delete ell fl">{{item.infoSource}}</span><span class="num num-delete ell fl ">{{item.clickCount}}条浏览</span><span class="time time-delete ell fl ">{{item.releaseDate}}</span></p>
+                </div>
+                <img class="lazy" data-original="{{item.imgUrl1}}">
+            </div>
+        </a>
+    </li>
+    {{else if item.tag == 0}}
+    <li class="unloaded collection-item" data-resid="{{item.resId}}" data-id="{{item.id}}" data-url="{{item.appLinkUrl}}" data-type="{{item.type}}" data-title="{{item.title}}"
+        data-img="{{item.imgUrl1}}">
+        <a class="news-banners type{{item.tag}} flex clearfix" href="javascript:void(0)">
+            <div class="delete-status  hide fl" data-id="{{item.id}}"></div>
+            <div class="content fr">
+                <p class="recommend-ul-theme two-ell">{{item.title}}</p>
+                {{if item.content}}<p class="news-content two-ell">{{item.content}}</p>{{/if}}
+                <p class="news-info clearfix"><span class="resource ell fl">{{item.infoSource}}</span><span class="num fl ell">{{item.clickCount}}条浏览</span><span class="time fl ell">{{item.releaseDate}}</span></p>
+            </div>
+        </a>
+    </li>
+    {{else}}
+        <li class="unloaded collection-item" data-resid="{{item.resId}}" data-id="{{item.id}}" data-url="{{item.appLinkUrl}}" data-type="{{item.type}}" data-title="{{item.title}}"
+        data-img="{{item.imgUrl1}}">
+            <a class="news-banners type{{item.tag}} flex clearfix" href="javascript:void(0)">
+                <div class="delete-status  hide fl" data-id="{{item.id}}"></div>
+                <div class="content fr">
+                    <p class="recommend-ul-theme two-ell">{{item.title}}</p>
+                    <div class="img-list flex">
+                        <div class="img-item flex-one"><img class="lazy" data-original="{{item.imgUrl1}}"></div>
+                        <div class="img-item flex-one"><img class="lazy" data-original="{{item.imgUrl2}}"></div>
+                        <div class="img-item flex-one"><img class="lazy" data-original="{{item.imgUrl3}}"></div>
+                    </div>
+                    <p class="news-info clearfix"><span class="resource  ell fl">{{item.infoSource}}</span><span class="num fl ell">{{item.clickCount}}条浏览</span><span class="time fl ell">{{item.releaseDate}}</span></p>
+                </div>
+            </a>
+        </li>
+    {{/if}}
+    {{/each}}
+</script>
+<!-- 收藏模板  end-->
+
+<!-- 警徽热点 start-->
+<script id="blogTmpl" type="text/html">
+    {{each $data as item index}}
+    <div class="blog-news-item blog-news-item{{item.multiple}} flex" data-index="{{item.multiple}}" data-id="{{item.id}}" data-wbname="{{item.wbName}}" data-weburl="{{item.wbImageUrl}}" data-type="{{item.appendixType}}" data-tabtype="blog">
+        <div class="blogs-wrap flex">
+            <div class="delete-status hide" data-id="{{item.id}}"></div>
+            <div class="content content-right">
+                <!-- 主要内容模块 -->
+                <div class="item-content mui-content" data-id="{{item.id}}" data-wbname="{{item.wbName}}" data-weburl="{{item.wbImageUrl}}">
+                    <p class="item-header" data-id="{{item.id}}" data-wbname="{{item.wbName}}" data-weburl="{{item.wbImageUrl}}">
+                        <img src="{{item.wbImageUrl}}" alt="" class="my-photo">
+                        <span class="item-title f28">{{item.wbName}}</span>
+                        <span class="item-date f22 c9">{{item.releaseTime}}</span>
+                    </p>
+                    <p class="article-sec f32" data-id="{{item.id}}" data-wbname="{{item.wbName}}" data-weburl="{{item.wbImageUrl}}">
+                        <span class="c3 content-text content-text{{item.multiple}}">{{item.content}}</span>
+                        <span class="full-text {{if item.notFull}} hide {{/if}}" data-id="{{item.id}}" data-index="{{item.multiple}}">全文</span>
+                    </p>
+                    {{if item.appendixType == 1}}
+                    <!--  appendixType 1 图片 2视频 -->
+                    <div id="imgList{{item.multiple}}" class="mui-content-padded img-list blog-img-list img-list{{item.multiple}} unloaded flex" data-index="{{item.multiple}}" data-imgarr="{{item.imgList}}">
+                        {{each item.appendixList as list i}}
+                        <div class="img-item img-item-btom {{if item.appendixList.length == 1}}img-item-one {{else if item.appendixList.length == 4}} img-item-two {{if i%2 == 1 }} img-item-two-mar {{/if}} {{else if item.appendixList.length > 1 && item.appendixList.length != 4}} img-item-three {{if i%3 != 0}} img-item-mar {{/if}} {{/if}}" data-index="{{i}}"><img src="{{list}}" data-preview-src="" data-preview-group="{{item.multiple}}"  data-id="{{item.id}}" data-wbname="{{item.wbName}}" data-weburl="{{item.wbImageUrl}}"  data-title="{{item.title}}" data-flag="2"></div>
+                        {{/each}}
+                    </div>
+                    {{else if item.appendixType == 2}}
+                        <div class="vedio-unit" data-detailid="{{item.detailsId}}" data-name="{{item.wbName}}" data-poster="{{item.appendixAddress}}">
+                            <span></span>
+                            <img src="{{item.appendixAddress}}">
+                        </div>
+                    {{/if}}
+                </div>
+                <!-- 分享、喜欢、点赞按钮 -->
+                <div class="btn-wrap c8e" data-id="{{item.id}}" data-wbname="{{item.wbName}}" data-weburl="{{item.wbImageUrl}}">
+                    <!-- 分享图标 -->
+                    <a href="javascript:;" class="btn-share f28" data-id="{{item.id}}" data-wbname="{{item.wbName}}" data-weburl="{{item.wbImageUrl}}"  data-title="{{item.title}}" data-flag="1" data-index="{{item.multiple}}">
+                        <span class="icon"></span>
+                        <span class="num">{{item.shareCount}}</span>
+                    </a>
+                    <!-- 收藏图标 -->
+                    <a href="javascript:;" class="btn-collect f28" data-id="{{item.id}}" data-index="{{item.multiple}}" data-collect="{{item.collection}}">
+                        <span class="icon {{if item.collection == 'true'}} collected {{else item.collection == 'false'}} uncollected {{/if}}"></span>
+                        <span class="num">{{item.collectionCount}}</span> 
+                    </a>
+                    <!-- 点赞图标 -->
+                    <a href="javascript:;" class="btn-praise f28" data-index="{{item.multiple}}" data-id="{{item.id}}" data-prise="{{item.prise}}">
+                        <span class="icon {{if item.prise == 'true'}} praised {{else if item.prise == 'false'}} unpraised {{/if}}"></span>
+                        <span class="num">{{item.priseCount}}</span>
+                    </a>
+                </div> 
+            </div> 
+        </div>
+        
+    </div>
+    {{/each}}
+</script>
+<!-- 警徽热点 end-->
+<script src="../lib/app.js"></script>
+<script src="../lib/mui-pre-pic/mui.min.js"></script>
+<script src="../lib/mui-pre-pic/mui.zoom.js"></script>
+<script src="../lib/mui-pre-pic/mui.previewimage.js"></script>
+<script src="../lib/mescroll/mescroll.min.js"></script>
+<script src="../lib/swiper/swiper.min.js"></script>
+<script src="../lib/jquery.lazyload.min.js"></script>
+<script src="../lib/fly/fly.js"></script>
+<script src="../app/my-collection.js"></script>
+</html>

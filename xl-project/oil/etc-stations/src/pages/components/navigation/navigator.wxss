@@ -1,0 +1,19 @@
+.navigator {
+  width: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  margin-right: 32px;
+}
+.navigator-icon {
+  width: 60px;
+  max-height: 60px;
+  margin-bottom: 16px;
+}
+.navigator-distance {
+  color: #666666;
+  font-size: 24px;
+  letter-spacing: 2px;
+}

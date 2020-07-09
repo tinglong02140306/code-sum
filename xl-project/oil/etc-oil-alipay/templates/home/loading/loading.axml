@@ -1,0 +1,55 @@
+<!--
+ * @Author: sunmingmao
+ * @Date: 2020-04-09 14:40:57
+ * @LastEditors: longting
+ * @LastEditTime: 2020-04-09 15:13:46
+ * @Description: 推荐页面加载中
+ -->
+<template name="home-loading">
+    <view class="home-loading-container">
+        <!--天气 国标价-->
+        <view class="home-loading-box">
+            <!--天气-->
+            <view class="home-loading-weather-box">
+                <text class="home-loading-city"></text>
+                <text class="home-loading-temperature"></text>
+            </view>
+            <!--国标价-->
+            <view class="home-loading-price-box"></view>
+        </view>
+        <!--附近服务-->
+        <view class="home-loading-server-container">
+            <text class="home-loading-server-text"></text>
+            <!--油站详情-->
+            <view class="home-loading-server-box card-box">
+                <!--油站logo-->
+                <image class="home-loading-server-logo"></image>
+                <!--详情信息-->
+                <view class="home-loading-server-station-info">
+                    <text class="home-loading-server-station-name"></text>
+                    <text class="home-loading-server-station-address"></text>
+                    <view class="home-loading-server-station-price-box"></view>
+                    <view class="home-loading-server-station-near"></view>
+                </view>
+            </view>
+        </view>
+        <!--广告位-->
+        <view class="home-loading-banner-container"></view>
+        <!--银行优惠-->
+        <view class="home-loading-bank-container">
+            <text class="home-loading-bank-text"></text>
+            <view class="home-loading-bank-list">
+                <block a:for="{{2}}" a:key="bank" a:for-item="item">
+                    <view class="home-loading-bank-list-item card-box">
+                        <image class="home-loading-bank-list-item-image"></image>
+                        <view class="home-loading-bank-list-item-info">
+                            <view class="home-loading-bank-list-item-info-top"></view>
+                            <view class="home-loading-bank-list-item-info-bottom"></view>
+                        </view>
+                        <view class="home-loading-bank-list-item-see"></view>
+                    </view>
+                </block>
+            </view>
+        </view>
+    </view>
+</template>

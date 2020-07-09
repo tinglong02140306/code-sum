@@ -1,0 +1,211 @@
+/* required by usingComponents */
+
+
+.wrapper{
+	width: 750rpx;
+	height: 462rpx;
+	box-sizing: border-box;
+	padding: 50rpx 20rpx;
+  background: #fff;
+
+}
+.input-item{
+	width: 690rpx;
+	height: 88rpx;
+	display: flex;
+	border-bottom: 1px solid #eee;
+	position: relative;
+	font-size: 28rpx;
+}
+.input-label{
+	flex: 0 0 150rpx;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+.input{
+	flex: 1;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+.clear{
+	position: absolute;
+	width: 60rpx;
+	right:0;
+	top:0;
+	bottom:0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.placeholderCls{
+	color: #999999;
+	font-size: 28rpx;
+	text-align: left;
+}
+.next-btn{
+	width: 686rpx;
+	outline: none;
+  color: #fff;
+  margin-top:50rpx;
+  border-radius: 10rpx;
+}
+.plate{
+	margin: 20rpx 0;
+	height: 82rpx;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+.plate-item{
+	flex: 0 0 60rpx;
+	height: 80rpx;
+	border: 1px solid #999;
+	border-radius: 10rpx;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+}
+.abs-icon{
+	position: absolute;
+	right: -30rpx;
+	bottom: -10rpx;
+	border: 2rpx solid #fff;
+	border-radius: 50%;
+	z-index: 9999;
+}
+.plate-dot{
+	flex: 0 0 10rpx;
+	height: 10rpx;
+	margin: 35rpx 5rpx;
+	border-radius: 50%;
+	background-color: #333;
+}
+.plate-xny{
+	flex: 0 0 60rpx;
+	height: 80rpx;
+	border: 1px dashed #999;
+	border-radius: 10rpx;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color:#004F9C;
+}
+.active{
+	border: 1px solid #004F9C;
+}
+.tip{
+	font-size: 28rpx;
+}
+.keyboard{
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 234;
+}
+.plate{
+  margin: 20rpx 0;
+  height: 82rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.plate-1{
+	margin: 20rpx 0;
+	height: 82rpx;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+.plate-item{
+  flex: 0 0 60rpx;
+  height: 80rpx;
+  border: 1px solid #999;
+  border-radius: 10rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.plate-dot{
+  flex: 0 0 10rpx;
+  height: 10rpx;
+  margin: 35rpx 5rpx;
+  border-radius: 50%;
+  background-color: #333;
+}
+.plate-xny{
+  flex: 0 0 60rpx;
+  height: 80rpx;
+  border: 1px dashed #999;
+  border-radius: 10rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color:#16C88B;
+}
+.active{
+  border: 1px solid #16C88B;
+}
+.notice{
+  font-size: 24rpx;
+  color: #999;
+}
+.plate-color{
+  flex: 0 0 160rpx;
+  height: 62rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2rpx solid #eee;
+  border-radius: 10rpx;
+  position: relative;
+  font-size: 30rpx;
+  font-weight: bold;
+  letter-spacing: 5rpx;
+}
+.plate-color-blue{
+  color: #0094EE;
+  border: 2rpx solid #0094EE;
+  background-color: #fff;
+}
+.plate-color-blue-active{
+  background-color: #0094EE;
+  color: #fff;
+}
+.plate-color-yellow{
+  color: #F4C12C;
+  border: 2rpx solid #F4C12C;
+  background-color: #fff;
+}
+.plate-color-yellow-active{
+  background-color: #F4C12C;
+  color: #fff;
+}
+.plate-color-green{
+  color: #16C88B;
+  border: 2rpx solid #16C88B;
+  background-color: #fff;
+}
+.plate-color-green-active{
+  border: 1px solid #16C88B;
+  background: linear-gradient(to bottom, white, #00EE00);
+  color: #fff;
+}
+.plate-color-grey{
+  color: #999;
+  border: 2rpx solid #999;
+  background-color: #fff;
+}
+.plate-color-grey-active{
+  background-color: #999;
+  color: #fff;
+}
+.button{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

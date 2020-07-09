@@ -1,0 +1,92 @@
+.hide {
+    display: none;
+}
+
+a {
+    text-decoration: none;
+    color: #01c9e2;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.wrap {
+    padding: 0 3%;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background: #fff;
+}
+
+.content {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #ccc;
+    padding: 0 3%;
+}
+
+.bg-wrap {
+    width: 100%;
+    /* height: 6.89rem; */
+    height: 4rem;
+}
+
+.bg-alipay {
+    background: url("../images/icon-alipay-change.png") center / 8.16rem 2.44rem no-repeat;
+}
+
+.bg-wx {
+    background: url("../images/icon-wx-change.png") center / 8.16rem 2.44rem no-repeat;
+}
+
+.info-item {
+    width: 100%;
+    height: 2.04rem;
+    font-size: 0;
+}
+
+.info-item label,
+.info-item span {
+    display: inline-block;
+    vertical-align: top;
+    text-align: left;
+    height: 100%;
+    font-size: 0.62rem;
+    line-height: 2.04rem;
+}
+
+.info-item label {
+    width: 30%;
+    color: #9d9d9d;
+}
+
+.info-item span {
+    width: 70%;
+    color: #020001;
+}
+
+.btn-wrap {
+    margin-top: 0.89rem;
+}
+
+.btn-wrap p {
+    width: 100%;
+    height: 1rem;
+    line-height: 1rem;
+    text-align: left;
+    font-size: 0.58rem;
+    text-indent: 3%;
+}
+
+.btn-wrap span {
+    display: inline-block;
+    margin-top: 2.22rem;
+    width: 90%;
+    height: 2.22rem;
+    line-height: 2.22rem;
+    text-align: center;
+    color: #fff;
+    font-size: 0.67rem;
+    background: #01c9e2;
+    border-radius: 0.22rem;
+}

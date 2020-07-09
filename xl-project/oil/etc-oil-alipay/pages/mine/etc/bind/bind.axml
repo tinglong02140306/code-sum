@@ -1,0 +1,56 @@
+<!--
+ * @Author: sunmingmao
+ * @Date: 2020-04-11 11:35:06
+ * @LastEditors: longting
+ * @LastEditTime: 2020-05-24 16:57:37
+ * @Description: 绑定ETC页面
+ -->
+<view class="bind-etc-container">
+    <view class="bind-etc-box">
+        <image class="bind-etc-image" src="https://oilmag.etcsd.com.cn/oilcoreserver/static//resource/icon-flow.png">
+        </image>
+        <view class="bind-etc-content-box">
+            <view class="bind-etc-content">
+                <view class="headline-box">
+                    <view class="headline-separation"></view>
+                    <text class="headline-text">车牌号</text>
+                </view>
+                <plate-input class="bind-etc-plate-input" default_index="{{plate_no_index}}"
+                    input_value="{{car_plate_input}}" onPlateChange="onPlateChange"></plate-input>
+            </view>
+            <view class="bind-etc-content">
+                <view class="headline-box">
+                    <view class="headline-separation"></view>
+                    <text class="headline-text">选择您的车牌颜色</text>
+                </view>
+                <plate-color class="bind-etc-plate-color" onPlateColorChange="onPlateColorChange"
+                    select="{{car_plate_color}}"></plate-color>
+                <view class="bind-etc-separation"></view>
+            </view>
+            <view class="bind-etc-content">
+                <view class="headline-box">
+                    <view class="headline-separation"></view>
+                    <text class="headline-text">ETC卡号</text>
+                </view>
+                <etc-input class="bind-etc-input" value="{{etc_card_no}}" onETCChange="onETCChange">
+                </etc-input>
+            </view>
+        </view>
+    </view>
+    <view class="bind-bottom-box" style="padding-bottom: {{isIphoneX?64:20}}rpx;">
+        <text class="btn-margin {{(etc_card_no&&car_plate_no)?'theme-button':'disable-button'}}"
+            onTap="onNextClick">提交</text>
+    </view>
+    <popup show="{{show}}">
+        <view class="bind-plate-number-list" style="padding-bottom: {{isIphoneX?32:0}}rpx;">
+            <text class="bind-plate-number-list-title">系统检测到您有以下车牌号,点击添加</text>
+            <view class="bind-plate-number-list-box">
+                <block a:for="{{plate_number_list}}" a:key="plate_number_list" a:for-item="item">
+                    <text class="bind-plate-number-list-item" onTap="onItemClick"
+                        data-item="{{item}}">{{item.plate_number_formate}}</text>
+                </block>
+            </view>
+            <text class="bind-plate-number-list-cancel" onTap="onCancelClick">取消</text>
+        </view>
+    </popup>
+</view>

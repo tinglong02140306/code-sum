@@ -1,0 +1,6 @@
+/* components/station-bar/station-bar.wxss */
+.station-bar{
+    margin-left: 80rpx;
+    font-size:38rpx;
+    font-weight: bold;
+}

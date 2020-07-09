@@ -1,0 +1,10 @@
+{
+    "defaultTitle": "ETC卡管理",
+    "pullRefresh": true,
+    "backgroundColor": "#F8F8F8",
+    "usingComponents": {
+        "etc-card-type": "../../../../components/etc-card-type/etc-card-type",
+        "status": "../../../../components/status/status",
+        "scroll-list": "../../../../components/scroll-list/scroll-list"
+    }
+}

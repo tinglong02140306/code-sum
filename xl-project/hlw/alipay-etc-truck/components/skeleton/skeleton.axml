@@ -1,0 +1,13 @@
+<view class="tiny-skeleton-ul" style="padding: 24px">
+    <view class="tiny-skeleton-li"></view>
+    <view class="tiny-skeleton-li"></view>
+    <view class="tiny-skeleton-li"></view>
+    <view class="tiny-skeleton-li"></view>
+    <view class="tiny-skeleton-li" style="height:200px;"></view>
+    <view class="tiny-skeleton-li"></view>
+    <view class="tiny-skeleton-li"></view>
+    <view class="tiny-skeleton-li"></view>
+    <view class="tiny-skeleton-li"></view>
+    <view class="tiny-skeleton-li"></view>
+    <view class="tiny-skeleton-li" style="height:50px;"></view>
+</view>

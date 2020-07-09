@@ -1,0 +1,216 @@
+/*
+ * @Author: qijiang 
+ * @Date: 2018-09-30 21:18:44 
+ * @Last Modified by: tinglong
+ * @Last Modified time: 2018-12-01 16:00:08
+ */
+<template>
+    <div>
+        <Menu ref="contactMenu" :mode="mode" :open-names="openName" :active-name="menuState" @on-select="selectEvt" width="180" v-show="!showNav">
+            <label v-for="navMenu in navData">
+                <Submenu :name="navMenu.id" v-if="navMenu.items.length != 0">
+                    <template slot="title">
+                        <i  v-if="navMenu.title == '事项管理'" class="iconfont icon-nav-shixiangguanli"></i>
+                        <i  v-else-if="navMenu.title == '情形配置'" class="iconfont icon-nav-qingxingpeizhi"></i>
+                        <i  v-else-if="navMenu.title == '基础数据管理'" class="iconfont icon-nav-yunhangguanli"></i>
+                        <img v-else-if="navMenu.icon" :src="navMenu.icon"></img> {{navMenu.title}}
+                    </template>
+                    <navMenu :navData="navMenu.items"></navMenu>
+                </Submenu>
+                <MenuItem :name="navMenu.id" v-if="navMenu.items.length == 0">
+                    <img v-if="navMenu.icon" :src="navMenu.icon"></img> {{navMenu.title}}
+                </MenuItem>
+            </label>
+        </Menu>
+        <div v-show="showNav" class="collapsed-nav-wrap">
+            <a href="javascript:void(0)" class="collapsed-nav cur" @click="menuCollapsed = !menuCollapsed">
+                <!-- :class="curCollapsed(navMenu.id)" -->
+                <i class="iconfont icon-nav-shoujianzhongxin"></i>
+            </a>
+            <!-- <div  class="drow-wrap" v-if="menuCollapsed">
+               
+            </div> -->
+            <Dropdown v-for="(navMenu,index) in navData" :key="index" placement="right-start" >
+                <a href="javascript:void(0)" class="collapsed-nav mt15" v-if="navMenu.title == '事项管理'">
+                    <i class="iconfont icon-nav-shixiangguanli"></i>
+                </a>
+                <a href="javascript:void(0)" class="collapsed-nav mt15" v-else-if="navMenu.title == '情形配置'">
+                    <i class="iconfont icon-nav-qingxingpeizhi"></i>
+                </a>
+                <a href="javascript:void(0)" class="collapsed-nav mt15" v-else-if="navMenu.title == '基础数据管理'">
+                    <i class="iconfont icon-nav-yunhangguanli"></i>
+                </a>
+                <DropdownMenu slot="list">  
+                    <DropdownItem class="font-max" v-for="(items,index) in navMenu.items" :key="index" :name="items.id" @click.native="handleClick(items.id)">{{items.title}}</DropdownItem>
+                </DropdownMenu>
+                <!-- <div> -->
+                    <!-- <DropdownItem class="font-max">
+                        {{navMenu.title}}
+                        <Icon type="ios-arrow-forward"></Icon>
+                    </DropdownItem>
+                    <DropdownMenu slot="list">
+                        <DropdownItem class="font-max" v-for="(items,index) in navMenu.items" :key="index" :name="items.id" @click.native="handleClick(items.id)">{{items.title}}</DropdownItem>
+                    </DropdownMenu> -->
+                <!-- </div> -->
+            </Dropdown>
+            
+        </div>
+    </div>
+    
+</template>
+<script>
+export default {
+    name: 'navMenu',
+    props: {
+        icon: {
+            type: String,
+            default: 'navicon-round'
+        },
+        size: {
+            type: Number,
+            default: 26
+        },
+        mode: {
+            type: String,
+            default: 'vertical'
+        },
+        theme: {
+            type: String,
+            default: 'dark'
+        },
+        navData: {
+            type: Array,
+            default: []
+        },
+        openName: {
+            type: Array
+        },
+        showNav: {
+            type: Boolean
+        }
+    },
+    data() {
+        return {
+            collapsed: false,
+            menuCollapsed: false,
+            temp: ''
+
+        }
+    },
+    computed: {
+        menuState: {
+            get() {
+                return this.$store.state.menuState;
+            }
+        }
+    },
+    mounted() {
+
+    },
+    created() {
+    },
+    methods: {
+        curCollapsed(id) {
+            let flag = false;
+            $(this.openName).each(function(index, item){
+                if(item == id) {
+                    flag = true;
+                }
+            });
+            return flag ?  'cur': '';
+        },
+        handleClick(val) {
+            this.findUrl(val, this.navData);
+            window.location.href = this.temp;
+            // this.$router.push(this.temp);
+            this.$store.commit('setState', {
+                menuState: val
+            });
+            sessionStorage.menuState = val;
+        },
+        selectEvt(val) {
+            this.findUrl(val, this.navData);
+            window.location.href = this.temp;
+            this.$store.commit('setState', {
+                menuState: val
+            });
+            sessionStorage.menuState = val;
+        },
+        update() {
+            let $this = this;
+            this.$nextTick(() => {
+                $this.$refs.contactMenu.updateOpened();
+                $this.$refs.contactMenu.updateActiveName();
+            });
+        },
+        findUrl(id, data) {
+            let len = data.length,
+                temp = '';
+            for (let i = 0; i < len; i++) {
+                if(data[i].id == id) {
+                    this.temp =  data[i].url;
+                    break;
+                } else {
+                    if(data[i].items && data[i].items.length > 0) {
+                        this.findUrl(id, data[i].items);
+                    }   
+                }
+            }
+        },
+    }
+}
+</script>
+<style lang="less">
+.ivu-menu-submenu-title img, .ivu-menu-item img {
+    width: 15px;
+    height: 15px;
+    vertical-align: middle;
+}
+// .ivu-menu-submenu-title-icon{
+//     -ms-transition: -ms-transform 0.2s ease-in-out;
+//     -webkit-transition: -webkit-transform 0.2s ease-in-out;
+//     transition: transform 0.2s ease-in-out;
+// }
+// .ivu-menu-opened>*>.ivu-menu-submenu-title-icon {
+//     -ms-transform: rotate(180deg);
+//     -moz-transform: rotate(180deg);
+//     -o-transform: rotate(180deg);
+//     transform: rotate(180deg);
+// }
+.collapsed-nav-wrap {
+    padding: 20px 0 0 5px;
+    .collapsed-nav {
+        margin-right: 10px;
+        display: inline-block;
+        width: 44px;
+        height: 44px;
+        line-height: 44px;
+        text-align: center;
+        border-radius: 50%;
+        background: #edf0f6;
+        i {
+            font-size: 23px;
+        }
+        &.cur {
+            background: #2080e4;
+            color: #fff;
+        }
+    }
+    // .drow-wrap {
+    //     position: relative;
+    //     padding: 5px 0;
+    //     top: -40px;
+    //     left: 54px;
+    //     z-index: 10;
+    //     width: 115px;
+    //     background: #fff;
+    //     box-shadow: 0 0 5px #ddd;
+    //     border-radius: 5px;
+    // }
+}
+.ivu-select-dropdown {
+    top: 20px;
+    left: 59px;
+    width: 100px;
+}
+</style>

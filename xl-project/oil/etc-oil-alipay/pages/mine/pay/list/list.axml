@@ -1,0 +1,93 @@
+<import src="../../../../templates/mine/pay-list/pay-list.axml" />
+<view class="person-pay-container">
+    <view class="person-pay-list" a:if="{{!isEmpty}}">
+        <view class="person-pay-list-up">
+            <text class="person-pay-hint">系统将按如下顺序扣款</text>
+            <view class="person-pay-count">
+                <text class="person-pay-count-hint">已开通的支付方式</text>
+                <text class="person-pay-count-move">拖动</text>
+            </view>
+        </view>
+        <view class="person-pay-list-content">
+            <view style="position: relative; z-index: 199;">
+                <movable-area class="movable-area"
+                    style='display:{{movableViewInfo.showClass}}; height:{{pageInfo.scrollHeight}}%;'>
+                    <movable-view class="row list-row movable-row" out-of-bounds='{{true}}' damping='999'
+                        style='height:{{pageInfo.rowHeight}}rpx;' direction="vertical" y="{{movableViewInfo.y}}">
+                        <view class="pay-list-box">
+                            <view class="pay-list-box-left">
+                                <image class="pay-list-icon" src="{{movableViewInfo.data.bank_title_logo}}"></image>
+                                <text class="pay-list-text">{{movableViewInfo.data.title}}</text>
+                            </view>
+                            <view class="pay-list-box-left">
+                                <view class="pay-discounts-view" a:if="{{movableViewInfo.data.activity_message}}">
+                                    <text class="pay-discounts-text">{{movableViewInfo.data.activity_message}}</text>
+                                    <image class="pay-discounts-image" src="{{discounts_icon}}"></image>
+                                </view>
+                                <image class="pay-list-right" src="{{move_icon}}"></image>
+                            </view>
+                        </view>
+                    </movable-view>
+                </movable-area>
+                <scroll-view scroll-y="{{pageInfo.scrollY}}" style="height: {{pageInfo.scrollHeight}}%">
+                    <block a:for="{{optionList}}" a:key="pay_list">
+                        <view onTap="unsignClick" data-index="{{index}}" data-id="{{item.id}}" class='row list-row {{pageInfo.readyPlaceIndex == index ? "ready-place" : ""}}'
+                            style="height: {{pageInfo.rowHeight}}rpx;">
+                            <view class='pay-list-box {{pageInfo.readyPlaceIndex == index ? "ready-place" : ""}}'>
+                                <view class="pay-list-box-left"
+                                    style='display: {{pageInfo.readyPlaceIndex == index ? "none" : "visibility"}}'>
+                                    <image class="pay-list-icon" src="{{item.bank_title_logo}}"></image>
+                                    <text class="pay-list-text">{{item.title}}</text>
+                                </view>
+                                <view class="pay-list-box-left"
+                                    style='display: {{pageInfo.readyPlaceIndex == index ? "none" : "visibility"}}'>
+                                    <view class="pay-discounts-view" a:if="{{item.activity_message}}">
+                                        <text class="pay-discounts-text">{{item.activity_message}}</text>
+                                        <image class="pay-discounts-image" src="{{discounts_icon}}"></image>
+                                    </view>
+                                    <view style="width:100rpx, height: 100%;" 
+                                        data-index='{{index}}'
+                                        catchTouchStart='dragStart' 
+                                        catchTouchMove='dragMove'
+                                        catchTouchEnd='dragEnd'>
+                                        <image class="pay-list-right" src="{{move_icon}}" >
+                                        </image>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                        <view class="person-pay-sign-line"></view>
+                    </block>
+                </scroll-view>
+            </view>
+        </view>
+    </view>
+
+    <view class="person-pay-sign">
+        <view class="person-pay-bank" onTap="signAlipay" a:if="{{isEmpty}}">
+            <view class="person-pay-bank-left">
+                <image class="pay-bank-left-image" src="{{alipay_icon}}" mode="widthFix"></image>
+                <text class="pay-bank-left-text">开通免密代扣签约服务</text>
+            </view>
+            <view class="person-pay-bank-left">
+                <text class="pay-bank-sub-text">去开通</text>
+                <image class="pay-bank-right" src="{{next_icon}}"></image>
+            </view>
+        </view>
+    </view>
+
+    <popup show="{{show}}" ref="popupRef">
+        <view class="pop-up-container" style="padding-bottom: {{isIphoneX?32:0}}rpx;">
+            <view class="pop-up-hint-title-view" a:if="{{clickType===3}}">
+                <text class="pop-up-hint-title">确定解约支付宝免密代扣服务？</text>
+            </view>
+            <view class="pop-up-operation-view" onTap="onSureClick">
+                <text class="pop-up-operation">解约</text>
+            </view>
+            <view class="pop-up-cancel-view" onTap="onCancelClick">
+                <text class="pop-up-cancel">取消</text>
+            </view>
+        </view>
+    </popup>
+
+</view>

@@ -1,0 +1,296 @@
+.station-item-container {
+    width: 710rpx;
+    margin-bottom: 20rpx;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.station-item-box {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 32rpx 32rpx;
+}
+
+
+/*ETC无感支付*/
+
+.station-item-nosence-container {
+    width: 100%;
+    height: 42rpx;
+    position: relative;
+    /* background-image: linear-gradient(to right, #5DB8A0, #5DB8A0); */
+    border-bottom-left-radius: 12rpx;
+    border-bottom-right-radius: 16rpx;
+    display: flex;
+    flex-direction: row;
+}
+
+.station-item-nosence-text {
+    width: 168rpx;
+    height: 42rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    box-sizing: border-box;
+    /*color: #FFEBC7 ;*/
+    color: #ffffff;
+    font-size: 24rpx;
+    background-color: #00991F;
+    border-bottom-left-radius: 12rpx;
+    border-top-right-radius: 20rpx;
+    padding-right: 8rpx;
+    box-shadow: 0rpx 2rpx 4rpx 0rpx rgba(0, 0, 0, 0.1);
+}
+
+.station-item-nosence3 {
+    left: 166rpx;
+    bottom: 0rpx;
+    position: absolute;
+    z-index: 2;
+    border-bottom: 32rpx solid #00991F;
+    border-right: 20rpx solid transparent;
+}
+
+.station-item-nosence4 {
+    width: 534rpx;
+    height: 42rpx;
+    /*background-image: linear-gradient(to right, #9e6224, #f3d191);*/
+    background-image: linear-gradient(to right, #00991F, #61ECBD);
+    position: absolute;
+    left: 176rpx;
+    bottom: 0;
+    border-bottom-right-radius: 12rpx;
+}
+
+.station-item-nosence4::after {
+    content: "";
+    width: 534rpx;
+    height: 38rpx;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 4;
+    background-color: white;
+    border-bottom-left-radius: 18rpx;
+}
+
+.station-item-nosence5 {
+    width: 6rpx;
+    height: 28rpx;
+    background-color: #ffffff;
+    position: absolute;
+    left: 176rpx;
+    top: 0;
+    z-index: 4;
+    border-bottom-left-radius: 12rpx;
+}
+
+
+/* .station-item-nosence1::after{
+    position: absolute;
+    z-index: 2;
+} */
+
+
+/**左侧**/
+
+.station-item-left {
+    width: 78rpx;
+    height: 76rpx;
+    margin-right: 24rpx;
+    align-self: flex-start;
+}
+
+
+/**右侧详情**/
+
+.station-item-center {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.station-item-center-top {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+
+/**油站名称**/
+
+.station-item-center-name {
+    flex: 1;
+    font-size: 32rpx;
+    color: #333333;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap
+}
+
+
+/**立即加油**/
+
+.station-item-center-oil {
+    width: 130rpx;
+    height: 44rpx;
+    font-size: 24rpx;
+    margin-left: 10rpx;
+}
+
+
+/**油站地址**/
+
+.station-item-center-address-text {
+    width: 100%;
+    color: #999999;
+    font-size: 26rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-right: 130rpx;
+    box-sizing: border-box;
+    margin-top: 24rpx;
+}
+
+.station-item-center-bottom {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+
+/**优惠信息**/
+
+.station-item-full-box {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    margin-top: 16rpx;
+    overflow: hidden;
+}
+
+.station-item-full-tag {
+    white-space: nowrap;
+    color: #057FFF;
+    font-size: 22rpx;
+    border: 2rpx solid rgba(22, 136, 255, .25);
+    border-radius: 4rpx;
+    background-color: rgba(5, 127, 255, .05);
+    padding: 0rpx 6rpx;
+}
+
+.station-item-full-item {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    overflow: hidden;
+}
+
+.station-item-full-item-text {
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #057FFF;
+    font-size: 26rpx;
+    margin-left: 10rpx;
+}
+
+
+/**油价信息**/
+
+.station-item-center-price {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-end;
+    box-sizing: border-box;
+    margin-top: 8rpx;
+}
+
+
+/**油品价格**/
+
+.station-item-center-price-current {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-end;
+    position: relative;
+}
+
+.station-item-center-price-mark {
+    font-size: 24rpx;
+    font-weight: normal;
+}
+
+.station-item-center-price-money {
+    font-size: 40rpx;
+    color: #000000;
+    font-weight: bold;
+    position: relative;
+    bottom: -6rpx;
+}
+
+
+/**降价信息**/
+
+.station-item-center-price-down {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    color: #FF5311;
+    font-size: 24rpx;
+    margin-left: 16rpx;
+}
+
+.station-item-center-price-down-image {
+    width: 24rpx;
+    height: 24rpx;
+    margin-right: 4rpx;
+}
+
+
+/**定位信息**/
+
+.station-item-navigation {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.station-item-right-image {
+    width: 52rpx;
+    height: 52rpx;
+    margin-left: 20rpx;
+}
+
+.station-item-right-text {
+    color: #333333;
+    font-size: 24rpx;
+}

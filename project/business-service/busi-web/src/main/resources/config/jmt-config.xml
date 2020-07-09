@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<comment></comment>
+    <!-- 平台sso服务器地址 -->
+ 	<!--<entry key="SSO.BASE.ENDPOINT">https://wj.ahga.gov.cn/publicsso/</entry>-->
+ 	<entry key="SSO.BASE.ENDPOINT">http://localhost:8080/publicsso</entry>
+	<!-- 安全过滤器仅在Link容器内生效(请求头的useragent中包含linkmessager) -->
+	<entry key="SSO.SECURITY.INLINK">false</entry>
+	<!-- 平台接口服务地址 -->
+ 	<!--<entry key="JMT.SERVICE.ENDPOINT">https://wj.ahga.gov.cn/service/</entry>-->
+ 	<entry key="JMT.SERVICE.ENDPOINT">http://172.31.1.30:8070/service/</entry>
+	<!-- 平台接口日志服务地址 -->
+ 	<entry key="JMT.LOG.SERVICE.ENDPOINT">https://wj.ahga.gov.cn/jmtlog</entry>
+	<!-- 平台分配给应用系统的Id -->
+	<entry key="JMT.CLIENT.ID">bg</entry>
+	<!-- 平台分配给应用系统的接入密钥 -->
+	<entry key="JMT.CLIENT.SECRET">5523c88dd347d1b7cc617f632b7efdb7</entry>
+	<!-- 不需安全认证的Url(支持正则表达式) -->
+	<entry key="IGNORE.URL.PATTERN">/ssoclient*|*.css|*.js|*.png|/ocrscan|*.jpg|*.gif|*.bmp|*.html|*.htm|/file/*|/apply/receive|/common/*|/images/*</entry>
+</properties>

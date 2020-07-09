@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <!-- 添加到主屏幕后，全屏显示 -->
+    <meta name="apple-touch-fullscreen" content="YES" />
+    <meta name="format-detection" content="telephone=no" />
+    <!-- iphone 运行在全屏模式 -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+    <title>city-picker</title>
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/handle-etc.css">
+    <script type="text/javascript" src="../js/administrativeDivisions.js"></script>
+    <script type="text/javascript" src="../js/plugins/remCacul/remCacul.js"></script>
+</head>
+
+<body>
+    <div class="wrap">
+        <!-- 输入车牌号 -->
+        <div class="input-carno-wrap">
+            <p class="title">办理ETC车牌号</p>
+            <!-- 车牌号输入框 -->
+            <div class="content">
+                <span data-type="province"></span>
+                <span data-type="numAlp"></span>
+                <span data-type="numAlp"></span>
+                <span data-type="numAlp"></span>
+                <span data-type="numAlp"></span>
+                <span data-type="numAlp"></span>
+                <span data-type="numAlp"></span>
+                <span class="new-energy xny-bg" data-type="numAlp"></span>
+            </div>
+        </div>
+
+        <!-- 选择车牌颜色 -->
+        <div class="select-car-color-wrap">
+            <p class="title">请选择车牌颜色</p>
+            <div class="content">
+                <span data-val="0">蓝色</span>
+                <span data-val="0">黄色</span>
+                <span data-val="0">渐变绿</span>
+            </div>
+        </div>
+
+        <span class="btn-submit">确定</span>
+
+        <!-- 键盘 -->
+        <div class="keyboard-wrapper">
+        </div>
+    </div>
+
+</body>
+<!-- <script src="https://gw.alipayobjects.com/as/g/h5-lib/alipayjsapi/3.1.1/alipayjsapi.min.js"></script> -->
+<script type="text/javascript" src="../js/plugins/jquery/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="../js/util.js"></script>
+<script type="text/javascript" src="../js/app/handle-etc.js"></script>
+
+</html>

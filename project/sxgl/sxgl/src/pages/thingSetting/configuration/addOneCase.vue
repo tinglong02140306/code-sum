@@ -1,0 +1,714 @@
+/*
+ * @Author: lhqin 
+ * @Date: 2018-10-30 10:32:25 
+ * @Last Modified by: qijiang
+ * @Last Modified time: 2018-11-13 23:31:32
+ */
+
+<template>
+    <div id="addOneCase">
+        <!-- 查询条件（基本查询）start -->
+        <div class="search-wrap">
+            <el-row>
+                <el-col :span="6">
+                    <label class="mr5">行政区划</label>
+                    <div class="inline-block common-width">
+                        <Cascader class="inline-block bwidth" :data="proData" :load-data="xzqhLoadData" v-model="newxzqhVal" change-on-select filterable @on-change="changeXzqh" :transfer="true"></Cascader>
+                    </div>
+                </el-col>
+                <el-col :span="6">
+                    <label class="mr5">主办部门</label>
+                    <div class="inline-block common-width">
+                        <el-select class="bwidth" v-model="deptVal" size="small" filterable>
+                            <el-option v-for="item in deptData" :key="item.value" :label="item.label" :value="item.value">
+                            </el-option>
+                        </el-select>
+                    </div>
+                </el-col>
+                <el-col :span="6">
+                    <label class="mr5">事件名称</label>
+                    <div class="inline-block common-width">
+                        <el-input v-model="eventNameVal" :maxlength="100" placeholder="请输入事件名称" size="small" @change="changeMatterName"></el-input>
+                    </div>
+                </el-col>
+                <el-col :span="4" class="ml10">
+                     <div class="inline-block">
+                        <el-button class="mr10 w70 h30" type="primary" size="mini" @click="searchEvt">查询</el-button>
+                        <a ref="higSearch" class="higher-search-a text-blue fz14" href="javascript:void(0)" v-bind:class="" @click="higSearchEvt">
+                            <span>{{ higSerMsg }}</span>
+                            <i class="iconfont icon-xia"></i>
+                        </a>
+                    </div>
+                </el-col>
+            </el-row>
+        </div>
+
+        <!-- 查询条件（高级查询）start -->
+        <div class="search-wrap" v-bind:class="{hide:isHigRow}">
+            <el-row>
+                <el-col :span="6">
+                    <label class="mr5">办理对象</label>
+                    <div class="inline-block common-width matt-class">
+                        <Select v-model="proObjVal" @on-change="objChangeEvt" :transfer="true">
+                            <Option v-for="item in proObjData" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                        </Select>
+                    </div>
+                </el-col>
+                <el-col :span="6">
+                    <!-- 数据是主题类型的数据，为了便于理解，所以是事件类别 -->
+                    <label class="mr5">事件类别</label>
+                    <div class="inline-block common-width">
+                        <Select class="bwidth" v-model="themeTypeVal" :transfer="true">
+                            <Option v-for="item in themeTypeData" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                        </Select>
+                    </div>
+                </el-col>
+                <el-col :span="10">
+                    <label class="mr5">事件编码</label>
+                    <div class="inline-block common-other-width">
+                        <el-input v-model="matterCodeVal" :maxlength="50" placeholder="请输入事件编码" size="small" @change="changeMatterCodeVal"/>
+                        </el-input>
+                    </div>
+                </el-col>
+            </el-row>
+
+        </div>
+
+        <div class="pr10">
+            
+            <!-- 事件列表start -->
+            <div class="list-wrap panel-border mt30" id="maskPanel">
+                <el-table :data="oneMerData" :row-class-name="getRowClass" style="width: 100%" tooltip-effect="light">
+                    <el-table-column label="事件名称" show-overflow-tooltip>
+                        <template scope="scope">
+                            <a :title="scope.row.eventName" href="javascript:void(0);" class="mattLink" @click="oneCaseCfgEvt($event,scope.row)">{{scope.row.eventName}}</a>
+                        </template>
+                    </el-table-column>
+                    <el-table-column align="center" label="行政区划" width="110" show-overflow-tooltip>
+                        <template scope="scope">
+                            <span :title="scope.row.adminDivName">{{scope.row.adminDivName}}</span>
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="主办部门" show-overflow-tooltip>
+                        <template scope="scope">
+                            <span :title="scope.row.sponsorDeptTxt">{{scope.row.sponsorDeptTxt}}</span>
+                        </template>
+                    </el-table-column>
+                </el-table>
+                <div class="block fr mt20">
+                    <el-pagination :total="total" :page-size="pageSize" @size-change="cfgSizeChange" @current-change="cfgCurrentChange" :current-page="currentPage" layout="total, sizes, prev, pager, next, jumper">
+                    </el-pagination>
+                </div>
+            </div>
+            <!-- 事件列表end -->
+        </div>
+
+    </div>
+
+</template>
+<script>
+import unit from '@/api/index';
+export default {
+    data() {
+        return {
+            isHigRow: true,
+            higSerMsg: '更多',
+
+            saveXzqh: [], // 暂存行政区划
+            saveFlag: true, // 暂存标志
+
+            newxzqhVal: [], // 行政区划
+            deptVal: '', // 主办部门
+            eventNameVal: '', // 事件名称
+            proObjVal: '', // 办理对象
+            themeTypeVal: '', // 主题类型
+            matterCodeVal: '', // 事件编号
+
+            currentPage: 1,
+            pageSize: 10,
+            total: 0,
+            oneMerData: [],
+
+            proData: [],
+            deptData: [],
+            proObjData: [],
+            themeTypeData: [],
+
+            themeTypeStr:''//主题类型查询字段初值
+        };
+    },
+    methods: {
+        /**
+         *  修复ie记忆问题
+         */
+        changeMatterName(val) {
+            let that = this;
+            that.eventNameVal = val == '' ? '' : val;
+        },
+        /**
+         *  修复ie记忆问题
+         */
+        changeMatterCodeVal(val) {
+            let that = this;
+            that.matterCodeVal = val == '' ? '' : val;
+        },
+        /*
+        ** 行政区划改变联动部门
+        */
+        changeXzqh(value, selectedData) {
+            let _that = this;
+            if (value.length === 0) { // 行政区划清空时部门和机构清空
+                _that.deptData = [];
+                _that.deptVal = '';
+            } else {
+                _that.newxzqhVal = value;
+            }
+            if (!this.saveFlag) {
+                _that.getDeptData();// 联动部门
+            }
+        },
+        /*
+        ** 点击列表中的按钮跳转相应操作
+        */
+        goMattDetail($event, row, type) {
+            let _that = this,
+            obj = {
+                id: row.id,
+                matteCode: row.matterCode ? row.matterCode : '', // row.matteCode
+                matteVersion: row.matterVersion ? row.matterVersion : '' // row.matteVersion
+            };
+            if (type === 'detail') {
+                obj.type = 'detail';
+            } else if (type === 'edit') {
+                obj.type = 'edit';
+            }
+        },
+        /*
+        ** 跳转一件事配置页面
+        */
+        oneCaseCfgEvt($event, row) {
+            this.$router.push({
+                path: '/thingSetting/oneThingSituationConfigInfos',
+                query: {
+                    id: row.id,
+                    name: row.eventName,
+                    eventCode: row.eventCode,
+                    eventVersion: row.eventVersion
+                }
+            });
+        },
+        /*
+        ** 01 禁用按钮 02 启用按钮
+        */
+        isDisFun(row) {
+            switch (row.status) {
+                case '01':
+                    return false;
+                case '02':
+                    return true;
+            }
+        },
+        /*
+        ** 01 启用按钮 02 禁用按钮
+        */
+        isDisRevseFun(row) {
+            switch (row.status) {
+                case '01':
+                    return true;
+                case '02':
+                    return false;
+            }
+        },
+        /*
+        ** 展/收列，类的回调
+        */
+        getRowClass: function (row, rowIndex) {
+            if (row.row.childs == null || row.row.childs.length == 0) { // 无子项
+                return 'row-expand-cover';
+            }
+        },
+        /*
+        ** 切换更多、常规
+        */
+        higSearchEvt(e) {
+            this.isHigRow = this.isHigRow !== true;
+            let iEle = $(e.target)
+                .parent()
+                .find('i');
+            this.higSerMsg = this.higSerMsg === '更多' ? '常规' : '更多';
+            iEle.hasClass('icon-xia')
+                ? iEle.removeClass('icon-xia').addClass('icon-shang')
+                : iEle.removeClass('icon-shang').addClass('icon-xia');
+        },
+        /*
+        ** 获取事件配置列表数据
+        */
+        getConfigData() {
+            let _that = this,
+                jsonObj = {
+                    adminDiv: _that.newxzqhVal[_that.newxzqhVal.length - 1], // 行政区划
+                    sponsorDept: _that.deptVal, // 主办部门
+                    eventName: _that.eventNameVal.trim(), // 事件名称
+                    eventClassify: _that.proObjVal === 'all' ? '' : _that.proObjVal, // 办理对象
+                    eventType: _that.themeTypeVal === 'all' ? '' : _that.themeTypeVal, // 主题类型
+                    eventCode: _that.matterCodeVal.trim(), // 事件编码
+                    type: '0',
+                    status:'',
+                    pageNum: _that.currentPage, // 当前页
+                    pageSize: _that.pageSize// 每页数量
+                };
+            unit.ajaxObjPost('/qxpz/event/getAll', jsonObj, function (res) {
+                if (res.flag == true) {
+                    let data = res.data;
+                    _that.total = data.total;
+                    _that.currentPage = data.pageNum;
+                    data = data.rows;
+                    $.each(data, function (index, item) {
+                        item.eventName =
+                            (item.eventName === null || '') ? '--' : item.eventName;
+                        item.adminDivName = (item.adminDivName === null || '') ? '--' : item.adminDivName;
+                        item.sponsorDeptTxt = (item.sponsorDeptTxt === null || '') ? '--' : item.sponsorDeptTxt;
+                    });
+                    _that.oneMerData = data;
+                } else {
+                    _that.$message.warning('请求数据失败');
+                }
+            }, function (res) {
+                _that.$message.warning('请求数据失败');
+            }, _that);
+        },
+        /*
+        ** 查询
+        */
+        searchEvt() {
+            let _that = this;
+            if (_that.themeTypeVal && !_that.proObjVal) { // 勾选主题类型未勾选办理对象
+                _that.$message.warning('请先选择办理对象');
+                return;
+            }
+            _that.currentPage = 1;
+            _that.getConfigData();
+        },
+        /*
+        ** 事件列表每页显示数据量变更
+        */
+        cfgSizeChange: function (val) {
+            let _that = this;
+            _that.pageSize = val;
+            _that.currentPage = 1;
+            _that.getConfigData();
+        },
+        /*
+        ** 事件列表页码变更
+        */
+        cfgCurrentChange: function (val) {
+            let _that = this;
+            _that.currentPage = val;
+            _that.getConfigData();
+        },
+        /*
+        ** 启用停用
+        */
+        isEnableEvt($event, row) { // str判断是否是父项
+            let _that = this;
+            if (row.status === '01') { // 停用
+                _that.$confirm('确定停用当前记录?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    cancelButtonClass: 'fr ml10',
+                    type: 'warning'
+                }).then(() => {
+                    let obj = {
+                        eventCode: row.eventCode,
+                        version: row.eventVersion,
+                        status: '02'
+                    };
+                    unit.ajaxMerPost('/qxpz/event/updateStatus', obj, function (res) {
+                        if (res.flag == true && res.data === '更新成功') {
+                            _that.$message({
+                                type: 'success',
+                                message: '停用成功!'
+                            });
+                            _that.getConfigData();
+                        } else {
+                            _that.$message.warning('服务端错误');
+                        }
+                    }, function (res) {
+                        _that.$message.warning('服务端错误');
+                    }, _that);
+                }).catch(() => { });
+            } else if (row.status === '02') { // 启用
+                _that.$confirm('确定启用当前记录及其父记录?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    cancelButtonClass: 'fr ml10',
+                    type: 'warning'
+                }).then(() => {
+                    let obj = {
+                        eventCode: row.eventCode,
+                        version: row.eventVersion,
+                        status: '01'
+                    };
+                    unit.ajaxMerPost('/qxpz/event/updateStatus', obj, function (res) {
+                        if (res.flag == true && res.data === '更新成功') {
+                            _that.$message({
+                                type: 'success',
+                                message: '启用成功!'
+                            });
+                            _that.getConfigData();
+                        } else {
+                            _that.$message.warning('服务端错误');
+                        }
+                    }, function (res) {
+                        _that.$message.warning('服务端错误');
+                    }, _that);
+                }).catch(() => { });
+            }
+        },
+        /*
+        ** 获取行政区划
+        */
+        getXzqhTreeData() {
+            let _that = this,
+                obj = {
+                    value: _that.newxzqhVal[0]
+                };
+            unit.ajaxMerPost('/qxpz/commer/getXzqhTreeData', obj, function (res) {
+                if (res.flag == true) {
+                    $.each(res.data, function (index, item) {
+                        item.children = [];
+                        item.loading = false;
+                    });
+                    _that.proData = res.data;
+                    _that.proData.unshift({
+                        label:'全部',
+                        value:''
+                    });
+                    setTimeout(function () {
+                        _that.getDefaultXzqh();
+                    }, 0);
+                } else {
+                    _that.$message.warning('服务端错误');
+                }
+            }, function (res) {
+                _that.$message.warning('服务端错误');
+            }, _that);
+        },
+        /*
+        ** 点击行政区划加载子项
+        */
+        xzqhLoadData(item, callback) {
+            let _that = this,
+                qhCode = item.value,
+                itenLen = item.__value.split(',').length;
+            item.loading = true;
+            setTimeout(() => {
+                let obj = {
+                    value: qhCode
+                };
+                unit.ajaxMerPost('/qxpz/commer/getXzqhTreeData', obj, function (result) {
+                    if (result.flag == true) {
+                        if (itenLen < 4) {
+                            if (result.data.length != 0) {
+                                $.each(result.data, function (i, t) {
+                                   if (t.existChild) {
+                                        t.children = [];
+                                        t.loading = false;
+                                    }
+                                });
+                            }
+                        }
+                        item.children = result.data;
+                        if (_that.saveFlag) {
+                            setTimeout(function () {
+                                _that.newxzqhVal = _that.saveXzqh;
+                                _that.getDeptData();
+                                _that.saveFlag = false;
+                            }, 0);
+                        }
+                    } else {
+                        _that.$message.warning('服务端错误');
+                    }
+                    item.loading = false;
+                    callback();
+                }, function (result) {
+                    _that.$message.warning('服务端错误');
+                }, _that);
+            }, 300);
+        },
+        /*
+        ** 获取部门字典
+        */
+        getDeptData() {
+            let _that = this,
+                obj = {
+                    adminDiv: _that.newxzqhVal[_that.newxzqhVal.length - 1]
+                };
+            unit.ajaxMerPost('/qxpz/commer/getDeptList', obj, function (res) {
+                if (res.flag == true) {
+                    _that.deptData = res.data;
+                    _that.deptData.unshift({
+                        label: '全部',
+                        value: ''
+                    });
+                    _that.deptVal = '';
+                } else {
+                    _that.$message.warning('服务端错误');
+                }
+            }, function (res) {
+                _that.$message.warning('服务端错误');
+            }, _that);
+        },
+        /*
+        ** 获取字典值公共方法
+        */
+        getDictionarys(str) {
+            let _that = this,
+                obj = {
+                    pinYinType: str
+                };
+            unit.ajaxMerPost('/qxpz/dic/getDictionarys', obj, function (res) {
+                if (res.flag == true) {
+                    let data = res.data;
+                    if (str === 'XZQH') {
+                        _that.saveXzqh = [data[0].value, data[1].value]; // 暂存行政区划，供后面调用
+                        _that.newxzqhVal = [data[0].value, data[1].value];
+                        _that.getConfigData();// 事件列表,防止行政区划接口慢，导致获取列表数据不传行政区划
+                    } else if (str === 'bldx') {
+                        _that.proObjData = data;
+                        _that.proObjData.unshift({
+                            label: '全部',
+                            value: 'all'
+                        });
+                        _that.proObjVal = 'all';
+                        _that.getThemeTypeData();// 获取主题类型
+                    }
+                } else {
+                    _that.$message.warning('服务端错误');
+                }
+            }, function (res) {
+                _that.$message.warning('服务端错误');
+            }, _that);
+        },
+        /*
+        ** 办理对象改变
+        */
+        objChangeEvt(data) {
+            let _that = this;
+            if(data === '0') {//个人
+                _that.themeTypeStr = 'GRZT';
+            } else if(data === '1') {//法人
+                _that.themeTypeStr = 'FRZT';
+            } else {
+                _that.themeTypeStr = '';
+            }
+            _that.getThemeTypeData();
+        },
+        /*
+        ** 获取主题类型
+        */
+        getThemeTypeData() {
+            let _that = this,
+                obj = {
+                    pinYinType: _that.themeTypeStr
+                };
+            unit.ajaxMerPost('/qxpz/dic/getDictionarys', obj, function (res) {
+                if (res.flag == true) {
+                    let data = res.data;
+                    _that.themeTypeData = data;
+                    _that.themeTypeData.unshift({
+                        label: '全部',
+                        value: 'all'
+                    });
+                    _that.themeTypeVal = 'all';
+                } else {
+                    _that.$message.warning('服务端错误');
+                }
+            }, function (res) {
+                _that.$message.warning('服务端错误');
+            }, _that);
+        },
+        /*
+        ** 获取默认行政区划
+        */
+        getDefaultXzqh() {
+            // let that = this;
+            // unit.ajaxMerPost('/znsj-web/commer/curentUserXzqh', {
+            //     pinYinType: 'XZQH'
+            // }, function (res) {
+            //     if (res.flag) {
+            //         that.saveXzqh = [];
+            //         that.newxzqhVal = [];
+            //         let data = res.data;
+            //         for (let i in data) {
+            //             that.newxzqhVal.push(data[i].value);
+            //             that.saveXzqh.push(data[i].value);
+            //         }
+            //         that.getConfigData();
+            //     } else {
+            //         that.$Message.warning('服务端错误');
+            //     }
+            // }, function (res) {
+            //     that.$Message.warning('服务端错误');
+            // }, that);
+            let that = this;
+            that.saveXzqh = [];
+            that.newxzqhVal = [];
+            that.newxzqhVal.push('');
+            that.saveXzqh.push('');
+            that.getConfigData();
+        },
+        /*
+        ** 办理对象字典
+        */
+        getproObjData() {
+            let _that = this;
+            _that.getDictionarys('bldx');
+        },
+        /*
+        ** 主题类型字典
+        */
+        getSxlxData() {
+            let _that = this;
+            _that.getDictionarys('SXLX');
+        },
+        /*
+        ** 初始化
+        */
+        init() {
+            let _that = this;
+            _that.getXzqhTreeData();// 获取行政区划
+            // setTimeout(function () {
+            //     _that.getConfigData();// 事件列表
+            // }, 300);
+            _that.getproObjData();// 办理对象字典
+            // 解决ie兼容性问题 requestAnimationFrame
+            unit.solveAnimFrame();
+            unit.solveIviewTable();
+        }
+    },
+    mounted() {
+        this.init();
+        
+    }
+};
+</script>
+<style lang="stylus" rel="stylesheet/stylus">
+#addOneCase {
+    height: 100%;
+    padding:0 15px;
+    overflow-y: auto;
+    background-color: #fff;
+
+    .el-dialog__wrapper {
+        .el-dialog {
+            width:75%;
+            .el-dialog__header {
+                background-color: #409eff;
+            }
+            .el-dialog__header .el-dialog__title, .el-dialog__headerbtn .el-dialog__close {
+                color: #fff;
+            }
+            .el-dialog__body {
+                padding: 10px 20px;
+            }
+        }
+    }   
+
+    .el-table {
+        font-size: 14px;
+    }
+
+    .el-table thead td, .el-table thead th {
+        padding: 8px 0;
+    }
+
+    .el-table tbody td {
+        padding: 8px 0;
+    }
+
+    .el-dropdown-menu {
+        width:10%;
+    }
+    
+    .el-button--primary {
+        color: #fff;
+        background-color: #2d8cf0;
+        border-color: #2d8cf0;
+    }
+
+    .btn-groups {
+        margin-top:25px;
+    }
+    
+    .search-wrap {
+        padding-left: 0px;
+        margin-top: 18px;
+    }
+
+    .list-wrap .ivu-table-body {
+        color: #515a6e;
+    }
+
+    .ivu-table td.matters-name {
+        .ivu-table-cell {
+            padding-left: 5px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+    }
+
+    .a-color-red {
+        a {
+            color: #288ff4;
+        }
+    }
+
+    .tab-cell-drop {
+        cursor: pointer;
+        margin-left: 10px;
+    }
+
+    .row-expand-cover {
+        td:first-child .el-table__expand-icon {
+            display: none;
+        }
+    }
+
+    .common-width {
+        width: 67%;
+    }
+
+    .bwidth {
+        width:100%;
+    }
+
+    .common-other-width {
+        width: 40%;
+    }
+
+    .matt-class {
+        .el-select {
+            width:100%;
+        }
+    }
+
+    .status-width {
+        width: 71.5%;
+    }
+
+     .mattLink {
+        color: #409eff;
+    }
+    
+    .el-table__expanded-cell {
+        .el-table {
+            width: 91%;
+            margin: 5px auto;
+        }
+    }
+        
+    
+}
+</style>

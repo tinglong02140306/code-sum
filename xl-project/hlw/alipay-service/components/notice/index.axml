@@ -1,0 +1,28 @@
+<view>
+	<view class="notice-wrapper">
+		<view class="notice-image-wrapper">
+			<image src="/images/notice.png" class="notice-image"/>
+		</view>
+		<view class="notice-info-wrapper">
+			<view class="notice-info">
+				<swiper class="swiper-info" indicator-dots="{{false}}" disable-touch="{{true}}" display-multiple-items="{{items}}" circular="{{true}}" easing-function="easeInOutCubic" autoplay="{{true}}" interval="2000" duration="500" vertical="{{true}}">
+					<block a:for="{{list}}" a:key="{{index}}">
+						<swiper-item class="txt-wrapper">
+							<text class="notice-txt" catchTap="onTap" data-item="{{item}}">{{item["title"]}}</text>
+						</swiper-item>
+					</block>
+				</swiper>
+			</view>
+			<view class="notice-info">
+				<swiper class="swiper-info" indicator-dots="{{false}}" disable-touch="{{true}}" display-multiple-items="{{items}}" circular="{{true}}" easing-function="easeInOutCubic" autoplay="{{true}}" interval="2000" duration="500" vertical="{{true}}">
+					<block a:for="{{cmpArr}}" a:key="{{index}}">
+						<swiper-item class="txt-wrapper">
+							<text class="notice-txt" catchTap="onTap" data-item="{{item}}">{{item["title"]}}</text>
+						</swiper-item>
+					</block>
+				</swiper>
+			</view>
+		</view>
+	</view>
+
+</view>

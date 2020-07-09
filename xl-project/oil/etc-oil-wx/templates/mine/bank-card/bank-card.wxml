@@ -1,0 +1,7 @@
+<template name="bank-card">
+    <view class="bank-card-container">
+        <image-loader width="712rpx" height="222rpx" mode="widthFix" css="position: relative" default="/assets/static/bank-bg-default.png" src="{{bank_back_ground_logo_url||'https://oilmag.etcsd.com.cn/oilcoreserver/static/resource/bank-bg-default.png'}}"></image-loader>
+        <text class="bank-card-title-text">{{bank_name?bank_name:"银行卡"}}</text>
+        <text class="bank-card-no-text">{{sign_account_before}}** **** {{sign_account_no}}</text>
+    </view>
+</template>

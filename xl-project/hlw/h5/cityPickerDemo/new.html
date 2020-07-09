@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../js/plugins/picker-extend/picker-extend.css">
+    <title>Document</title>
+    <style>
+        div {
+            /* 解决 移动端点击div  会显示高亮   */
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
+        
+        .area-cascade-wrap {
+            position: relative;
+            opacity: 1;
+            z-index: 10000;
+            visibility: visible;
+        }
+        
+        .pickerExtend div {
+            /* 解决 移动端点击div  会显示高亮   */
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
+        
+        .area-cascade-wrap .gray-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: #eee;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 888;
+            display: block;
+        }
+        
+        .area-cascade-wrap .content {
+            display: block;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            z-index: 889;
+            width: 100%;
+            /* 高度暂时写死 */
+            min-height: 300px;
+            color: black;
+            background: white;
+        }
+        
+        .area-cascade-wrap .content .btn-bar {
+            border-bottom: 1px solid #DCDCDC;
+            font-size: 15px;
+            height: 45px;
+            position: relative;
+            text-align: center;
+            line-height: 45px;
+        }
+        
+        .area-cascade-wrap .content .btn-bar .cancel,
+        .area-cascade-wrap .content .btn-bar .ensure {
+            height: 45px;
+            width: 55px;
+            cursor: pointer;
+            position: absolute;
+            top: 0;
+        }
+        
+        .area-cascade-wrap .content .btn-bar .cancel {
+            left: 0;
+            color: #666;
+        }
+        
+        .area-cascade-wrap .content .btn-bar .ensure {
+            right: 0;
+            color: #1e83d3;
+        }
+        
+        .area-cascade-wrap .content .btn-bar .title {
+            font-size: 15px;
+            padding: 0 15%;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+        
+        .select-wrapper {
+            height: 200px;
+            overflow-y: hidden;
+        }
+        
+        .select-wrap {
+            height: auto;
+            overflow-y: auto;
+        }
+        
+        .select-wrap span {
+            display: inline-block;
+            width: 100%;
+            height: 2.18rem;
+        }
+        /* .pickerExtend-show .content {
+    bottom: 0;
+} */
+    </style>
+</head>
+
+<body>
+    <div class="pickerExtend pickerExtend-show" style="display: block;">
+        <div class="grayLayer"></div>
+        <div class="content">
+            <div class="btnBar">
+                <div class="fixWidth">
+                    <div class="cancel">取消</div>
+                    <div class="title">区域选择</div>
+                    <div class="ensure">确认</div>
+                </div>
+            </div>
+            <div class="panel">
+                <div class="fixWidth">
+                    <div class="wheels" style="height: 200px;">
+                        <div class="wheel" style="height: 200px; width: 33.33%;">
+                            <ul class="selectContainer" style="transform: translate3d(0px, 80px, 0px);">
+                                <li data-id="37" style="height: 40px; line-height: 40px;">山东省</li>
+                            </ul>
+                        </div>
+                        <div class="wheel" style="height: 200px; width: 33.33%;">
+                            <ul class="selectContainer" style="transform: translate3d(0px, -80px, 0px);">
+                                <li data-id="3701" style="height: 40px; line-height: 40px;">济南市</li>
+                                <li data-id="3702" style="height: 40px; line-height: 40px;">青岛市</li>
+                                <li data-id="3703" style="height: 40px; line-height: 40px;">淄博市</li>
+                                <li data-id="3704" style="height: 40px; line-height: 40px;">枣庄市</li>
+                                <li data-id="3705" style="height: 40px; line-height: 40px;">东营市</li>
+                                <li data-id="3706" style="height: 40px; line-height: 40px;">烟台市</li>
+                                <li data-id="3707" style="height: 40px; line-height: 40px;">潍坊市</li>
+                                <li data-id="3708" style="height: 40px; line-height: 40px;">济宁市</li>
+                                <li data-id="3709" style="height: 40px; line-height: 40px;">泰安市</li>
+                                <li data-id="3710" style="height: 40px; line-height: 40px;">威海市</li>
+                                <li data-id="3711" style="height: 40px; line-height: 40px;">日照市</li>
+                                <li data-id="3712" style="height: 40px; line-height: 40px;">莱芜市</li>
+                                <li data-id="3713" style="height: 40px; line-height: 40px;">临沂市</li>
+                                <li data-id="3714" style="height: 40px; line-height: 40px;">德州市</li>
+                                <li data-id="3715" style="height: 40px; line-height: 40px;">聊城市</li>
+                                <li data-id="3716" style="height: 40px; line-height: 40px;">滨州市</li>
+                                <li data-id="3717" style="height: 40px; line-height: 40px;">菏泽市</li>
+                            </ul>
+                        </div>
+                        <div class="wheel" style="height: 200px; width: 33.33%;">
+                            <ul class="selectContainer" style="transform: translate3d(0px, 80px, 0px);">
+                                <li data-id="370501" style="height: 40px; line-height: 40px;">市辖区</li>
+                                <li data-id="370502" style="height: 40px; line-height: 40px;">东营区</li>
+                                <li data-id="370503" style="height: 40px; line-height: 40px;">河口区</li>
+                                <li data-id="370521" style="height: 40px; line-height: 40px;">垦利县</li>
+                                <li data-id="370522" style="height: 40px; line-height: 40px;">利津县</li>
+                                <li data-id="370523" style="height: 40px; line-height: 40px;">广饶县</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- <div class="selectLine" style="height: 40px; top: 80px;"></div>
+                    <div class="shadowMask" style="height: 200px;"></div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

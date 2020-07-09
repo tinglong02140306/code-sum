@@ -1,0 +1,137 @@
+.blacklist-import-container {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.blacklist-import-current-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.blacklist-import-label {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 6px;
+    color: black;
+    letter-spacing: 1px;
+}
+
+.blacklist-import-current-time {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: absolute;
+    right: 0;
+}
+
+.blacklist-import-content {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 6px;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.blacklist-import-templet-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    margin: 10px 0;
+}
+
+.blacklist-import-table {
+    width: 100%;
+    align-self: center;
+    table {
+        thead {
+            th {
+                font-weight: 600;
+                letter-spacing: 1px;
+            }
+        }
+    }
+}
+
+.blacklist-import-templet {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.blacklist-import-upload-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.blacklist-import-upload-box {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    span {
+        color: red;
+    }
+}
+
+.blacklist-import-upload-btn {
+    span {
+        color: white;
+    }
+}
+
+.blacklist-import-upload-input {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    opacity: 0;
+    z-index: 1000;
+}
+
+.blacklist-import-templet-download {
+    color: #1890FA;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.blacklist-import-table-hint {
+    margin: 6px 10px 0 10px;
+    color: red;
+    font-size: 12px;
+}
+
+.blacklist-import-file-name {
+    color: rgba(0, 0, 0, 0.65);
+    margin-left: 4px;
+}
+
+.content-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    box-sizing: border-box;
+    .ant-form-item-with-help {
+        margin-bottom: 0;
+    }
+}
+
+.box-item {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 10px;
+    .ant-form-item-label {
+        font-weight: bolder;
+        min-width: 20px;
+        margin-left: 10px;
+    }
+}

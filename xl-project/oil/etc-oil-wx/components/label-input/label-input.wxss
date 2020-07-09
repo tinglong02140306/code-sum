@@ -1,0 +1,50 @@
+.label-input-container{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.label-input-right{
+    height: 90rpx;
+    flex:1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.label-input{
+    flex: 1;
+    height: 90rpx;
+    font-size: 30rpx;
+    color: #383838;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.label-input:focus{color:#000000}
+
+.label-textarea{
+    position: relative;
+    width: 100%;
+    font-size: 30rpx;
+    color: #383838;
+    z-index: 0;
+}
+
+.label-input-placeholder{
+    color: #bdbec2;
+    font-size: 28rpx;
+}
+
+.label-input-text{
+    height: 90rpx;
+    color: #8f8f91;
+    font-size: 30rpx;
+    margin-right: 10rpx;
+    letter-spacing: 2rpx;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}

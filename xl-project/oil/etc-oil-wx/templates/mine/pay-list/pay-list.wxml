@@ -1,0 +1,27 @@
+<template name="pay_list">
+    <view class="pay-list-container">
+        <view class="pay-list-box">
+            <view class="pay-list-box-left">
+                <image class="pay-list-icon" src="{{cellIcon}}" wx:if="{{cellIcon}}"></image>
+                <image class="pay-list-icon" src="https://oilmag.etcsd.com.cn/oilcoreserver/static/resource/pay-list-default.png" wx:if="{{!cellIcon}}"></image>
+                <!--<text class="pay-list-text" >{{cellTitle}}</text>-->
+                <text class="pay-list-text" wx:if="{{item.sign_type==1}}">邮储银行{{item.sign_bank_account_type==0?"储蓄卡":"信用卡"}}({{item.sign_account_no}})</text>
+                <text class="pay-list-text" wx:if="{{item.sign_type==3}}">微信免密支付</text>
+
+            </view>
+            <view class="pay-list-box-left">
+                <view class="pay-discounts-view" wx:if="{{!discounts}}">
+                    <text class="pay-discounts-text">满200减50</text>
+                    <image class="pay-discounts-image" src="https://oilmag.etcsd.com.cn/oilcoreserver/static/resource/discounts-right.png"></image>
+                </view>
+                <image class="pay-list-right"
+                       src="https://oilmag.etcsd.com.cn/oilcoreserver/static/resource/pay-list-move.png"
+                       data-index='{{index}}'
+                       bindtouchstart='dragStart'
+                       bindtouchmove='dragMove'
+                       bindtouchend='dragEnd'></image>
+            </view>
+        </view>
+        <!--<view class="pay-list-line"></view>-->
+    </view>
+</template>

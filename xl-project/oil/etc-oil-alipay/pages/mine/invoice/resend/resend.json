@@ -1,0 +1,8 @@
+{
+    "defaultTitle": "重发邮件",
+    "backgroundColor": "#eeeeee",
+    "titleBarColor": "#ffffff",
+    "usingComponents": {
+        "invoice-input": "../../../../components/invoice-input/invoice-input"
+    }
+}

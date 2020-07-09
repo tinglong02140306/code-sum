@@ -1,0 +1,120 @@
+.staion-details {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.staion-details-top {
+  width: 100%;
+  height: 300px;
+}
+.staion-details-center {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 32px;
+  background-color: white;
+}
+.staion-details-center-name {
+  width: 100%;
+  font-size: 32px;
+  color: #090506;
+  letter-spacing: 2px;
+}
+.staion-details-center-info {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 32px;
+  overflow: hidden;
+}
+.staion-details-center-info-icon {
+  width: 70px;
+  height: 70px;
+  margin-right: 16px;
+  border-radius: 50%;
+}
+.staion-details-center-info-address {
+  font-size: 28px;
+  color: #6b6b6b;
+  flex: 1;
+}
+.staion-details-center-info-separation {
+  color: #d9d9d9;
+  margin: 0 32px;
+}
+.staion-details-center-info-distance {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.staion-details-center-info-distance-icon {
+  width: 30px;
+  height: 40px;
+  margin-bottom: 8px;
+}
+.staion-details-center-info-distance-num {
+  font-size: 28px;
+  color: #6b6b6b;
+  flex: 1;
+}
+.staion-details-bottom {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 32px;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  margin-top: 10px;
+}
+.staion-details-bottom .sub {
+  background-color: white;
+}
+.staion-details-bottom-price {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+  padding-top: 32px;
+}
+.staion-details-bottom-price-item {
+  width: 33%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 10px 0;
+}
+.staion-details-bottom-price-item-info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.staion-details-bottom-price-item-info-oil {
+  color: #757575;
+  font-size: 28px;
+  margin-bottom: 4px;
+}
+.staion-details-bottom-price-item-info-price {
+  color: #ed411d;
+  font-size: 36px;
+}
+.staion-details-bottom-price-item-separation {
+  width: 2px;
+  height: 50px;
+  background-color: #e4e4e4;
+}

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="../../../../" >
+    <meta charset="UTF-8">
+    <!-- 添加到主屏幕后，全屏显示 -->
+    <meta name="apple-touch-fullscreen" content="YES" />
+    <meta name="format-detection" content="telephone=no" />
+    <!-- iphone 运行在全屏模式 -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="viewport" content="width=device-width"/>
+    <title>我的办理</title>
+    <link rel="stylesheet" type="text/css" href="../lib/mescroll/mescroll.min.css?__inline" />
+    <link rel="stylesheet" type="text/css" href="../css/base.css?__inline" />
+    <link rel="stylesheet" type="text/css" href="../css/all.css?__inline" />
+    <link rel="stylesheet" type="text/css" href="../css/my-handle.css?__inline" />
+</head>
+<body>
+    <div class="wrap">
+        <!-- 头部start -->
+        <header class="topic-bg">
+            <div class="header-item topic-bg">
+                <a class="header-back back" data-bind="click: back" href="javascript:void(0)"></a>
+                <span class="ell">我的办理</span>
+            </div>
+        </header>
+        <!-- 头部end -->
+        <!--  -->
+        <div id="wrapper" class="handle-wrap mescroll top-7">
+            <div class="handle-view">
+                <div class="handle-ul">
+                    <ul class='handle-result'></ul>
+                </div>
+            </div>
+        </div>
+         <div class="empty hide top-7">
+            <div class="handle-empty-ad"></div>
+            <p>您还没有办理信息哦~</p>
+        </div>
+    </div>  
+</body>
+
+<!-- 办理模板  start-->
+<script id="handleTmpl" type="text/html">
+    {{each $data as item index}}
+        <li class='handle-item' data-id="{{item.id}}" data-actionParam="{{item.actionParam}}">
+           <p class="type-name-warp clearfix">
+               <span class="type-name ell fl">{{item.typeName}}</span>
+                {{if item.status == '0'}}
+                    <span class="status in-handle fr">办理中</span>
+                {{else if item.status =='1'}}
+                    <span class="status already-handle fr">已完成</span>
+                 {{else if item.status =='3'}}
+                     <span class="status no-handle fr">未通过</span>
+                {{/if}}
+           </p>
+           <p class="name ">{{item.title}}</p>
+           <p class="time">{{item.createdDate}}&nbsp;申请</p>
+
+        </li>
+    {{/each}}
+</script>
+<!-- 办理模板  end-->
+<script src="../lib/mescroll/mescroll.min.js"></script>
+<script src="../lib/lib.js"></script>
+<script src="../app/my-handle.js?__inline"></script>
+</html>

@@ -1,0 +1,10 @@
+ <view class="invoice-index-container">
+    <view class="invoice-index-list" onTap="oilInvoiceClick">
+        <text class="invoice-index-list-title">加油消费</text>
+        <image class="invoice-index-list-image" src="https://oilmag.etcsd.com.cn/oilcoreserver/static/resource/icon-person-next.png"></image>
+    </view>
+    <view class="invoice-index-list" onTap="invoiceHistoryClick">
+        <text class="invoice-index-list-title">开票历史</text>
+        <image class="invoice-index-list-image" src="https://oilmag.etcsd.com.cn/oilcoreserver/static/resource/icon-person-next.png"></image>
+    </view>
+ </view>

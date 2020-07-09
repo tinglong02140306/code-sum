@@ -1,0 +1,82 @@
+<view>
+	<block a:if="{{ready}}">
+		<view style="overflow: hidden;">
+			<view style="overflow: hidden;" a:if="{{loaded}}">
+				<view style="height:162rpx;">
+					<steps activeIndex="{{activeIndex}}" items="{{items}}" a:if="{{!appendCar}}"/>
+				</view>
+				<view style="background: #F5F5F5;height:30rpx;width:100%;">
+				</view>
+				<view class="wrapper">
+					<view class="title">
+						银行账户绑定
+					</view>
+					<view class="title-one">
+						绑定银行账户用于高速通行扣费
+					</view>
+					<block a:if="{{ws}}">
+						<view class="title-content" onTap="signWs">
+							<image src="/assets/images/ws.png" style="width:686rpx;height:212rpx" mode="widthFix"/>
+						</view>
+					</block>
+					<block a:if="{{!ws}}">
+						<block a:if="{{Other}}">
+							<view class="title-content" onTap="signIcbc">
+								<image src="/assets/images/icbc.png" style="width:690rpx;height:250rpx" mode="widthFix"/>
+							</view>
+							<view class="title-content" onTap="signCcb">
+								<image src="/assets/images/ccb.png" style="width:690rpx;height:250rpx" mode="widthFix"/>
+							</view>
+							<view class="title-content" onTap="signWs" a:if="{{!OtherWs}}">
+								<image src="/assets/images/ws.png" style="width:686rpx;height:212rpx" mode="widthFix"/>
+							</view>
+							<view class="title-content" a:if="{{abc}}" onTap="signAbc">
+								<image src="/assets/images/abc.png" style="width:690rpx;height:250rpx" mode="widthFix"/>
+							</view>
+						</block>
+						<block a:if="{{!Other}}">
+							<view class="title-content" a:if="{{!icbc && !abc && !ccb}}" onTap="signWs">
+								<image src="/assets/images/ws.png" style="width:686rpx;height:212rpx" mode="widthFix"/>
+							</view>
+							<view class="title-content" a:if="{{icbc}}" onTap="signIcbc">
+								<image src="/assets/images/icbc.png" style="width:690rpx;height:250rpx" mode="widthFix"/>
+							</view>
+							<view class="title-content" a:if="{{ccb}}" onTap="signCcb">
+								<image src="/assets/images/ccb.png" style="width:690rpx;height:250rpx" mode="widthFix"/>
+							</view>
+							<view class="title-content" a:if="{{abc}}" onTap="signAbc">
+								<image src="/assets/images/abc.png" style="width:690rpx;height:250rpx" mode="widthFix"/>
+							</view>
+							<block a:if="{{!icbc && !abc && !ccb}}">
+								<view class="toggle-wrapper" onTap="showMore" a:if="{{!more}}">
+									<view>更多办理方式</view>
+									<am-icon type="arrow-down" color="#999" size="20"/>
+								</view>
+								<block a:if="{{more}}">
+									<view class="title-content" onTap="signIcbc">
+										<image src="/assets/images/icbc.png" style="width:690rpx;height:250rpx" mode="widthFix"/>
+									</view>
+									<view class="title-content" onTap="signCcb">
+										<image src="/assets/images/ccb.png" style="width:690rpx;height:250rpx" mode="widthFix"/>
+									</view>
+									<view class="title-content" a:if="{{!ProvincialAbc}}" onTap="signAbc">
+										<image src="/assets/images/abc.png" style="width:690rpx;height:250rpx" mode="widthFix"/>
+									</view>
+									<!--<view class="title-content" onTap="signAbc"><image src="/assets/images/abc.png" style="width:690rpx;height:250rpx" mode="widthFix"/></view>  -->
+									<view class="toggle-wrapper" style="margin-bottom:50rpx;" onTap="hideMore" a:if="{{more}}">
+										<view>收起</view>
+										<am-icon type="arrow-up" color="#999" size="20"/>
+									</view>
+								</block>
+							</block>
+						</block>
+					</block>
+					<view class="footer" a:if="{{tip}}">
+						没有工行银行卡，开通工行二类户
+					</view>
+				</view>
+			</view>
+		</view>
+	</block>
+	<ant-skeleton a:else />
+</view>

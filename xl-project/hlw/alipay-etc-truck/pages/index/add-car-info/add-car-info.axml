@@ -1,0 +1,66 @@
+<view class="wrapper">
+	<!--title区域-->
+	<block>
+		<view class="top-area">
+			<view class="title">请上传行驶证</view>
+			<view class="subtitle">请确保您上传的照片完整，文字清晰</view>
+		</view>
+	</block>
+	<!--身份证图片-->
+	<block>
+		<view class="img-list">
+			<view class="img-item" data-idx="car1" onTap="uploadAndOcr">
+				<view class="close" data-idx="car1" catchTap="deleteImg" a:if="{{carFaceImg}}"/>
+				<image src="/assets/images/car-1.png" style="width:100%;height:100%" mode="scaleToFill"
+				       a:if="{{!carFaceImg}}"/>
+				<image src="{{carFaceImg}}" style="width:100%;height:100%" mode="scaleToFill"
+				       a:if="{{carFaceImg}}"/>
+			</view>
+		</view>
+		<view class="result-title">请确认识别结果，若识别信息有误，请重新上传或手动修改</view>
+		<input-item
+			disabled="{{true}}"
+			placeholder="必填"
+			value="{{plateNo}}"
+			disabled="{{true}}"
+		>
+			车牌号码
+		</input-item>
+		<input-item
+		    data-field="model"
+			placeholder="必填"
+			value="{{model}}"
+			onInput="onItemInput"
+		>
+			品牌型号
+		</input-item>
+		<block a:if="{{stafflag}}">
+			<input-item
+				data-field="retcode"
+				clear="{{true}}"
+				value="{{retcode}}"
+				placeholder="选填"
+				onInput="onItemInput"
+				onClear="onClear"
+				disabled="{{true}}"
+			>
+			业务推广码
+			</input-item>
+		</block>
+		<block a:if="{{!stafflag}}">
+			<input-item
+				data-field="retcode"
+				clear="{{true}}"
+				value="{{retcode}}"
+				placeholder="选填"
+				onInput="onItemInput"
+				onClear="onClear"
+				maxlength="12"
+			>
+			业务推广码
+			</input-item>
+		</block>
+	</block>
+	<button class="next-btn bg-primary" onTap="addCar">确认并提交</button>
+</view>
+<!--下一步-->

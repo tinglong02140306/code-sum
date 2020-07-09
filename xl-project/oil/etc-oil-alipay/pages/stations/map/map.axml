@@ -1,0 +1,146 @@
+<!--
+ * @Author: sunmingmao
+ * @Date: 2020-04-01 14:10:44
+ * @LastEditors: longting
+ * @LastEditTime: 2020-04-22 10:09:08
+ * @Description: 加油站地图模式
+ -->
+<view class="map-container">
+    <!--导航栏-->
+    <map-bar onMenuClick="onMenuClick" selected_index="{{page_type}}"></map-bar>
+    <!--地图-->
+    <map style="width: 100vw;height: {{map_height}};" show-location id="map" scale="{{scale}}" latitude="{{center_lat}}"
+        longitude="{{center_lng}}" markers="{{page_type==1?markers_clean:markers}}" onTap="tap"
+        onRegionChange="regionchange" onMarkerTap="markertap" onCalloutTap="onCalloutTap">
+    </map>
+    <!--右侧按钮-->
+    <cover-view class="map-right-box">
+        <!--搜索-->
+        <cover-view class="map-right-image" a:if="{{page_type==0}}">
+            <cover-image class="map-right-image" onTap="onSearchClick" src="{{icon_search}}"></cover-image>
+        </cover-view>
+        <!--列表-->
+        <cover-view class="map-right-image">
+            <cover-image class="map-right-image" onTap="onListClick" src="{{icon_list}}"></cover-image>
+        </cover-view>
+        <!--定位-->
+        <cover-view class="map-right-image">
+            <cover-image class="map-right-image" onTap="onLocationClick" src="{{icon_location}}"></cover-image>
+        </cover-view>
+    </cover-view>
+
+    <!--查询条件-->
+    <cover-view class="map-filter" a:if="{{page_type==0}}" onTap="onFilterClick">{{oil_type_name}}丨{{oil_brand_name}}
+    </cover-view>
+
+    <!--油站详情信息-->
+    <cover-view class="map-station-container card-box" style="bottom: {{isIphoneX?64:40}}rpx;"
+        a:if="{{select_marker && page_type==0}}" onTap="onDetailClick">
+        <!--logo-->
+        <cover-image class="map-station-logo" src="{{select_marker&&select_marker.brand_icon_url}}"></cover-image>
+        <!--详情-->
+        <cover-view class="map-station-info-box">
+            <cover-view class="map-station-info-top">
+                <!--详情信息-->
+                <cover-view class="map-station-info-top-left">
+                    <!--名称-->
+                    <cover-view class="map-station-info-name">{{select_marker&&select_marker.name}}</cover-view>
+                    <!--地址-->
+                    <cover-view class="map-station-info-address">{{select_marker&&select_marker.address}}</cover-view>
+                    <!--优惠信息-->
+                    <cover-view></cover-view>
+                </cover-view>
+                <!--立即加油-->
+                <cover-view class="map-station-info-top-oil theme-button" catchTap="onOilClick">立即加油</cover-view>
+            </cover-view>
+            <cover-view class="map-station-info-bottom">
+                <!--油价信息-->
+                <cover-view class="map-station-price-box">
+                    <!--价格-->
+                    <cover-view class="map-station-price" a:if="{{select_marker&&select_marker.current_station_price}}">
+                        <cover-view class="map-station-price-mark">￥</cover-view>
+                        <cover-view class="map-station-price-money">
+                            {{select_marker&&select_marker.current_station_price.xl_price?select_marker.current_station_price.xl_price:select_marker.current_station_price.list_price?select_marker.current_station_price.list_price:'--'}}
+                        </cover-view>
+                    </cover-view>
+                    <!--降价信息-->
+                    <cover-view class="map-station-price-down-box"
+                        a:if="{{select_marker&&select_marker.current_station_price.oil_price_difference}}">
+                        <cover-image class="map-station-price-down-image" src="/assets/static/station-item-down.png">
+                        </cover-image>
+                        <cover-view>已降￥{{select_marker&&select_marker.current_station_price.oil_price_difference}}
+                        </cover-view>
+                    </cover-view>
+                </cover-view>
+                <!--定位-->
+                <cover-view class="map-station-navigation" catchTap="onNavigationClick">
+                    <cover-view class="map-station-navigation-text">{{select_marker&&select_marker.distance}}km
+                    </cover-view>
+                    <cover-image class="map-station-navigation-image" src="/assets/static/station-item-navigation.png">
+                    </cover-image>
+                </cover-view>
+            </cover-view>
+        </cover-view>
+    </cover-view>
+    <!--洗车机详情信息-->
+    <cover-view class="map-station-container card-box" style="bottom: {{isIphoneX?64:40}}rpx;"
+        a:if="{{select_marker_clean&& page_type==1}}" onTap="onDetailClick">
+        <!--logo-->
+        <cover-image class="map-station-logo"
+            src="{{select_marker_clean&&select_marker_clean.logo_url?select_marker_clean.logo_url:'https://oss.etcsd.com/object/9d7bca54e57b4556932609f924a89675'}}">
+        </cover-image>
+        <!--详情-->
+        <cover-view class="map-station-info-box">
+            <cover-view class="map-station-info-top">
+                <!--详情信息-->
+                <cover-view class="map-station-info-top-left">
+                    <!--名称-->
+                    <cover-view class="map-station-info-name">{{select_marker_clean&&select_marker_clean.washer_name}}
+                    </cover-view>
+                    <!--地址-->
+                    <cover-view class="map-station-info-address">
+                        {{select_marker_clean&&select_marker_clean.washer_address}}</cover-view>
+                    <!--优惠信息-->
+                    <cover-view></cover-view>
+                </cover-view>
+                <!--立即洗车-->
+                <cover-view class="map-station-info-top-oil theme-button" catchTap="onCleanClick">立即洗车</cover-view>
+            </cover-view>
+            <cover-view class="clean-item-stop-box" a:if="{{select_marker_clean.free_parking_min}}">
+                <cover-view class="clean-details-stop-bg">
+                    <cover-view class="clean-details-stop-text">停车场</cover-view>
+                </cover-view>
+                <cover-view class="clean-details-stop">{{select_marker_clean.free_parking_min}}分钟免费停车</cover-view>
+            </cover-view>
+            <cover-view class="map-station-info-bottom">
+                <!--油价信息-->
+                <cover-view class="map-station-price-box">
+                    <!--价格-->
+                    <cover-view class="map-station-price"
+                        a:if="{{select_marker_clean&&select_marker_clean.washer_price}}">
+                        <cover-view class="map-station-price-mark">￥</cover-view>
+                        <cover-view class="map-station-price-money">
+                            {{select_marker_clean&&select_marker_clean.washer_price}}</cover-view>
+                        <cover-view class="map-station-price-money-num">/次</cover-view>
+                    </cover-view>
+                    <!--状态-->
+                    <cover-view class="map-station-price-down-box">
+                        <cover-image class="clean-item-status-image"
+                            src="{{select_marker_clean.washer_status=='2'?'/assets/static/clean-status-doing.png':select_marker_clean.washer_status=='3'?'/assets/static/clean-un-used.png':'/assets/static/clean-used.png'}}">
+                        </cover-image>
+                        <cover-view class="clean-item-status-text">
+                            {{select_marker_clean.washer_status=='2'?'使用中':select_marker_clean.washer_status=='3'?'维护中':'空闲'}}
+                        </cover-view>
+                    </cover-view>
+                </cover-view>
+                <!--定位-->
+                <cover-view class="map-station-navigation" catchTap="onNavigationClick">
+                    <cover-view class="map-station-navigation-text">
+                        {{select_marker_clean&&select_marker_clean.distance_meter}}km</cover-view>
+                    <cover-image class="map-station-navigation-image" src="/assets/static/station-item-navigation.png">
+                    </cover-image>
+                </cover-view>
+            </cover-view>
+        </cover-view>
+    </cover-view>
+</view>

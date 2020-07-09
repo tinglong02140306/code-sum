@@ -1,0 +1,82 @@
+<!--
+ * @Author: sunmingmao
+ * @Date: 2020-04-17 17:26:43
+ * @LastEditors: sunmingmao
+ * @LastEditTime: 2020-04-20 15:07:15
+ * @Description: 优惠券
+ -->
+<view class="perference-container">
+    <view class="perference-tab-container">
+        <block wx:for="{{tabs}}" wx:key="coupon">
+            <view class="perference-tab-item">
+                <text class="perference-tab-item-text" bind:tap="onTabItemClick"
+                data-item="{{item.key}}"
+                style="height: {{tab_height}}rpx;border-bottom: 4rpx solid {{type==item.key?'#08CC8A':'#00000000'}};">{{item.title}}</text>
+            </view>
+        </block>
+    </view>
+    <view class="perference-list" style="margin-bottom: {{isIphoneX?160:120}}rpx">
+        <!--未使用-->
+        <scroll-list height="{{scroll_height}}" 
+            bind:refresh="onOilRefresh" 
+            bind:loadmore="onOilLoadMore" 
+            load_status="{{oil_load_status}}"
+            refresher_triggered="{{oil_refresher}}"
+            wx:if="{{type==1}}"
+            show_finish="{{oil_status==1?false:true}}">
+            <view class="perference-list-box">
+                <block wx:for="{{oil_list}}" wx:key="oil">
+                    <item type="{{1}}" item="{{item}}" bind:default="onSetDefault" bind:select="onSetSelect" bind:see="onSeeCoupon"></item>
+                </block>
+                <status wx:if="{{oil_status}}" type="{{oil_status}}" text="{{oil_status==1?'没有未使用的优惠券哦～':'网络好像断了哦～'}}" bind:retry="onRetryClick"></status>
+            </view>
+        </scroll-list>
+        <!--已使用-->
+        <scroll-list height="{{scroll_height}}" 
+            bind:refresh="onCouponRefresh" 
+            bind:loadmore="onCouponLoadMore" 
+            load_status="{{coupon_load_status}}"
+            refresher_triggered="{{coupon_refresher}}"
+            wx:if="{{type==2}}"
+            show_finish="{{coupon_status==1?false:true}}">
+            <view class="perference-list-box">
+                <block wx:for="{{coupon_list}}" wx:key="oil">
+                    <item type="{{2}}" item="{{item}}"></item>
+                </block>
+                <status wx:if="{{coupon_status}}" type="{{coupon_status}}" text="{{coupon_status==1?'没有已使用的优惠券哦～':'网络好像断了哦～'}}" bind:retry="onRetryClick"></status>
+            </view>
+        </scroll-list>
+        <!--已结束-->
+        <scroll-list height="{{scroll_height}}" 
+            bind:refresh="onFinishRefresh" 
+            bind:loadmore="onFinishLoadMore" 
+            load_status="{{finish_load_status}}"
+            refresher_triggered="{{finish_refresher}}"
+            wx:if="{{type==4}}"
+            show_finish="{{finish_status==1?false:true}}">
+            <view class="perference-list-box">
+                <block wx:for="{{finish_list}}" wx:key="oil">
+                    <item type="{{4}}" item="{{item}}"></item>
+                </block>
+                <status wx:if="{{finish_status}}" type="{{finish_status}}" text="{{finish_status==1?'没有已过期的优惠券哦～':'网络好像断了哦～'}}" bind:retry="onRetryClick"></status>
+            </view>
+        </scroll-list>
+    </view>
+    <view class="exchange-code-box" style="padding-bottom: {{isIphoneX?64:24}}rpx">
+        <view class="exchange-code-input-box">
+            <input
+                    class="exchange-code-input"
+                    placeholder-class="code-input-placeholder"
+                    placeholder="请输入兑换码"
+                    maxlength="{{20}}"
+                    value='{{coupon_code}}'
+                    bindinput="onCouponCodeInput"
+                    wx:if="{{!input_disabled}}"/>
+            <view class="exchange-code-scan-box" bind:tap="onCodeScan">
+                <image class="exchange-code-scan-icon" src="https://oss.etcsd.com/object/3c22dcc1871c4b71800f5ac0ffb45bf0"></image>
+            </view>
+        </view>
+        <view class="exchange-code-btn" bind:tap="onCodeClick"> 兑换 </view>
+    </view>
+</view>
+

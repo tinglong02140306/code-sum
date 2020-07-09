@@ -1,0 +1,91 @@
+<!--
+ * @Author: sunmingmao
+ * @Date: 2020-03-26 15:42:07
+ * @LastEditors: longting
+ * @LastEditTime: 2020-04-30 11:02:01
+ * @Description: 油站列表
+ -->
+<!--pages/stations/index/index.axml-->
+<!-- <import src="../../../templates/stations/station-item/station-item.axml"></import>-->
+<import src="../../../templates/stations/clean-item/clean-item.axml"></import>
+<import src="../../../templates/stations/station-item-loading/station-item-loading"></import>
+<view class="station-container">
+    <!--导航栏-->
+    <station-bar onClick="onMenuClick" list="{{bar_list}}" page_type="{{page_type}}"></station-bar>
+    <!--加油-->
+    <view class="station-box">
+        <!--筛选条件-->
+        <view class="station-menu-container" style="display:{{ page_type==1 ? 'flex' : 'none'}};">
+            <view class="station-filter-tabs">
+                <filter-tabs 
+                    source="{{tabs_oil}}" 
+                    tab_height="{{tab_height}}" 
+                    tab_list_top="{{tab_list_top}}"
+                    height="{{drop_down_height}}" 
+                    onSelect="onOilSelectClick">
+                </filter-tabs>
+            </view>
+            <view class="station-search" onTap="onSearchClick">
+                <image class="station-search-image" src="/assets/static/map-search.png"></image>
+                搜索
+            </view>
+        </view>
+        <!--油站列表-->
+        <scroll-list height="{{scroll_height}}" 
+            onRefresh="onOilRefresh" 
+            onLoadMore="onOilLoadMore"
+            load_status="{{load_status_oil}}" 
+            refresher_triggered="{{refresher_oil}}" a:if="{{page_type==1}}">
+            <view class="station-list-box">
+                <block a:for="{{station_list}}" a:key="stations" a:if="{{load_page_oil==2}}">
+                    <station-item openid={{openid}} item="{{item}}" onStationClick="onStationClick" onPayClick="onPayClick" onNavigationClick="onNavigationClick"></station-item>
+                </block>
+                <block a:for="{{10}}" a:key="stations_loasding" a:if="{{load_page_oil==1}}">
+                    <template is="station-item-loading"></template>
+                </block>
+                <status a:if="{{oil_status}}" type="{{oil_status}}" text="{{oil_status==1?'没有符合您条件的油站哦～':'网络好像断了哦～'}}"
+                    onRetryClick="onRetryClick"></status>
+            </view>
+        </scroll-list>
+    </view>
+    <!--洗车-->
+    <view class="station-box">
+        <!--筛选条件-->
+        <view class="station-menu-container clean-filter-margin" style="display:{{ page_type==0?'flex':'none'}};">
+            <view class="station-filter-tabs">
+                <filter-tabs 
+                    source="{{tabs_clean}}" 
+                    tab_height="{{tab_height}}" 
+                    tab_list_top="{{tab_list_top}}"
+                    height="{{drop_down_height}}" 
+                    onSelect="onCleanSelectClick">
+                </filter-tabs>
+            </view>
+            <view class="station-search" onTap="onRefreshClick">
+                <image class="station-search-image" src="https://oss.etcsd.com/object/d8048ebb9b1b4a4fa1e7d61d461bd426"></image>
+                刷新
+            </view>
+        </view>
+        <!--洗车列表-->
+        <scroll-list 
+            height="{{scroll_height}}" 
+            onRefresh="onCleanRefresh" 
+            onLoadMore="onCleanLoadMore"
+            load_status="{{load_status_clean}}" 
+            refresher_triggered="{{refresher_clean}}" 
+            a:if="{{page_type==0}}">
+            <view class="station-list-box">
+                <block a:for="{{clean_list}}" a:key="stations">
+                    <template is="clean-item" data="{{item}}"></template>
+                </block>
+                <status a:if="{{clean_status}}" 
+                    type="{{clean_status}}" 
+                    text="{{clean_status==1?'附近没有洗车服务':'网络好像断了哦～'}}"
+                    onRetryClick="onRetryClick">
+                </status>
+            </view>
+        </scroll-list>
+    </view>
+    <!--切换地图模式-->
+    <!-- <image class="station-to-map" a:if="{{station_list}}" src="{{icon_station_to_map}}" onTap="onMapClick"></image> -->
+</view>

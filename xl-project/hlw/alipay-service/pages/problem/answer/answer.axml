@@ -1,0 +1,50 @@
+
+<view class="wrap" a:if="{{loaded}}">
+    <view class="content">
+        <view class="title">
+            <view class="img-wrap">
+                <image src="/images/dot.png" />
+            </view>
+            <view class="text-wrap">
+                <text>{{title}}</text>
+            </view>
+        </view>
+        <text class="detail">{{content}}</text>
+    </view>
+    <!-- 评价 -->
+    <view class="evaluate" a:if="{{logined}}">
+        <view class="inuse-notice" a:if="{{inuseNotice}}">
+            <image class="bg" src="/images/problem/use-notice.png"/>
+            <view class="notice-text-wrap">
+                <image class="icon" src="/images/problem/icon-robot.png"/>
+                <text class="">感谢您的鼓励，有需要的记得找我哦~</text>
+            </view>
+        </view>
+
+        <view class="nouse-notice" a:if="{{nouseNotice}}">
+            <image class="bg" src="/images/problem/nouse-notice.png"/>
+            <view class="notice-text-wrap">
+                <image class="icon" src="/images/problem/icon-robot.png"/>
+                <text class="">没有帮上忙，我们会继续努力的~</text>
+                <button open-type="contact" style="width: 180rpx">求助在线客服</button>
+            </view>
+        </view>
+        <view class="btn-wrap">
+            <text class="title">本文是否对你有帮助</text>
+            <view class="btn-use {{inuse ? 'btn-use-actived' : ''}}" data-type="1" onTap="comment">
+                <image src="/images/problem/icon-use-selected.png" a:if="{{inuse}}"/>
+                <image src="/images/problem/icon-use.png" a:else/>
+                <view class="text-wrap">
+                    <text>有帮助</text>
+                </view>
+            </view>
+            <view class="btn-nouse {{nouse ? 'btn-nouse-actived' : ''}}" data-type="0" onTap="comment">
+                <image src="/images/problem/icon-nouse-selected.png" a:if="{{nouse}}"/>
+                <image src="/images/problem/icon-nouse.png" a:else/>
+                <view class="text-wrap">
+                    <text>{{nouse ? "已投票" : "没帮助"}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

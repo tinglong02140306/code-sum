@@ -1,0 +1,19 @@
+<!--
+ * @Author: sunmingmao
+ * @Date: 2020-04-09 09:47:53
+ * @LastEditors: sunmingmao
+ * @LastEditTime: 2020-05-22 09:30:23
+ * @Description: 判断用户登录状态
+ -->
+ <view class="login-status-container" catch:tap="gettap" >
+    <!-- <button wx:if="{{!open_id}}" class="login-status-btn" style="width: {{width}}px;height{{height}}px" open-type="getPhoneNumber" catchgetphonenumber="getPhoneNumber" ></button> -->
+    <view class="login-status-box" catch:tap="getClick" id="content">
+        <slot></slot>
+    </view>
+    <popup show="{{show}}">
+        <view class="login-button-box">
+            <button class="login-button" open-type="getPhoneNumber" 
+                catchgetphonenumber="getPhoneNumber">微信登录</button>
+        </view>
+    </popup>
+ </view>

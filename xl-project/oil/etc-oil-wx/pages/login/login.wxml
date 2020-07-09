@@ -1,0 +1,9 @@
+<!--pages/login/login.wxml-->
+<view class="login-container">
+    <image class="login-logo" src="/assets/static/logo.png"></image>
+    <text class="login-title">ETC加油助手</text>
+    <view class="login-button-view-box">
+        <text>立即登录</text>
+        <button class="login-button-over" open-type="getPhoneNumber" catchgetphonenumber="getPhoneNumber"></button>
+    </view>
+</view>

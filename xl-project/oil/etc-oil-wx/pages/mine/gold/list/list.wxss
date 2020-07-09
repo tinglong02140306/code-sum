@@ -1,0 +1,154 @@
+/* pages/person/refueling-gold/refueling-gold.wxss */
+@import "../../../../templates/mine/balance-detail/balance-detail.wxss";
+@import "../../../../templates/mine/load-more/load-more.wxss";
+
+page{
+    background-color: #f8f8f8;
+    width: 100%;
+    overflow-x: hidden;
+    height: auto;
+}
+
+.refueling-gold-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    overflow-x: hidden;
+
+}
+
+.refueling-gold-bg-img{
+    margin: 42rpx 52rpx 64rpx 50rpx;
+    width: 648rpx;
+    height: 267rpx;
+    position: relative;
+}
+
+.refueling-gold-card-view{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    width: 648rpx;
+    height: 267rpx;
+    border-radius: 16rpx;
+    margin-top: 42rpx;
+}
+
+.refueling-gold-bg-pro{
+    position: absolute;
+    width: 653rpx;
+    height: 289rpx;
+    border-radius: 30rpx;
+    margin-top: 92rpx;
+}
+
+.gold-card-balance{
+    width: 100%;
+    color: rgba(255, 255, 255, 1);
+    font-size: 80rpx;
+    text-align: center;
+    font-family: PingFang-SC-Heavy;
+    margin-top: 74rpx;
+}
+
+.gold-card-label{
+    width: 100%;
+    color: rgba(255, 255, 255, 1);
+    font-size: 30rpx;
+    text-align: center;
+    font-family: PingFang-SC-Medium;
+}
+
+.refueling-gold-precedence-box{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    width: 750rpx;
+    height: 110rpx;
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.gold-precedence-text{
+    color: rgba(51, 51, 51, 1);
+    font-size: 32rpx;
+    text-align: left;
+    font-family: PingFang-SC-Medium;
+    margin-left: 48rpx;
+}
+.gold-precedence-switch{
+    /*width: 64rpx;*/
+    /*height: 38rpx;*/
+    color: #DBB06E;
+    margin-right: 42rpx;
+    zoom: 0.8;
+}
+
+.refueling-gold-list-box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 750rpx;
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: 0rpx 2rpx 10rpx 0rpx rgba(0, 0, 0, 0.05);
+    margin-top: 20rpx;
+}
+
+.gold-list-hint{
+    width: 100%;
+    height: 45rpx;
+    color: rgba(219, 176, 110, 1);
+    font-size: 32rpx;
+    text-align: center;
+    font-family: PingFang-SC-Bold;
+    margin-top: 26rpx;
+    margin-bottom: 22rpx;
+}
+
+.gold-list-hint-line{
+    width: 749rpx;
+    height: 2rpx;
+    background-color: rgba(236, 238, 242, 1);
+}
+
+.gold-list-empty-view{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 66rpx;
+}
+
+.gold-list-empty-img{
+    width: 77rpx;
+    height: 88rpx;
+}
+
+.gold-list-empty-text{
+    width: 100%;
+    color: rgba(187, 187, 187, 1);
+    font-size: 26rpx;
+    text-align: center;
+    font-family: PingFang-SC-Medium;
+    margin: 16rpx 0 65rpx 0;
+}
+
+.refueling-gold-more{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40rpx;
+    margin-bottom: 40rpx;
+}
+
+.refueling-gold-more-text{
+    color: rgba(187, 187, 187, 1);
+    font-size: 26rpx;
+    text-align: center;
+    font-family: PingFangSC-Ultralight;
+
+}

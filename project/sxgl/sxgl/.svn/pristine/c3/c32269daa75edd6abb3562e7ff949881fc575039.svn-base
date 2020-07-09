@@ -1,0 +1,1349 @@
+/*
+ * @Author: lhqin 
+ * @Date: 2018-10-12 21:17:45 
+ * @Last Modified by: kkfan2
+ * @Last Modified time: 2019-01-18 10:17:00
+ */
+
+<template>
+    <!-- 基本信息 -->
+    <div id="mattInfoPanelSelf">
+        <!-- 基本信息 标题栏 -->
+        <div class="basic-info-wrap">
+            <i class="icon-nav inline-block"></i>
+            <span class="fz14 inline-block title-text">基本信息</span>
+        </div>
+        <el-form :model="ruleForm" :rules="rules" ref="mattForm" label-width="123px" class="demo-ruleForm" size="small">
+            <el-row>
+                <el-col :span="10" :push="1">
+                    <el-row>
+                        <el-col :span="24">
+                            <el-form-item label="事项名称" prop="matterName">
+                                <!-- @change="(val)=>changeInput(val,'matterName')" -->
+                                <el-input v-model="ruleForm.matterName" maxlength="100" placeholder="请输入事项名称" :disabled="isDisabled" @focus="matterNameChangeEvt"></el-input>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+
+                    <el-row>
+                        <el-col :span="24">
+                            <el-form-item label="事项编码" prop="matterCode">
+                                <el-input v-model="ruleForm.matterCode" maxlength="50" placeholder="系统自动生成" disabled></el-input>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+                </el-col>
+                <el-col :span="8" :push="3">
+                    <el-col :span="24">
+                        <el-form-item label="缩略图" prop="img" class="thumbnail">
+                            <!-- 上传后图片展示地址 -->
+                            <div class="upload-img-content fl" v-if="ruleForm.isImage">
+                                <img :src="ruleForm.webImgUrl">
+                                <a class="delete-btn" @click="deleteWebImg" href="javascript:void(0)" :disabled="isDisabled">
+                                    <i class="iconfont icon-quxiao"></i>
+                                </a>
+                            </div>
+                            <vue-upload-web ref="upload" :url="ruleForm.uploadObj.cdnUrl" :form-data="ruleForm.uploadObj.cdnParams" :accept="ruleForm.uploadObj.accept" :key-generator="keyGenerator" @progress="uploadProgress" @success="uploadSuccessFJ" @before="beforeUpload" @error="uploadError" @complete="handleComplete" upload-button=".upload-btn-one" :multiple=false :fileSingleSizeLimit=208400>
+                            </vue-upload-web>
+
+                            <!--上传加号按钮start-->
+                            <div ref="uploadAdd" class="upload-btn-one upload-view ivu-upload ivu-upload-drag" :disabled="isDisabled">
+                                <div class="icon">
+                                    <i class="ivu-icon ivu-icon-ios-add"></i>
+                                </div>
+                            </div>
+                            <span style="display: inline-block;position: absolute;width: 205px;top: 15px;left: 93px;">请上传png、jpg、jpeg格式图片</span>
+                            <!--上传加号按钮end-->
+
+                        </el-form-item>
+                    </el-col>
+                </el-col>
+            </el-row>
+            <el-row>
+                <el-col :span="10" :push="1">
+                    <el-form-item label="行政区划" prop="adminDiv">
+                        <Cascader class="inline-block xzqhWt" :data="adminDivData" :load-data="xzqhLoadData" v-model="ruleForm.adminDiv" change-on-select filterable :disabled="isDisabled" :transfer="true" @on-change="changeXzqh"></Cascader>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="8" :push="3">
+                    <el-form-item label="所属部门" prop="deptCode">
+                        <el-select v-model="ruleForm.deptCode" filterable :disabled="isDisabled" class="xzqhWt" :popper-append-to-body="false">
+                            <el-option v-for="(item ,key) in deptData" :key="key" :label="item.label" :value="item.value">
+                            </el-option>
+                        </el-select>
+                    </el-form-item>
+                </el-col>
+            </el-row>
+
+            <el-row>
+                <el-col :span="11" :push="1">
+                    <el-form-item label="事项分类" prop="matterClassify">
+                        <el-radio-group v-model="ruleForm.matterClassify" :disabled="isDisabled">
+                            <el-radio label="1">办事项</el-radio>
+                            <el-radio label="2">咨询项</el-radio>
+                            <el-radio label="3">预约项</el-radio>
+                        </el-radio-group>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="8" :push="2">
+                    <el-form-item label="事项类型" prop="matterType">
+                        <el-select v-model="ruleForm.matterType" filterable :disabled="isDisabled" class="xzqhWt" :popper-append-to-body="false">
+                            <el-option v-for="item in matterTypeData" :key="item.value" :label="item.label" :value="item.value">
+                            </el-option>
+                        </el-select>
+                    </el-form-item>
+                </el-col>
+            </el-row>
+            <el-row>
+                <el-col :span="18" :push="1">
+                    <el-form-item label="办件类型" prop="projType">
+                        <el-checkbox-group v-model="ruleForm.projType" :disabled="isDisabled">
+                            <el-checkbox v-for="(item,index) in projTypeData" :label="item.value" @change="checked=>handleCheck(checked,item)">{{item.label}}</el-checkbox>
+                        </el-checkbox-group>
+                    </el-form-item>
+                </el-col>
+            </el-row>
+
+            <el-row>
+                <el-col :span="11" :push="1">
+                    <el-form-item label="法定时限" prop="legalTime">
+                        <el-col :span="18" class="mr10">
+                             <!-- @change="(val)=>changeInput(val,'legalTime')" -->
+                            <el-input class="mr10" v-model="ruleForm.legalTime" placeholder="请输入法定时限" :disabled="isDisabled"></el-input>
+                        </el-col>
+                        <el-col :span="4">
+                            <label>工作日</label>
+                        </el-col>
+                    </el-form-item>
+                </el-col>
+                <el-col :span="11" :push="2">
+                    <el-form-item label="承诺时限" prop="commitTime">
+                        <el-col :span="12" class="mr10">
+                             <!-- @change="(val)=>changeInput(val,'commitTime')" -->
+                            <el-input v-model="ruleForm.commitTime" placeholder="请输入承诺时限" :disabled="isDisabled"></el-input>
+                        </el-col>
+                        <el-col :span="4">
+                            <label>工作日</label>
+                        </el-col>
+                    </el-form-item>
+                </el-col>
+            </el-row>
+
+            <el-row class="theme-type">
+                <el-col :span="20" :push="1">
+                    <el-row>
+                        <el-form-item class="mt10" label="主题类型" prop="themeType">
+                            <el-checkbox-group v-model="ruleForm.themeType" :disabled="isDisabled">
+                                <el-checkbox label="个人" name="theme" @change="changeType($event,'percheck')"></el-checkbox>
+                                <el-checkbox label="法人" name="theme" @change="changeType($event,'laycheck')"></el-checkbox>
+                            </el-checkbox-group>
+                        </el-form-item>
+                    </el-row>
+                    <div id="tipId">
+                        <el-row class="mt10 person-select">
+                            <el-col :span="9" :push="2">
+                                <el-form-item label="个人主题" prop="personalTheme">
+                                    <el-select v-model="ruleForm.personalTheme" multiple filterable :disabled="isDisabledPersonal" class="xzqhWt" :popper-append-to-body="false">
+                                        <el-option v-for="item in perThemeData" :key="item.value" :label="item.label" :value="item.value">
+                                        </el-option>
+                                    </el-select>
+                                </el-form-item>
+                            </el-col>
+                            <el-col :span="9" :push="3">
+                                <el-form-item label="个人对象" prop="personalObject">
+                                    <el-select v-model="ruleForm.personalObject" multiple filterable :disabled="isDisabledPersonal" class="xzqhWt" :popper-append-to-body="false">
+                                        <el-option v-for="item in perObjectData" :key="item.value" :label="item.label" :value="item.value">
+                                        </el-option>
+                                    </el-select>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+                        <el-row class="mt10 legal-select">
+                            <el-col :span="9" :push="2">
+                                <el-form-item label="法人主题" prop="legalTheme">
+                                    <el-select v-model="ruleForm.legalTheme" multiple filterable :disabled="isDisabledLegal" class="xzqhWt" :popper-append-to-body="false">
+                                        <el-option v-for="item in legalThemeData" :key="item.value" :label="item.label" :value="item.value">
+                                        </el-option>
+                                    </el-select>
+                                </el-form-item>
+                            </el-col>
+                            <el-col :span="9" :push="3">
+                                <el-form-item label="法人对象" prop="legalObject">
+                                    <el-select v-model="ruleForm.legalObject" multiple filterable :disabled="isDisabledLegal" class="xzqhWt" :popper-append-to-body="false">
+                                        <el-option v-for="item in legalObjectData" :key="item.value" :label="item.label" :value="item.value">
+                                        </el-option>
+                                    </el-select>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+                    </div>
+
+                </el-col>
+            </el-row>
+            <el-row>
+                <el-col :span="20" :push="1">
+                    <el-form-item label="事项说明" prop="mattDesc">
+                        <!-- 富文本遮罩 -->
+                        <div id="maskId" class="mask" v-if="maskRef">
+                        </div>
+                        <div class="components-container">
+                            <div class="editor-container">
+                                <UE :defaultMsg="defaultMsg" :config="config" ref="ue" :id="ueEditorId"></UE>
+                            </div>
+                        </div>
+                    </el-form-item>
+                </el-col>
+            </el-row>
+            <!-- 拓展信息 -->
+            <div class="extend-info-wrap">
+                <extendInfo ref='extendInfo' :matterCode="ruleForm.matterCode" :adminDiv="ruleForm.adminDiv" :id="ruleForm.id" :matterVersion="ruleForm.matterVersion" :isDisabled="isDisabled" :isDisabledLegal="isDisabledLegal"></extendInfo>
+            </div>
+            <!-- 选择事项弹窗 -->
+            <el-dialog title="请选择事项" :visible.sync="addCaseDialog" width="70%">
+                <!-- @refreshList="getConfigData" -->
+                <matt-case ref='addCaseDialog' type="selection" @closeDialog="closeDialog" @matterValueChangEvt="matterValueChangEvt"></matt-case> 
+            </el-dialog>
+           <el-row>
+               <el-col :span="20" :push="1">
+                    <div v-if="btnVisiable" class="mt10 tr">
+                        <el-button class="w100 h34" type="primary" size="small" :disabled="okDisabled" @click="submitForm('mattForm')">确定</el-button>
+                        <el-button class="w100 h34" size="small" :disabled="okDisabled" @click="backPage()">取消</el-button>
+                    </div>
+               </el-col>
+           </el-row>
+        </el-form>
+    </div>
+</template>
+<script>
+import Vue from 'vue';
+import unit from '@/api/index';
+import UE from '@/components/UE/ue.vue';
+import vueUploadWeb from '@/components/upload/upload';
+import extendInfo from '@/pages/issuesManagement/issuesHandle/extendInfo';
+import addMattCase from '@/pages/issuesManagement/issuesHandle/addMattCase';
+Vue.use(vueUploadWeb);
+export default {
+    components: {
+        UE,
+        'vue-upload-web':vueUploadWeb,
+        'extendInfo': extendInfo,
+        'matt-case': addMattCase,
+    },
+    data() {
+        //法定时限自定义校验规则（非必填）
+        var vlilegalTime = (rule, value, callback) => {
+            if (value) {//有值才检验
+                let reg = /^(0|([1-9]\d{0,2}))$/;
+                if (!reg.test(value)) {
+                    callback(new Error('请输入0-999之间的正整数'));
+                } else {
+                    callback();
+                }
+            } else {
+                callback();
+            }
+        };
+        //承诺时限自定义校验规则（办件类型为承诺件时必填）
+        var vlilegalTime2 = (rule, value, callback) => {
+            let reg = /^([\+ \-]?([1-9]\d*)|(0))([.]\d{0,1})?$/;
+            if (value) {
+                if (!reg.test(value) || value.indexOf('-') > -1) {
+                    callback(new Error('请输入0-999之间的数字（小数精确到十分位）'));
+                } else if (value > 999) {
+                    callback(new Error('数字不大于999'));
+                } else {
+                    callback();
+                }
+            } else {
+                callback();
+            }
+        };
+        return {
+            addCaseDialog: false, // 选择事项弹窗
+            btnVisiable:false,
+            ueEditorId: 'editor2',
+            defaultMsg: '',//富文本编辑器
+            maskRef: false,//富文本遮罩
+            time:0,
+
+            tempVal: '',
+            config: {
+                initialFrameWidth: null,
+                initialFrameHeight: 350,
+                autoClearinitialContent: true,
+                wordCount: false,
+                elementPathEnabled: false,
+                enableAutoSave: false,
+                initialFrameHeight: 260,
+                toolbars: [//自定义工具栏按钮
+                    [
+                        'fullscreen', //全屏
+                        'undo', //撤销 
+                        'redo', //重做 
+                        'paragraph', //段落格式 
+                        'fontfamily', //字体 
+                        'fontsize', //字号
+                        'forecolor', //字体颜色
+                        'backcolor',
+                        'bold', //加粗 
+                        'italic', //斜体 
+                        'underline', //下划线 
+                        'strikethrough', //删除线 
+                        'formatmatch', //格式刷
+                        'removeformat', //清除格式  
+                        'blockquote', //引用 
+                        'pasteplain', //纯文本粘贴模式 
+                        'backcolor', //背景色 
+                        'insertorderedlist', //有序列表 
+                        'insertunorderedlist', //无序列表 
+                        'selectall', //全选 
+                        'rowspacingtop', //段前距 
+                        'rowspacingbottom', //段后距 
+                        'lineheight', //行间距
+                        'directionalityltr', //从左向右输入 
+                        'directionalityrtl', //从右向左输入
+                        'indent', //首行缩进 
+                        'justifyleft', //居左对齐 
+                        'justifyright', //居右对齐 
+                        'justifycenter', //居中对齐 
+                        'justifyjustify', //两端对齐 
+                        'touppercase', //字母大写 
+                        'tolowercase', //字母小写 
+                        'horizontal', //分隔线 
+                        'date', //日期 
+                        'time', //时间 
+                        'simpleupload',
+                        'spechars' //特殊字符          
+                    ]
+                ]
+            },
+
+            isDisabled: false,
+            isDisabledPersonal: true,
+            isDisabledLegal: true,
+            okDisabled: false,
+            areaOption: [],
+
+            saveXzqh: [], //暂存行政区划
+            saveFlag: true, //暂存标志
+            time:0,
+            // getDetailFlag: true,//请求详细信息标志
+            query: {},
+            saveType: '',
+
+            parentCode: '',//复制操作时传
+            ruleForm: {//表单赋初值
+                adminDiv: [],
+                deptCode: '',
+                orgCode: '',
+                matterName: '',
+                matterCode: '系统自动生成',
+                ssqdCode: '',
+                matterVersion: '1.0',
+                matterClassify: '1',
+                matterType: '',
+                matterSource: '01',
+                projType: [],
+                isSink: '1',
+                legalTime: '',
+                commitTime: '',
+                themeType: [],
+                personalTheme: [],
+                personalObject: [],
+                legalTheme: [],
+                legalObject: [],
+
+                webImgHide: true,
+                isImage: false,//隐藏图片占位
+                uploadObj: {// 文件上传参数
+                    cdnUrl: '/bog-matter-mgr/commer/upload',
+                    cdnParams: {
+                        flag: '0'//0 图片上传，1文件上传
+                    },
+                    accept: {
+                        extensions: 'jpg,jpeg,png',
+                        mimeTypes: '.jpg,.jpeg,.png'
+                    }
+                },
+            },
+            rules: {//表单校验规则
+                adminDiv: [
+                    { type: 'array', required: true, message: '请选择行政区划', trigger: 'change' }
+                ],
+                deptCode: [
+                     { required: true, message: '请选择部门', trigger: 'change' }
+                ],
+                matterName: [
+                    { required: true, message: '请输入事项名称', trigger: 'blur' },
+                    { max: 200, message: '长度不大于200个字符', trigger: 'blur' }
+                ],
+                matterCode: [
+                    { required: true, message: '请输入事项编码', trigger: 'blur' }
+                ],
+                matterClassify: [
+                    { required: true, message: '请选择事项分类', trigger: 'change' }
+                ],
+                matterType: [
+                    { required: true, message: '请选择事项类型', trigger: 'change' }
+                ],
+                matterSource: [
+                    { required: true, message: '请选择事项来源', trigger: 'change' }
+                ],
+                projType: [
+                    { required: true, message: '请勾选办件类型', trigger: 'change' }
+                ],
+                legalTime: [
+                    { required: false, trigger: 'blur', validator: vlilegalTime }
+                ],
+                commitTime: [
+                    { required: false, message: '请填写承诺时限', trigger: 'blur' },
+                    { validator: vlilegalTime2, trigger: 'blur' }
+                ],
+                themeType: [
+                    { type: 'array', required: true, message: '请至少选择一个主题类型', trigger: 'change' }
+                ],
+                personalTheme: [
+                    { required: false, message: '请选择个人主题', trigger: 'change' }
+                ],
+                personalObject: [
+                    { required: false, message: '请选择个人对象', trigger: 'change' }
+                ],
+                legalTheme: [
+                    { required: false, message: '请选择法人主题', trigger: 'change' }
+                ],
+                legalObject: [
+                    { required: false, message: '请选择法人对象', trigger: 'change' }
+                ]
+            },
+            adminDivData: [],//行政区划
+            deptData: [],//部门
+            orgData: [],//所属组织机构
+            perThemeData: [],//个人主题
+            perObjectData: [],
+            legalThemeData: [],
+            legalObjectData: [],
+
+            matterTypeData: [],//事项类型
+            projTypeData: []//办件类型
+        };
+    },
+    methods: {
+        matterValueChangEvt(val) {
+            this.ruleForm.matterName = val;
+            this.closeDialog();
+        },
+        matterNameChangeEvt() {
+            let that = this;
+            if(this.$parent.sourceForm.dataSource == '01') {
+                that.addCaseDialog = true;
+            }
+        },
+        closeDialog() {
+           this.addCaseDialog=false;
+        },
+        //修复ie记忆问题
+        changeInput(val,attr) {
+            this.ruleForm[attr] = val == '' ? '' : val;
+        },
+        /*
+       ** 上传文件
+       */
+        uploadError: function (file) {
+            let _that = this;
+            if (file.indexOf('Q_TYPE_DENIED') != -1) {
+                _that.$Message.error('请上传正确格式的图片');
+            } else {
+                _that.$Message.error('上传图片大小不能超过200kb');
+            }
+        },
+        handleComplete: function () {
+            this.loadingMask.close();
+        },
+
+        keyGenerator: function (file) { },
+        beforeUpload: function (file) {
+            this.loadingMask = this.$loading({
+                lock: true,
+                text: '上传中',
+                spinner: 'el-icon-loading',
+                background: 'rgba(0, 0, 0, 0.5)',
+                customClass: 'el-mask'
+            });
+        },
+        uploadProgress: function (file, percentage) { },
+        uploadSuccessFJ: function (file, res) {
+            var _that = this,
+                data,
+                info,
+                img;
+            if (res && res.data && res.data.fileInfo && res.data.fileInfo.length > 0) {
+                data = res.data;
+                info = data.fileInfo[0];
+                if (file.size > 204800) {
+                    _that.$Message.error('上传文件大小不能超过200kb');
+                } else {
+                    _that.ruleForm.webImgUrl = data.fileInfo[0].filePath;
+                    $(_that.$refs.uploadAdd).hide();//隐藏加号上传图标
+                    setTimeout(function () {
+                        let img = $('.upload-img-content').find('img');//图片宽高固定100px
+                        // img.width(100);
+                        // img.height(100);
+                    }, 50);
+                    _that.ruleForm.isImage = true;
+                }
+            } else {
+                _that.$Message.error(res.data);
+                return;
+            }
+        },
+        /*
+       ** 删除上传的图片
+       */
+        deleteWebImg() {
+            let _that = this;
+            _that.ruleForm.isImage = false;
+            $(_that.$refs.uploadAdd).show();
+            _that.ruleForm.webImgUrl = '';
+            _that.ruleForm.webImgUrl && $('#webUploadBtn').uploadify('cancel', _that.ruleForm.webImgUrl);
+        },
+        /*
+        ** 行政区划改变联动部门和所属组织机构
+        */
+        changeXzqh(value, selectedData) {
+            let _that = this;
+            if (value.length === 0) {//行政区划清空时部门和机构清空
+                _that.ruleForm.deptCode = '';
+                _that.deptData = [];
+
+                _that.ruleForm.orgCode = '';
+                _that.orgData = [];
+                _that.$refs.extendInfo.ruleForm.useDeptNo = '';
+                _that.$refs.extendInfo.useDeptNoData = [];
+            } else {
+                _that.ruleForm.adminDiv = value;
+
+                //  _that.$refs.extendInfo.getUseDept(value);
+            }
+            if (!_that.saveFlag) {
+                if (_that.$route.query.type != 'detail') {
+                    _that.ruleForm.deptCode = '';
+                    // _that.$refs.extendInfo.ruleForm.useDeptNo = [];
+                    setTimeout(function() {
+                        _that.getDeptData();//联动部门
+                    },300)
+                }
+            }
+        },
+        /*
+        ** 提交
+        */
+        submitForm(formName) {
+            let _that = this,
+                type = _that.saveType,
+                url;
+            _that.ruleForm.resultFile = this.$refs.extendInfo.ruleForm.resultFile;
+            if (type === 'addMatters') {//新增父项（不需ID）
+                url = '/matterAllocation/addMatter';
+                _that.addOrChange(formName, type, url);
+            } else if (type === 'edit') {//编辑（需ID）
+                url = '/matterAllocation/updateMatter';
+                _that.addOrChange(formName, type, url);
+            } else if (type === 'copy') {//复制（需ID，子项的复制需要父项matterCode）
+                url = '/matterAllocation/copyMatter';
+                _that.addOrChange(formName, type, url);
+            } else if (type === 'change') {//变更（需ID）
+                url = '/matterAllocation/updateVersion';
+                _that.addOrChange(formName, type, url);
+            } else if (type === 'addChild') {//新增子项（需ID）
+                url = '/matterAllocation/addMatter';
+                _that.addOrChange(formName, type, url);
+            }
+        },
+        /*
+        ** 操作(请求接口)
+        */
+        addOrChange(formName, type, url) {
+            let _that = this,
+                flag = false;
+            _that.$refs.extendInfo.$refs['extendInfoForm'].validate((valid) => {
+                flag = valid;
+            });
+            
+            _that.$refs[formName].validate((valid) => {
+                if (valid) {
+                    if(!flag) {
+                        _that.$Message.warning('扩展信息数据校验错误，请检查数据输入！');
+                        return ;
+                    }
+                    let formData = _that.ruleForm;
+                    let projTypeArr = formData.projType.slice(','),
+                        str = '',
+                        content = _that.$refs.ue.getUEContent();
+                    _that.defaultMsg = content;
+                    for (let i = 0; i < projTypeArr.length; i++) {
+                        str += projTypeArr[i] + ',';
+                    }
+                    let projType = str.substring(0, str.length - 1);
+                    let situationMatterDto = {
+                        adminDiv: formData.adminDiv[formData.adminDiv.length - 1],
+                        commitTime: formData.commitTime,
+                        deptCode: formData.deptCode,
+                        isSink: formData.isSink,
+                        legalTime: formData.legalTime,
+                        matterClassify: formData.matterClassify,
+                        matterName: formData.matterName,
+                        matterSource: formData.matterSource,
+                        matterType: formData.matterType,
+                        normalCode: formData.matterCode,//事项编号
+                        normalVersion: formData.matterVersion,//事项版本号
+                        ssqdCode: formData.ssqdCode,//实施清单编码
+                        orgCode: formData.orgCode,
+                        projType: projType,
+                        remark: content,
+                        dataSource: _that.$parent.sourceForm.dataSource || '02',
+                        picUrl: formData.webImgUrl, //缩略图
+
+                        resultFile: formData.resultFile, // 扩展信息
+                        isHighFrequency: _that.$refs.extendInfo.ruleForm.isHighFrequency, // 高频事项
+                        isOnce: _that.$refs.extendInfo.ruleForm.isOnce, // 单次事项
+                        isSink: _that.$refs.extendInfo.ruleForm.isSink, // 下沉社区
+                        sortNo: _that.$refs.extendInfo.ruleForm.sortNo, // 排序值
+                        useDeptNo: _that.$refs.extendInfo.ruleForm.useDeptNo.join(','), // 使用部门编号
+                        // useDeptName: _that.$refs.extendInfo.ruleForm.useDeptName, // 使用部门名称
+                        specialService: _that.$refs.extendInfo.ruleForm.specialService, // 专题服务
+                        processingDepth: _that.$refs.extendInfo.ruleForm.processingDepth, // 网上办理深度
+
+                    };
+                    let typeData = _that.ruleForm.themeType;
+                    situationMatterDto.personalTheme = '';
+                    situationMatterDto.personalObject = '';
+                    situationMatterDto.legalTheme = '';
+                    situationMatterDto.legalObject = '';
+                    situationMatterDto.isPersonal = '';
+                    situationMatterDto.isLegal = '';
+                    for (let i = 0; i < typeData.length; i++) {
+                        if (typeData[i] === '个人') {
+                            situationMatterDto.isPersonal = '1';
+                            situationMatterDto.personalTheme = _that.ruleForm.personalTheme.join(',');
+                            situationMatterDto.personalObject = _that.ruleForm.personalObject.join(',');
+                        } else if (typeData[i] === '法人') {
+                            situationMatterDto.isLegal = '1';
+                            situationMatterDto.legalTheme = _that.ruleForm.legalTheme.join(',');
+                            situationMatterDto.legalObject = _that.ruleForm.legalObject.join(',');
+                        }
+                    }
+
+                    if (type === 'edit' || type === 'change' ||type=='copy') {//编辑、变更需要ID
+                        situationMatterDto.id = _that.query.id;
+                    }
+                    if (type === 'copy') {
+                        if (_that.query.isChild === '1') {//子项复制
+                            situationMatterDto.parentCode = _that.parentCode;
+                        }
+                    }
+                    if (type === 'addChild') {//新增子项
+                        situationMatterDto.parentCode = _that.query.parentCode;
+                    }
+
+                    const loading = this.$loading({
+                        lock: true,
+                        text: '加载中',
+                        spinner: 'el-icon-loading',
+                        background: 'rgba(0, 0, 0, 0.5)',
+                        customClass: 'el-mask'
+                    });
+
+                    unit.ajaxObjPost('/znsj-web' + url, situationMatterDto, function (res) {
+                        loading.close();
+                        if (res.flag == true) {
+                            if (type === 'addMatters') {
+                                _that.$message.success('新增成功');
+                                _that.$router.go(-1);
+                            } else if (type === 'edit') {
+                                _that.$message.success('修改成功');
+                                _that.$router.go(-1);
+                            } else if (type === 'copy') {
+                                _that.$message.success('复制成功');
+                                _that.$router.go(-1);
+                            } else if (type === 'change') {
+                                _that.$message.success('变更成功');
+                                _that.$router.go(-1);
+                            } else if (type === 'addChild') {
+                                _that.$message.success('新增子项成功');
+                                _that.$router.go(-1);
+                            }
+                            _that.$emit('getCode', {
+                                normalCode: res.data.matterCode,
+                                normalVersion: res.data.matterVersion
+                            });
+                        } else {
+                            // _that.$message.warning('服务端错误');
+                        }
+                    }, function (res) {
+                        loading.close();
+                        // _that.$message.warning('服务端错误');
+                    }, _that);
+                } else {
+                    _that.$Message.warning('基本信息数据校验错误，请检查数据输入！');
+                    return false;
+                }
+            });
+        },
+        backPage() {
+            this.$router.go(-1);
+        },
+        /*
+        ** 获取行政区划
+        */
+        getXzqhTreeData() {
+            let _that = this,
+                obj = {
+                    value: _that.ruleForm.adminDiv[0]
+                };
+            unit.ajaxMerPost('/znsj-web/commer/getXzqhTreeData', obj, function (res) {
+                if (res.flag == true) {
+                    $.each(res.data, function (i, t) {
+                        if (t.existChild) {
+                            t.children = [];
+                            t.loading = false;
+                        }
+                    });
+                    _that.adminDivData = res.data;
+                    setTimeout(function () {
+                        if (_that.saveType == 'addMatters') {
+                            // _that.getDefaultXzqh();
+                        } else {
+                           // _that.getEditDefaultXzqh();
+                            _that.getMattInfo()
+                        }
+                    }, 0);
+                } else {
+                    // _that.$message.warning('服务端错误1');
+                }
+            }, function (res) {
+                // _that.$message.warning('服务端错误2');
+            }, _that);
+        },
+        /* 
+        ** 行政区划动态加载
+        */
+        xzqhLoadData(item, callback) {
+            let _that = this,
+                qhCode = item.value,
+                itenLen = item.__value.split(',').length;
+            item.loading = true;
+            setTimeout(() => {
+                let obj = {
+                    value: qhCode
+                };
+                unit.ajaxMerPost('/znsj-web/commer/getXzqhTreeData', obj, function (result) {
+                    if (result.flag == true) {
+                        if (itenLen < 4) {
+                            if (result.data.length != 0) {
+                                $.each(result.data, function (i, t) {
+                                    t.children = [];
+                                    t.loading = false;
+                                });
+                            }
+                        }
+                        item.children = result.data;
+                        if(_that.time<_that.saveXzqh.length){
+                            _that.saveFlag=true;
+                            if(_that.time==_that.saveXzqh.length-1)
+                                _that.saveFlag=false;
+                        }else _that.saveFlag=false;
+                        if (_that.saveFlag) {
+                            setTimeout(function () {
+                                _that.ruleForm.adminDiv = _that.saveXzqh;
+                               _that.time++;
+                            }, 0);
+                        }
+                         _that.getDeptData();//获取部门
+                    } else {
+                        // _that.$message.warning('服务端错误3');
+                    }
+                    item.loading = false;
+                    callback();
+                }, function (result) {
+                    // _that.$message.warning('服务端错误4');
+                }, _that);
+            }, 300);
+        },
+        /*
+        ** 获取事项类型
+        */
+        getSXLXData() {
+            let _that = this,
+                obj = {
+                    pinYinType: 'SXLX'
+                };
+            unit.ajaxMerPost('/znsj-web/dic/getDictionarys', obj, function (res) {
+                if (res.flag == true) {
+                    _that.matterTypeData = res.data;
+                    if (res.data.length === 0) {
+                        _that.rules.matterType = [];
+                    }
+                } else {
+                    // _that.$message.warning('服务端错误5');
+                }
+            }, function (res) {
+                // _that.$message.warning('服务端错误6');
+            }, _that);
+        },
+        /*
+        ** 获取办件类型
+        */
+        getBJLXData() {
+            let _that = this,
+                obj = {
+                    pinYinType: 'BJLX'
+                };
+            unit.ajaxMerPost('/znsj-web/dic/getDictionarys', obj, function (res) {
+                if (res.flag == true) {
+                    _that.projTypeData = res.data;
+                    $.each(res.data, function (index, item) {
+                        if (item.label === '承诺件') {
+                            _that.ruleForm.projType = [item.value];
+                            _that.rules.commitTime[0].required = true;
+                        }
+                        if (item.label === '承诺件') {
+                            _that.tempVal = item.value;
+                        }
+                    });
+                    if (res.data.length === 0) {
+                        _that.rules.projType = [];
+                    }
+
+                } else {
+                    // _that.$message.warning('服务端错误7');
+                }
+            }, function (res) {
+                // _that.$message.warning('服务端错误8');
+            }, _that);
+        },
+        /*
+        ** 根据type相应操作
+        */
+        getMattInfo() {
+            let _that = this,
+                uploadBtn;
+            _that.query = _that.$route.query;
+            _that.saveType = _that.query.type;
+            let type = _that.saveType;
+            let obj = {
+                id: _that.query.id
+            };
+           
+            if (type === 'detail') {//查看
+                _that.isDisabled = true;
+                _that.okDisabled = true;
+                _that.rules = {};
+                uploadBtn = $('.upload-btn-one label');
+                $('.upload-btn-one').css({ 'cursor': 'not-allowed' });//加号上传禁用效果
+                uploadBtn.css({ 'cursor': 'not-allowed' });//加号上传禁用效果
+                uploadBtn.removeClass('hover');
+                uploadBtn.unbind("click");
+
+                _that.$nextTick(function () {
+                    _that.$refs.ue.setDisabled();//禁用富文本
+                });
+                _that.maskRef = true;//富文本加遮罩
+
+                _that.getDetailById(obj);
+            } else if (type === 'edit') {//编辑
+                _that.getDetailById(obj);
+            } else if (type === 'copy') {//复制(能编辑)
+                _that.getDetailById(obj);
+            } else if (type === 'change') {//变更
+                _that.getDetailById(obj);
+            } else if (type === 'addChild') {//新增子项
+                _that.getDetailById(obj);
+            }
+        },
+        /*
+        ** 获取个人主题
+        */
+        getGRZTData() {
+            let _that = this,
+                obj = {
+                    pinYinType: 'GRZT'
+                };
+            unit.ajaxMerPost('/znsj-web/dic/getDictionarys', obj, function (res) {
+                if (res.flag == true) {
+                    _that.perThemeData = res.data;
+                } else {
+                    // _that.$message.warning('服务端错误9');
+                }
+            }, function (res) {
+                // _that.$message.warning('服务端错误10');
+            }, _that);
+        },
+        /*
+        ** 获取个人对象
+        */
+        getGRDXData() {
+            let _that = this,
+                obj = {
+                    pinYinType: 'GRDX'
+                };
+            unit.ajaxMerPost('/znsj-web/dic/getDictionarys', obj, function (res) {
+                if (res.flag == true) {
+                    _that.perObjectData = res.data;
+                } else {
+                    // _that.$message.warning('服务端错误11');
+                }
+            }, function (res) {
+                // _that.$message.warning('服务端错误12');
+            }, _that);
+        },
+        /*
+        ** 获取法人主题
+        */
+        getFRZTData() {
+            let _that = this,
+                obj = {
+                    pinYinType: 'FRZT'
+                };
+            unit.ajaxMerPost('/znsj-web/dic/getDictionarys', obj, function (res) {
+                if (res.flag == true) {
+                    _that.legalThemeData = res.data;
+                } else {
+                    // _that.$message.warning('服务端错误13');
+                }
+            }, function (res) {
+                // _that.$message.warning('服务端错误14');
+            }, _that);
+        },
+        /*
+        ** 获取法人对象
+        */
+        getFRDXData() {
+            let _that = this,
+                obj = {
+                    pinYinType: 'FRDX'
+                };
+            unit.ajaxMerPost('/znsj-web/dic/getDictionarys', obj, function (res) {
+                let data = res.data;
+                _that.legalObjectData = data;
+            }, function (res) {
+                // _that.$message.warning('服务端错误15');
+            }, _that);
+        },
+        /*
+        ** 主题类型勾选样式和规则处理
+        */
+        changeType($event, str) {
+            let _that = this;
+            if ($event) {//勾选
+                if (str === 'percheck') {//勾选了个人
+                    this.isDisabledPersonal = false;
+                    _that.rules.personalTheme[0].required = true;
+                    _that.rules.personalObject[0].required = true;
+                } else {//勾选了法人
+                    this.isDisabledLegal = false;
+                    _that.rules.legalTheme[0].required = true;
+                    _that.rules.legalObject[0].required = true;
+                }
+            } else {//取消勾选
+                if (str === 'percheck') {//取消个人
+                    this.isDisabledPersonal = true;
+                    let temp = [];
+                    for (let i = 0; i < _that.ruleForm.themeType.length; i++) {
+                        if (_that.ruleForm.themeType[i] != '个人') {
+                            temp.push(_that.ruleForm.themeType[i]);
+                        }
+                    }
+                    _that.ruleForm.themeType = temp;
+                    _that.rules.personalTheme[0].required = false;
+                    _that.rules.personalObject[0].required = false;
+                    _that.ruleForm.personalTheme = [];
+                    _that.ruleForm.personalObject = [];
+                } else {//取消法人
+                    this.isDisabledLegal = true;
+                    let temp = [];
+                    for (let i = 0; i < _that.ruleForm.themeType.length; i++) {
+                        if (_that.ruleForm.themeType[i] != '法人') {
+                            temp.push(_that.ruleForm.themeType[i]);
+                        }
+                    }
+                    _that.ruleForm.themeType = temp;
+                    _that.rules.legalTheme[0].required = false;
+                    _that.rules.legalObject[0].required = false;
+                    _that.ruleForm.legalTheme = [];
+                    _that.ruleForm.legalObject = [];
+                }
+            }
+        },
+        /*
+        ** 办件类型为“承诺件”时承诺时限必填
+        */
+        handleCheck(checked, item) {
+            // let _that = this;
+            // if (item.label === '承诺件') {
+            //     if (checked) {
+            //         _that.rules.commitTime[0].required = true;
+            //     } else {
+            //         _that.rules.commitTime[0].required = false;
+            //     }
+            // }
+
+            let _that = this,
+                arr=_that.ruleForm.projType;
+            if(checked){
+                if(item.value === '1'&&arr.indexOf('3')!=-1||item.value === '3'&&arr.indexOf('1')!=-1){
+                    _that.$Message.warning('承诺件和即办件只能二选一');
+                    arr.pop();
+                }
+                else if( item.value==='3'){
+                     _that.rules.commitTime[0].required = true;
+                }
+            }else if(item.value==='3'){
+                 _that.rules.commitTime[0].required = false;
+            }
+        },
+        /*
+        ** 根据id获取事项信息
+        */
+        getDetailById(obj) {
+            let _that = this;
+            unit.ajaxMerPost('/znsj-web/matterAllocation/getInfo', obj, function (res) {
+                if (res.flag == true) {
+
+                    let data = res.data;
+                    if (_that.saveType != 'addChild') {
+                        _that.$emit('statusChange', data.matterSource);
+                    }
+                    _that.parentCode = data.parentCode;//复制操作会传
+
+                    let temp=data.allAdminDiv.split(',');
+                    _that.ruleForm.adminDiv =temp;
+                    _that.saveXzqh=temp;
+
+                    _that.ruleForm.deptCode = data.deptCode;
+                   
+                    _that.ruleForm.matterName = data.matterName;
+                   
+                   if(_that.saveType=='copy'){
+                        _that.ruleForm.matterCode=''
+                        _that.rules.matterCode[0].required=false;
+                    }else {
+                         _that.ruleForm.matterCode = data.matterCode;
+                    }
+                    _that.ruleForm.ssqdCode = data.ssqdCode;
+                    _that.ruleForm.matterVersion = data.matterVersion;
+                    _that.ruleForm.matterClassify = data.matterClassify;
+                    // _that.ruleForm.matterSource = data.matterSource;
+                    _that.ruleForm.matterType = data.matterType;
+                    _that.ruleForm.isSink = data.isSink;
+                    _that.ruleForm.projType = data.projType.split(',');
+                    _that.ruleForm.legalTime = data.legalTime;
+                    _that.ruleForm.commitTime = data.commitTime;
+                    _that.$parent.sourceForm.dataSource = data.dataSource || '02';
+
+                    if (_that.saveType != 'detail') {
+                        $.each(_that.ruleForm.projType, function (index, item) {
+                            if (item == _that.tempVal) {
+                                _that.rules.commitTime[0].required = true;
+                                return false;
+                            } else {
+                                _that.rules.commitTime[0].required = false;
+                            }
+                        });
+                    }
+                    if (data.isPersonal === '1') {
+                        _that.ruleForm.themeType.push('个人');
+                        if(_that.saveType == 'edit' || _that.saveType == 'copy') {
+                            _that.rules.personalTheme[0].required = true;
+                            _that.rules.personalObject[0].required = true;
+                        } 
+                    }
+                    if (data.isLegal === '1') {
+                        _that.ruleForm.themeType.push('法人');
+                        if(_that.saveType == 'edit' || _that.saveType == 'copy') {
+                            _that.rules.legalTheme[0].required = true;
+                            _that.rules.legalObject[0].required = true;
+                        } 
+                    }
+
+                    if (_that.saveType != 'detail' && _that.saveType != 'addMatters') {
+                        if (data.isPersonal === '1') {
+                            _that.isDisabledPersonal = false;
+                        }
+                        if (data.isLegal === '1') {
+                            _that.isDisabledLegal = false;
+                        }
+                    }
+                    _that.ruleForm.personalTheme = data.personalTheme ? data.personalTheme.split(',') : [];
+                    _that.ruleForm.personalObject = data.personalObject ? data.personalObject.split(',') : [];
+                    _that.ruleForm.legalTheme = data.legalTheme ? data.legalTheme.split(',') : [];
+                    _that.ruleForm.legalObject = data.legalObject ? data.legalObject.split(',') : [];
+
+
+                    if (data.remark) {
+                        _that.$refs.ue.setContent(data.remark);
+                    }
+
+                    if (data.picUrl) {//有图片地址
+                        setTimeout(function () {
+                            let img = $('.upload-img-content').find('img');//图片宽高固定100px
+                            // img.width(100);
+                            // img.height(100);
+                        }, 50);
+                        _that.ruleForm.isImage = true;
+                        $(_that.$refs.uploadAdd).hide();//隐藏加号上传图标
+                        _that.ruleForm.webImgUrl = data.picUrl;//缩略图 
+                    } else {//无图片地址
+                        _that.ruleForm.isImage = false;
+                        $(_that.$refs.uploadAdd).show();//隐藏加号上传图标
+                    }
+                    // _that.getDetailFlag = false;//请求详情标志，防止行政区划联动时部门和所属机构被渲染
+
+                    _that.$refs.extendInfo.init();
+                }
+            }, function (res) {
+                // _that.$message.warning('服务端错误16');
+            }, _that);
+        },
+        /*
+        ** 获取部门
+        */
+        getDeptData() {
+            let _that = this,
+                obj = {
+                    adminDiv: _that.ruleForm.adminDiv[_that.ruleForm.adminDiv.length - 1] || '',
+                };
+            unit.ajaxMerPost('/znsj-web/commer/getDeptList', obj, function (res) {
+                if (res.flag == true) {
+                    _that.deptData = res.data;
+                    _that.deptData.unshift({
+                        label:'全部',
+                        value:''
+                    });
+                    _that.$refs.extendInfo.useDeptNoData = unit.loneArray(res.data);
+                  //  _that.ruleForm.deptCode = '';
+                    if(_that.saveType!='detail'){
+                        _that.rules.deptCode.push({ required: true, message: '请选择部门', trigger: 'change' });
+                    }
+                    
+                    //_that.getMattInfo();
+                } else {
+                    // _that.$message.warning('服务端错误17');
+                }
+            }, function (res) {
+                // _that.$message.warning('服务端错误18');
+            }, _that);
+        },
+        /*
+        ** 获取默认行政区划
+        */
+        getDefaultXzqh() {
+            let that = this;
+            unit.ajaxMerPost('/znsj-web/commer/curentUserXzqh', {
+                pinYinType: 'XZQH'
+            }, function (res) {
+                if (res.flag) {
+                    that.ruleForm.adminDiv = [];
+                    that.saveXzqh = [];
+                    let data = res.data;
+                    for (let i in data) {
+                        that.saveXzqh.push(data[i].value);
+                        that.ruleForm.adminDiv.push(data[i].value);
+                    }
+                    // that.getConfigData();
+                } else {
+                    // that.$Message.warning('服务端错误19');
+                }
+            }, function (res) {
+                // that.$Message.warning('服务端错误20');
+            }, that);
+        },
+        /*
+        ** 编辑获取默认行政区划
+        */
+        getEditDefaultXzqh() {
+            let that = this;
+            unit.ajaxMerPost('/znsj-web/matterAllocation/getInfo', {
+                id: that.query.id
+            }, function (res) {
+                if (res.flag) {
+                    let data = res.data,
+                        i = 0,
+                        xzqhStore = [];
+                  
+                    that.ruleForm.adminDiv = [];
+                    let temp=res.data.allAdminDiv.split(',');
+                  
+                    for (let i in temp) {
+                        that.saveXzqh.push(temp[i]);
+                    
+                        that.ruleForm.adminDiv.push(temp[i]);
+                    }
+                    // $(that.saveXzqh).each(function (index, obj) {
+                    //     if (obj != data.adminDiv) {
+                    //         i++;
+                    //         xzqhStore.push(obj);
+                    //         that.ruleForm.adminDiv.push(obj);
+                    //     } else {
+                    //         xzqhStore.push(obj);
+                    //         that.saveXzqh = xzqhStore;
+                    //         that.ruleForm.adminDiv.push(obj);
+                    //         return false;
+                    //     }
+                        
+                    // });
+                    // if (i == that.saveXzqh.length) {
+                    //     xzqhStore.push(data.adminDiv);
+                    //     that.saveXzqh = xzqhStore;
+                    //     that.ruleForm.adminDiv.push(data.adminDiv);
+                    // }
+                    that.getMattInfo();
+                } else {
+                    // that.$Message.warning('服务端错误21');
+                }
+            }, function (res) {
+                // that.$Message.warning('服务端错误22');
+            }, that);
+
+        },
+        destroyed() {
+            // this.$refs.ue.destroyed();
+            // this.$refs.ue.init();
+        },
+        init() {
+            let _that = this;
+            _that.query = _that.$route.query;
+            _that.saveType = _that.query.type;
+            let type = _that.saveType;
+            _that.btnVisiable=type=='detail'?false:true;
+            // if (type != "addMatters") {
+            //     unit.ajaxMerPost('/znsj-web/commer/curentUserXzqh', {
+            //         pinYinType: 'XZQH'
+            //     }, function (res) {
+            //         if (res.flag) {
+            //             _that.saveXzqh = [];
+            //             let data = res.data;
+            //             for (let i in data) {
+            //                 _that.saveXzqh.push(data[i].value);
+            //             }
+            //         } else {
+            //             _that.$Message.warning('服务端错误');
+            //         }
+            //     }, function (res) {
+            //         _that.$Message.warning('服务端错误');
+            //     }, _that);
+            // }
+            _that.getXzqhTreeData();//获取行政区划
+            _that.getSXLXData();//获取事项类型
+            _that.getBJLXData();//获取办件类型
+            _that.getGRZTData();//获取个人主题字典
+            _that.getGRDXData();//获取个人对象字典
+            _that.getFRZTData();//获取法人主题字典
+            _that.getFRDXData();//获取法人对象字典
+            // 解决ie兼容性问题 requestAnimationFrame
+            unit.solveAnimFrame();
+        }
+    },
+    mounted() {
+        
+        this.init();
+    },
+    destroyed() {
+        // this.$refs.ue.destroyed();
+        // this.$refs.ue.init();
+    }
+};
+</script>
+<style lang="less" rel="stylesheet/less">
+@import "../../../assets/styles/color.less";
+#mattInfoPanelSelf {
+    .el-form-item__content .el-input--small {
+        width: 100% !important;
+    }
+    .basic-info-wrap {
+        border-bottom: 1px dashed #d8d8d8;
+        margin-bottom: 15px;
+    }
+    .xzqhWt.el-select {
+       // height: 32px;
+        line-height: 32px;
+    }
+    // .xzqhWt {
+    //     width: 100%;
+    // }
+    .title-text {
+        font-weight: 700;
+        display: inline-block;
+        line-height: 30px;
+        height: 30px;
+    }
+    .icon-nav {
+        width: 20px;
+        height: 30px;
+        background: url(../../../assets/images/common/icon-nav-list.png) no-repeat;
+        background-position: center center;
+        background-size: 18px;
+        vertical-align: top;
+    }
+    .thumbnail {
+        .el-form-item__content {
+            position: absolute;
+        }
+        .el-form-item__label {
+            margin-top: 20px;
+        }
+        .upload-view {
+            display: inline-block;
+            width: 78px;
+            height: 68px;
+            .webuploader-pick {
+                background: transparent;
+            }
+            .icon {
+                line-height: 44px;
+                .ivu-icon-ios-add {
+                    font-size: 29px;
+                    color: #666;
+                }
+            }
+        }
+        .upload-img-content {
+            position: relative;
+            width: 100px;
+            img {
+                width: 78px;
+                height: 68px;
+                border: 1px solid #e7e7e7;
+                border-radius: 4px;
+            }
+            a {
+                position: absolute;
+                top: -20%;
+                right: 14%;
+
+                i {
+                    display: inline-block;
+                    width: 21px;
+                    height: 21px;
+                    background: red;
+                    border-radius: 50%;
+                    line-height: 21px;
+                    color: #fff;
+                    text-align: center;
+                }
+            }
+        }
+    }
+
+    .mask {
+        background-color: #f5f7fa;
+        position: absolute;
+        width: 100%;
+        height: 261px;
+        top: 56px;
+        z-index: 9999;
+        opacity: 0.6;
+    }
+    
+}
+</style>
+

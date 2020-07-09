@@ -1,0 +1,418 @@
+<template>
+  <div class="layout" :type="fontFlag" :color="colorFlag">
+    <zufwHeader icon="md-menu" v-if="isNew" ref="shit" @logout="logout"></zufwHeader>
+    <Layout>
+      <Sider class="iframe-sider" :collapsed-width="60" width="200" v-model="collapsed" hide-trigger collapsible v-if="isNew">
+        <div id="content" v-show="!collapsedShow" style="overflow-y: auto;height: calc(100% - 40px)">
+          <navMenu ref="navMenu" :navData="navData" :openName="openName" :showNav="collapsed" v-show="showNav"></navMenu>
+        </div>
+        <div class="opt-bottom">
+          <ul class="clearfix">
+            <li class="fl huanziti" @click="isShow('huanziti')" v-if="!collapsed">
+              <i class="iconfont icon-huanziti"></i>
+              <div ref="huanziti" class="huanziti-font" v-show="status.huanziti">
+                <span ref="big" class="big" :class="{select: fontFlag == 'big'}" @click="selectFont('big')">较大</span>
+                <span ref="normal" class="normal" :class="{select: fontFlag == 'normal'}" @click="selectFont('normal')">标准</span>
+              </div>
+            </li>
+            <li class="fl huanziti" @click="isShow('huanfu')" v-if="!collapsed">
+              <i class="iconfont icon-huanfu" style="font-size: 26px;"></i>
+              <div ref="huanfu" class="huanfu-logo" v-show="status.huanfu">
+                <span ref="light" class="light" :class="{select: colorFlag == 'light'}" @click="selectColor('light')">
+                  <span class="huanfu-select"></span>
+                </span>
+                <span ref="dark" class="dark" :class="{select: colorFlag == 'dark'}" @click="selectColor('dark')">
+                  <span class="huanfu-select"></span>
+                </span>
+              </div>
+            </li>
+            <li class="fl shouqi" @click="handleChange" v-if="!collapsed">
+              <i class="iconfont icon-shouqi1"></i>
+            </li>
+            <li class="fl zhankai" @click="handleChange" v-if="collapsed">
+              <i class="iconfont icon-zhankai"></i>
+            </li>
+          </ul>
+
+        </div>
+      </Sider>
+      <div class="iframe-main">
+        <div class="iframe-content" ref="wrapper" :style="{ height: wrapperHeight + 'px' }">
+          <div id="app" v-cloak>
+            <router-view/>
+          </div>
+        </div>
+        <zufwFooter v-if="isNew"></zufwFooter>
+      </div>
+    </Layout>
+  </div>
+</template>
+
+<script>
+import util from "@/api";
+import Header from '@/components/header/header';
+import Footer from '@/components/footer/footer';
+import navMenu from '@/components/navMenu/navMenu';
+export default {
+  name: 'App',
+  components: {
+    zufwHeader: Header,
+    zufwFooter: Footer,
+    navMenu: navMenu
+  },
+  data() {
+    return {
+      collapsed: false,
+      collapsedShow: false,
+      wrapperHeight: 0,
+      navData: [{ "code": "A_M20302040000", "icon": null, "id": "4028ba05667656db01667da41ce0030a", "isSelect": "false", "items": [{ "code": "A_M20302040300", "icon": null, "id": "4028ba05667656db0166be16309a2ffd", "isSelect": "false", "items": [], "openType": "", "title": "事项管理", "type": "URL", "url": "/itemManagement" }, { "code": "A_M20302040400", "icon": null, "id": "4028ba05667656db0166be1912112fff", "isSelect": "false", "items": [], "openType": "", "title": "一件事管理", "type": "URL", "url": "/oneManagement" }], "openType": "", "title": "事项管理", "type": "MENU", "url": "http://172.31.1.87:9180/pzgl-qxpz-webindex.html" }, { "code": "A_M20302050000", "icon": null, "id": "4028ba05667656db0166be08fe442ffa", "isSelect": "false", "items": [{ "code": "A_M20302050100", "icon": null, "id": "4028ba05667656db0166be17aca12ffe", "isSelect": "false", "items": [], "openType": "", "title": "事项配置", "type": "URL", "url": "/mattCaseConfig" }, { "code": "A_M20302050200", "icon": null, "id": "4028ba05667656db0166be19ed673000", "isSelect": "false", "items": [], "openType": "", "title": "一件事配置", "type": "URL", "url": "/oneCaseConfig" }], "openType": "", "title": "情形配置", "type": "MENU", "url": "http://172.31.1.87:9180/pzgl-qxpz-webindex.html" }, { "code": "A_M20302060000", "icon": null, "id": "4028ba05667656db0166be136a8b2ffb", "isSelect": "false", "items": [{ "code": "A_M20302060100", "icon": null, "id": "4028ba05667656db0166be14c0e02ffc", "isSelect": "false", "items": [], "openType": "", "title": "字典配置", "type": "URL", "url": "/dictionary" }], "openType": "", "title": "字典管理", "type": "MENU", "url": "http://172.31.1.87:9180/pzgl-qxpz-webindex.html" }],
+      openName: [],
+      status: {
+        huanziti: false,
+        huanfu: false
+      },
+      showNav: true,
+    }
+  },
+  computed: {
+    isNew: {
+      get() {
+        return this.$store.state.isNew;
+      }
+    },
+    fontFlag: {
+      get() {
+        return this.$store.state.fontFlag;
+      }
+    },
+    colorFlag: {
+      get() {
+        return this.$store.state.colorFlag;
+      }
+    },
+  },
+  methods: {
+    selectColor(val) {
+      this.$store.commit('setState', {
+        colorFlag: val
+      });
+      localStorage.colorFlag = val;
+    },
+    selectFont(val) {
+      this.$store.commit('setState', {
+        fontFlag: val
+      });
+      localStorage.fontFlag = val;
+    },
+    isShow(val) {
+      if (this.status[val]) {
+        this.status[val] = false;
+        this.status.huanfu = false;
+        this.status.huanziti = false;
+      } else {
+        this.status.huanziti = false;
+        this.status.huanfu = false;
+        this.status[val] = !this.status[val];
+      }
+    },
+    handleChange(state) {
+      let $this = this;
+      $this.showNav = false;
+      $this.collapsed = !$this.collapsed;
+      setTimeout(() => {
+        $('#content').getNiceScroll().resize();
+      }, 300);
+      setTimeout(function () {
+        $this.showNav = true;
+      }, 200);
+
+    },
+    selectEvt(val) {
+      this.$store.commit('setState', {
+        menuState: val
+      });
+      sessionStorage.menuState = val;
+    },
+    //处理菜单数据
+    handleMenuData(data) {
+      let $this = this;
+      for (let i = 0; i < data.length; i++) {
+        if (location.hash.indexOf('oneThingSituationConfigInfos') > -1 && data[i].url.indexOf('oneCaseConfig') > -1) {
+          $this.$store.commit('setState', {
+            menuState: data[i].id
+          });
+          sessionStorage.menuState = data[i].id;
+
+          $this.$nextTick(() => {
+            $this.$refs.navMenu.update();
+          });
+          return false;
+        } else if (location.hash.indexOf('matterSituationConfigInfos') > -1 && data[i].url.indexOf('mattCaseConfig') > -1) {
+          $this.$store.commit('setState', {
+            menuState: data[i].id
+          });
+          sessionStorage.menuState = data[i].id;
+
+          $this.$nextTick(() => {
+            $this.$refs.navMenu.update();
+          });
+          return false;
+        } else if (data[i].url.indexOf(location.hash.substring(1, location.hash.length - 1)) > -1) {
+          $this.$store.commit('setState', {
+            menuState: data[i].id
+          });
+          sessionStorage.menuState = data[i].id;
+
+          $this.$nextTick(() => {
+            $this.$refs.navMenu.update();
+          });
+          return false;
+        }
+        if (data[i].items.length > 0) {
+          this.handleMenuData(data[i].items);
+        }
+        $this.$nextTick(() => {
+          $('#content').niceScroll({
+            cursorcolor: "#ccc",//#CC0071 光标颜色
+            cursoropacitymax: 1, //改变不透明度非常光标处于活动状态（scrollabar“可见”状态），范围从1到0
+            touchbehavior: false, //使光标拖动滚动像在台式电脑触摸设备
+            cursorwidth: "5px", //像素光标的宽度
+            cursorborder: "0", // 游标边框css定义
+            cursorborderradius: "5px",//以像素为光标边界半径
+            autohidemode: true //是否隐藏滚动条
+          });
+        });
+
+      }
+    },
+
+    getNavData() {
+      let $this = this;
+      util.ajaxObjPost($this.$store.state.userUrl + '/getNavData', {
+
+      }, function (res) {
+        let data = res.data.data.items,
+          openName = [];
+        for (let i = 0; i < data.length; i++) {
+          $this.openName.push(data[i].id);
+        }
+        // $this.openName = openName;
+        $this.navData = data;
+        $this.handleMenuData(data);
+
+        $this.$nextTick(() => {
+          $this.$refs.navMenu.update();
+        });
+      }, function (res) {
+
+      }, this);
+    },
+    getUserInfo() {
+      let $this = this;
+      util.ajaxObjPost($this.$store.state.userUrl + '/getUserInfo', {
+
+      }, function (res) {
+        $this.$store.commit('setState', {
+          loginName: res.data.loginName,
+          xzqhId: res.data.organization.xzqhId,
+          xzqhName: res.data.organization.name,
+          userId: res.data.user.id
+        });
+      }, function (res) {
+      }, this);
+    },
+    logIn() {     //登录
+      window.location.href = location.origin + this.$store.state.userUrl + '/';
+    },
+    logout() {
+      window.location.href = this.$store.state.contentPath + this.$store.state.userUrl + '/logout';
+    }
+  },
+
+  mounted() {
+    let $this = this;
+    if (this.isNew) {  //判断是否打开新页面，隐藏导航栏
+      $this.wrapperHeight = document.documentElement.clientHeight - 60 - 42;
+      window.onresize = () => {
+        $this.wrapperHeight = document.documentElement.clientHeight - 60 - 42;
+      }
+    } else {
+      $this.wrapperHeight = document.documentElement.clientHeight;
+      window.onresize = () => {
+        $this.wrapperHeight = document.documentElement.clientHeight;
+      }
+    }
+  },
+  created() {
+    let $this = this;
+    this.getUserInfo();
+    this.getNavData();
+    if (
+      '-ms-scroll-limit' in document.documentElement.style &&
+      '-ms-ime-align' in document.documentElement.style
+    ) { // detect it's IE11
+      window.addEventListener("hashchange", function (event) {
+        var currentPath = window.location.hash.slice(1);
+        $this.$router.push(currentPath)
+      }, false)
+    }
+  }
+}
+</script>
+
+<style lang="less">
+@import "./assets/styles/color.less";
+/* 表格 更多 下拉框样式修改 */
+.el-dropdown-menu li {
+    padding: 0;
+}
+.el-dropdown-menu .el-button--text {
+    padding: 0 20px;
+    width: 100%;
+    line-height: 36px;
+    text-align: left;
+}
+// 停用成功提示框
+.el-message__content {
+    display: inline-block;
+}
+
+.layout {
+    height: 100%;
+    width: 100%;
+    & > .ivu-layout {
+        display: block;
+        height: 100%;
+        width: 100%;
+
+        .ivu-layout-sider {
+            float: left;
+            height: 100%;
+            height: calc(~"100% - 60px") !important;
+            .ivu-layout-sider-children {
+                border-right: 1px solid @optBorderColor;
+            }
+        }
+
+        .iframe-main {
+            display: block;
+            overflow: auto;
+            height: 100%;
+
+            .iframe-content {
+                #app {
+                    position: relative;
+                    overflow: hidden;
+                    height: 100%;
+                    width: 100%;
+                    background: #eef1f7;
+                }
+            }
+        }
+
+        .opt-bottom {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 40px;
+            line-height: 40px;
+            background: @optBgColor;
+            border-top: 1px solid @optBorderColor;
+            cursor: pointer;
+            .huanziti {
+                position: relative;
+                height: 100%;
+                width: 85px;
+                text-align: center;
+                box-sizing: border-box;
+                border-right: 1px solid @optBorderColor;
+                i {
+                    font-size: 20px;
+                }
+                .huanziti-font {
+                    padding: 0 20px;
+                    position: absolute;
+                    bottom: 45px;
+                    left: 7px;
+                    width: 180px;
+                    height: 45px;
+                    background: url(./assets/images/common/huanziti-font.png)
+                        no-repeat;
+                    background-size: 100% auto;
+                    text-align: left;
+                    z-index: 999;
+                    span {
+                        margin-right: 20px;
+                        line-height: 36px;
+                        cursor: pointer;
+                        &.select {
+                            color: #2d8cf0;
+                        }
+                        &.big {
+                            font-size: 16px;
+                        }
+                        &.normal {
+                            font-size: 14px;
+                        }
+                    }
+                }
+                .huanfu-logo {
+                    padding: 0 30px;
+                    position: absolute;
+                    bottom: 49px;
+                    left: -75px;
+                    width: 180px;
+                    height: 45px;
+                    background: url(./assets/images/common/huanfu-logo.png)
+                        no-repeat;
+                    background-size: 100% auto;
+                    text-align: left;
+                    z-index: 999;
+                    span {
+                        position: relative;
+                        display: inline-block;
+                        margin-right: 15px;
+                        width: 21px;
+                        height: 14px;
+                        border-radius: 3px;
+                        cursor: pointer;
+                        line-height: 36px;
+                        .huanfu-select {
+                            position: absolute;
+                            bottom: -6px;
+                            right: -29px;
+                            display: none;
+                            background: url(./assets/images/common/huanfu-select.png)
+                                no-repeat;
+                        }
+                        &.select {
+                            .huanfu-select {
+                                display: block;
+                            }
+                        }
+                        &.light {
+                            background: #2d8cf0;
+                        }
+                        &.dark {
+                            background: #71798b;
+                        }
+                    }
+                }
+            }
+            .shouqi {
+                width: 29px;
+                box-sizing: border-box;
+                text-align: center;
+            }
+            .zhankai {
+                width: 100%;
+                box-sizing: border-box;
+                text-align: center;
+                i {
+                    font-size: 23px;
+                }
+            }
+        }
+    }
+}
+</style>

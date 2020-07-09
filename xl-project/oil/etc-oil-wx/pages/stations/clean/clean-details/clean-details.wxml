@@ -1,0 +1,158 @@
+<!--pages/stations/clean-details/clean-details.wxml-->
+<view class="clean-details-container">
+    <!--洗车机背景图-->
+    <image class="clean-details-image"  src="{{details.photo_url||icon_default_wash}}"></image>
+    <!--洗车机详情-->
+    <view class="clean-details-box">
+        <view class="clean-details-info card-box">
+            <view class="clean-details-info-top">
+                <text class="clean-details-name">{{details.washer_name}}</text>
+            </view>
+            <!--洗车机地址-->
+            <view class="clean-details-address">
+                <text class="clean-details-address-text">{{details.washer_address}}</text>
+                <view class="clean-details-navigation" >
+                    <text class="station-details-distance">{{details.distance_meter}}km</text>
+                    <image class="clean-details-navigation-logo" bind:tap="onNavigationClick" src="/assets/static/station-item-navigation.png"></image>
+                    <image class="clean-details-navigation-logo" bindtap='callClick' src="https://oss.etcsd.com/object/357eebe45a834bedbba22ba399717fca"></image>
+                </view>
+            </view>
+            <!--洗车机价钱状态-->
+            <view class="clean-item-box-bottom">
+                <view class="clean-item-box-bottom-left">
+                    <view class="clean-item-price-box">
+                        <text class="clean-item-price-marker">￥</text>
+                        <text class="clean-item-price-money">{{details.washer_price}}</text>
+                        <text class="clean-item-price-marker">/次</text>
+                    </view>
+                    <view class="clean-item-status-box">
+                        <image class="clean-item-status-image" src="{{details.washer_status=='2'?'/assets/static/clean-status-doing.png':details.washer_status=='3'?'/assets/static/clean-un-used.png':'/assets/static/clean-used.png'}}"></image>
+                        <text class="clean-item-status-text">{{details.washer_status=='2'?'使用中':details.washer_status=='3'?'维护中':'空闲'}}</text>
+                    </view>
+                </view>
+<!--                <view class="clean-item-box-bottom-right" bind:tap="onRefreshClick">-->
+<!--                    <text class="clean-item-price-marker">刷新</text>-->
+<!--                    <image class="clean-item-status-image-refresh" src="https://oss.etcsd.com/object/d8048ebb9b1b4a4fa1e7d61d461bd426"></image>-->
+<!--                </view>-->
+            </view>
+            <view class="clean-item-stop-box" wx:if="{{details.free_parking_min}}">
+                <div class="clean-details-stop-bg">停车场</div>
+                <text class="clean-details-stop">{{details.free_parking_min}}分钟免费停车</text>
+            </view>
+        </view>
+    </view>
+<!--    //洗车活动临时隐藏-->
+<!--    <view class="clean-share-activity-box">热门活动</view>-->
+<!--    <view class="clean-share-container">-->
+<!--            <view class="clean-share-container-box" bind:tap="goBuyClick">-->
+<!--                <view class="clean-share-box-left-item">-->
+<!--                    <view class="clean-share-box-left-texts">-->
+<!--                        <text>购券洗车</text>-->
+<!--                        <text style="color: #f87117">9.9元</text>-->
+<!--                        <text>起</text>-->
+<!--                    </view>-->
+<!--                    <view class="clean-share-box-left-btns">-->
+<!--                        <text>去抢券></text>-->
+<!--                    </view>-->
+<!--                </view>-->
+<!--                <image class="clean-share-box-right-icon" src="/assets/static/mine-banner-package.png"></image>-->
+<!--            </view>-->
+<!--    </view>-->
+    <!--一键洗车-->
+    <view class="clean-details-btns" style="padding-bottom: {{isIphoneX?64:24}}rpx">
+<!--        <login-status bind:click="onCleanClick" openid="{{openid}}">-->
+            <view class="clean-details-btn-item theme-button right-theme" bind:tap="onCleanClick" > 一键洗车 </view>
+<!--        </login-status>-->
+    </view>
+    <modal-super show="{{isShowFar}}">
+        <view class="fast-oil-far-container">
+            <text class="fast-oil-far-name">{{details.washer_name}}</text>
+            <text class="fast-oil-far-hint">当前位置距离洗车机过远</text>
+            <view class="fast-oil-far-btns">
+<!--                <text class="fast-oil-far-go" bind:tap="onContinuePay">继续支付</text>-->
+                <text class="theme-button fast-oil-far-return" bind:tap="onReSelect">重选洗车机</text>
+            </view>
+        </view>
+    </modal-super>
+    <modal-super show="{{isFistShow}}">
+        <view class="clean-no-support-container">
+            <view style="margin: 30rpx">
+                <view class="clean-no-support-title-box">
+                    <view class="clean-no-support-title-line"></view>
+                    <text class="clean-no-support-title-text">服务车型说明</text>
+                </view>
+            </view>
+            <text class="clean-no-support-text">1.以下车型或加特殊物件车辆，容易清洗损坏，请不要清洗！</text>
+            <view class="clean-no-support-image-row">
+                <view class="clean-no-support-image-items">
+                    <image class="clean-no-support-image-1" src="https://oss.etcsd.com/object/a13307520c114f878f438aa6ef89cc64"></image>
+                    <text class="clean-no-support-image-text">车顶行李箱</text>
+                </view>
+                <view class="clean-no-support-image-items">
+                    <image class="clean-no-support-image-1" src="https://oss.etcsd.com/object/59b910d088a940c4aafd748c9d5e990a"></image>
+                    <text class="clean-no-support-image-text">尾翼/后备胎</text>
+                </view>
+            </view>
+            <view class="clean-no-support-image-row">
+                <view class="clean-no-support-image-items">
+                    <image class="clean-no-support-image-1" src="https://oss.etcsd.com/object/9c5aa74dfdd14b91af117bfd5bedb7f4"></image>
+                    <text class="clean-no-support-image-text">拖车钩</text>
+                </view>
+                <view class="clean-no-support-image-items">
+                    <image class="clean-no-support-image-1" src="https://oss.etcsd.com/object/93083f313c31436999446594171cf146"></image>
+                    <text class="clean-no-support-image-text">皮卡车</text>
+                </view>
+            </view>
+            <view class="clean-no-support-text-row">
+                <text class="clean-no-support-text">2.车辆尺寸限制:</text>
+<!--                <text class="clean-no-support-text">高度小于2.0m</text>-->
+                <view class="clean-no-support-text-items">
+                    <text class="clean-no-support-text-m">高度 小于 2.0m</text>
+                    <text class="clean-no-support-text-m">宽度 小于 2.0m</text>
+                </view>
+            </view>
+            <view class="fast-oil-far-btns">
+                <text class="theme-button clean-no-support-btn-item" bind:tap="onHideFirst">确 定</text>
+            </view>
+        </view>
+    </modal-super>
+</view>
+
+
+
+<!--一洗车模式-->
+<!--    <view class="clean-model-box">-->
+<!--        <view class="clean-model-box-top">-->
+<!--            <text class="clean-model-title">洗车模式</text>-->
+<!--            <view class="clean-model-sub-title">-->
+<!--                <text class="clean-model-title-hint">模式说明</text>-->
+<!--                <icon type="info" color="#d4d4d4" size="30rpx"></icon>-->
+<!--            </view>-->
+<!--        </view>-->
+<!--        <view class="clean-model-box-top">-->
+<!--            <view class="clean-model-bottom-left">-->
+<!--                <image class="clean-model-bottom-icon"></image>-->
+<!--                <text class="clean-model-bottom-text">家用车模式</text>-->
+<!--            </view>-->
+<!--            <view class="clean-model-bottom-right">-->
+<!--                <image class="clean-model-bottom-icon"></image>-->
+<!--                <text class="clean-model-bottom-text">出租车模式</text>-->
+<!--            </view>-->
+<!--        </view>-->
+<!--    </view>-->
+<!--一分享好友-->
+<!--    <view class="clean-share-box">-->
+<!--        <view class="clean-share-box-left">-->
+<!--            <text class="clean-share-box-left-text">邀请好友免费洗车</text>-->
+<!--            <text class="clean-share-box-left-sub">分享齐得洗车卡</text>-->
+<!--        </view>-->
+<!--        <image class="clean-share-box-img"></image>-->
+<!--    </view>-->
+<!--    <view class="clean-share-box">-->
+<!--        <view class="clean-share-box-left">-->
+<!--            <text class="clean-share-box-left-text">邀请好友免费洗车</text>-->
+<!--            <text class="clean-share-box-left-sub">分享齐得洗车卡</text>-->
+<!--        </view>-->
+<!--        <image class="clean-share-box-img" src="https://oss.etcsd.com/object/1ff4a3b552b8433e9a034b6a94470882"></image>-->
+<!--        <button class="clean-share-service-btn" open-type="share"></button>-->
+<!--    </view>-->

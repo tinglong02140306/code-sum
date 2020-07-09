@@ -1,0 +1,39 @@
+.wrap {
+	position: relative;
+	height: 100%;
+	background: #fff;
+}
+.main-wrap {
+	position: absolute;
+	/* top: 2.1rem; */
+	bottom: 0;
+	width: 100%;
+}
+.img-content {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 9rem;
+	
+}
+.img-content img {
+	height: 4.7rem;
+}
+.fail-tip {
+	font-size: .6rem;
+	text-align: center;
+}
+.pay-btn-content {
+	text-align: center;
+}
+.pay-btn {
+	display:inline-block;
+	margin-top: 2.0rem;
+    width: 50%;
+	height: 1.78rem;
+	font-size: 0.53rem;
+	color: #4c72ff;
+	line-height: 1.78rem;
+	border: 1px solid #4c72ff;
+	border-radius: 0.22rem;
+}

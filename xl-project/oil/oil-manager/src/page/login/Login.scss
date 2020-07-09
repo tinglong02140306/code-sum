@@ -1,0 +1,81 @@
+$input-width:250px;
+
+.login-div{
+  background: url("./image/sdhs.jpg");
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-size: 100% 100%;
+  //justify-content: flex-end;
+  //padding-right: 250px;
+}
+
+.login-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  border-radius: 10px;
+  width: 350px;
+  height: 450px;
+  margin-top: 120px;
+  justify-content: center;
+  img{
+    margin-bottom: 20px;
+  }
+  a{
+    font-size: 18px;
+    color: white;
+    margin: 10px 0px 10px;
+  }
+  div{
+    color: red;
+    font-size: 10px;
+    width: $input-width;
+    padding: 2px;
+  }
+}
+
+.login-container-input{
+  width:$input-width;
+  height: 40px;
+}
+
+.identify-box{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.identify-input{
+  width: 140px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.login-check-container{
+  display: flex;
+  flex-direction: row;
+  width: $input-width;
+  margin: 0;
+  padding: 0;
+}
+
+.login-check-box{
+  span{
+    color: black;
+    font-size: 10px;
+  }
+}
+
+.login-button{
+  width: 250px;
+  height: 40px;
+  margin: 15px 0;
+  span{
+    color: white;
+  }
+}

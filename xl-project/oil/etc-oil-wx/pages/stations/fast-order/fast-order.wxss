@@ -1,0 +1,295 @@
+/* pages/station/fast-order/fast-order.wxss */
+page{
+    width: 100%;
+    height: auto;
+}
+
+.fast-order-box{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    background-color: #f8f8f8;
+}
+
+.fast-order-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    background-color: #f8f8f8;
+    overflow: hidden;
+    position: relative;
+}
+
+.fast-order-info-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    position: relative;
+    left: 0;
+    top: 0;
+    padding-bottom: 180rpx;
+}
+
+.fast-order-info-background{
+    width: 100%;
+    height: 200rpx;
+    position: relative;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+}
+
+.fast-order-info-background::after{
+    content: '';
+    width: 140%;
+    height: 200rpx;
+    position: absolute;
+    left: -20%;
+    top: 0;
+    background-color: #00A170;
+    border-radius: 0 0 50% 50%;
+}
+
+.fast-order-info-box{
+    position: absolute;
+    top: 24rpx;
+    left: 20rpx;
+    width: 710rpx;
+    background-color: white;
+    border-radius: 12rpx;
+    box-shadow: 0 4rpx 20rpx 0 rgba(0, 0, 0, .05);
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 30rpx 0rpx;
+}
+
+.fast-order-info-items{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.fast-order-info-hint-text{
+    left: 50rpx;
+    top: 278rpx;
+    height: 37rpx;
+    color: rgba(0, 0, 0, 0.45);
+    font-size: 26rpx;
+    text-align: left;
+    font-family: PingFangSC-Regular;
+    margin: 15rpx 30rpx;
+}
+
+.fast-order-info-data-text{
+    height: 37rpx;
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 26rpx;
+    text-align: right;
+    font-family: PingFangSC-Medium;
+    margin: 15rpx 30rpx;
+}
+
+.fast-order-discounts-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    left: 0;
+    top: 0;
+    z-index: 100;
+}
+
+.fast-order-discounts-box{
+    /*top: 10rpx;*/
+    left: 20rpx;
+    width: 710rpx;
+    height: 277rpx;
+    border-radius: 12rpx;
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: 0rpx 4rpx 20rpx 0rpx rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    align-items: center;
+    padding-top: 20rpx;
+    padding-bottom: 20rpx;
+}
+
+.fast-order-info-items-line{
+    left: 50rpx;
+    top: 737.5rpx;
+    width: 650rpx;
+    height: 2rpx;
+    background-color: rgba(0, 0, 0, 0.1);
+    margin: 15rpx 30rpx;
+}
+
+/*.fast-order-discounts-container{*/
+/*    width: 100%;*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    align-items: center;*/
+/*    box-sizing: border-box;*/
+/*    left: 0;*/
+/*    top: 0;*/
+/*    z-index: 100;*/
+/*}*/
+
+/*.fast-order-discounts-box{*/
+/*    left: 20rpx;*/
+/*    width: 710rpx;*/
+/*    height: 277rpx;*/
+/*    border-radius: 12rpx;*/
+/*    background-color: rgba(255, 255, 255, 1);*/
+/*    box-shadow: 0rpx 4rpx 20rpx 0rpx rgba(0, 0, 0, 0.05);*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    box-sizing: border-box;*/
+/*    align-items: center;*/
+/*    padding-top: 20rpx;*/
+/*    padding-bottom: 20rpx;*/
+/*}*/
+
+.fast-order-info-items-line{
+    left: 50rpx;
+    top: 737.5rpx;
+    width: 650rpx;
+    height: 2rpx;
+    background-color: rgba(0, 0, 0, 0.1);
+    margin: 15rpx 30rpx;
+}
+
+.fast-order-coupon-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    left: 0;
+    top: 0;
+    padding-top: 20rpx;
+    z-index: 100;
+}
+
+.fast-order-coupon-box{
+    left: 20rpx;
+    width: 710rpx;
+    height: 101rpx;
+    border-radius: 12rpx;
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: 0rpx 4rpx 20rpx 0rpx rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding-top: 20rpx;
+}
+
+.fast-order-confirm-box{
+    width: 750rpx;
+    padding: 30rpx 32rpx;
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: 0rpx -4rpx 20rpx 0rpx rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    position: fixed;
+    bottom: 0px;
+}
+
+.fast-order-confirm-hint{
+    width: 112rpx;
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 28rpx;
+}
+
+.fast-order-confirm-money-box{
+    flex: 1;
+    max-height: 52rpx;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    box-sizing: border-box;
+}
+
+.fast-order-confirm-mark{
+    color: rgba(5, 186, 125, 1);
+    font-size: 24rpx;
+    align-self: flex-end;
+    padding-bottom: 4rpx;
+}
+
+.fast-order-confirm-money{
+    color: rgba(5, 186, 125, 1);
+    font-size: 40rpx;
+    font-weight: 500;
+}
+
+.fast-order-confirm-button{
+    width: 320rpx;
+    height: 90rpx;
+    line-height: 90rpx;
+    text-align: center;
+    font-size: 32rpx;
+}
+
+
+.fast-order-preferent-container{
+    width: 100%;
+    height: 870rpx;
+    background-color: #f8f8f8;
+    border-top-left-radius: 32rpx;
+    border-top-right-radius: 32rpx;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.fast-order-preferent-header{
+    width: 100%;
+    height: 140rpx;
+    padding: 0 32rpx;
+    background-color: white;
+    border-top-left-radius: 32rpx;
+    border-top-right-radius: 32rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.fast-order-preferent-header-text{
+    font-size: 36rpx;
+    color: rgba(0, 0, 0, .85);
+    font-weight: 500;
+}
+
+.fast-order-preferent-header-image{
+    width: 32rpx;
+    height: 32rpx;
+}
+
+.fast-order-preferent-list{
+    width: 100%;
+    height: 750rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20rpx;
+    background-color: #f8f8f8;
+    box-sizing: border-box;
+}

@@ -1,0 +1,27 @@
+//.oil-price-table{
+//  width: 100%;
+//  background-color: white;
+//}
+.oil-price-table-container{
+  width: 100%;
+  box-sizing: border-box;
+  padding: 16px;
+  background-color: #f7f7f7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.oil-price-table{
+  width: 100%;
+  background-color: white;
+  box-sizing: border-box;
+  table{
+    thead{
+      th{
+        font-weight: 600;
+        letter-spacing: 1px;
+      }
+    }
+  }
+}

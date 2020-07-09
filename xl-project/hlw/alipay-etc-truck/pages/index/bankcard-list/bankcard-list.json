@@ -1,0 +1,8 @@
+{
+	"usingComponents": {
+		"am-icon": "mini-antui/es/am-icon/index",
+		"steps": "mini-antui/es/steps/index",
+		"ant-skeleton": "../../../components/skeleton/skeleton"
+	},
+	"defaultTitle": "银行服务开通"
+}

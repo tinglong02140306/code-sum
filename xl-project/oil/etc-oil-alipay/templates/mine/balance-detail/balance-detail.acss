@@ -1,0 +1,82 @@
+.balance-detail-box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /*justify-content: space-around;*/
+    background-color: #ffffff;
+    box-sizing: border-box;
+    padding: 0;
+}
+
+.balance-detail-image {
+    width: 67rpx;
+    height: 67rpx;
+    margin: 38rpx 30rpx 38rpx 30rpx;
+}
+
+.balance-detail-right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    margin-left: 30rpx;
+    width: 600rpx;
+}
+
+.balance-detail-title-top {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    margin-top: 30rpx;
+    margin-right: 30rpx;
+    margin-bottom: 30rpx;
+    /*margin: 30rpx;*/
+}
+
+.balance-detail-title-bottom {
+    /*width: 160rpx;*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    margin-right: 30rpx;
+    /*margin-bottom: 30rpx;*/
+}
+
+.balance-detail-title-bottom text {
+    line-height: 40rpx;
+}
+
+.balance-detail-title-text {
+    color: rgba(51, 51, 51, 1);
+    font-size: 30rpx;
+    text-align: left;
+    font-family: PingFang-SC-Medium;
+}
+
+.balance-detail-amount {
+    width: 100%;
+    font-size: 32rpx;
+    text-align: right;
+    font-family: DINAlternate-Bold;
+}
+
+.balance-detail-title-sub {
+    width: 100%;
+    color: rgba(170, 170, 170, 1);
+    font-size: 26rpx;
+    text-align: right;
+    font-family: PingFang-SC-Medium;
+}
+
+.balance-detail-line {
+    margin-bottom: 0;
+    width: 630rpx;
+    height: 2rpx;
+    background-color: rgba(242, 242, 242, 1);
+}

@@ -1,0 +1,167 @@
+/* ========添加车辆-详情页======== start */
+.corange {
+    color: #f19b4f;
+}
+.record-detail-wrap .btn-delete {
+    position: absolute;
+    top: 0;
+    right: 4.2%;
+    width: 2.0rem;
+    line-height: 2.1rem;
+}
+
+.record-detail-content {
+    padding: 2.7rem 4.2% 0;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 91.6%;
+    /* height: calc(100% - 2.1rem); */
+}
+
+.record-detail-item {
+    border-radius: 0.22rem;
+}
+
+.record-detail-items {
+    padding: 0 3.6%;
+    margin-top: 0.68rem;
+    border-radius: 0.44rem;
+}
+
+.record-detail-items .time {
+    padding: 0.44rem 0;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.fine-socre-status span {
+    display: inline-block;
+    height: 1.06rem;
+    line-height: 1.06rem;
+}
+
+.warn-loc {
+    padding: 0.22rem 0;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.warn-loc p {
+    padding: 0.22rem 0;
+}
+
+.warn-icon {
+    display: inline-block;
+    width: 0.72rem;
+    height: 0.72rem;
+    background: url(../img/service-hall/icon-warn.png) no-repeat left center;
+    background-size: 100%;
+}
+
+.location-icon {
+    display: inline-block;
+    width: 0.54rem;
+    height: 0.72rem;
+    background: url(../img/service-hall/icon-location.png) no-repeat left center;
+    background-size: 100%;
+}
+
+.warn-txt,
+.location-txt {
+    position: relative;
+    top: -0.1rem;
+    padding-left: 0.34rem;
+}
+
+.fine-socre-status {
+    padding: 0.68rem 0;
+    line-height: 1.06rem;
+}
+
+.fine-socre-status .fines,
+.fine-socre-status .scores {
+    width: 24.6%;
+    height: 1.06rem;
+    line-height: 1.06rem;
+}
+
+
+/*处理状态*/
+
+.btn-status {
+    margin-right: 0.0rem;
+    width: 2.44rem;
+    height: 1.02rem;
+    border: 1px solid #ff5722;
+    border-radius: 0.22rem;
+    color: #ff5722;
+    line-height: 1.02rem;
+}
+
+.pl15 {
+    padding-left: 0.34rem;
+}
+
+/* 车辆信息删除提示框样式 */
+.mark {
+    position: fixed;
+    display: none;
+    top: 0;
+    z-index: 15;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .3);
+}
+
+.quit {
+    position: absolute;
+    top: calc(50% - 2.96rem);
+    left: 10%;
+    width: 80%;
+    height: 5.92rem;
+    background: #fff;
+    border-radius: 0.22rem;
+}
+
+.quit-notice {
+    padding-top: 0.68rem;
+    border-bottom: 1px solid #eaeaea;
+    height: 3.2rem;
+}
+
+.quit-notice p {
+    padding: 0.2rem 0;
+    text-align: center;
+}
+
+.quit .quit-btn {
+    display: flex;
+    height: 2.0rem;
+    line-height: 2.0rem; 
+}
+
+.quit .quit-btn span:nth-child(1) {
+    border-right: 1px solid #eaeaea;
+}
+
+.quit .quit-btn span {
+    flex: 1;
+    text-align: center;
+}
+/* ========添加车辆-详情页======== end */
+
+
+/*========没有违章记录 start======*/
+.empty-record .empty-ad {
+    height: 10rem;
+    background: url(./public/wcportal/0.0.1/img/service-hall/no-illeage-detail.png) no-repeat center bottom;
+    background-size:  4.46rem 4.86rem;
+   
+}
+.empty p {
+    line-height: 1.56rem;
+}
+.empty-data .empty-ad {
+    height: 10rem;
+    background: url(./public/wcportal/0.0.1/img/service-hall/search-emptys.png) no-repeat center bottom;
+    background-size: 3.92rem 4.56rem;
+}
+/*========没有违章记录 end======*/

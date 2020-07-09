@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <base href="../../../../" >
+    <meta charset="UTF-8">
+    <!-- 添加到主屏幕后，全屏显示 -->
+    <meta name="apple-touch-fullscreen" content="YES"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <!-- iphone 运行在全屏模式 -->
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="viewport" content="width=device-width"/>
+    <title>办事分类列表</title>
+    <link rel="stylesheet" type="text/css" href="../lib/mescroll/mescroll.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/base.css?__inline" />
+    <link rel="stylesheet" type="text/css" href="../css/all.css?__inline" />
+     <link rel="stylesheet" type="text/css" href="../css/service-classification-list.css?__inline" />
+</head>
+
+<body>
+    <div class="wrap service-list-wrap">
+        <!-- 头部 start -->
+        <!-- <header >
+            <div class="header-item topic-bg">
+                <a class="header-back back" data-bind="click: back" href="javascript:void(0)"></a>
+                <span class="ell page-title"></span>
+            </div>
+             
+        </header> -->
+        <!-- 头部 end -->
+        <!-- 查询资讯结果 start -->
+        <div id="wrapper" class="result-wrapper mescroll">
+           <!-- 搜索框 start-->
+            <div class="search clearfix">
+                <div id="areaName" class="area-name ell tc c3" ></div>
+                <div class="search-input">
+                    <a href="javascript:void(0)" class="fl interval"></a>
+                    <a href="javascript:void(0)" class="fl btn-search"></a>
+                    <input id="target" type="text" placeholder="" class="fl f26 c3" >
+                    <label class="f26 c9" data-flag="1">搜索</label>
+                    <a href="javascript:void(0)" class="btn-delete fl hide" data-bind="click: clearClickEvent"></a>
+                </div>  
+            </div>
+            <!-- 搜索框 end-->
+            <div  class="result-veiw">
+                <ul  class="matter-result" >
+                   <!--  <li >
+                       <a class="list-wrap clearfix">
+                            <span class="handle fl">可办理</span>
+                            <span class="matter-name ell fl">sssss</span>
+                            <span class="arrow fr"></span>
+                       </a>
+                    </li> -->
+                </ul>
+                <div class="no-line hide">网络无法连接，请检查您的网络</div>
+            </div>
+
+            <div class="empty hide">
+                <div class="empty-ad"></div>
+                <p>未搜索到相关内容</p>
+            </div>
+        </div>
+    </div>
+   <!-- 列表数据 -->
+    <script id="resultTempl" type="text/html">
+        {{each $data as item index}}
+        <li data-index="{{index}}" data-url="{{item.deatilUrl}}" data-id="{{item.id}}" data-pid="{{item.projectId}}" data-type="{{item.projectYwType}}" data-projectname="{{item.projectName}}" data-tertype="{{item.terminalType}}">
+           <a class="list-wrap clearfix">
+                {{if item.projectYwType ==='1'}}
+                    <span class="handle fl">可办理</span>
+                {{else if item.projectYwType === '2'}}
+                    <span class="searchs fl">查询</span>
+                {{else if item.projectYwType === '3'}}
+                    <span class="guide fl">指南</span>
+                {{/if}}
+                <span class="matter-name ell fl" title="{{item.projectName}}">{{item.projectName}}</span>
+                <span class="arrow fr"></span>
+           </a>
+        </li>
+       {{/each}}
+    </script>
+
+    <script>
+        var CONFIG = {
+            path: './public/wcportal/0.0.1/'
+        };
+    </script>
+<script src="../lib/jquery/jquery-1.8.2.min.js"></script>
+<script src="../lib/croods/croods-1.3.1.min.js"></script>
+<script src="../lib/jquery.lazyload.min.js"></script>
+<script src="../lib/mescroll/mescroll.min.js"></script>
+<script src="../lib/fly/fly.js"></script>
+<script src="../app/service-classification-list.js?__inline"></script>
+</body>
+</html>

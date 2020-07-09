@@ -1,0 +1,29 @@
+<!--pages/stations/clean/clean-doing/clean-doing.wxml-->
+<navigation-bar>
+    <view class="back-box" background_style="background-color:#EDEDED" bind:tap="onBackClick">
+        <image class="back-image" src="/assets/static/back.png"></image>
+        <view class="navigation-title">洗车中</view>
+        <image class="back-image"></image>
+    </view>
+</navigation-bar>
+
+<view class="clean-doing-container">
+    <text class="clean-doing-time-text">{{hours>0?hours+':':''}}{{minute}}:{{second}}</text>
+    <view class="clean-doing-icon-box">
+        <image class="clean-doing-icon-bg" src="/assets/static/clean-doing-bg.png"></image>
+        <image class="clean-doing-icon-line" style="top:{{rangeHeight}}" animation="{{animationData}}" src="/assets/static/clean-doing-line.png"></image>
+    </view>
+    <text class="clean-doing-hint-text">非常紧急的情况下，不要触碰紧急停车按钮，复位请重新付费使用！</text>
+    <view class="clean-doing-btn" >
+        <view class="clean-doing-btn-item theme-button" bind:tap="onConfirmClick"> {{isFinish?'洗车停止':'紧急停止'}} </view>
+    </view>
+<!--    暂时没有活动-->
+<!--    <view class="clean-share-box">-->
+<!--        <view class="clean-share-box-left">-->
+<!--            <text class="clean-share-box-left-text">邀请好友免费洗车</text>-->
+<!--            <text class="clean-share-box-left-sub">分享齐得洗车卡</text>-->
+<!--        </view>-->
+<!--        <image class="clean-share-box-img" src="https://oss.etcsd.com/object/1ff4a3b552b8433e9a034b6a94470882"></image>-->
+<!--        <button class="clean-share-service-btn" open-type="share"></button>-->
+<!--    </view>-->
+</view>

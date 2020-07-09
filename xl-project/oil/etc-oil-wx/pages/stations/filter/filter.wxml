@@ -1,0 +1,47 @@
+<!--
+ * @Author: sunmingmao
+ * @Date: 2020-04-07 15:07:25
+ * @LastEditors: sunmingmao
+ * @LastEditTime: 2020-04-17 16:08:41
+ * @Description: 条件筛选页面
+ -->
+ <view class="station-filter-container">
+     <!--油号-->
+     <view class="station-filter-box">
+        <text class="station-filter-title">支持油品</text>
+        <view class="station-filter-content-box">
+            <text class="station-filter-content-title">汽油</text>
+            <view class="station-filter-content">
+                <block wx:for="{{oil_gas}}" wx:key="filter">
+                    <view class="station-filter-content-item" bind:tap="onOilNoClick" data-item="{{item.id}}">
+                        <text class="station-filter-content-item-text {{select_oil_no==item.title?'check':'uncheck'}}">{{item.title}}</text>
+                    </view>
+                </block>
+            </view>
+        </view>
+        <view class="station-filter-content-box">
+            <text class="station-filter-content-title">柴油</text>
+            <view class="station-filter-content">
+                <block wx:for="{{oil_diesel}}" wx:key="filter">
+                    <view class="station-filter-content-item" bind:tap="onOilNoClick" data-item="{{item.id}}">
+                        <text class="station-filter-content-item-text {{select_oil_no==item.id?'check':'uncheck'}}">{{item.title}}</text>
+                    </view>
+                </block>
+            </view>
+        </view>
+     </view>
+      <!--品牌-->
+      <view class="station-filter-box">
+        <text class="station-filter-title">加油站品牌</text>
+        <view class="station-filter-content">
+            <block wx:for="{{brands}}" wx:key="filter">
+                <view class="station-filter-content-item" bind:tap="onBrandClick" data-item="{{index}}">
+                    <text class="station-filter-content-item-text {{select_brand==item.id?'check':'uncheck'}}">{{item.title}}</text>
+                </view>
+            </block>
+        </view>
+     </view>
+     <view class="station-filter-finish" style="padding-bottom: {{isIphoneX?64:20}}rpx;">
+         <view class="station-filter-finish-btn theme-button" bind:tap="onFinishClick">完成</view>
+    </view>
+ </view>

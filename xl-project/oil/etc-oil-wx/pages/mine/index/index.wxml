@@ -1,0 +1,61 @@
+
+<view class="mine-container">
+    <view class="mine-header-container card-box">
+        <!--用户信息 登录注册-->
+        <view class="mine-info-box">
+            <view class="head-image-box">
+                <open-data wx:if="{{openid}}" class="head-image" type="userAvatarUrl" mode="cover"></open-data>
+                <image wx:if="{{!openid}}" class="head-image" src="{{icon_default_head}}"></image>
+            </view>
+            <open-data wx:if="{{openid}}" class="nick-name" type="userNickName"></open-data>
+            <text wx:if="{{!openid}}" class="nick-name">未登录</text>
+            <login-status openid="{{openid}}" bind:click="onChangeUserClick">
+                <text class="mine-login-btn theme-button">{{openid?'切换账号':'注册/登录'}}</text>
+            </login-status>
+        </view>
+        <!--navigation-->
+        <view class="mine-business">
+            <login-status openid="{{openid}}" bind:click="onCouponsClick">
+                <view class="mine-business-item">
+                    <image class="mine-business-item1" src="{{icon_coupons}}" alt=""></image>
+                    <text class="business-text">优惠券</text>
+                </view>
+            </login-status>
+            <login-status openid="{{openid}}" bind:click="onCargoClick">
+                <view class="mine-business-item">
+                    <image class="mine-business-item2" src="{{icon_gold}}" alt=""></image>
+                    <text class="business-text">加油金</text>
+                </view>
+            </login-status>
+            <login-status openid="{{openid}}" bind:click="onCardClick">
+                <view class="mine-business-item">
+                    <image class="mine-business-item3" src="{{icon_etc}}" alt=""></image>
+                    <text class="business-text">ETC卡</text>
+                </view>
+            </login-status>
+        </view>
+    </view>
+    <view class="mine-list-container card-box">
+        <login-status openid="{{openid}}" bind:click="onOrdersClick">
+            <view class="mine-list-item-box">
+                <image class="mine-list-item-icon" src="{{icon_orders}}"></image>
+                <text class="mine-list-item-text">我的订单</text>
+                <image class="mine-list-item-right" src="{{icon_next}}"></image>
+            </view>
+        </login-status>
+        <login-status openid="{{openid}}" bind:click="onPaysClick">
+            <view class="mine-list-item-box">
+                <image class="mine-list-item-icon" src="{{icon_pays}}"></image>
+                <text class="mine-list-item-text">支付管理</text>
+                <image class="mine-list-item-right" src="{{icon_next}}"></image>
+            </view>
+        </login-status>
+        <login-status openid="{{openid}}" bind:click="onInvoicesClick">
+            <view class="mine-list-item-box no-border">
+                <image class="mine-list-item-icon" src="{{icon_invoices}}"></image>
+                <text class="mine-list-item-text">发票管理</text>
+                <image class="mine-list-item-right" src="{{icon_next}}"></image>
+            </view>
+        </login-status>
+    </view>
+</view>

@@ -1,0 +1,701 @@
+/*
+ * @Author: qijiang 
+ * @Date: 2018-10-29 10:52:06 
+ * @Last Modified by: qijiang
+ * @Last Modified time: 2019-02-13 20:04:55
+ */
+<template>
+    <div id="dataServerSetModel">
+        <div class="clearfix data-template-main">
+            <div class="left-wrap fl">
+                <div class="template-search">
+                    <el-row>
+                        <el-col :span="14">
+                            <div class="inline-block common-width">
+                                <el-input v-model="serviceName" :maxlength="10" size="small" @change="changeServiceName"></el-input>
+                            </div>
+                        </el-col>
+                        <el-col :span="2" class="left-13">
+                            <div class="template-search-btn" @click="searchBtn(2)">
+                                <i class="iconfont icon-sousuo"></i>
+                            </div>
+                        </el-col>
+                        <el-col :span="2" class="jiahao">
+                            <i class="iconfont icon-jiahao1" @click="showTree"></i>
+                        </el-col>
+                        <el-col :span="2" class="jianhao">
+                            <i class="iconfont icon-jianhao" @click="closeTree"></i>
+                        </el-col>
+                    </el-row>
+                </div>
+                <RadioGroup v-model="radioSelect" @on-change="changeRadio">
+                    <Tree ref="treeNode" :data="dataTemplateTree" :render="renderContent"></Tree>
+                </RadioGroup>
+            </div>
+            <p class="template-line"></p>
+            <div class="right-wrap fr">
+                <p class="no-data" v-show="shouNoData">
+                    <i class="iconfont icon-gantanhao"></i>
+                    请在左侧选择一个服务
+                </p>
+                <div class="list-wrap" v-show="!shouNoData">
+                    <div class="server-info-wrap">
+                        <p class="server-info-title font-min" v-if="param.name != ''">
+                            <span class="title-handle">数据模板名称：</span>
+                            <span class="body-handle">{{param.name}}</span>
+                        </p>
+                        <div class="server-info-main font-min">
+                            <p class="server-info-item">
+                                <span class="title-handle">服务描述：</span>
+                                <span class="body-handle">{{infoDetail.serviceName}}</span>
+                            </p>
+                            <p class="server-info-item">
+                                <span class="title-handle">服务编码：</span>
+                                <span class="body-handle">{{infoDetail.serviceCode}}</span>
+                                <span class="title-handle">版本号：</span>
+                                <span class="body-handle">{{infoDetail.serviceVersion}}</span>
+                                <span class="title-handle">返回格式：</span>
+                                <span class="body-handle">{{infoDetail.retFormat}}</span>
+                                <span class="title-handle">请求方式：</span>
+                                <span class="body-handle">{{infoDetail.reqFormat}}</span>
+                            </p>
+                            <p class="server-info-item">
+                                <span class="title-handle">请求参数：</span>
+                            </p>
+                        </div>
+                        <div class="table-form">
+                            <el-table :data="infoDetail.inputList" tooltip-effect="light" ref="inputTable" @selection-change="inputChangeFun">
+                                <el-table-column type="selection" width="55" v-if="param.templateType == 2 || param.templateType == 3 || param.templateType == 5 || param.templateType == 4">
+                                </el-table-column>
+                                <el-table-column label="要素名称" v-if="param.templateType == 3 || param.templateType == 4">
+                                    <template scope="scope">
+                                        <el-select v-model="scope.row.bindId" size="small" filterable :disabled="scope.row.disabled">
+                                            <el-option v-for="item in ysmcData" :key="item.value" :label="item.label" :value="item.value" :title="item.label">
+                                            </el-option>
+                                        </el-select>
+                                    </template>
+                                </el-table-column>
+                                <el-table-column label="参数">
+                                    <template scope="scope">
+                                        <span :title="scope.row.paramCode">{{scope.row.paramCode}}</span>
+                                    </template>
+                                </el-table-column>
+                                <el-table-column label="类型">
+                                    <template scope="scope">
+                                        <span :title="scope.row.paramType">{{scope.row.paramType}}</span>
+                                    </template>
+                                </el-table-column>
+                                <el-table-column label="必选">
+                                    <template scope="scope">
+                                        <span :title="scope.row.isReqiredTxt">{{scope.row.isReqiredTxt}}</span>
+                                    </template>
+                                </el-table-column>
+                                <el-table-column label="描述">
+                                    <template scope="scope">
+                                        <span :title="scope.row.paramDesc">{{scope.row.paramDesc}}</span>
+                                    </template>
+                                </el-table-column>
+                            </el-table>
+                        </div>
+                        <div class="server-info-main font-min">
+                            <p class="server-info-item">
+                                <span class="title-handle">返回参数：</span>
+                            </p>
+                        </div>
+                        <div class="table-form">
+                            <el-table ref="outputTable" :data="infoDetail.outputList" tooltip-effect="light" @selection-change="changeFun">
+                                <el-table-column type="selection" width="55">
+                                </el-table-column>
+                                <el-table-column label="要素名称" v-if="param.templateType != 5 && param.templateType != 2">
+                                    <template scope="scope">
+                                        <el-select v-model="scope.row.bindId" size="small" filterable :disabled="scope.row.disabled">
+                                            <el-option v-for="item in ysmcData" :key="item.value" :label="item.label" :value="item.value" :title="item.label">
+                                            </el-option>
+                                        </el-select>
+                                    </template>
+                                </el-table-column>
+                                <el-table-column label="参数">
+                                    <template scope="scope">
+                                        <span :title="scope.row.paramCode">{{scope.row.paramCode}}</span>
+                                    </template>
+                                </el-table-column>
+                                <el-table-column label="类型">
+                                    <template scope="scope">
+                                        <span :title="scope.row.paramType">{{scope.row.paramType}}</span>
+                                    </template>
+                                </el-table-column>
+                                <el-table-column label="必选">
+                                    <template scope="scope">
+                                        <span :title="scope.row.isReqiredTxt">{{scope.row.isReqiredTxt}}</span>
+                                    </template>
+                                </el-table-column>
+                                <el-table-column label="描述">
+                                    <template scope="scope">
+                                        <span :title="scope.row.paramDesc">{{scope.row.paramDesc}}</span>
+                                    </template>
+                                </el-table-column>
+                            </el-table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="footer" v-if="showGoBtn">
+            <el-button type="primary" size="small" @click="sureBtn" v-if="param.templateType==2" :disabled="!serviceCode && !serviceVersion">下一步</el-button>
+            <el-button type="primary" size="small" @click="sureBtn" v-if="param.templateType!=2">确定</el-button>
+            <el-button size="small" @click="closeBtn" v-if="param.templateType!=2">取消</el-button>
+        </div>
+    </div>
+</template>
+<script>
+import unit from "@/api";   // 公共工具方法
+export default {
+    props: {
+        showGoBtn: { //是否显示上一步、下一步按钮
+            type: Boolean,
+            default: true
+        },
+        param: {
+            type: Object
+        }
+    },
+    data() {
+        return {
+            inputSelectId: [],  //复选框选中id,保存用
+            selectId: [],  //复选框选中id,保存用
+            shouNoData: true, //空数据标志位
+            showBtn: false,   //是否显示按钮
+            serviceName: '',  //搜索值、模板名称
+            dataTemplateTree: [],//树结构列表
+            tableList: [],     // 列表数据
+            //服务信息详情
+            infoDetail: {
+                inputList: [],   //请求参数
+                serviceName: '', //数据模板名称/服务名
+                serviceCode: '', //服务编码
+                serviceVersion: '', //版本号
+                retFormat: '', //返回格式
+                reqFormat: ''  //请求方式
+            },
+            ysmcData: [],  //要素名称数据源
+            radioSelect: '' //树结构-单选框选中值
+        }
+    },
+    methods: {
+        //修复ie记忆问题
+        changeServiceName(val) {
+            this.serviceName = val == '' ? '' : val;
+        },
+        //关闭树结构
+        closeTree() {
+            this.dataTemplateTree[0].expand = false;
+        },
+        //获取请求参数复选框数据
+        inputChangeFun(val) {
+            if (this.infoDetail.inputList && this.infoDetail.inputList.length > 0) { //全部不可选择
+                for (let i = 0; i < this.infoDetail.inputList.length; i++) {
+                    this.infoDetail.inputList[i].disabled = true;
+                }
+            }
+            if (val.length > 0) { //选中的可选择
+                for (let i = 0; i < val.length; i++) {
+                    val[i].disabled = false;
+                }
+            }
+            this.inputSelectId = val;
+        },
+        //获取复选框数据
+        changeFun(val) {
+            if (this.infoDetail.outputList && this.infoDetail.outputList.length > 0) { //全部不可选择
+                for (let i = 0; i < this.infoDetail.outputList.length; i++) {
+                    this.infoDetail.outputList[i].disabled = true;
+                }
+            }
+            if (val.length > 0) { //选中的可选择
+                for (let i = 0; i < val.length; i++) {
+                    val[i].disabled = false;
+                }
+            }
+            this.selectId = val;
+        },
+        //展开树结构
+        showTree() {
+            this.dataTemplateTree[0].expand = true;
+        },
+        //下拉树渲染
+        renderContent(h, { root, node, data }) {
+            let str = [
+                h('Radio', {
+                    attrs: {
+                        label: data.serviceCode + ',' + data.serviceVersion
+                    },
+                    style: {
+                        marginRight: '8px'
+                    }
+                }, [
+                        h('span', data.title),
+                    ])
+            ],
+                that = this,
+                styleSet = {
+                    style: {
+                        display: 'inline-block',
+                        width: 'auto'
+                    }
+                };
+
+            if (data.leaf || node.nodeKey == 0) {  //有子项的样式以及图标设置
+                str = [
+                    h('Icon', {
+                        props: {
+                            type: 'ios-folder-outline'
+                        },
+                        style: {
+                            marginRight: '8px'
+                        }
+                    }),
+                    h('span', data.title)
+                ];
+            }
+            return h('span', styleSet, [
+                h('span', str),
+                h('span', {
+                    style: {
+                        display: 'inline-block',
+                        float: 'right',
+                        marginRight: '32px'
+                    }
+                })
+            ]);
+        },
+        /*
+        ** 请求左边树的数据
+        */
+        getTreeData(flag) {
+            let _that = this,
+                jsonObj = {
+                    type: '1',
+                    templateType: _that.param.templateType,
+                    serviceName: _that.serviceName.trim()
+                };
+            if (flag) {
+                jsonObj.dataTemplateId = _that.param.dataTemplateId;
+                jsonObj.linkId = _that.param.linkId;
+            }
+            unit.ajaxMerPost('/znsj-web/data/server/tree', jsonObj, function (res) {
+                if (res.flag == true) {
+                    if (res.data.serverCode) {
+                        _that.radioSelect = res.data.serverCode + ',' + res.data.serverVersion;
+                        _that.serviceCode = res.data.serverCode;
+                        _that.serviceVersion = res.data.serverVersion;
+                        _that.getDetailByTempId(res.data.serverCode, res.data.serverVersion);
+                    }
+                    let data = _that.formatData(res.data.serviceTree);
+                    //赋值
+                    _that.dataTemplateTree = data;
+                } else {
+                    _that.$Message.warning(res.errMsg || '请求数据失败');
+                }
+            }, function (res) {
+                _that.$Message.warning(res.data.errMsg || '请求数据失败');
+            }, _that);
+        },
+        /*
+        ** 递归处理树形数据
+        */
+        formatData(data) {
+            for (let i = 0; i < data.length; i++) {
+                data[i].expand = true
+                data[i].title = data[i].name;
+                if (data[i].children.length > 0) {
+                    data[i].children = this.formatData(data[i].children);
+                }
+            }
+            return data;
+        },
+        /*
+        ** 获取详情数据
+        */
+        getDetailByTempId(serviceCode, serviceVersion) {
+            let _that = this,
+                jsonObj = {
+                    dataTemplateId: _that.param.dataTemplateId,
+                    linkId: _that.param.linkId,
+                    serviceCode: serviceCode,
+                    serviceVersion: serviceVersion,
+                    templateType: _that.param.templateType,
+                };
+            unit.ajaxObjPost('/znsj-web/data/server/serviceDetails', jsonObj, function (res) {
+                if (res.flag == true) {
+                    _that.shouNoData = false;
+                    //处理output置灰不可选
+                    if (res.data.outputList && res.data.outputList.length > 0) {
+                        for (let i = 0; i < res.data.outputList.length; i++) {
+                            res.data.outputList[i].disabled = true;
+                        }
+                    }
+
+                    if (_that.param.templateType == 3 || _that.param.templateType == 4 || _that.param.templateType == 5) {
+                        if (res.data.inputList && res.data.inputList.length > 0) {
+                            for (let i = 0; i < res.data.inputList.length; i++) {
+                                res.data.inputList[i].disabled = true;
+                            }
+                        }
+                    }
+                    //赋值
+                    _that.infoDetail = res.data;
+
+                    setTimeout(() => {
+                        for (let i = 0; i < res.data.outputList.length; i++) {
+                            if (res.data.outputList[i].bindId) {
+                                _that.$refs.outputTable.toggleRowSelection(_that.infoDetail.outputList[i], true);
+                            }
+                        }
+                        if (_that.param.templateType == 3 || _that.param.templateType == 2 || _that.param.templateType == 4 || _that.param.templateType == 5) {
+                            for (let i = 0; i < res.data.inputList.length; i++) {
+                                if (res.data.inputList[i].bindId) {
+                                    _that.$refs.inputTable.toggleRowSelection(_that.infoDetail.inputList[i], true);
+                                }
+                            }
+                        }
+                    }, 200);
+                } else {
+                    _that.$Message.warning(res.errMsg || '请求数据失败');
+                }
+            }, function (res) {
+                _that.$Message.warning(res.data.errMsg || '请求数据失败');
+            }, _that);
+        },
+        //搜索按钮
+        searchBtn() {            ;
+            //点击一次，请求一次数据
+            this.getTreeData();
+        },
+        //确定按钮
+        sureBtn() {
+            let arr = [],
+                that = this;
+            if (!this.serviceCode && !this.serviceVersion) {
+                return;
+            }
+            if (this.param.templateType == 2 || this.param.templateType == 5 || this.param.templateType == 3 || this.param.templateType == 4) {  //要素配置-数据服务配置
+                if (this.inputSelectId.length == 0 || (this.inputSelectId.length > 1 && this.param.templateType != 3 && this.param.templateType != 4 && this.param.templateType != 2)) {
+                    this.$Message.warning('请选择一个请求参数');
+                    return;
+                }
+                for (let i = 0; i < this.inputSelectId.length; i++) {
+                    if (this.param.templateType != '5' && this.param.templateType != '2') {
+                        if (!this.inputSelectId[i].bindId) {
+                            this.$Message.warning('请选择要素名称');
+                            return;
+                        }
+                        if (this.param.templateType != '4') {
+                            for (let j = i + 1; j < this.inputSelectId.length; j++) {
+                                if (this.inputSelectId[i].bindId && this.inputSelectId[i].bindId == this.inputSelectId[j].bindId) {
+                                    this.$Message.warning('一个要素只能绑定一个请求参数');
+                                    return;
+                                }
+                            }
+                        }
+                    }
+                    this.inputSelectId[i].paramWay = 1;
+                    this.inputSelectId[i].tempAttrId = this.inputSelectId[i].bindId;
+                    if (this.param.templateType == 2 || this.param.templateType == 5) {
+                        this.inputSelectId[i].tempAttrId = this.param.tempAttrId;
+                    }
+                }
+            }
+
+            if (this.selectId.length == 0) {
+                this.$Message.warning('请选择一个返回参数');
+                return;
+            }
+            for (let i = 0; i < this.selectId.length; i++) {
+                if (!this.selectId[i].paramWay || this.selectId[i].paramWay == 2) {
+                    if (this.param.templateType != '5' && this.param.templateType != '2') {
+                        if (!this.selectId[i].bindId) {
+                            this.$Message.warning('请选择要素名称');
+                            return;
+                        }
+                        if (this.param.templateType != '4') {
+                            for (let j = i + 1; j < this.selectId.length; j++) {
+                                if (this.selectId[i].bindId && this.selectId[i].bindId == this.selectId[j].bindId) {
+                                    this.$Message.warning('一个要素只能绑定一个返回参数');
+                                    return;
+                                }
+                            }
+                        }
+                    }
+                    this.selectId[i].paramWay = 2;
+                    this.selectId[i].tempAttrId = this.selectId[i].bindId;
+                    if (this.param.templateType == 2 || this.param.templateType == 5) {
+                        this.selectId[i].tempAttrId = this.param.tempAttrId;
+                    }
+                }
+            }
+
+            if ((this.param.templateType == 2 || this.param.templateType == 5 || this.param.templateType == 3 || this.param.templateType == 4) && this.inputSelectId.length != 0) {  //要素配置-数据服务配置
+                if (this.param.templateType == 2 || this.param.templateType == 3 || this.param.templateType == 4) {
+                    
+                    $(this.inputSelectId).each(function (index, obj) {
+                        let numFlag = 0;
+                        for (let m = 0; m < that.selectId.length; m++) {
+                            if (obj.tempAttrId == that.selectId[m].tempAttrId && obj.paramCode == that.selectId[m].paramCode && obj.paramWay == that.selectId[m].paramWay) {
+                                numFlag++;
+                            }
+                        }
+
+                        if (!numFlag) {
+                            that.selectId.push(obj);
+                        }
+                    });
+                } else {
+                    this.selectId.push(this.inputSelectId[0]);
+                }
+            }
+
+            if (this.param.templateType == 1) {  //环节配置-数据服务配置
+                for (let i = 0; i < this.infoDetail.inputList.length; i++) {
+                    this.infoDetail.inputList[i].paramWay = 1;
+                    this.selectId.push(this.infoDetail.inputList[i]);
+                }
+            }
+            let _that = this,
+                jsonObj = {
+                    dataTemplateId: _that.param.dataTemplateId,
+                    linkId: _that.param.linkId,
+                    serviceCode: _that.serviceCode,
+                    serviceVersion: _that.serviceVersion,
+                    templateType: _that.param.templateType,
+                    tempAttrList: this.selectId,
+                    outputDataType: this.infoDetail.outputDataType,
+                    reqFormat: this.infoDetail.reqFormat,
+                    retFormat: this.infoDetail.retFormat,
+                    serviceCode: this.infoDetail.serviceCode,
+                    serviceName: this.infoDetail.serviceName,
+                    serviceUrl: this.infoDetail.serviceUrl,
+                    serviceVersion: this.infoDetail.serviceVersion
+                };
+            unit.ajaxObjPost('/znsj-web/data/server/selectAttr', jsonObj, function (res) {
+                if (res.flag == true) {
+                    if (_that.param.templateType == 2) {
+                        _that.$emit('go', 'next');
+                    } else {
+                        _that.$Message.success('保存成功');
+                        _that.$emit('closeDialog');
+                    }
+                } else {
+                    _that.$Message.warning(res.errMsg || '请求数据失败');
+                }
+            }, function (res) {
+                _that.$Message.warning(res.data.errMsg || '请求数据失败');
+            }, _that);
+        },
+        //取消按钮
+        closeBtn() {
+            this.$emit('closeDialog');
+        },
+        //单选框点击事件
+        changeRadio(val) {
+            let arr = val.split(',');
+            this.serviceCode = arr[0];
+            this.serviceVersion = arr[1];
+            this.getDetailByTempId(arr[0], arr[1]);
+        },
+        //获取要素名称字典
+        getYsmcData() {
+            let _that = this,
+                jsonObj = {
+                    templateId: _that.param.dataTemplateId,
+                },
+                url = '';
+            if (_that.param.templateType == '1') {
+                url = '/data/temp/attr/getAttrDictByTempId';
+            } else if (_that.param.templateType == '3') {
+                url = '/elementDetail/getAttrDictByTempId';
+            } else if (_that.param.templateType == '4') {
+                jsonObj = {
+                    matriCode: _that.param.matriCode,
+                    matriVersion: _that.param.matriVersion
+                };
+                url = '/matri/bill/getAttrDictByTempId';
+            } else if (_that.param.templateType == '5' || _that.param.templateType == '2') {
+                return;
+            }
+            unit.ajaxMerPost('/znsj-web' + url, jsonObj, function (res) {
+                if (res.flag == true) {
+                    _that.ysmcData = res.data;
+                } else {
+                    _that.$Message.warning(res.errMsg || '请求数据失败');
+                }
+            }, function (res) {
+                _that.$Message.warning(res.data.errMsg || '请求数据失败');
+            }, _that);
+        },
+        //供父事项调用
+        parentHandle() {
+            this.sureBtn();
+        }
+    },
+    mounted() {
+        //请求树结构数据
+        this.getTreeData(this.param.flag);
+        this.getYsmcData();
+    }
+};
+</script>
+<style lang="less">
+@import "../../assets/styles/theme.less";
+.v-modal {
+    z-index: 999 !important;
+}
+.el-dialog__body {
+    padding: 30px 0;
+    padding-top: 0;
+}
+#dataServerSetModel {
+    .data-template-main {
+        .ivu-tree-children {
+            overflow: visible !important;
+            height: auto !important;
+            font-size: 14px;
+        }
+        position: relative;
+        border-top: 1px solid #e4e4e4;
+        border-bottom: 1px solid #e4e4e4;
+        .el-table {
+            .el-checkbox {
+                margin-left: 0;
+            }
+            td {
+                padding: 8px 0;
+            }
+        }
+        .left-wrap {
+            overflow: auto;
+            min-height: 600px;
+            padding: 20px 10px 0 10px;
+            width: 30%;
+            .left-13 {
+                margin-left: -13px;
+                margin-right: 0;
+            }
+            .jiahao {
+                margin-left: 20px;
+                height: 32px;
+                line-height: 32px;
+                i {
+                    font-size: 20px;
+                    color: #2d8cf0;
+                    cursor: pointer;
+                }
+            }
+            .jianhao {
+                height: 32px;
+                line-height: 32px;
+                i {
+                    font-size: 20px;
+                    color: #2d8cf0;
+                    cursor: pointer;
+                }
+            }
+            .common-width {
+                width: 100%;
+            }
+            .template-search-btn {
+                position: relative;
+                height: 32px;
+                width: 32px;
+                background-color: #f4f6f9;
+                line-height: 32px;
+                border-radius: 0 5px 5px 0;
+                border: 1px solid #e0e6f1;
+                z-index: 99;
+                cursor: pointer;
+                text-align: center;
+                i {
+                    font-size: 20px;
+                }
+            }
+            .ivu-tree {
+                & > .ivu-tree-children > li > .ivu-checkbox-wrapper {
+                    display: none;
+                }
+                ul {
+                    li {
+                        width: 98%;
+                    }
+                }
+            }
+        }
+        .right-wrap {
+            padding: 0 10px 15px 10px;
+            width: 70%;
+            min-height: 600px;
+            .no-data {
+                height: 600px;
+                line-height: 600px;
+                text-align: center;
+                .icon-gantanhao {
+                    color: #137ddf;
+                    font-size: 34px;
+                    vertical-align: middle;
+                }
+            }
+            .list-wrap {
+                .server-info-wrap {
+                    .server-info-title {
+                        padding: 13px 0;
+                        border-bottom: 1px dashed #e0e6f1;
+                    }
+                    .server-info-main {
+                        .server-info-item {
+                            padding: 7px 0;
+                        }
+                    }
+                    .title-handle {
+                        font-weight: bold;
+                    }
+                    .body-handle {
+                        margin-right: 40px;
+                    }
+                    .table-form {
+                        margin: 5px 0;
+                        border: 1px solid #e0e6f1;
+                        border-bottom: none;
+                        .el-table {
+                            border: none;
+                        }
+                        //未配置
+                        .seted {
+                            color: #606266;
+                        }
+                    }
+                }
+            }
+        }
+        .template-line {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 30%;
+            width: 1px;
+            background: #e4e4e4;
+        }
+    }
+    // 弹框按钮样式覆盖
+    .footer {
+        padding-right: 30px;
+        padding-top: 10px;
+        background: #fff;
+        text-align: right;
+        line-height: 50px;
+        border: none;
+        .el-button {
+            padding: 8px 15px;
+            width: 120px;
+        }
+    }
+}
+</style>

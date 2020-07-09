@@ -1,0 +1,48 @@
+<!--
+ * @Author: sunmingmao
+ * @Date: 2020-03-04 15:10:20
+ * @LastEditTime: 2020-03-04 20:38:53
+ * @LastEditors: longting
+ * @Description: 优惠券Item
+ * @FilePath: /oil-wechat-applet/pages/station/components/perferents/perferent-item/perferent-item.axml
+ -->
+<!--pages/station/components/perferent/perferent.axml-->
+<view class="preference-item-container">
+    <view class="preference-item">
+        <view class="preference-item-content">
+            <view class="preference-item-content-left">
+                <image class="preference-item-content-left-image" src="{{money_icon}}"></image>
+                <text class="preference-item-content-left-text">{{item.coupon_value}}</text>
+            </view>
+            <view class="preference-item-content-right">
+                <view class="ptcr-top">
+                    <view class="ptcr-top-left">
+                        <text class="ptcr-top-left-title">{{item.activity_name}}</text>
+                        <text class="ptcr-top-left-mark">满{{item.coupon_use_limit}}元使用</text>
+                    </view>
+                    <view class="ptcr-top-right">
+                        <image class="ptcr-top-right-check" a:if="{{item.enabled}}" onTap="onCheckClick"
+                            src="{{item.isCheck?check_icon:uncheck_icon}}">
+                        </image>
+                        <text class="ptcr-top-right-enabled" a:if="{{!item.enabled}}" data-item="{{data}}">不可用</text>
+                    </view>
+                </view>
+                <view class="ptcr-bottom">
+                    <text class="ptcr-bottom-time">有效期至 {{item.invalid_time}}</text>
+                    <view class="ptcr-bottom-rule" catchTap="onSeeRuleClick"
+                        a:if="{{item.activity_desc&&item.activity_desc.length}}">
+                        <text class="ptcr-bottom-rule-text">使用规则</text>
+                        <image class="ptcr-bottom-rule-image" src="{{pull_icon}}"></image>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="preference-item-footer" style="max-height:{{item.isOpen?500:0}}rpx">
+            <view class="preference-item-footer-content">
+                <block a:for="{{item.activity_desc}}" a:key="index" a:index="index">
+                    <text class="preference-item-footer-text">{{item}}</text>
+                </block>
+            </view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,201 @@
+/* pages/person/etc/etc.acss */
+
+
+/*@import "../../../../templates/person/etc-card/etc-card.acss";*/
+
+@import "../../../../templates/mine/load-more/load-more.acss";
+page {
+    background-color: #F8F8F8;
+    height: auto;
+    width: 100%;
+}
+
+.etc-card-scroll-view {
+    /*background-color: #252231;*/
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.etc-list-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    /*margin-top: 10rpx;*/
+    align-items: center;
+}
+
+.etc-card-bottom-blank {
+    height: 100px;
+    width: 100%;
+    background-color: transparent;
+}
+
+.etc-card-bottom-tab {
+    flex: 1;
+    height: 65px;
+    width: 100%;
+    position: fixed;
+    bottom: 0px;
+    background-color: #1C1A24;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    z-index: 999;
+}
+
+.etc-card-complain-view {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.etc-card-tab-complain {
+    width: 42rpx;
+    height: 42rpx;
+}
+
+.etc-card-tab-text {
+    font-size: 14px;
+    color: white;
+}
+
+.etc-card-tab-add {
+    width: 44rpx;
+    height: 44rpx;
+    margin: 10rpx;
+}
+
+.etc-card-add-text {
+    /*font-size: 14px;*/
+    /*color: black;*/
+    color: rgba(153, 153, 153, 1);
+    font-size: 32rpx;
+    text-align: left;
+    font-family: PingFang-SC-Medium;
+}
+
+.etc-card-tab-line {
+    width: 1px;
+    height: 25px;
+    background-color: #383838;
+    margin: 20px 0;
+}
+
+.etc-card-add {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+    background-color: white;
+}
+
+.empty-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 20rpx 0;
+    background-color: #252231;
+}
+
+.empty-add {
+    width: 702rpx;
+    height: 332rpx;
+}
+
+.empty-add-view {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    border-radius: 10rpx;
+    height: 100rpx;
+    width: 80%;
+    background-color: #1C1A24;
+    border-width: 20rpx;
+    border-color: white;
+}
+
+.empty-image {
+    width: 32rpx;
+    height: 32rpx;
+    margin: 10rpx;
+}
+
+.empty-text {
+    font-size: 30rpx;
+    color: #dbd9e3;
+}
+
+.bank-type-list-box {
+    width: 100vw;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.bank-type-item {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 28rpx 0;
+}
+
+.bank-type-text {
+    font-size: 30rpx;
+}
+
+.etc-card-add-new {
+    position: fixed;
+    flex: 1;
+    bottom: 40rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 680rpx;
+    height: 88rpx;
+    border-radius: 8rpx;
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: 0rpx 4rpx 20rpx 0rpx rgba(0, 0, 0, 0.06);
+}
+
+.etc-card-add-img {
+    margin: 10rpx;
+    width: 38rpx;
+    height: 38rpx;
+}
+
+.no-etc-text {
+    margin-top: 40rpx;
+    font-size: 30rpx;
+    color: #BBBBBB;
+}
+
+.no-etc-image {
+    width: 292rpx;
+    height: 292rpx;
+}
+
+.no-etc-view {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 300rpx 0;
+}

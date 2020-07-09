@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <base href="../../../../">
+    <meta charset="UTF-8">
+    <!-- 添加到主屏幕后，全屏显示 -->
+    <meta name="apple-touch-fullscreen" content="YES" />
+    <meta name="format-detection" content="telephone=no" />
+    <!-- iphone 运行在全屏模式 -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="viewport" content="width=device-width" />
+    <title>我的</title>
+    <script src="../lib/remCacul/remCacul.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/base.css?__inline" />
+    <link rel="stylesheet" type="text/css" href="../css/my.css?__inline" />
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="top-content">
+            <div class="login hide clearfix">
+                <img src="../img/my/default-photo.png" onerror="javascript:this.src='./public/wcportal/0.0.1/img/my/default-photo.png';" class="fl my-photo">
+                <div class="my-info fl">
+                    <div class="name ell"></div>
+                    <div class="auth-status clearfix"><span class="fl">注册用户</span></div>
+                    <div class="phone"></div>
+                </div>
+            </div>
+            <div class="loginout hide">
+                <div class="clearfix">
+                    <img src="../img/my/default-photo.png" class="fl my-photo">
+                    <div class="loginout-span fl">登录/注册</div>
+                </div>
+            </div>
+        </div>
+        <div class="nav-content">
+            <div class="nav-tab">
+                <div class="nav-item my-car" data-type="1" data-login="1" data-url="my-car.html">
+                    <div class="nav-item-info">我的车辆<span class="num"></span></div>
+                </div>
+                <div class="nav-item my-driver" data-type="1" data-login="1" data-url="my-driver-license.html">
+                    <div class="nav-item-info">我的驾照</div>
+                </div>
+                <div class="nav-item my-handle" data-type="1" data-login="1" data-url="my-handle.html">
+                    <div class="nav-item-info">我的办理</div>
+                </div>
+            </div>
+            <div class="nav-tab">
+                <div class="nav-item my-integral" data-type="1" data-login="1" data-url="my-score.html">
+                    <div class="nav-item-info">我的积分</div>
+                </div>
+                <div class="nav-item my-collection" data-type="1" data-login="1" data-url="my-collection.html">
+                    <div class="nav-item-info">我的收藏</div>
+                </div>
+            </div>
+            <div class="nav-tab">
+                <div class="nav-item my-set" data-type="2" data-login="0" data-url="ct://LocalService@app@Setting@">
+                    <div class="nav-item-info">设置</div>
+                </div>
+                <div class="nav-item my-share" data-type="1" data-login="0" data-url="recom-friends.html">
+                    <div class="nav-item-info">推荐给好友</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../lib/jquery/jquery-1.8.2.min.js"></script>
+    <script src="../lib/fly/fly.min.js"></script>
+    <script src="../lib/croods/croods-1.3.1.min.js"></script>
+    <script src="../app/my.js"></script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+@import '~iview/src/styles/index.less';
+@import "./color.less";
+// Here are the variables to cover, such as:
+@primary-color: @baseColor;

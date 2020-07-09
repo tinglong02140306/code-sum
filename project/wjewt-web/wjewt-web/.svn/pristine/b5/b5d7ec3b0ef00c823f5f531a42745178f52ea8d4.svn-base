@@ -1,0 +1,99 @@
+/* ========缴费识别码缴费========  */
+body{
+	background-color: #fff;
+}
+header{
+	border:none;
+}
+.header-item{
+	background: #4c72ff;
+	color: #fff;
+}
+.idCode-content{
+	padding-top: 2.1rem;
+	text-align: center;
+}
+
+.hide{
+	display: none;
+}
+
+.idCode-content input{
+	width: 14.666667rem;
+	height: 4.488889rem;
+	font-size: 0.666667rem;
+	background-color: #fff;
+	padding: 2.866667rem 0 0.955556rem 0;
+	border: none;
+	outline: none;
+	box-sizing: border-box;
+	border-bottom: 0.044444rem solid #c2c2c2;
+}
+
+::-webkit-input-placeholder {
+    font-size: 0.666667rem;
+    color: #bebdbd;
+}
+
+.idCode-content button{
+	/*display: inline-block;*/
+	width: 14.666667rem;
+	height: 1.933333rem;
+	background-color: #4c72ff;
+	border: none;
+	outline: none;
+	border-radius: 0.177778rem;
+	font-size: 0.755556rem;
+	margin-top: 2.666667rem;
+	color: #fff;
+}
+
+.mark {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .3);
+    display: none;
+    z-index: 10;
+}
+
+.quit {
+    width: 80%;
+    height: 6rem;
+    background: #fff;
+    position: absolute;
+    top: 30%;
+    left: 10%;
+    font-size: .67rem;
+}
+
+.quit p {
+    height: 4.2rem;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+    line-height: 4.2rem;
+}
+
+.quit div {
+    height: 1.8rem;
+    line-height: 1.8rem;
+    display: flex;
+}
+
+.quit div span {
+    flex: 1;
+    text-align: center;
+}
+
+.quit div span:nth-child(1) {
+    border-right: 1px solid #ccc;
+}
+/*暂无数据*/
+.empty {
+	position: absolute;
+	height: calc(100% - 3rem);
+    width: 100%;
+}
+.empty-ad {
+	background: url(../images/common/no-handle.png) no-repeat 50% bottom /  3.84rem 4.29rem;
+}

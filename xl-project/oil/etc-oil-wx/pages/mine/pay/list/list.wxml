@@ -1,0 +1,115 @@
+
+<import src="../../../../templates/mine/pay-list/pay-list.wxml"/>
+<view class="person-pay-container">
+    <view class="person-pay-list" wx:if="{{!isEmpty}}">
+        <view class="person-pay-list-up">
+            <text class="person-pay-hint">系统将按如下顺序扣款</text>
+            <view class="person-pay-count">
+                <text class="person-pay-count-hint">已开通的支付方式</text>
+                <text class="person-pay-count-move">拖动</text>
+            </view>
+        </view>
+        <view class="person-pay-list-content">
+            <view style="position: relative; z-index: 199;">
+                <movable-area class="movable-area"
+                              style='display:{{movableViewInfo.showClass}}; height:{{pageInfo.scrollHeight}}%;'>
+                    <movable-view class="row list-row movable-row"
+                                  out-of-bounds='true'
+                                  damping='999'
+                                  style='height:{{pageInfo.rowHeight}}rpx;'
+                                  direction="vertical"
+                                  y="{{movableViewInfo.y}}">
+                        <view class="pay-list-box">
+                            <view class="pay-list-box-left">
+                                <image class="pay-list-icon" src="{{movableViewInfo.data.bank_title_logo}}"></image>
+                                <text class="pay-list-text">{{movableViewInfo.data.title}}</text>
+                            </view>
+                            <view class="pay-list-box-left">
+                                <view class="pay-discounts-view" wx:if="{{movableViewInfo.data.activity_message}}">
+                                    <text class="pay-discounts-text">{{movableViewInfo.data.activity_message}}</text>
+                                    <image class="pay-discounts-image" src="{{discounts_icon}}"></image>
+                                </view>
+                                <image class="pay-list-right" src="{{move_icon}}"></image>
+                            </view>
+                        </view>
+                    </movable-view>
+                </movable-area>
+                <scroll-view scroll-y="{{pageInfo.scrollY}}" style="height: {{pageInfo.scrollHeight}}%">
+                    <block wx:for="{{optionList}}" wx:key="pay_list">
+                        <view class='row list-row {{pageInfo.readyPlaceIndex == index ? "ready-place" : ""}}' style="height: {{pageInfo.rowHeight}}rpx;">
+                            <view class='pay-list-box {{pageInfo.readyPlaceIndex == index ? "ready-place" : ""}}'>
+                                <view class="pay-list-box-left" style='display: {{pageInfo.readyPlaceIndex == index ? "none" : "visibility"}}'>
+                                    <image class="pay-list-icon" src="{{item.bank_title_logo}}"></image>
+                                    <text class="pay-list-text">{{item.title}}</text>
+                                </view>
+                                <view class="pay-list-box-left" style='display: {{pageInfo.readyPlaceIndex == index ? "none" : "visibility"}}'>
+                                    <view class="pay-discounts-view" wx:if="{{item.activity_message}}">
+                                        <text class="pay-discounts-text">{{item.activity_message}}</text>
+                                        <image class="pay-discounts-image" src="{{discounts_icon}}"></image>
+                                    </view>
+                                    <view style="width:100rpx, height: 100%;">
+                                        <image class="pay-list-right"
+                                               src="{{move_icon}}"
+                                               data-index='{{index}}'
+                                               catchtouchstart='dragStart'
+                                               catchtouchmove='dragMove'
+                                               catchtouchend='dragEnd'>
+                                        </image>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                        <view class="person-pay-sign-line"></view>
+                    </block>
+                </scroll-view>
+            </view>
+        </view>
+    </view>
+
+    <view class="person-pay-sign">
+        <view class="person-pay-bank" bindtap="onCardMore">
+            <view class="person-pay-bank-left">
+                <image class="pay-bank-left-image" src="{{union_icon}}"  mode="widthFix"></image>
+                <text class="pay-bank-left-text">管理/添加银行卡</text>
+            </view>
+            <view class="person-pay-bank-left">
+                <image class="pay-bank-right" src="{{next_icon}}"></image>
+            </view>
+        </view>
+        <!-- <view class="person-pay-sign-line" wx:if="{{!isWeChat}}"></view>
+        <view class="person-pay-bank" bindtap="signWeChat" wx:if="{{!isWeChat}}">
+            <view class="person-pay-bank-left">
+                <image class="pay-bank-left-image" src="{{wx_icon}}" mode="widthFix"></image>
+                <text class="pay-bank-left-text">开通微信免密支付</text>
+            </view>
+            <view class="person-pay-bank-left">
+                <text class="pay-bank-sub-text">去开通</text>
+                <image class="pay-bank-right" src="{{next_icon}}"></image>
+            </view>
+        </view> -->
+<!--        <view class="person-pay-sign-line"></view>-->
+        <view class="person-pay-bank" bindtap="signWxVehicle" wx:if="{{!isWxVehicle}}">
+            <view class="person-pay-bank-left">
+                <image class="pay-bank-left-image" src="{{wx_icon}}" mode="widthFix"></image>
+                <text class="pay-bank-left-text">开通微信车主服务</text>
+            </view>
+            <view class="person-pay-bank-left">
+<!--                <text class="pay-bank-sub-text" wx:if="{{!isWxVehicle}}">去开通</text>-->
+                <text class="pay-bank-sub-text">去开通</text>
+                <image class="pay-bank-right" src="{{next_icon}}"></image>
+            </view>
+        </view>
+<!--        <view class="person-pay-sign-line"></view>-->
+<!--        <view class="person-pay-bank" bindtap="signCCB">-->
+<!--            <view class="person-pay-bank-left">-->
+<!--                <image class="pay-bank-left-image" src="{{icon_ccb}}" mode="widthFix"></image>-->
+<!--                <text class="pay-bank-left-text">开通龙支付无感支付</text>-->
+<!--            </view>-->
+<!--            <view class="person-pay-bank-left">-->
+<!--                <text class="pay-bank-sub-text">满200减20</text>-->
+<!--                <view class="pay-bank-sub-circle"></view>-->
+<!--                <image class="pay-bank-right" src="{{next_icon}}"></image>-->
+<!--            </view>-->
+<!--        </view>-->
+    </view>
+</view>

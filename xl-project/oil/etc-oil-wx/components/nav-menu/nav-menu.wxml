@@ -1,0 +1,18 @@
+<!--
+ * @Author: sunmingmao
+ * @Date: 2020-04-02 08:54:04
+ * @LastEditors: sunmingmao
+ * @LastEditTime: 2020-04-02 10:38:53
+ * @Description: 导航菜单
+ -->
+<view class="nav-menu-container">
+    <block wx:for="{{list}}" wx:key="menu">
+        <view class="nav-menu-item-container" style="margin-right: {{space}}rpx;">
+            <view bind:tap="onMenuClick" 
+                data-item="{{index}}" 
+                class="nav-menu-item"
+                style="{{index==selected_index?selected_style:style}}">{{item}}</view>
+            <view class="nav-menu-separation" style="{{index==selected_index?selected_border_style:border_style}}"></view>
+        </view>
+    </block>
+</view>

@@ -1,0 +1,102 @@
+.wrap header {
+	padding-top: 0.9rem !important;
+    background: #4c72ff;
+}
+.wrap {
+	position: relative;
+	height: 100%;
+}
+.main-wrap {
+	position: absolute;
+	top: 3rem;
+	bottom: 2.622222rem;
+	width: 100%;
+	overflow-y: auto;
+}
+.pay-detail-first {
+	overflow: hidden;
+	background: #fff;
+	border-bottom: 1px solid #f1f1f1;
+}
+.pay-detail-two {
+	overflow: hidden;
+	padding-top: 0.777778rem;
+	background: #fff;
+}
+.detail-title {
+	margin: 0.955556rem 0 1.111111rem 0;
+	text-align: center;
+	font-size: 0.666667rem;
+	color: #333;
+}
+.detail-money {
+	margin-bottom: 2.0rem;
+	text-align: center;
+	font-size: 1.333333rem;
+	color: #020202;
+}
+.detail-message {
+	padding: 0 0.666667rem;
+	margin-bottom: 0.533333rem;
+	font-size: 0.577778rem;
+	color: #999;
+}
+.pay-list-title {
+	padding: 0.555556rem 0 0.555556rem 0.488889rem;
+	margin-top: 0.177778rem;
+	background: #fff;
+}
+.pay-list-title p {
+	padding-left: 0.333333rem;
+	font-size: 0.666667rem;
+	color: #333;
+	border-left: 3px solid #4c72ff;
+}
+.pay-list {
+	background: #fff;
+}
+.pay-list-item {
+	padding: 0.666667rem;
+	border-top: 1px solid #f1f1f1;
+}
+.pay-list-item div span {
+	font-size: 0.666667rem;
+	color: #333;
+}
+.pay-list-item p {
+	margin-top: 0.444444rem;
+	font-size: 0.577778rem;
+	color: #999;
+}
+.pay-footer {
+	position: fixed;
+	bottom: 0;
+	height: 2.4rem;
+	width: 100%;
+	background: #fff;
+}
+.pay-footer-fl {
+	width: 8.711111rem;
+	height: 2.4rem;
+	line-height: 2.4rem;
+	text-align: center;
+	font-size: 0.577778rem;
+	color: #999;
+}
+.pay-footer-fr {
+	width: 7.266667rem;
+	height: 2.4rem;
+	line-height: 2.4rem;
+	text-align: center;
+	background: #4c72ff;
+	font-size: 0.755556rem;
+	color: #fff;
+}
+.empty {
+	position: absolute;
+	height: calc(100% - 3rem);
+    width: 100%;
+}
+.empty-ad {
+	background: url(../images/common/no-handle.png) no-repeat 50% bottom /  3.84rem 4.29rem;
+}

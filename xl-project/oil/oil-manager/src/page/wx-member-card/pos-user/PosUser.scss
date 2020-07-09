@@ -1,0 +1,79 @@
+.pos-user-container{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  box-sizing: border-box;
+}
+.pos-user-form-text{
+  font-weight: bold;
+  font-size: 14px;
+  margin-right: 5px;
+  width: 180px;
+  padding: 10px;
+  color: #c90000;
+}
+.pos-user-top-container{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  background-color: white;
+  padding:10px 0;
+  margin-bottom: 10px;
+}
+.pos-user-table-box{
+  background-color: white;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border: solid 1px #f2f2f2;
+  margin-top: 10px;
+}
+.pos-user-table-container{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: white;
+  margin-top: 10px;
+}
+.pos-user-table{
+  width: 100%;
+  background-color: white;
+  table{
+    thead{
+      th{
+        color: black;
+          font-weight: bold;
+          font-size: 14px;
+      }
+    }
+  }
+}
+.pos-user-form{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.pos-user-form-item {
+  color: black;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: 14px;
+  margin-right: 5px;
+  font-weight: bold;
+}
+.pos-user-form-btn{
+  font-size: 12px;
+  margin: 0 10px;
+}

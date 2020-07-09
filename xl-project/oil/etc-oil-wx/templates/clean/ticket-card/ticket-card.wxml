@@ -1,0 +1,22 @@
+<template name="ticket_card">
+    <view class="ticket-card-container" data-item="{{item}}" catch:tap="onPackageClick">
+        <image class="ticket-card-select-icon" src="{{item.isSelect?FastOrderCheck:FastOrderUnCheck}}"></image>
+        <view class="ticket-card-box">
+            <image class="ticket-card-box-bg-img" src="{{item.background_url?item.background_url:'https://oss.etcsd.com/object/17e7048da2fa48f89e729d0ded3250be'}}"></image>
+            <view class="ticket-card-box-info">
+                <view class="ticket-card-box-info-top">
+                    <text class="ticket-card-title-text">{{item.package_name}}</text>
+                    <view class="ticket-card-discount-text">{{item.discount_rate}}折</view>
+                </view>
+               <view class="ticket-card-box-info-top">
+                   <text class="ticket-card-number-text">含{{item.coupon_count}}张洗车券</text>
+                   <view class="ticket-card-money-box">
+                       <text>￥</text>
+                       <text style="font-size: {{'48rpx'}}">{{item.package_price}}</text>
+                   </view>
+               </view>
+            </view>
+        </view>
+    </view>
+
+</template>

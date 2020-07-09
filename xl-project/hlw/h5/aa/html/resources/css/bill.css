@@ -1,0 +1,401 @@
+.pd3 {
+    padding: 0 3%;
+}
+
+.f26 {
+    font-size: 0.56rem !important;
+}
+
+.f28 {
+    font-size: 0.62rem !important;
+}
+
+.f34 {
+    font-size: 0.76rem !important;
+}
+
+.c3b4 {
+    color: #3b4257;
+}
+
+.hide {
+    display: none !important;
+}
+
+html,
+body,
+.wrap {
+    background: #f1f1f6;
+    height: 100%;
+}
+
+.bill-search-wrap {
+    width: 100%;
+    height: 8.67rem;
+}
+
+.bill-search-wrap .title {
+    width: 100%;
+    height: 1.82rem;
+    font-size: 0.67rem;
+    color: #8087a9;
+    line-height: 1.82rem;
+}
+
+.bill-search-wrap .con-item {
+    display: flex;
+    width: 100%;
+    height: 2.13rem;
+    background: #fff;
+    align-items: center;
+}
+
+.bor-bom {
+    border-bottom: 1px solid #ededed;
+}
+
+.bill-search-wrap .con-item span,
+.bill-search-wrap .con-item input,
+.bill-search-wrap .con-item select {
+    display: inline-block;
+    color: #3b4257;
+    font-size: 0.67rem;
+    height: 100%;
+    line-height: 2.13rem;
+}
+
+.bill-search-wrap .con-item span {
+    width: 14%;
+}
+
+.bill-search-wrap .con-item input,
+.bill-search-wrap .con-item select {
+    padding-left: 0.67rem;
+    width: 86%;
+}
+
+.bill-search-wrap .con-item select {
+    height: 98% !important;
+    background: #fff !important;
+}
+
+select,
+option {
+    border: none;
+    appearance: none;
+    -moz-appearance: none;
+    /* Firefox */
+    -webkit-appearance: none;
+    /* Safari 和 Chrome */
+}
+
+select:focus,
+option:focus {
+    outline: none;
+}
+
+
+/* 按钮 */
+
+.btn-wrap {
+    display: flex;
+    height: 2.56rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-wrap span {
+    display: inline-block;
+    height: 1.38rem;
+    width: 6.67rem;
+    font-size: 0.8rem;
+    color: #fff;
+    /* background: #008fff; */
+    /* border-radius: 1.11rem; */
+    background: url("../images/btn-bg.png") center / 6.67rem 1.38rem no-repeat;
+    text-align: center;
+    line-height: 1.38rem;
+}
+
+
+/* 账单列表 */
+
+.bill-list-wrap {
+    width: 100%;
+}
+
+.bill-list-wrap .tab-wrap {
+    padding: 0 3%;
+    width: 100%;
+    height: 1.82rem;
+    font-size: 0;
+}
+
+.tab-wrap {
+    background: #fff;
+}
+
+.swiper-slide {
+    width: 100%;
+}
+
+.swiper-pagination {
+    width: 100%;
+    background: #fff;
+}
+
+.tab-wrap .tab-content {
+    background: #fff;
+}
+
+.tab-wrap .tab-item {
+    display: inline-block;
+    width: 24%;
+    height: 1.81rem;
+    color: #3b4257;
+    line-height: 1.81rem;
+    text-align: center;
+}
+
+
+/*ios使用sticky样式实现*/
+
+.tab-sticky {
+    z-index: 9999;
+    /*需设置zIndex,避免在悬停时,可能会被列表数据遮住*/
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    /*相对mescroll的div悬停的位置*/
+}
+
+
+/*android和pc端悬停*/
+
+.tab-fixed {
+    z-index: 9999;
+    position: fixed;
+    top: 0.0001px;
+    left: 0;
+    width: 100%;
+}
+
+.tab-wrap .tab-item span {
+    font-size: 0.67rem;
+}
+
+.tab-wrap .tab-active {
+    color: #0287ef;
+    background: url("../images/tab-line.png") center bottom / 3.87rem 0.07rem no-repeat;
+}
+
+.mescroll {
+    position: fixed;
+    top: 0.001px;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: auto;
+    overflow-x: hidden;
+}
+
+.swiper-list-wrap .list-item {
+    margin-top: 0.44rem;
+    padding-left: 3%;
+    min-height: 2rem;
+    height: auto;
+    background: #fff;
+    border-top: 1px solid #ececec;
+    border-bottom: 1px solid #ececec;
+}
+
+.list-item .state-wrap {
+    width: 100%;
+    height: 1.07rem;
+    text-align: right;
+}
+
+.list-item .state {
+    display: inline-block;
+    width: 3.96rem;
+    height: 1.07rem;
+}
+
+
+/* 支付成功 */
+
+.list-item .success-state {
+    background: url("../images/icon-success.png") center / 3.96rem 1.07rem no-repeat;
+}
+
+
+/* 支付失败 */
+
+.list-item .fail-state {
+    background: url("../images/icon-fail.png") center / 3.96rem 1.07rem no-repeat;
+}
+
+.list-item .state span {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    font-size: 0.6rem;
+    color: #fff;
+    vertical-align: top;
+    line-height: 1.07rem;
+    text-indent: 0.8rem;
+    text-align: center;
+}
+
+
+/* 支付成功 */
+
+.list-item .success-state span {
+    background: url("../images/icon-right.png") 0.44rem center / .53rem .53rem no-repeat;
+}
+
+
+/* 支付失败 */
+
+.list-item .fail-state span {
+    background: url("../images/icon-error.png") 0.44rem center / .53rem .53rem no-repeat;
+}
+
+.list-item .content {
+    position: relative;
+    top: 0;
+    padding-right: 3%;
+    min-height: 2rem;
+    width: 100%;
+    font-size: 0;
+}
+
+.list-item .left-content {
+    display: inline-block;
+    width: 60%;
+    vertical-align: top;
+}
+
+.list-item .right-content {
+    display: inline-block;
+    margin-top: 1.11rem;
+    width: 40%;
+    height: 2rem;
+    vertical-align: top;
+}
+
+.list-item .content {
+    color: #3b4257;
+}
+
+.list-item .content .font {
+    display: inline-block;
+    height: 1.11rem;
+    line-height: 1.11rem;
+}
+
+.list-item .content .start-point,
+.list-item .content .end-point {
+    min-width: 2.89rem;
+}
+
+.list-item .content .start-time,
+.list-item .content .end-time {
+    text-indent: 0.11rem;
+}
+
+.icon-direct {
+    display: inline-block;
+    width: 1.78rem;
+    height: 1.78rem;
+    background: url("../images/icon-direct.png") center / 0.62rem 0.71rem no-repeat;
+}
+
+.list-item .right-content p {
+    width: 100%;
+    text-align: right;
+}
+
+.fail-detail .icon {
+    display: inline-block;
+    width: 100%;
+    height: 1.33rem;
+}
+
+.fail-reason {
+    display: inline-block;
+    width: 100%;
+    color: #e00000;
+    text-align: left;
+}
+
+.fail-detail .icon-up {
+    background: url("../images/icon-up.png") center / 0.62rem 0.53rem no-repeat;
+}
+
+.fail-detail .icon-down {
+    background: url("../images/icon-down.png") center / 0.62rem 0.53rem no-repeat;
+}
+
+
+/* 无数据页面 */
+
+.empty-wrap {
+    width: 100%;
+    height: auto;
+    background: #fff;
+}
+
+.empty-wrap .content {
+    width: 100%;
+    height: calc(100vh - 10.49rem);
+    /* min-height: calc(100vh - 10.49rem);   */
+}
+
+.icon-empty {
+    display: inline-block;
+    margin-top: 4.44rem;
+    width: 100%;
+    height: 4.6rem;
+    min-height: 4.6rem;
+    background: url("../images/bg-empty.png") center / 6.22rem 4.6rem no-repeat;
+}
+
+.notice-wrap {
+    margin-top: 1.11rem;
+}
+
+.notice-wrap span {
+    display: inline-block;
+    width: 100%;
+    height: 1.11rem;
+    line-height: 1.11rem;
+    text-align: center;
+}
+
+
+/* picker样式覆盖 */
+
+.picker {
+    font-size: .58rem;
+}
+
+.picker-header {
+    padding: .475rem .6rem;
+}
+
+.picker-title {
+    font-size: 0.62rem;
+    line-height: 0.62rem;
+}
+
+.picker-close {
+    font-size: .96rem;
+    height: 1.6rem;
+}
+
+.picker-cancel,
+.picker-confirm {
+    font-size: .6rem;
+    padding: .4rem .5rem;
+}

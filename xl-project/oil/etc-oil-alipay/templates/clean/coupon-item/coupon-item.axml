@@ -1,0 +1,21 @@
+<template name="coupon_item">
+    <view class="coupon-item-template-container">
+        <image class="coupon-item-template-image" src="https://oss.etcsd.com/object/30c76dfc2d244b5486c28699e9bf3a95">
+        </image>
+        <view class="coupon-item-template-box">
+            <view class="coupon-item-template-left">
+                <text class="coupon-item-template-left-num">{{item.coupon_amt?item.coupon_amt:'1'}}</text>
+                <text class="coupon-item-template-left-text">{{item.coupon_type==='4'?'次':'元'}}</text>
+            </view>
+            <view class="coupon-item-template-center">
+                <text
+                    class="coupon-item-template-center-name">{{item.coupon_type==='0'?'加油优惠券':item.coupon_type==='1'?'洗车优惠券':item.coupon_type==='3'?'提货券':item.coupon_type==='4'?'洗车抵用券':'优惠券'}}</text>
+                <text class="coupon-item-template-center-time">{{item.invalid_time?item.invalid_time+'过期':''}}</text>
+            </view>
+            <view class="coupon-item-template-right" catchTap="goCouponClick">
+                <image class="coupon-item-template-right-image"></image>
+                <!--                <view class="coupon-item-template-right-text">查看</view>-->
+            </view>
+        </view>
+    </view>
+</template>

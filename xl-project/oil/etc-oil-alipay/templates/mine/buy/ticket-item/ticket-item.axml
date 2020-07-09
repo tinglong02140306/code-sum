@@ -1,0 +1,25 @@
+<template name="ticket_item">
+    <view class="ticket-card-template-container">
+        <image class="ticket-card-template-bg-img"
+            src="{{item.background_url?item.background_url:'https://oss.etcsd.com/object/17e7048da2fa48f89e729d0ded3250be'}}">
+        </image>
+        <view class="ticket-card-template-box">
+            <view class="ticket-card-template-info-top">
+                <text class="ticket-card-name-text">{{item.package_name}}</text>
+                <view class="ticket-card-discount-value">{{item.discount_rate}}折</view>
+            </view>
+            <view class="ticket-card-template-info-top-2">
+                <text class="ticket-card-count-text">含{{item.coupon_count}}张洗车券</text>
+                <view class="ticket-card-money-content">
+                    <text>￥</text>
+                    <text style="font-size: {{'48rpx'}}">{{item.package_price}}</text>
+                </view>
+            </view>
+        </view>
+        <view class="ticket-card-template-bottom">
+            <!--水蜡精洗10次，有效期365天-->
+            <text class="ticket-card-template-introduce">{{item.description}}</text>
+            <view class="ticket-card-template-button theme-button">购买</view>
+        </view>
+    </view>
+</template>

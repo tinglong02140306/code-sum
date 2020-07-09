@@ -1,0 +1,80 @@
+.order-list-template-container {
+    width: 100%;
+    background-color: #ffffff;
+    padding-top: 10rpx;
+}
+
+.order-list-template-box {
+    width: 100%;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 10rpx 32rpx;
+}
+
+.order-list-template-line {
+    margin-top: 20rpx;
+    margin-left: 132rpx;
+    margin-right: 0;
+    height: 2rpx;
+    background-color: #F2F2F2;
+}
+
+.order-template-item-left {
+    /*width: 100rpx;*/
+    /*height: 100rpx;*/
+    width: 78rpx;
+    height: 76rpx;
+    border-radius: 100%;
+    background-color: rgba(255, 255, 255, 1);
+    /*border: 2rpx solid rgba(0, 0, 0, 0.15);*/
+    margin: 32rpx;
+}
+
+.order-template-item-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+    overflow: hidden;
+}
+
+.order-template-item-center text {
+    line-height: 40rpx;
+}
+
+.order-template-item-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.order-template-station {
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 32rpx;
+    text-align: left;
+    width: 100%;
+    font-family: PingFang-SC-Medium;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.order-template-oil {
+    margin-top: 6rpx;
+    color: rgba(0, 0, 0, 0.45);
+    font-size: 26rpx;
+    text-align: left;
+    font-family: PingFangSC-Regular;
+}
+
+.order-template-money {
+    color: rgba(0, 0, 0, 1);
+    font-size: 32rpx;
+    font-weight: bold;
+    text-align: right;
+    font-family: PingFang-SC-Regular;
+}

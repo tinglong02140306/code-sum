@@ -1,0 +1,13 @@
+<view class="popup" a:if="{{show}}" onTap="onMaskerClick" catchTouchMove="preventTouchMove">
+    <view class="popup-content-bottom bottom-pos"
+        a:if="{{position==='bottom'}}"
+        animation="{{animation}}"
+        id="bottom"
+        catchTap="onContentClick">
+        <slot></slot>
+    </view>
+    <view class="popup-content-center"
+        a:if="{{position==='center'}}">
+        <slot></slot>
+    </view>
+</view>

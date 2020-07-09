@@ -1,0 +1,134 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    font: normal 14px "Microsoft YaHei";
+}
+.location {
+    padding: 10px;
+    background: #fff;
+    font-size: 12px;
+    color: #999;
+}
+.location .title {
+    padding: 0 4px 0 8px;
+    height: 28px;
+    background: #f4f6fa;
+    line-height: 28px;
+}
+.location .title .label {
+    margin-right: 6px;
+}
+.location .title span {
+    margin: 0 2px;
+}
+.location .triangle {
+    height: 2px;
+    border-left: 14px solid #f4f6fa;
+    border-top: 13px solid #fff;
+    border-bottom: 13px solid #fff;
+}
+.form-div {
+    position: relative;
+    padding: 0 10px 10px;
+    background: #fff;
+    border-bottom: 1px solid #eceff0;
+}
+/*搜索按钮*/
+.search-btn:focus,
+.query-btn:focus, 
+.add-btn:focus, 
+.search-btn:hover, 
+.query-btn:hover, 
+.add-btn:hover {
+    background-color: #0085b1;
+    color: #fff;
+}
+.query-form {
+    width: 80%;
+}
+.form-btn-group {
+    margin: 5px 0;
+}
+.query-btn {
+    margin-left: 40px;
+    padding: 0;
+    width: 80px;
+    height: 30px; 
+    font-size: 14px;
+    line-height: 30px;
+}
+.icon-triangle-down:before {
+    content: "\e638";
+}
+.icon {
+    background-image: none;
+}
+.widget .select {
+    line-height: 28px;
+}
+
+.result-div {
+    padding: 10px;
+    background: #f5f5f5;
+}
+.grid {
+    background: #fff;
+    border: 1px solid #eceff0;
+    border-top: none;
+}
+.grid .grid-title {
+    position: relative;
+    padding: 8px;
+    border-top: 1px solid #eceff0;
+    line-height: 40px;
+}
+.grid .grid-title h2 {
+    margin: 5px 0;
+    padding-left: 12px;
+    height: 20px;
+    border-left: 3px solid #0099cc;
+    line-height: 20px;
+    font-size: 14px;
+    font-weight: normal;
+}
+.add-btn {
+    padding: 0;
+    width: 62px;
+    height: 28px;
+    background: #0099cc;
+    border-radius: 0;
+    line-height: 28px;
+    color: #fff;
+}
+.btn {
+    border-radius: 0px !important;
+}
+
+.datapicker-range-wrap {
+    position: relative;
+}
+.odd {
+    background: #fff;
+}
+.grid-table tbody tr.hover td, .grid-table tbody tr:hover td {
+     background-color: #eaedf1; 
+}
+.grid-table tbody tr.odd td, 
+.grid-table tbody tr:nth-child(odd) td {
+     background-color: #fff; 
+}
+.grid-table tr:hover td, .grid-table tr.even:hover td {
+     background: #eaedf1; 
+}
+.grid-table td, .grid-table th {
+    border-top: 1px solid #eceff0;
+    border-bottom: none; 
+    border-collapse: collapse;
+}
+.f5 {
+    background: #f5f5f5;
+}
+.empty-data {
+    height: 250px !important;
+}
+

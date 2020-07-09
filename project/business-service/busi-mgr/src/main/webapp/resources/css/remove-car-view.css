@@ -1,0 +1,135 @@
+.container {
+	padding: 0 20px;
+    margin: 20px auto 0;
+    width: 100%;
+}
+.container .payment-title {
+	height: 40px;
+	font-size: 16px;
+}
+.container .grid {
+    margin: 15px 0 30px 0;
+    border-radius: 0;
+    border-left: none;
+}
+.container  .grid-pic {
+    margin-top: -10px;
+
+}
+.detail-content .table-detail td, 
+.detail-content .grid .table-detail {
+    border: 1px solid #eaeaea;
+}
+.detail-content .table-detail td {
+    text-align: left;
+    text-indent: 4px;
+}
+.detail-content .table-detail td.bg-grey {
+    text-align: center;
+    text-indent: 0;
+}
+.detail-content .grid .table-detail {
+    border-top: none;
+}
+.grid-table {
+    margin: 0;
+}
+.detail-content .table-detail th {
+    padding: 0;
+    height: 0;
+    border: none;
+}
+.detail-content .table-detail td {
+    height: 36px;
+}
+.detail-content .grid tr {
+    height: 0;
+}
+.grid tr td {
+    background: #fff;
+}
+.bg-grey {
+    background-color: #f5f5f5 !important;
+}
+/*小标题*/
+.tab-title {
+    padding: 10px 0;
+    font-size: 0;
+    border-bottom: 1px solid #eceff0;
+}
+
+.tab-title em {
+    display: inline-block
+}
+em, i {
+    font-style: normal;
+}
+
+/*.tab-title .tab-title-icon {
+    width: 5px;
+    height: 12px;
+    background: #5f96ec
+}*/
+
+.tab-title .tab-title-label {
+    height: 16px;
+    font-size: 14px;
+    color: #222;
+    line-height: 16px;
+    text-indent: 8px
+}
+.grid-table thead  tr {
+    height: 0;
+}
+.grid-table tbody tr.hover td, 
+.grid-table tbody tr:hover td {
+    /*background-color: #fffcee;*/
+}
+.container .grid .grid-table .bo-border,
+.container .grid .grid-table .to-border {
+    border-bottom: 1px solid #eceff0;
+}
+.container .grid-pic .grid-table  td {
+    height: 120px;
+}
+.container .grid .grid-table th,
+.container .grid .grid-table td {
+    padding: 5px 0;
+    height: 30px;
+    border-left: 1px solid #eceff0;
+    border-top: 1px solid #eceff0;
+    border-bottom: none;
+    border-collapse: collapse;
+    color: #333;
+    font-size: 12px;
+    text-align: center;
+    line-height: 30px;
+}
+
+/*=======图片预览======start*/
+.pic-preview {
+    display: inline-block;
+    word-break: break-all;
+    color: #333;
+}
+.img-list {
+    float: left;
+    margin: 5px;
+}
+.feedback-img {
+    width: 163px;
+    height: 100px;
+}
+.container .grid-pic .grid-table .pic-preview-td {
+    text-align: left;
+}
+
+/*=======图片预览======end*/
+
+.grid-table tbody tr.even td,
+.grid-table tbody tr:nth-child(even) td {
+    background-color: #fff;
+}
+.grid-table tbody tr.hover td, .grid-table tbody tr:hover td {
+    background-color: transparent; !important;
+}

@@ -1,0 +1,15 @@
+<view class="image-loader-container">
+    <image 
+        class="image-loader-default"
+        src="{{default}}" 
+        mode="{{mode}}"
+        wx:if="{{!loadFinish}}"
+        style="width:{{width}};height:{{height}};{{css}}"></image>
+    <image 
+        src="{{src}}" 
+        bindload="onLoadImage" 
+        binderror="onErrorImage"
+        mode="{{mode}}"
+        class='{{loadFinish ? "" : "before-load"}}'
+        style="width:{{!loadFinish?0:width}};height:{{!loadFinish?0:height}};{{css}}"></image>
+</view>

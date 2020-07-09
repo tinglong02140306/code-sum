@@ -1,0 +1,253 @@
+/* 挪车评价 start*/ 
+.ios-header {
+	position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+.content-wrap {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	width: 100%;
+}
+.form {
+	padding: 0rem 4.2%;
+	background: #fff;
+}
+.form-item {
+	height: 3.58rem;
+	background: url(../images/common/border-icon.png) left bottom 1px repeat-x;
+}
+.item-label {
+	width: 28.8%;
+	height: 3.58rem;
+	font-size: 0.76rem;
+	color: #222;
+	line-height: 3.58rem;
+	text-align: left;
+}
+.item-value {
+	width: calc(100% - 28.8%);
+	height: 3.58rem;
+	text-align: right;
+	font-size: 0;
+}
+.item-value div {
+	display: inline-block;
+    padding: 0.72rem 0.36rem 0.68rem;
+    width: 1.30rem;
+    font-size: 0;
+    color: #9d9d9d;
+    text-align: center;
+}
+.item-value div:last-child {
+	padding-right: 0rem;
+}
+.item-value span {
+	display: inline-block;
+	font-size: 0.53rem;
+}
+.make-complaint .img-style,
+.average-prise .img-style,
+.satisfaction .img-style {
+	width: 1.30rem;
+	height: 1.28rem;
+	background: url('../images/remove-car/satisfaction-icon-select.png') no-repeat center center;
+	background-size: 1.30rem 1.28rem;
+}
+.item-value img {
+	height: 1.28rem;
+	width: 1.30rem;
+	padding-bottom: 0.2rem;
+}
+.make-complaint .img-style {
+	background: url('../images/remove-car/make-complaints.png') no-repeat center center;
+	background-size: 1.30rem 1.28rem;
+}
+.make-complaint .img-style-select {
+	background: url('../images/remove-car/make-complaints-select.png') no-repeat center center;
+	background-size: 1.30rem 1.28rem;
+}
+.average-prise .img-style {
+	background: url('../images/remove-car/average-prise.png') no-repeat center center;
+	background-size: 1.30rem 1.28rem;
+}
+.average-prise .img-style-select {
+	background: url('../images/remove-car/average-prise-select.png') no-repeat center center;
+	background-size: 1.30rem 1.28rem;
+}
+
+.make-complaint span {
+	width: 1.30rem;
+    text-align: center;
+}
+.hide-opacity {
+	opacity: 0;
+}
+.write-evaluate {
+    padding: 0.6rem 0rem;
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    height: 5.26rem;
+    background-color: #fff;
+    border: 0;
+    resize: none;
+    outline: 0;
+    color: #808080;
+    font-size: 0.66rem;
+    line-height: 0.9rem;
+    font-family: inherit;
+    -webkit-touch-callout:text;
+    -webkit-user-select:text;
+    -khtml-user-select:text;
+    -moz-user-select:text;
+    -ms-user-select:text;
+    user-select:text; 
+}
+.submit-evaluate {
+	margin: 0.95rem 4.2% 0 4.2%; 
+	width: calc(100% - 8.4%);
+	height: 1.78rem;
+	background: #4c72ff;
+	border-radius: 4px;
+	font-size: 0.75rem;
+	color: #fff;
+	text-align: center;
+	line-height: 1.78rem;
+}
+.mask {
+    position: fixed;
+    z-index: 998;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, .4);
+    transition: all 0.4s;
+    touch-action: none;
+}
+
+.success-content {
+	position: absolute;
+    top: 10.42rem;
+	margin: 0rem 35.5%;
+    width: 29%;
+	height: 4.52rem;
+	background-color: #585c64;
+	border-radius: 4px;
+	font-size: 0.66rem;
+	color: #fff;
+}
+.success-img {
+	height: 2.9rem;
+	width: 100%;
+	background: url('../images/remove-car/evaluate-ok.png') no-repeat center center;
+	background-size: 1.7rem 1.7rem;
+}
+.success-tip {
+	padding-bottom: 0.76rem;
+	text-align: center;
+}
+/*  挪车评价 end */
+
+
+.remove-status {
+	background: #f5f5f5; 
+}
+.remove-status div {
+	padding: 0.86rem 0rem;
+	width: 50%; 	
+}
+.remove-status .success-wrap {
+	position: relative;
+	padding-right: 1.16rem;
+    font-size: 0;
+    text-align: right;
+}
+.remove-status .fail-wrap {
+	position: relative;
+	padding-left: 1.16rem;
+	font-size: 0;
+	text-align: left;
+}
+.select-success-img {
+	height: 2.70rem;
+	width: 2.70rem;
+	border: 2px solid #4c72ff;
+    border-radius: 50%;
+}
+.success-bg {
+	display: inline-block;
+	height: 2.70rem;
+	width: 2.70rem;
+	background: url('../images/remove-car/success-icon.png') no-repeat center center;
+	background-size: 2.7rem 2.7rem;
+	border: 2px solid #4c72ff;
+    border-radius: 50%;
+}
+.select-success-bg {
+	background: url('../images/remove-car/success-select.png') no-repeat center center;
+	background-size: 2.7rem 2.7rem;
+}
+.seclect-icon {
+	position: absolute;
+	top: 0.1rem;
+    right: 1.2rem;
+	width: 0.62rem;
+	height: 0.62rem;
+	background: url('../images/remove-car/remove-select.png') no-repeat center center;
+	background-size: 100% 100%;
+}
+.fail-type {
+	right: 4rem;
+}
+.fail-wrap {
+	position: relative;
+}
+.fail-success-img {
+	height: 2.70rem;
+	width: 2.70rem;
+	border: 2px solid #d4d4d4;
+    border-radius: 50%;
+}
+.fail-bg {
+	display: inline-block;
+	height: 2.70rem;
+	width: 2.70rem;
+	background: url('../images/remove-car/fail-icon.png') no-repeat center center;
+	background-size: 2.7rem 2.7rem;
+	border: 2px solid #d4d4d4;
+	border-radius: 50%;
+}
+.fail-select-bg {
+	background: url('../images/remove-car/fail-select.png') no-repeat center center;
+	background-size: 2.7rem 2.7rem;
+}
+.success-select-label {
+	padding-right: 1.16rem;
+	text-align: right;
+	font-size: 0rem;
+}
+.fail-select-label {
+	padding-left: 1.16rem;
+	text-align: left;
+	font-size: 0rem;
+}
+.success-select-label span {
+	display: inline-block;
+	padding-top: 0.33rem;
+	width: 2.70rem;
+	font-size: 0.53rem;
+	color: #4c72ff;
+	text-align: center;
+}
+.fail-select-label span {
+	display: inline-block;
+	padding-top: 0.33rem;
+	width: 2.70rem;
+	font-size: 0.53rem;
+	color: #3d3d3d;
+	text-align: center;
+}

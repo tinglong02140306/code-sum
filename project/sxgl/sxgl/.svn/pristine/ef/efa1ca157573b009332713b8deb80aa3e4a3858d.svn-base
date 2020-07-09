@@ -1,0 +1,1402 @@
+/*
+* @Author: gaoxiong
+* @Date: 2018-10-01 14:45:00
+ * @Last Modified by: qijiang
+ * @Last Modified time: 2018-12-26 21:03:30
+* @description 字典管理
+*/
+<template>
+  <div id="dictionary">
+    <tabNavigate :tabs="tabs"></tabNavigate>
+    <div class="main-wrap clearfix">
+      <div class="dictionary-wrap">
+      <div class="first clearfix">
+        <!--字典类型查询-->
+        <div class="dictionary-search">
+          <!-- head -->
+          <div class="head">
+            <detailHead :subTitle="firstZoneTitle"></detailHead>
+          </div>
+          <!-- content -->
+          <Form :model="formItem" :rules="formValidate" ref="formValidate" :label-width="80">
+            <FormItem label="类型代码" prop="dictCode">
+              <Input v-model="formItem.dictCode" size="small" @change="(val)=>changeInput(val,'dictCode')"></Input>
+            </FormItem>
+            <FormItem label="类型名称" prop="dictName">
+              <Input v-model="formItem.dictName" size="small" @change="(val)=>changeInput(val,'dictName')"></Input>
+            </FormItem>
+            <FormItem class="searchBtn">
+              <Button type="primary" icon="ios-search" @click="search('formValidate')">搜索</Button>
+            </FormItem>
+          </Form>
+        </div>
+        <!--字典展示-->
+        <div class="dictionary-show">
+          <!-- head -->
+          <div class="head">
+            <detailHead :subTitle="secondZoneTitle"></detailHead>
+          </div>
+          <!-- content -->
+          <Tree class="tree" :data="treeData" :render="treeRenderContent"></Tree>
+        </div>
+      </div>
+      <div class="second clearfix">
+        <!--字典类型-->
+        <div class="dictionary-type">
+          <!-- head -->
+          <div class="head">
+            <detailHead :subTitle="thirdZoneTitle"></detailHead>
+            <div class="operate-img">
+              <a class="dictionary-grid-btn type-add-btn" title="新增" href="javascript:void(null);" @click="typeAddBtn"></a>
+              <a class="dictionary-grid-btn type-delete-btn" title="删除" href="javascript:void(null);" @click="typeDeleteBtn"></a>
+              <a class="dictionary-grid-btn type-edit-btn" title="编辑" href="javascript:void(null);" @click="typeEditBtn"></a>
+              <vue-upload-web class="hide" :url="typeUploadUrl" :form-data="typeUploadParams" :accept="typeUploadAccept" :key-generator="typeKeyGenerator" @progress="typeUploadProgress" @success="typeHandleSuccess" @before="typeBeforeUpload" @error="typeUploadError" @complete="typeHandleComplete" upload-button=".btns" :multiple=false>
+              </vue-upload-web>
+              <a class="dictionary-grid-btn type-import-btn btns" title="导入" href="javascript:void(null);"></a>
+              <a class="dictionary-grid-btn type-export-btn" title="导出" href="javascript:void(null);" @click="typeExportBtn"></a>
+              <a class="dictionary-grid-btn type-refresh-btn" title="刷新" href="javascript:void(null);" @click="typeRefreshBtn"></a>
+            </div>
+          </div>
+          <!-- content -->
+          <div class="mt15">
+            <Table highlight-row ref="typeCurrentRowTable" :columns="typeColumnsData" :data="typeItemData" @on-row-click="typeRowClick"></Table>
+            <div class="mt10 mr10">
+              <div class="fr">
+                <Page :total="typeTotal" :page-size="5" :current="1" show-total @on-change="typeChangePage" size="small" show-elevator></Page>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--字典值-->
+        <div class="dictionary-value">
+          <!-- head -->
+          <div class="head">
+            <detailHead :subTitle="forthZoneTitle"></detailHead>
+            <div class="operate-img">
+              <a class="dictionary-grid-btn value-add-btn" :class="{'value-add-disabled': isValueOperateDisabled, 'disabled': isValueOperateDisabled}" title="新增" href="javascript:void(null);" @click="valueAddBtn"></a>
+              <a class="dictionary-grid-btn value-delete-btn" :class="{'value-delete-disabled': isValueOperateDisabled, 'disabled': isValueOperateDisabled}" title="删除" href="javascript:void(null);" @click="valueDeleteBtn"></a>
+              <a class="dictionary-grid-btn value-edit-btn" :class="{'value-edit-disabled': isValueOperateDisabled, 'disabled': isValueOperateDisabled}" title="编辑" href="javascript:void(null);" @click="valueEditBtn"></a>
+              <a class="dictionary-grid-btn value-up-btn" :class="{'value-up-disabled': isValueOperateDisabled, 'disabled': isValueOperateDisabled}" title="上移" href="javascript:void(null);" @click="valueUpBtn"></a>
+              <a class="dictionary-grid-btn value-down-btn" :class="{'value-down-disabled': isValueOperateDisabled, 'disabled': isValueOperateDisabled}" title="下移" href="javascript:void(null);" @click="valueDownBtn"></a>
+            </div>
+          </div>
+          <!-- content -->
+          <div class="mt15">
+            <Table highlight-row ref="valueCurrentRowTable" :columns="valueColumnsData" :data="valueItemData" @on-row-click="valueRowClick"></Table>
+            <div class="mt10 mr10">
+              <div class="fr">
+                <Page :total="valueTotal" :page-size="5" :current="1" show-total @on-change="valueChangePage" size="small" show-elevator></Page>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--字典类型-新增-->
+    <Modal id="dictionaryAddDialogModal" v-model="typeAddDialogModal" title="字典类型" :mask-closable="false" @on-visible-change="typeAddDialogVisibleChange">
+      <Form :model="typeAddDialogFormItem" :rules="typeAddDialogRuleValidate" ref="typeAddDialogRuleValidate" :label-width="80">
+        <FormItem label="类型代码" prop="dictCode">
+          <Input v-model="typeAddDialogFormItem.dictCode"></Input>
+        </FormItem>
+        <FormItem label="类型名称" prop="dictName">
+          <Input v-model="typeAddDialogFormItem.dictName"></Input>
+        </FormItem>
+        <FormItem label="来源配置" prop="dictDataSql">
+          <Input v-model="typeAddDialogFormItem.dictDataSql" type="textarea" :autosize="{minRows: 2,maxRows: 5}"></Input>
+        </FormItem>
+        <FormItem label="加载方式" prop="loadType">
+          <Select v-model="typeAddDialogFormItem.loadType">
+            <Option v-for="item in loadTypeList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+          </Select>
+        </FormItem>
+        <FormItem label="描述" prop="dictDes">
+          <Input v-model="typeAddDialogFormItem.dictDes" type="textarea" :autosize="{minRows: 2,maxRows: 5}"></Input>
+        </FormItem>
+      </Form>
+      <div slot="footer">
+        <el-button type="primary" size="small" @click="typeAddDialogOk('typeAddDialogRuleValidate')">确定</el-button>
+        <el-button type="text" size="small" @click="typeAddDialogModal = false">取消</el-button>
+        
+      </div>
+    </Modal>
+    <!--字典类型-删除-->
+    <Modal id="dictionaryDeleteDialogModal" v-model="typeDeleteDialogModal" title="删除" :mask-closable="false">
+      <div style="font-size: 14px">
+        <p>确定删除该记录</p>
+      </div>
+      <div slot="footer">
+        <el-button type="primary" size="small" @click="typeDeleteDialogOk">确定</el-button>
+        <el-button type="text" size="small" @click="typeDeleteDialogModal = false">取消</el-button>
+      </div>
+    </Modal>
+    <!--字典值-新增-->
+    <Modal id="dictionaryAddDialogModal" v-model="valueAddDialogModal" title="字典值" :mask-closable="false" @on-visible-change="valueAddDialogVisibleChange">
+      <Form :model="valueAddDialogFormItem" :rules="valueAddDialogRuleValidate" ref="valueAddDialogRuleValidate" :label-width="80">
+        <FormItem label="代码" prop="dictCode">
+          <Input v-model="valueAddDialogFormItem.dictCode"></Input>
+        </FormItem>
+        <FormItem label="名称" prop="dictName">
+          <Input v-model="valueAddDialogFormItem.dictName"></Input>
+        </FormItem>
+        <FormItem label="简称" prop="shortName">
+          <Input v-model="valueAddDialogFormItem.shortName"></Input>
+        </FormItem>
+        <FormItem label="上级" prop="">
+          <Select v-model="valueAddDialogFormItem.sjxh">
+            <Option v-for="item in treeData[0].children" :value="item.dictId" :key="item.dictId">{{ item.dictName }}</Option>
+          </Select>
+        </FormItem>
+        <FormItem label="排序值" prop="rankItem">
+          <Input v-model="valueAddDialogFormItem.rankItem"></Input>
+        </FormItem>
+      </Form>
+      <div slot="footer">
+        <el-button type="primary" size="small" @click="valueAddDialogOk('valueAddDialogRuleValidate')">确定</el-button>
+        <el-button type="text" size="small" @click="valueAddDialogModal = false">取消</el-button>
+      </div>
+    </Modal>
+    <!--字典值-删除-->
+    <Modal id="dictionaryDeleteDialogModal" v-model="valueDeleteDialogModal" title="删除" :mask-closable="false">
+      <div style="font-size: 14px">
+        <p>确定删除该记录</p>
+      </div>
+      <div slot="footer">
+        <Button type="text" size="large" @click="valueDeleteDialogModal = false">取消</Button>
+        <Button type="primary" size="large" @click="valueDeleteDialogOk">确定</Button>
+      </div>
+    </Modal>
+    </div>
+  </div>
+</template>
+<script>
+import detailHead from "@/components/common/detailHead";   // 公共头部
+import unit from '@/api/index';
+import tabNavigate from "@/components/common/tabNavigate";   // 页签导航
+import vueUploadWeb from '@/components/upload/upload';
+
+export default {
+  components: {
+    detailHead,
+    tabNavigate: tabNavigate,
+    'vue-upload-web':vueUploadWeb
+  },
+  data() {
+    //排序值校验
+    var vlilegalSort = (rule, value, callback) => {
+      if (value) {//有值才检验
+        let reg = /^(0|([1-9]\d{0,4}))$/;
+        if (!reg.test(value)) {
+          callback(new Error('请输入0-99999之间的正整数'));
+        } else {
+          callback();
+        }
+      } else {
+        callback();
+      }
+    };
+    return {
+      tabs: ['字典管理', '字典配置'],
+      firstZoneTitle: '字典类型查询',
+      secondZoneTitle: '字典展示',
+      thirdZoneTitle: '字典类型',
+      forthZoneTitle: '字典值',
+      //字典类型查询模块
+      formItem: {
+        dictCode: '',
+        dictName: '',
+      },
+      formValidate: {
+        dictCode: [{
+          max: 50,
+          message: '长度最大不能超过50',
+          trigger: 'blur'
+        }],
+        dictName: [{
+          max: 50,
+          message: '长度最大不能超过50',
+          trigger: 'blur'
+        }],
+      },
+      //字典展示模块
+      treeData: [{
+        title: '字典展示',
+        expand: true,
+        render: (h, { root, node, data }) => {
+          return h('span', {
+            style: {
+              display: 'inline-block',
+              width: '100%'
+            }
+          }, [
+              h('span', [
+                h('Icon', {
+                  props: {
+                    type: 'ios-folder-outline'
+                  },
+                  style: {
+                    marginRight: '8px'
+                  }
+                }),
+                h('span', data.title)
+              ])
+            ]);
+        },
+        children: []
+      }
+      ],
+      //字典类型模块
+      typeCurrentPageNo: 1,
+      typeColumnsData: [{
+        title: '类型代码',
+        key: 'dictCode',
+        align: 'center',
+        render: (h, params) => {
+          return h('div', [
+            h('span', {
+              style: {
+                display: 'inline-block',
+                width: '100%',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap',
+                textAlign: 'center'
+              },
+              domProps: {
+                title: params.row.dictCode
+              },
+              // on: {
+              //   click: () => {
+              //     alert(params.index);
+              //   }
+              // }
+            },
+              params.row.dictCode
+            )
+          ]);
+        }
+      }, {
+        title: '类型名称',
+        key: 'dictName',
+        align: 'center',
+        render: (h, params) => {
+          return h('div', [
+            h('span', {
+              style: {
+                display: 'inline-block',
+                width: '100%',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap',
+                textAlign: 'center'
+              },
+              domProps: {
+                title: params.row.dictName
+              },
+              // on: {
+              //   click: () => {
+              //     alert(params.index);
+              //   }
+              // }
+            },
+              params.row.dictName
+            )
+          ]);
+        }
+      }, {
+        title: '加载方式',
+        key: 'loadTypeValue',
+        align: 'center',
+        render: (h, params) => {
+          return h('div', [
+            h('span', {
+              style: {
+                display: 'inline-block',
+                width: '100%',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap',
+                textAlign: 'center'
+              },
+              domProps: {
+                title: params.row.loadTypeValue
+              },
+              // on: {
+              //   click: () => {
+              //     alert(params.index);
+              //   }
+              // }
+            },
+              params.row.loadTypeValue
+            )
+          ]);
+        }
+      }
+      ],
+      typeItemData: [],
+      typeTotal: 0,
+      //字典值模块
+      valueCurrentPageNo: 1,
+      valueColumnsData: [{
+        title: '代码',
+        key: 'dictCode',
+        align: 'center',
+        render: (h, params) => {
+          return h('div', [
+            h('span', {
+              style: {
+                display: 'inline-block',
+                width: '100%',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap',
+                textAlign: 'center'
+              },
+              domProps: {
+                title: params.row.dictCode
+              }
+            },
+              params.row.dictCode
+            )
+          ]);
+        }
+      }, {
+        title: '名称',
+        key: 'dictName',
+        align: 'center',
+        render: (h, params) => {
+          return h('div', [
+            h('span', {
+              style: {
+                display: 'inline-block',
+                width: '100%',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap',
+                textAlign: 'center'
+              },
+              domProps: {
+                title: params.row.dictName
+              }
+            },
+              params.row.dictName
+            )
+          ]);
+        }
+      }, {
+        title: '简称',
+        key: 'shortName',
+        align: 'center',
+        render: (h, params) => {
+          return h('div', [
+            h('span', {
+              style: {
+                display: 'inline-block',
+                width: '100%',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap',
+                textAlign: 'center'
+              },
+              domProps: {
+                title: params.row.shortName
+              }
+            },
+              params.row.shortName
+            )
+          ]);
+        }
+      }, {
+        title: '上级代码',
+        key: 'sjxh',
+        align: 'center',
+        render: (h, params) => {
+          return h('div', [
+            h('span', {
+              style: {
+                display: 'inline-block',
+                width: '100%',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap',
+                textAlign: 'center'
+              },
+              domProps: {
+                title: params.row.sjxh
+              }
+            },
+              params.row.sjxh
+            )
+          ]);
+        }
+      }, {
+        title: '排序值',
+        key: 'rankItem',
+        align: 'center',
+        render: (h, params) => {
+          return h('div', [
+            h('span', {
+              style: {
+                display: 'inline-block',
+                width: '100%',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap',
+                textAlign: 'center'
+              },
+              domProps: {
+                title: params.row.rankItem
+              }
+            },
+              params.row.rankItem
+            )
+          ]);
+        }
+      }
+      ],
+      valueItemData: [],
+      valueTotal: 0,
+      //字典类型-新增
+      isTypeAdd: 0,
+      typeAddDialogModal: false,
+      typeAddDialogFormItem: {
+        dictCode: '',
+        dictName: '',
+        dictDataSql: '',
+        loadType: '',
+        dictDes: ''
+      },
+      typeAddDialogRuleValidate: {
+        dictCode: [{
+          required: true,
+          message: '类型代码不能为空',
+          trigger: 'change'
+        }, {
+          message: '长度最大不能超过20',
+          max: 20,
+          trigger: 'change'
+        }, {
+          message: '只允许输入字母、数字、和符号',
+          pattern: /^[^\u4e00-\u9fa5]+$/,
+          trigger: 'change'
+        }],
+        dictName: [{
+          required: true,
+          message: '类型名称不能为空',
+          trigger: 'change'
+        }, {
+          message: '长度最大不能超过50',
+          max: 50,
+          trigger: 'change'
+        }],
+        dictDataSql: [{
+          required: true,
+          message: '来源配置不能为空',
+          trigger: 'change'
+        }, {
+          message: '长度最大不能超过500',
+          max: 500,
+          trigger: 'change'
+        }],
+        loadType: [{
+          required: true,
+          message: '加载方式不能为空',
+          trigger: 'change'
+        }],
+        dictDes: [{
+          max: 500,
+          message: '长度最大不能超过500',
+          trigger: 'change'
+        }]
+      },
+      //字典类型-删除
+      typeDeleteDialogModal: false,
+      //字典值-新增
+      isValueAdd: 0,
+      valueAddDialogModal: false,
+      valueAddDialogFormItem: {
+        dictCode: '',
+        dictName: '',
+        shortName: '',
+        sjxh: '',
+        rankItem: '0'
+      },
+      valueAddDialogRuleValidate: {
+        dictCode: [{
+          required: true,
+          message: '代码不能为空',
+          trigger: 'change'
+        }, {
+          message: '长度最大不能超过20',
+          max: 20,
+          trigger: 'change'
+        }, {
+          message: '只允许输入字母、数字、和符号',
+          pattern: /^[^\u4e00-\u9fa5]+$/,
+          trigger: 'change'
+        }],
+        dictName: [{
+          required: true,
+          message: '名称不能为空',
+          trigger: 'change'
+        }, {
+          message: '长度最大不能超过100',
+          max: 100,
+          trigger: 'change'
+        }],
+        shortName: [{
+          message: '长度最大不能超过50',
+          max: 50,
+          trigger: 'change'
+        }],
+        rankItem: [{
+          validator: vlilegalSort, trigger: 'change'
+        }]
+      },
+      //字典值-删除
+      valueDeleteDialogModal: false,
+      //控制字典值的图标是否能使用
+      isValueOperateDisabled: false,
+      //记录选中的字典值
+      selectValueItemIndex: -1,
+      selectValueItem: {},
+      //记录选中的字典类型
+      selectTypeItemIndex: -1,
+      selectTypeItem: {},
+      //记录选中的字典类型itemId
+      typeItemId: '',
+      //记录选中的字典类型dictType
+      typeDictType: '',
+      //字典类型加载方式
+      loadTypeList: [],
+      //字典类型-导入
+      typeUploadUrl: '/bog-matter-mgr/dic/typeImport',//上传的地址
+      typeUploadParams: {},//上传的参数
+      typeUploadAccept: {
+        extensions: 'sql',
+      },//上传指定的类型
+    }
+  },
+  methods: {
+    /*
+    * 修复ie记忆问题
+    */ 
+    changeInput(val,key) {
+        let that = this;
+        that.formItem[key] = val == '' ? '' : val;
+    },
+    //字典类型查询模块
+    search(name) {
+      this.$refs[name].validate((valid) => {
+        if (valid) {
+          this.getTypeItemData();
+        } else {
+          this.$Message.error('Fail!');
+        }
+      })
+    },
+    //字典展示模块
+    treeRenderContent(h, { root, node, data }) {
+      return h('span', {
+        style: {
+          display: 'inline-block',
+          width: '100%'
+        }
+      }, [
+          h('span', [
+            h('Icon', {
+              props: {
+                type: 'ios-paper-outline'
+              },
+              style: {
+                marginRight: '8px'
+              }
+            }),
+            h('span', data.title)
+          ])
+        ]);
+    },
+    //获取字典数据
+    getDicValuesByDicId(itemId, dictName) {
+      let self = this;
+      unit.ajaxMerPost('/pzgl-qxpz-web/dic/valueTree', {
+        id: itemId
+      }, function (res) {
+        if (res.data && res.data.length > 0) {
+          res.data.forEach(item => {
+            item.title = item.dictName;
+            item.expand = false;
+          });
+          self.treeData[0].title = dictName;
+          self.treeData[0].children = res.data;
+          self.$nextTick(() => {
+            $('.tree ').children(":first").addClass('tree-height');
+            $('.tree ').children(":first").children(":first").addClass('tree-height');
+          })
+        } else {
+          //清除字典展示的数据
+          self.treeData[0].title = "字典展示";
+          self.treeData[0].children = [];
+        }
+      }, function (res) {
+
+      }, this);
+    },
+    //字典类型模块
+    typeDeleteBtn() {
+      let that = this;
+      if (this.selectTypeItemIndex == -1) {
+        this.$Message.warning('请选择待删除的记录！');
+      } else {
+        // this.typeDeleteDialogModal = true;
+        that.$confirm('确定删除该记录', '提示', {
+            cancelButtonText: '取消',
+            confirmButtonText: '确定',
+            cancelButtonClass: 'fr ml10',
+            type: 'warning'
+        }).then(() => {
+          that.typeDeleteDialogOk();
+        }).catch(() => { 
+        });
+      }
+    },
+    typeAddBtn() {
+      this.$refs['typeAddDialogRuleValidate'].resetFields();
+      this.typeAddDialogModal = true;
+      this.typeAddDialogFormItem = {};
+      this.isTypeAdd = 0;
+    },
+    typeEditBtn() {
+      if (this.selectTypeItemIndex == -1) {
+        this.$Message.warning('请选择待编辑的记录！');
+      } else {
+        this.typeAddDialogFormItem.dictCode = this.selectTypeItem.dictCode;
+        this.typeAddDialogFormItem.dictName = this.selectTypeItem.dictName;
+        this.typeAddDialogFormItem.dictDataSql = this.selectTypeItem.dictDataSql;
+        this.typeAddDialogFormItem.loadType = this.selectTypeItem.loadType;
+        this.typeAddDialogFormItem.dictDes = this.selectTypeItem.dictDes;
+
+        this.typeAddDialogModal = true;
+        this.isTypeAdd = 1;
+      }
+    },
+    typeExportBtn() {
+      if (this.selectTypeItemIndex == -1) {
+        this.$Message.warning('请选择待导出的记录！');
+      } else {
+        var exportUrl = '/bog-matter-mgr/dic/typeExport?ids=' + this.typeItemId;
+        exportUrl = encodeURI(exportUrl);
+        window.open(exportUrl, '_self');
+      }
+    },
+    typeRefreshBtn() {
+      if (this.selectTypeItemIndex == -1) {
+        this.$Message.warning('请选择待处理的记录！');
+      } else {
+        this.getTypeItemData();
+        // this.getDicValuesByDicId(this.typeItemId, this.selectTypeItem.dictName);
+        // this.getValueItemData(this.typeItemId, this.typeDictType);
+        setTimeout(() => {
+          this.$Message.success('刷新成功');
+        }, 1000);
+      }
+    },
+    getTypeItemData() {
+      // this.$http.get('http://localhost:3000/typeItemData').then(res => {
+      //   res.body.rows[0]._highlight = true;
+      //   this.typeItemData = res.body.rows;
+      //   this.typeTotal = res.body.total;
+      // });
+      let self = this;
+      unit.ajaxMerPost('/pzgl-qxpz-web/dic/typeList', {
+        typeCode: self.formItem.dictCode,
+        typeName: self.formItem.dictName,
+        currentPageNo: self.typeCurrentPageNo,
+        pageSize: 5,
+      }, function (res) {
+        if (res.data && res.data.rows.length > 0) {
+          //默认选中第一条
+          res.data.rows[0]._highlight = true;
+          //记录第一条数据
+          self.selectTypeItemIndex = 0;
+          self.selectTypeItem.dictCode = res.data.rows[0].dictCode;
+          self.selectTypeItem.dictName = res.data.rows[0].dictName;
+          self.selectTypeItem.dictDataSql = res.data.rows[0].dictDataSql;
+          self.selectTypeItem.loadType = res.data.rows[0].loadType;
+          self.selectTypeItem.dictDes = res.data.rows[0].dictDes;
+
+          self.typeItemData = res.data.rows;
+          self.typeTotal = res.data.total;
+
+          self.getDicValuesByDicId(res.data.rows[0].id, res.data.rows[0].dictName);
+          self.getValueItemData(res.data.rows[0].id, res.data.rows[0].dictType);
+        } else {
+          //清除字典类型数据
+          self.selectTypeItemIndex = -1;
+          self.selectTypeItem = {};
+          self.typeItemData = [];
+          self.typeTotal = 0;
+          //清除字典展示的数据
+          self.treeData[0].title = "字典展示";
+          self.treeData[0].children = [];
+          //清除字典值的数据
+          self.valueItemData = [];
+          self.valueTotal = 0;
+          self.isValueOperateDisabled = false;
+        }
+        if(res.data) {
+          self.typeTotal = res.data.total;
+        }
+      }, function (res) {
+        //清除字典类型数据
+        self.selectTypeItemIndex = -1;
+        self.selectTypeItem = {};
+        self.typeItemData = [];
+        self.typeTotal = 0;
+        //清除字典展示的数据
+        self.treeData[0].title = "字典展示";
+        self.treeData[0].children = [];
+        //清除字典值的数据
+        self.valueItemData = [];
+        self.valueTotal = 0;
+        self.isValueOperateDisabled = false;
+      }, this);
+    },
+    typeChangePage(currentPageNo) {
+      this.typeCurrentPageNo = currentPageNo;
+      this.getTypeItemData();
+    },
+    //字典类型item点击
+    typeRowClick(param, index) {
+      if (this.selectTypeItemIndex == index) {
+        this.$refs.typeCurrentRowTable.clearCurrentRow();
+        this.selectTypeItemIndex = -1;
+        //清除字典展示的数据
+        this.treeData[0].title = "字典展示";
+        this.treeData[0].children = [];
+        //清除字典值的数据
+        this.valueItemData = [];
+        this.valueTotal = 0;
+        this.isValueOperateDisabled = false;
+      } else {
+        this.selectTypeItemIndex = index;
+        this.selectTypeItem = param;
+        this.getDicValuesByDicId(param.id, param.dictName);
+        this.getValueItemData(param.id, param.dictType);
+      }
+    },
+    //字典值模块
+    valueAddBtn() {
+      this.$refs['valueAddDialogRuleValidate'].resetFields();
+      this.valueAddDialogModal = true;
+      this.valueAddDialogFormItem = {
+        rankItem: '0'
+      };
+      this.isValueAdd = 0;
+    },
+    valueDeleteBtn() {
+      let that = this;
+      if (this.selectValueItemIndex == -1) {
+        this.$Message.warning('请选择待删除的记录！');
+      } else {
+          that.$confirm('确定删除该记录', '提示', {
+              cancelButtonText: '取消',
+              confirmButtonText: '确定',
+              cancelButtonClass: 'fr ml10',
+              type: 'warning'
+          }).then(() => {
+              that.valueDeleteDialogOk();
+          }).catch(() => { 
+          });
+        // this.valueDeleteDialogModal = true;
+      }
+    },
+    valueEditBtn() {
+      if (this.selectValueItemIndex == -1) {
+        this.$Message.warning('请选择待编辑的记录！');
+      } else {
+        this.valueAddDialogFormItem.dictCode = this.selectValueItem.dictCode;
+        this.valueAddDialogFormItem.dictName = this.selectValueItem.dictName;
+        this.valueAddDialogFormItem.shortName = this.selectValueItem.shortName;
+        this.valueAddDialogFormItem.sjxh = this.selectValueItem.sjxh;
+        this.valueAddDialogFormItem.rankItem = this.selectValueItem.rankItem;
+
+        this.valueAddDialogModal = true;
+        this.isValueAdd = 1;
+      }
+    },
+    valueUpBtn() {
+      if (this.selectValueItemIndex == -1) {
+        this.$Message.warning('请选择待处理的记录！');
+      } else {
+        this.valueSort(this.selectValueItem.dictId, '0');
+      }
+    },
+    valueDownBtn() {
+      if (this.selectValueItemIndex == -1) {
+        this.$Message.warning('请选择待处理的记录！');
+      } else {
+        this.valueSort(this.selectValueItem.dictId, '1');
+      }
+    },
+    getValueItemData(itemId, dictType) {
+      let self = this;
+      self.typeItemId = itemId;
+      self.typeDictType = dictType;
+      unit.ajaxMerPost('/pzgl-qxpz-web/dic/valueList', {
+        id: itemId,
+        currentPageNo: self.valueCurrentPageNo,
+        pageSize: 5,
+      }, function (res) {
+        if (res.data && res.data.rows && res.data.rows.length > 0) {
+          //默认选中第一条
+          res.data.rows[0]._highlight = true;
+          //记录第一条数据
+          self.selectValueItemIndex = 0;
+          self.selectValueItem.dictId = res.data.rows[0].dictId;
+          self.selectValueItem.dictCode = res.data.rows[0].dictCode;
+          self.selectValueItem.dictName = res.data.rows[0].dictName;
+          self.selectValueItem.shortName = res.data.rows[0].shortName;
+          self.selectValueItem.sjxh = res.data.rows[0].sjxh;
+          self.selectValueItem.rankItem = res.data.rows[0].rankItem;
+
+          self.valueItemData = res.data.rows;
+          self.valueTotal = res.data.total;
+
+          if (res.data.total == "-1" /*|| dictType != 2*/) {
+            //操作图标置灰
+            self.isValueOperateDisabled = false;
+          } else {
+            self.isValueOperateDisabled = false;
+          }
+        } else {
+          //清除字典值的数据
+          self.valueItemData = [];
+          self.valueTotal = 0;
+          self.isValueOperateDisabled = false;
+        }
+        if(res.data) {
+          self.valueTotal = res.data.total;
+        }
+      }, function (res) {
+      }, this);
+    },
+    valueChangePage(currentPageNo) {
+      this.valueCurrentPageNo = currentPageNo;
+      this.getValueItemData(this.typeItemId, this.typeDictType);
+    },
+    //字典值item点击
+    valueRowClick(param, index) {
+      if (this.selectValueItemIndex == index) {
+        this.$refs.valueCurrentRowTable.clearCurrentRow();
+        this.selectValueItemIndex = -1;
+
+      } else {
+        this.selectValueItemIndex = index;
+        this.selectValueItem = param;
+      }
+    },
+    //监听对话框显示变化
+    typeAddDialogVisibleChange(isVisible) {
+      //true:Modal visivle; false:Modal dismiss
+      if (isVisible) {
+      } else {
+        //对整个表单进行重置，将所有字段值重置为空并移除校验结果
+        if (this.isTypeAdd == 0) {
+          this.$refs['typeAddDialogRuleValidate'].resetFields();
+        }
+      }
+    },
+    //字典类型-新增
+    typeAddDialogOk(name) {
+      let self = this;
+      this.$refs[name].validate((valid) => {
+        if (valid) {
+          if (self.isTypeAdd == 0) {
+            //新增
+            self.typeSave('');
+          } else {
+            //编辑
+            self.typeSave(self.typeItemId);
+          }
+        }
+      })
+    },
+    //字典类型新增/编辑
+    typeSave(itemId) {
+      let self = this;
+      let params = {};
+      if (itemId) {
+        params = {
+          dictCode: self.typeAddDialogFormItem.dictCode,
+          dictName: self.typeAddDialogFormItem.dictName,
+          dictDataSql: self.typeAddDialogFormItem.dictDataSql,
+          loadType: self.typeAddDialogFormItem.loadType,
+          dictDes: self.typeAddDialogFormItem.dictDes,
+          id: itemId
+        }
+      } else {
+        params = {
+          dictCode: self.typeAddDialogFormItem.dictCode,
+          dictName: self.typeAddDialogFormItem.dictName,
+          dictDataSql: self.typeAddDialogFormItem.dictDataSql,
+          loadType: self.typeAddDialogFormItem.loadType,
+          dictDes: self.typeAddDialogFormItem.dictDes
+        }
+      }
+      unit.ajaxObjPost('/pzgl-qxpz-web/dic/typeSave', params, function (res) {
+          if (self.isTypeAdd == 0) {
+            self.$Message.success('新增成功');
+          } else {
+            self.$Message.success('保存成功');
+          }
+          // 刷新父页面列表
+          setTimeout(function () {
+            self.typeAddDialogModal = false;
+            self.getTypeItemData();
+          }, 500);
+      }, function (res) {
+          if (self.isTypeAdd == 0) {
+            self.$Message.error('新增失败');
+          } else {
+            self.$Message.error('保存失败');
+          }
+      }, this);
+    },
+    //字典类型-删除
+    typeDeleteDialogOk() {
+      this.typeRemove(this.typeItemId);
+    },
+    //字典类型删除
+    typeRemove(itemId) {
+      let self = this;
+      unit.ajaxMerPost('/pzgl-qxpz-web/dic/typeRemove', {
+        ids: itemId
+      }, function (res) {
+        if (res.flag) {
+          self.$Message.success('删除成功');
+          // 刷新父页面列表
+          setTimeout(function () {
+            // self.typeDeleteDialogModal = false;
+            self.getTypeItemData();
+          }, 500);
+        } else {
+          self.$Message.error('删除失败');
+        }
+      }, function (res) {
+        self.$Message.error('删除失败');
+      }, this);
+    },
+    //监听对话框显示变化
+    valueAddDialogVisibleChange(isVisible) {
+      if (isVisible) {
+      } else {
+        if (this.isValueAdd == 0) {
+          this.$refs['valueAddDialogRuleValidate'].resetFields();
+        }
+      }
+    },
+    //字典值-新增
+    valueAddDialogOk(name) {
+      let self = this;
+      this.$refs[name].validate((valid) => {
+        if (valid) {
+          if (self.isValueAdd == 0) {
+            //新增
+            self.valueSave('');
+          } else {
+            //编辑
+            self.valueSave(self.selectValueItem.dictId);
+          }
+        }
+      })
+    },
+    //字典值新增/编辑
+    valueSave(itemId) {
+      let self = this;
+      let params = {};
+      if (itemId) {
+        params = {
+          dictCode: self.valueAddDialogFormItem.dictCode,
+          dictName: self.valueAddDialogFormItem.dictName,
+          shortName: self.valueAddDialogFormItem.shortName,
+          sourceId: self.valueAddDialogFormItem.sourceId,
+          sjxh: self.valueAddDialogFormItem.sjxh,
+          rankItem: self.valueAddDialogFormItem.rankItem,
+          dictId: itemId
+        }
+      } else {
+        params = {
+          dictCode: self.valueAddDialogFormItem.dictCode,
+          dictName: self.valueAddDialogFormItem.dictName,
+          shortName: self.valueAddDialogFormItem.shortName,
+          sourceId: self.valueAddDialogFormItem.sourceId,
+          sjxh: self.valueAddDialogFormItem.sjxh,
+          rankItem: self.valueAddDialogFormItem.rankItem
+        }
+      }
+      unit.ajaxObjPost('/pzgl-qxpz-web/dic/valueSave', params, function (res) {
+        if (res.flag) {
+          if (self.isValueAdd == 0) {
+            self.$Message.success('新增成功');
+          } else {
+            self.$Message.success('保存成功');
+          }
+          // 刷新父页面列表
+          setTimeout(function () {
+            self.valueAddDialogModal = false;
+            self.getDicValuesByDicId(self.typeItemId, self.selectTypeItem.dictName);
+            self.getValueItemData(self.typeItemId, self.typeDictType);
+          }, 500);
+        } else {
+          if (self.isValueAdd == 0) {
+            self.$Message.error('新增失败');
+          } else {
+            self.$Message.error('保存失败');
+          }
+        }
+      }, function (res) {
+        if (self.isValueAdd == 0) {
+          self.$Message.error('新增失败');
+        } else {
+          self.$Message.error('保存失败');
+        }
+      }, this);
+    },
+    //字典值-删除
+    valueDeleteDialogOk() {
+      this.valueRemove(this.selectValueItem.dictId);
+    },
+    //字典值删除
+    valueRemove(itemId) {
+      let self = this;
+      unit.ajaxMerPost('/pzgl-qxpz-web/dic/valueRemove', {
+        ids: itemId
+      }, function (res) {
+        if (res.flag) {
+          self.$Message.success('删除成功');
+          // 刷新父页面列表
+          setTimeout(function () {
+            self.valueDeleteDialogModal = false;
+            self.getDicValuesByDicId(self.typeItemId, self.selectTypeItem.dictName);
+            self.getValueItemData(self.typeItemId, self.typeDictType);
+          }, 500);
+        } else {
+          self.$Message.error('删除失败');
+        }
+      }, function (res) {
+        self.$Message.error('删除失败');
+      }, this);
+    },
+    //字典值排序 0：上移 1：下移
+    valueSort(itemId, movePositon) {
+      let self = this;
+      unit.ajaxMerPost('/pzgl-qxpz-web/dic/valueSort', {
+        id: itemId,
+        movePositon: movePositon
+      }, function (res) {
+        if (res.flag) {
+          // 刷新父页面列表
+          self.getValueItemData(self.typeItemId, self.typeDictType);
+        } else {
+          self.$Message.error(res.errMsg);
+        }
+      }, function (res) {
+        if (res.data) {
+          self.$Message.error(res.data.errMsg);
+        } else {
+          self.$Message.error("操作失败");
+        }
+      }, this);
+    },
+    //字典类型-导入
+    //上传成功回调方法
+    typeHandleSuccess(file, res) {
+      if (res) {
+        if (res.flag) {
+          this.$Message.success('导入成功');
+        } else {
+          if (res.errMsg) {
+            this.$Message.error(res.errMsg);
+          } else {
+            this.$Message.error('导入失败');
+          }
+        }
+      }
+    },
+    //上传前回调方法
+    typeBeforeUpload(file) {
+      this.loading = this.$loading({
+        lock: true,
+        text: '上传中',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.5)',
+        customClass: 'el-mask'
+      });
+    },
+    //正在上传中回调方法
+    typeUploadProgress(file, percentage) {
+    },
+    //上传失败回调方法
+    typeUploadError(message) {
+      if(message.indexOf('Q_TYPE_DENIED') > -1) {
+        this.$Message.error('请导入正确的格式');
+      } else {
+        this.$Message.error('导入失败');
+      }
+    },
+    //上传完成回调方法，不管成功或者失败
+    typeHandleComplete(file) {
+      this.loading.close();
+    },
+    //设置key参数
+    typeKeyGenerator(file) {
+      /*const currentTime = new Date().getTime();
+      this.cdnParams.key = "test/cdn/ie9/" + currentTime + "." + file.name;
+      return this.cdnParams.key;*/
+    },
+    //获取加载方式字典
+    getDictionarys() {
+      let self = this;
+      unit.ajaxMerPost('/pzgl-qxpz-web/dic/getDictionarys', {
+        pinYinType: 'JZLX'
+      }, function (res) {
+        if (res.data) {
+          self.loadTypeList = res.data;
+        }
+      }, function (res) {
+      }, this);
+    }
+  },
+  mounted: function () {
+    this.getTypeItemData();
+    this.getDictionarys();
+  },
+}
+</script>
+<style lang="less" rel="stylesheet/stylus">
+@import "../../../assets/styles/color.less";
+#dictionary {
+    width: 100%;
+    min-width: 1000px;
+    height: 100%;
+    padding: 0 20px 0 20px;
+    overflow-y: auto;
+    background-color: #edf0f6;
+    .main-wrap{
+        padding: 20px 20px 15px 20px;
+        background-color: #fff;
+    }
+    .dictionary-wrap {
+        width: 100%;
+        height: 100%;
+        padding: 20px 20px 20px 20px;
+        background: #fff;
+        // overflow-y: auto;
+        .dictionary-search {
+            float: left;
+            height: 240px;
+            width: 43%;
+            .searchBtn {
+                text-align: right;
+            }
+        }
+        .dictionary-show {
+            float: left;
+            height: 240px;
+            width: 57%;
+            .tree {
+                margin: 0 0 10px 30px;
+                width: 95.2%;
+                display: inline-block;
+                overflow-x: hidden;
+                height: 190px;
+                cursor: pointer;
+                .tree-height {
+                    height: 190px;
+                }
+            }
+        }
+        .dictionary-type {
+            float: left;
+            width: 43%;
+        }
+        .dictionary-value {
+            float: left;
+            width: 57%;
+        }
+        .head {
+            position: relative;
+            overflow: hidden;
+        }
+        .operate-img {
+            position: absolute;
+            top: 25% - 8px;
+            right: 0;
+            margin-right: 10px;
+            .dictionary-grid-btn,
+            .ivu-upload {
+                float: left;
+                display: block;
+                width: 16px;
+                height: 16px;
+                margin-right: 8px;
+            }
+            .type-add-btn,
+            .value-add-btn {
+                background: url(../../../assets/images/dictionary/dictionary-add-btn.png)
+                    left center no-repeat;
+            }
+            .type-delete-btn,
+            .value-delete-btn {
+                background: url(../../../assets/images/dictionary/dictionary-delete-btn.png)
+                    left center no-repeat;
+            }
+            .type-edit-btn,
+            .value-edit-btn {
+                background: url(../../../assets/images/dictionary/dictionary-edit-btn.png)
+                    left center no-repeat;
+            }
+            .type-import-btn {
+                background: url(../../../assets/images/dictionary/dictionary-import-btn.png)
+                    left center no-repeat;
+                .webuploader-pick {
+                    background: transparent;
+                    padding: 8px 8px;
+                }
+            }
+            .type-export-btn {
+                background: url(../../../assets/images/dictionary/dictionary-export-btn.png)
+                    left center no-repeat;
+            }
+            .type-refresh-btn {
+                background: url(../../../assets/images/dictionary/dictionary-refresh-btn.png)
+                    left center no-repeat;
+            }
+            .value-add-disabled {
+                background: url(../../../assets/images/dictionary/dictionary-add-disabled.png)
+                    left center no-repeat;
+            }
+            .value-delete-disabled {
+                background: url(../../../assets/images/dictionary/dictionary-delete-disabled.png)
+                    left center no-repeat;
+            }
+            .value-edit-disabled {
+                background: url(../../../assets/images/dictionary/dictionary-edit-disabled.png)
+                    left center no-repeat;
+            }
+            .value-up-btn {
+                background: url(../../../assets/images/dictionary/dictionary-up-btn.png)
+                    left center no-repeat;
+            }
+            .value-up-disabled {
+                background: url(../../../assets/images/dictionary/dictionary-up-disabled.png)
+                    left center no-repeat;
+            }
+            .value-down-btn {
+                background: url(../../../assets/images/dictionary/dictionary-down-btn.png)
+                    left center no-repeat;
+            }
+            .value-down-disabled {
+                background: url(../../../assets/images/dictionary/dictionary-down-disabled.png)
+                    left center no-repeat;
+            }
+            .disabled {
+                cursor: not-allowed;
+                border: none;
+            }
+        }
+        .mt15 {
+            margin-top: 0;
+            margin-left: 15px;
+        }
+        .ivu-table-body .ivu-table-cell {
+            height: 48px;
+            padding-left: 0;
+            padding-right: 0;
+        }
+        .ivu-table-body .ivu-table-cell div span {
+            height: 48px;
+            line-height: 48px;
+        }
+    }
+    .ivu-tree-children {
+        height: auto !important;
+    }
+    .second .ivu-page-options-elevator input{
+      margin: 0;
+      vertical-align: top;
+    }
+    .ivu-page.mini .ivu-page-total{
+      vertical-align: middle;
+    }
+}
+#dictionaryAddDialogModal {
+    .ivu-tree-children {
+        height: auto !important;
+    }
+    .ivu-modal {
+        width: 40% !important;
+    }
+    .ivu-modal-content {
+        border-radius: 2px;
+        .ivu-select-dropdown {
+            max-width: 100%;
+        }
+        .el-button--text {
+            margin-left: 10px;
+            // width: 56px;
+            // height: 32px;
+            border: 1px solid #ced5e3;
+        }
+    }
+    .el-button {
+        width: 64px;
+        height: 34px;
+    }
+    // .ivu-modal-header {
+    //     border-radius: 2px 2px 0 0;
+    //     background: @baseColor;
+    //     .ivu-modal-header-inner {
+    //         color: #ffffff;
+    //     }
+    // }
+    // .ivu-icon-ios-close {
+    //     color: #ffffff;
+    // }
+    // .ivu-modal-footer {
+    //     border-top: none;
+    //     text-align: center;
+    // }
+}
+#dictionaryDeleteDialogModal {
+    // .ivu-tree-children {
+    //     height: auto !important;
+    // }
+    // .ivu-modal {
+    //     width: 20% !important;
+    // }
+    // .ivu-modal-content {
+    //     border-radius: 2px;
+    //     .el-button--text {
+    //         margin-left: 10px;
+    //         width: 54px;
+    //         height: 30px;
+    //         border: 1px solid #ced5e3;
+    //     }
+        
+    // }
+    // .ivu-modal-header {
+    //     border-radius: 2px 2px 0 0;
+    //     background: @baseColor;
+    //     .ivu-modal-header-inner {
+    //         color: #ffffff;
+    //     }
+    // }
+    // .ivu-icon-ios-close {
+    //     color: #ffffff;
+    // }
+    // .ivu-modal-footer {
+    //     border-top: none;
+    // }
+}
+</style>

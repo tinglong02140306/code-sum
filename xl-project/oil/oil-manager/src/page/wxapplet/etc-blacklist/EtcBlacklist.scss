@@ -1,0 +1,103 @@
+.blacklist-container{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 16px;
+  background-color: #f7f7f7;
+}
+
+.blacklist-top-container{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  background-color: white;
+  padding:10px 0;
+  margin-bottom: 10px;
+}
+
+.blacklist-table{
+  width: 100%;
+  background-color: white;
+  box-sizing: border-box;
+  table{
+    table-layout: fixed;
+    thead{
+      th{
+        font-weight: 600;
+        letter-spacing: 1px;
+      }
+    }
+    tbody{
+      tr{
+        td{
+          word-break: break-all;
+        }
+      }
+    }
+  }
+}
+
+.blacklist-form{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.blacklist-form-item{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  label{
+    font-weight: 600;
+  }
+}
+
+.blacklist-button{
+  margin: 4px;
+}
+
+.blacklist-table-header{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 6px 0;
+}
+.blacklist-table-header-left{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+.blacklist-table-header-right{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.blacklist-table-header-button{
+  margin: 0 20px 0 0;
+}
+
+.blacklist-table-engine-lead{
+  position: relative;
+}
+
+.blacklist-table-engine-lead-input{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: 1000;
+}

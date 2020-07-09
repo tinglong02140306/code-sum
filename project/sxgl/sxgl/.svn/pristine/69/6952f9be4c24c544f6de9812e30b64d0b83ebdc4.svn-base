@@ -1,0 +1,1682 @@
+@charset "UTF-8";
+
+/*! Fly UI v0.7.0 | by Fly UI Team | (c) 2015 iFlytek, Inc. | Licensed under MIT | 2015-07-23 11:07:39 UTC */
+
+body,
+div,
+p,
+dl,
+dt,
+dd,
+ul,
+ol,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+form {
+    margin: 0;
+    padding: 0;
+}
+
+img,
+abbr {
+    border: none;
+}
+
+cite,
+em,
+i,
+ins {
+    font-style: normal;
+    font-weight: normal;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: normal;
+}
+
+a {
+    color: #0e90d2;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #095f8a;
+    outline: 0;
+}
+
+body {
+    font-size: 16px;
+    line-height: 1.6;
+    font-family: Georgia, "Times New Roman", Times, SimSun, serif;
+    color: #333333;
+    word-break: break-all;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+    color: inherit;
+    font: inherit;
+    margin: 0;
+    outline: 0;
+}
+
+button,
+input {
+    line-height: normal;
+}
+
+
+/* 文字溢出省略 */
+
+.ell,
+.fly-combobox-inner li,
+.fly-form-element .label,
+.fly-suggest-inner li {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+/* 清除浮动 */
+
+.clear {
+    clear: both;
+    overflow: hidden;
+    height: 0;
+}
+
+.fly-form {
+    *zoom: 1;
+}
+
+.fly-form:before,
+.fly-form:after {
+    content: "";
+    display: table;
+    font: 0/0 a;
+}
+
+.fly-form:after {
+    clear: both;
+}
+
+.fly-btn {
+    padding: 0 2em;
+    border: 1px solid #999999;
+    border-radius: 3px;
+    font-size: 14px;
+    background-color: #fff;
+    color: #999999;
+    height: 28px;
+    line-height: 24px;
+    vertical-align: top;
+}
+
+.fly-btn:hover {
+    outline: 0;
+    color: #999999;
+    border-color: gray;
+    text-decoration: none;
+}
+
+.fly-btn.fly-btn-disabled,
+.fly-btn[disabled] {
+    pointer-events: none;
+    color: #999999;
+    background-color: #eeeeee;
+    border-color: #999999;
+    cursor: not-allowed;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.fly-btn-primary {
+    color: #fff;
+    background-color: #0e90d2;
+    border-color: #0c80ba;
+}
+
+.fly-btn-primary:hover {
+    color: #fff;
+    background-color: #0c80ba;
+    border-color: #0b6fa2;
+}
+
+.fly-checkbox {
+    line-height: 30px;
+}
+
+.fly-checkbox label {
+    margin: 0 20px 0 0;
+}
+
+.fly-checkbox input {
+    vertical-align: -2px;
+}
+
+.fly-combobox-arrow {
+    float: right;
+    width: 23px;
+    height: 28px;
+    border-left: 1px solid #e4e4e4;
+    background-color: #f9f9f9;
+    background-image: url(../img/icon/icon-combobox.png);
+    background-repeat: no-repeat;
+    background-position: center 0;
+    text-align: center;
+    cursor: pointer;
+}
+
+.fly-combobox-arrow:hover {
+    background-color: #f2f2f2;
+}
+
+.fly-combobox-active .fly-combobox-arrow {
+    background-position: center -28px;
+}
+
+.fly-combobox-multi.fly-combobox-active .fly-combobox-arrow {
+    background-position: center -56px;
+}
+
+.fly-combobox-clear.fly-combobox-active .fly-combobox-arrow {
+    background-position: center -56px;
+}
+
+.fly-combobox {
+    position: relative;
+    line-height: 28px;
+    border: 1px solid #e4e4e4;
+    background-color: #fff;
+}
+
+.fly-combobox em {
+    display: block;
+    margin: 0 3px;
+    padding: 0 5px;
+    margin-right: 27px;
+}
+
+.fly-combobox .text {
+    margin: 0 0 0 -8px;
+    padding: 6px 8px;
+    width: 100%;
+    height: 16px;
+    line-height: 16px;
+    background: none;
+    border: none;
+    vertical-align: top;
+}
+
+.fly-combobox input.disabled {
+    background-color: #f3f3f3;
+}
+
+.fly-combobox-inner {
+    position: absolute;
+    display: none;
+    margin: 0 0 0 -1px;
+    width: 100%;
+    border: 1px solid #e4e4e4;
+    background-color: #fff;
+    z-index: 999;
+    max-height: 156px;
+    overflow: auto;
+}
+
+.fly-combobox-inner li {
+    padding: 5px 8px;
+    font-size: 12px;
+    line-height: 16px;
+    cursor: pointer;
+    color: #6d6d6d;
+    text-align: left;
+}
+
+.fly-combobox-inner li:hover {
+    background-color: #f4f6f8;
+}
+
+.fly-combobox-inner li.selected {
+    background-color: #D9E8FB;
+}
+
+.fly-combobox-tree li:hover {
+    background: none;
+}
+
+.fly-combobox-tree li.selected {
+    background: none;
+}
+
+body {
+    _margin: 0;
+    _height: 100%;
+}
+
+.aui_outer {
+    text-align: left;
+}
+
+table.aui_border,
+table.aui_dialog {
+    border: 0;
+    margin: 0;
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+}
+
+.aui_nw,
+.aui_n,
+.aui_ne,
+.aui_w,
+.aui_c,
+.aui_e,
+.aui_sw,
+.aui_s,
+.aui_se,
+.aui_header,
+.aui_tdIcon,
+.aui_main,
+.aui_footer {
+    padding: 0;
+}
+
+.aui_header,
+.aui_buttons button {
+    font: 12px/1.11 'Microsoft Yahei', Tahoma, Arial, Helvetica, STHeiti;
+}
+
+.aui_title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.aui_state_noTitle .aui_title {
+    display: none;
+}
+
+.aui_close {
+    display: block;
+    position: absolute;
+    text-decoration: none;
+    outline: none;
+    _cursor: pointer;
+}
+
+.aui_close:hover {
+    text-decoration: none;
+}
+
+.aui_main {
+    text-align: center;
+    min-width: 9em;
+    min-width: 0\9;
+    /*IE8 BUG*/
+}
+
+.aui_content {
+    display: inline-block;
+    *zoom: 1;
+    *display: inline;
+    text-align: left;
+    border: none 0;
+}
+
+.aui_content.aui_state_full {
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 0 !important;
+    height: 100%;
+}
+
+.aui_loading {
+    width: 96px;
+    height: 32px;
+    text-align: left;
+    overflow: hidden;
+}
+
+.aui_icon {
+    vertical-align: middle;
+}
+
+.aui_icon div {
+    width: 48px;
+    height: 48px;
+    margin: 10px 0 10px 10px;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.aui_buttons {
+    padding: 8px 8px 10px 8px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.aui_buttons button {
+    margin: 0 8px;
+    padding: 0 20px;
+    height: 28px;
+    border: none;
+    border-radius: 3px;
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+    line-height: 24px;
+    cursor: pointer;
+    background-color: #dddddd;
+    -webkit-box-shadow: 0 2px 0 #999;
+    box-shadow: 0 2px 0 #999;
+}
+
+.aui_buttons button:hover {
+    background-color: #cccccc;
+    -webkit-box-shadow: 0 2px 0 #888888;
+    box-shadow: 0 2px 0 #888888;
+}
+
+button.aui_state_highlight {
+    color: #fff;
+    background-color: #4393f0;
+    -webkit-box-shadow: 0 2px 0 #2365b1;
+    box-shadow: 0 2px 0 #2365b1;
+}
+
+button.aui_state_highlight:hover {
+    background-color: #3785e0;
+    -webkit-box-shadow: 0 2px 0 #1c5aa1;
+    box-shadow: 0 2px 0 #1c5aa1;
+}
+
+.aui_buttons button:focus {
+    outline: none 0;
+}
+
+.aui_inner {
+    background: #FFF;
+}
+
+
+/*.aui_outer, .aui_inner {
+  border:1px solid rgba(0, 0, 0, .7);
+  border:1px solid #333\9;
+}*/
+
+.aui_nw,
+.aui_ne,
+.aui_sw,
+.aui_se {
+    width: 0;
+    height: 0;
+}
+
+.aui_nw,
+.aui_n,
+.aui_ne,
+.aui_w,
+.aui_e,
+.aui_sw,
+.aui_s,
+.aui_se {
+    background: none;
+}
+
+.aui_state_lock .aui_nw,
+.aui_state_lock .aui_n,
+.aui_state_lock .aui_ne,
+.aui_state_lock .aui_w,
+.aui_state_lock .aui_e,
+.aui_state_lock .aui_sw,
+.aui_state_lock .aui_s,
+.aui_state_lock .aui_se {
+    background: rgba(0, 0, 0, 0.5);
+    background: #C3C2C2 \9 !important;
+    filter: alpha(opacity=50);
+}
+
+.aui_state_focus .aui_outer {
+    -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
+}
+
+.aui_state_drag .aui_outer,
+.aui_outer:active {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.aui_titleBar {
+    position: relative;
+    height: 100%;
+}
+
+.aui_title {
+    padding: 0 15px;
+    /*height: 32px;*/
+    background-color: #F7F7F7;
+    border-top: 1px solid #edf5f8;
+    border-bottom: 1px solid #ececec;
+    line-height: 32px;
+    font-size: 14px;
+    font-weight: normal;
+    color: #333;
+    font-family: "Microsoft Yahei";
+    -webkit-filter: none;
+    filter: none;
+}
+
+.aui_state_focus .aui_title {
+    color: #4c5a5f;
+}
+
+.aui_state_drag .aui_title {
+    border-top-color: #bdc6cd;
+    background: -webkit-gradient(linear, left top, left bottom, from(#bdc6cd), to(#edf5f8));
+    background: -webkit-linear-gradient(top, #bdc6cd, #edf5f8);
+    background: linear-gradient(top, #bdc6cd, #edf5f8);
+    background: -moz-linear-gradient(top, #bdc6cd, #edf5f8);
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#bdc6cd), to(#edf5f8));
+    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#bdc6cd', endColorstr='#edf5f8');
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.aui_state_drag .aui_titleBar {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.aui_close {
+    padding: 0;
+    top: 5px;
+    right: 8px;
+    height: 20px;
+    width: 20px;
+    border: 1px solid #C4C4C4;
+    border-radius: 100%;
+    color: #C4C4C4;
+    line-height: 22px;
+    font-size: 20px;
+    font-family: Helvetica, STHeiti;
+    _font-family: Tahoma, '\u9ed1\u4f53', 'Book Antiqua', Palatino;
+    text-align: center;
+}
+
+.aui_close:hover {
+    color: #C72015;
+    border-color: #C72015;
+}
+
+.aui_close:active {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.aui_content {
+    color: #666;
+    padding-left: 0px;
+}
+
+.aui_state_focus .aui_content {
+    color: #333;
+    font-size: 12px;
+}
+
+.aui_buttons {
+    background-color: #F6F6F6;
+    border-top: solid 1px #DADEE5;
+}
+
+.aui_state_noTitle .aui_nw,
+.aui_state_noTitle .aui_ne,
+.aui_state_noTitle .aui_sw,
+.aui_state_noTitle .aui_se {
+    width: 3px;
+    height: 3px;
+}
+
+.aui_state_noTitle .aui_inner {
+    border: 1px solid #666;
+    background: #FFF;
+}
+
+.aui_state_noTitle .aui_outer {
+    border: none 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.aui_state_noTitle .aui_nw,
+.aui_state_noTitle .aui_n,
+.aui_state_noTitle .aui_ne,
+.aui_state_noTitle .aui_w,
+.aui_state_noTitle .aui_e,
+.aui_state_noTitle .aui_sw,
+.aui_state_noTitle .aui_s,
+.aui_state_noTitle .aui_se {
+    background: rgba(0, 0, 0, 0.05);
+    background: #C3C2C2 \9 !important;
+    filter: alpha(opacity=5) !important;
+}
+
+.aui_state_noTitle .aui_titleBar {
+    bottom: 0;
+    _bottom: 0;
+    _margin-top: 0;
+}
+
+.aui_state_noTitle .aui_close {
+    top: 0;
+    right: 0;
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    text-align: center;
+    text-indent: 0;
+    font-size: 18px;
+    text-decoration: none;
+    color: #214FA3;
+    background: none;
+    -webkit-filter: !important;
+    filter: !important;
+}
+
+.aui_state_noTitle .aui_close:hover,
+.aui_state_noTitle .aui_close:active {
+    text-decoration: none;
+    color: #900;
+}
+
+.aui_state_noTitle .aui_dialog {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.fly-form-element {
+    float: left;
+    margin: 5px 0;
+    width: 33.33333%;
+    font-size: 12px;
+}
+
+.fly-form-element .label {
+    float: left;
+    padding: 0 0 0 10px;
+    width: 100px;
+    text-align: right;
+    line-height: 28px;
+}
+
+.fly-form-element .label i {
+    display: inline-block;
+    overflow: hidden;
+    height: 16px;
+    line-height: 1.25;
+    color: #ff0000;
+    font-size: 1.25em;
+    vertical-align: -4px;
+}
+
+.fly-form-element .control {
+    margin: 0 0 0 120px;
+}
+
+.fly-grid {
+    /* padding: 10px; */
+}
+
+.fly-grid-head {
+    border-top: 1px solid #e4e4e4;
+    border-left: 1px solid #e4e4e4;
+}
+
+.fly-grid-body {
+    border-left: 1px solid #e4e4e4;
+}
+
+.fly-table {
+    position: relative;
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.fly-table td,
+.fly-table th {
+    border-spacing: 0;
+    border-collapse: collapse;
+    white-space: nowrap;
+}
+
+.fly-table-header th,
+.fly-table-body td {
+    padding: 0px 3px;
+    border-bottom: solid 1px #e4e4e4;
+    border-right: solid 1px #e4e4e4;
+    height: 38px;
+    background: #fcfcfc;
+    text-align: center;
+}
+
+.fly-table-header th {
+    border-right: 0;
+}
+
+.fly-table-header th.fly-table-tr-last {
+    border-right: 1px solid #e4e4e4;
+}
+
+.fly-grid-empty {
+    /*display: none;*/
+    height: 26px;
+    margin-right: -1px;
+    border: 1px solid #e4e4e4;
+    border-top: none;
+    line-height: 26px;
+    text-align: center;
+}
+
+.fly-grid-pager {
+    padding: 10px 0;
+}
+
+.fly-table-tr-odd {
+    background: #ffffff;
+}
+
+.fly-table-tr-odd td {
+    background: #ffffff;
+}
+
+.fly-table-tr-even {
+    background: #f4f6f8;
+}
+
+.fly-table-tr-even td {
+    background: #f4f6f8;
+}
+
+.fly-table-tr-hover {
+    background: #ffffcc;
+}
+
+.fly-table-tr-hover td {
+    background: #ffffcc;
+}
+
+
+/* mask */
+
+.has-mask {
+    position: relative;
+}
+
+.fly-mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    z-index: 9997;
+}
+
+.fly-mask-background {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    z-index: 9998;
+    filter: alpha(opacity=30);
+    opacity: 0.3;
+}
+
+.fly-mask-background iframe {
+    width: 100%;
+    height: 100%;
+    filter: alpha(opacity=0);
+    opacity: 0;
+}
+
+.fly-mask-content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 9999;
+}
+
+.fly-mask-content div {
+    padding: 10px 20px;
+    height: 16px;
+    font-size: 12px;
+    line-height: 16px;
+    background-color: #fff;
+    border-radius: 4px;
+}
+
+.fly-mask-content div i,
+.fly-mask-content div em {
+    display: inline-block;
+    height: 16px;
+    font-style: normal;
+    vertical-align: top;
+}
+
+.fly-mask-content div i {
+    background: url(../img/icon/loading.gif);
+    width: 16px;
+}
+
+.fly-mask-content div em {
+    margin-left: 8px;
+    color: #333;
+}
+
+.fly-pager {
+    padding: 5px 10px;
+    font: 14px/150% '微软雅黑';
+}
+
+.pager-operation {
+    float: right;
+}
+
+.pager-ctn span,
+.pager-ctn a {
+    padding: 0.3em 0.5em;
+    border: 1px solid #ccc;
+    margin-right: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.pager-ctn .pager-num {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    cursor: default;
+}
+
+.pager-ctn .current {
+    color: #ccc;
+    cursor: default;
+}
+
+.pager-ctn .pager-num .current {
+    background: #26B;
+    color: #fff;
+    border: solid 1px #AAE;
+}
+
+.fly-pager i,
+.fly-pager em {
+    padding: 0 3px;
+    font-style: normal;
+}
+
+.pager-messg,
+.pager-turn,
+.pager-size {
+    padding: 0 3px;
+}
+
+.pager-input-wrap {
+    border: 1px solid #ccc;
+    padding: 2px 5px;
+}
+
+.pager-input {
+    border: 0;
+    width: 28px;
+    text-align: center;
+    outline: none;
+    font-family: '微软雅黑';
+}
+
+.fly-pager .pager-go {
+    border: 1px solid #ccc;
+    padding: 2px 5px;
+    background: #ddd;
+    cursor: pointer;
+    color: #000;
+}
+
+.pager-size-choose {
+    border: 1px solid #ccc;
+    padding: 2px 20px 2px 6px;
+    background-image: url(../img/icon/icon-combobox.png);
+    background-repeat: no-repeat;
+    background-position: 26px -4px;
+    cursor: pointer;
+}
+
+.up {
+    background-position: 26px -30px;
+}
+
+.pager-size-choose {
+    margin-top: -3px;
+}
+
+.pager-size-choose-list {
+    position: absolute;
+    display: none;
+    margin-top: -1px;
+    width: 45px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    z-index: 10000;
+}
+
+.pager-size-choose-list li {
+    padding: 2px 10px 2px 6px;
+    cursor: pointer;
+}
+
+.pager-size-choose-list li:hover {
+    background-color: #f4f6f8;
+}
+
+.pager-size-choose-list li.selected {
+    background-color: #ffffcc;
+}
+
+.fly-radio {
+    min-height: 30px;
+    line-height: 30px;
+}
+
+.fly-radio label {
+    margin: 0 20px 0 0;
+}
+
+.fly-radio input {
+    vertical-align: -2px;
+}
+
+.fly-suggest-wrapper {
+    position: relative;
+    line-height: 28px;
+    border: 1px solid #e4e4e4;
+    background-color: #fff;
+}
+
+.fly-suggest-wrapper em {
+    display: block;
+    margin: 0 3px;
+    padding: 0 5px;
+}
+
+.fly-suggest-wrapper .text {
+    margin: 0 0 0 -8px;
+    padding: 6px 8px;
+    width: 100%;
+    height: 16px;
+    line-height: 16px;
+    background: none;
+    border: none;
+    vertical-align: top;
+}
+
+.fly-suggest-wrapper input.disabled {
+    background-color: #f3f3f3;
+}
+
+.fly-suggest-ctn {
+    position: absolute;
+    display: none;
+    margin: 0 0 0 -1px;
+    width: 100%;
+    border: 1px solid #e0e0e0;
+    background-color: #fff;
+    z-index: 999;
+}
+
+.fly-suggest-inner {
+    *position: relative;
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: 174px;
+}
+
+.fly-suggest-inner li {
+    padding: 5px 8px;
+    font-size: 12px;
+    line-height: 16px;
+    cursor: pointer;
+    color: #6d6d6d;
+    text-align: left;
+}
+
+.fly-suggest-inner li:hover {
+    background-color: #f4f6f8;
+}
+
+.fly-suggest-inner li.selected {
+    background-color: #D9E8FB;
+}
+
+.fly-suggest-pager {
+    padding: 0 10px;
+    border-top: 1px solid #e0e0e0;
+    text-align: center;
+}
+
+.fly-suggest-pager .fly-suggest-prev-btn {
+    float: left;
+}
+
+.fly-suggest-pager .fly-suggest-next-btn {
+    float: right;
+}
+
+
+/* 控件 */
+
+.fly-textbox {
+    line-height: 28px;
+    border: 1px solid #e4e4e4;
+    background-color: #fff;
+}
+
+.fly-textbox.warning {
+    border-bottom-color: #ff0000;
+}
+
+.fly-textbox em {
+    display: block;
+    margin: 0 3px;
+    padding: 0 5px;
+}
+
+.fly-textbox em input.text,
+.fly-textbox em textarea {
+    margin: 0 0 0 -8px;
+    padding: 6px 8px;
+    width: 100%;
+    height: 16px;
+    line-height: 16px;
+    background: url(../img/blank.gif) no-repeat;
+    border: none;
+    vertical-align: top;
+    *margin-top: -28px;
+}
+
+.fly-textbox em input.disabled,
+.fly-textbox em textarea.disabled {
+    background-color: #f3f3f3;
+}
+
+.fly-textbox em textarea {
+    height: 80px;
+}
+
+.fly-textbox-idcard em {
+    margin-right: 54px !important;
+}
+
+.fly-textbox-idcard.has-scan em {
+    margin-right: 108px !important;
+}
+
+.fly-textbox-idcard .read {
+    float: right;
+    width: 50px;
+    height: 28px;
+    border-left: 1px solid #e4e4e4;
+    background-color: #f9f9f9;
+    text-align: center;
+    cursor: pointer;
+}
+
+.fly-textbox-datepicker em {
+    margin-right: 27px !important;
+}
+
+.fly-textbox-datepicker .icon {
+    float: right;
+    width: 23px;
+    height: 28px;
+    border-left: 1px solid #e4e4e4;
+    background: #f9f9f9 url(../img/icon/datepicker.png) no-repeat center center;
+    text-align: center;
+    cursor: pointer;
+}
+
+.fly-textbox-datepicker .icon:hover {
+    background-color: #f2f2f2;
+}
+
+.fly-textrange em {
+    margin: 0 22px;
+    height: 28px;
+}
+
+.fly-textrange em input.text {
+    width: 50%;
+}
+
+.fly-textrange em input.start {
+    float: left;
+    margin-left: -27px;
+}
+
+.fly-textrange em input.end {
+    float: right;
+    margin-right: -27px;
+}
+
+.fly-textrange em i {
+    position: relative;
+    display: inline-block;
+    border-left: 1px solid #e4e4e4;
+    border-right: 1px solid #e4e4e4;
+    background: #f9f9f9 url(../img/icon/to.png) no-repeat center center;
+    width: 20px;
+    height: 28px;
+}
+
+.WdateDiv {
+    width: 180px;
+    background-color: #FFFFFF;
+    border: #bbb 1px solid;
+    padding: 2px;
+    font-size: 12px;
+}
+
+.WdateDiv table {
+    font-size: 12px;
+}
+
+.WdateDiv2 {
+    width: 360px;
+}
+
+.WdateDiv .NavImg a {
+    display: block;
+    cursor: pointer;
+    height: 16px;
+    width: 16px;
+}
+
+.WdateDiv .NavImgll a {
+    float: left;
+    background: transparent url(../img/datepicker.gif) no-repeat scroll 0 0;
+}
+
+.WdateDiv .NavImgl a {
+    float: left;
+    background: transparent url(../img/datepicker.gif) no-repeat scroll -16px 0;
+}
+
+.WdateDiv .NavImgr a {
+    float: right;
+    background: transparent url(../img/datepicker.gif) no-repeat scroll -32px 0;
+}
+
+.WdateDiv .NavImgrr a {
+    float: right;
+    background: transparent url(../img/datepicker.gif) no-repeat scroll -48px 0;
+}
+
+.WdateDiv #dpTitle {
+    height: 24px;
+    margin-bottom: 2px;
+    padding: 1px;
+}
+
+.WdateDiv .yminput {
+    margin-top: 2px;
+    text-align: center;
+    height: 20px;
+    border: 0px;
+    width: 50px;
+    cursor: pointer;
+}
+
+.WdateDiv .yminputfocus {
+    margin-top: 2px;
+    text-align: center;
+    font-weight: bold;
+    height: 20px;
+    color: blue;
+    border: #ccc 1px solid;
+    width: 50px;
+}
+
+.WdateDiv .menuSel {
+    z-index: 1;
+    position: absolute;
+    background-color: #FFFFFF;
+    border: #ccc 1px solid;
+    display: none;
+}
+
+.WdateDiv .menu {
+    cursor: pointer;
+    background-color: #fff;
+}
+
+.WdateDiv .menuOn {
+    cursor: pointer;
+    background-color: #BEEBEE;
+}
+
+.WdateDiv .invalidMenu {
+    color: #aaa;
+}
+
+.WdateDiv .YMenu {
+    margin-top: 20px;
+}
+
+.WdateDiv .MMenu {
+    margin-top: 20px;
+    *width: 62px;
+}
+
+.WdateDiv .hhMenu {
+    margin-top: -90px;
+    margin-left: 26px;
+}
+
+.WdateDiv .mmMenu {
+    margin-top: -46px;
+    margin-left: 26px;
+}
+
+.WdateDiv .ssMenu {
+    margin-top: -24px;
+    margin-left: 26px;
+}
+
+.WdateDiv .Wweek {
+    text-align: center;
+    background: #DAF3F5;
+    border-right: #BDEBEE 1px solid;
+}
+
+.WdateDiv .MTitle {
+    background-color: #BDEBEE;
+}
+
+.WdateDiv .WdayTable2 {
+    border-collapse: collapse;
+    border: #c5d9e8 1px solid;
+}
+
+.WdateDiv .WdayTable2 table {
+    border: 0;
+}
+
+.WdateDiv .WdayTable {
+    line-height: 20px;
+    border: #c5d9e8 1px solid;
+}
+
+.WdateDiv .WdayTable td {
+    text-align: center;
+}
+
+.WdateDiv .Wday {
+    cursor: pointer;
+}
+
+.WdateDiv .WdayOn {
+    cursor: pointer;
+    background-color: #C0EBEF;
+}
+
+.WdateDiv .Wwday {
+    cursor: pointer;
+    color: #FF2F2F;
+}
+
+.WdateDiv .WwdayOn {
+    cursor: pointer;
+    color: #000;
+    background-color: #C0EBEF;
+}
+
+.WdateDiv .Wtoday {
+    cursor: pointer;
+    color: blue;
+}
+
+.WdateDiv .Wselday {
+    background-color: #A9E4E9;
+}
+
+.WdateDiv .WspecialDay {
+    background-color: #66F4DF;
+}
+
+.WdateDiv .WotherDay {
+    cursor: pointer;
+    color: #6A6AFF;
+}
+
+.WdateDiv .WotherDayOn {
+    cursor: pointer;
+    background-color: #C0EBEF;
+}
+
+.WdateDiv .WinvalidDay {
+    color: #aaa;
+}
+
+.WdateDiv #dpTime {
+    float: left;
+    margin-top: 3px;
+    margin-right: 30px;
+}
+
+.WdateDiv #dpTime #dpTimeStr {
+    margin-left: 1px;
+}
+
+.WdateDiv #dpTime input {
+    width: 18px;
+    height: 20px;
+    text-align: center;
+    border: #ccc 1px solid;
+}
+
+.WdateDiv #dpTime .tB {
+    border-right: 0px;
+}
+
+.WdateDiv #dpTime .tE {
+    border-left: 0;
+    border-right: 0;
+}
+
+.WdateDiv #dpTime .tm {
+    width: 7px;
+    border-left: 0;
+    border-right: 0;
+}
+
+.WdateDiv #dpTime #dpTimeUp {
+    height: 10px;
+    width: 13px;
+    border: 0px;
+    background: url(../img/datepicker.gif) no-repeat -32px -16px;
+}
+
+.WdateDiv #dpTime #dpTimeDown {
+    height: 10px;
+    width: 13px;
+    border: 0px;
+    background: url(../img/datepicker.gif) no-repeat -48px -16px;
+}
+
+.WdateDiv #dpQS {
+    float: left;
+    margin-right: 3px;
+    margin-top: 3px;
+    background: url(../img/datepicker.gif) no-repeat 0px -16px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.WdateDiv #dpControl {
+    text-align: right;
+}
+
+.WdateDiv .dpButton {
+    height: 20px;
+    width: 45px;
+    border: #ccc 1px solid;
+    margin-top: 2px;
+    margin-right: 1px;
+}
+
+.fly-daterange em input.text {
+    background: url(../img/icon/datepicker.png) no-repeat right center;
+    width: 50%;
+}
+
+.fly-tip-wrap {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0;
+    margin: 0 50%;
+    z-index: 100000880;
+    text-align: center;
+    font-size: 12px;
+}
+
+.fly-tip-wrap .fly-tip {
+    margin: 0 auto 1px auto;
+    float: left;
+    height: 30px;
+    line-height: 30px;
+    color: #fff;
+    white-space: nowrap;
+}
+
+.fly-tip-wrap .fly-tip.success {
+    background-color: #50c750;
+}
+
+.fly-tip-wrap .fly-tip.success i {
+    background-position: 0 -35px;
+}
+
+.fly-tip-wrap .fly-tip.warning {
+    background-color: #f88530;
+}
+
+.fly-tip-wrap .fly-tip.warning i {
+    background-position: 0 -70px;
+}
+
+.fly-tip-wrap .fly-tip.error {
+    background-color: #d33030;
+}
+
+.fly-tip-wrap .fly-tip.error i {
+    background-position: 0 0;
+}
+
+.fly-tip-wrap .fly-tip-icon {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background-image: url(../img/icon/icon_tip.png);
+    background-repeat: no-repeat;
+    vertical-align: top;
+}
+
+.fly-tip-wrap .fly-tip-content {
+    display: inline-block;
+    padding: 0 20px;
+    white-space: nowrap;
+    vertical-align: top;
+}
+
+.fly-tree {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    position: relative;
+    display: block;
+    background: white;
+}
+
+.fly-tree a,
+.fly-tree span {
+    color: #333;
+    display: inherit;
+    height: 22px;
+    line-height: 22px;
+    text-decoration: none;
+}
+
+.fly-tree ul,
+.fly-tree li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.fly-tree li {
+    clear: both;
+    display: block;
+    cursor: pointer;
+    overflow: visible !important;
+}
+
+.fly-tree li .fly-body {
+    height: 22px;
+    line-height: 22px;
+    overflow: inherit;
+    white-space: nowrap;
+}
+
+.fly-tree .fly-box {
+    width: 22px;
+    height: 22px;
+    overflow: hidden;
+    float: left;
+    background: url('../img/tree/tree.gif');
+    background-position: -22px -220px;
+}
+
+.fly-tree .fly-expandable-close {
+    background-position: 0px -44px;
+}
+
+.fly-tree .fly-first .fly-expandable-close {
+    background-position: 0px -22px;
+}
+
+.fly-tree .fly-last .fly-expandable-close {
+    background-position: 0px -66px;
+}
+
+.fly-tree .fly-onlychild .fly-expandable-close {
+    background-position: 0px 0px;
+}
+
+.fly-tree .fly-expandable-open {
+    background-position: 0px -132px;
+}
+
+.fly-tree .fly-first .fly-expandable-open {
+    background-position: 0px -110px;
+}
+
+.fly-tree .fly-last .fly-expandable-open {
+    background-position: 0px -154px;
+}
+
+.fly-tree .fly-onlychild .fly-expandable-open {
+    background-position: 0px -88px;
+}
+
+.fly-tree .fly-over {
+    background: whiteSmoke;
+}
+
+.fly-tree .fly-selected {
+    background: #D9E8FB;
+}
+
+.fly-tree .fly-line {
+    background-position: 0px -176px;
+}
+
+.fly-tree .fly-note {
+    background-position: 0px -198px;
+}
+
+.fly-tree .fly-note {
+    background-position: 0px -198px;
+}
+
+.fly-tree .fly-note-last {
+    background-position: 0px -220px;
+}
+
+.fly-tree .fly-checkbox-unchecked {
+    background-position: -22px 0px;
+}
+
+.fly-tree .fly-checkbox-checked {
+    background-position: -22px -22px;
+}
+
+.fly-tree .fly-checkbox-incomplete {
+    background-position: -22px -44px;
+}
+
+.fly-tree .fly-over .fly-checkbox-unchecked {
+    background-position: -44px 0px;
+}
+
+.fly-tree .fly-over .fly-checkbox-checked {
+    background-position: -44px -22px;
+}
+
+.fly-tree .fly-over .fly-checkbox-incomplete {
+    background-position: -44px -44px;
+}
+
+.fly-tree .fly-tree-icon-folder {
+    background-position: -22px -88px;
+}
+
+.fly-tree .fly-tree-icon-none {
+    background: none;
+}
+
+.fly-tree .fly-tree-icon-none img {
+    width: 22px;
+    height: 22px;
+    border: 0;
+}
+
+.fly-tree .fly-tree-icon-folder-open {
+    background-position: -44px -88px;
+}
+
+.fly-tree .fly-tree-icon-leaf {
+    background-position: -22px -110px;
+}
+
+.fly-tree-loading {
+    position: absolute;
+    z-index: 91000;
+    top: 40%;
+    left: 50%;
+    overflow: hidden;
+    background: url('../img/tree/loading.gif') no-repeat 0px 0px;
+    width: 24px;
+    height: 24px;
+    display: none;
+}
+
+.fly-tree-noline .fly-box {
+    background-image: url('../img/tree/tree-noline.gif');
+}
+
+.fly-numberbox {
+    position: relative;
+    border: 1px solid #e4e4e4;
+    width: 140px;
+}
+
+.fly-numberbox em {
+    display: block;
+    margin: 0 37px;
+    padding: 0 5px;
+}
+
+.fly-numberbox em input.text {
+    margin: 0 0 0 -8px;
+    padding: 6px 11px;
+    width: 50px;
+    font-size: 12px;
+    text-align: center;
+    height: 16px;
+    line-height: 16px;
+    background: #fff;
+    border: none;
+    vertical-align: top;
+    *margin-top: -28px;
+}
+
+.fly-numberbox .add,
+.fly-numberbox .sub {
+    position: absolute;
+    top: 0;
+    z-index: 10;
+    width: 35px;
+    text-align: center;
+    line-height: 28px;
+    height: 28px;
+    font-size: 16px;
+    color: #666;
+    background: #f5f5f5;
+    cursor: pointer;
+    border: solid #e4e4e4;
+    -moz-user-select: none;
+    /*火狐*/
+    -webkit-user-select: none;
+    /*webkit浏览器*/
+    -ms-user-select: none;
+    /*IE10*/
+    -khtml-user-select: none;
+    /*早期浏览器*/
+    user-select: none;
+}
+
+.fly-numberbox .add {
+    left: 0;
+    border-width: 0 1px 0 0;
+}
+
+.fly-numberbox .sub {
+    right: 0;
+    border-width: 0 0 0 1px;
+}
+
+-moz-user-select: none;
+
+/*火狐*/
+
+-webkit-user-select: none;
+
+/*webkit浏览器*/
+
+-ms-user-select: none;
+
+/*IE10*/
+
+-khtml-user-select: none;
+
+/*早期浏览器*/
+
+user-select: none;
+
+}
+.fly-numberbox .add {
+    left: 0;
+    border-width: 0 1px 0 0;
+}
+.fly-numberbox .sub {
+    right: 0;
+    border-width: 0 0 0 1px;
+}

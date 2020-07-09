@@ -1,0 +1,23 @@
+/* 列表样式 */
+
+.scroll-view-container {
+    width: 100%;
+    height: 100vh;
+    font-family: SourceHanSansCN-Regular;
+}
+
+.data-nomore {
+    height: 80rpx;
+    font-size: 28rpx;
+    color: rgb(59, 66, 87);
+    line-height: 80rpx;
+    text-align: center;
+}
+
+.data-empty {
+    height: 500rpx;
+    font-size: 28rpx;
+    color: rgb(59, 66, 87);
+    line-height: 500rpx;
+    text-align: center;
+}

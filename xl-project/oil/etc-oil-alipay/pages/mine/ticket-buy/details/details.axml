@@ -1,0 +1,69 @@
+<!--pages/mine/ticket-buy/details/details.axml-->
+<view class="ticket-buy-details-container">
+    <!--卡片-->
+    <image class="ticket-card-details-bg-img"
+        src="{{details.background_url?details.background_url:'https://oss.etcsd.com/object/17e7048da2fa48f89e729d0ded3250be'}}">
+    </image>
+    <view class="ticket-card-details-box">
+        <view class="ticket-card-details-info-top">
+            <!--新用户乐透券包-->
+            <text class="ticket-card-details-name-text">{{details.package_name}}</text>
+            <view class="ticket-card-details-discount-value">{{details.discount_rate}}折</view>
+        </view>
+        <view class="ticket-card-details-info-top-2">
+            <text class="ticket-card-details-count-text">含{{details.coupon_count}}张洗车券</text>
+            <view class="ticket-card-details-money-content">
+                <text>￥</text>
+                <text style="font-size: {{'48rpx'}}">{{details.package_price}}</text>
+            </view>
+        </view>
+    </view>
+    <!--详情-->
+    <view class="ticket-card-details-info-box">
+        <text class="ticket-card-details-info-title">{{details.package_name}}</text>
+        <!--水蜡精洗4次，有效期365天-->
+        <text class="ticket-card-details-info-sub">{{details.description}}</text>
+    </view>
+    <view class="ticket-buy-details-station-container">
+        <!--适用站点-->
+        <view class="ticket-buy-details-station" a:if="{{!isEmptyList}}">
+            <text class="ticket-buy-details-station-count">适用站点（{{amount}}家门店）</text>
+            <view class="ticket-buy-details-station-see" onTap="onAllClick">查看全部</view>
+        </view>
+        <!--位置-->
+        <view class="ticket-buy-details-locale-box" a:if="{{!isEmptyList}}" onTap="onDetailsClick">
+            <view class="ticket-buy-details-locale-img-box">
+                <image class="ticket-buy-details-locale-img" src="{{clean_data.photo_url}}"></image>
+            </view>
+            <view class="ticket-buy-details-station-box">
+                <text class="ticket-buy-details-station-name">{{clean_data.washer_name}}</text>
+                <text class="ticket-buy-details-station-locale">{{clean_data.washer_address}}</text>
+            </view>
+            <view class="ticket-buy-details-station-distance">
+                <view class="ticket-buy-details-station-near">距离最近</view>
+                <view class="ticket-buy-station-distance-navigation">
+                    <text class="ticket-buy-station-distance">{{clean_data.distance_meter}}km</text>
+                    <image class="ticket-buy-navigation-logo" src="/assets/static/station-item-navigation.png"
+                        onTap="onNavigateClick"></image>
+                </view>
+            </view>
+        </view>
+    </view>
+    <!--说明-->
+    <view class="ticket-buy-details-instruct">
+        <text class="ticket-buy-details-instruct-title">使用说明</text>
+        <block a:for="{{details.instruction}}" a:key="index" a:index="index">
+            <text class="ticket-buy-details-instruct-content">{{item}}</text>
+        </block>
+        <view class="ticket-buy-details-instruct-bottom"></view>
+    </view>
+    <!--购买-->
+    <view class="ticket-buy-confirm-box" style="padding-bottom:{{isIphoneX?42:30}}rpx">
+        <text class="ticket-buy-confirm-hint">实付款:</text>
+        <view class="ticket-buy-confirm-money-box">
+            <text class="ticket-buy-confirm-mark">￥</text>
+            <text class="ticket-buy-confirm-money">{{details.package_price}}</text>
+        </view>
+        <view class="ticket-buy-confirm-button theme-button" onTap="onSubmitClick">购买</view>
+    </view>
+</view>

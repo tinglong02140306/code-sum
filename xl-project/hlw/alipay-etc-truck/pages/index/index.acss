@@ -1,0 +1,45 @@
+.login-footer{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 236rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction:column;
+    z-index: 99;
+    background: #fff;
+}
+.login-button{
+    width: 300rpx;
+    height: 80rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10rpx;
+    font-family: "PingFangSC-Regular";
+    font-size: 36rpx;
+    color: #FFFFFF;
+}
+.btn-wrapper{
+    width: 750rpx;
+    height: 100rpx;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 40rpx;
+}
+.contact-btn{
+    width: 80rpx;
+    height: 80rpx;
+    position: fixed;
+    right: 30rpx;
+    bottom: 250rpx;
+    z-index: 123;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 50%;
+    box-shadow: 0rpx 0rpx 4rpx 4rpx #dadada;
+}

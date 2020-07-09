@@ -1,0 +1,153 @@
+/*
+ * @Author: qijiang 
+ * @Date: 2018-09-30 21:18:44 
+ * @Last Modified by: qijiang
+ * @Last Modified time: 2018-12-29 10:41:20
+ */
+<template>
+    <div class="iframe-header bg-header-base">
+        <div class="iframe-banner">
+        </div>
+        <!-- <div class="custom-content-con">
+            <Avatar icon="ios-person" size="default" :src="userUrl" class="a"/>
+            <span class="user-name">{{loginName}}</span>
+            <span class="btn-exit-system" title="退出" @click="exitBtn">退出</span>
+        </div> -->
+        <div class="custom-content-con">
+            <span class="ivu-avatar ivu-avatar-circle ivu-avatar-default ivu-avatar-image ivu-avatar-icon"  @click="showUserInfo" >
+                <!-- <img :src="userUrl"> -->
+                <img v-if="userPic" :src="userPic">
+            </span>
+            <span class="user-name">{{loginName}}</span>
+            <span class="btn-exit-system" title="退出" @click="exitBtn">退出</span>
+        </div>
+    </div>
+</template>
+<script>
+import navMenu from '@/components/navMenu/navMenu';
+import unit from "@/api";   // 公共工具方法
+export default {
+    components: {
+        navMenu: navMenu
+    },
+    props: {
+        icon: {
+            type: String,
+            default: 'navicon-round'
+        },
+        size: {
+            type: Number,
+            default: 26
+        }
+    },
+    data() {
+        return {
+            collapsed: false,
+            theme: 'light',
+            mode: 'horizontal',
+            userUrl: this.$store.state.userUrl + '/getUserPhoto',
+            userPic: ''
+        }
+    },
+    computed: {
+        
+        menuState: {
+            get() {
+                return this.$store.state.menuState;
+            }
+        },
+        loginName: {
+            get() {
+                return this.$store.state.loginName;
+            }
+        }
+        
+    },
+    mounted() {
+
+    },
+    created(){
+       let that=this;
+        unit.ajaxMerPost(this.$store.state.userUrl + '/getUserPhoto',{},function(res) {
+            that.userUrl=that.$store.state.userUrl+'/static/images/common/default-avator.png';
+        },function(error) {
+            if(!error.data) {
+                that.userUrl=that.$store.state.userUrl+'/static/images/common/default-avator.png';
+            }
+        }, that);
+    },
+    methods: {
+        showUserInfo() {
+            this.showInfo = !this.showInfo;
+        },
+        handleChange() {
+            this.collapsed = !this.collapsed;
+            this.$emit('handleChange', this.collapsed);
+        },
+        selectEvt(val) {
+            this.$store.commit('setState', {
+                menuState: val
+            });
+            localStorage.menuState = val;
+        },
+        exitBtn() {
+            this.$emit('logout');
+        },
+        /**
+         * 获取用户头像base64
+         */
+        getUserPic() {
+            let that = this;
+            unit.ajaxMerPost('/bog-matter-mgr/getUserPhoto.do', {
+            }, function (res) {
+                that.$set(that, 'userPic', res.data)
+            }, function (res) {
+                that.$Message.warning('获取数据失败');
+            }, that);
+        }
+    },
+    mounted() {
+        this.getUserPic();
+    }
+}
+</script>
+<style lang="less">
+@import "../../assets/styles/color.less";
+.iframe-header {
+    overflow: hidden;
+    position: relative;
+    padding: 0 20px;
+    width: 100%;
+    // background: @baseBgColor;
+    height: 60px;;
+    line-height: 60px;
+    z-index: 99;
+    .iframe-banner {
+        float: left;
+        margin-left: 10px;
+        height: 60px;
+        width: 128px;
+        background: url(../../assets/images/common/logo-font.png) 0 14px no-repeat;
+        background-size: 100% auto;
+    }
+    .custom-content-con {
+        float: right;
+        padding: 0 0 0 20px;
+        height: auto;
+        line-height: 60px;
+        .user-name {
+            margin-right: 26px;
+            margin-left: 10px;
+            font-size: 14px;
+            color: #fff;
+        }
+        .btn-exit-system {
+            padding-left: 20px;
+            background: url(../../assets/images/common/icon-exit-background.png)
+                no-repeat left center;
+            color: #fff;
+            cursor: pointer;
+        }
+    }
+}
+</style>

@@ -1,0 +1,14 @@
+{
+  "name": "etc",
+  "version": "1.0.0",
+  "description": "高速ETC服务",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mini-antui": "^0.4.33"
+  }
+}

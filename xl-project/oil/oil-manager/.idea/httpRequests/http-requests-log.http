@@ -1,0 +1,11 @@
+POST http://oilcoreserver.test.etcsd.cn/oilcoreserver/website/user/user-login
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{   "username": "123",   "password": "123" }
+
+<> 2018-07-10T075610.200.txt
+
+###
+

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=div">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>animation</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background: #000;
+        }
+
+        .demo-one {
+            transition: transform 2s ease;
+        }
+
+        .demo-one:hover {
+            transform: rotate(45deg);
+        }
+
+        .demo-two {
+            margin-top: 20px;
+        }
+
+        .demo-two:hover .cell {
+            /* delay iteration-count direction fill-mode */
+            animation: move 2s linear 2 alternate forwards;
+
+        }
+
+        .demo-two .cell {
+            width: 200px;
+            height: 200px;
+            background: red;
+        }
+
+        @keyframes move {
+            100% {
+                transform: translateX(200px)
+            }
+
+        }
+
+        .myDiv2 {
+            top: 150px;
+            width: 75px;
+            height: 75px;
+            background-color: red;
+            position: relative;
+            animation: mymove 5s 1 2s;
+        }
+
+        @keyframes mymove {
+            from {
+                left: 0px;
+                background-color: green;
+            }
+
+            to {
+                left: 200px;
+                background-color: blue;
+            }
+        }
+
+        .forwards {
+            animation-fill-mode: forwards;
+        }
+
+        .bkforwards {
+            animation-fill-mode: backwards;
+        }
+
+        .both {
+            animation-fill-mode: both;
+        }
+
+        .demo-3 {
+            margin: 30px auto;
+            animation: jump 2s cubic-bezier(0.41, -0.04, 0.93, 0.29) infinite;
+            border-radius: 50%;
+
+        }
+
+        @keyframes jump {
+            0% {
+                transform: translateY(0px)
+            }
+
+            90% {
+                transform: translateY(200px);
+                clip-path: ellipse(50% 50% at 50% 50%);
+            }
+
+            100% {
+                transform: translateY(210px);
+                clip-path: ellipse(50% 45% at 50% 48%);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box demo-one">
+    </div>
+
+    <div class="box demo-two">
+        <div class="cell"></div>
+    </div>
+    <div class="box demo-3">
+        <div class="cell"></div>
+    </div>
+    <!-- <div class="myDiv2"></div>
+    <div class="myDiv2 forwards"></div>
+    <div class="myDiv2 bkforwards"></div>
+    <div class="myDiv2 both"></div> -->
+</body>
+<script>
+    let runend = () => console.log('runend');
+    let $loading = document.querySelector('.demo-one');
+    $loading.addEventListener('transitionend', runend);
+</script>
+
+</html>

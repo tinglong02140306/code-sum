@@ -1,0 +1,116 @@
+$width:250px;
+$width-label:100px;
+$width-div:372px;
+$width-parent:390px;
+
+.interests-dialog-container{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-start; 
+    
+    .ant-form-item-control-wrapper{
+        min-height: 60px;
+    }
+
+    .ant-form-item-with-help {
+        margin-bottom: 0px;
+    }
+}
+
+.interests-dialog-div{
+    width: $width-parent;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+}
+
+.interests-dialog-form-item{
+    width: $width-div;
+    margin: 0;
+
+    .ant-form-item-label{
+        width: $width-label;
+    }
+
+    .ant-form-item-children .ant-input{
+        width: $width;
+    }
+}
+
+.interests-dialog-form-item-logo{
+    width: 205px;
+    
+    .ant-form-item-control-wrapper{
+        min-height: 120px;
+    }
+
+}
+
+.interests-dialog-form-item-add{
+    align-self: flex-end;
+    .ant-form-item-control-wrapper{
+        min-height: 40px;
+    }
+
+    .ant-form-item-label{
+        width: $width-label;
+    }
+
+    .ant-form-item-children .ant-input{
+        width: $width;
+    }
+
+    .dynamic-delete-button{
+        margin-left: 8px;
+    }
+}
+
+.interests-dialog-form-item-add0{
+    width: $width-div;
+
+    .ant-form-item-control-wrapper{
+        min-height: 40px;
+    }
+
+    .ant-form-item-label{
+        width: $width-label;
+    }
+
+    .ant-form-item-children .ant-input{
+        width: $width;
+    }
+
+    .dynamic-delete-button{
+        margin-left: 8px;
+    }
+}
+
+.interests-dialog-form-item-add-coupon{
+    width: $width-div;
+    padding-left: $width-label;
+
+    .interests-dialog-form-add{
+        width: $width; 
+    }
+}
+
+.interests-dialog-form-item-footer{
+    align-self: center;
+}
+
+.interests-footer-btns{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    margin-top: 20px;
+}
+
+.interests-footer-btn{
+    margin-right: 10px;
+}

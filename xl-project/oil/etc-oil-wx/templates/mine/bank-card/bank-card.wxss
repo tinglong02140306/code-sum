@@ -1,0 +1,39 @@
+.bank-card-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    left: 0;
+    top: 0;
+}
+
+.bank-card-bg-image{
+    width: 712rpx;
+    height: 222rpx;
+    position: relative;
+}
+
+.bank-card-title-text{
+    text-align: left;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 30rpx;
+    font-family: PingFangSC-Semibold;
+    position: absolute;
+    top: 26rpx;
+    left: 130rpx;
+    z-index: 200;
+}
+
+.bank-card-no-text{
+    color: #ffffff;
+    text-align: left;
+    font-size: 48rpx;
+    text-align: left;
+    font-family: FZLTZHUNHJW--GB1-0;
+    position: absolute;
+    bottom: 20rpx;
+    right: 40rpx;
+    z-index: 200;
+}
+

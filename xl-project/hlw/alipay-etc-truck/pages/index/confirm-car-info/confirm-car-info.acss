@@ -1,0 +1,89 @@
+/* required by usingComponents */
+.wrapper{
+	width: 750rpx;
+	box-sizing: border-box;
+	padding: 30rpx 0;
+}
+.banner{
+	width: 100%;
+	height: 200rpx;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	border-bottom: 2rpx solid #eee;
+}
+.title{
+	flex: 0 0 120rpx;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 32rpx;
+	font-weight: bold;
+}
+.subtitle{
+	font-size: 28rpx;
+	color: #999;
+	flex: 1;
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+}
+.car-container{
+	width: 600rpx;
+	height: 100rpx;
+	box-sizing: border-box;
+	margin: 30rpx 55rpx;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 10rpx;
+}
+.next-btn{
+	width: 600rpx;
+	margin: 50rpx 75rpx;
+	outline: none;
+}
+.info{
+	width: 100%;
+	min-height: 80rpx;
+	padding: 10rpx 0;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	border-bottom: 2rpx solid #eee;
+}
+.input-item{
+	width: 690rpx;
+	height: 88rpx;
+	display: flex;
+	border-bottom: 1px solid #eee;
+	position: relative;
+	font-size: 30rpx;
+}
+.input-label{
+	flex: 0 0 150rpx;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+.input{
+	flex: 1;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+.clear{
+	position: absolute;
+	width: 60rpx;
+	right:0;
+	top:0;
+	bottom:0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.placeholderCls{
+	color: #999999;
+	font-size: 28rpx;
+	text-align: left;
+}

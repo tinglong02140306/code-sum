@@ -1,0 +1,16 @@
+<view class="wrapper">
+	<div class="card">
+		<view class="row" style="border-bottom:2rpx solid #eee;">
+			<view>车牌号：</view>
+			<view>{{punishInfo["vlp"]}}</view>
+		</view>
+		<view class="row">
+			<view>卡号：</view>
+			<view>{{punishInfo["tally_card"]}}</view>
+		</view>
+		<view class="row">
+			<view>金额：</view>
+			<view>{{punishInfo["amount"]}}</view>
+		</view>
+	</div>
+</view>

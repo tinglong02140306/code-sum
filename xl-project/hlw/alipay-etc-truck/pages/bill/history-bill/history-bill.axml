@@ -1,0 +1,23 @@
+<view>
+	<view class="body-wrapper" a:if="{{loaded}}">
+		<!--列表区-->
+		<block a:for="{{list}}">
+			<view class="snack-bar">{{item["bill_month"]}}</view>
+			<view class="container">
+				<block a:for="{{item['bill_list']}}" a:for-item="bill">
+					<view class="bill-item" onTap="showDetail" data-idx="{{bill}}">
+						<image src="/images/my/wallet.png" style="width:50rpx;height:50rpx" mode="widthFix"/>
+						<view class="bill-date">
+							<view class="bill-money">￥{{bill["amount"]}}</view>
+							<view class="bill-cycle">账单周期：{{bill["booked_date_start"]}}-{{bill["booked_date_end"]}}</view>
+						</view>
+						<view class="bill-status">{{billStateMap[bill["state"]]}}</view>
+						<view class="right"><view class="right-arrow"/></view>
+					</view>
+				</block>
+			</view>
+		</block>
+	</view>
+	<ant-skeleton a:else />
+</view>
+

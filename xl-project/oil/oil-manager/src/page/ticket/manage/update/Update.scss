@@ -1,0 +1,99 @@
+.ticket-manage-update-container {
+    width: 96%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    margin-top: 16px;
+    border-radius: 2px;
+}
+
+.ticket-manage-update-title {
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 16px;
+    font-weight: bolder;
+    border-bottom: 1px solid #e9e9e9;
+    padding: 10px 16px;
+}
+
+.ticket-manage-update-box {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.ticket-manage-update-content-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    box-sizing: border-box;
+    .ant-form-item-with-help{
+        margin-bottom: 0;
+    }
+}
+
+.ticket-manage-update-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.ticket-manage-update-box-item {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 10px;
+    .ant-form-item-label {
+        font-weight: bolder;
+        min-width: 154px;
+        margin-right: 10px;
+    } 
+}
+
+.margin-input{
+    .ant-input-number{
+        margin-right: 6px;
+    }
+    input{
+        margin: 0 6px;
+    }
+}
+
+.ticket-manage-update-box-item-btns{
+    width: 100%;
+    text-align: center;
+    button{
+        margin: 16px 10px 0 10px;
+    }
+}
+
+.other {
+    padding-left: 0;
+    margin-left: 0;
+    .ant-form-item-control{
+        min-width: 300px;
+    }
+}
+
+.number{
+    input{
+        width: 100px;
+    }
+}
+
+#hint{
+    color: #ffa515;
+    margin-left: 4px;
+}
+
+.ticket-manage-update-box-item-detail{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    white-space: nowrap;
+}

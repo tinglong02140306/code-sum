@@ -1,0 +1,445 @@
+.f22 {
+    font-size: 0.49rem;
+}
+.wrap {
+	height: 100%;
+}
+
+.header {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	background: #4c72ff;
+	line-height: 2.1rem;
+	font-size: .5rem;
+}
+
+.header a {
+	color: #fff;
+    font-size: .62rem;
+    line-height: 2.1rem;
+}
+
+.down-app {
+	padding-left: 0.8rem;
+    margin-right: 5.4%;
+    background: url(../images/common/down-icon.png) left center no-repeat;
+    background-size: 0.577rem 0.577rem;
+}
+
+.user-name {
+	    padding-left: 0.75rem;
+    margin-right: 7.5%;
+    background: url(../images/common/person-icon.png) left center no-repeat;
+    background-size: 0.488rem 0.577rem;
+    max-width: 50%;
+}
+
+.news-view {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	height: 100%;
+    width: 100%;
+}
+
+.news-list {
+	padding: 0 4.1%;
+	background: #fff;
+}
+
+.news-list li {
+    position: relative;
+    background: #fff;
+    border: none!important;
+}
+
+.news-list li a {
+    background: url(../images/common/border-icon.png) left bottom 1px repeat-x;
+}
+
+.news-list li a {
+	position: relative;
+    display: block;
+}
+
+.news-list li a.type1 {
+    padding: 0.64rem 0;
+}
+
+.news-list li a.type0,
+.news-list li a.type3 {
+    padding: 0.36rem 0;
+}
+
+.news-banner img {
+    display: block;
+}
+
+.news-list li a.type1 img {
+    width: 4.70rem;
+    height: 3.52rem;
+}
+
+.ul-content {
+    margin-right: 0.62rem;
+    height: 3.66rem;
+}
+
+.flex {
+    display: box !important;
+    display: flex !important;
+    display: -webkit-box !important;
+    display: -webkit-flex !important;
+    -webkit-box-orient: horizontal !important;
+}
+
+.flex-one {
+    display: block !important;
+    -webkit-box-flex: 1 !important;
+    -webkit-flex: 1 !important;
+    flex: 1 !important;
+}
+
+.two-ell {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.recommend-ul-theme {
+    font-size: 0.76rem;
+    color: #000;
+    line-height: .96rem;
+}
+
+.news-content {
+    margin-top: .4rem;
+    margin-bottom: .3rem;
+    line-height: .8rem;
+    font-size: 0.62rem;
+    color: #666;
+}
+
+.news-info {
+    position: absolute;
+    bottom: 0.6rem;
+    font-size: 0.53rem;
+    line-height: 1.02rem;
+    color: #808080;
+}
+
+.news-list li a.type0 .news-info,
+.news-list li a.type3 .news-info {
+    position: relative;
+    bottom: 0;
+    margin-top: 0.14rem;
+}
+
+.news-list li a.type3 .news-info {
+    margin-top: 0.4rem;
+}
+
+.news-list li a.type3 .img-list {
+     margin: 0.3rem 0 0.22rem;
+}
+
+.news-list li a.type3 .img-item {
+    margin-right: 0.44rem;
+}
+
+.news-list li a.type3 .img-list img {
+    width: 100%;
+    height: 3.6rem;
+}
+
+.news-list li a.type3 .img-list .img-item:last-child {
+    margin-right: 0;
+}
+
+.news-info .resource {
+    margin-right: .3rem;
+    max-width: 3.8rem;
+}
+
+.news-list li a.type0 .news-info .resource,
+.news-list li a.type3 .news-info .resource {
+    max-width: 7rem;
+}
+
+.news-info .num {
+     margin-right: .3rem;
+}
+
+.news-info .time {
+    max-width: 3.2rem;
+}
+
+.news-title,
+.news-time {
+    display: block;
+}
+
+.news-title {
+    font-size: 0.67rem;
+    color: #333;
+}
+
+.news-time {
+    font-size: 0.53rem;
+    color: #808080;
+}
+
+.empty-news {
+    font-size: 0.6rem;
+    text-align: center;
+    color: #999;
+    line-height: 4rem;
+}
+
+
+
+/*======tab swiper 样式覆盖 start====*/
+.swiper-container {
+    height: 100%;
+    width: auto;
+}
+.swiper-wrapper {
+    position: absolute;
+    top: 1.56rem;
+    height: 100%;
+    width: auto;
+}
+.swiper-slide {
+    padding-bottom: 2.5rem;
+    overflow-x: auto;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    box-sizing: border-box;
+}
+.swiper-container-horizontal > .swiper-pagination-bullets {
+    top: 0;
+    bottom: -moz-calc(100% - 1.56rem);
+    bottom: -webkit-calc(100% - 1.56rem);
+    bottom: calc(100% - 1.56rem);
+}
+.swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet {
+    margin: 0;
+    width: 33.33%;
+    height: 1.56rem;
+    font-size: 0.71rem;
+    color: #666;
+    /*background-color: #fff;*/
+    background: #fff url(../images/common/border-icon.png) left bottom 1px repeat-x;
+     /*border-bottom: 1px solid #eaeaea;   */
+    border-radius: 0; 
+    opacity: 1;
+    line-height: 1.56rem;
+} 
+ .innner-item {
+    display: inline-block;
+    width: auto;
+    height: 100%;
+    background: none;
+    border-radius: 0;
+} 
+.swiper-pagination-bullet-active .innner-item {
+    display: block;
+    color: #333;
+    height: calc(100% - .1rem);
+    background: url(../images/police-headline/icon-border.png) center bottom / 1.18rem .089rem no-repeat;
+}
+/*======tab swiper 样式覆盖 end====*/
+
+/*====推荐样式、本地、警微热点样式 start====*/
+.home-news {
+    width: 100%;
+}
+
+/*=警微热点样式 start=*/
+.blog-news-content,
+.blog-news-item {
+    width: 100%;
+    background: #f5f5f5;
+}
+.item-content {
+    padding: .38rem 4.2% 0.56rem;
+    width: 91.6%;
+    /*background: url(../images/common/border-icon.png) left bottom 1px repeat-x;*/
+}
+.blog-news-content .blog-news-item:first-child {
+    padding-top: .44rem;
+}
+.blog-news-item {
+    background: #fff;
+    margin-bottom: .44rem;
+}
+.item-title {
+    padding: 0 .44rem;
+    color: #3a4981;
+}
+.item-date {
+    padding: 0 .22rem
+}
+.item-header {
+    height: 1.46rem;
+    padding: .38rem 0;
+    font-size: 0;
+}
+.item-header span {
+    display: inline-block;
+    vertical-align: top;
+    line-height: 1.46rem;
+}
+.item-header .my-photo {
+    display: inline-block;
+    width: 1.46rem;
+    height: 1.46rem;
+    border-radius: .73rem;
+    /*background: pink;*/
+}
+.full-text {
+    color: #4c72ff;
+    line-height: .72rem;
+}
+.content-text {
+    line-height: .72rem;
+}
+.img-list {
+    flex-wrap: wrap; /* 自动换行*/
+    margin-top: 0.56rem;
+}
+/*一行展示一个图片*/
+.img-item-one {
+    width: 9.84rem;
+    height: 7.42rem;
+}
+.img-list .img-item-one img {
+    display: block;
+    width: auto;
+    max-width: 14.67rem;
+    min-width: 4.2rem;
+    height: 7.42rem;
+}
+/*一行展示2张图片*/
+/* .img-item-two {
+    width: 4.8rem;
+    height: 3.6rem;
+} */
+/*一行展示3张图片*/
+.img-item-two,
+.img-item-three {
+    width: calc(33% - .14rem);
+    height: 4.8rem;
+}
+.img-item-two-mar {
+    margin-left: .21rem;
+    margin-right: calc(34% - .14rem);
+}
+.img-item-mar {
+    margin-left: .21rem;
+}
+.img-item-two img,
+.img-item-three img {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.img-item-btom {
+    margin-bottom: .21rem;
+}
+/* 视频 */
+.vedio-unit {
+    position: relative;
+    top: .44rem;
+    width: 100%;
+    height: 9.56rem;   
+}
+.vedio-unit span {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: url(../images/police-headline/icon-play.png) center center / 1.78rem no-repeat;
+}
+.vedio-unit img {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/*=警微热点样式 end=*/
+
+/*====推荐样式、本地、警微热点样式 end====*/
+
+/*=====上拉刷新下拉加载背景小图标样式修改===== start*/
+.wrap .mescroll-downwarp .downwarp-progress {
+    width: 1rem;
+    height: 1rem;
+    background: url(../images/common/news.png) no-repeat;
+    background-size: 100%;
+    border-radius: inherit;
+    border: none;
+    border-bottom-color: inherit;
+    opacity: 0;
+}
+
+.wrap .mescroll-downwarp .downwarp-progress.mescroll-rotate {
+    background: url(../images/common/news-load.gif) no-repeat;
+    background-size: 100%;
+    -webkit-animation: inherit;
+    animation: inherit;
+}
+.wrap .mescroll-downwarp .downwarp-tip {
+    line-height: 1rem;
+}
+/*=====上拉刷新下拉加载背景小图标样式修改===== end*/
+.mescroll-fade-in {
+    display: none;
+}
+
+.empty p {
+    padding-top: 0.68rem;
+    font-size: 0.62rem;
+    color: #666;
+    text-align: center;
+    line-height: 0.68rem;
+}
+
+.empty-ad {
+    height: 10rem;
+    background: url(../images/common/404.png) no-repeat 50% bottom;
+    background-size: 4.1rem 4.04rem;
+}
+
+
+.empty .refresh-btn {
+    margin: 1.64rem auto 0.70rem;
+    width: 7.1rem;
+    height: 1.78rem;
+    background-color: #4c72ff;
+    border: 1px solid #4c72ff;
+    border-radius: 10px;
+    text-align: center;
+    line-height: 1.78rem;
+    font-size: 0.66rem;
+    color: #fff;
+}
+
+.empty .close-btn {
+    margin: 0 auto;
+    width: 7.1rem;
+    height: 1.78rem;
+    background-color: #fff;
+    border: 1px solid #d8d8d8;
+    border-radius: 10px;
+    line-height: 1.78rem;
+    font-size: 0.66rem;
+    color: #666;
+    text-align: center;
+}
+/*警微热点 全文添加透明度*/
+.add-opacity {
+    background: rgba(76,114,255, .1);
+}

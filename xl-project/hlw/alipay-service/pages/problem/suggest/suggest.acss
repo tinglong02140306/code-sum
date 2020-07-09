@@ -1,0 +1,100 @@
+.wrap {
+    font-family: SourceHanSansCN-Regular;
+}
+
+.text {
+    color: #3b4257;
+}
+
+image {
+    width: 36rpx;
+    height: 36rpx;
+    background: #fff;
+}
+
+.wrap {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #f0f3f8;
+}
+
+.detail-item {
+    margin-top: 20rpx;
+    /* min-height: 160rpx; */
+    background-color: #fff;
+    border: 2rpx solid #ececec;
+    border-left: none;
+    border-right: none;
+}
+
+.detail-item .eqwidth {
+    margin-left: 4%;
+    width: 92%;
+}
+
+.title {
+    display: flex;
+    height: 190rpx;
+    line-height: 190rpx;
+    align-items: center;
+}
+
+.title text {
+    width: 644rpx;
+    font-size: 32rpx;
+    text-indent: 10rpx;
+    font-weight: bold;
+}
+
+
+/* .title image {
+    width: 36rpx;
+    height: 36rpx;
+} */
+
+.content-step {
+    display: flex;
+}
+
+.date {
+    width: 140rpx;
+}
+
+.date text,
+.descript text {
+    display: block;
+    width: 100%;
+}
+
+.time {
+    font-size: 22rpx;
+}
+
+.year {
+    font-size: 22rpx;
+}
+
+.icon {
+    width: 90rpx;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.descript {
+    width: 460rpx;
+    font-size: 26rpx;
+    position: relative;
+    left: -42rpx;
+    padding: 0 0 80rpx 42rpx;
+    z-index: 1;
+}
+
+.pre {
+    border-left: 2rpx solid #eaeaea;
+}
+
+.cur {
+    color: #3568eb;
+}

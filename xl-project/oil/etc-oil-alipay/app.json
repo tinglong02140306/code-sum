@@ -1,0 +1,72 @@
+{
+    "pages": [
+        "pages/home/index/index",
+        "pages/home/rights/rights",
+        "pages/stations/index/index",
+        "pages/stations/map/map",
+        "pages/stations/details/details",
+        "pages/stations/fast-oil/fast-oil",
+        "pages/stations/fast-order/fast-order",
+        "pages/stations/qrcode/qrcode",
+        "pages/stations/qrcode-result/qrcode-result",
+        "pages/stations/filter/filter",
+        "pages/stations/search/search",
+        "pages/stations/etc-pay/etc-pay",
+        "pages/mine/index/index",
+        "pages/mine/etc/list/list",
+        "pages/mine/coupons/list/list",
+        "pages/mine/coupons/coupon/coupon",
+        "pages/mine/gold/list/list",
+        "pages/mine/invoice/index/index",
+        "pages/mine/invoice/history/history",
+        "pages/mine/invoice/details/details",
+        "pages/mine/invoice/resend/resend",
+        "pages/mine/invoice/create/create",
+        "pages/mine/invoice/result/result",
+        "pages/mine/invoice/consume/consume",
+        "pages/mine/pay/list/list",
+        "pages/mine/etc/bind/bind",
+        "pages/mine/order/list/list",
+        "pages/mine/order/details/details",
+        "pages/stations/clean/park-confirm/park-confirm",
+        "pages/stations/clean/clean-order/clean-order",
+        "pages/stations/clean/clean-doing/clean-doing",
+        "pages/stations/clean/clean-notice/clean-notice",
+        "pages/stations/clean/clean-result/clean-result",
+        "pages/stations/clean/clean-details/clean-details",
+        "pages/mine/ticket-buy/details/details",
+        "pages/mine/ticket-buy/list/list",
+        "pages/login/login"
+    ],
+    "window": {
+        "defaultTitle": "ETC加油助手",
+        "titleBarColor": "#ffffff",
+        "transparentTitle": "none",
+        "titlePenetrate": "YES"
+
+    },
+    "tabBar": {
+        "textColor": "#828282",
+        "selectedColor": "#00A170",
+        "backgroundColor": "#ffffff",
+        "items": [{
+                "pagePath": "pages/home/index/index",
+                "name": "推荐",
+                "icon": "/assets/static/tab-home.png",
+                "activeIcon": "/assets/static/tab-home-select.png"
+            },
+            {
+                "pagePath": "pages/stations/index/index",
+                "name": "服务网点",
+                "icon": "/assets/static/tab-station.png",
+                "activeIcon": "/assets/static/tab-station-select.png"
+            },
+            {
+                "pagePath": "pages/mine/index/index",
+                "name": "我的",
+                "icon": "/assets/static/tab-persion.png",
+                "activeIcon": "/assets/static/tab-persion-select.png"
+            }
+        ]
+    }
+}

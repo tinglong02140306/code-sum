@@ -1,0 +1,13 @@
+ {
+   "name": "confirm",
+   "version": "0.1.0",
+   "description": "flymo confirm",
+   "main": "confirm.js",
+   "files": [
+     "confirm.html",
+     "confirm.js",
+     "confirm.css"
+   ],
+   "dependencies": {
+   }
+ }

@@ -1,0 +1,44 @@
+.add-risk-dialog-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-risk-dialog-input-item{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  div{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    color: black;
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 10px;
+    width: 100px;
+  }
+}
+
+.add-risk-dialog-input{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-risk-dialog-input-empty{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-left: 70px;
+  span{
+    color: #fa0000;
+    font-size: 10px;
+  }
+}

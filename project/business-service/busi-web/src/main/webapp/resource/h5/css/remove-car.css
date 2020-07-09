@@ -1,0 +1,47 @@
+.positon-wrap {
+    padding-bottom: 1rem;
+    font-size: .58rem;
+    color: #333;
+}
+input {
+    border:none;
+    outline: none;
+}
+#suggestId {
+    height:1.2rem;
+    width: 100%;
+}
+
+.search-result {
+    padding-top: 0.3rem;
+    position: absolute;
+    top: 2rem;
+    /*top: 0;*/
+    bottom: 0;
+    width: 100%;
+}
+
+.search-result p,
+.nearby-address p{
+    height: 2.04rem;
+    font-size: 0.66rem;
+    color: #333;
+    line-height: 2.04rem;
+}
+.search-result p.address,
+.nearby-address p.address{
+    font-size: 0.5rem;
+    color: #666;
+}
+.search-result .item ,
+.nearby-address .item{
+    padding: 0 .62rem;
+    background: url(../images/anhui-110/border-icon.png) left bottom 1px repeat-x;
+}
+
+.search-result i,
+.nearby-address i{
+    display: block;
+    width: 1.96rem;
+    height: 2rem;
+}

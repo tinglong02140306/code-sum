@@ -1,0 +1,13 @@
+<view class="popup" wx:if="{{isShow}}" bind:tap="onMaskerClick" catchtouchmove="preventTouchMove">
+    <view class="popup-content-bottom bottom-pos"
+        wx:if="{{position==='bottom'}}"
+        animation="{{animation}}"
+        id="bottom"
+        catch:tap="onContentClick">
+        <slot></slot>
+    </view>
+    <view class="popup-content-center"
+        wx:if="{{position==='center'}}">
+        <slot></slot>
+    </view>
+</view>

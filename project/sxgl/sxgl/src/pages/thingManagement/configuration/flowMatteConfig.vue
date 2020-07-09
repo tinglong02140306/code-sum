@@ -1,0 +1,892 @@
+/*
+ * @Author: tinglong 
+ * @Date: 2018-10-22 10:52:06 
+ * @Last Modified by: qijiang
+ * @Last Modified time: 2019-01-17 17:21:00
+ */
+
+<template>
+    <div id="flowMatteConfig">
+        <!-- 流程配置列表 -->
+        <div class="tab-list-wrap">
+            <el-table :data="matteData" @selection-change="matteSelChange">
+                <el-table-column class="font-max" prop="matterName" label="事项名称">
+                </el-table-column>
+                <el-table-column class="font-max" label="前置事项">
+                    <template slot-scope="scope">
+                        <span :title="matteData[scope.$index].parentName">{{matteData[scope.$index].parentNameSl}}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column class="font-max" prop="subStageName" label="所属阶段">
+                </el-table-column>
+                <el-table-column class="font-max" prop="adminDivName" label="行政区划">
+                </el-table-column>
+                <el-table-column class="font-max" prop="deptName" label="主办部门">
+                </el-table-column>
+                <el-table-column label="操作" align="center" width="100">
+                    <template slot-scope="scope">
+                        <el-button class="font-max" type="text" size="small" @click="editFlowMatEvt(matteData[scope.$index].id)">编辑</el-button>
+                        <el-button class="font-max" type="text" size="small" @click="delFlowMatEvt(matteData[scope.$index].id)">删除</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+        </div>
+
+        <!-- 新增流程配置 -->
+        <el-dialog :title="matteTitle" :visible.sync="matteAddVis" width="1200px" :close-on-click-modal="false">
+            <el-form :model="matteFormData" ref="matteForm" :rules="matteRules" label-width="100px" :label-position="labelPosition" size="mini">
+                <div class="row-wrap">
+                    <el-row v-if="stageFlag">
+                        <el-col :span="12">
+                            <el-form-item label-width="0px">
+                                <label class="stage-label font-min"><span class="required">*</span>阶段名称</label>
+                                <el-select class="font-min" placeholder="请选择" v-model="matteFormData.subStageCode" @change="stageChange">
+                                    <el-option
+                                        v-for="item in stageOptions"
+                                        :key="item.value"
+                                        :label="item.label"
+                                        :value="item.value"
+                                        :title="item.label">
+                                    </el-option>
+                                </el-select>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+                    <el-row>
+                        <el-col :span="12">
+                            <el-form-item label-width="0px">
+                                <label class="stage-label font-min"><span class="required">*</span>事项名称</label>
+                                <div class="matte-wrap">
+                                    <a href="javascript:;"  class="mr20" v-for="(item,index) in mattNameData" :key="index">
+                                        <span>{{item.matterName}}</span>
+                                        <i class="icon-del" @click="matteDelEvt(index)"></i>
+                                    </a>
+                                </div>
+                                <!-- <el-input class="font-min" v-model="matteFormData.matterName" :disabled="true"></el-input> -->
+                            </el-form-item>
+                        </el-col>
+                        <el-col :span="12">
+                            <el-form-item label-width="0px">
+                                <label class="stage-label font-min">前置事项</label>
+                                <el-select class="font-min" v-model="parentIdArr" multiple filterable default-first-option @change="preNameChange">
+                                    <el-option class="font-min parent-item" v-for="item in parentNameOptions" :key="item.value" :label="item.label" :value="item.value" :title="item.label">
+                                    </el-option>
+                                </el-select>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+                </div>
+                <!-- 表单页 -->
+                <div class="matte-list-wrap">
+                    <matteListPage ref="matteListPage" @getMatteName="getMatteName" :matteChechedData="matteChechedData"></matteListPage>
+                </div>
+                <div class="footer">
+                    <el-button type="primary" size="small" @click="saveFormData('matteForm')">确 定</el-button>
+                    <el-button size="small" @click="matteAddVis = false">取 消</el-button>
+                </div>
+            </el-form>
+        </el-dialog>  
+
+
+
+        <!-- 流程图弹框 -->
+        <el-dialog title="流程图" :visible.sync="flowChartVis" width="1250px" custom-class="flow-chart-dialog" :close-on-click-modal="false">
+            <div class="flow-chart-wrap" ref="contentWrap">
+                <div class="tab-con-wrap" v-if="treeData.eventMatterList.length > 1">
+                    <!-- <div class="tab-wrap">
+                        <a href="javascript:;" v-for="(item,index) in treeData.eventMatterList" :label="index" :key="index" @click="tabClick(index)" :class="tabIndex == index ? 'selecteds': ''">{{item.subStageName}}</a>
+                    </div> -->
+
+                    <div class="radio-group switch-navigate mt10">
+                        <Icon type="ios-arrow-back" @click="scrollPre" v-if="showBtn" />
+                        <div class="radio-sub-wrap" :style="{width: subWrapWid}">
+                            <div class="radio-sub" :style="{width: subWid}">
+                                 <!-- :style="{width: subWid}" -->
+                                <span class="switch-default ell font-min" v-for="(item,index) in treeData.eventMatterList" :key="index" :value="index" :class="{cur:tabIndex==index, last: index+1==treeData.eventMatterList.length}" :title="item.subStageName" @click="tabClick(index)">{{item.subStageName}}</span>
+                            </div>
+                        </div>
+                        <Icon type="ios-arrow-forward" @click="scrollNext" v-if="showBtn" />
+                    </div>
+                    
+                    
+                    <div class="content" ref="flowChartCon" :class="isIE9 ? 'is-ie9-auto': ''">
+                        <div class="item" v-for="(item,index) in treeData.eventMatterList" :label="index" :key="index" v-show="isFirst ? isFirst : index == tabIndex">
+                            <flowChart ref="flowChart" :width="treeData.tabW" :index="index"/>
+                        </div>
+                    </div>
+                </div>
+                <div  v-else class="content" ref="flowChartCon" :class="isIE9 ? 'is-ie9-auto': ''">
+                    <div class="item">
+                        <flowChart ref="flowChart" :width="treeData.tabW" :index="0"/>
+                    </div>
+                </div>
+            </div>
+        </el-dialog>  
+    </div>
+</template>
+
+<script>
+// 公共工具方法
+import unit from "@/api";   
+// 流程图
+import flowChart from "@/pages/thingManagement/configuration/flowChart.vue";
+// 事项收件列表
+import matteListPage from "@/pages/thingManagement/configuration/matteListPage.vue";
+
+export default {
+    components: {
+      flowChart: flowChart,
+      matteListPage: matteListPage
+    },
+    data() {
+        return {
+            // tabData: [{
+            //     subStageName: '阶段一'
+            // }],
+            showBtn: false,  //是否显示按钮
+            // showLastBtn: true,  // 是否显示上一步按钮
+            subWid: '100%',
+            subWrapWid: '96%',
+            distance: 0,
+
+            version: 1.1, // 测试数据
+            code: 'px-s2e-s',
+            eventId: 'c56edc6bdbf3428b8d3bca5ecb382777',  // 一件事id
+            matteAddVis: false,  // 新增流程配置弹框标志位
+            flowChartVis: false,  // 流程图弹框
+            delPromTips: '确定要删除这条记录？',  // 删除提示语
+            tabIndex: '0',  // 流程图tab切换index值
+            matteTitle: '新增事项',
+           
+            matteData: [], // 流程配置数据
+            mattNameData: [],  // 事项名称 数据
+            matteFormData: { // 新增流程表单数据
+                subStageCode: '',
+                subStageName: '',  // 所属名称
+                // matterName: '',  // 事项名称
+                parentName: '',  // 前置事项 文本
+            }, 
+            matteRules: { // 流程验证规则
+                // matterName: [
+                //     { required: true, message: '请选择事项名称', trigger: 'change' }
+                // ],
+                // parentName: [
+                //     { required: false, message: '请选择前置事项', trigger: 'change' }
+                // ]
+            },
+            stageOptions: [],  // 阶段名称
+
+            parentIdArr: [],  // 前置事项
+            parentNameOptions: [],  // 前置事项
+
+            labelPosition: 'right',
+            treeData: { // 树形图数据
+                tabW: 0,
+                eventMatterList: [],
+            },
+            timeout: '',
+            preNodeSelInFlag: false,  // 前置节点 判断是手动输入、未选择； 还是选择的
+            curId: '',
+            isFirst: true,
+            total: 0,
+            pageSize: 10,
+            currentPage: 1,
+            stageFlag: false,  // 表单中 阶段名称是否显示标志位
+            tagInter: '',
+            matteChechedData: [], // 选中事项名称数据
+            isIE9: false
+            
+        };
+    },
+    methods: {
+        /*
+         * tab向前移动
+         */
+        scrollPre() {
+            let that = this;
+            that.distance -= 100;
+            $('.radio-sub-wrap').scrollLeft(that.distance);
+            if (that.distance < 0) {
+                that.distance = 0;
+            }
+        },
+        /*
+         * tab向后移动
+         */
+        scrollNext() {
+            let that = this,
+                maxWid = that.subWid.substr(0, that.subWid.length - 2) - that.subWrapWid.substr(0, that.subWid.length - 2);
+            that.distance += 100;
+            $('.radio-sub-wrap').scrollLeft(that.distance);
+            if (that.distance > maxWid) {
+                that.distance = maxWid;
+            }
+        },
+        /*
+         * 计算宽度
+         */
+        cupWidth() {
+            let that = this,
+                len = that.treeData.eventMatterList.length,
+                distanceRight = 0,
+                allWid = $('.radio-group')[0].offsetWidth,
+                subWrapWid = 0,
+                subWid = 0,
+                $dom = $('.switch-default');
+            for (let i = 0; i < len; i++) {
+                subWid += $dom[i].offsetWidth;
+                distanceRight += 5;
+            }
+            if (subWid > allWid) {
+                that.showBtn = true;
+                subWrapWid = allWid - 36;
+            } else {
+                that.showBtn = false;
+                subWrapWid = allWid;
+            }
+            
+            if(len >= 6) {
+                that.showBtn = true;
+            }else {
+                that.showBtn = false;
+            }
+            that.subWrapWid = 960 + 'px';
+            that.subWid = subWid + 1 + distanceRight - 5 + 'px';
+        },
+        /*
+         * 获取前置事项数据
+         */
+        getparNameData(matte) {
+            let that = this,
+                results,
+                url = '/eventMatter/SituationMatterLavel',
+                param = {
+                    matterName:  '',  // 前置节点名称
+                    eventCode: that.code,
+                    eventVersion: that.version,
+                    subStageCode: that.matteFormData.subStageCode,
+                    matterCode: matte && matte.length == 1 ? matte[0].matterCode : '',
+                    matterVersion: matte && matte.length == 1 ? matte[0].matterVersion: ''
+                };
+            unit.ajaxPost('/znsj-web' + url ,param).then(function(res){
+                res = typeof res === 'string' ? JSON.parse(res) : res;
+                let data = res.data.data;
+                that.parentNameOptions = [];
+                for(let i in data) {
+                    that.parentNameOptions.push(data[i]);
+                }
+            }).catch(function(error){
+                that.$Message.error('数据加载失败！');
+            });
+        },
+        /*
+         * 请求一件事 事项数据
+         */
+        getMatteData(type) { 
+            let that = this, 
+                url = '/eventMatter/getEventMatterPage',
+                param = {
+                    eventVersion: that.version,  // 事件版本
+                    eventCode: that.code  // 事件code
+                };
+            unit.ajaxMerPost('/znsj-web' + url, param, function(res) {
+                res = typeof res == 'string' ? JSON.parse(res) : res;
+                let data = res.data;
+                that.matteData = [];
+                for(let i in data) {
+                    if(data[i].parentName) {
+                        let name = data[i].parentName;
+                        data[i].parentNameSl = name.length > 40 ? name.substring(0,40) + '...' : name;
+                    }else {
+                        data[i].parentNameSl = '';
+                    }
+                    that.$set(that.matteData, i, data[i]); 
+                }
+            },function(error) {
+                that.$Message.error('数据加载失败！');
+            }, that);
+
+        },
+        /*
+         * 获取字典项公共方法
+         */ 
+        getDicData(param, success) {
+            let that = this;
+            unit.ajaxMerPost('/znsj-web/dic/getDictionarys', {pinYinType: param}, function(res) {
+                res = typeof res === 'string' ? JSON.parse(res) : res;
+                let data = res.data;
+                if(data && data.length > 0) {
+                    success && success(data);
+                } 
+            },function(error) {
+                that.$Message.error('数据加载失败！！');
+            }, that);
+        },
+        /*
+         * 编辑、新增
+         */
+        editFlowMatEvt(id, type) {
+            let that = this,
+                url = '/eventMatter/getEventMatterInfo';
+            // 获取阶段名称
+            that.getStageName();
+            that.curId = id;
+            if(id) {  // 根据id获取数据
+                // that.matteTitle = '编辑事项';
+                // that.matteAddVis = true;
+                unit.ajaxMerPost('/znsj-web' + url, {
+                    id: id
+                },function(res) {
+                    let data = res.data;
+                    that.clearFormData();
+                    for(var key in data) {
+                        that.matteFormData[key] = data[key];
+                    }
+                    that.parentIdArr = [];
+                    if(data.parentId) {
+                        that.parentIdArr = data.parentId.split(',');
+                    }
+                    that.mattNameData = [];
+                    if(data.matterName) {
+                        that.mattNameData.push({
+                            matterName: data.matterName,
+                            matterVersion: data.matterVersion,
+                            matterCode: data.matterCode,
+                            id: id
+                        });
+                    }
+                    // 获取前置事项列表
+                    that.getparNameData(that.mattNameData); 
+                    that.matteTitle = '编辑事项';
+                    that.matteAddVis = true;
+                    that.$nextTick(()=> {
+                        that.matteChechedData = that.mattNameData;
+                    });
+                },function(error) {
+                    that.$Message.error('数据加载失败！');
+                }, that);
+            }else {
+                that.matteTitle = '新增事项';
+                that.matteAddVis = true;
+                // 获取前置事项列表
+                that.getparNameData(); 
+                // 清空表单数据
+                that.clearFormData();
+            } 
+        },
+        /*
+         * 清空表单数据
+         */
+        clearFormData() {
+            let that = this;
+            // 对整个表单进行重置，将所有字段值重置为空并移除校验结果
+            // if (that.$refs['matteForm'] !== undefined) {
+            //     that.$refs['matteForm'].resetFields(); 
+            //     for(var key in that.matteFormData) {
+            //         that.matteFormData[key] = '';
+            //     }
+            //     that.parentIdArr = [];
+            //     that.mattNameData = [];
+            // }
+            for(var key in that.matteFormData) {
+                that.matteFormData[key] = '';
+            }
+            that.parentIdArr = [];
+            that.mattNameData = [];
+            that.$nextTick(function() {
+                that.matteChechedData = [];
+                let inter = setInterval(function(){
+                    if(that.$refs.matteListPage.matteInit) {
+                        that.$refs.matteListPage.matteInit();
+                        clearInterval(inter);
+                    }  
+                }, 100)
+                
+            });
+            
+        },
+        /*
+         * 保存流程、指南数据
+        */
+        saveFormData(formName, type) {
+            var that = this,
+                url,
+                param = {};
+                url = that.curId ? '/eventMatter/editEventMatter' : '/eventMatter/addEventMatter';
+                param = that.matteFormData;
+                param.matters = that.mattNameData;
+                param.parentId = that.parentIdArr.join(',');
+                param.eventVersion = that.version
+                param.eventCode = that.code;
+                param.id = that.curId ? that.curId : null;
+                if(that.parentIdArr.length > 5) {
+                    that.$Message.warning('最多能选择5个前置事项');
+                    return;
+                }
+                if(that.mattNameData.length <= 0) {
+                    that.$Message.warning('请选择事项名称');
+                    return;
+                }
+                if(!that.matteFormData.subStageCode && that.stageFlag) {
+                    that.$Message.warning('请选择阶段名称');
+                    return;
+                }
+                that.saveJsonType(url, param);      
+        },
+        /*
+         * 保存数据json字符串形式 编辑
+         * id: 记录id
+         */
+        saveJsonType(url, param) {
+            let that = this;
+            unit.ajaxPost('/znsj-web' + url ,param).then(function(res){
+                res = typeof res == 'string' ? JSON.parse(res) : res;
+                let data = res.data;
+                that.$Message.success(data.data || '保存成功！');
+                that.matteAddVis = false;
+                // 刷新数据
+                that.getMatteData();
+            }).catch(function(error){
+                that.$Message.error('数据加载失败！');
+            });
+        },
+        /*
+         * 删除  弹框触发事件
+         * id: 记录id
+         */
+        delFlowMatEvt(id) {  
+            let that = this;
+            that.curId = id;
+            that.$confirm(that.delPromTips, '提示', {
+                cancelButtonText: '取 消',
+                confirmButtonText: '确 定',
+                cancelButtonClass: 'fr ml10',
+                type: 'warning'
+            }).then(() => {
+                that.sureDelEvt();
+            }).catch(() => { 
+            });
+        },
+         /*
+         * 确定删除选中记录项
+         */
+        sureDelEvt() {
+            let that = this,
+                url = '/eventMatter/deleteEventMatter';
+            unit.ajaxMerPost('/znsj-web' + url , {
+                    id: that.curId
+                }, function(res) {
+                res = typeof res == 'string' ? JSON.parse(res) : res;
+                let data = res.data;
+                // 刷新数据
+                that.getMatteData();
+            },function(error) {
+                that.$Message.error('数据加载失败！');
+            }, that);
+        },
+        /*
+         * 查看流程图
+         */
+        viewFlowChat() {
+            let that = this,
+                tabW,
+                setInter;
+            that.flowChartVis = true;
+            that.isFirst = true;
+            // 获取流程图数据
+            that.getGuideMapData();
+        },
+        /*
+         * 流程图tab切换
+         */
+        tabClick(index) {
+            let that = this;
+            that.tabIndex = index;
+        },
+        /*
+         * 获取流程图数据
+         */
+        getGuideMapData() {
+            let that = this;
+            unit.ajaxPost('/znsj-web/consignee/event/guidView' , {
+                id: that.eventId,  // '20181022001'  
+                eventCode: that.code, // that.code, 'sjbma_001'
+                eventVersion:  that.version// 1  that.version
+            }).then(function(res){
+                that.treeData = res.data.data;
+                let tabW = that.$refs.contentWrap.offsetWidth;
+                    that.treeData.tabW = tabW - 15;
+                that.$nextTick(() => {
+                    if (that.treeData.eventMatterList.length == 1) {
+                        that.$refs.flowChart.setWidthAndReset(that.treeData.eventMatterList[0], 0);
+                    } else if (that.treeData.eventMatterList.length > 1) {
+                        that.$refs.flowChart.forEach(function (flowChart, index) {
+                            flowChart.setWidthAndReset(that.treeData.eventMatterList[index], index);
+                        });
+                        setTimeout(() => {
+                            that.cupWidth();
+                        }, 0);
+                    }else if(that.treeData.eventMatterList.length == 0) {
+                        // 数据为0的情况
+                    }
+                    that.isFirst = false; 
+                });
+            }).catch(function(error){
+                that.$Message.error('数据加载失败！');
+            });
+        },
+        /*
+         * 流程事项table复选框chang事件
+         */ 
+        matteSelChange(val) {
+            let that = this;
+            that.matteSelArr = [];
+            if(val.length >  0) {
+                for(let i in val) {
+                    that.matteSelArr.push(val[i].id);
+                }
+            }
+        },
+        /*
+         * 获取从子组件传来的事项名称
+         */
+        getMatteName(obj) {
+            let that = this,
+                data = obj.data,
+                addInfo = obj.addInfo;
+            // for(var i in that.mattNameData) {
+            //     if(that.mattNameData[i].matterCode == data.matterCode) {
+            //         that.$Message.warning('已选择此事项!');
+            //         return;
+            //     }
+            // }
+            if(addInfo == '1') {
+                that.mattNameData.push({
+                    matterName: data.matterName,
+                    matterCode: data.matterCode,
+                    matterVersion: data.matterVersion
+                });
+                that.matteChechedData = that.mattNameData;  // 传给子类
+            }else if(addInfo == '0'){
+                that.matteDelEvt(obj.delIndex);
+            }
+        },
+        /*
+         * 事项名称删除
+         */
+        matteDelEvt(index) {
+            let that = this;
+            that.mattNameData.splice(index, 1);
+            that.matteChechedData = that.mattNameData; // 传给子类
+            that.$refs.matteListPage.matteInit();
+        },
+        /*
+         * 获取从子组件传来的事项名称
+         */
+        getStageName() {
+            let that = this;
+            unit.ajaxMerPost('/znsj-web/stepEvent/getStepEventDict' , {
+                id: that.eventId
+            }, function(res) {
+                res = typeof res == 'string' ? JSON.parse(res) : res;
+                let data = res.data;
+                if(data.length > 0) {
+                    that.stageOptions = data;
+                    that.stageFlag = true;
+                }else {
+                    that.stageFlag = false;
+                }
+            },function(error) {
+                that.$Message.error('数据加载失败');
+            }, that);
+        },
+        /*
+         * 所属名称change事件
+         */
+        stageChange(val) {
+            let that = this;
+            that.matteFormData.subStageCode = val;
+            for(let i in that.stageOptions) {
+                if(that.stageOptions[i].value === val) {
+                    that.matteFormData.subStageName = that.stageOptions[i].label;
+                }
+            }
+            // 获取前置事项列表
+            that.getparNameData();
+        },
+        /*
+         * 前置事项change事件
+         */
+        preNameChange(val) {
+            let that = this;
+            that.setTagTitle();
+        },
+        /*
+         * 前置事项加title属性
+         */ 
+        setTagTitle() {
+            let that = this;
+            clearInterval(that.tagInter);
+            that.tagInter = setInterval(() => {
+                let tagTextList = document.querySelector('#flowMatteConfig').querySelectorAll('.el-select__tags-text');
+                if(tagTextList.length > 0) {
+                    clearInterval(that.tagInter);
+                    tagTextList.forEach((item) => {
+                        item.setAttribute('title', item.innerText);
+                    });
+                }
+            },300);
+        },
+        /*
+         * 初始化数据
+         */ 
+        init() {
+            let that = this;       
+            that.getMatteData(); 
+            // 获取阶段名称
+            that.getStageName();
+
+            // 获取前置事项列表
+            that.getparNameData(); 
+        },
+        
+    },
+    mounted() {
+        let that = this,
+            parent;
+        if(that.$parent && that.$parent.param){
+            parent = that.$parent.param;
+            that.code = parent.eventCode ? parent.eventCode : '';
+            that.version = parent.eventVersion ? parseFloat(parent.eventVersion) : 0;
+            that.eventId = parent.eventId ? parent.eventId : '';
+        }
+        that.init(); 
+        that.isIE9 = unit.isIE9();    
+    }
+};
+</script>
+<style lang="less">
+@import "../../../assets/styles/theme.less";
+.v-modal {
+    z-index: 999 !important;
+}
+.el-button {
+    font-size: 14px !important;
+}
+.el-select-dropdown__item span {
+    display: inline-block !important;
+    max-width: 300px !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+}
+#flowMatteConfig {
+    overflow-y: auto;
+    height: 100%;
+    background-color: #fff;
+    .el-table {
+        border: 1px solid #ddd;
+        border-bottom: none;
+    }
+    // 弹框头部样式覆盖
+    .el-dialog__body {
+        padding: 30px 0;
+    }
+    .el-dialog__header {
+        border-bottom: 1px solid #ddd;
+    }
+    // 弹框按钮样式覆盖
+    .footer {
+        margin-top: 20px;
+        padding: 10px 30px 0 0;
+        background: #fff;
+        text-align: right;
+        line-height: 50px;
+        border-top: 1px solid #ddd;
+    }
+    
+    // 改弹框层级
+    .el-dialog__wrapper {
+        z-index: 1000 !important;
+    }
+    .el-input--mini .el-input__inner {
+        height: 32px;
+        line-height: 32px;
+    }
+    
+    // 流程图样式覆盖
+    .flow-chart-dialog {
+        .el-dialog__body {
+            padding: 0;
+        }
+        .flow-chart-wrap {
+            height: 350px;
+            .tab-wrap {
+                width: 100%;
+                height: 51px;
+                border-bottom: 1px solid #ccc;
+                a {
+                    display: inline-block;
+                    margin: 0 10px;
+                    padding: 0 13px;
+                    height: 100%;
+                    font-size: 14px;
+                    color: #666;
+                    font-weight: 400;
+                    line-height: 48px;
+                    border-bottom: 2px solid transparent;
+                    vertical-align: top;
+                }
+                a :hover {
+                    color: #666;
+                }
+                .selecteds {
+                    color: #1255B3;
+                    border-color:#1255B3;
+                }
+            }
+            .content {
+                margin-top: 10px;
+                // height: 350px;
+                // overflow: auto;
+                overflow-x: hidden;
+                background: #fff;
+            }
+            .is-ie9-auto {
+                height: 350px;
+                overflow: auto;
+            }
+        }
+
+    }
+    
+    // 表单页样式
+    .matte-list-wrap {
+        padding: 0 20px;
+        .el-form-item {
+            margin-top: 52px;
+        }
+    }
+    // 选择下拉框样式修改
+    .row-wrap {
+        .el-select,
+        .el-input {
+            width: 385px !important;
+        }
+    }
+    .stage-label {
+        display: inline-block;
+        padding-right: 10px;
+        width: 100px;
+        height: 28px;
+        line-height: 28px;
+        text-align: right;
+        vertical-align: top;
+        .required {
+            display: inline-block;
+            padding: 0 3px;
+            color: red;
+        }
+    }
+    .el-select__tags-text {
+        display: inline-block;
+        max-width: 250px;
+        overflow: hidden;
+        text-overflow:ellipsis;
+        white-space: nowrap; 
+    }
+    .el-select .el-tag__close.el-icon-close {
+        top: -6px;
+    }
+
+    .radio-group {
+        margin: 10px 100px 0 35px;
+        font-size: 0;
+        .switch-default {
+            padding: 0 12px;
+            margin-right: 5px;
+            display: inline-block;
+            height: 35px;
+            width: 136px;
+            // background-color: #eef1f7;
+            line-height: 35px;
+            text-align: center;
+            cursor: pointer;
+            color: #515a6e;
+            box-sizing: border-box;
+            &.cur {
+                margin-bottom: -1px;
+                background-color: #fff;
+                border-bottom: 2px solid #2d8cf0;
+                // border-left: 1px solid #e4e4e4;
+                // border-right: 1px solid #e4e4e4;
+                line-height: 33px;
+                color: #515a6e;
+            }
+            &.last {
+                margin-right: 0px;
+            }
+        }
+        .ivu-icon {
+            float: left;
+            line-height: 36px;
+            font-size: 18px;
+            cursor: pointer;
+            &.ivu-icon-ios-arrow-forward {
+                float: right;
+            }
+        }
+        .radio-sub-wrap {
+            float: left;
+            display: inline-block;
+            overflow: hidden;
+            height: 36px;
+            white-space: nowrap;
+        }
+        &.switch-navigate {
+            // overflow: hidden;
+            height: 36px;
+            line-height: 36px;
+            border-bottom: 1px solid #e4e4e4;
+        }
+    }
+    .mtb10 {
+        margin: 10px 0;
+    }
+    .matte-wrap {
+        display: inline-block;
+        width: 385px;
+        padding-left: 5px;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        min-height: 30px;
+        vertical-align: top;
+        a {
+            display: inline-block;
+            line-height: 30px;
+            span {
+                cursor: default;
+            }
+        }
+        a:hover {
+            color: #515a6e;
+            
+        }
+        .icon-del {
+            position: relative;
+            top: 3px;
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            background: url(../../../assets/images/common/icon-del.png) no-repeat;
+            background-position: center;
+            background-size: 12px 12px;
+        }
+    }
+    .el-icon-circle-close-outline {
+        color: red;
+        margin-left: -1px;
+    }
+    
+}
+</style>

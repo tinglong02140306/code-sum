@@ -1,0 +1,53 @@
+<!--preference-item-->
+<view class="preference-item-container">
+    <view class="preference-item">
+        <view class="preference-item-content">
+            <view class="preference-item-content-left"
+                style="{{type==4?backgroundGray:item.coupon_type==='0'?backgroundG:item.coupon_type==='3'?backgroundY:backgroundB}}{{borderRadius}}">
+                <image class="preference-item-content-left-image" src="{{item.coupon_type==='4'?car_icon:money_icon}}">
+                </image>
+                <text
+                    class="preference-item-content-left-text">{{item.coupon_type!=='4'&&item.coupon_amt?item.coupon_amt:''}}</text>
+                <text class="preference-item-content-left-text">{{item.coupon_type==='4'?'1':''}}<text
+                        class="preference-item-content-left-text-small">{{item.coupon_type==='4'?'次':''}}</text></text>
+            </view>
+            <view class="preference-item-content-new-right">
+                <view class="ptcr-left">
+                    <view class="ptcr-top-left">
+                        <text class="ptcr-top-left-title" style="{{titleColor}}">{{item.coupon_name}}</text>
+                        <text class="ptcr-bottom-time-center"
+                            a:if="{{item.limit_amount}}">满{{item.limit_amount}}元使用</text>
+                        <text class="ptcr-bottom-time-center" a:if="{{item.coupon_type==='3'}}">加油站兑换非油品</text>
+                        <text class="ptcr-bottom-time-center" a:if="{{item.coupon_type==='4'}}">水蜡精洗1次</text>
+                        <text class="ptcr-bottom-time">有效期至 {{item.invalid_time}}</text>
+                    </view>
+                </view>
+                <view class="ptcr-top-right">
+                    <view class="ptcr-top-right-oil" a:if="{{type==1&&item.coupon_type!=='3'}}">
+                        <text class="ptcr-top-right-oil-check" catchTap="onSetSelectClick">立即使用</text>
+                    </view>
+                    <view class="ptcr-top-right-product" a:if="{{type==1&&item.coupon_type==='3'}}">
+                        <image class="ptcr-top-right-product-image" src="{{prefer_qrcode}}"></image>
+                        <text class="ptcr-top-right-product-check" catchTap="onSeeCouponClick">查看劵码</text>
+                    </view>
+                    <view class="ptcr-top-right-finish" a:if="{{type!==1}}">
+                        <image class="ptcr-top-right-finish-image" src="{{finish_icon}}"></image>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="preference-item-show-footer">
+            <view class="ptcr-bottom-rule-new" catchTap="onSeeRuleClick">
+                <text class="ptcr-bottom-rule-text">券的来源:{{item.activity_name}}</text>
+                <image class="ptcr-bottom-rule-image" src="{{pull_icon}}"></image>
+            </view>
+        </view>
+        <view class="preference-item-footer" style="max-height:{{showRules?500:0}}rpx">
+            <view class="preference-item-footer-content">
+                <block a:for="{{item.activity_desc}}" a:key="index" a:index="index">
+                    <text class="preference-item-footer-text">{{item}}</text>
+                </block>
+            </view>
+        </view>
+    </view>
+</view>

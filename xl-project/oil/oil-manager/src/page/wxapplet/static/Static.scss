@@ -1,0 +1,99 @@
+.static-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 16px;
+}
+
+.static-form {
+    width: 100%;
+    background-color: #ffffff;
+    padding: 10px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.static-table {
+    width: 100%;
+    background-color: #ffffff;
+    margin-top: 10px;
+}
+
+.static-table-header {
+    margin: 10px 0;
+}
+
+.static-options-box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.static-options-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    box-sizing: border-box;
+    margin-right: 6px;
+    cursor: pointer;
+}
+
+.static-options-update {
+    color: #0d965d;
+}
+
+.static-options-delete {
+    color: #e73838;
+}
+
+.static-options-see {
+    color: #1890ff;
+}
+
+.static-modal-add-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    .ant-form-item-with-help{
+        margin-bottom: 0;
+    }
+}
+
+.static-modal-add-form-item {
+    min-width: 200px;
+}
+
+.form-item-margin {
+    margin-left: 12px;
+}
+
+.static-modal-container{
+    box-sizing: border-box;
+    .ant-modal-body{
+        padding-bottom: 0;
+        padding-left: 8px;
+        padding-right: 0;
+        box-sizing: border-box;
+    }
+}
+
+.static-add-modal-submit {
+    width: 100%;
+    display: flex !important;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 8px 10px 10px 10px;
+    margin-top: 20px;
+    border-top: 1px solid #e8e8e8;
+    box-sizing: border-box;
+}

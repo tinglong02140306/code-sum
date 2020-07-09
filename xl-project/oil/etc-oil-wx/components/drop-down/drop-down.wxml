@@ -1,0 +1,31 @@
+<!--
+ * @Author: sunmingmao
+ * @Date: 2020-04-02 11:06:47
+ * @LastEditors: sunmingmao
+ * @LastEditTime: 2020-04-03 17:07:42
+ * @Description: 下拉菜单
+ -->
+<view class="drop-down-container" catchtouchmove="preventTouchMove">
+    <!--菜单按钮-->
+    <view class="drop-down-menu-box" style="height: {{tab_height}}rpx;">
+        <block wx:for="{{tabs}}" wx:key="menu" >
+            <view class="drop-down-menu" bind:tap="onMenuClick" data-item="{{index}}">
+                <text style="color:{{selected_index==index&&showMark?selected_color:color}};">{{item.defaultTitle}}</text>
+                <image style="width: {{15}}rpx;max-height: {{15}}rpx;margin-left:{{space}}rpx" 
+                    mode="widthFix" 
+                    src="{{selected_index==index&&showMark?icon_up:icon_pull}}"></image>
+            </view>
+        </block>
+    </view>
+    <!--下拉列表-->
+    <view class="drop-down-list" style="height: {{height}};" wx:if="{{showMark}}" bind:tap="onMarskClick">
+        <scroll-view scroll-y style="width:100%;height: {{height}};">
+            <block wx:for="{{source}}" wx:key="key" wx:item="item" wx:index="index">
+                <view class="drop-down-list-item"  catch:tap="onItemClick" data-item="{{item}}">
+                    <text style="color:{{tabs[selected_index].defaultId==item.id?selected_color:color}};">{{item.title}}</text>
+                    <image class="drop-down-list-item-image" wx:if="{{tabs[selected_index].defaultId==item.id}}" mode="widthFix" src="{{icon_check}}"></image>
+                 </view>
+            </block>
+         </scroll-view>
+    </view>
+</view>

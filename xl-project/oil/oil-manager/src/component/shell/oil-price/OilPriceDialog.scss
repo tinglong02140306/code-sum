@@ -1,0 +1,53 @@
+.price-dialog-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.price-dialog-left{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.price-dialog-input-item{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.price-dialog-input-title{
+  display: flex;
+  flex-direction: row;
+  font-weight: bold;
+  font-size: 14px;
+  color: black;
+  margin-right: 5px;
+  justify-content: flex-end;
+  width: 100px;
+}
+
+.price-dialog-center{
+  background-color: #e7e7e7;
+  width: 1px;
+  height: 250px;
+  margin: 0 15px 0 35px;
+  align-self: center;
+}
+.price-dialog-item-container{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-end;
+
+}
+
+.price-dialog-empty-hint{
+  width: 255px;
+  font-size: 10px;
+  color: red;
+  padding-left: 100px;
+  margin: 2px;
+}

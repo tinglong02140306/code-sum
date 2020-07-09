@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+ 
+  <display-name>业务服务组件</display-name>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+		  classpath*:spring/spring-applicationContext.xml,
+		  classpath*:spring/spring-redis-cache.xml
+		</param-value>
+	</context-param>
+	<!-- 指定系统环境  -->
+	<context-param>
+		<param-name>spring.profiles.active</param-name>
+		<param-value>${profiles.activation}</param-value>
+	</context-param>
+	
+	<!-- Character Encoding filter -->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- UAAC -->
+	<filter>
+		<filter-name>uaacClientFilter</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>uaacClientFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+  	<!-- spring容器启动监听器  -->
+	<listener>
+		<listener-class>
+			org.springframework.web.context.ContextLoaderListener
+		</listener-class>
+
+	</listener>
+	
+  	<!-- Spring 刷新Introspector防止内存泄露 -->
+	<listener>
+		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+	</listener>
+	
+	<!-- 配置相关的监听机制 -->
+	<listener>
+		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+	</listener>
+	
+	<!-- session超时定义,单位为分钟 -->
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
+
+	<!--默认静态资源拦截-->
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.js,*.css,*.png,*.jpg,*.eot,*.svg,*.ttf,*.woff</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>busimgr</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>busimgr</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+	<!-- 关闭不安全的HTTP方法 -->
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>http method security</web-resource-name>
+			<url-pattern>/*</url-pattern>
+			<http-method>PUT</http-method>
+			<http-method>DELETE</http-method>
+			<http-method>HEAD</http-method>
+			<http-method>OPTIONS</http-method>
+			<http-method>TRACE</http-method>
+		</web-resource-collection>
+		<auth-constraint />
+	</security-constraint>
+</web-app>

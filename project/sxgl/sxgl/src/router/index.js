@@ -1,0 +1,158 @@
+import Vue from 'vue';
+import Router from 'vue-router';
+
+Vue.use(Router);
+const routes = [{
+        path: '/',
+        // redirect: '/oneManagement'
+        redirect: '/itemManagement'
+            // redirect: '/mattCaseConfig' 
+    },
+    //  导入 测试 可删除
+    {
+        path: '/importDemo',
+        name: '/importDemo',
+        component: resolve => require(['@/pages/issuesManagement/issuesHandle/importDemo'], resolve)
+    },
+    // 事项配置_新增事项
+    {
+        path: '/issuesManagement/addMatters',
+        name: '/issuesManagement/addMatters',
+        component: resolve => require(['@/pages/issuesManagement/issuesHandle/addMatters'], resolve)
+    },
+    // 一件事配置_新增一件事
+    {
+        path: '/thingManagement/addOneThing',
+        name: '/thingManagement/addOneThing',
+        component: resolve => require(['@/pages/thingManagement/thingHandle/addOneThing'], resolve)
+    },
+    // 事项管理列表
+    {
+        path: '/itemManagement',
+        name: 'itemManagement',
+        component: resolve => require(['@/pages/issuesManagement/configuration/itemManagement'], resolve)
+    },
+    // 情形配置_事项列表
+    {
+        path: '/mattCaseConfig',
+        name: 'mattCaseConfig',
+        component: resolve => require(['@/pages/issuesSetting/configuration/mattCaseConfig'], resolve)
+    },
+    // 情形配置列表_新增列表
+    {
+        path: '/addMattCase',
+        name: 'addMattCase',
+        component: resolve => require(['@/pages/issuesSetting/configuration/addMattCase'], resolve)
+    },
+    // 事项维护_新增事项_配置信息页面 - 新
+    {
+        path: '/configInfoPage',
+        name: 'configInfoPage',
+        component: resolve => require(['@/pages/issuesManagement/configuration/configInfoPage'], resolve)
+    },
+    // 事项配置  受理条件
+    {
+        path: '/accConConfig',
+        name: 'accConConfig',
+        component: resolve => require(['@/pages/issuesManagement/configuration/accConConfig'], resolve)
+    },
+    // 事项配置 指南配置
+    {
+        path: '/guideConfig',
+        name: 'guideConfig',
+        component: resolve => require(['@/pages/issuesManagement/configuration/guideConfig'], resolve)
+    },
+    {
+        path: '/matterSituationConfigInfos',
+        name: 'matterSituationConfigInfos',
+        component: resolve => require(['@/pages/issuesSetting/configuration/matterSituationConfigInfos'], resolve)
+    },
+
+
+
+    // 一件事管理列表
+    {
+        path: '/oneManagement',
+        name: 'oneManagement',
+        component: resolve => require(['@/pages/thingManagement/configuration/oneManagement'], resolve)
+    },
+    // 情形配置_一件事列表
+    {
+        path: '/oneCaseConfig',
+        name: 'oneCaseConfig',
+        component: resolve => require(['@/pages/thingSetting/configuration/oneCaseConfig'], resolve)
+    },
+    // 情形配置_一件事列表_新增
+    {
+        path: '/addOneCase',
+        name: 'addOneCase',
+        component: resolve => require(['@/pages/thingSetting/configuration/addOneCase'], resolve)
+    },
+    // 一件事维护_新增事项_配置信息页面
+    {
+        path: '/oneConfigInfoPage',
+        name: 'oneConfigInfoPage',
+        component: resolve => require(['@/pages/thingManagement/configuration/oneConfigInfoPage'], resolve)
+    },
+    // 一件事 - 阶段配置
+    {
+        path: '/stageConfig',
+        name: 'stageConfig',
+        component: resolve => require(['@/pages/thingManagement/configuration/stageConfig'], resolve)
+    },
+    // 一件事 - 流程事项配置
+    {
+        path: '/flowMatteConfig',
+        name: 'flowMatteConfig',
+        component: resolve => require(['@/pages/thingManagement/configuration/flowMatteConfig'], resolve)
+    },
+    // 一件事 - 事项流程表单页面
+    {
+        path: '/matteListPage',
+        name: 'matteListPage',
+        component: resolve => require(['@/pages/thingManagement/configuration/matteListPage'], resolve)
+    },
+    // 一件事 - 指南配置
+    {
+        path: '/oneGuideConfig',
+        name: 'oneGuideConfig',
+        component: resolve => require(['@/pages/thingManagement/configuration/oneGuideConfig'], resolve)
+    },
+    // 一件事 - 流程事项配置
+    {
+        path: '/thingSetting/oneThingSituationConfigInfos',
+        name: 'thingSetting/oneThingSituationConfigInfos',
+        component: resolve => require(['@/pages/thingSetting/configuration/oneThingSituationConfigInfos'], resolve)
+    },
+
+
+
+    // 基础信息管理-数据模板管理
+    {
+        path: '/basicInformation/dataTemplate',
+        name: '/basicInformation/dataTemplate',
+        component: resolve => require(['@/pages/basicInformation/dataTemplate'], resolve)
+    },
+    // 字典管理
+    {
+        path: '/basicInformation/dictManage',
+        name: '/basicInformation/dataTemplate',
+        component: resolve => require(['@/pages/basicInformation/dictionaryManage'], resolve)
+    },
+    // 基础信息管理-行政区划管理
+    {
+        path: '/basicInformation/administrativeDivision',
+        name: '/basicInformation/administrativeDivision',
+        component: resolve => require(['@/pages/basicInformation/administrativeDivision'], resolve)
+    },
+    // 基础信息管理-单位管理
+    {
+        path: '/basicInformation/deptManagement',
+        name: '/basicInformation/deptManagement',
+        component: resolve => require(['@/pages/basicInformation/deptManagement'], resolve)
+    },
+];
+
+export default new Router({
+    routes
+});

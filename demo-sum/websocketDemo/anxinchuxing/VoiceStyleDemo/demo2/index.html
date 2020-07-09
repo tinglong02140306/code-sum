@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <!-- 添加到主屏幕后，全屏显示 -->
+    <meta name="apple-touch-fullscreen" content="YES" />
+    <meta name="format-detection" content="telephone=no" />
+    <!-- iphone 运行在全屏模式 -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/all.css">
+    <link rel="stylesheet" href="index.css">
+    <script type="text/javascript" src="../js/remCacul/remCacul.js"></script>
+	<title>音频样式</title>
+</head>
+<body>
+	<div id="preloader_1">
+	  	
+	  	<span></span>
+  		<span></span>
+	  	<span></span>
+	  	<span></span>
+	  	<span></span>
+	  	<span></span>
+  		<span></span>
+	  	<span></span>
+	  	<span></span>
+	  	<span></span>
+
+	  	<span></span>
+  		<span></span>
+	  	<span></span>
+	  	<span></span>
+	  	<span></span>
+	  	<span></span>
+  		<span></span>
+	  	<span></span>
+	  	<span></span>
+	  	<span></span>
+
+	  	<span></span>
+  		<span></span>
+	  	<span></span>
+	  	<span></span>
+	  	<span></span>
+	  	<span></span>
+  		<span></span>
+	  	<span></span>
+	  	<span></span>
+	  	<span></span>
+
+	  	<span></span>
+  		<span></span>
+	  	<span></span>
+	  	<span></span>
+	  	<span></span>
+	  	<span></span>
+  		<span></span>
+	  	<span></span>
+	  	<span></span>
+	  	<span></span>
+	  	<span></span>
+  		<span></span>
+	  	<span></span>
+	  	<span></span>
+	  	<span></span>
+	  	<span></span>
+  		<span></span>
+	  	<span></span>
+	  	<span></span>
+	  	<span></span>
+
+	  	<span></span>
+  		<span></span>
+	  	<span></span>
+	  	<span></span>
+	  	<span></span>
+	</div>
+	<script type="text/javascript" src="../js/jquery-1.8.2.min.js"></script>
+	<script>
+		$(function() {
+			var childs = $('#preloader_1').find('span'),
+			    clen = childs.length;
+			for(var i = 1; i < clen; i++) {
+				var delay = 0.2 * i;
+				childs.eq(i).css({
+					'-webkit-animation-delay': delay+ 's',
+				    '-moz-animation-delay': delay+ 's',
+				    '-ms-animation-delay': delay+ 's',
+				    '-o-animation-delay': delay+ 's',
+				    'animation-delay': delay+ 's'
+				});
+
+			}
+
+		});
+	</script>	
+</body>
+</html>

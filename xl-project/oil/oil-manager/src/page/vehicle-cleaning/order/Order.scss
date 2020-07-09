@@ -1,0 +1,213 @@
+.vehicle-order-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 16px;
+}
+
+/*查询条件*/
+.vehicle-order-search-container{
+    width: 100%;
+    background-color: #ffffff;
+    padding: 10px 0px 10px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+.vehicle-order-search-item{
+    flex: 0 0 40%;
+    margin-bottom: 24px;
+    position: relative;
+    margin: 0 10px;
+    text-align: center;
+    .ant-form-item-control-wrapper{
+        min-width: 200px;
+    }
+    .ant-form-item-label{
+        font-weight: bolder;
+        min-width: 100px;
+    }
+
+    .ant-calendar-picker{
+        min-width: 200px;
+    }
+}
+
+.vehicle-order-btn{
+    margin-left: 10px;
+}
+
+/*查询按钮*/
+.vehicle-order-search-item-btn{
+    position: absolute;
+    right: 0;
+}
+
+/*Table*/
+.vehicle-order-table{
+    width: 100%;
+    background-color: #ffffff;
+    margin-top: 10px;
+}
+
+/*操作*/
+.vehicle-order-options-box{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.vehicle-order-options-item{
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.see{
+    color: #1890ff;
+}
+
+.update{
+    color: #0d965d;
+}
+
+.delete{
+    color: #e73838;
+}
+
+/*modal*/
+.vehicle-order-modal{
+   .ant-modal-body{
+       padding: 24px 0px 0 0px;
+   }
+   .vehicle-order-modal-download{
+      font-weight: bolder;
+      span{
+          font-weight: normal;
+          color: #1890ff;
+          cursor: pointer;
+          margin-left: 4px;
+      }
+   }
+}
+
+/*modal form*/
+.vehicle-order-modal-form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    box-sizing: border-box;
+    .ant-form-item{
+        margin-right: 0;
+    }
+
+    .ant-form-item-with-help{
+        margin-bottom: 0;
+    }
+
+    .hint{
+        color: #f6982c;
+    }
+}
+
+/*modal form item*/
+.vehicle-order-modal-form-item{
+    min-width: 300px;
+    margin-bottom: 24px;
+    position: relative;
+    margin: 0 10px;
+    text-align: right;
+    .ant-form-item-control-wrapper{
+        min-width: 200px;
+    }
+    .ant-time-picker{
+        min-width: 200px;
+    }
+    .ant-input-number{
+        min-width: 200px;
+    }
+    label{
+        font-weight: bolder;
+    }
+
+    .ant-input[disabled]{
+        color: rgba($color: #000000, $alpha: 0.65);
+    }
+}
+
+.other{
+    padding-left: 82px;
+}
+
+/*modal form footer*/
+.vehicle-order-modal-form-footer{
+    width: 100%;
+    padding: 10px 16px;
+    text-align: right;
+    border-top: 1px solid #e8e8e8;
+    border-radius: 0 0 4px 4px;
+    box-sizing: border-box;
+    margin-top: 24px;
+    margin-bottom: 0;
+
+    button{
+        margin-left: 16px;
+    }
+}
+
+/*导出*/
+.vehicle-order-export-form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .hint{
+        color: #f6982c;
+    }
+}
+
+.vehicle-order-export-form-box{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.vehicle-order-export-form-item{
+    margin-bottom: 24px;
+    margin: 0 10px;
+    text-align: right;
+    .ant-form-item-control-wrapper{
+        min-width: 177px;
+    }
+    .ant-time-picker{
+        min-width: 177px;
+    }
+    .ant-form-item-label{
+        font-weight: bold;
+        width: 100px;
+    }
+}
+
+// .vehicle-order-export-form-footer{
+//     width: 100%;
+//     border-top: 1px solid #e8e8e8;
+//     text-align: right;
+//     box-sizing: border-box;
+//     padding: 0;
+//     button{
+//         margin-left: 16px;
+//     }
+// }

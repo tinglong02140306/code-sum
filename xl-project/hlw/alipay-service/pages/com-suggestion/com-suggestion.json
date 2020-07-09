@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+		"notice": "../../components/notice/index",
+		"card": "../../components/card/index",
+		"list-item": "../../components/list-item/index",
+		"category": "../../components/category/index"
+  }
+}

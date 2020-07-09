@@ -1,0 +1,628 @@
+/* pages/mine/test/test.acss */
+
+@import "../../../templates/mine/etc-card-add/etc-card-add.acss";
+.mine-info-container {
+    width: 100%;
+    height: auto;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mine-info-container-content {
+    width: 100%;
+    height: auto;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 0;
+}
+
+.mine-navigation-bar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 1);
+    background-color: transparent;
+    font-size: 30rpx;
+    text-align: center;
+    font-family: PingFangSC-Medium;
+}
+
+.mine-account-info-top-bg {
+    width: 100%;
+    /*width: 750rpx;*/
+    height: 720rpx;
+    position: relative;
+}
+
+.mine-account-info-box-green {
+    top: 150rpx;
+    width: 100%;
+    /*height: 320rpx;*/
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    /* position: absolute; */
+    box-sizing: border-box;
+}
+
+
+/*头像昵称*/
+
+.mine-user-header-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10rpx 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.head-image-box {
+    margin-left: 36rpx;
+    width: 86rpx;
+    height: 86rpx;
+    border-radius: 100%;
+    overflow: hidden;
+    box-shadow: 0rpx 12rpx 40rpx 0rpx rgba(0, 0, 0, 0.1);
+}
+
+.head-image {
+    width: 86rpx;
+    height: 86rpx;
+}
+
+.nick-name {
+    flex: 1;
+    margin-left: 24rpx;
+    margin-right: 10rpx;
+    color: #ffffff;
+    font-size: 36rpx;
+    text-align: left;
+    font-family: PingFangSC-Semibold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.name-wrap {
+    flex: 1;
+    margin-left: 24rpx;
+    margin-right: 10rpx;
+}
+
+.name-wrap text {
+    display: inline-block;
+    width: 100%;
+    color: #ffffff;
+    font-size: 36rpx;
+    text-align: left;
+    font-family: PingFangSC-Semibold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.un-login {
+    border: none;
+    background: transparent;
+}
+
+.mine-login-btn {
+    width: 160rpx;
+    height: 60rpx;
+    border-radius: 32rpx;
+    background-color: rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 28rpx;
+    text-align: center;
+    font-family: PingFang-SC-Medium;
+    margin-right: 36rpx;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border: none;
+}
+
+
+/*ETC卡列表*/
+
+.mine-etc-card-list-box {
+    /*width: 750rpx;*/
+    width: 100%;
+    white-space: nowrap;
+    height: 280rpx;
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+}
+
+.hor {
+    display: flex;
+    flex-direction: row;
+    padding-right: 40rpx;
+}
+
+.etx-card-box {
+    display: inline-block;
+}
+
+.mine-etc-card-item {
+    /*display: inline-block;*/
+    margin: 0rpx 10rpx 0rpx 20rpx;
+    width: 622rpx;
+    height: 260rpx;
+    border-radius: 12rpx;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mine-etc-card-item-no {
+    /*display: inline-block;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: -16rpx 30rpx 0;
+    width: 652rpx;
+    /*height: 260rpx;*/
+    border-radius: 12rpx;
+    box-sizing: border-box;
+}
+
+.card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    height: 80vh;
+    width: 80vw;
+    margin: 5vh 10vw;
+    font-size: 40px;
+    background: #F8F2DC;
+    border-radius: 4px;
+}
+
+
+/*ETC卡*/
+
+.mine-etc-card-container {
+    /* position: absolute; */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 280rpx;
+    /*top:140rpx;*/
+    top: 410rpx;
+    box-sizing: border-box;
+}
+
+.mine-etc-card-add-box {
+    width: 690rpx;
+    height: 280rpx;
+    border-radius: 12rpx;
+    background: linear-gradient(to bottom, rgb(255, 255, 255), #EDFAF9);
+    background: linear-gradient(to right, rgb(255, 255, 255), #EDFAF9);
+    /*box-shadow: 0rpx 4rpx 32rpx 0rpx rgba(41, 69, 89, 0.15);*/
+    display: flex;
+    flex-direction: column;
+    /*justify-content: center;*/
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.mine-etc-card-add-top {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 54rpx;
+    margin-top: 80rpx;
+}
+
+.mine-etc-card-add-icon {
+    width: 52rpx;
+    height: 52rpx;
+}
+
+.mine-etc-card-add-text {
+    color: rgba(51, 51, 51, 1);
+    font-size: 36rpx;
+    margin-left: 16rpx;
+    font-family: PingFangSC-Medium;
+}
+
+.mine-etc-card-add-bottom {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mine-etc-card-add-bottom-items {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.mine-etc-card-add-steps {
+    width: 32rpx;
+    height: 32rpx;
+    border-radius: 100%;
+    font-size: 20rpx;
+    color: #ffffff;
+    text-align: center;
+    background-color: rgba(128, 208, 183, 1);
+    margin: 0 10rpx;
+    line-height: 32rpx;
+}
+
+.mine-etc-card-add-steps-text {
+    color: rgba(128, 128, 128, 1);
+    font-size: 24rpx;
+    font-family: PingFang-SC-Medium;
+}
+
+
+/*我的账户*/
+
+.mine-account-info-box-white {
+    width: 100%;
+    top: 220rpx;
+    /*height: 328rpx;*/
+    /*background-color: #ffffff;*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /*margin-top: 40rpx;*/
+    box-sizing: border-box;
+    /* position: absolute; */
+    padding: 0 48rpx;
+}
+
+.mine-account-info-title {
+    /*margin-top: 110rpx;*/
+    margin-left: 32rpx;
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 32rpx;
+    text-align: left;
+    font-family: PingFangSC-Medium;
+    width: 100%;
+}
+
+.mine-account-info-items {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 32rpx;
+    margin-top: 32rpx;
+}
+
+.mine-account-info-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.mine-account-info-item-number {
+    /*color: rgba(0, 0, 0, 0.85);*/
+    color: #FFFFFF;
+    font-size: 46rpx;
+    text-align: center;
+    font-family: PingFangSC-Medium;
+}
+
+.mine-account-info-item-title {
+    margin-top: 8rpx;
+    /*color: rgba(0, 0, 0, 0.65);*/
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 28rpx;
+    text-align: left;
+    font-family: PingFangSC-Regular;
+}
+
+.mine-account-info-item-title-t {
+    margin-top: 8rpx;
+    color: rgba(0, 0, 0, 0.65);
+    font-size: 28rpx;
+    text-align: left;
+    font-family: PingFangSC-Regular;
+}
+
+
+/*客服*/
+
+.mine-account-info-item-service-btn {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+}
+
+
+/*更多服务*/
+
+.mine-more-serve-box {
+    /*top:716rpx;*/
+    /*position: absolute;*/
+    width: 690rpx;
+    border-radius: 20rpx;
+    height: 180rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    box-sizing: border-box;
+}
+
+.mine-more-serve-title {
+    margin: 32rpx;
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 32rpx;
+    text-align: left;
+    font-family: PingFangSC-Medium;
+    width: 100%;
+}
+
+.mine-list-item-icon {
+    width: 36rpx;
+    height: 38rpx;
+}
+
+
+/*!*广告位-图层*!*/
+
+
+/*.mine-banner-container{*/
+
+
+/*    width: 678rpx;*/
+
+
+/*    height: 146rpx;*/
+
+
+/*    border-radius: 8rpx;*/
+
+
+/*    background-color: rgba(248, 248, 248, 1);*/
+
+
+/*    margin: 32rpx;*/
+
+
+/*}*/
+
+.mine-layer-image-big {
+    margin-top: 16rpx;
+    width: 506rpx;
+    height: 74rpx;
+}
+
+
+/*广告位*/
+
+.mine-banner-container {
+    /*top:1128rpx;*/
+    /*position: absolute;*/
+    width: 100%;
+    height: 150rpx;
+    border-radius: 20rpx;
+    margin-top: 48rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /*position: relative;*/
+}
+
+.mine-banner-image-big {
+    border-radius: 20rpx;
+    width: 690rpx;
+    height: 150rpx;
+}
+
+.mine-banner-dots {
+    width: 100%;
+    height: 40rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding-left: 16rpx;
+}
+
+.mine-banner-dots-item {
+    width: 8rpx;
+    height: 8rpx;
+    background-color: #00A170;
+    margin-right: 8rpx;
+}
+
+.mine-banner-dots-item-check {
+    width: 8rpx;
+    height: 8rpx;
+    background-color: rgba(255, 255, 255, 0.8);
+    margin-right: 8rpx;
+}
+
+.mine-banner-swiper {
+    width: 678rpx;
+    height: 146rpx;
+    /*width: 686rpx;*/
+    /*height: 180rpx;*/
+}
+
+.mine-banner-swiper-item {
+    width: 100%;
+    height: 100%;
+    border-radius: 20rpx;
+    box-shadow: 0rpx 4rpx 0rpx 0rpx rgba(0, 0, 0, .05);
+}
+
+.mine-banner-swiper-item-image {
+    width: 100%;
+    height: 100%;
+}
+
+
+/*弹出框*/
+
+.pop-up-container {
+    width: 100%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.pop-up-hint-title-view {
+    width: 100%;
+    background-color: #FFFFFF;
+    border-bottom: 2rpx solid rgba(212, 212, 212, 0.38);
+    text-align: center;
+    padding: 25rpx 40rpx;
+    box-sizing: border-box;
+}
+
+.pop-up-hint-title {
+    color: rgba(136, 136, 136, 1);
+    font-size: 28rpx;
+    text-align: center;
+    font-family: PingFangSC-Regular;
+}
+
+.pop-up-operation-view {
+    width: 100%;
+    background-color: #FFFFFF;
+    border-bottom: 10rpx solid rgba(205, 205, 209, 0.3);
+    text-align: center;
+    padding: 25rpx 40rpx;
+    box-sizing: border-box;
+}
+
+.pop-up-operation {
+    color: rgba(230, 67, 64, 1);
+    font-size: 36rpx;
+    text-align: center;
+    font-family: PingFangSC-Regular;
+}
+
+.pop-up-cancel-view {
+    width: 100%;
+    background-color: #FFFFFF;
+    text-align: center;
+    padding: 25rpx 40rpx;
+    box-sizing: border-box;
+}
+
+.pop-up-cancel {
+    color: rgba(0, 0, 0, 1);
+    font-size: 36rpx;
+    text-align: center;
+    font-family: PingFangSC-Regular;
+}
+
+.clean-share-container {
+    top: 906rpx;
+    /*position: absolute;*/
+    margin-top: 30rpx;
+    width: 684rpx;
+}
+
+.clean-share-container-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    /*position: relative;*/
+    height: 180rpx;
+    border-radius: 20rpx;
+    /*box-shadow: 0rpx 2rpx 10rpx 0rpx rgba(0, 0, 0, 0.05);*/
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.clean-share-box-left-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    text-align: left;
+}
+
+.clean-share-box-left-texts {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: left;
+    color: rgba(0, 0, 0, 1);
+    font-size: 36rpx;
+    font-family: PingFangSC-Medium;
+}
+
+.clean-share-box-left-btns {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    width: 102rpx;
+    height: 36rpx;
+    margin-top: 10rpx;
+    border-radius: 20rpx;
+    background-color: rgba(1, 161, 112, 1);
+    color: #FFFFFF;
+    font-size: 22rpx;
+    text-align: left;
+    font-family: PingFangSC-Regular;
+}
+
+.clean-share-box-left-icon {
+    width: 16rpx;
+    height: 8rpx;
+    background-color: #e1e1e1;
+}
+
+.clean-share-box-right-icon {
+    width: 225rpx;
+    height: 141rpx;
+    /*background-color: #05BA7D;*/
+}
+
+.mine-bottom-logo-text {
+    color: rgba(0, 0, 0, 0.3);
+    font-size: 24rpx;
+    text-align: left;
+    font-family: PingFangSC-Regular;
+}

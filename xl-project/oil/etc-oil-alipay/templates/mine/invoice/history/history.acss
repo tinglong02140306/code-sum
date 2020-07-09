@@ -1,0 +1,91 @@
+.invoice-history-template-container {
+    width: 90%;
+    background-color: #f8f8f8;
+    padding: 15rpx 5%;
+}
+
+.invoice-history-template-box {
+    width: 100%;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 32rpx;
+    border-radius: 12rpx;
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: 0rpx 4rpx 20rpx 0rpx rgba(0, 0, 0, 0.05);
+}
+
+.invoice-history-template-detail-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    box-sizing: border-box;
+}
+
+.invoice-history-template-detail-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.invoice-history-template-detail-item-text {
+    color: rgba(0, 0, 0, 0.45);
+    font-size: 26rpx;
+    text-align: right;
+    font-family: PingFangSC-Regular;
+}
+
+.invoice-history-template-detail-item-image {
+    width: 30rpx;
+    max-height: 30rpx;
+    margin-left: 4rpx;
+}
+
+.invoice-history-template-item-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+    overflow: hidden;
+}
+
+.invoice-history-template-item-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.invoice-history-template-type {
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 32rpx;
+    text-align: left;
+    width: 100%;
+    font-family: PingFang-SC-Medium;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.invoice-history-template-name {
+    margin-top: 6rpx;
+    color: rgba(0, 0, 0, 0.45);
+    font-size: 26rpx;
+    text-align: left;
+    font-family: PingFangSC-Regular;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.invoice-history-template-money {
+    color: rgba(0, 0, 0, 1);
+    font-size: 28rpx;
+    text-align: right;
+    font-family: PingFang-SC-Regular;
+}

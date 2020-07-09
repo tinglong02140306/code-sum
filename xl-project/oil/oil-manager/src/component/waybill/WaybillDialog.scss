@@ -1,0 +1,38 @@
+.waybill-dialog-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.waybill-dialog-left{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  //justify-content: center;
+}
+
+.waybill-dialog-input-item{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.waybill-dialog-input-title{
+  display: flex;
+  flex-direction: row;
+  font-weight: bold;
+  font-size: 14px;
+  color: black;
+  margin-right: 5px;
+  //width: 80px;
+}
+
+.waybill-dialog-center{
+  background-color: #e7e7e7;
+  width: 1px;
+  height: 170px;
+  margin: 0 30px;
+  align-self: center;
+}

@@ -1,0 +1,57 @@
+ol,
+ul {
+	list-style:none;
+}
+li {
+	float: left;
+	width: 50%;
+}
+/* 主题内容 */
+.content-list {
+	position: absolute;
+	width: 100%;
+}
+/*320 140*/
+.content-list a {  
+	display: block;
+	width: 100%;
+	box-sizing: border-box;
+	height: 3.33rem;
+	/* background-color: #fff; */
+	/* border-bottom: 1px solid #f0f0f0; */
+}
+.content-list li {
+	background: url(./public/wcportal/0.0.1/img/common/border-icon.png) 0 bottom repeat-x;
+
+}
+.right-aside {
+	/* border-right: 1px solid #f0f0f0; */
+	background: url(./public/wcportal/0.0.1/img/common/border-icon.png) right 0 repeat-y;
+}
+.workType-wrap {
+	position: relative;
+	top: 0.45rem;
+}
+.content-list ul {
+	font-size: 0; 
+}
+
+.content-list .list-txt {
+	width: 59.8%;
+	line-height: 3.33rem;
+}
+.span-icon {
+  	width: 40.2%;
+}
+.content-list .list-icon {
+	margin-top: 0.56rem;
+	width: 2.22rem;
+	height: 2.22rem;
+	line-height: 3.33rem;
+}
+
+/*无网络样式*/
+.wrap .no-net {
+    position: relative;
+    z-index: 2;
+}

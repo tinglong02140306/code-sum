@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.iflytek.sgy.wjewt</groupId>
+        <artifactId>wjewt</artifactId>
+        <version>0.7.8.1010-SNAPSHOT</version>
+    </parent>
+    <groupId>com.iflytek.sgy</groupId>
+    <artifactId>wjewt-web</artifactId>
+    <description>统计分析</description>
+    <packaging>war</packaging>
+    <organization>
+        <name>科大讯飞股份有限公司</name>
+        <url>http://www.iflytek.com</url>
+    </organization>
+
+    <repositories>
+        <repository>
+            <id>iflytek</id>
+            <name>iflytek Repository</name>
+            <url>http://maven.iflytek.com:8081/nexus/content/groups/public/</url>
+        </repository>
+    </repositories>
+
+    <properties>
+        <jetty.port>9080</jetty.port>
+        <maven.deploy.skip>true</maven.deploy.skip>
+        <maven.test.skip>true</maven.test.skip>
+    </properties>
+
+    <dependencies>
+        <!-- dubbox -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>dubbo</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.101tec</groupId>
+            <artifactId>zkclient</artifactId>
+        </dependency>
+        <!-- 统一运营api接口 -->
+        <dependency>
+            <groupId>com.iflytek.sgy.wjewt</groupId>
+            <artifactId>uop-api</artifactId>
+            <version>0.7.8.1010-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.iflytek.sgy.social</groupId>
+            <artifactId>social-support</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.iflytek.sgy.social</groupId>
+            <artifactId>social-utils</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.iflytek.sgy.social</groupId>
+            <artifactId>social-orm</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>3.2.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.iflytek.sgy.social</groupId>
+            <artifactId>comment-api</artifactId>
+            <version>0.7.9.1001-SNAPSHOT</version>
+        </dependency>
+
+        <!-- Hibernate start -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+        </dependency>
+        <!-- Hibernate end -->
+
+        <!-- spring cache redis -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-redis</artifactId>
+        </dependency>
+
+        <!-- 数据库连接池 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+        </dependency>
+        <!-- ojdbc -->
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc6</artifactId>
+        </dependency>
+
+        <!-- fastjson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>bingo.jmt</groupId>
+            <artifactId>jmtsdk</artifactId>
+            <version>1.0</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- aspectj -->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+        </dependency>
+
+        <!-- Web -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+        </dependency>
+
+        <!-- servlet -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jstl</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>jsr311-api</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+    </dependencies>
+    <build>
+        <finalName>wjewt</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <archive>
+                        <addMavenDescriptor>false</addMavenDescriptor>
+                        <manifestEntries>
+                            <Implementation-BuildNumber>${project.version}</Implementation-BuildNumber>
+                            <Implementation-Title>${project.name}</Implementation-Title>
+                            <Implementation-Version>${project.version}</Implementation-Version>
+                        </manifestEntries>
+                    </archive>
+                    <!-- 激活spring profile -->
+                    <webResources>
+                        <resource>
+                            <filtering>true</filtering>
+                            <directory>src/main/webapp</directory>
+                            <includes>
+                                <include>**/web.xml</include>
+                            </includes>
+                        </resource>
+                    </webResources>
+                    <warSourceDirectory>src/main/webapp</warSourceDirectory>
+                    <webXml>src/main/webapp/WEB-INF/web.xml</webXml>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>maven-jetty-plugin</artifactId>
+                <configuration>
+                    <systemProperties>
+                        <systemProperty>
+                            <name>org.mortbay.jetty.Request.maxFormContentSize</name>
+                            <value>20000000</value>
+                        </systemProperty>
+                        <systemProperty>
+                            <name>log4j.level</name>
+                            <value>${log4j.level}</value>
+                        </systemProperty>
+                    </systemProperties>
+                    <webAppSourceDirectory>src/main/webapp</webAppSourceDirectory>
+                    <scanIntervalSeconds>3</scanIntervalSeconds>
+                    <contextPath>${project.build.finalName}</contextPath>
+                    <webDefaultXml>jetty.xml</webDefaultXml>
+                    <jettyEnvXml>jetty-env.xml</jettyEnvXml>
+                    <connectors>
+                        <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+                            <port>${jetty.port}</port>
+                        </connector>
+                    </connectors>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

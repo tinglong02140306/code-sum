@@ -1,0 +1,531 @@
+/* pages/home/index/index.wxss */
+@import "/templates/home/loading/loading.wxss";
+.home-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/*天气 国标价*/
+.home-weather-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    padding: 32rpx;
+}
+
+/*天气*/
+.home-weather-box{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-end;
+    position: relative;
+}
+
+/*城市名*/
+.home-weather-city{
+    font-size: 48rpx;
+    color: rgba(0, 0, 0, .85);
+    position: relative;
+    font-weight: bolder;
+    left: 0;
+    bottom: 2rpx;
+}
+
+/*天气图片*/
+.home-weather-pic{
+    width: 60rpx;
+    height: 60rpx;
+    margin-left: 32rpx;
+    position: relative;
+    left: 0;
+    bottom: 8rpx;
+}
+
+/*温度*/
+.home-weather-temperature{
+    font-size: 32rpx;
+    color: rgba(0, 0, 0, .65);
+    margin-left: 10rpx;
+    position: relative;
+    left: 0;
+    bottom: 4rpx;
+}
+
+/*降雨概率*/
+.home-weather-sd-text{
+    font-size: 26rpx;
+    color: rgba(0, 0, 0, .65);
+    margin-left: 32rpx;
+    position: relative;
+    left: 0;
+    bottom: 8rpx;
+}
+
+/*降雨概率*/
+.home-weather-sd{
+    font-size: 26rpx;
+    color: #00A170;
+    margin-left: 8rpx;
+    position: relative;
+    left: 0;
+    bottom: 8rpx;
+}
+
+/*国标价*/
+.home-price-box{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f8f8;
+    border-radius: 16rpx;
+    margin-top: 16rpx;
+}
+
+.home-price-swiper{
+    width: 350rpx;
+    height: 64rpx;
+}
+
+.home-price-swiper-item{
+    width:100%;
+    height: 100%;
+}
+
+.home-price-pic{
+    width: 30rpx;
+    height: 35rpx;
+    margin-left: 16rpx;
+}
+
+.home-price-text{
+    font-size: 26rpx;
+    color: rgba(0, 0, 0, .65);
+    margin-left: 16rpx;
+    margin-right: 16rpx;
+}
+
+/*国标价item*/
+.home-price-item{
+    width:100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+/*油品类型*/
+.home-price-item-type{
+    font-size: 26rpx;
+    color: rgba(0, 0, 0, .35);
+}
+
+/*油品价格*/
+.home-price-item-price{
+    font-size: 26rpx;
+    color: rgba(0, 0, 0, .85);
+    margin-left: 8rpx;
+    margin-right: 20rpx;
+}
+
+/*附近服务*/
+.home-server-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    /*padding: 0 32rpx;*/
+    /*margin-top: 40rpx;*/
+}
+.home-server-container-vertical{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    /*padding: 0 32rpx;*/
+    /*margin-top: 40rpx;*/
+}
+.home-server-text{
+    font-size: 32rpx;
+    color: rgba(0, 0, 0, .85);
+    align-self: flex-start;
+    /*margin: 40rpx; 横向滑动时*/
+    margin: 30rpx 40rpx 0 40rpx;
+    font-weight: bolder;
+}
+.home-server-container-scroll{
+    /*width: 100%;*/
+    min-height: 300rpx;
+    white-space: nowrap;
+    display: flex;
+    /*flex-direction: row;*/
+    /*box-sizing: border-box;*/
+}
+
+/*油站*/
+.home-server-box{
+    display: inline-block;
+    /*width: 636rpx;横向滑动时*/
+    width: 680rpx;
+    min-height: 300rpx;
+    /*margin: 0 20rpx; 横向滑动时*/
+    margin: 30rpx 30rpx 0rpx 30rpx;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    padding:32rpx 20rpx;
+    position: relative;
+}
+.home-server-logo{
+    width: 224rpx;
+    height: 164rpx;
+    border-radius: 12rpx;
+    box-shadow: 0rpx 4rpx 10rpx 0rpx rgba(0, 0, 0, .1);
+    background-color: #f8f8f8;
+}
+
+.home-server-station-info{
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    margin-left: 20rpx;
+}
+
+/*油站名称*/
+.home-server-station-name{
+    font-size: 36rpx;
+    color: #333333;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+
+/*油站地址*/
+.home-server-station-address{
+    font-size: 26rpx;
+    color: #999999;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    margin-top: 8rpx;
+}
+
+/*油站价格信息*/
+.home-server-station-price-box{
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    box-sizing: border-box;
+    margin-top: 16rpx;
+}
+
+/*油品类型*/
+.home-server-station-type{
+    border-radius: 6rpx;
+    background-color: rgba(0, 0, 0, .05);
+    padding: 0 8rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.home-server-station-type-text{
+    font-size: 24rpx;
+    color: rgba(0, 0, 0, .65);
+}
+
+.home-server-station-type-image{
+    width: 20rpx;
+    height: 12rpx;
+    margin-left: 4rpx;
+}
+
+/*价格*/
+.home-server-station-price{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    box-sizing: border-box;
+    margin-left: 16rpx;
+    position: relative;
+    left: 0;
+    top: -6rpx;
+}
+
+.home-server-station-price-mark{
+    font-size: 24rpx;
+}
+
+.home-server-station-price-text{
+    font-size: 40rpx;
+    color: #000000;
+    font-weight: bold;
+    position: relative;
+    bottom: -6rpx;
+}
+
+/*价格差*/
+.home-server-station-diff{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    box-sizing: border-box;
+    margin-left: 16rpx;
+}
+
+.home-server-station-diff-image{
+    width: 24rpx;
+    height: 24rpx;
+}
+
+.home-server-station-diff-text{
+    color: #FF5311;
+    font-size: 24rpx;
+    margin-left: 4rpx;
+}
+
+/*立即加油*/
+.home-server-station-price-oil{
+    width: 250rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+    text-align: center;
+    color: #ffffff;
+    font-size: 32rpx;
+    letter-spacing: 2rpx;
+    margin-top: 24rpx;
+}
+
+/*距离最近*/
+.home-server-station-near{
+    position: absolute;
+    background-color: #E3C283;
+    border-radius: 0 18rpx 0 12rpx;
+    font-size: 24rpx;
+    color: rgba(0, 0, 0, .65);
+    padding: 6rpx 20rpx;
+    bottom: 0;
+    left: 0;
+}
+
+/*广告位*/
+.home-banner-container{
+    width: 100%;
+    margin-top: 40rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 0;
+}
+
+.home-banner-dots{
+    width: 100%;
+    height: 40rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding-left: 16rpx;
+}
+
+.home-banner-dots-item{
+    width: 8rpx;
+    height: 8rpx;
+    background-color: #00A170;
+    margin-right: 8rpx;
+}
+
+.home-banner-dots-item-check{
+    width: 8rpx;
+    height: 8rpx;
+    background-color: rgba(255, 255, 255, 0.8);
+    margin-right: 8rpx;
+}
+
+.home-banner-swiper{
+    width: 686rpx;
+    height: 180rpx;
+}
+
+.home-banner-swiper-item{
+    width: 100%;
+    height: 100%;
+    border-radius: 20rpx;
+    box-shadow: 0rpx 4rpx 0rpx 0rpx rgba(0, 0, 0, .05);
+}
+
+.home-banner-swiper-item-image{
+    width: 100%;
+    height: 100%;
+}
+
+/*银行优惠*/
+.home-bank-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40rpx;
+    padding: 0 32rpx;
+    box-sizing: border-box;
+}
+
+.home-bank-text{
+    font-size: 32rpx;
+    color: rgba(0, 0, 0, .85);
+    align-self: flex-start;
+    font-weight: bolder;
+}
+
+.home-bank-list{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40rpx;
+    box-sizing: border-box;
+}
+
+.home-bank-list-item{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    padding: 32rpx;
+    overflow: hidden;
+    margin-bottom: 32rpx;
+}
+
+.home-bank-list-item-image{
+    width: 64rpx;
+    height: 64rpx;
+    background-color: #f8f8f8;
+    border-radius: 50rpx;
+}
+
+.home-bank-list-item-info{
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    box-sizing: border-box;
+    margin: 0 32rpx;
+}
+
+.home-bank-list-item-info-top{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.home-bank-list-item-info-top-text{
+    flex: 1;
+    font-size: 36rpx;
+    color: rgba(0, 0, 0, .85);
+    font-weight: bolder;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+
+.home-bank-list-item-info-top-mark{
+    background-color: rgba(255, 147, 0, 0.1);
+    color: #FF9300;
+    font-size: 26rpx;
+    margin-left: 10rpx;
+    border-radius: 6rpx;
+    padding: 2rpx 10rpx;
+}
+
+.home-bank-list-item-info-bottom{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.home-bank-list-item-info-bottom-item{
+    width: 100%;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    color: rgba(0, 0, 0, 0.65);
+    font-size: 28rpx;    
+    margin-top: 8rpx;
+}
+
+/*去查看*/
+.home-bank-list-item-see{
+    width: 164rpx;
+    height: 52rpx;
+    line-height: 52rpx;
+    color: #ffffff;
+    font-size: 28rpx;
+    text-align: center;
+    box-shadow: 0rpx 2rpx 4rpx 0rpx rgba(0, 0, 0, 0.1);
+    background-color: #E3C283;
+    border-radius: 32rpx;
+}
+
+.home-online-serve{
+    position: fixed;
+    bottom: 80rpx;
+    right: 0;
+    width: 198rpx;
+    height: 80rpx;
+    border-top-left-radius: 50rpx;
+    border-bottom-left-radius: 50rpx;
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: 0px 2rpx 4rpx 0px rgba(0, 0, 0, 0.05);
+    z-index: 5;
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 28rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.home-online-image{
+    width: 48rpx;
+    height: 48rpx;
+    margin-right: 6rpx;
+}
+
+.home-online-serve-btn{
+    width: 198rpx;
+    height: 80rpx;
+    position: absolute;
+    z-index: 6;
+    left: 0;
+    top: 0;
+    opacity: 0;
+}

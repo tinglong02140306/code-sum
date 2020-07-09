@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>chatRoom</title>
+</head>
+<body>
+<input id="sendText" type="text">
+<button id="sendBtn">发送</button>
+<script type="text/javascript">
+    var websocket = new WebSocket("ws://localhost:3000");  // websocket server服务（ws://echo.websocket.org/）
+        // doc = document.getElementById("recv");
+    function showMessage(str) {
+        var ele = document.createElement('div');
+        ele.innerHTML = str;
+        document.body.appendChild(ele);
+    }
+    websocket.onopen = function() {
+        document.getElementById("sendBtn").onclick = function() {
+            var txt = document.getElementById('sendText').value;
+            if(txt) {
+                websocket.send(txt);
+            }   
+        }
+        // console.log('websocket open');
+        // doc.innerHTML = "contented";
+    }
+    websocket.onclose = function() {
+        // console.log('websocket close');
+        // doc.innerHTMl = e.data;
+    }
+    websocket.onmessage = function(e) {
+        console.log(e.data);
+        // doc.innerHTML = e.data;
+        showMessage(e.data);
+    }
+    
+</script>
+    
+</body>
+</html>

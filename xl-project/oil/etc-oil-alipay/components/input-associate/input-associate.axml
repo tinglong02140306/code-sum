@@ -1,0 +1,4 @@
+<view class="input-associate">
+    <text class="input-associate-text">{{title_name}}</text>
+    <view class="input-associate-line"></view>
+</view>

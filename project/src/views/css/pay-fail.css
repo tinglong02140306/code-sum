@@ -1,0 +1,23 @@
+.wrap {
+	position: relative;
+	height: 100%;
+	background: #fff;
+}
+.main-wrap {
+	position: absolute;
+	top: 2.1rem;
+	bottom: 0;
+	width: 100%;
+}
+.img-content {
+	height: 9rem;
+	line-height: 9rem;
+	text-align: center;
+}
+.img-content img {
+	height: 3rem;
+}
+.fail-tip {
+	font-size: .6rem;
+	text-align: center;
+}

@@ -1,0 +1,15 @@
+<scroll-view class="scroll-view-container"
+             scroll-y="true"
+             lower-threshold="50"
+             scroll-top="0"
+             scroll-with-animation="true"
+             bindscrolltolower="scrollToLower">
+	<block a:for="{{problems}}" a:key="{{index}}">
+        <view data-id="{{item.question_id}}" onTap="viewAnswer">
+            <list-item title="{{item.question}}" bottom="{{index!==problems.length-1}}"/>
+        </view>
+	</block>
+	<!-- <view class="data-loading" hidden="{{hidden}}">数据加载中...</view> -->
+	<view class="data-nomore" a:if="{{page == totalPage && problems.length > 0}}">没有更多了</view>
+	<view class="data-empty" a:if="{{problems.length===0 && loaded}}">暂无数据~</view>
+</scroll-view>

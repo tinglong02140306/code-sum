@@ -1,0 +1,13 @@
+ {
+   "name": "appOperation",
+   "version": "0.1.0",
+   "description": "flymo appOperation",
+   "main": "appOperation.js",
+   "files": [
+     "appOperation.html",
+     "appOperation.js",
+     "appOperation.css"
+   ],
+   "dependencies": {
+   }
+ }

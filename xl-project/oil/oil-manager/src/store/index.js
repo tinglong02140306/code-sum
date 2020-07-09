@@ -1,0 +1,133 @@
+import WaterCollect from "./order/water-collect";
+import HomeStores from './home/home';
+import Partner from './business/partner';
+import SystemUser from "./system/systemuser";
+import SystemRole from "./system/systemrole";
+import SystemPermission from "./system/systempermission";
+import LoginStore from "./login/login";
+import RouterStore from "./router/router";
+import OrderStore from "./order/order";
+import InvoiceStore from './invoice/invoice';
+import InvoiceRegularStore from './invoice/invoice-regular';
+import Params from './system/params';
+import Organization from "./business/organization";
+import ChildStore from "./order/childrentable"
+import WaybillStore from "./order/waybill"
+import FinancialStore from "./report/financial"
+import OilProductStore from "./report/oil-product"
+import CardStatisticsStore from "./report/oil-card-statistics"
+import ProductStatisticsStore from "./report/oil-product-statistics"
+import ServiceStore from "./system/serviceStore";
+import InviteStore from "./wx/invite";
+import GlobalStore from './global/global';
+import PageStore from './system/pages';
+import EtcOilStore from "./wx/etc-oil";
+import BlacklistStore from "./wx/etc-blacklist";
+import GoldStore from "./account/gold";
+import ReportStore from "./shell/reports";
+import TerminalStore from "./shell/terminal";
+import GroupStore from "./shell/groups";
+import SummaryReportStore from "./shell/summary-report";
+import ShellPriceStore from "./shell/price";
+import OilPriceStore from "./shell/oil-price";
+import PosUserStore from "./wx-member-card/pos-user";
+import ImageStore from "./station/station-image";
+import CompanyStore from "./station/company";
+import BrandStore from "./station/brand";
+import StationInfoStore from "./station/station-info";
+import StationPriceStore from "./station/oil-price";
+import StationTerminalStore from "./station/station-terminal";
+import StationGunStore from "./station/oil-gun";
+import WXChargeStore from './report/wx-recharge';
+import WXConsumeStore from './report/wx-consume';
+import FeeImportStore from './report/fee-import';
+import InterestStore from './wx/interests'
+import BillOnlineStore from './bill/bill-online'
+import BillEtcStore from './bill/bill-etc'
+import BillPartnerStore from './bill/bill-partner'
+import BillTicketStore from './bill/bill-ticket'
+import discountStore from './discount/discount'
+import discountStationStore from './discount/discount-station'
+import AccountCheckStore from './order/account-check';
+import StaticStore from './wx/static';
+import BannerStore from './wx/banner';
+import VehicleBrandStore from './vehicle-cleaning/brand';
+import VehicleInfoStore from './vehicle-cleaning/info';
+import VehicleOrderStore from './vehicle-cleaning/order';
+import TickerManageStore from './ticket/manage';
+import TickerGrantStore from './ticket/grant';
+import TickerBagStore from './ticket/bag';
+import TicketPointStore from './ticket/points';
+import TickerBagOrderStore from './ticket/order';
+import WhiteListStore from './ticket/white-list';
+
+class Stores {
+    constructor() {
+        this.homeStore = HomeStores;
+        this.partner = Partner;
+        this.loginStore = new LoginStore();
+        this.systemuser = new SystemUser();
+        this.systemrole = new SystemRole();
+        this.systempermission = new SystemPermission();
+        this.organization = new Organization();
+        this.routerStore = new RouterStore();
+        this.childStore = new ChildStore();
+        this.orderStore = new OrderStore();
+        this.collectStore = new WaterCollect();
+        this.invoiceStore = new InvoiceStore();
+        this.invoiceRegularStore = new InvoiceRegularStore();
+        this.waybillStore = new WaybillStore();
+        this.financialStore = new FinancialStore();
+        this.oilProductStore = new OilProductStore();
+        this.cardStatisticsStore = new CardStatisticsStore();
+        this.productStatisticsStore = new ProductStatisticsStore();
+        this.serviceStore = new ServiceStore();
+        this.inviteStore = new InviteStore();
+        this.params = new Params();
+        this.globalStore = new GlobalStore();
+        this.pageStore = new PageStore();
+        this.etcOilStore = new EtcOilStore();
+        this.blacklistStore = new BlacklistStore();
+        this.reportStore = new ReportStore();
+        this.terminalStore = new TerminalStore();
+        this.groupStore = new GroupStore();
+        this.summaryStore = new SummaryReportStore();
+        this.shellPriceStore = new ShellPriceStore();
+        this.posUserStore = new PosUserStore();
+        this.oilPriceStore = new OilPriceStore();
+        this.imageStore = new ImageStore();
+        this.companyStore = new CompanyStore();
+        this.brandStore = new BrandStore();
+        this.stationInfoStore = new StationInfoStore();
+        this.stationPriceStore = new StationPriceStore();
+        this.stationTerminalStore = new StationTerminalStore();
+        this.stationGunStore = new StationGunStore();
+        this.wxChargeStore = new WXChargeStore();
+        this.wxConsumeStore = new WXConsumeStore();
+        this.feeImportStore = new FeeImportStore();
+        this.goldStore = new GoldStore();
+        this.interestStore = new InterestStore();
+        this.BillOnlineStore = new BillOnlineStore();
+        this.BillEtcStore = new BillEtcStore();
+        this.BillPartnerStore = new BillPartnerStore();
+        this.BillTicketStore = new BillTicketStore();
+        this.discountStore = new discountStore();
+        this.discountStationStore = new discountStationStore();
+        this.accountCheckStore = new AccountCheckStore();
+        this.staticStore = new StaticStore();
+        this.bannerStore = new BannerStore();
+        //洗车服务
+        this.vehicleBrandStore = new VehicleBrandStore();
+        this.vehicleInfoStore = new VehicleInfoStore();
+        this.vehicleOrderStore = new VehicleOrderStore();
+        //优惠券
+        this.tickerManageStore = new TickerManageStore();
+        this.tickerGrantStore = new TickerGrantStore();
+        this.tickerBagStore = new TickerBagStore();
+        this.ticketPointStore = new TicketPointStore();
+        this.tickerBagOrderStore = new TickerBagOrderStore();
+        this.WhiteListStore = new WhiteListStore();
+    }
+}
+
+export default new Stores();

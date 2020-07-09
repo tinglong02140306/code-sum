@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <!-- 添加到主屏幕后，全屏显示 -->
+    <meta name="apple-touch-fullscreen" content="YES" />
+    <meta name="format-detection" content="telephone=no" />
+    <!-- iphone 运行在全屏模式 -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+    <title>city-picker</title>
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/select-area.css">
+    <!-- <link rel="stylesheet" href="../js/plugins/picker-extend/picker-extend.css"> -->
+    <!-- <link rel="stylesheet" href="./js/plugins/picker/picker.css"> -->
+    <link rel="stylesheet" href="../css/index.css">
+    <script type="text/javascript" src="../js/cityData.js"></script>
+    <!-- <script type="text/javascript" src="../js/administrativeDivisions.js"></script> -->
+
+    <script type="text/javascript" src="./js/plugins/remCacul/remCacul.js"></script>
+</head>
+
+<body>
+    <div class="wrap">
+        <img src="../image/img.png" alt="">
+
+        <div class="car-info-wrap">
+            <p><span class="">车辆信息</span><span class="">(最多可连续添加20辆)</span></p>
+            <div class="carno-wrap">
+                <div class="car-item bg-green">
+                    <span class="car-no">鲁A12345</span>
+                    <span class="icon-del"></span>
+                </div>
+                <div class="car-item bg-green">
+                    <span class="car-no">鲁A12345</span>
+                    <span class="icon-del"></span>
+                </div>
+            </div>
+            <!-- 添加车辆按钮 -->
+            <div class="btn-add-car">
+                <span>添加车辆</span>
+            </div>
+        </div>
+
+        <!-- 收件人信息 -->
+        <div class="recipient-info-wrap">
+            <div class="info-item">
+                <label for="">收件人</label>
+                <input class="recip-name" type="text" placeholder="请输入收件人姓名">
+            </div>
+            <div class="info-item">
+                <label for="">联系电话</label>
+                <input class="tel" type="text" placeholder="请输入联系人手机号">
+            </div>
+
+            <div class="info-item">
+                <label for="">收件地址</label>
+                <!-- <span class="area" id="trigger">请选择所在地区</span> -->
+                <!-- <select id="trigger" disabled placeholder="请选择所在地区"></select> -->
+                <input id="trigger" readonly type="text" placeholder="请选择所在地区">
+            </div>
+            <!-- name="" id="" cols="10" rows="10"  -->
+            <textarea class="detail-address" placeholder="请输入详细地址"></textarea>
+
+        </div>
+
+        <div class="btn-submit">确认提交</div>
+    </div>
+    <!-- 键盘 -->
+    <div class="keyboard-wrap"></div>
+
+    <!-- 级联 -->
+    <!-- area-cascade-wrap  -->
+
+    <div class="area-cascade-wrap">
+        <div class="gray-layer"></div>
+        <div class="content">
+            <div class="btn-bar">
+                <div class="cancel">取消</div>
+                <div class="title">区域选择</div>
+                <div class="ensure">确认</div>
+            </div>
+            <div class="selected-wrap">
+                <div class="item">山东省</div>
+                <div class="item">济南市</div>
+                <div class="item">历下区</div>
+                <div class="item">请选择</div>
+            </div>
+            <!-- 父级别高度固定 -->
+            <div class="select-wrapper">
+                <!-- 高度auto -->
+                <div class="select-wrap">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- <div class="pickerExtend">
+        <div class="grayLayer"></div>
+        <div class="content">
+            <div class="btnBar">
+                <div class="cancel">取消</div>
+                <div class="title">区域选择</div>
+                <div class="ensure">确认</div>
+            </div>
+            <div class="panel">
+
+            </div>
+        </div> -->
+
+</body>
+<script type="text/javascript" src="../js/plugins/jquery/jquery-1.8.2.min.js"></script>
+<!-- <script type="text/javascript" src="../js/plugins/picker-extend/picker-extend.js"></script> -->
+<!-- <script type="text/javascript" src="./js/plugins/picker/picker.min.js"></script> -->
+<script type="text/javascript" src="../js/util.js"></script>
+<script type="text/javascript" src="../js/app/index.js"></script>
+
+</html>

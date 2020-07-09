@@ -1,0 +1,33 @@
+<!--pages/person/refueling-gold/refueling-gold.wxml-->
+<import src="../../../../templates/mine/balance-detail/balance-detail.wxml"/>
+<import src="../../../../templates/mine/load-more/load-more.wxml"></import>
+<view class="refueling-gold-container">
+    <image class="refueling-gold-bg-pro" src="https://oilmag.etcsd.com.cn/oilcoreserver/static//resource/refurling-gold-pro.png"></image>
+    <image class="refueling-gold-bg-img" src="https://oilmag.etcsd.com.cn/oilcoreserver/static//resource/refurling-gold-bg.png"></image>
+    <view class="refueling-gold-card-view">
+        <text class="gold-card-balance">{{account_balance}}</text>
+        <text class="gold-card-label">加油金余额</text>
+    </view>
+    <view class="refueling-gold-precedence-box">
+        <text class="gold-precedence-text">优先使用加油金消费</text>
+        <switch class="gold-precedence-switch" checked="{{defaulted}}" color="#DBB06E" bindchange="switchChange"/>
+    </view>
+    <view class="refueling-gold-list-box">
+        <text class="gold-list-hint">余额明细</text>
+        <view class="gold-list-hint-line"></view>
+        <view wx:if="{{!isEmpty}}">
+            <block wx:for="{{balance_list}}" wx:key="balance" wx:for-index="index" wx:for-item="item">
+                <template is="balance" data="{{item,account_balance}}"></template>
+            </block>
+        </view>
+        <view class="gold-list-empty-view" wx:if="{{isEmpty}}">
+            <image class="gold-list-empty-img" src="https://oilmag.etcsd.com.cn/oilcoreserver/static//resource/refurling-gold-none.png"></image>
+            <text class="gold-list-empty-text">我是空的</text>
+        </view>
+
+    </view>
+    <view class="refueling-gold-more">
+        <template is="load-more" data="{{loadingState}}" wx:if="{{!isShowBottom}}"></template>
+        <text class="refueling-gold-more-text" wx:if="{{isShowBottom}}">  ———— 没有更多明细了 ————  </text>
+    </view>
+</view>

@@ -1,0 +1,58 @@
+.invoice-dialog-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.invoice-dialog-left{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.invoice-dialog-input-item{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.invoice-dialog-input-title{
+  display: flex;
+  flex-direction: row;
+  font-weight: bold;
+  font-size: 14px;
+  color: black;
+  margin-right: 5px;
+  //width: 80px;
+  span{
+    color: #c90000;
+    margin-right: 5px;
+  }
+}
+
+.invoice-dialog-center{
+  background-color: #e9e9e9;
+  width: 1px;
+  height: 400px;
+  margin: 0 30px;
+  align-self: center;
+}
+.invoice-dialog-item-container{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-end;
+
+}
+.invoice-dialog-empty-hint{
+  width: 250px;
+  font-size: 10px;
+  color: red;
+  padding-left: 50px;
+  margin: 2px;
+  align-items: flex-end;
+}

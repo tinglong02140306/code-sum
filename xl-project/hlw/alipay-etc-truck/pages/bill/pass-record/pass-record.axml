@@ -1,0 +1,46 @@
+<view class="body-wrapper">
+	<!--top区-->
+	<block>
+		<view class="top-area">
+			<image style="width:80rpx;height:80rpx;" src="/assets/images/etc-2.png" mode="widthFix"/>
+			<view class="top-title">货车ETC通行费</view>
+			<view class="top-money">￥{{passInfo["amount"]}}</view>
+		</view>
+	</block>
+	<!--列表区-->
+	<block>
+		<view class="list">
+			<!--路程信息-->
+			<view class="list-tile" style="padding:20rpx 0;">
+				<view class="tile-label">收费站详情</view>
+				<view class="tile-val">
+					<view class="distance">
+						<view class="distance-item">
+							<view style="margin-right:20rpx;color:#999;font-size:24rpx;">{{passInfo["title"][0]}}</view>
+							<image src="/assets/images/location.png" style="width:30rpx;height:30rpx;" mode="widthFix"/>
+							<view style="margin-left:20rpx;">{{passInfo["title"][1]}}</view>
+						</view>
+						<view class="distance-item">
+							<view style="margin-right:20rpx;color:#999;font-size:24rpx;">{{passInfo["title"][2]}}</view>
+							<image src="/assets/images/location.png" style="width:30rpx;height:30rpx;" mode="widthFix"/>
+							<view style="margin-left:20rpx;">{{passInfo["title"][3]}}</view>
+						</view>
+					</view>
+				</view>
+			</view>
+			<view class="split"/>
+			<view class="list-tile">
+				<view class="tile-label">流水号</view>
+				<view class="tile-val">{{passInfo["merchant_waste_id"]}}</view>
+			</view>
+			<view class="list-tile">
+				<view class="tile-label">账单日期</view>
+				<view class="tile-val">{{passInfo["booked_date"]}}</view>
+			</view>
+			<view class="list-tile">
+				<view class="tile-label">账单状态</view>
+				<view class="tile-val">{{billStateMap[passInfo["state"]]}}</view>
+			</view>
+		</view>
+	</block>
+</view>

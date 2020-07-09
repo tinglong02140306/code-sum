@@ -1,0 +1,131 @@
+@station-item:station-item;
+@margin:32px;
+
+.@{station-item}{
+    width: 100vw;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 32px 0;
+    background-color: white;
+    margin-bottom: 16px;
+    border-bottom:1px solid #e5e7ee;
+
+    &-left{
+        width: 100px;
+        height: 100px;
+        border-radius: 100%;
+        margin-left: @margin;
+    }
+
+    &-center{
+        flex:1;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        box-sizing: border-box;
+        margin: 0 12px;
+        overflow: hidden;
+       
+
+        &-name{
+            width: 100%;
+            color: #333333;
+            font-size: 32px;
+            overflow: hidden;
+            text-overflow:ellipsis;
+            white-space: nowrap;
+        }
+
+        &-address{
+            width: 100%;
+            color: #888888;
+            font-size: 24px;
+            overflow: hidden;
+            text-overflow:ellipsis;
+            white-space: nowrap;
+            margin: 12px 0 0 0;
+        }
+
+        &-sub{
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            box-sizing: border-box;
+            overflow: hidden;
+            margin: 12px 0 0 0;
+
+            &-price{
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                overflow: hidden;
+                text-overflow:ellipsis;
+                white-space: nowrap;
+                box-sizing: border-box;
+
+                &-hint{
+                    color: black;
+                    font-size: 28px;
+                    letter-spacing: 2rpx;
+                    overflow: hidden;
+                    text-overflow:ellipsis;
+                    white-space: nowrap;
+                    box-sizing: border-box;
+                }
+
+                &-num{
+                    color: black;
+                    font-size: 36px;
+                    overflow: hidden;
+                    text-overflow:ellipsis;
+                    white-space: nowrap;
+                    font-weight: 600;
+                    box-sizing: border-box;
+                }
+            }
+
+            &-cut{
+                color: #fa5f50;
+                font-size: 9Px;
+                background-color: white;
+                border: 2px solid #fa5f50;
+                padding: 0px 6px;
+                border-radius: 4px;
+                margin-left: 10px;
+                font-weight: 500;
+            }
+
+            &-prefer{
+
+            }
+        }
+    }
+
+    &-right{
+        width: 120px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        box-sizing: border-box;
+        margin-right: @margin;
+
+        &-icon{
+            width: 60px;
+            max-height: 60px;
+            margin-bottom: 16px;
+        }
+
+        &-distance{
+            color: #666666;
+            font-size: 24px;
+            letter-spacing: 2px;
+        }
+    }
+}

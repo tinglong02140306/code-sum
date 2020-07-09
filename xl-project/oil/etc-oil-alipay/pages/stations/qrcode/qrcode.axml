@@ -1,0 +1,71 @@
+<!--
+ * @Author: sunmingmao
+ * @Date: 2020-04-11 08:52:15
+ * @LastEditors: longting
+ * @LastEditTime: 2020-04-27 16:50:52
+ * @Description: 二维码支付页面
+ -->
+<view class="qrcode-container">
+    <!--已开通付款码-->
+    <view class="qrcode-box" id="box" style="margin-top: {{margin_top}}px" a:if="{{status==1}}">
+        <view class="qrcode-title-container">
+            <image class="qrcode-title-icon" src="{{qrcode_icon}}"></image>
+            <text class="qrcode-box-title">向加油站出示</text>
+        </view>
+        <view class="qrcode-title-separation">
+            <view class="qrcode-title-separation-content"></view>
+        </view>
+        <view class="qrcode-canvas-box">
+            <canvas class="qrcode-canvas" id="qrcode" onTap="onRefreshCode"
+                style="width: {{qrcodewidth}}px;height:{{qrcodewidth}}px" />
+            <cover-view class="qrcode-canvas-mask" a:if="{{processing}}"
+                style="width: {{qrcodewidth}}px;height:{{qrcodewidth}}px">
+                <cover-image class="qrcode-canvas-doing" mode="widthFix"
+                    src="https://oilmag.etcsd.com.cn/oilcoreserver/static//resource/icon-qrcode-procce.png">
+                </cover-image>
+                <cover-view class="qrcode-processing">交易处理中...</cover-view>
+            </cover-view>
+        </view>
+        <view class="qrcode-refresh-box" onTap="onRefreshCode">
+            <image class="qrcode-refresh-icon" mode="widthFix" animation="{{refreshAnimation}}"
+                src="/assets/static/icon-qrcode-refresh.png" style="visibility: {{processing?'hidden':'visible'}}">
+            </image>
+            <text class="qrcode-refresh-hint" style="visibility: {{processing?'hidden':'visible'}}">加油码自动</text>
+            <text class="qrcode-refresh-text" style="visibility: {{processing?'hidden':'visible'}}">刷新</text>
+        </view>
+        <view class="qrcode-pay-box" onTap="onPaymentClick"
+            style='border-bottom-left-radius:{{preferent?0:10}}rpx;border-bottom-right-radius:{{preferent?0:10}}rpx;'>
+            <view class="qrcode-content-box">
+                <image class="qrcode-pay-image" src="{{default_pay_icon}}"></image>
+                <text class="qrcode-pay-title">{{default_type}}</text>
+            </view>
+            <!-- <image class="qrcode-next" mode="widthFix" src="/assets/static/icon-qrcode-next.png"></image> -->
+        </view>
+        <view class="qrcode-perfer-box" a:if="{{preferent}}" onTap="onPreferentClick">
+            <view class="qrcode-content-box">
+                <image class="qrcode-perfer-image" src="{{perfer_icon}}"></image>
+                <text class="qrcode-perfer-title">您有{{preferent}}张优惠券可用</text>
+            </view>
+            <image class="qrcode-next" mode="widthFix" src="{{perfer_next_icon}}"></image>
+        </view>
+    </view>
+    <!--未开通付款码-->
+    <view class="qrcode-no-open-box" id="box-no-open" style="margin-top: {{margin_top}}px" a:if="{{status==2}}">
+        <text class="qrcode-no-title">加油付款码</text>
+        <text class="qrcode-no-hint">没有ETC卡，也可开通加油付款码</text>
+        <image class="qrcode-no-image" src="{{no_bg_icon}}"></image>
+        <view class="qrcode-no-open-btn" onTap="onOpenQrcode">开通加油码</view>
+    </view>
+    <!--底部 合作油站 电子发票-->
+    <view class="qrcode-tab" id="tab" style="padding-bottom: {{isIphoneX?'48rpx':'10rpx'}}">
+        <view class="qrcode-item" onTap="onStationClick">
+            <image class="qrcode-tab-icon" src="{{station_icon}}"></image>
+            <text class="qrcode-tab-text">合作油站</text>
+        </view>
+        <view class="qrcode-separation"></view>
+        <view class="qrcode-item" onTap="onInvoiceClick">
+            <image class="qrcode-tab-icon" src="{{invoice_icon}}"></image>
+            <text class="qrcode-tab-text">电子发票</text>
+        </view>
+    </view>
+</view>

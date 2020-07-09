@@ -1,0 +1,43 @@
+<view>
+	<view a:if="{{loaded}}">
+		<view style="width:750rpx;margin-bottom:200rpx;">
+			<image src="/assets/images/introduce.png" alt="" style="width:750rpx;" mode="widthFix"/>
+		</view>
+		<view class="login-footer">
+			<view>查看
+				<block a:if="{{flag}}">
+					<text style="color:#3E72ED" onTap="showProtocol">《新疆交投ETC服务协议》</text>
+				</block>
+				<block a:if="{{flagTj}}">
+					<text style="color:#3E72ED" onTap="showProtocol">《天津交投ETC服务协议》</text>
+				</block>
+				<block a:if="{{flagHb}}">
+					<text style="color:#3E72ED" onTap="showProtocol">《河北交投ETC服务协议》</text>
+				</block>
+				<block a:if="{{flagYn}}">
+					<text style="color:#3E72ED" onTap="showProtocol">《云南省云通记账卡/电子标签领用协议》</text>
+				</block>
+				<block a:if="{{flagGx}}">
+					<text style="color:#3E72ED" onTap="showProtocol">《广西八桂行ETC电子标签用户服务协议》</text>
+				</block>
+				<block a:if="{{flagMony}}">
+					<text style="color:#3E72ED" onTap="showProtocolMoney">《ETC服务协议》</text>
+					<text style="color:#3E72ED" onTap="showProtocol">《服务合同》</text>
+				</block>
+				<block a:if="{{flagETC}}">
+					<text style="color:#3E72ED" onTap="showProtocol">《ETC服务协议》</text>
+				</block>
+			</view>
+			<view class="btn-wrapper">
+				<button type="primary" class="login-button" size="mini" onTap="next" disabled="{{Mismatch}}">个人用户办理</button>
+				<button type="primary" class="login-button" size="mini" onTap="company">企业用户办理</button>
+			</view>
+		</view>
+		<view class="contact-btn">
+			<contact-button tnt-inst-id="QGMARDCN" scene="SCE00160438" size="25" color="#00A3FF" icon="/assets/icons/kefu.png" />
+			<!-- <image mode="scaleToFill" style="width:100%;height:100%;" src="/assets/icons/kefu.png" onTap="CustomerService"/> -->
+		</view>
+	</view>
+	<ant-skeleton a:else/>
+</view>
+

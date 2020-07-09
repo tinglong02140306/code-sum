@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText":"订单详情",
+  "navigationBarBackgroundColor":"#00A170",
+  "navigationBarTextStyle":"white",
+  "backgroundColor":"#00A170",
+  "usingComponents": {
+    "popup":"../../../components/popup/popup",
+    "perferent-container":"../components/perferents/perferent-container/perferent-container" 
+  }
+}

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+    <%@ page contentType="text/html;charset=UTF-8" isELIgnored="false" %>
+    <%@ include file="/WEB-INF/view/inc/taglibs.jsp"%>
+<head>
+    <meta charset="UTF-8">
+    <!-- 添加到主屏幕后，全屏显示 -->
+    <meta name="apple-touch-fullscreen" content="YES" />
+    <meta name="format-detection" content="telephone=no" />
+    <!-- iphone 运行在全屏模式 -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+    <link href="${ctx}/resource/h5/css/base.css" rel="stylesheet" />
+    <link href="${ctx}/resource/js/plugins/mescroll/mescroll.min.css" rel="stylesheet" />
+    <link href="${ctx}/resource/h5/css/all.css" rel="stylesheet" />
+    <link href="${ctx}/resource/h5/css/remove-car-app.css" rel="stylesheet" />
+    <script type="text/javascript" src="${ctx}/resource/js/plugins/remCacul/remCacul.js"></script>
+    <title>一键挪车首页</title>
+</head>
+<body>
+    <div class="wrap index-warp">
+        <!-- 头部 start-->
+        <header class="topic-bg">
+            <div class="header-item topic-bg">
+                <a href="javascript:void(0)" class="arrow-left header-back" data-bind="click: back"></a>
+                <span class="f36 cf title">一键挪车</span>
+                <label class="bind-car">绑定爱车</label>
+            </div>
+        </header>
+        <!-- 头部 end -->
+        <!-- 主要内容 -->
+        <div class="content top-7">
+            <!-- form表单 start -->
+            <div class="remove-car-form  ">
+                <form id="carForm" class="bf">
+                    <!-- 车牌号码 -->
+                    <div class="car-num-wrap clearfix">
+                        <span class="in-label fl">车牌号码</span>
+                        <div class="in-value fl">
+                            <span class=" fl tl wan-span">皖</span>
+                            <input type="text" class="car-num"  name="carNum"  placeholder="请输入车牌号码" maxlength="6" data-bind="value: formdata.carNum">
+                        </div>
+                    </div>
+                    <!-- 车身颜色 -->
+                    <div class="car-color-wrap clearfix">
+                        <span class="tl in-label fl">车牌颜色</span>
+                        <div class="in-value fl">
+                            <input type="text" class="car-color ell"  name="carColor" placeholder="蓝色车牌（小型汽车）" value="蓝色车牌（小型汽车）" data-bind=" value: formdata.carColor">
+                        </div>
+                    </div>
+                    <!-- 位置 -->
+                    <div class="car-color-wrap clearfix">
+                        <span class="tl in-label fl">位&nbsp&nbsp置</span>
+                        <div class="in-value fl">
+                            <input type="text" class="car-color address ell"  name="address" placeholder="科大讯飞" data-bind=" value: formdata.address">
+                        </div>
+                    </div>
+                    <!-- 挪车原因 -->
+                    <div class="remove-car-reason  clearfix">
+                        <p class="in-label">挪车原因</p>
+                        <div class="reason">
+                            <span class="item-reason">您爱车挡道,请挪车</span>
+                            <span class="item-reason item-reason-select">您的车窗灯未关</span>
+                            <span class="item-reason">您违规停车，请挪车</span>
+                            <span class="item-reason item-reason-select second-reason">急需挪车，请速来</span>
+                        </div>
+                    </div>
+                </form>
+                <div class="separate-warp"></div>
+                <!-- 现场照片 -->
+                <div class="add-picture-wrap bf clearfix">
+                    <div class="picture-tip">
+                        <span class="tl in-label fl">现场照片</span>
+                        <div class="in-value fl"><span class="tip">最多上传3张照片</span></div>
+                    </div>
+                    <div class="attachment-div fl">
+                        <a class="add-photo more" data-bind="click: more" href="javascript:void(0)"></a>
+                    </div>
+                </div>
+                <div class="apply-btn save-apply may-save-apply">
+                    <span>发起挪车</span> 
+                    <span class="is-last">(今天还可以发起1次)</span>
+                 </div>
+            </div>
+            <div class="bottom-tip">
+                <span class="remove-record">挪车记录</span>
+                <span class="remove-instructe">挪车说明</span>
+            </div>
+        </div>
+
+<div class="wrap position-wrap hide"></div>
+
+    <!-- 搜索结果模板start -->
+    <script id="newsTempl" type="text/html">
+	{{each $data as item index}}
+        <span class="item-reason {{if index%=0}} second-reason {{/if}}" data-bind="{{value}}">
+            {{item.name}}
+        </span>
+    {{/each}}
+    </script>
+    <!-- 搜索结果模板end -->
+    <script type="text/javascript" src="${ctx}/resource/js/plugins/jquery/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="${ctx}/resource/js/plugins/fly/fly.js"></script>
+    <script type="text/javascript" src="${ctx}/resource/js/plugins/hammer/hammer.js"></script>
+    <script type="text/javascript" src="${ctx}/resource/js/plugins/croods/croods-1.3.1.min.js"></script>
+    <script type="text/javascript" src="${ctx}/resource/js/plugins/device/device.js"></script>
+    <script type="text/javascript" src="${ctx}/resource/js/plugins/iScroll.js"></script>
+    <script type="text/javascript" src="${ctx}/resource/h5/js/util.js"></script>
+    <script type="text/javascript" src="${ctx}/resource/h5/js/remove-car-app.js"></script>
+
+    
+</body>
+</html>

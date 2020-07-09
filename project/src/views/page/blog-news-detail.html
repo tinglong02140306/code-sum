@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="../../../../">
+    <meta charset="UTF-8">
+    <!-- 添加到主屏幕后，全屏显示 -->
+    <meta name="apple-touch-fullscreen" content="YES"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <!-- iphone 运行在全屏模式 -->
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="viewport" content="width=device-width"/>
+    <title>警微热点-详情</title>
+    <link rel="stylesheet" type="text/css" href="../css/mui-preview-pic.css?__inline" />
+    <link rel="stylesheet" type="text/css" href="../lib/mui-pre-pic/mui.min.css">
+    <link rel="stylesheet" type="text/css" href="../lib/swiper/swiper.min.css">
+    <link rel="stylesheet" type="text/css" href="../lib/mescroll/mescroll.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/base.css?__inline"/>
+    <link rel="stylesheet" type="text/css" href="../css/all.css?__inline"/>
+    <link rel="stylesheet" type="text/css" href="../css/blog-news-detail.css?__inline"/> 
+</head>
+<body>
+    <div id="wrap" class="wrap bf">  
+        <!-- 头部 -->
+        <header class="topic-bg">
+            <div class="header-item topic-bg">
+                <a href="javascript:void(0)" class="header-back" data-bind="click: back"></a>
+                <a href="javascript:void(0)" class="title-text">微博正文</a>
+                <a href="javascript:void(0)" class="title-pic">
+                   <i class="my-photos hide">
+                       <img class="unloaded" src="" alt="">
+                   </i>
+                   <i class="f28 title hide"></i>  <!-- c2b -->
+               </a>
+            </div>
+        </header> 
+        <div class="interval"></div> 
+        <div class="content top-7 bf">
+            <!-- <div id ="blogContent" class="blog-news-content">
+            </div> -->
+        </div>
+        <!-- 暂无数据 -->
+        <div class="empty top-7 hide">
+            <div class="empty-ad"></div>
+            <p>暂无数据~</p>
+        </div>
+    </div>
+    
+    <share data-bind="source: OP"></share>
+
+<!-- 警徽热点 -->
+<script id="blogTmpl" type="text/html">
+    {{each $data as item index}}
+        <div id ="blogContent" class="blog-news-content">
+            <div class="blog-news-item blog-news-item{{index}}">
+                <p class="item-header" data-id="{{item.id}}" data-wbname="{{item.wbName}}" data-weburl="{{item.wbImageUrl}}">
+                    <img src="{{item.wbImageUrl}}" alt="" class="my-photo">
+                    <span class="item-title f28">{{item.wbName}}</span>
+                    <span class="item-date f22 c9">{{item.releaseTime}}</span>
+                </p>
+                <!-- 主要内容模块 -->
+                <div class="item-content">
+                    <p class="article-sec f32 c3"></p>
+                    {{if item.appendixType == 1}} <!--  appendixType 1 图片 2视频 -->
+                        <div class="img-list  img-list{{index}} unloaded flex" data-imgarr="{{item.imgList}}">
+                            {{each item.appendixList as list i}}
+                                <div class="img-item img-item-btom {{if item.appendixList.length == 1}}img-item-one {{else if item.appendixList.length == 4}} img-item-two {{if i%2 == 1 }} img-item-two-mar {{/if}} {{else if item.appendixList.length > 1 && item.appendixList.length != 4}} img-item-three {{if i%3 != 0}} img-item-mar {{/if}} {{/if}}" data-index="{{i}}"><img src="{{list}}" data-preview-src="" data-preview-group="{{index}}"></div>
+                            {{/each}}
+                        </div>
+                    {{else if item.appendixType == 2}}
+                        <div class="vedio-unit" data-detailid="{{item.detailsId}}" data-name="{{item.wbName}}" data-poster="{{item.appendixAddress}}">
+                            <span></span>
+                            <img src="{{item.appendixAddress}}">
+                        </div>
+                    {{/if}}
+                </div> 
+            </div>
+        </div>
+        <!-- 分享、喜欢、点赞按钮 -->
+        <div class="btn-wrap c8e">
+            <!-- 分享图标 -->
+            <a href="javascript:;" class="btn-share f28" data-id="{{item.id}}" data-wbname="{{item.wbName}}" data-weburl="{{item.wbImageUrl}}" data-title="{{item.title}}">
+                <span class="icon"></span>
+                <span class="num">{{item.shareCount}}</span>
+            </a>
+            <!-- 收藏图标 -->
+            <a href="javascript:;" class="btn-collect f28"  data-id="{{item.id}}" data-collect="{{item.collection}}">
+                <span class="icon {{if item.collection}} collected {{else}} uncollected {{/if}}"></span>
+                <span class="num">{{item.collectionCount}}</span> 
+            </a>
+            <!-- 点赞图标 -->
+            <a href="javascript:;" class="btn-praise f28" data-index="{{index}}" data-id="{{item.id}}" data-prise="{{item.prise}}">
+                <span class="icon {{if item.prise}} praised {{else}} unpraised {{/if}}"></span>
+                <span class="num">{{item.priseCount}}</span>
+            </a>   
+        </div>
+    {{/each}}
+</script>
+<script src="../lib/app.js"></script>
+<script src="../lib/mui-pre-pic/mui.min.js"></script>
+<script src="../lib/mui-pre-pic/mui.zoom.js"></script>
+<script src="../lib/mui-pre-pic/mui.previewimage.js"></script>
+<script src="../lib/mescroll/mescroll.min.js"></script>
+<script src="../lib/jquery.lazyload.min.js"></script>
+<script src="../lib/fly/fly.js"></script>   <!-- 先引mescroll后引fly -->
+<script src="../app/blog-news-detail.js?__inline"></script>
+</html>

@@ -1,0 +1,17 @@
+<!--pages/mine/ticket-buy/list/list.axml-->
+<import src="../../../../templates/mine/buy/ticket-item/ticket-item.axml"/>
+<view class="ticket-card-scroll-view" style='padding-bottom: {{isIphoneX?"68rpx":"10rpx"}}'>
+    <view>
+        <scroll-list
+            onRefresh="onRefresh"
+            onLoadMore="onLoadMore"
+            load_status="{{load_status}}"
+            refresher_triggered="{{refresher}}"
+            show_finish="{{show_finish}}">
+            <view a:for="{{card_list}}" a:for-index="index" a:for-item="item" a:key="etc_card" data-item="{{item}}" onTap="onCellClick"class="ticket-list-container" a:if="{{!is_empty}}">
+                <template is="ticket_item" data="{{item}}"></template>
+            </view>
+            <status a:if="{{status}}"  text="{{status==1?'暂时还没有洗车券哦～':'网络好像断了哦～'}}" onRetryClick="onRetryClick"></status>
+        </scroll-list>
+    </view>
+</view>

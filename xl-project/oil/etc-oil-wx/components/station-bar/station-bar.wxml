@@ -1,0 +1,19 @@
+<!--
+ * @Author: sunmingmao
+ * @Date: 2020-04-02 08:50:18
+ * @LastEditors: sunmingmao
+ * @LastEditTime: 2020-04-17 17:01:57
+ * @Description: 油站列表导航栏
+ -->
+ <navigation-bar background_style="background-color:#EDEDED">
+    <nav-menu list="{{list}}"
+              selected_index="{{selected_index}}"
+      class="station-bar"
+      color="rgba(0,0,0,.45)" 
+      selected_color="rgba(0,0,0,.85)" 
+      border_color="#05BA7D"
+      border_width = "{{3}}"
+      bind:menu="onMenuClick"
+      style="height: {{height}}px;"
+    ></nav-menu>
+ </navigation-bar>

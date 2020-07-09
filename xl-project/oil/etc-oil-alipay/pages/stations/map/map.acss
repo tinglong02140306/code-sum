@@ -1,0 +1,280 @@
+/* pages/stations/map/map.acss */
+
+.map-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.map-station-container {
+    width: 710rpx;
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    padding: 32rpx;
+    overflow: hidden;
+    position: absolute;
+    bottom: 32rpx;
+    left: 20rpx;
+    z-index: 2;
+}
+
+
+/**logo**/
+
+.map-station-logo {
+    width: 74rpx;
+    height: 74rpx;
+    margin-right: 32rpx;
+    border-radius: 50rpx;
+}
+
+
+/**详情**/
+
+.map-station-info-box {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.map-station-info-top {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.map-station-info-top-left {
+    flex: 1;
+    overflow: hidden;
+}
+
+
+/**油站名称**/
+
+.map-station-info-name {
+    width: 100%;
+    font-size: 32rpx;
+    color: #333333;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap
+}
+
+
+/**油站地址**/
+
+.map-station-info-address {
+    width: 100%;
+    color: #999999;
+    font-size: 26rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-top: 24rpx;
+}
+
+
+/**立即加油**/
+
+.map-station-info-top-oil {
+    width: 130rpx;
+    height: 44rpx;
+    text-align: center;
+    line-height: 44rpx;
+    font-size: 24rpx;
+    margin-left: 10rpx;
+}
+
+.map-station-info-bottom {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    overflow: hidden;
+    box-sizing: border-box;
+    margin-top: 8rpx;
+}
+
+.map-station-price-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-end;
+    position: relative;
+}
+
+
+/**价格**/
+
+.map-station-price {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-end;
+    box-sizing: border-box;
+}
+
+.map-station-price-mark {
+    font-size: 24rpx;
+    font-weight: normal;
+}
+
+.map-station-price-money {
+    font-size: 40rpx;
+    color: #000000;
+    font-weight: bold;
+    position: relative;
+    bottom: -6rpx;
+}
+
+.map-station-price-money-num {
+    font-size: 28rpx;
+    color: #000000;
+    font-weight: bold;
+    position: relative;
+}
+
+
+/**降价**/
+
+.map-station-price-down-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    color: #FF5311;
+    font-size: 24rpx;
+    margin-left: 16rpx;
+}
+
+.map-station-price-down-image {
+    width: 24rpx;
+    height: 24rpx;
+    margin-right: 4rpx;
+}
+
+
+/**导航**/
+
+.map-station-navigation {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.map-station-navigation-text {
+    color: #333333;
+    font-size: 24rpx;
+}
+
+.map-station-navigation-image {
+    width: 40rpx;
+    height: 40rpx;
+    margin-left: 20rpx;
+}
+
+
+/**查询条件**/
+
+.map-filter {
+    font-size: 26rpx;
+    color: #000000;
+    font-weight: bolder;
+    position: absolute;
+    bottom: 350rpx;
+    right: 32rpx;
+    background-color: #ffffff;
+    border-radius: 50rpx;
+    padding: 20rpx 32rpx;
+    box-shadow: 0rpx 0rpx 16rpx 0rpx rgba(0, 0, 0, .1);
+    line-height: 1 !important;
+}
+
+
+/**右侧按钮**/
+
+.map-right-box {
+    position: absolute;
+    bottom: 450rpx;
+    right: 32rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-end;
+    background-color: transparent;
+}
+
+.map-right-image {
+    width: 72rpx;
+    height: 72rpx;
+    box-shadow: 0rpx 0rpx 16rpx 0rpx rgba(0, 0, 0, .1);
+    margin-bottom: 32rpx;
+    border-radius: 100%;
+}
+
+
+/*状态*/
+
+.clean-item-status-image {
+    width: 26rpx;
+    height: 26rpx;
+}
+
+.clean-item-status-text {
+    font-size: 24rpx;
+    color: rgba(0, 0, 0, .85);
+    margin-left: 4rpx;
+}
+
+
+/*停车*/
+
+.clean-item-stop-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 14rpx;
+}
+
+.clean-details-stop-bg {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 82rpx;
+    height: 40rpx;
+    border-radius: 2rpx;
+    background-color: rgba(5, 127, 255, 0.05);
+    border: 2rpx solid rgba(22, 136, 255, 0.25);
+    color: rgba(5, 127, 255, 1);
+    font-size: 24rpx;
+    text-align: center;
+    font-family: PingFangSC-Regular;
+}
+
+.clean-details-stop-text {
+    margin-top: 2vm;
+}
+
+.clean-details-stop {
+    height: 40rpx;
+    color: rgba(5, 127, 255, 1);
+    font-size: 26rpx;
+    text-align: left;
+    font-family: PingFang-SC-Medium;
+    margin-left: 10rpx;
+    margin-top: 6rpx;
+}

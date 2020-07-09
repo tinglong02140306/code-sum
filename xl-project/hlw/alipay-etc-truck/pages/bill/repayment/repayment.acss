@@ -1,0 +1,94 @@
+.next-btn{
+  width: 600rpx;
+  outline: none;
+}
+.desc-area{
+  width: 750rpx;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.btn-area{
+  width: 750rpx;
+  height: 20vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.title{
+  font-size: 34rpx;
+  font-weight: bold;
+  margin-top: 50rpx;
+}
+.subtitle{
+  font-size: 30rpx;
+  color: #999;
+  margin-top: 50rpx;
+}
+.tip{
+  font-size: 30rpx;
+  margin: 100rpx 50rpx 0;
+  text-align: center;
+  line-height: 60rpx;
+}
+.list{
+  width: 750rpx;
+  height: calc(100vh - 100rpx);
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+.list-tile{
+  width: 750rpx;
+  display: flex;
+  min-height: 150rpx;
+  padding: 20rpx;
+  box-sizing: border-box;
+  justify-content: flex-start;
+  align-items: center;
+  border-bottom: 2rpx solid #eee;
+}
+.tile-bill{
+  margin-left: 30rpx;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+.bill-date{
+  font-size: 30rpx;
+}
+.plate{
+  font-size: 26rpx;
+  color: #999;
+}
+.tile-money{
+  flex: 0 0 150rpx;
+  margin-left: 30rpx;
+  font-size: 30rpx;
+  font-weight: bold;
+}
+.bottom-bar{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80rpx;
+  border-top: 2rpx solid #eee;
+  display: flex;
+  font-size: 28rpx;
+}
+.bottom-left{
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.bottom-right{
+  flex: 0 0 200rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

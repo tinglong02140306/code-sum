@@ -1,0 +1,29 @@
+<!--pages/person/etc/etc.wxml-->
+<import src="../../../../templates/mine/load-more/load-more.wxml"></import>
+
+<view class="etc-card-scroll-view" style='padding-bottom: {{isIphoneX?"68rpx":"10rpx"}}'>
+    <view style="margin-bottom: {{'100rpx'}}">
+        <scroll-list
+                height="{{scroll_height}}"
+                bind:refresh="onRefresh"
+                bind:loadmore="onLoadMore"
+                load_status="{{load_status}}"
+                refresher_triggered="{{refresher}}"
+                show_finish="{{show_finish}}"
+        >
+            <view class="etc-list-container" wx:if="{{!is_empty}}">
+                <block wx:for="{{card_list}}" wx:for-index="index" wx:for-item="item" wx:key="etc_card">
+                    <etc-card-type data="{{item}}" bind:itemclick="onETCItemClick" bind:carChange="etcCarChange" bind:unBindClick="onUnbindClick"></etc-card-type>
+                </block>
+            </view>
+            <status wx:if="{{status}}"  text="{{status==1?'您尚未添加ETC卡哦～':'网络好像断了哦～'}}" bind:retry="onRetryClick"></status>
+        </scroll-list>
+    </view>
+
+
+<!--    <view class="etc-card-bottom-blank"></view>-->
+    <view class="etc-card-add-new" bindtap="etcAddClick" style='bottom: {{isIphoneX?"68rpx":"40rpx"}}' wx:if="{{router != 1}}">
+        <image class="etc-card-add-img" src="https://oilmag.etcsd.com.cn/oilcoreserver/static/resource/bank-card-add.png"></image>
+        <text class="etc-card-add-text">添加ETC卡</text>
+    </view>
+</view>

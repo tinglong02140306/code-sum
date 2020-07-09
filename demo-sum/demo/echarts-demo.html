@@ -1,0 +1,97 @@
+<!DOCTYPE html>  
+<html xmlns=" http://www.w3.org/1999/xhtml" xml:lang="en">  
+<head>  
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">  
+<title>Canvas绘图</title>  
+<style type="text/css"></style>
+ 
+</head>  
+<body>  
+<div id="timeCharts" class="" width="200px" height="200px"></div> 
+</body>  
+<script type="text/javascript" src="jquery/jquery-1.8.2.min.js"></script>  
+<script type="text/javascript" src="echarts/echarts.min.js"></script>  
+<script>  
+$(function() {
+    var renderCharts = function() {
+        var option,
+            timeCharts;
+
+        timeCharts = echarts.init(document.getElementById('timeCharts'));
+
+        // 图标自适应
+        $(window).resize(function() {
+            timeCharts.resize();
+        });
+        option = {
+            backgroundColor: '#4888ff',
+            title: {
+                text: "00:00",
+                x: 'center',
+                y: 'center',
+                textStyle: {
+                    color: '#fff',
+                    fontSize: 40,
+                }
+            },
+            series: [{
+                name: 'loading',
+                type: 'pie',
+                radius: ['30%', '31%'],
+                hoverAnimation: false,
+                label: {
+                    normal: {
+                        show: false,
+                    }
+                },
+                data: [{
+                    value: 10,
+                    itemStyle: {
+                        normal: {
+                            label: {
+                                show: false
+                            },
+                            labelLine: {
+                                show: false
+                            },
+                            borderWidth: 8,
+                            shadowBlur: 80,
+                            borderColor: "#fff",
+                            shadowColor: 'rgba(0, 0, 0, 0)' //边框阴影
+                        }
+                    }
+                    
+                }, {
+                    value: 20,
+                    itemStyle: {
+                        normal: {
+                            label: {
+                                show: false,
+                                position: "center"
+                            },
+                            labelLine: {
+                                show: false
+                            },
+                            color: "#7697fc",
+                            borderColor: "#7697fc",
+                            borderWidth: 0
+                        },
+                        emphasis: {
+                            color: "#7697fc",
+                            borderColor: "#7697fc",
+                            borderWidth: 0
+                        }
+                        
+                    }
+                }]
+            }]
+        };
+        timeCharts.setOption(option);
+    };
+    renderCharts();
+
+});
+  
+</script>
+    
+</html>   

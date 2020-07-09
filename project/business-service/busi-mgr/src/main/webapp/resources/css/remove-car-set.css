@@ -1,0 +1,135 @@
+.location {
+	padding: 10px;
+	background: #fff;
+	font-size: 12px;
+	color: #999;
+}
+.location .title {
+	padding: 0 4px 0 8px;
+	height: 28px;
+	background: #f4f6fa;
+	line-height: 28px;
+}
+.location .title .label {
+	margin-right: 6px;
+}
+.location .title span {
+	margin: 0 2px;
+}
+.location .triangle {
+	height: 2px;
+	border-left: 14px solid #f4f6fa;
+	border-top: 13px solid #fff;
+	border-bottom: 13px solid #fff;
+}
+.wrap {
+	min-width: 820px;
+}
+.result-div {
+	padding: 10px;
+    background: #f5f5f5;
+}
+.title-wrap {
+	padding: 8px;
+	background: #fff;
+    border-top: 1px solid #eceff0;
+    line-height: 40px;
+}
+.title-wrap .title {
+	margin: 5px 0;
+    padding-left: 12px;
+    height: 20px;
+    border-left: 3px solid #0099cc;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: normal;
+}
+.content {
+	padding: 0px 0px 39px 17px;
+	background: #fff;
+}
+.bttn {
+	margin-left: 40px;
+	vertical-align: inherit;
+}
+.widget {
+	width: 126px;
+}
+
+.row-item {
+	height: 40px;
+}
+.row-item div {
+	display: inline-block;
+	height: 40px;
+}
+.row-item span {
+	display: inline-block;
+	line-height: 40px;
+}
+.press-edit .dropdown-wrap,
+.limit-edit .dropdown-wrap{
+	display: block;
+}
+.press-edit .dropdown-wrap span,
+.limit-edit .dropdown-wrap span {
+	display: block;
+}
+.dropdown .icon {
+	background-image: none;
+}
+.widget .select {
+	line-height: 2em;
+}
+.press-edit {
+	position: absolute;
+    top: 16px;
+}
+.limit-edit {
+	position: absolute;
+	top: 25px;
+
+}
+.press {
+	position: relative;
+	padding-top: 11px;
+}
+/* .press .bttn {
+	margin-left: 156px;
+} */
+.limit {
+	padding-top: 20px;
+}
+.mr {
+	margin-left: 174px;
+}
+.Wdate {
+    text-indent: 5px;
+    width: 108px;
+}
+.service-edit  input {
+	cursor: pointer;
+}
+.limit-edit .minus,
+.press-edit .minus {
+	display: inline-block;
+	position: relative;
+	top: -10px;
+}
+.tel {
+	padding-top: 4px;
+}
+.huise {
+	background-color: #c8c8c8;
+	border: 1px solid #c8c8c8;
+}
+.huise:hover,
+.huise:active,
+.huise:focus {
+	background-color: #c8c8c8;
+	border: 1px solid #c8c8c8;
+}
+/* .row-item .label span {
+	height: 40px;
+	line-height: 40px;
+} */

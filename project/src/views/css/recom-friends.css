@@ -1,0 +1,88 @@
+/* ========推荐好友======== start */
+.corange {
+    color: #f19b4f;
+}
+
+.fw {
+    font-weight: bold;
+}
+
+.recom-friends-content {
+    position: absolute;
+    padding: 0rem 0.68rem;
+    width: calc(100% - 1.36rem);
+}
+
+.recom-friends-code {
+    padding: 0.68rem 5.3%;
+    width: 89.4%;
+    height: 15.88rem;
+    background: url(../img/service-hall/bg-recom-friends.png) no-repeat center;
+    background-size: 100% 15.88rem;
+}
+
+.recom-friends-content .btn-wrap {
+    padding: 1.54rem 0% 0;
+    width: 100%;
+}
+
+.code-value {
+    height: 4.56rem;
+    width: 100%;
+    border-bottom: 1px dashed #eaeaea;
+}
+
+.qr-code-wrap {
+    margin: auto;
+    height: 7.48rem;
+    width: 100%;
+}
+
+.code-value-text {
+    padding: 1.12rem 0 0.22rem 0;
+}
+
+.code-value-num {
+    padding: 0.22rem 0;
+}
+
+.code-value-login {
+    display: inline-block;
+    color: #4d72ff;
+    line-height: 4.44rem;
+}
+
+.qr-code-pic {
+    margin: 1.34rem auto 0;
+    width: 80%;
+}
+
+.pic {
+    margin: auto;
+    width: 6.88rem;
+    height: 6.88rem;
+    background: url(../img/service-hall/icon-qr-code.png) no-repeat;
+    background-size: 6.88rem;
+}
+
+.pic-txt {
+    padding: 0.6rem 0;
+}
+
+.code-value .hide {
+    display: none;
+}
+.btn-wrap {
+    padding: 2.4rem 4.2% 0;
+    width: 91.6%;
+}
+.btn-wrap a {
+    display: inline-block;
+    width: 100%;
+    height: 2.0rem;
+    border-radius: 0.22rem;
+    line-height: 2.0rem;
+}
+
+
+/* ========推荐好友======== end */

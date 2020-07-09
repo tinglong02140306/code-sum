@@ -1,0 +1,17 @@
+<view>
+	<steps activeIndex="{{activeIndex}}" items="{{items}}"/>
+	<!--等待授信结果-->
+	<block a:if="{{loaded}}">
+		<view class="wrapper">
+			<view class="car-container">
+				<view class="spinner"/>
+				<view class="txt">
+					{{sendText}}
+				</view>
+			</view>
+		</view>
+		<view class="tip">信用评估中，请耐心等待</view>
+	</block>
+</view>
+
+

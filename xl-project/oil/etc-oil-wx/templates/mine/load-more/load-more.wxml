@@ -1,0 +1,5 @@
+<template name="load-more">
+    <view class="load-more-container" wx:if="{{loadingState||loadingState_unused||loadingState_finished}}">
+        <text class="load-more-text">{{loadingState||loadingState_unused||loadingState_finished}}</text>
+    </view>
+</template>

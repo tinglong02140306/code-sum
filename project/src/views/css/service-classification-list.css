@@ -1,0 +1,212 @@
+/**
+ * @author hmxue
+ * @time 2017-11-09
+ * @description 警方提示详情
+ */
+ .wrap {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+}
+/* ================ 警营提示详情样式 start =====================*/
+.result-wrapper {
+    position: absolute;
+    top: 0rem;
+    bottom: 0;
+    width: 100%;
+    font-size: 0.02rem;
+}
+.result-veiw {
+    background: #fff;
+}
+
+/* ================ 警营提示详情样式 end =====================*/
+/* ================ 搜索框 start =====================*/
+.search {
+    margin: 0.56rem auto;
+    width: 91.7%;
+    height: 1.4rem;
+    background: #eee;
+    border-radius: 0.78rem;
+    line-height: 1.4rem;
+}
+.search div {
+    float: left;
+
+}
+.service-list-wrap .search .area-name {
+    /*padding: 0rem 0.5rem 0rem 0.94rem;
+    width: 11%;*/
+    padding: 0 .2rem;
+    box-sizing: border-box;
+    width: 21%;
+    height: 1.4rem;
+    font-size: 0.58rem;
+    color: #333;
+    background: url(../img/service-hall/down.png) no-repeat right 0.76rem;
+    background-size: 0.24rem 0.24rem;
+    line-height: 1.5rem;
+    text-align: center;
+}
+.search-input {
+    padding: 0rem 0.68rem;
+    position: relative;
+    /*width: calc(89% - 2.80rem);*/
+    box-sizing: border-box;
+    width: 79%;
+    height: 1.4rem;
+}
+.search .interval {
+    margin: 0.34rem 0rem;
+    display: inline-block;
+    width: 0.56rem;
+    height: 0.72rem;
+    border-left: 1px solid #d0d0d0;
+}
+.search .btn-search {
+    /*margin-top: 0.46rem;*/
+    display: inline-block;
+    width: 0.56rem;
+    height: 1.4rem;
+    background: url(../img/service-hall/search.png) left center no-repeat;
+    background-size: 0.56rem 0.56rem;
+}
+
+/* 输入框删除按钮 */
+.search .btn-delete {
+    margin-top: 0.36rem; 
+    display: inline-block;
+    width: 0.71rem;
+    height: 0.71rem;
+    background: url(../img/service-hall/btn-delete.png) no-repeat;
+    background-size: 0.69rem 0.69rem;
+}
+
+.search .hide {
+    display: none;
+}
+
+.search input {
+    /*width:calc(95% - 2.5rem);
+    padding-right: 0.7rem;
+    height: 1.4rem;
+    background: transparent; 
+    border: none;
+    outline: none;
+    text-indent: 5%;
+    line-height: 1.4rem;
+    font-size: 0.58rem;*/
+    padding: 0.3rem 0.7rem 0.3rem 0rem;
+    width: calc(95% - 2.5rem);
+    height: 0.8rem;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 0.58rem;
+    text-indent: 5%;
+    line-height: normal;
+    vertical-align: middle;
+
+}
+.search-input label {
+    padding: 0.46rem 0.3rem 0.34rem 0rem;
+    position: absolute;
+    top: 0rem;
+    left: 1.8rem;
+    width: calc(95% - 2.5rem);
+    background: transparent;
+    line-height: 0.6rem;
+    text-indent: 5%;
+}
+.matter-result .list-wrap {
+    display: inline-block;
+    width: 91.6%;
+    padding: 0 0.62rem;
+    border-bottom: 1px solid #eaeaea;
+
+}
+.list-wrap span {
+    display: inline-block;
+    margin: 0.6rem 0rem;
+    
+}
+.list-wrap .handle,
+.list-wrap .guide,
+.list-wrap .searchs {
+    padding: 0.2rem 0rem;
+    width: 20%;
+    border-radius: 0.2rem;
+    font-size: 0.62rem;
+    vertical-align: middle;
+    text-align: center;
+}
+
+
+.list-wrap .handle {
+    border: 1px solid #94aaff;
+    background-color: #edf1ff;
+    color: #4c72ff;
+}
+.list-wrap .guide {
+    background-color: #fef7e7;
+    border: 1px solid #f9c766;
+    color: #f5a100;
+}
+.list-wrap .searchs {
+    background-color: #e9f9e9;
+    border: 1px solid #7fda7f;
+    color: #3fc63f;
+}
+
+.list-wrap .matter-name {
+    padding: 0.2rem 0rem 0.2rem 0.24rem;
+    width: 75%;
+    font-size: 0.68rem;
+    color: #333;
+    vertical-align: middle;
+  /*  width: 75%;
+    padding-left: 0.24rem;
+    height: 1.066667rem;
+    line-height: 1.06rem;
+    font-size: 0.68rem;
+    vertical-align: middle;
+    color:#333;*/
+}
+.matter-result .list-wrap .matter-name-anhui {
+    padding: 0.2rem 0rem 0.2rem 0.44rem;
+    width: 73%;
+}
+.list-wrap .arrow {
+    padding: 0.2rem 0rem;
+    width: 2%;
+    height: 0.9rem;
+    background: url('../img/service-hall/arrow.png') no-repeat right;
+    background-size: 0.266667rem 0.44rem;
+}
+/* ================ 搜索框 end =====================*/
+.empty {
+    top: 1.96rem;
+    height: calc(100% - 2.52rem);
+    background-color: transparent;
+}
+.empty p {
+    line-height: 1.56rem;
+}
+.empty-ad {
+    height: 9.2rem;
+    background: url(./public/wcportal/0.0.1/img/service-hall/search-emptys.png) no-repeat center bottom;
+    background-size: 3.92rem 4.56rem;
+}
+/*无网络样式*/
+.wrap .no-net {
+    /*position: relative;*/
+    top: 0;
+    z-index: 2;
+}
+.no-line {
+    padding-bottom: .5rem;
+    font-size: 0.6rem;
+    color: #999;
+    line-height: 2rem;
+    text-align: center;
+}

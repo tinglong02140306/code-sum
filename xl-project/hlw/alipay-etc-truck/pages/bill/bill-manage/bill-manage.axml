@@ -1,0 +1,3 @@
+<view>
+  <grid onGridItemClick="onItemClick" columnNum="{{2}}" list="{{list}}" />
+</view>

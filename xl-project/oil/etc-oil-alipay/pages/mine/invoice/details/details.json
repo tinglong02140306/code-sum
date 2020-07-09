@@ -1,0 +1,8 @@
+{
+    "defaultTitle": "发票详情",
+    "backgroundColor": "#eeeeee",
+    "titleBarColor": "#ffffff",
+    "usingComponents": {
+        "modal": "../../../../components/modal/modal"
+    }
+}

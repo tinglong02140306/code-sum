@@ -1,0 +1,99 @@
+<!--
+ * @Author: sunmingmao
+ * @Date: 2020-04-01 14:12:00
+ * @LastEditors: sunmingmao
+ * @LastEditTime: 2020-04-20 16:48:24
+ * @Description: 油站详情
+ -->
+<view class="station-details-container">
+    <!--油站背景图-->
+    <image class="station-details-image" mode="widthFix" src="{{station.station_photo_url||background_default}}"></image>
+    <!--油站详情-->
+    <view class="station-details-box">
+        <!--油站价格-->
+        <view class="station-details-info">
+            <view class="station-details-info-top">
+                <image class="station-details-logo" src="{{station.brand_icon_url}}"></image>
+                <text class="station-details-name">{{station.name}}</text>
+            </view>
+            <view class="station-details-info-bottom" wx:if="{{station.station_price&&station.station_price.length}}">
+                <picker mode="selector" range="{{oil_types}}" range-key="oil_no" value="{{current_index}}" bindchange="onOilNoChange">
+                    <view class="station-details-type">
+                        <text class="station-details-oil-no">{{current_oil_no}}</text>
+                        <image class="station-details-oil-no-icon" src="/assets/static/drop-down-pull.png"></image>
+                    </view>
+                </picker>
+                <view class="station-details-prices">
+                    <view class="station-details-prices-item">
+                        <text class="station-details-prices-item-name member-price">ETC价</text>
+                        <view class="station-details-prices-item-price member-price">
+                            <text class="station-details-prices-item-price-mark">￥</text>
+                            <text>{{current_price_vip||'--'}}</text>
+                        </view>
+                    </view>
+                    <view class="station-details-prices-item">
+                        <text class="station-details-prices-item-name">国标价</text>
+                        <view class="station-details-prices-item-price">
+                            <text class="station-details-prices-item-price-mark">￥</text>
+                            <text>{{current_price_gb||'--'}}</text>
+                        </view>
+                    </view>
+                    <view class="station-details-prices-item">
+                        <text class="station-details-prices-item-name">油站价</text>
+                        <view class="station-details-prices-item-price">
+                            <text class="station-details-prices-item-price-mark">￥</text>
+                            <text>{{current_price||'--'}}</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <!--油站地址-->
+        <view class="station-details-address card-box">
+            <text class="station-details-address-text">{{station.address}}</text>
+            <view class="station-details-navigation" bind:tap="onNavigationClick">
+                <text class="station-details-distance">{{station.distance}}km</text>
+                <image class="station-details-navigation-logo" src="/assets/static/station-item-navigation.png"></image>
+            </view>
+        </view>
+        <!--实时订单-->
+        <view class="station-details-order-box">
+            <text class="station-details-order-title">实时订单</text>
+            <view class="station-details-order-list">
+                <block wx:for="{{order_list}}" wx:key="order">
+                    <view class="station-details-order-item card-box">
+                        <view class="station-details-order-item-top">
+                            <view class="station-details-order-item-avatar-box">
+                                <image class="station-details-order-item-avatar_default" src="/assets/static/default-head.png"></image>
+                                <image class="station-details-order-item-avatar" src="{{item.img}}"></image>
+                            </view>
+                            <text class="station-details-order-item-nick">{{item.name}}**</text>
+                        </view>
+                        <view class="station-details-order-item-bottom">
+                            <text>{{item.time}}</text>
+                            <text>消费￥{{item.money}}</text>
+<!--                            <view>-->
+<!--                                节省-->
+<!--                                <text class="station-details-order-money">￥{{item.discount}}</text>-->
+<!--                            </view>-->
+                        </view>
+                    </view>
+                </block>
+            </view>
+        </view>
+    </view>
+    <!--快捷加油 ETC加油-->
+    <view class="station-details-btns" wx:if="{{is_support_no_sense}}" style="padding-bottom: {{isIphoneX?64:24}}rpx;">
+<!--        <login-status bind:click="onOilClick" openid="{{openid}}">-->
+            <view class="station-details-btn-item left-theme" bind:tap="onOilClick">快捷加油</view>
+<!--        </login-status>-->
+        <view class="station-details-btn-item theme-button right-theme" bind:tap="onEtcClick">ETC加油</view>
+    </view>
+    <!--快捷加油 ETC加油-->
+    <view class="station-details-btns" wx:if="{{!is_support_no_sense}}" style="padding-bottom: {{isIphoneX?64:24}}rpx;"> 
+        <view class="station-details-btn-item left-theme" bind:tap="onEtcClick">ETC加油</view>
+<!--        <login-status bind:click="onOilClick" openid="{{openid}}">-->
+            <view class="station-details-btn-item theme-button right-theme" bind:tap="onOilClick">快捷加油</view>
+<!--        </login-status>-->
+    </view>
+</view>

@@ -1,0 +1,9 @@
+{
+    "defaultTitle": "开票历史",
+    "backgroundColor": "#eeeeee",
+    "titleBarColor": "#ffffff",
+    "usingComponents": {
+        "status": "../../../../components/status/status",
+        "scroll-list": "../../../../components/scroll-list/scroll-list"
+    }
+}

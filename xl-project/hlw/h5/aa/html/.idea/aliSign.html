@@ -1,0 +1,128 @@
+<html>
+<meta charset="utf-8">
+<title>代扣签约</title>
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="format-detection" content="email=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+    
+    .wrapper {
+        height: 100vh;
+        width: 100vw;
+        box-sizing: border-box;
+        padding: 5vw 2vw;
+    }
+    
+    .logo-wrapper {
+        width: 100%;
+        height: 30vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .img-logo {
+        width: 53vw;
+        height: 17vw;
+    }
+    
+    .desc-wrapper {
+        margin-bottom: 40px;
+    }
+    
+    .desc-wrapper p {
+        font-size: 15px;
+        line-height: 200%;
+        color: #666;
+    }
+    
+    .btn {
+        width: 100%;
+        height: 40px;
+        color: #fff;
+        background-color: dimgrey;
+        border: none;
+        border-radius: 5px;
+        outline: none;
+    }
+</style>
+</head>
+
+<body id="body">
+    <div class="wrapper">
+        <section class="logo-wrapper">
+            <img class="img-logo" src="data:image/png;base64,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">
+        </section>
+        <section class="desc-wrapper">
+            <p>*ETC产生的通行费，以支付宝免密支付的方式支付；</p>
+            <p>*通行高速后，请确保以下渠道（支付宝余额、余额宝、花呗、绑定的银行卡）可以正常使用支付宝代扣还款，逾期未还款的用户将列入高速联网黑名单，并依法追缴。</p>
+        </section>
+        <div style="margin-bottom:40px;font-size:15px;">
+            <input type="checkbox" name="cbx" id="cbx" onchange="agree()" />
+            <label>我同意并遵守<a style="color:#1296db" onclick="javascript:ap.pushWindow('wxProtocal.html');">《鲁通记账卡使用协议》</a></label>
+        </div>
+        <button class="btn" onclick="sign()">确认签约</button>
+    </div>
+    <script src="./resources/js/plugins/jquery/jquery-1.8.2.min.js"></script>
+    <script src="https://gw.alipayobjects.com/as/g/h5-lib/alipayjsapi/3.1.1/alipayjsapi.min.js"></script>
+    <script type="text/javascript">
+        function agree() {
+            var isChecked = $('#cbx').attr("checked");
+            console.log(isChecked);
+            if (isChecked) {
+                $(".btn").css("background-color", "#5887F9");
+            } else {
+                $(".btn").css("background-color", "dimgrey");
+            }
+        }
+
+        function sign() {
+            var isChecked = $('#cbx').attr("checked");
+            if (isChecked) {
+                $.ajax({
+                    url: "/isp/alipay/life/resign",
+                    type: "POST",
+                    beforeSend: function(request) {
+                        var token = localStorage.getItem('TOKEN');
+                        if (token) request.setRequestHeader("auth-token", token);
+                    },
+                    success: function(res) {
+                        const newTab = window.open();
+                        if ("0000" == res.code) {
+                            setTimeout(function() {
+                                const div = document.createElement('div');
+                                div.innerHTML = res.data; // html code
+                                newTab.document.body.appendChild(div);
+                                newTab.document.forms[0].submit();
+                            }, 500);
+                        } else {
+                            ap.showToast({
+                                content: res.desc,
+                                duration: 2000
+                            }, function() {});
+                        }
+                    },
+                    error: function(e) {
+                        ap.showToast({
+                            content: '网络异常，请稍后重试',
+                            duration: 2000
+                        }, function() {});
+                    }
+                });
+            } else {
+                ap.showToast({
+                    content: '请先同意以上协议',
+                    duration: 2000
+                }, function() {});
+            }
+        }
+    </script>
+</body>
+
+</html>

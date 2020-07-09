@@ -1,0 +1,25 @@
+.refresh-view {
+  width: 100%;
+  flex: 1;
+}
+.refresh-view-content {
+  width: 100%;
+  margin-top: -90px;
+}
+.refresh-view-content-indicator {
+  color: grey;
+  text-align: center;
+  height: 90px;
+  line-height: 90px;
+  font-size: 28px;
+}
+.refresh-view-content-children {
+  width: 100%;
+}
+.refresh-view-content-loading {
+  color: grey;
+  text-align: center;
+  height: 90px;
+  line-height: 90px;
+  font-size: 28px;
+}

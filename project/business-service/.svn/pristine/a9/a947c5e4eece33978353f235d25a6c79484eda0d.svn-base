@@ -1,0 +1,242 @@
+.wrap {
+	width: 100%;
+}
+.content-wrap {
+	position: absolute;
+	top: 0rem;
+	bottom: 0rem;
+	width: 100%;
+	background: #fff;
+}
+* {
+    -webkit-backface-visibility: visible;
+}
+.wrap-adjust {
+	padding-bottom: 3.6rem;
+}
+.timer-shaft {
+	position: relative;
+	padding: 0.84rem 4.2% 0rem;
+	background: #fff;
+}
+.timer-shaft-circle {
+	margin: 0 auto;
+	height: 1.91rem;
+}
+.circle {
+	width: 13%;
+	height: 1.91rem;
+	background: #fff;
+	border-radius: 50%;
+	font-size: 0.71rem;
+	color: #13af5c;
+	line-height: 1.92rem;
+	text-align: center;
+}
+.circle-apply {
+    margin-left: 0.8rem;
+	background: url(../images/remove-car/apply-logo.png) no-repeat center center;
+	background-size: 1.88rem auto;
+}
+/* 通知车主失败 */
+.notice-carowner {
+	background: url(../images/remove-car/notice-carperson.png) no-repeat center center;
+	background-size: 1.88rem auto;
+}
+/* 通知车主成功 */
+.notice-sucess {
+	background: url(../images/remove-car/notice-success.png) no-repeat center center;
+	background-size: 1.88rem auto;
+}
+/* 取消挪车 */
+.result-icon {
+	margin-right: 0.8rem;
+	background: url(../images/remove-car/remove-car-cancle.png) no-repeat center center;
+	background-size: 1.88rem auto;
+}
+/* 挪车成功 */
+.result-success {
+    margin-right: 0.8rem;
+	background: url(../images/remove-car/remove-car-success.png) no-repeat center center;
+	background-size: 1.88rem auto;
+}
+.apply-line,
+.notice-line {
+	margin: 0rem 0.1rem;
+    display: inline-block;
+    height: 0.955rem;
+    width: 23.5%;
+    border-bottom: 2px solid #4c72ff;
+}
+.no-line {
+	border-bottom: 2px solid #b6b6b6;
+}
+.apply-text,
+.notice-text,
+.result-text {
+	margin-top: 0.37rem;
+    width: 26%;
+    height: 1.86rem;
+    font-size: 0rem;
+}
+.notice-text {
+	padding-left: 1.6rem;
+}
+.apply-text p,
+.notice-text p,
+.result-text p {
+	text-align: center;
+}
+.apply-text p:first-child,
+.notice-text p:first-child,
+.result-text p:first-child {
+	font-size: 0.66rem;
+	color: #222;
+	line-height: 0.8rem;
+}
+.apply-text p:nth-child(2),
+.notice-text p:nth-child(2),
+.result-text p:nth-child(2){
+	font-size: 0.52rem;
+	color: #969696;
+	line-height: 0.9rem;
+}
+.car-info {
+	padding: 0.48rem 4.2%;
+	background: #fff;
+}
+.car-info .item span {
+	line-height: 1rem;
+}
+.car-info .item .label {
+	width: 27%;
+	font-size: 0.74rem;
+	color: #161616;
+}
+.car-info .item .value {
+	width: 70%;
+	font-size: 0.74rem;
+	color: #969696;
+}
+.inform {
+	width: 96%;
+	height: 2.22rem;
+	background: #fff;
+	border-top: 1px solid #ddd;
+	font-size: 0.71rem;
+	color: #ff833a;
+	text-align: center;
+	line-height: 2.22rem;
+}
+.tel-message {
+	margin-top: 0.31rem;
+	background: #fff;
+	font-size: 0.62rem;
+}
+.tel-message p {
+	width: 96%;
+	height: 2rem;
+	line-height: 2rem;
+}
+.tel-message p:nth-child(2) {
+	border-top: 1px solid #ddd;
+}
+.car-message {
+	margin-top: 0.31rem;
+	background: #fff;
+}
+.address,
+.reason {
+	padding-top: 0.28rem;
+}
+
+.car-mes-logo {
+	margin: 0 auto;
+	width: 100%;
+}
+.car-mes-logo {
+	padding: 0.48rem 0rem 0rem;
+}
+.img-bottom {
+	padding-bottom: 0.4rem;
+}
+.img-bottom-none {
+	padding-bottom: 0rem;
+}
+.car-mes-logo img {
+	width: 100%;
+}
+.remove-evaluate {
+	background: #fff;
+}
+.evaluate-title {
+	padding: 0.54rem 4.2%;
+	border-bottom: 2px solid #f5f5f5;
+	background: url('../images/remove-car/separate-icon.png') no-repeat 4.2% center;
+	background-size: 0.15rem 0.6rem;
+	font-size: 0.70rem;
+	color: #161616;
+	text-indent: 0.6rem;
+}
+.interval {
+	width: 100%;
+	height: 0.06rem;
+	background: #f5f5f5;
+}
+.interval-wrap {
+	width: 100%;
+	height: 0.44rem;
+	background: #f5f5f5;
+}
+.evaluate-content {
+	padding: 0rem 4.2% 2.08rem;
+	font-size: 0;
+}
+.carowner-attitude,
+.move-speed {
+	height: 1.78rem;
+	border-bottom: 1px solid #e5e5e5;
+	line-height: 1.78rem;
+}
+
+.carowner-attitude span,
+.move-speed span{
+	display: inline-block;
+	width: 25%;
+	font-size: 0.70rem;
+	color: #222;
+	text-indent: 0.6rem;
+}
+.carowner-attitude span.value,
+.move-speed span.value {
+	padding-right: 0.1rem;
+	width: 74%;
+    background: url('../images/remove-car/icon3_select.png') no-repeat 87% center;
+    background-size: 0.88rem 0.88rem;
+    font-size: 0.52rem;
+    color: #969696;
+    text-align: right;
+}
+.move-speed span.pj-center,
+ .carowner-attitude span.pj-center{
+	background: url('../images/remove-car/details-center.png') no-repeat 87% center;
+    background-size: 0.88rem 0.88rem;
+}
+.move-speed span.pj-low,
+ .carowner-attitude span.pj-low{
+	background: url('../images/remove-car/icon1_select.png') no-repeat  87% center;
+    background-size: 0.88rem 0.88rem;
+}
+.evaluate-text {
+	padding-left: 0.6rem;
+}
+.evaluate-text .title {
+	height: 1.78rem;
+	font-size: 0.70rem;
+	color: #222;
+	line-height: 1.78rem;
+}
+.evaluate-text .content {
+	font-size: 0.70rem;
+	color: #646464;
+}

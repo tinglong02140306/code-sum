@@ -1,0 +1,17 @@
+<!--pages/person/payment/bank-add/bank-add.wxml-->
+<import src="../../../../templates/mine/bind-bank/bind-bank.wxml"></import>
+<view class="bank-card-add-container">
+    <view class="bank-card-add-container" wx:if="{{!show_result}}">
+        <view class="bank-card-add-title">
+            <text>请绑定持卡人本人的银行卡</text>
+        </view>
+        <template is="bind-bank" data="{{bank_card_type,is_show_modal,bank_card_type_str,isIphoneX,isStartIdentify,icon_unselect,icon_select}}"></template>
+    </view>
+    <view class="result-container" wx:if="{{show_result}}">
+        <image class="result-image" src="{{icon_success}}"></image>
+        <text class="result-text">信息提交成功</text>
+        <view class="result-button" bindtap="completeBack">
+            <button class="theme-button" form-type="submit">完成</button>
+        </view>
+    </view>
+</view>

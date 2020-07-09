@@ -1,0 +1,180 @@
+.modal-container {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+}
+
+.modal-content-container {
+    width: 80%;
+    background-color: white;
+    border-radius: 10rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0rpx 0rpx;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1000;
+    top: -90rpx;
+}
+
+.modal-content-title {
+    font-size: 34rpx;
+    color: black;
+    font-weight: 500;
+    letter-spacing: 2rpx;
+    margin-top: 48rpx;
+}
+
+.modal-content-box {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 32rpx 32rpx;
+}
+
+.modal-btn-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-separation {
+    width: 100%;
+    height: 2rpx;
+    background-color: #f2f2f2;
+}
+
+.modal-btn-box {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-btns {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.modal-btn-style {
+    width: 48%;
+    height: 108rpx;
+    color: #333333;
+    font-size: 32rpx;
+    font-weight: 500;
+    text-align: center;
+    line-height: 108rpx;
+}
+
+.modal-btn-separation {
+    width: 2rpx;
+    height: 96rpx;
+    background-color: #f2f2f2;
+}
+
+.modal-btn-only {
+    width: 100%;
+    height: 96rpx;
+    color: #303030;
+    font-size: 26rpx;
+    text-align: center;
+    line-height: 96rpx;
+    font-weight: 500;
+}
+
+.modal-content-text {
+    color: #999999;
+    font-size: 28rpx;
+    letter-spacing: 2rpx;
+    line-height: 40rpx !important;
+    text-align: center;
+    padding: 0 10rpx;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    display: block;
+    white-space: pre-wrap;
+}
+
+.modal-slot {
+    background-color: #303030;
+}
+
+.invoice-redaction-details-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0 10rpx;
+}
+
+.invoice-redaction-details-text {
+    color: #e0a86c;
+    font-size: 28rpx;
+    letter-spacing: 2rpx;
+    line-height: 40rpx;
+    text-align: center;
+    margin-bottom: 32rpx;
+    display: block;
+    white-space: pre-wrap;
+}
+
+.invoice-redaction-details-content-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.invoice-redaction-details-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    box-sizing: border-box;
+}
+
+.invoice-redaction-details-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    box-sizing: border-box;
+    margin-bottom: 6rpx;
+}
+
+.invoice-redaction-details-item-title {
+    font-size: 28rpx;
+    letter-spacing: 2rpx;
+    line-height: 40rpx;
+    text-align: center;
+    color: #5a5a5a;
+}
+
+.invoice-redaction-details-item-content {
+    font-size: 28rpx;
+    line-height: 40rpx;
+    text-align: center;
+    color: #303030;
+    margin-left: 20rpx;
+}

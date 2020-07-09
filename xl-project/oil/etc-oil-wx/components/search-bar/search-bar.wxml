@@ -1,0 +1,24 @@
+<!--
+ * @Author: sunmingmao
+ * @Date: 2020-04-07 16:52:30
+ * @LastEditors: sunmingmao
+ * @LastEditTime: 2020-04-20 10:05:25
+ * @Description: 搜索导航栏
+ -->
+ <navigation-bar background_style="background-color:#EDEDED">
+    <view class="search-bar-container">
+        <view class="search-bar-back-box"  bind:tap="onBackClick"> 
+            <image class="search-bar-back" src="/assets/static/search-bar-back.png"></image>
+        </view>
+        <view class="search-bar-box">
+            <image class="search-bar-icon" src="/assets/static/seach-bar-search.png"></image>
+            <input class="search-input"
+                confirm-type="search"
+                focus
+                placeholder-class="search-input-placeholder" 
+                placeholder="请输入要搜索的加油站名称"
+                bindinput="onInput"
+                bindconfirm="onConfirm"/>
+        </view>
+    </view>
+ </navigation-bar>

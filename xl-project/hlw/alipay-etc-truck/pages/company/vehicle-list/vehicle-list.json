@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "picker-item": "mini-antui/es/picker-item/index"
+  }
+}

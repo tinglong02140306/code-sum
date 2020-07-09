@@ -1,0 +1,50 @@
+
+.flow-chart-wrap header {
+	top: 0;
+}
+#liMarquee {
+	display: inline-block;
+    width: 78%;
+    height: 2.1rem;
+    font-size: 0.8rem;
+    text-align: center;
+    line-height: 2.1rem;
+    vertical-align: top;
+}
+.flow-chart-wrap {
+	padding-top: 1.8rem;
+}
+.pinch-zoom,.pinch-zoom img{
+    max-width: 100%;
+    -webkit-user-drag: none;
+    -moz-user-drag: none;
+    -ms-user-drag: none;
+    user-drag: none;
+}
+.flow-chart-wrap img {
+    display: block;
+    padding: 0.2rem 0;
+    max-width: 100%;
+
+}
+/*无网络样式*/
+.no-net {
+    position: relative;
+    padding-top: 2.1rem;
+    z-index: 2;
+}
+/*轮播布局*/
+#itemBanner {
+    position: relative;
+}
+.marquee-content-wrap {
+    float: left;
+    width: 800%;
+}
+.marquee-content,
+.marquee-content-copy {
+    float: left;
+}
+.marquee-content-copy {
+    padding-left: 40px;
+}

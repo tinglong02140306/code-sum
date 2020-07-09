@@ -1,0 +1,69 @@
+<view class="invoice-details-container">
+    <view class="invoice-content-box">
+        <view class="invoice-details-top-box">
+            <text class="invoice-details-top-title">电子发票</text>
+            <view class="invoice-details-top-more" onTap="onSeeInvoiceClick">
+                <text class="invoice-details-top-more-text">查看发票</text>
+                <image class="invoice-details-top-more-image" src="https://oilmag.etcsd.com.cn/oilcoreserver/static//resource/icon-invoice-next1587007642632.png"></image>
+            </view>
+        </view>
+        <view class="invoice-content-details">
+            <text class="invoice-content-details-title">发票抬头</text>
+            <text class="invoice-content-details-info">{{invoice_title}}</text>
+        </view>
+        <view class="invoice-content-details">
+            <text class="invoice-content-details-title">发票内容</text>
+            <text class="invoice-content-details-info">{{invoice_detail}}</text>
+        </view>
+        <view class="invoice-content-details">
+            <text class="invoice-content-details-title">发票金额</text>
+            <text class="invoice-content-details-info"><text style="color: #05BA7D">{{invoice_total_money}}</text> 元</text>
+        </view>
+        <view class="invoice-content-details">
+            <text class="invoice-content-details-title">申请时间</text>
+            <text class="invoice-content-details-info">{{invoice_create_time}}</text>
+        </view>
+     </view>
+    <view class="invoice-content-box" a:if="{{accept_email}}">
+        <view class="invoice-details-top-box">
+            <text class="invoice-details-top-title">接收信息</text>
+            <text class="invoice-details-top-title"></text>
+        </view>
+        <view class="invoice-content-details">
+            <text class="invoice-content-details-title">电子邮件</text>
+            <text class="invoice-content-details-info">{{accept_email}}</text>
+        </view>
+        <view class="invoice-content-details">
+            <text class="invoice-content-details-title">推送状态</text>
+            <text class="invoice-content-details-info">已推送</text>
+        </view>
+    </view>
+
+    <view class="invoice-details-btn-box" style='padding-bottom: {{isIphoneX?"40rpx":"20rpx"}}'>
+        <view class="invoice-details-btn-ash-view">
+            <text class="invoice-details-btn-ash disable-button" onTap="onRedactionClick">申请重开发票</text>
+        </view>
+        <view class="invoice-details-btn-ash-view">
+            <text class="invoice-details-btn-high theme-button" onTap="onResendClick">重发邮件</text>
+        </view>
+    </view>
+    <modal is_show_modal="{{is_show_redaction}}"
+        title="提示"
+        content="您正在申请发票红冲,请您认真核对需红冲的发票,申请提交后,系统将在三个工作日内处理您的申请,原有发票将无法继续使用,该发票申请对应的交易记录将恢复为待开票状态"
+        cancel_color="#08CC8A"
+        confirm_color="#08CC8A"
+        onConfirm="onRedactionModalClick">
+    </modal>
+    <modal is_show_modal="{{is_show_redaction_hint}}"
+        title="请您确认"
+        type="{{1}}"
+        redaction="{{redaction}}"
+        onConfirm="onRedactionInfoModalClick">
+    </modal>
+    <modal is_show_modal="{{is_show_repeat}}"
+        title="提示"
+        content="该笔订单已申请过发票重开 \n无法重复申请"
+        show_cancel="{{false}}"
+        onConfirm="onRepeatClick">
+    </modal>
+</view>

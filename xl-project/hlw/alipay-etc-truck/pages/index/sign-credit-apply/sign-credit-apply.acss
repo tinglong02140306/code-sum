@@ -1,0 +1,60 @@
+.wrapper{
+	width: 750rpx;
+  height: 100%;
+	box-sizing: border-box;
+	padding: 0rpx 30rpx;
+  overflow: hidden;
+  background: #FFFFFF;
+  box-shadow: inset 0 -1px 0 0 #EEEEEE;
+}
+
+.car-container{
+	width: 600rpx;
+  /* height: 100%; */
+	box-sizing: border-box;
+	margin: 30rpx 55rpx;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+  flex-direction: column;
+	border-radius: 10rpx;
+}
+.next-btn{
+	width: 686rpx;
+	outline: none;
+  color: #fff;
+  border-radius: 10rpx;
+  font-family: "PingFangSC-Regular";
+  font-size: 36rpx;
+}
+.next-btn-one{
+  width: 686rpx;
+	outline: none;
+  color: #000;
+  position: fixed;
+  bottom:50rpx;
+  border-radius: 10rpx;
+  font-family: "PingFangSC-Regular";
+  font-size: 36rpx;
+}
+.success{
+  font-family: "PingFangSC-Regular";
+  font-size: 40rpx;
+  color: #333333;
+  letter-spacing: 0;
+  text-align: center;
+}
+.successContent{
+  font-family: "PingFangSC-Regular";
+  font-size: 28rpx;
+  color: #999999;
+}
+.title{
+  margin-top: 30rpx;
+}
+.button{
+  display: flex;
+	justify-content: center;
+	align-items: center;
+  margin-top: 60rpx;
+}

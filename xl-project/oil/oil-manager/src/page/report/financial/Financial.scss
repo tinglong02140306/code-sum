@@ -1,0 +1,88 @@
+.financial-container{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  box-sizing: border-box;
+}
+.financial-top-container{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: white;
+  padding: 10px 0;
+}
+.financial-table-container{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: white;
+  margin-top: 10px;
+}
+.financial-table{
+  width: 100%;
+  table{
+    thead{
+      th{
+        color: black;
+        font-weight: 600;
+        font-size: 14px;
+      }
+    }
+  }
+}
+.financial-search-item-container{
+  display: flex;
+  flex-direction: row;
+}
+.financial-input-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  div {
+    width: 90px;
+    color: black;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 5px;
+  }
+  Input{
+    width: 60%;
+  }
+}
+.financial-date-picker-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  div {
+    width: 90px;
+    color: black;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 5px;
+  }
+  span{
+    div{
+      min-width: 130px;
+    }
+  }
+}
+.financial-btn-container{
+  display: flex;
+  flex-direction: row;
+  margin-left: 15px;
+}

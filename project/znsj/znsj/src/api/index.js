@@ -1,0 +1,692 @@
+import Axios from 'axios';
+// 基本url配置
+import config from '@/config';
+const ajaxPrefixBuild = config.ajaxPrefix;
+
+/**
+ * 默认的情况下传递的参数,也可通过 requestHeader 参数传递
+ * @type {Object}
+ */
+window.ajaxHeader = {
+    // 时间戳(1970年以来的秒数)
+    timestamp: Date.parse(new Date()),
+    // 本次请求的用户协议类型
+    protocol: document.location.protocol === 'https:' ? 'https' : 'http'
+};
+let vcity = {
+    11: '北京',
+    12: '天津',
+    13: '河北',
+    14: '山西',
+    15: '内蒙古',
+    21: '辽宁',
+    22: '吉林',
+    23: '黑龙江',
+    31: '上海',
+    32: '江苏',
+    33: '浙江',
+    34: '安徽',
+    35: '福建',
+    36: '江西',
+    37: '山东',
+    41: '河南',
+    42: '湖北',
+    43: '湖南',
+    44: '广东',
+    45: '广西',
+    46: '海南',
+    50: '重庆',
+    51: '四川',
+    52: '贵州',
+    53: '云南',
+    54: '西藏',
+    61: '陕西',
+    62: '甘肃',
+    63: '青海',
+    64: '宁夏',
+    65: '新疆',
+    71: '台湾',
+    81: '香港',
+    82: '澳门',
+    91: '国外'
+};
+
+// 工具类
+const unit = {
+    /**
+     * 默认参数丢失，统一抛出错误
+     * @param  {String} message 错误消息
+     */
+    throwIfMissing(message = '关键参数不能为空') {
+        console.error(message);
+    },
+    /**
+     * 获取cookie
+     */
+    getCookie(name) {
+        let strcookie = document.cookie; //获取cookie字符串
+        let arrcookie = strcookie.split("; "); //分割
+        //遍历匹配
+        for (let i = 0; i < arrcookie.length; i++) {
+            let arr = arrcookie[i].split("=");
+            if (arr[0] == name) {
+                return arr[1]
+            }
+        }
+        return {};
+    },
+    formatDate(date, fmt) {
+        if (/(y+)/.test(fmt)) {
+            fmt = fmt.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length));
+        }
+        let o = {
+            'M+': date.getMonth() + 1,
+            'd+': date.getDate(),
+            'h+': date.getHours(),
+            'm+': date.getMinutes(),
+            's+': date.getSeconds()
+        };
+        for (let k in o) {
+            if (new RegExp(`(${k})`).test(fmt)) {
+                let str = o[k] + '';
+                fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? str : padLeftZero(str));
+            }
+        }
+        return fmt;
+    },
+
+    padLeftZero(str) {
+        return ('00' + str).substr(str.length);
+    },
+
+    /**
+     * get请求
+     * @param  {[type]} url 请求地址
+     * @param  {[type]} obj 请求入参
+     * @return {[type]}     返回response对象
+     */
+    ajaxGet(url, obj) {
+        // 创建一个新对象 存储入参
+        const params = Object.assign({}, obj);
+        // 调用 Axios get 方法
+        return Axios.get(url, {
+            // url 前缀，定义域名用
+            baseURL: ajaxPrefixBuild,
+            // 通过header传递的参数
+            headers: window.ajaxHeader,
+            // 参数设置
+            params
+        }).then(response => {
+            // 请求成功后
+            return response;
+        }).catch(error => (error));
+    },
+
+    /**
+     * post 请求
+     * @param  {[type]} url 请求地址
+     * @param  {[type]} obj 请求入参
+     * @return {[type]}     返回response对象
+     */
+    ajaxPost(url, obj, flag) {
+        url = this.handleUrl(url);
+        // const params = Object.assign({}, obj)
+        // 调用 Axios post 方法
+        return Axios.post(url, obj, {
+            // url 前缀，定义域名用
+            baseURL: ajaxPrefixBuild,
+            // 通过header传递的参数
+            headers: flag ? Object.assign({}, window.ajaxHeader, {
+                    'Content-Type': 'application/json;charset=UTF-8',
+                    'X-TOKEN': this.getCookie("X-TOKEN")
+                }) : Object.assign({}, window.ajaxHeader, {
+                    'X-TOKEN': this.getCookie("X-TOKEN")
+                })
+                // responseType: 'json'
+        }).then(response => {
+            // 请求成功后
+            return response;
+        }).catch(error => (error));
+    },
+    /**
+     * meserve Post请求
+     * @param  {[type]} url 请求地址
+     * @param  {[type]} obj 请求入参
+     * @return {[type]}     返回response对象
+     */
+    ajaxMerPost(url, obj, successFun, errorFun, that) {
+        url = this.handleUrl(url);
+        const params = that.$qs.stringify(obj);
+        Axios
+            .post(url, params, { headers: { 'X-TOKEN': this.getCookie("X-TOKEN") } })
+            .then(function(res) {
+                if (res.status == 200 && res.data.flag) {
+                    successFun && successFun(res.data);
+                } else {
+                    errorFun && errorFun(res);
+                }
+            })
+            .catch(function(error) {
+                errorFun && errorFun(error);
+            });
+    },
+    /**
+     * application/json;    Post请求
+     * @param  {[type]} url 请求地址
+     * @param  {[type]} obj 请求入参
+     * @return {[type]}     返回response对象
+     */
+    ajaxObjPost(url, obj, successFun, errorFun, that) {
+        url = this.handleUrl(url);
+        Axios
+            .post(url, obj, { headers: { 'Content-Type': 'application/json;charset=UTF-8', 'X-TOKEN': this.getCookie("X-TOKEN") } })
+            .then(function(res) {
+                if (res.status == 200 && res.data.flag) {
+                    successFun && successFun(res.data);
+                } else {
+                    errorFun && errorFun(res);
+                }
+            })
+            .catch(function(error) {
+                errorFun && errorFun(error);
+            });
+    },
+    //处理url
+    handleUrl(url) {
+        // znsj-sj-web
+        if (url.indexOf('znsj-web')) {
+            url = url.replace(/znsj-web/i, "bog-receive-web");
+        }
+        if (url.indexOf('znsj-sj-web')) {
+            url = url.replace(/znsj-sj-web/i, "bog-receive-web");
+        }
+        if (url.indexOf('znsj-qx')) {
+            url = url.replace(/znsj-qx/i, "bog-receive-web");
+        }
+        return url;
+    },
+    /**
+     * 空数据处理
+     * @param  {[type]} obj typeof == obj
+     * @param  {[type]} status 数据为空展示状态
+     * @return {[type]}     返回处理后obj对象
+     */
+    objNoData(obj, status) {
+        if (typeof obj !== 'object') {
+            return false;
+        }
+        if (!status) {
+            status = '-'; // 无数据默认展示 -
+        }
+        for (var s in obj) {
+            if (!obj[s]) {
+                obj[s] = status;
+            }
+        }
+        return obj;
+    },
+    /**
+     * 将时间戳转化为日期格式
+     * @param str 日期
+     * @return 字符串
+     */
+    timeForData(time) {
+        var year = time.substring(0, 4),
+            month = time.substring(4, 6),
+            day = time.substring(6, 8);
+        return year + '-' + month + '-' + day;
+    },
+    /**
+     * 处理电话格式，保留第一位及后两位
+     * @param str 电话
+     * @return 字符串
+     */
+    handlePhone(phone) {
+        let len = phone.length,
+            data = phone.substring(0, 1) + '********' + phone.substring(len - 2, len);
+        return data;
+    },
+    /**
+     * 获取当前时间
+     * @param type 类型 day 当前天 、minute当前分钟、 hour当前分钟
+     * @return 字符串
+     */
+    getNowDate(type) {
+        let nowDate = new Date(),
+            year = nowDate.getFullYear(),
+            month = nowDate.getMonth(),
+            day = nowDate.getDate(),
+            minute = nowDate.getMinutes(),
+            hour = nowDate.getHours(),
+            data = '';
+        if (type == 'day') {
+            data = year + '-' + this.formatDate(month + 1) + '-' + this.formatDate(day);
+        } else if (type == 'minute') {
+            data = this.formatDate(minute);
+        } else if (type == 'hour') {
+            data = parseInt(this.formatDate(hour)) + 1;
+        }
+        return data;
+    },
+    /**
+     * 时间格式化
+     * @param type 时间类型、date时间值
+     * @return 字符串
+     */
+    formatDate(date, type) {
+        date = date < 10 ? '0' + date : date + '';
+        return date;
+    },
+    /**
+     * 时间列表
+     * @param type 时间类型、date时间值
+     * @return 字符串
+     */
+    handleDateList(dateFlag) {
+        let arr = [],
+            day = this.getNowDate('day'),
+            hour = this.getNowDate('hour'),
+            i = 0;
+        if (dateFlag) {
+            i = parseInt(hour);
+        }
+        for (i; i < 60; i++) {
+            arr.push(this.formatDate(i));
+        }
+        return arr;
+    },
+    /**
+     * 表单验证
+     * @param arr 验证规则数组对象、obj待验证数据
+     * @return 布尔值
+     */
+    inputCheck(arr, obj, that) { // arr: 正则对象 obj: 待验证数据
+        let result = true;
+        for (let i in arr) {
+            if (obj[arr[i].key] != undefined) {
+                let value = $.trim(obj[arr[i].key]);
+                if (arr[i].required && !value) {
+                    that.$Message.warning(arr[i].title + '不能为空！');
+                    result = false;
+                    return;
+                } else if (arr[i].max && value.length > arr[i].max) {
+                    that.$Message.warning(arr[i].title + '最多不超过' + arr[i].max + '个字符');
+                    result = false;
+                    return;
+                } else if (arr[i].pattern && !(new RegExp(arr[i].pattern).test(value))) {
+                    that.$Message.warning('请输入正确的' + arr[i].title);
+                    result = false;
+                    return;
+                }
+            }
+        }
+        return result;
+    },
+
+    /**
+     * 统一社会信用代码
+     * @param Code 待验证数据
+     * @return 布尔值
+     */
+    CheckSocialCreditCode(Code, that) {
+        var patrn = /^[0-9A-Z]+$/;
+        // 18位校验及大写校验
+        if ((Code.length != 18) || (patrn.test(Code) == false)) {
+            that.$Message.warning('请输入正确的统一社会信用代码！');
+            return false;
+        } else {
+            var Ancode; // 统一社会信用代码的每一个值
+            var Ancodevalue; // 统一社会信用代码每一个值的权重
+            var total = 0;
+            var weightedfactors = [1, 3, 9, 27, 19, 26, 16, 17, 20, 29, 25, 13, 8, 24, 10, 30, 28]; // 加权因子
+            var str = '0123456789ABCDEFGHJKLMNPQRTUWXY';
+            // 不用I、O、S、V、Z
+            for (var i = 0; i < Code.length - 1; i++) {
+                Ancode = Code.substring(i, i + 1);
+                Ancodevalue = str.indexOf(Ancode);
+                total = total + Ancodevalue * weightedfactors[i];
+                // 权重与加权因子相乘之和
+            }
+            var logiccheckcode = 31 - total % 31;
+            if (logiccheckcode == 31) {
+                logiccheckcode = 0;
+            }
+            var Str = '0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F,G,H,J,K,L,M,N,P,Q,R,T,U,W,X,Y';
+            var Array_Str = Str.split(',');
+            logiccheckcode = Array_Str[logiccheckcode];
+
+            var checkcode = Code.substring(17, 18);
+            if (logiccheckcode != checkcode) {
+                that.$Message.warning('请输入正确的统一社会信用代码！');
+                // alert("不是有效的统一社会信用编码！");
+                return false;
+            } else {
+                return true;
+            }
+        }
+    },
+    // 验证15/18身份证
+    checkCard(card, that) {
+        card = card.toUpperCase();
+        // 是否为空
+        if (card === '') {
+            that.$Message.warning('身份证号不能为空！');
+            return false;
+        }
+        // 校验长度，类型
+        if (!unit.isCardNo(card)) {
+            that.$Message.warning('请输入正确的身份证号');
+            return false;
+        }
+        // 检查省份
+        if (!unit.checkProvince(card)) {
+            that.$Message.warning('请输入正确的身份证号');
+            return false;
+        }
+        // 校验生日
+        if (!unit.checkBirthday(card)) {
+            that.$Message.warning('请输入正确的身份证号');
+            return false;
+        }
+        // 检验位的检测
+        if (!unit.checkParity(card)) {
+            that.$Message.warning('请输入正确的身份证号');
+            return false;
+        }
+        return true;
+    },
+
+    // 检查号码是否符合规范，包括长度，类型
+    isCardNo(card) {
+        // 身份证号码为15位或者18位，15位时全为数字，18位前17位为数字，最后一位是校验位，可能为数字或字符X
+        var reg = /(^\d{15}$)|(^\d{17}(\d|X)$)/;
+        if (reg.test(card) === false) {
+            return false;
+        }
+        return true;
+    },
+
+    // 取身份证前两位,校验省份
+    checkProvince(card) {
+        var province = card.substr(0, 2);
+        if (vcity[province] == undefined) {
+            return false;
+        }
+        return true;
+    },
+
+    // 检查生日是否正确
+    checkBirthday(card) {
+        var len = card.length,
+            arr_data,
+            year,
+            month,
+            day,
+            birthday;
+        // 身份证15位时，次序为省（3位）市（3位）年（2位）月（2位）日（2位）校验位（3位），皆为数字
+        if (len == '15') {
+            var re_fifteen = /^(\d{6})(\d{2})(\d{2})(\d{2})(\d{3})$/;
+            arr_data = card.match(re_fifteen);
+            year = arr_data[2];
+            month = arr_data[3];
+            day = arr_data[4];
+            birthday = new Date('19' + year + '/' + month + '/' + day);
+            return unit.verifyBirthday('19' + year, month, day, birthday);
+        }
+        // 身份证18位时，次序为省（3位）市（3位）年（4位）月（2位）日（2位）校验位（4位），校验位末尾可能为X
+        if (len == '18') {
+            var re_eighteen = /^(\d{6})(\d{4})(\d{2})(\d{2})(\d{3})([0-9]|X)$/;
+            arr_data = card.match(re_eighteen);
+            year = arr_data[2];
+            month = arr_data[3];
+            day = arr_data[4];
+            birthday = new Date(year + '/' + month + '/' + day);
+            return unit.verifyBirthday(year, month, day, birthday);
+        }
+        return false;
+    },
+
+    // 校验日期
+    verifyBirthday(year, month, day, birthday) {
+        var now = new Date(),
+            now_year = now.getFullYear();
+        // 年月日是否合理
+        if (birthday.getFullYear() == year && (birthday.getMonth() + 1) == month && birthday.getDate() == day) {
+            // 判断年份的范围（3岁到100岁之间)
+            var time = now_year - year;
+            if (time >= 0 && time <= 100) {
+                return true;
+            }
+            return false;
+        }
+        return false;
+    },
+
+    // 校验位的检测
+    checkParity(card) {
+        // 15位转18位
+        card = unit.changeFivteenToEighteen(card);
+        var len = card.length;
+        if (len == '18') {
+            var arrInt = new Array(7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2),
+                arrCh = new Array('1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2'),
+                cardTemp = 0,
+                i, valnum;
+            for (i = 0; i < 17; i++) {
+                cardTemp += card.substr(i, 1) * arrInt[i];
+            }
+            valnum = arrCh[cardTemp % 11];
+            if (valnum == card.substr(17, 1)) {
+                return true;
+            }
+            return false;
+        }
+        return false;
+    },
+    // 15位转18位身份证号
+    changeFivteenToEighteen(card) {
+        if (card.length == '15') {
+            var arrInt = new Array(7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2),
+                arrCh = new Array('1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2'),
+                cardTemp = 0,
+                i;
+            card = card.substr(0, 6) + '19' + card.substr(6, card.length - 6);
+            for (i = 0; i < 17; i++) {
+                cardTemp += card.substr(i, 1) * arrInt[i];
+            }
+            card += arrCh[cardTemp % 11];
+            return card;
+        }
+        return card;
+    },
+    /**
+     * 页面跳转
+     * _this vue
+     * url 传来的url
+     * url 传来的url
+     * boolean 是否显示浏览器工具栏，默认yes
+     * width 打开窗口宽，默认1300
+     * height 打开窗口高，默认900
+     */
+    openNewDialog(_this, url, params, boolean, width, height) {
+        const { href } = _this.$router.resolve({
+            path: url,
+            name: url,
+            params: params
+        });
+        let str = '';
+        str = str += boolean ? 'toolbar=' + boolean : 'toolbar=yes';
+        str = str += width ? ',width=' + width : ',width=' + (screen.availWidth - 10);
+        str = str += height ? ',height=' + height : ',height=' + (screen.availHeight - 50);
+        str += "left=0,top=0";
+        window.open(href, '_blank', str);
+    },
+    openFullWindow: function(url, name) {
+        var redirectUrl = url;
+        var width = screen.availWidth - 10;
+        var height = screen.availHeight - 50;
+        var szFeatures = "top=0,";
+        szFeatures += "left=0,";
+        szFeatures += "width=" + width + ",";
+        szFeatures += "height=" + height + ",";
+        szFeatures += "directories=no,";
+        szFeatures += "status=no,toolbar=no,location=no,";
+        szFeatures += "menubar=yes,";
+        szFeatures += "scrollbars=yes,";
+        szFeatures += "resizable=yes"; // channelmode
+        szFeatures += "fullscreen=yes";
+        window.open(redirectUrl, '_blank', szFeatures);
+    },
+    openOnlyPage: function(url, name) {
+        var redirectUrl = url;
+        var width = screen.availWidth;
+        var height = screen.availHeight;
+        var szFeatures = "top=0,";
+        szFeatures += "left=0,";
+        szFeatures += "width=" + width + ",";
+        szFeatures += "height=" + height + ",";
+        szFeatures += "directories=no,";
+        szFeatures += "status=no,toolbar=no,location=no,";
+        szFeatures += "menubar=no,";
+        szFeatures += "scrollbars=yes,";
+        szFeatures += "resizable=yes"; // channelmode
+        szFeatures += "fullscreen=yes";
+        window.open(redirectUrl, '_blank', szFeatures);
+    },
+    /**
+     * 打印pdf的窗口
+     * @param  {[type]} url [description]
+     * @return {[type]}     [description]
+     */
+    openPrintWindow: function(url) {
+        var redirectUrl = url;
+        var width = screen.availWidth;
+        var height = screen.availHeight;
+        var szFeatures = "top=0,";
+        szFeatures += "left=0,";
+        szFeatures += "width=" + 1000 + ",";
+        szFeatures += "height=" + height + ",";
+        szFeatures += "directories=no,";
+        szFeatures += "status=no,toolbar=no,location=no,";
+        szFeatures += "menubar=no,";
+        szFeatures += "scrollbars=yes,";
+        szFeatures += "resizable=no"; // channelmode
+        szFeatures += "fullscreen=no";
+        window.open(redirectUrl, '_blank', szFeatures);
+    },
+    /*
+     * 判断是否是ie
+     */
+    isIE: function() {
+        if (!!window.ActiveXObject || "ActiveXObject" in window) {
+            return true;
+        } else {
+            return false;
+        }
+    },
+    /**
+     * 解决requestAnimFrame兼容性问题
+     */
+    solveAnimFrame() {
+        let lastTime = 0;
+        let vendors = ['webkit', 'moz'];
+        for (let x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+            window.requestAnimationFrame = window[vendors[x] + 'RequestAnimationFrame'];
+            window.cancelAnimationFrame = window[vendors[x] + 'CancelAnimationFrame'] || // Webkit中此取消方法的名字变了
+                window[vendors[x] + 'CancelRequestAnimationFrame'];
+        }
+
+        if (!window.requestAnimationFrame) {
+            window.requestAnimationFrame = function(callback, element) {
+                let currTime = new Date().getTime();
+                let timeToCall = Math.max(0, 16.7 - (currTime - lastTime));
+                let id = window.setTimeout(function() {
+                    callback(currTime + timeToCall);
+                }, timeToCall);
+                lastTime = currTime + timeToCall;
+                return id;
+            };
+        }
+        if (!window.cancelAnimationFrame) {
+            window.cancelAnimationFrame = function(id) {
+                clearTimeout(id);
+            };
+        }
+    },
+    /**
+     * 解决iview table在ie9下的兼容性问题
+     */
+    solveIviewTable() {
+        if (!('classList' in document.documentElement)) {
+            Object.defineProperty(HTMLElement.prototype, 'classList', {
+                get: function () {
+                    var self = this;
+                    function update(fn) {
+                        return function (value) {
+                            var classes = self.className.split(/s+/g);
+                            var index = classes.indexOf(value);
+        
+                            fn(classes, index, value);
+                            self.className = classes.join(' ');
+                        };
+                    }
+        
+                    return {
+                        add: update(function (classes, index, value) {
+                            if (!~index) classes.push(value);
+                        }),
+        
+                        remove: update(function (classes, index) {
+                            if (~index) classes.splice(index, 1);
+                        }),
+        
+                        toggle: update(function (classes, index, value) {
+                            if (~index) { classes.splice(index, 1); } else { classes.push(value); }
+                        }),
+        
+                        contains: function (value) {
+                            return !!~self.className.split(/s+/g).indexOf(value);
+                        },
+        
+                        item: function (i) {
+                            return self.className.split(/s+/g)[i] || null;
+                        },
+                    };
+                },
+            });
+        }
+    },
+    isIE9() {
+        let Sys = {},
+            ua = navigator.userAgent.toLowerCase(),
+            flag = false;
+        if (window.ActiveXObject) {
+            Sys.ie = ua.match(/msie ([\d.]+)/)[1];
+            if (Sys.ie.indexOf("9") > -1) {
+                flag = true;
+            }else {
+                flag = false;
+            }
+        }
+        return flag;
+    },
+    formatDate: function(date, fmt) { //author: meizz   
+        var o = {
+            "M+": date.getMonth() + 1, //月份   
+            "d+": date.getDate(), //日   
+            "H+": date.getHours(), //小时   
+            "m+": date.getMinutes(), //分   
+            "s+": date.getSeconds(), //秒   
+            "q+": Math.floor((date.getMonth() + 3) / 3), //季度   
+            "S": date.getMilliseconds() //毫秒   
+        };
+        if (/(y+)/.test(fmt))
+            fmt = fmt.replace(RegExp.$1, (date.getFullYear() + "").substr(4 - RegExp.$1.length));
+        for (var k in o)
+            if (new RegExp("(" + k + ")").test(fmt))
+                fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        return fmt;
+    }
+};
+
+export default unit;

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="../../../../" >
+    <meta charset="UTF-8">
+    <!-- 添加到主屏幕后，全屏显示 -->
+    <meta name="apple-touch-fullscreen" content="YES"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <!-- iphone 运行在全屏模式 -->
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="viewport" content="width=device-width"/>
+    <title>办事大厅</title>
+    <link rel="stylesheet" type="text/css" href="../css/base.css?__inline"/>
+    <link rel="stylesheet" type="text/css" href="../css/all.css?__inline"/>
+    <link rel="stylesheet" type="text/css" href="../css/service-hall.css?__inline"/>
+</head>
+<body>
+    <div class="wrap service-hall-wrap">
+        <!-- 头部 -->
+        <header >
+            <div class="header-item topic-bg">
+                <a href="javascript:void(0)" class="arrow-left header-back" data-bind="click: back"></a>
+                <span class="f36 cf title">便民服务</span>
+            </div>
+             
+        </header>
+        <!-- 主题内容 -->
+        <div class="content-list work-type top-7">
+            <div id="workType" class="workType-wrap bf">
+            </div>
+        </div>
+    </div>
+    <!-- 办事分类模版 -->
+    <script id="workTypeTmpl" type="text/html">
+        <ul class="clearfix">
+            {{each $data as item index}}
+                {{if index == $data.length -1}}
+                    <li>
+                        <a href="javascript:void(0)" class="{{if index%2 == 0 }} right-aside {{/if}} c3 f30 fl clearfix" data-id="{{item.id}}" data-code="{{item.code}}" data-typename="{{item.name}}" data-type="jmhd">
+                            <span class="list-txt tc fl">{{item.name}}</span>
+                            <span class="span-icon fl tl">
+                                <img class="list-icon" src="./public/wcportal/0.0.1/img/service-hall/{{item.code}}.png" alt="" >
+                            </span>
+                        </a>
+                    </li>
+                {{else}}
+                    <li>
+                        <a href="javascript:void(0)" class="{{if index%2 == 0 }} right-aside {{/if}} c3 f30 fl clearfix" data-id="{{item.id}}" data-code="{{item.code}}" data-typename="{{item.name}}">
+                            <span class="list-txt tc fl">{{item.name}}</span>
+                            <span class="span-icon fl tl">
+                                <img class="list-icon" src="./public/wcportal/0.0.1/img/service-hall/{{item.code}}.png" alt="" >
+                            </span>
+                        </a>
+                    </li>
+                {{/if}}
+
+            {{/each}}
+        </ul>
+        
+    </script>
+
+<script src="../lib/lib.js"></script>
+<script src="../app/service-hall.js"></script>
+</html>

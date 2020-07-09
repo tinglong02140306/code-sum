@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="../../../../" >
+    <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <!-- 添加到主屏幕后，全屏显示 -->
+    <meta name="apple-touch-fullscreen" content="YES"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <!-- iphone 运行在全屏模式 -->
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="viewport" content="width=device-width"/>
+    <title>注册</title>
+    <link rel="stylesheet" type="text/css" href="../css/base.css?__inline"/>
+    <link rel="stylesheet" type="text/css" href="../css/all.css?__inline"/>
+    <link rel="stylesheet" type="text/css" href="../css/pub-secr-register.css?__inline"/>
+</head>
+<body>
+    <div class="wrap">   
+        <!-- 头部 -->
+        <header class="topic-bg">
+            <div class="header-item topic-bg">
+                <a href="javascript:void(0)" class="header-back" data-bind="click: back"></a>
+                <span class="f36 cf title">注册</span>
+            </div>
+        </header>
+        <!-- 主要内容 -->
+        <div class="content top-7">
+            <!-- 表单部分 -->
+            <div class="form-wrap">
+
+                <div class="form-unit-key f30 c9">
+                    <div class="form-unit form-unit-phone undeline unit-pad"> 
+                        <span class="icon"></span>
+                        <input type="text"  placeholder="请填写中国大陆手机号" maxlength="11" class="f30" name="phone" data-bind="value: form.phone">
+                    </div>
+
+                    <div class="form-unit form-unit-code undeline unit-pad"> 
+                        <span class="icon"></span>
+                        <input type="text" placeholder="请输入短信验证码" class="f30" name="verifyCode" data-bind="value: form.verifyCode">
+                        <span class="inl line"></span>
+                        <p class="c-down-text f30 c6" data-bind="click: sendSmsNumClick" data-flag="1">
+                            <span class="time-distr">发送验证码</span>
+                            <!-- <span>重新发送(</span> -->
+                            <span class="time-down-text hide">58</span>
+                            <span class="bracket hide">)</span>
+                        </p> 
+                    </div>
+
+                    <div class="form-unit form-unit-pass unit-pad"> 
+                        <span class="icon"></span>
+                        <input type="password"  placeholder="6-14位密码，建议数字、字母、符号组合" id="showPass" class="f30" name="password" maxlength="14" data-bind="value: form.password">
+                        <input type="text"  placeholder="6-14位密码，建议数字、字母、符号组合" id="hidePass" class="f30 hide" name="password" maxlength="14" data-bind="value: form.password">
+                        <span class="icon-key icon-hide-key inl" data-bind="click: keyShowHideClick" data-flag="0"></span>
+                    </div>
+                </div>
+
+                <!-- 个人信息 -->
+                <div class="form-unit-info f30 c9">
+                    <div class="form-unit form-unit-phone undeline unit-pad"> 
+                        <span class="c3 f30 form-name">用户名</span>
+                        <input type="text"  placeholder="4-20位字母开头，数字、字母、下划线组合" class="f30" name="username" data-bind="value: form.username">
+                    </div>
+                    <div class="form-unit form-unit-phone undeline unit-pad"> 
+                        <span class="c3 f30 form-name">证件号码</span>
+                        <input type="text"  placeholder="请输入和证件类型一致的证件号码" class="f30" name="cardNum" data-bind="value: form.cardNum">
+                    </div>
+                    <div class="form-unit form-unit-phone undeline unit-pad"> 
+                        <span class="c3 form-name f30">姓名</span>
+                        <input type="text"  placeholder="请输入姓名" class="f30" name="name" data-bind="value: form.name">
+                    </div>
+                    <div class="form-unit form-unit-nation unit-pad"> 
+                        <span class="c3 form-name f30">民族</span>
+                        <span class="c3 f30 inl nation-text" name="nation" data-bind="text: form.nation"></span>
+                        <span class="inl arrow-right" data-bind="click: nationSelClick"></span>
+                  </div>
+                </div>
+                <!-- 邀请码 -->
+                <div class="form-unit form-invite-code unit-pad"> 
+                    <span class="c3 f30 form-name">邀请码</span>
+                    <input type="text"  placeholder="邀请码(选填)" class="f30" name="invitedCode" data-bind="value: form.invitedCode">
+                </div>
+            </div>
+
+            <!-- 按钮部分 -->
+            <div class="btn-wrap">
+                <a href="javascript:;" data-bind="click: regClick" data-flag="0" class="unuse">立即注册</a>
+            </div>
+
+            <!-- 复选框用户协议部分 -->
+            <div class="com-agree-wrap">
+                <span class="inl agree-flag right-f"  data-flag ="1" data-bind="click: agreeClick"></span>
+                <span class="inl f24 c80">我已阅读并同意</span>
+                <span class="inl f24 cblue">《皖警e网通用户协议》</span>
+            </div>
+        </div>
+
+        <!-- 民族选择页面 -->
+        <div class="nation-content top-7 f30 c3 hide"> 
+        </div>
+
+    </div>
+</body>
+<script id="nationTmpl" type="text/html">
+    {{each $data as item}}
+        <a href="javascript:;" data-text={{item.text}} data-value="{{item.value}}">
+            <p class="text-item">{{item.text}}</p>
+        </a>
+    {{/each}}
+</script>
+<script src="../lib/lib.js"></script>
+<script src="../app/pub-secr-register.js?__inline"></script>
+</html>

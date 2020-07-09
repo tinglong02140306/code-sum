@@ -1,0 +1,125 @@
+<view>
+	<!--<steps-->
+			<!--activeIndex="{{activeIndex}}" items="{{items}}">-->
+	<!--</steps>-->
+	<!--申请人信息-->
+	<block>
+	<block>
+		<view class="img-list">
+			<view class="img-item" data-idx="people1" onTap="selectImg">
+				<view class="close" data-idx="people1" catchTap="deleteImg" a:if="{{idFaceImg}}"/>
+				<image src="/assets/images/people-1.png" style="width:100%;height:100%" mode="scaleToFill" a:if="{{!idFaceImg}}"/>
+				<image src="{{idFaceImg}}" style="width:100%;height:100%" mode="scaleToFill" a:if="{{idFaceImg}}"/>
+			</view>
+			<view class="img-item" data-idx="people2" onTap="selectImg">
+				<view class="close" data-idx="people2" catchTap="deleteImg" a:if="{{idBackImg}}"/>
+				<image src="/assets/images/people-2.png" style="width:100%;height:100%" mode="scaleToFill" a:if="{{!idBackImg}}"/>
+				<image src="{{idBackImg}}" style="width:100%;height:100%" mode="scaleToFill" a:if="{{idBackImg}}"/>
+			</view>
+		</view>
+	</block>
+	<block>
+		<view>
+			<input-item
+					data-field="userName"
+					clear="{{true}}"
+					value="{{userName}}"
+					placeholder="必填"
+					onInput="onItemInput"
+					onClear="onClear"
+                   disabled="{{true}}"
+			>
+				账户名
+			</input-item>
+			<input-item
+					data-field="certNo"
+					clear="{{true}}"
+					value="{{certNo}}"
+					placeholder="必填"
+					onInput="onItemInput"
+					onClear="onClear"
+					type="idcard"
+					disabled="{{true}}"
+                   
+			>
+				身份证号
+			</input-item>
+			<block>
+				<picker-item
+						placeholder="必填"
+						value="{{startDate}}"
+						data-idx="startDate"
+						onPickerTap="selectDate"
+				>
+					证件签发日期
+				</picker-item>
+				<picker-item
+						placeholder="必填 长期有效可为空"
+						value="{{endDate}}"
+						data-idx="endDate"
+						onPickerTap="selectDate"
+				>
+					证件有效期
+				</picker-item>
+			</block>
+			<input-item
+					data-field="cardNo"
+					clear="{{true}}"
+					value="{{cardNo}}"
+					placeholder="必填"
+					onInput="onItemInput"
+					onClear="onClear"
+					type="number"
+					
+					disabled="{{disableInput}}"
+			>
+				银行卡号
+			</input-item>
+			<picker-item
+					
+					placeholder="请选择发卡银行"
+					value="{{accBank}}"
+					onPickerTap="selectAccBank"
+			>
+				发卡方
+			</picker-item>
+			<input-item
+					data-field="mobile"
+					clear="{{true}}"
+					value="{{mobile}}"
+					placeholder="请填写银行预留手机号"
+					onInput="onItemInput"
+					onClear="onClear"
+					type="number"
+					maxlength="11"
+					disabled="{{disableInput}}"
+			>
+				手机号
+			</input-item>
+			<input-item
+					data-field="captcha"
+					clear="{{true}}"
+					value="{{captcha}}"
+					placeholder="请填写验证码"
+					onInput="onItemInput"
+					onClear="onClear"
+					type="number"
+			>
+				验证码
+				<view slot="extra" catchTap="sendMsg">
+					<button size="mini" type="primary" disabled="{{!enableSmallButton}}">{{smallButtonText}}</button>
+				</view>
+			</input-item>
+		</view>
+	</block>
+	<!--同意办理-->
+	<view class="btn-wrapper">
+		<button class="btn bg-primary" onTap="sign">确认</button>
+	</view>
+  <view style="padding-left:15rpx;">
+      （只能绑定申请人的银行卡号）
+  </view>
+</view>
+
+
+

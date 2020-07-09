@@ -1,0 +1,122 @@
+div {
+    /* 解决 移动端点击div  会显示高亮   */
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.area-cascade-wrap {
+    height: auto;
+    position: relative;
+    /* opacity: 1;
+    z-index: 10000;
+    visibility: visible; */
+    z-index: 0;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.show {
+    opacity: 1;
+    z-index: 10000;
+    visibility: visible;
+}
+
+.pickerExtend div {
+    /* 解决 移动端点击div  会显示高亮   */
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.area-cascade-wrap .gray-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: #eee;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 888;
+    display: block;
+}
+
+.area-cascade-wrap .content {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 889;
+    width: 100%;
+    /* 高度暂时写死 */
+    min-height: 300px;
+    color: black;
+    background: white;
+}
+
+.area-cascade-wrap .content .btn-bar {
+    border-bottom: 1px solid #DCDCDC;
+    font-size: 15px;
+    height: 45px;
+    position: relative;
+    text-align: center;
+    line-height: 45px;
+}
+
+.area-cascade-wrap .content .btn-bar .cancel,
+.area-cascade-wrap .content .btn-bar .ensure {
+    height: 45px;
+    width: 55px;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+}
+
+.area-cascade-wrap .content .btn-bar .cancel {
+    left: 0;
+    color: #666;
+}
+
+.area-cascade-wrap .content .btn-bar .ensure {
+    right: 0;
+    color: #1e83d3;
+}
+
+.area-cascade-wrap .content .btn-bar .title {
+    font-size: 15px;
+    padding: 0 15%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.selected-wrap .item {
+    height: 1.11rem;
+    text-indent: 0.67rem;
+    line-height: 1.11rem;
+}
+
+.selected-wrap {
+    padding: 1.11rem 0;
+    border-bottom: 1px solid #DCDCDC;
+    background-color: #eee;
+    font-size: 0.67rem;
+}
+
+.select-wrapper {
+    height: 200px;
+    overflow-y: auto;
+}
+
+.select-wrap {
+    height: auto;
+    overflow-y: auto;
+}
+
+.select-wrap span {
+    display: inline-block;
+    text-indent: 0.67rem;
+    width: 100%;
+    height: 2.18rem;
+}
+
+
+/* .pickerExtend-show .content {
+    bottom: 0;
+} *

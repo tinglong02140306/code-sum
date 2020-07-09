@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+  <style>.chimee-container{
+		position: relative;
+	  }
+	  .time-ad{
+		background-color: transparent;
+		border:0;
+	  }
+	  .time-ad img{
+		display: block;
+		width: 30px;
+	  }
+	  .time-ad em{
+		position: absolute;
+		right: -7px;
+		top: 35px;
+		width: 60px;
+		text-align: center;
+		font-size: 12px;
+		background-color: rgba(156, 85, 85, 0.66);
+		padding: 0 3px;
+		z-index: -1;
+		border-radius: 5px;
+	  }
+	  .time-ad cm-pp-close{
+		display: none;
+	  }
+	  .time-ad cm-pp-body{
+		padding: 0;
+	  }</style>
+</head>
+<body>
+
+  <div class="chimee-container">
+    <video tabindex="-1"></video>
+  </div>
+  
+  <script src="http://lib.baomitu.com/chimee/0.9.5/index.browser.js"></script>
+  <script src="chimee.js"></script>
+  <script>
+		Chimee.install(chimeePluginControlbar);
+		var player = new Chimee({
+			wrapper: '.chimee-container',
+			src: 'http://cdn.toxicjohann.com/lostStar.mp4',
+			isLive: false,
+			box:'native',
+			autoplay: false,
+			controls: true,
+			plugin: [{
+				"name": "chimeeControl",
+				"children": {
+					play:{}, progressTime:{}, progressBar:{},  volume:false, screen:{},				
+					screen: {
+						icon: {
+							full:'<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="32px" height="32px" viewBox="0 0 32 32" enable-background="new 0 0 32 32" xml:space="preserve">  <image id="image0" width="32" height="32" x="0" y="0"xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAQAAADZc7J/AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElNRQfiBAwRJxmLRNqzAAAARklEQVRIx2P8z4ABIEKMRIkyMDFQCEYNGBYGsDD8J0k9huqB9wIjaT6ggQtGDRgMBuBOytjLxEHpBYyCGm/+HC3WRw3ACgDXuglBWfY5fgAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAxOC0wNC0xMlQxNzozOToyNSswODowMHp2MN0AAAAldEVYdGRhdGU6bW9kaWZ5ADIwMTgtMDQtMTJUMTc6Mzk6MjUrMDg6MDALK4hhAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAABJRU5ErkJggg==" /></svg>',
+							small:'<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="32px" height="32px" viewBox="0 0 32 32" enable-background="new 0 0 32 32" xml:space="preserve">  <image id="image0" width="32" height="32" x="0" y="0"xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAQAAADZc7J/AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElNRQfiBAwRJR2+H3woAAAATUlEQVRIx2P8/58BO2BE4+NQx8RAIaDYABYcDibsJainBt4LowYMBgMY/1NowMB7YdQAqhQokIRAuEDBBKMFyqgBcACrmTDLlSFTuQIAo54JQdc+DdEAAAAldEVYdGRhdGU6Y3JlYXRlADIwMTgtMDQtMTJUMTc6Mzc6MjkrMDg6MDCjH2oaAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDE4LTA0LTEyVDE3OjM3OjI5KzA4OjAw0kLSpgAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAAASUVORK5CYII=" /></svg>',
+						}
+					}
+				}
+			}]
+		}); 
+	  </script>
+  
+</body>
+</html>

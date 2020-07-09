@@ -1,0 +1,34 @@
+.popup{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    background-color: rgba(0, 0, 0, .6);
+    position: fixed;
+    z-index: 8000;
+    top:0;
+    left: 0;
+}
+
+.popup-content-bottom{
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.bottom-pos{
+    -webkit-transform:translateY(100%);
+    transform:translateY(100%);
+}
+
+.popup-content-center{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}

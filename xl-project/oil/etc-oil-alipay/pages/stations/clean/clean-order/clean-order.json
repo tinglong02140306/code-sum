@@ -1,0 +1,8 @@
+{
+    "defaultTitle": "洗车订单支付",
+    "backgroundColor": "#eeeeee",
+    "usingComponents": {
+        "popup": "../../../../components/popup/popup",
+        "perferent-container": "../../components/clean-perferents/perferent-container/perferent-container"
+    }
+}

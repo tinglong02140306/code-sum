@@ -1,0 +1,23 @@
+<view stype="font-size:28rpx;">
+	<view class="desc-area" a:if="{{!list.length}}">
+		<block>
+			<image src="/assets/images/no-punish.png" style="width:150rpx;height:150rpx;" mode="widthFix"/>
+			<view class="title">暂无记录</view>
+			<view class="next-btn" onTap="goBack">返回</view>
+		</block>
+	</view>
+	<view a:if="{{list.length}}">
+		<block a:for="{{list}}">
+			<view class="card" onTap="showDetail" data-item="{{item}}">
+				<view class="row">
+					<view>账单金额</view>
+					<view>{{billStateMap[item["status"]]}}</view>
+				</view>
+				<view class="row">
+					<view>{{item["amount"]}}</view>
+					<view>账单日期{{item["cleared_time"]}}</view>
+				</view>
+			</view>
+		</block>
+	</view>
+</view>

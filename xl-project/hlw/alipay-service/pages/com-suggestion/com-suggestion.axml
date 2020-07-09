@@ -1,0 +1,68 @@
+<view>
+	<block a:if="{{!logined}}">
+		<button class="login-btn" open-type="getAuthorize" onGetAuthorize="onGetAuthorize" onError="onAuthError"
+		        scope="userInfo">请先登录</button>
+	</block>
+	<block a:else>
+		<view class="suggestion_wrap" style="overflow-x:hidden;">
+			<!-- 投诉类型 -->
+			<view class="suggestion_style">
+				<view class="ocr-desc"><text style="color:red;width:20rpx;height:20rpx;line-height:20rpx;margin-right:10px;">*</text>请选择您要投诉的类型（必填）</view>
+			</view>
+			<view class="suggestion_style_box">
+				<radio-group class="radio-group" onChange="radioChange" style="display:flex;flex-wrap:wrap;width:100%;">
+					<label class="radio-box" a:for="{{items}}" key="name">
+						<radio class="radio" value="{{item.name}}" checked="{{item.checked}}" />
+						<text style="color:#3b4257;">{{item.value}}</text>
+					</label>
+				</radio-group>
+			</view>
+			<!-- 投诉内容 -->
+			<view class="suggestion_style">
+				<view class="ocr-desc"><text style="color:red;width:20rpx;height:20rpx;line-height:20rpx;margin-right:10px;">*</text>请详细描述您要投诉的内容（必填）</view>
+			</view>
+			<view class="suggestion_box">
+				<textarea onInput="bindTap" maxlength="300" placeholder="您的意见和建议，我们将努力改进" placeholder-style="font-family: SourceHanSansCN-Light;font-size: 28rpx;color: #a7acbc;">
+					<text class="currentWordNumber">{{currentWordNum}}/{{max}}</text>
+				</textarea>
+			</view>
+			<!-- 输入联系方式 -->
+			<view class="suggestion_style">
+				<text class="ocr-desc">请填写您的联系方式（选填）</text>
+			</view>
+			<input
+					style="height:96rpx;display:flex;align-items:center;padding: 0 30rpx;"
+					placeholder-style="width:688rpx;font-family: SourceHanSansCN-Light;font-size: 28rpx;color: #a7acbc;"
+					value="{{phone}}"
+					placeholder="请填写您要投诉的客服工号"
+					align="left"
+					type="number"
+					maxlength="4"
+					onInput="bindKeyInput"
+			>
+			</input>
+			<!-- 投诉图片 -->
+			<view class="suggestion_style">
+				<text class="ocr-desc">请详提供相关投诉的截图或照片（选填）</text>
+			</view>
+			<view class="img-list"  >
+				<block a:if="{{imgUrl.length}}">
+					<view class="img-item" a:for="{{imgUrl}}">
+						<view class="close" data-idx="{{index}}" catchTap="deleteImg"/>
+						<image src="{{item}}" data-idx="{{index}}" style="width: 175rpx;height:175rpx;border-radius: 10rpx;" mode="aspectFill" catchtap="imgPreview"/>
+					</view>
+				</block>
+				<block a:if="{{imgUrl.length<3}}">
+					<view class="img-item" onTap="upload">
+						<image src="/images/add_pic.png" style="width:175rpx;height:175rpx;border-radius: 10rpx;" mode="aspectFill"/>
+					</view>
+				</block>
+
+			</view>
+			<view style="width:690rpx;padding:0 30rpx;">
+				<button class="btn bg-primary" style="width:690rpx;margin-bottom:20rpx;" onTap="next">提交</button>
+			</view>
+		</view>
+	</block>
+</view>
+

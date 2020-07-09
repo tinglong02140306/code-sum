@@ -1,0 +1,39 @@
+<!--pages/stations/clean/clean-result/clean-result.wxml-->
+<import src="../../../../templates/clean/coupon-item/coupon-item.wxml"></import>
+<navigation-bar>
+    <view class="back-box" background_style="background-color:#EDEDED" bind:tap="onBackClick">
+        <image class="back-image" src="/assets/static/back.png"></image>
+        <view class="navigation-title">洗车结果</view>
+        <image class="back-image"></image>
+    </view>
+</navigation-bar>
+<view class="clean-result-container">
+    <!--支付失败-->
+    <view class="clean-result-box" style="display: {{status=='02'?'flex':'none'}}">
+        <view class="clean-result-box-top">
+            <image class="clean-result-box-image" src="{{icon_fail}}"></image>
+            <text class="clean-result-box-hint">支付失败</text>
+        </view>
+        <view class="clean-result-box-retry-pay theme-button" bind:tap="onRetryPay">重新支付</view>
+    </view>
+    <!--支付成功-->
+    <view class="clean-result-box" style="display: {{status=='01'?'flex':'none'}}">
+        <view class="clean-result-box-top">
+            <image class="clean-result-box-image" src="{{icon_success}}"></image>
+            <text class="clean-result-box-hint">洗车完成</text>
+        </view>
+        <view class="clean-result-box-retry-pay theme-button" bind:tap="onSeeOrder">查看订单详情</view>
+        <view class="clean-result-box-invoice disable-button" bind:tap="onBackHome">返回首页</view>
+    </view>
+    <!--优惠券-->
+    <view class="clean-result-coupon-box" wx:if="{{couponList.length}}">
+        <view class="clean-result-coupon-line"></view>
+        <text class="clean-result-coupon-text">本次消费获得</text>
+        <view class="clean-result-coupon-line"></view>
+    </view>
+    <view class="clean-result-coupon-list" wx:if="{{couponList.length}}">
+        <block wx:for="{{couponList}}" wx:key="coupon_item">
+            <template is="coupon_item" data="{{item}}"></template>
+        </block>
+    </view>
+</view>

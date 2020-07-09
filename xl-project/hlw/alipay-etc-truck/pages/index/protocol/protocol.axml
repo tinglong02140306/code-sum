@@ -1,0 +1,121 @@
+<view class="page">
+        <view class="wrapper">
+
+                <view class="title-content" a:if="{{icbc}}">
+                    <view class="content-wrap">
+                        <view class="item-wrap">
+                            <view class="item account">**** **** **** {{account}}</view>
+                            <view class="item link icbc-item {{ isShowBindBtn ? '': 'hide'}}" data-type="ICBC" onTap="changeCard">换绑银行卡</view>
+                        </view>
+                        <!-- 只有周结才有额度展示 -->
+                        <view class="item money {{week? '':'hide'}}">网商银行授信额度：{{creditlimit}}</view>
+                    </view>
+                    <image src="/assets/icons/ICBC.png" class="bank-img" mode="widthFix"/>
+                </view>
+                
+                <view class="title-content" a:if="{{ccb}}">
+                     <view class="content-wrap">
+                        <view class="item-wrap">
+                            <view class="item account">**** **** **** {{account}}</view>
+                            <view class="item link ccb-item {{ isShowBindBtn ? '': 'hide'}}" data-type="CCB" onTap="changeCard">换绑银行卡</view>
+                        </view>
+                        <!-- 只有周结才有额度展示 -->
+                        <view class="item money {{week? '':'hide'}}" >网商银行授信额度：{{creditlimit}}</view>
+                    </view>
+                    <image src="/assets/icons/CCB.png" class="bank-img" mode="widthFix"/>
+                </view>
+
+                <view class="title-content" a:if="{{abc}}">
+                     <!-- <view class="account">**** **** ****  {{account}}</view> -->
+                     <view class="content-wrap">
+                        <view class="item-wrap">
+                            <view class="item account">**** **** **** {{account}}</view>
+                            <view class="item link abc-item {{ isShowBindBtn ? '': 'hide'}}" data-type="ABC" onTap="changeCard">换绑银行卡</view>
+                        </view>
+                        <!-- 只有周结才有额度展示 -->
+                        <view class="item money {{week? '':'hide'}}">网商银行授信额度：{{creditlimit}}</view>
+                    </view>
+                    <image src="/assets/icons/ABC.png" class="bank-img" mode="widthFix"/>
+                </view>
+
+                <view class="title-content" a:if="{{wsBank}}">
+                    <view class="content-wrap">
+                        <view class="view-account-wrap">
+                            <view class="view-account" onTap="jumpNetPage">
+                                <text>查看账号</text>
+                                <image src="/assets/icons/icon-right.png" class="icon-right"/>
+                            </view>
+                        </view>
+                        <view class="item money {{week? '':'hide'}}" >网商银行授信额度：{{creditlimit}}</view>
+                    </view>
+                   <image src="/assets/icons/net.png" class="bank-img" mode="widthFix"/>
+               </view>
+        </view>
+    <text class="item-title">以下是还款方式提醒\n\n</text>  
+    <text>尊敬的客户，根据您绑定的银行卡的不同以及所选择的日结卡还是周结卡的不同，还款方式也不完全一样。\n\n</text>
+    <text>对于日结账单，会优先从您的银行卡里代扣。\n\n</text>
+    <text>对于周结账单，网商银行用户会优先从网商银行卡里代扣，网商银行卡扣不到时会从支付宝余额扣款。非网商银行用户的周账单会优先从支付宝余额进行扣款，支付宝余额扣不到时会从支付宝绑定的银行卡中进行代扣。\n\n</text>
+    <view class="bottom-line">
+        <text class="item-title">网商银行二类户\n\n</text>
+        <text>
+        日结卡还款:\n
+        将钱存在网商银行账户里，可通过普通银行卡转账。系统会从账户自动代扣\n
+        周结卡还款:\n
+        将钱存在网商银行账户里，或将钱转入支付宝余额。\n\n
+        </text>
+    </view>
+    <view class="bottom-line">
+        <text class="item-title">工商银行一类户\n\n</text>
+        <text>
+        日结卡还款:\n
+        将钱存在工商银行账户里，可通过普通银行卡转账汇入。系统会从账户自动代扣\n
+        周结卡还款:\n
+        将钱转入支付宝余额，或将工商银行卡绑入支付宝银行卡列表，并设置为第一支付顺序。\n\n
+        </text>
+    </view>
+    <view class="bottom-line">
+        <text class="item-title">工商银行二类户\n\n</text>
+        <text>
+        日结卡还款:\n
+        将钱存在工商银行账户里，可通过开通该二类户所使用的银行卡转账汇入。系统会从账户自动代扣\n
+        周结卡还款:\n
+        将钱转入支付宝余额，或将工商银行卡绑入支付宝银行卡列表，并设置为第一支付顺序。\n\n
+        </text>
+    </view>
+    <view class="bottom-line">
+        <text class="item-title">建设银行一类户\n\n</text>
+        <text>
+        日结卡还款:\n
+        将钱存在建设银行一类账户里，可通过普通银行卡转账汇入。系统会从账户自动代扣\n
+        周结卡还款:\n
+        将钱转入支付宝余额，或将建设银行卡绑入支付宝银行卡列表，并设置为第一支付顺序。\n\n
+        </text>
+    </view>
+    <view class="bottom-line">
+        <text class="item-title">建设银行二类户\n\n</text>
+        <text>
+        日结卡还款:\n
+        暂无\n
+        周结卡还款:\n
+        暂无\n\n
+        </text>
+    </view>
+    <view class="bottom-line">
+        <text class="item-title">农业银行一类户\n\n</text>
+        <text>
+        日结卡还款:\n
+        将钱存在农业银行账户里，可通过普通银行卡转账汇入。系统会从账户自动代扣\n
+        周结卡还款:\n
+        将钱转入支付宝余额，或将农业银行卡绑入支付宝银行卡列表，并设置为第一支付顺序。\n\n
+        </text>
+    </view>
+    <view class="bottom-line">
+        <text class="item-title">农业银行二类户\n\n</text>
+        <text>
+        日结卡还款:\n
+        将钱存在农业银行二类账户里，可通过开通该二类户所使用的银行卡转账汇入。系统会从账户自动代扣\n
+        周结卡还款:\n
+        将钱转入支付宝余额，或将农业银行卡绑入支付宝银行卡列表，并设置为第一支付顺序。\n\n
+        </text>
+    </view>
+</view>

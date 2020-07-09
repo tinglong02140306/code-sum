@@ -1,0 +1,88 @@
+.consume-list-template-container {
+    width: 100%;
+    background-color: #ffffff;
+}
+
+.consume-list-template-box {
+    width: 100%;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 32rpx;
+}
+
+.consume-list-template-select {
+    width: 36rpx;
+    height: 36rpx;
+    margin-right: 28rpx;
+}
+
+.consume-list-template-line {
+    /*margin-left: 132rpx;*/
+    margin-right: 0;
+    height: 2rpx;
+    background-color: #F2F2F2;
+}
+
+.consume-template-item-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+    overflow: hidden;
+}
+
+.consume-template-item-center text {
+    line-height: 40rpx;
+}
+
+.consume-template-item-right {
+    margin-top: 60rpx;
+}
+
+.consume-template-station {
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 32rpx;
+    text-align: left;
+    width: 100%;
+    font-family: PingFang-SC-Medium;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.consume-template-oil {
+    margin-top: 6rpx;
+    color: rgba(0, 0, 0, 0.45);
+    font-size: 26rpx;
+    text-align: left;
+    font-family: PingFangSC-Regular;
+}
+
+.consume-template-money {
+    color: rgba(0, 0, 0, 1);
+    font-size: 28rpx;
+    text-align: right;
+    font-family: PingFang-SC-Regular;
+}
+
+.consume-template-detail-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    box-sizing: border-box;
+}
+
+.consume-template-invoice {
+    border-radius: 6rpx;
+    background-color: rgba(0, 0, 0, 0.05);
+    color: rgba(0, 0, 0, 0.65);
+    font-size: 24rpx;
+    text-align: left;
+    font-family: PingFangSC-Regular;
+    padding: 4rpx 8rpx;
+}

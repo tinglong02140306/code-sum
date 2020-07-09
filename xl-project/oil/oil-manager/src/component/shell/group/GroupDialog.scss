@@ -1,0 +1,192 @@
+.terminal-group-dialog-box {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.terminal-group-name-box {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding-left: 20px;
+}
+
+.terminal-group-dialog-container {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-around;
+}
+
+.terminal-group-dialog-price-box{
+  width: 92%;
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: column;
+  border: 1px solid #e8e8e8;
+  border-radius: 5px;
+  padding: 20px 0;
+}
+
+.terminal-group-dialog-data-container{
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  margin: 20px 0 0 0;
+}
+
+.terminal-group-dialog-xl-container{
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0 10px 0;
+}
+
+.terminal-group-dialog-xl-select{
+  font-size: 20px;
+}
+
+.terminal-group-dialog-price-formula{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  span {
+    color: red;
+    font-size: 15px;
+    margin-right: 2px;
+  }
+}
+
+.terminal-group-dialog-separation {
+  width: 2px;
+  height: 100px;
+  background-color: #cfcdcdfd;
+  margin: 0 6px 0 14px;
+}
+
+.terminal-group-dialog-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.terminal-group-dialog-item-container {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.terminal-group-dialog-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.terminal-group-dialog-item-label {
+  width: 130px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  font-weight: 600;
+  color: black;
+  margin: 0 6px 4px 0;
+
+  span {
+    color: red;
+    margin-right: 2px;
+  }
+}
+
+.terminal-group-dialog-item-text-area-label {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  font-weight: 600;
+  color: black;
+  margin: 0 6px 4px 0;
+  span {
+    color: red;
+    margin-right: 2px;
+  }
+}
+
+.terminal-group-dialog-item-title-label{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  font-weight: 600;
+  color: black;
+  margin:0px 20px 20px 20px;
+  letter-spacing: 1px;
+  align-self: flex-start;
+}
+
+.terminal-group-dialog-item-input {
+  width: 90px;
+}
+
+.terminal-group-dialog-item-input-text-area {
+  width: 400px;
+}
+
+.terminal-group-dialog-item-hint {
+  height: 22px;
+  color: red;
+  padding-left: 135px;
+  margin: 1px 0;
+}
+
+.terminal-group-dialog-group-hint {
+  padding-left: 70px;
+}
+
+.terminal-group-separation {
+  width: 1px;
+  height: 160px;
+  box-sizing: border-box;
+  background-color: #e8e8e8;
+  align-self: center;
+}
+
+.terminal-group-row-separation {
+  align-self: center;
+  width: 70%;
+  height:1px;
+  box-sizing: border-box;
+  background-color: #e8e8e8;
+}
+
+.terminal-group-price-title{
+  width: auto;
+  margin: 0 0 10px 20px;
+  align-self: flex-start;
+  letter-spacing: 1px;
+}
+
+.terminal-group-data-hint{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-weight: 500;
+  margin: 12px 0 0 10px;
+  div{
+    flex: 1;
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.6);
+    text-align: center;
+  }
+}

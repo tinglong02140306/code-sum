@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "modal": "mini-antui/es/modal/index"
+  },
+  "defaultTitle": "在线签约"
+}

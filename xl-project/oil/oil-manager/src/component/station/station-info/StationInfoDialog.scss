@@ -1,0 +1,230 @@
+.station-info-dialog-container{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  box-sizing: border-box;
+  //border: 1px solid #e8e8e8;
+}
+.station-info-dialog-left{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 0;
+  padding: 0;
+}
+.station-info-dialog-line{
+  margin: 10px 30px 20px 40px;
+  width: 1px;
+  background-color: #e8e8e8;
+  height: 280px;
+}
+.station-info-dialog-item{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  margin-bottom: 8px;
+}
+.station-info-dialog-item-content{
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  margin-bottom: 4px;
+  .ant-select{
+    width: 250px;
+  }
+  input{
+    width: 250px;
+  }
+}
+.station-info-dialog-item-content-check{
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 4px;
+}
+.station-info-dialog-oil-check{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 4px;
+  //width: 320px;
+  height: 50px;
+  border: 1px solid #e8e8e8;
+}
+.oil-check-item{
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+}
+.oil-check-line{
+  margin: 5px 0;
+  width: 250px;
+  background-color: #e8e8e8;
+  height: 1px;
+}
+.station-info-cascader{
+  width: 250px;
+}
+.station-info-dialog-item-label{
+  width: 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  font-weight: 600;
+  margin: 0 4px 0 0;
+  span{
+    color: red;
+  }
+}
+.station-info-oil-detail-label{
+  width: 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  font-weight: 600;
+  margin: 0 4px 0 0;
+  span{
+    color: red;
+  }
+}
+.station-info-dialog-item-label2{
+  width: 90px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  font-weight: 600;
+  margin: 0 4px 0 0;
+  span{
+    color: red;
+  }
+}
+.station-info-dialog-placeholder{
+  align-self: flex-start;
+  margin: 0 0 2px 104px;
+  color: red;
+}
+
+.road-info-container{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 16px;
+  background-color: #f7f7f7;
+}
+.road-info-top-container{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  background-color: white;
+  padding:10px 0;
+  margin-bottom: 10px;
+}
+.road-info-form{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.road-info-form-item{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  label{
+    font-weight: 600;
+  }
+}
+
+.road-info-button{
+  margin: 4px;
+}
+
+.road-info-table-container{
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #f7f7f7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.road-info-table{
+  width: 100%;
+  background-color: white;
+  box-sizing: border-box;
+  table{
+    thead{
+      th{
+        font-weight: 600;
+        letter-spacing: 1px;
+      }
+    }
+  }
+}
+
+.road-info-item-input{
+  width: 200px;
+}
+
+.payment-dialog-container{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  //align-items: center;
+  box-sizing: border-box;
+}
+
+.payment-table-container{
+  //width: 100%;
+  box-sizing: border-box;
+  background-color: #f7f7f7;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  text-align: left;
+  align-items: center;
+}
+.payment-table{
+  width: 100%;
+  background-color: white;
+  box-sizing: border-box;
+  table{
+    thead{
+      th{
+        text-align: left;
+        font-weight: 600;
+        letter-spacing: 1px;
+      }
+    }
+  }
+}
+
+.payment-info-button-box{
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.payment-info-button{
+  margin: 10px;
+  width: 80px;
+  height: 25px;
+  //background-color: rgba(50, 107, 230, 1);
+}

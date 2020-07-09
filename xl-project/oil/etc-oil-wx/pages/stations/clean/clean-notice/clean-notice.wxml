@@ -1,0 +1,29 @@
+<!--pages/stations/clean/clean-notice/clean-notice.wxml-->
+<navigation-bar>
+    <view class="back-box" background_style="background-color:#EDEDED" bind:tap="onBackClick">
+        <image class="back-image" src="/assets/static/back.png"></image>
+        <view class="navigation-title">注意事项</view>
+        <image class="back-image"></image>
+    </view>
+</navigation-bar>
+<view class="clean-notice-container">
+
+<!--    <view class="clean-notice-alert-box">-->
+<!--        <image class="clean-notice-alert-icon"></image>-->
+<!--        <view class="clean-notice-alert-text-box">-->
+<!--            <text class="clean-notice-alert-text-title">安全提醒</text>-->
+<!--            <view class="clean-notice-alert-text-sub"><text style="color: {{'#FFE4B7'}}">确认完以下操作</text>，保障洗车过程中车辆安全，洗车过程中请勿移动车辆。</view>-->
+<!--        </view>-->
+<!--    </view>-->
+    <view class="clean-notice-items-box">
+        <view class="clean-notice-items-row">
+            <image class="clean-notice-items-big" src="/assets/static/clean-notice.png"></image>
+        </view>
+        <text class="clean-notice-items-title">确认完成以上操作，保障洗车过程中车辆安全，洗车过程中请勿移动车辆。</text>
+    </view>
+    <view class="clean-notice-btns" style="padding-bottom: {{isIphoneX?64:24}}rpx">
+<!--        <login-status bind:click="onConfirmClick" openid="{{openid}}">-->
+            <view class="clean-notice-btn-item theme-button" bind:tap="onConfirmClick"> 启动洗车 </view>
+<!--        </login-status>-->
+    </view>
+</view>

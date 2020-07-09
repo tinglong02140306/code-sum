@@ -1,0 +1,207 @@
+.etc-card-type-container {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    width: 700rpx;
+    height: 200rpx;
+    border-radius: 12rpx;
+    background-color: rgba(66, 74, 129, 1);
+    box-shadow: 0rpx 2rpx 20rpx 0rpx rgba(0, 0, 0, 0.05);
+    margin: 30rpx 25rpx 0 25rpx;
+}
+
+.etc-card-type-bg-image {
+    width: 710rpx;
+    height: 340rpx;
+    position: relative;
+    left: 0;
+    top: 0;
+    z-index: 100;
+}
+
+.etc-card-type-content {
+    width: 100%;
+    position: absolute;
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    background-color: transparent;
+    box-sizing: border-box;
+    align-items: flex-end;
+    justify-content: center;
+    right: 0;
+    bottom: 0;
+    padding: 32rpx 32rpx 32rpx 32rpx;
+}
+
+.etc-card-type-title-view {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.etc-card-type-logo-img {
+    width: 94rpx;
+    height: 92rpx;
+    margin-right: 32rpx;
+}
+
+.etc-card-type-title-img {
+    width: 370rpx;
+    height: 41rpx;
+}
+
+.etc-card-type-status-img {
+    padding-right: 13rpx;
+    width: 100rpx;
+    height: 40rpx;
+    position: absolute;
+    right: 0;
+}
+
+.etc-card-type-box {
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+
+.etc-card-type {
+    width: 178rpx;
+    height: 58rpx;
+}
+
+.etc-card-type-number {
+    /*font-size: 14px;*/
+    /*color: #cf7e22;*/
+    font-size: 40rpx;
+    color: #ffffff;
+    text-align: right;
+    font-family: PingFangSC-Semibold;
+}
+
+.etc-card-type-from {
+    font-size: 10px;
+    color: white;
+    letter-spacing: 2rpx;
+}
+
+.etc-card-type-contents {
+    width: 100%;
+    /*position: absolute;*/
+    /*z-index: 200;*/
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(66, 74, 129, 1);
+    border-radius: 12rpx;
+    box-sizing: border-box;
+    align-items: flex-end;
+    justify-content: center;
+    right: 0;
+    bottom: 0;
+    padding: 30rpx;
+}
+
+.etc-card-type-name {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 42rpx;
+    text-align: left;
+    font-family: PingFangSC-Semibold;
+    width: 100%;
+}
+
+.etc-card-plate-no {
+    width: 100%;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 26rpx;
+    text-align: right;
+    font-family: PingFang-SC-Medium;
+}
+
+.etc-card-type-number {
+    width: 100%;
+    color: rgba(255, 255, 255, 1);
+    font-size: 40rpx;
+    text-align: right;
+    font-family: PingFangSC-Semibold;
+}
+
+.etc-card-type-container1 {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    width: 700rpx;
+    height: 362rpx;
+    border-radius: 12rpx;
+    background-color: transparent;
+    box-shadow: 0rpx 2rpx 20rpx 0rpx rgba(0, 0, 0, 0.05);
+    margin: 30rpx;
+}
+
+.etc-card-type-contents1 {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(66, 74, 129, 1);
+    box-sizing: border-box;
+    align-items: flex-end;
+    justify-content: center;
+    right: 0;
+    bottom: 0;
+    padding: 30rpx;
+    border-top-right-radius: 12rpx;
+    border-top-left-radius: 12rpx;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.etc-card-type-click {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /*justify-content: space-around;*/
+    justify-content: center;
+    width: 100%;
+    /*height: 105rpx;*/
+    background-color: white;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    border-bottom-right-radius: 12rpx;
+    border-bottom-left-radius: 12rpx;
+}
+
+.etc-card-type-unbind {
+    color: rgba(119, 119, 119, 1);
+    font-size: 32rpx;
+    text-align: center;
+    font-family: PingFangSC-Regular;
+    width: 348rpx;
+}
+
+.etc-card-type-change {
+    color: rgba(119, 119, 119, 1);
+    font-size: 32rpx;
+    text-align: center;
+    font-family: PingFangSC-Regular;
+    width: 348rpx;
+}
+
+.etc-card-type-click-line {
+    width: 2rpx;
+    height: 70rpx;
+    background-color: #E6E6E6;
+}
+
+.etc-card-type-number1 {
+    width: 100%;
+    color: rgba(255, 255, 255, 1);
+    font-size: 40rpx;
+    text-align: right;
+    font-family: PingFangSC-Semibold;
+    box-sizing: border-box;
+    margin: 10rpx 0rpx 52rpx 0rpx;
+}

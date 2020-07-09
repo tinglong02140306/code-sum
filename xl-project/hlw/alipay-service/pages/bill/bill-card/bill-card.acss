@@ -1,0 +1,71 @@
+.wrapper{
+  width: 100vw;
+  height: 100vh;
+  box-sizing: border-box;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  background-color: rgb(241,241,246);
+}
+.inner-wrapper{
+  margin-top: 62rpx;
+  margin-left: 24rpx;
+  margin-right: 24rpx;
+}
+.card{
+  width: 100%;
+  height: 258rpx;
+  position: relative;
+  margin-bottom: 40rpx;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAArIAAAECCAMAAAA1hcRaAAAAP1BMVEUAAAAtjf0tjf0tjf0tjf0tjf0tjf0tjf0tjf0tjf0tjf0zmP9Gof4tjf1EoP43mv89nf5Anv46m/80mf8xk/7UGfH8AAAAC3RSTlMA6pOATBDGxa1YV+CNA4cAAAUjSURBVHja7N1dbqMwGIZRSNJfMCkt+1/rJHaapjOpejl+pXPW8Mj6MMYMXw67x7FAd8bH3WH4x8NernRs3D8M37ycgt2O6zJfLccJ+rBt52hfhhu7U7Dr/N3yMUEvztHuhqvnUt5PkWqWjp2ifb5ZY9f5jnWCjlzX2dda7D1vE3SklNe6VzDWqeCu9wn6sZXxvG+wL9v8I9sG9KSU/SnZsazzj5YJuvGxlXEYDp+LrHGW/pVyGHbleCrTaECEreyGpzoXGA2IsJWnYSzLPBsNCFHGoZT5F16C0Y9S/krWSzD6dk3WExgZWrKWWWK0ZC2zxGjJWmaJ0ZK1zBKjJWuZJcY1WXuzZLhJ1iswEtwm66QBAS7JegAjRUvWZECMlqzJgBgtWZMBMVqyJgNifCbrbQIhvpL93QT/X0vWMEuMlqxhlhgtWcMsMS7J2pklxTVZp7nI0JL1/EWMu8m6uZN+tWRtGRCjJWvLgBiSJUxL1i4XMSRLGMkSRrKEuSTr+CEpJEsYyRLGLEsYyRJGsoSRLGGcMSCMZAnjvCxhfJVAGN9+EcYXtoRxjwFh3BZDGHdyEcbNh4Rxvyxh3OJNGP9KIIw/0hDGf78I4++KhPEPW8L4UzhharLmAnLUZJ3iIkdN1nsEctRkPXyRoyZrkSVHTdYiS46arEWWHDVZiyw5arIWWXLUZO3JkqMm68UXOWqyTheQoybr2YscNVljATlqssYCctRkjQXkqMm6n5PeHY/vb+u6LstSkzXI/mHXTm7kiIEgihqgAMli+e+rgNGhLxr0cuiqAN6z4SORXLivc69j5OEnWc9e3NO5H7W+lOzw7MV15hr58Z9kFcvdzJ/x+mayw2UBV3jM19+TVSw3so8kT5JVLHdxrpE8T1ax3MO5krySrJMXd3Cu5NNkD8XydSt5OVlvXlxuj7yRrH8FXGyO5J1kHby41kreS9ZSwJXmyLvJGrFcaCVvJ2vEcpk58kGyrra4yk4+TvawE/B1K58lK1gucR75MFnBcoU58mmydlieu0mx/5L9A1+3E8lSZEeyNNmRLE12JEuTHcnSZEeyNJmRLE3mkCxNzhHJ0uSIZGmyIlma7EiWJjOSpcqQLFVWJEuTGclSZUiWKiuSpcmMZKkyJEuVHclSZUiWKiuSpckZyVJlSZYqZyRLlSVZqpyRLFWWZOkyJEuVHclS5ZAsVWYkS5UlWboMyVJlRrJUOSRLlyFZqsxIlipLsnQZkqXKGclSZUuWLodk6TIkS5UzkqXKlixdlmTpckiWLkOydIlkqTIlSxfJUmZLli5LsnQ5JEsXyVJGspQZkqWLZCkjWcpIljKJZKmSSJYqiWSpYpeljGT5294dFEEUwlAQdBDywb/XNbAGpqpbwxwhL0ayxEiWGG8MiJEsMZIlxq8EYvz9IsYPW2IkS41kiXGTixiXD4lxX5YYV7yJsZVAjUUaYux+EWNdkRgbttRYCidmJUvLkSwxI1laPsnSciRLzEiWlpUsLUeyxHySpeVKlpiRLC0rWVqeZIlZydLyJEvMSpaWJ1liVrLEjGRpuZIlZiRLy5EsMStZYkaytBzJErOSJWYkS8uRLDFXssSsZIn5JEvLG8nSckaytBzJEnMlS8yVLDFXssRcyRJzJUvMlSwxZyRLyxnJ0vI+yRKzkiXmSpaYM5IlZiVLzBnJErOSJeaMZIm5I1la3kqWmLeSJeatZIl5O5Il5n6SJebsSJaY841kiTk7kiXm3W/+JQspkiXmB671OmyJk2WLAAAAAElFTkSuQmCC);
+  background-size: 100% 100%;
+}
+.card-title{
+  width: 100%;
+  display: flex;
+  box-sizing: border-box;
+  padding-top: 52rpx;
+  padding-bottom: 70rpx;
+  align-items: center;
+}
+.card-title-icon{
+  width: 38rpx;
+  height: 28rpx;
+  margin-left:46rpx;
+  margin-right:14rpx
+}
+.card-title-text{
+  color: white;
+  font-family: SourceHanSansCN-Light;
+  font-size: 28rpx;
+  letter-spacing: 5rpx;
+}
+.card-title-plate{
+  margin-left: 178rpx;
+  font-family: SourceHanSansCN-Normal;
+  color: white;
+  font-size: 40rpx;
+}
+.card-no{
+  font-family: SourceHanSansCN-Normal;
+  font-size: 32rpx;
+  color: white;
+  padding-left: 46rpx;
+}
+.add-btn{
+  width: 100%;
+  height: 122rpx;
+  font-family: SourceHanSansCN-Light;
+  font-size: 32rpx;
+  color: rgb(59,66,87);
+  border: 2rpx solid rgb(235,235,235);
+  border-radius: 10rpx;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.add-icon{
+  width: 38rpx;
+  height: 38rpx;
+  margin-right: 24rpx;
+}

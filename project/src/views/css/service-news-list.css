@@ -1,0 +1,35 @@
+.wrap {
+	height: 100%;
+}
+.news-list {
+	background: #fff;
+}
+.news-list li {
+	background: url(./public/wcportal/0.0.1/img/common/border-icon.png) 0 bottom repeat-x;
+}
+
+.news-list li:last-child {
+	/*background: none;*/
+}
+
+.news-list li a {
+	display: block;
+	padding: 0.37rem 0.53rem;
+	height: 100%;
+}
+
+.news-list li .title {
+	font-size: 0.66rem;
+    color: #333;
+    line-height: 1.2rem;
+}
+
+.news-list li .time {
+	font-size: 0.53rem;
+    line-height: 1.02rem;
+    color: #808080;
+}
+
+.news-list li.zcjd-item .time {
+	text-indent: .4rem;
+}

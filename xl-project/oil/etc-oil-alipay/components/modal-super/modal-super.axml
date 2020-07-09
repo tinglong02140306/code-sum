@@ -1,0 +1,7 @@
+<view class="modal-super-container" a:if="{{show}}" onTap="onModalClick" catchTouchMove="preventTouchMove">
+    <view class="modal-super-box" animation="{{animation_opacity}}">
+        <view class="modal-slot-container" catchTap="onContentClick" animation="{{animation}}">
+            <slot></slot>
+        </view>
+    </view>
+</view>

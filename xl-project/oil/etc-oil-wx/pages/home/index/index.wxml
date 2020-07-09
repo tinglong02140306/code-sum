@@ -1,0 +1,225 @@
+<!--
+ * @Author: sunmingmao
+ * @Date: 2020-03-26 15:42:07
+ * @LastEditors: sunmingmao
+ * @LastEditTime: 2020-04-30 10:23:12
+ * @Description: 首页
+ -->
+<import src="/templates/home/loading/loading.wxml"></import>
+<view class="home-container">
+    <scroll-list bind:refresh="onRefresh" 
+        bind:loadmore="onLoadMore" 
+        load_status="{{load_status}}"
+        show_finish="{{false}}" 
+        refresher_triggered="{{refresher}}">
+        <view class="home-data-container" wx:if="{{loading==2}}">
+            <!--天气 国标价-->
+            <view class="home-weather-container">
+                <!--天气-->
+                <view class="home-weather-box">
+                    <text class="home-weather-city">{{city}}</text>
+                    <image class="home-weather-pic" src="{{weathers.weather_pic}}"></image>
+                    <text class="home-weather-temperature" >{{weathers.temperature||'--'}}℃</text>
+                    <text class="home-weather-sd-text">洗车指数</text>
+                <text class="home-weather-sd" style="color: {{weathers.color}};">{{weathers.wash_car_index||'--'}}</text>
+                </view>
+                <!--国标价-->
+                <view class="home-price-box">
+                    <image class="home-price-pic" src="/assets/static/home-oil-price.png"></image>
+                    <text class="home-price-text">国标油价:</text>
+                    <!--各油品类型价格-->
+                    <swiper class="home-price-swiper" vertical autoplay circular>
+                        <block wx:for="{{gboilScroll}}" wx:key="price" wx:for-item="item">
+                            <swiper-item class="home-price-swiper-item">
+                                <view class="home-price-item">
+                                    <block wx:for="{{item}}" wx:key="single" wx:for-item="single">
+                                        <text class="home-price-item-type">{{single.oil_type}}</text>
+                                        <text class="home-price-item-price">￥{{single.gb_price}}</text>
+                                    </block>
+                                </view>
+                            </swiper-item>
+                        </block>
+                    </swiper>
+                    <!-- <text bind:tap="onRemindClick">油价提醒</text> -->
+                </view>
+            </view>
+            <!--附近服务-->
+            <view class="home-server-container" wx:if="{{nearClean}}">
+                <text class="home-server-text">附近服务</text>
+                <view class="home-server-container-vertical">
+                    <!--油站详情-->
+                        <view class="home-server-box card-box" bind:tap="onOilDetailClick">
+                            <!--油站logo-->
+                            <image class="home-server-logo" src="{{near.station_photo_url||icon_default_station}}" mode="aspectFill"></image>
+                            <!--详情信息-->
+                            <view class="home-server-station-info">
+                                <text class="home-server-station-name">{{near.name}}</text>
+                                <text class="home-server-station-address">{{near.address}}</text>
+                                <view class="home-server-station-price-box">
+                                    <!--油品类型-->
+                                    <picker mode="selector" wx:if="{{near.station_price&&near.station_price.length}}" catch:tap="onOilNoPicker" range="{{nearPrices}}" range-key="oil_no" value="{{nearCurrentIndex}}" catchchange="onOilNoChange">
+                                        <view class="home-server-station-type">
+                                            <text class="home-server-station-type-text">{{nearOilType}}</text>
+                                            <image class="home-server-station-type-image" src="/assets/static/drop-down-pull.png"></image>
+                                        </view>
+                                    </picker>
+                                    <!--油品价格-->
+                                    <view class="home-server-station-price" wx:if="{{nearCurrent}}">
+                                        <text class="home-server-station-price-mark">￥</text>
+                                        <text class="home-server-station-price-text">{{nearCurrent.xl_price?nearCurrent.xl_price:nearCurrent.list_price?nearCurrent.list_price:'--'}}</text>
+                                    </view>
+                                    <!--价格差-->
+                                    <view class="home-server-station-diff" wx:if="{{nearCurrent&&nearCurrent.oil_price_difference}}">
+                                        <image class="home-server-station-diff-image" src="/assets/static/station-item-down.png"></image>
+                                        <text class="home-server-station-diff-text">已降￥{{nearCurrent.oil_price_difference}}</text>
+                                    </view>
+                                </view>
+                                <view class="home-server-station-price-oil theme-button" catch:tap="onOilClick">立即加油</view>
+                            </view>
+                            <!--距离最近-->
+                            <view class="home-server-station-near">距离最近</view>
+                        </view>
+                    <!--洗车详情-->
+<!--                    <login-status style="display: inline-block" openid="{{open_id}}" catch:click="onCleanDetailClick" wx:if="{{nearClean}}">-->
+                        <view class="home-server-box card-box" bind:tap="onCleanDetailClick">
+                            <!--油站logo-->
+                            <image class="home-server-logo" src="{{nearClean.photo_url||icon_default_wash}}" mode="aspectFill"></image>
+                            <!--详情信息-->
+                            <view class="home-server-station-info">
+                                <text class="home-server-station-name">{{nearClean.washer_name}}</text>
+                                <text class="home-server-station-address">{{nearClean.washer_address}}</text>
+                                <view class="home-server-station-price-box">
+                                    <!--油品价格-->
+                                    <view class="home-server-station-price" wx:if="{{nearClean.washer_price&&nearClean.washer_price}}">
+                                        <text class="home-server-station-price-mark">￥</text>
+                                        <text class="home-server-station-price-text">{{nearClean.washer_price||'--'}}</text>
+                                        <text class="home-server-station-price-mark">/次</text>
+                                    </view>
+                                </view>
+                                <view class="home-server-station-price-oil theme-button" catch:tap="onCleanClick">立即洗车</view>
+                            </view>
+                            <!--距离最近-->
+                            <view class="home-server-station-near">距离最近</view>
+                        </view>
+<!--                    </login-status>-->
+                </view>
+            </view>
+
+            <!--广告位-->
+            <view class="home-banner-container" wx:if="{{banners&&banners.length}}">
+                    <swiper class="home-banner-swiper" autoplay circular bindchange="onBannersChange">
+                        <block wx:for="{{banners}}" wx:key="banners">
+                            <swiper-item class="home-banner-swiper-item" bind:tap="onBannerItemClick" data-item="{{item}}">
+                                <image class="home-banner-swiper-item-image" src="{{item.url}}"></image>
+                            </swiper-item>
+                        </block>
+                    </swiper>
+                    <view class="home-banner-dots" wx:if="{{banners&&banners.length>1}}">
+                        <block wx:for="{{banners}}" wx:key="banners_dots">
+                            <view class="{{banner_current==index?'home-banner-dots-item-check':'home-banner-dots-item'}}"></view>
+                        </block>
+                    </view>
+            </view>
+            <!--银行优惠-->
+            <view class="home-bank-container" wx:if="{{rights&&rights.length}}">
+                <text class="home-bank-text">优惠活动</text>
+                <view class="home-bank-list">
+                    <block wx:for="{{rights}}" wx:key="bank" wx:for-item="item">
+                        <view class="home-bank-list-item card-box"  >
+                            <image class="home-bank-list-item-image" src="{{item.equity_logo}}"></image>
+                            <view class="home-bank-list-item-info">
+                                <view class="home-bank-list-item-info-top">
+                                    <text class="home-bank-list-item-info-top-text">{{item.name}}</text>
+                                    <!-- <text class="home-bank-list-item-info-top-mark">加油</text> -->
+                                </view>
+                                <view class="home-bank-list-item-info-bottom">
+                                    <block wx:for="{{item.desc_list}}" wx:key="rights" wx:for-item="desc">
+                                        <text class="home-bank-list-item-info-bottom-item">{{desc}}</text>
+                                    </block>
+                                </view>
+                            </view>
+                            <view class="home-bank-list-item-see" data-item="{{item}}" bind:tap="onRightItemClick">去查看</view>
+                        </view>
+                    </block>
+                </view>
+            </view>
+        </view>
+        <!--加载中-->
+        <view wx:if="{{loading==1}}"> 
+            <template is="home-loading"></template>
+        </view>
+    </scroll-list>
+    <view class="home-online-serve">
+        <image class="home-online-image" src="/assets/static/home-serve.png"></image>
+        <text>在线客服</text>
+        <button class="home-online-serve-btn" open-type="contact"></button>
+    </view>
+</view>
+
+
+<!--//附近服务横向scroll-->
+<!--<view class="home-server-container" wx:if="{{near}}">-->
+<!--    <text class="home-server-text">附近服务</text>-->
+<!--    <scroll-view class="home-server-container-scroll" scroll-x="true" style=" white-space: nowrap; display: flex" scroll-with-animation >-->
+<!--        &lt;!&ndash;油站详情&ndash;&gt;-->
+<!--        <login-status style="display: inline-block" openid="{{open_id}}" catch:click="onOilDetailClick" wx:if="{{near}}">-->
+<!--            <view class="home-server-box card-box">-->
+<!--                &lt;!&ndash;油站logo&ndash;&gt;-->
+<!--                <image class="home-server-logo" src="{{near.station_photo_url||icon_default_station}}" mode="aspectFill"></image>-->
+<!--                &lt;!&ndash;详情信息&ndash;&gt;-->
+<!--                <view class="home-server-station-info">-->
+<!--                    <text class="home-server-station-name">{{near.name}}</text>-->
+<!--                    <text class="home-server-station-address">{{near.address}}</text>-->
+<!--                    <view class="home-server-station-price-box">-->
+<!--                        &lt;!&ndash;油品类型&ndash;&gt;-->
+<!--                        <picker mode="selector" wx:if="{{near.station_price&&near.station_price.length}}" catch:tap="onOilNoPicker" range="{{nearPrices}}" range-key="oil_no" value="{{nearCurrentIndex}}" catchchange="onOilNoChange">-->
+<!--                            <view class="home-server-station-type">-->
+<!--                                <text class="home-server-station-type-text">{{nearOilType}}</text>-->
+<!--                                <image class="home-server-station-type-image" src="/assets/static/drop-down-pull.png"></image>-->
+<!--                            </view>-->
+<!--                        </picker>-->
+<!--                        &lt;!&ndash;油品价格&ndash;&gt;-->
+<!--                        <view class="home-server-station-price" wx:if="{{nearCurrent&&nearCurrent.list_price}}">-->
+<!--                            <text class="home-server-station-price-mark">￥</text>-->
+<!--                            <text class="home-server-station-price-text">{{nearCurrent.list_price||'&#45;&#45;'}}</text>-->
+<!--                        </view>-->
+<!--                        &lt;!&ndash;价格差&ndash;&gt;-->
+<!--                        <view class="home-server-station-diff" wx:if="{{nearCurrent&&nearCurrent.oil_price_difference}}">-->
+<!--                            <image class="home-server-station-diff-image" src="/assets/static/station-item-down.png"></image>-->
+<!--                            <text class="home-server-station-diff-text">已降￥{{nearCurrent.oil_price_difference}}</text>-->
+<!--                        </view>-->
+<!--                    </view>-->
+<!--                    <login-status openid="{{open_id}}" catch:click="onOilClick">-->
+<!--                        <view class="home-server-station-price-oil theme-button">立即加油</view>-->
+<!--                    </login-status>-->
+<!--                </view>-->
+<!--                &lt;!&ndash;距离最近&ndash;&gt;-->
+<!--                <view class="home-server-station-near">距离最近</view>-->
+<!--            </view>-->
+<!--        </login-status >-->
+<!--        &lt;!&ndash;洗车详情&ndash;&gt;-->
+<!--        <login-status style="display: inline-block" openid="{{open_id}}" catch:click="onCleanDetailClick" wx:if="{{nearClean}}">-->
+<!--            <view class="home-server-box card-box">-->
+<!--                &lt;!&ndash;油站logo&ndash;&gt;-->
+<!--                <image class="home-server-logo" src="{{nearClean.photo_url||icon_default_wash}}" mode="aspectFill"></image>-->
+<!--                &lt;!&ndash;详情信息&ndash;&gt;-->
+<!--                <view class="home-server-station-info">-->
+<!--                    <text class="home-server-station-name">{{nearClean.washer_name}}</text>-->
+<!--                    <text class="home-server-station-address">{{nearClean.washer_address}}</text>-->
+<!--                    <view class="home-server-station-price-box">-->
+<!--                        &lt;!&ndash;油品价格&ndash;&gt;-->
+<!--                        <view class="home-server-station-price" wx:if="{{nearClean.washer_price&&nearClean.washer_price}}">-->
+<!--                            <text class="home-server-station-price-mark">￥</text>-->
+<!--                            <text class="home-server-station-price-text">{{nearClean.washer_price||'&#45;&#45;'}}次</text>-->
+<!--                        </view>-->
+<!--                    </view>-->
+<!--                    <login-status openid="{{open_id}}" catch:click="onCleanClick">-->
+<!--                        <view class="home-server-station-price-oil theme-button">立即洗车</view>-->
+<!--                    </login-status>-->
+<!--                </view>-->
+<!--                &lt;!&ndash;距离最近&ndash;&gt;-->
+<!--                <view class="home-server-station-near">距离最近</view>-->
+<!--            </view>-->
+<!--        </login-status>-->
+<!--    </scroll-view>-->
+<!--</view>-->

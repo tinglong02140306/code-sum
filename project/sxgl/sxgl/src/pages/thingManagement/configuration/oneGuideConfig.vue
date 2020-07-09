@@ -1,0 +1,502 @@
+/*
+ * @Author: tinglong 
+ * @Date: 2018-10-29 10:52:06 
+ * @Last Modified by: kkfan2
+ * @Last Modified time: 2018-11-20 21:22:25
+ */
+<template>
+    <div id="oneGuideConfig">
+        <!-- 指南配置列表 -->
+        <div class="list-wrap">
+            <el-table :data="guideData"  @selection-change="guideSelChange">
+                <el-table-column align="center" type="selection" width="55">
+                </el-table-column>
+                <el-table-column class="font-max" class-name="el-tooltip" prop="subStageName" label="所属阶段">
+                    <template scope="scope">
+                        <span :title='scope.row.subStageName'>{{scope.row.subStageName}}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column class="font-max" class-name="el-tooltip" prop="guideTitle" label="指南名称">
+                     <template scope="scope">
+                        <span :title='scope.row.guideTitle'>{{scope.row.guideTitle}}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column label="操作"  align="center" width="180">
+                    <template slot-scope="scope">
+                        <el-button class="font-max" type="text" size="small" @click="editGuideEvt(guideData[scope.$index].id)">编辑</el-button>
+                        <el-button class="font-max" type="text" size="small" @click="delGuideEvt(guideData[scope.$index].id)">删除</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+        </div>
+
+        <!-- 新增指南配置列表 -->
+        <el-dialog :title="guideTitle" :visible.sync="guideAddVis" width="800px" height="600px"  :close-on-click-modal="false"> 
+            <el-form :model="guideFormData" :rules="guideRules" ref="guideForm" label-width="80px" :label-position="labelPosition" size="mini">
+                <el-row v-if="stageFlag">
+                    <el-col :span="24">
+                        <el-form-item label-width="0px">
+                            <label class="editor-label"><span class="required">*</span>阶段名称</label>
+                            <el-select placeholder="请选择" v-model="guideFormData.subStageCode" style="width: 675px" @change="stageChange">
+                                <el-option
+                                    v-for="item in stageOptions"
+                                    :key="item.value"
+                                    :label="item.label"
+                                    :value="item.value">
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
+                    </el-col>
+                </el-row>  
+                <el-row>
+                    <el-col :span="24">
+                        <el-form-item label="指南名称" prop="guideTitle">
+                            <el-input v-model="guideFormData.guideTitle" style="width: 675px" placeholder="请输入指南名称" maxlength="200" @chnage="changeGuid"></el-input>
+                        </el-form-item>
+                    </el-col>
+                </el-row> 
+                <el-row>
+                    <el-col :span="24">
+                        <label class="editor-label"><span class="required">*</span>指南内容</label>
+                        <div class="editor-containers">
+                            <UE ref="UE" :defaultMsg="guideFormData.guideDsc" :config=ueEditConfigData :id="ueEditorId"></UE>
+                        </div>
+                    </el-col>
+                </el-row>   
+                <!-- 指南内容 -->
+                <div class="footer">
+                    <el-button type="primary" size="small" @click="saveFormData('guideForm')">确 定</el-button>
+                    <el-button size="small" @click="guideAddVis = false">取 消</el-button>
+                </div>
+            </el-form>
+        </el-dialog>  
+    </div>
+</template>
+
+<script>
+import unit from "@/api";   // 公共工具方法
+import UE from '@/components/UE/ue.vue';
+export default {
+    components: {
+      UE: UE
+    },
+    data() {
+        return {
+            version: 1.1, // 测试数据
+            code: 'px-s2e-s',
+            eventId: 'c56edc6bdbf3428b8d3bca5ecb382777',  // 一件事id
+            guideAddVis: false, // 新增指南配置弹框标志位 
+            delPromTips: '：确定要删除这条记录吗？',  // 删除提示语
+            guideTitle: '新增指南',
+            curId: '',  // 当前被操作事项id  存储 删除 编辑项
+            guideSeldArr: [],  // 指南删除选中项 id
+            guideData: [{ // 指南列表数据
+                guideTitle: ''  // 指南名称
+            }],
+            guideFormData: {  // 指南表单数据
+                subStageCode:'',
+                subStageName: '',  // 所属名称
+                guideTitle: '',  // 指南名称
+                guideDsc: '' // 指南内容
+            },
+            guideRules: { // 指南验证规则
+                guideTitle: [
+                    { required: true, message: '请填写指南名称', trigger: 'blur' },
+                    { min: 0, max: 200, message: '长度在 0 到 200个字符', trigger: 'blur' }
+                ]
+            },
+            stageOptions: [],  // 阶段名称
+            labelPosition: 'right',
+            ueEditorId: 'editor2',// 富文本编辑器数据
+            ueEditConfigData: {
+                initialFrameWidth: null,
+                initialFrameHeight: 200,
+                toolbars: [
+                    [
+                        'fullscreen', //全屏
+                        'undo', //撤销 
+                        'redo', //重做 
+                        'paragraph', //段落格式 
+                        'fontfamily', //字体 
+                        'fontsize', //字号
+                        'forecolor', //字体颜色
+                        'backcolor',
+                        'bold', //加粗 
+                        'italic', //斜体 
+                        'underline', //下划线 
+                        'strikethrough', //删除线 
+                        'formatmatch', //格式刷
+                        'removeformat', //清除格式  
+                        'blockquote', //引用 
+                        'pasteplain', //纯文本粘贴模式 
+                        'backcolor', //背景色 
+                        'insertorderedlist', //有序列表 
+                        'insertunorderedlist', //无序列表 
+                        'selectall', //全选 
+                        'rowspacingtop', //段前距 
+                        'rowspacingbottom', //段后距 
+                        'lineheight', //行间距
+                        'directionalityltr', //从左向右输入 
+                        'directionalityrtl', //从右向左输入
+                        'indent', //首行缩进 
+                        'justifyleft', //居左对齐 
+                        'justifyright', //居右对齐 
+                        'justifycenter', //居中对齐 
+                        'justifyjustify', //两端对齐 
+                        'touppercase', //字母大写 
+                        'tolowercase', //字母小写 
+                        'horizontal', //分隔线 
+                        'date', //日期 
+                        'time', //时间 
+                        'simpleupload',
+                        'spechars' //特殊字符
+                        // 'insertvideo' // 视频          
+                    ]
+                ], 
+            },
+            stageFlag: false,  // 表单中 阶段名称是否显示标志位
+        };
+            
+    },
+    methods: {
+         /*
+         * 修复ie记忆问题
+         */ 
+        changeGuid(val) {
+            let that = this;
+            that.guideFormData.guideTitle = val == '' ? '' : val;
+        },
+        /*
+         * 请求一件事数据
+         * type请求数据类别： 1： 流程配置 2：指南配置
+         */
+        getGuideData() {
+            let that = this, 
+                url = '/eventGuide/getEventGuideByeventCode',
+                param = {
+                    eventVersion: that.version,  // 事件版本
+                    eventCode: that.code,  // 事件code
+                    type:2
+                };
+            unit.ajaxMerPost('/znsj-web' + url, param, function(res) {
+                res = typeof res == 'string' ? JSON.parse(res) : res;
+                let data = res.data;
+                if(res.flag) {
+                    that.guideData = [];
+                    for(let i in data) {
+                        that.$set(that.guideData, i, data[i]); 
+                    }
+                }else {
+                    that.$Message.error(data.data || '数据加载失败！');
+                }
+            },function(error) {
+                that.$Message.error('数据加载失败！');
+            }, that);
+
+        },
+        /*
+         * 编辑、新增
+         */
+        editGuideEvt(id) {
+            let that = this,
+                url;
+            that.curId = id;
+            // 获取阶段名称
+            that.getStageName(); 
+            // 根据id获取数据
+            if(id) {  
+                url = '/eventGuide/getEventGuideInfo';
+                that.guideTitle = '编辑指南';
+                that.guideAddVis = true;
+                unit.ajaxMerPost('/znsj-web' + url, {
+                    id: id
+                },function(res) {
+                    res = typeof res == 'string' ? JSON.parse(res) : res;
+                    let data = res.data;
+                    if(res.flag) {
+                        setTimeout(function() {
+                           for(var key in data) {
+                                that.guideFormData[key] = data[key];
+                            }
+                            that.$refs.UE.setContent(data.guideDsc);
+                        },300);
+                    }else {
+                        that.$Message.error(data.data || '数据加载失败！');
+                    }
+                },function(error) {
+                    that.$Message.error('数据加载失败！');
+                }, that);
+            }else {
+                that.guideTitle = '新增指南';
+                that.guideAddVis = true;
+                that.clearFormData();
+            }
+        },
+        /*
+         * 清空表单数据
+         */
+        clearFormData() {
+            let that = this;
+            // 对整个表单进行重置，将所有字段值重置为空并移除校验结果
+            if (that.$refs['guideForm'] !== undefined) {
+                that.$refs['guideForm'].resetFields(); 
+                that.guideFormData.guideTitle = '';
+                that.guideFormData.guideDsc = '';
+                that.guideFormData.subStageCode = '';
+                that.$refs.UE.setContent('');
+            } 
+        },
+        /*
+         * 保存流程、指南数据
+         */
+        saveFormData(formName) {
+            var that = this,
+                url,
+                param;
+            that.$refs[formName].validate((valid) => {
+                if(!valid) {
+                    return;
+                }
+                let that = this;
+                url = that.curId ? '/eventGuide/updateEventGuide' : '/eventGuide/addEventGuide';
+                param = that.guideFormData;
+                param.guideDsc = that.$refs.UE.getUEContent();
+                if(!that.guideFormData.subStageCode && that.stageFlag) {
+                    that.$Message.warning('请选择阶段名称');
+                    return;
+                }
+                if(!param.guideDsc) {
+                    that.$Message.warning('请填写指南内容！');
+                    return;
+                }
+                param.eventVersion = that.version
+                param.eventCode = that.code;
+                param.id = that.curId ? that.curId : null;
+                param.type = that.$parent.guideType;
+                that.saveJsonType(url, param); 
+            });
+        },
+        /*
+         * 保存数据json字符串形式 编辑
+         * id: 记录id
+         * type (string, optional): 事件类型：1:事项 2：一件事
+         */
+        saveJsonType(url, param) {
+            let that = this;
+            unit.ajaxPost('/znsj-web' + url ,param).then(function(res){
+                res = typeof res == 'string' ? JSON.parse(res) : res;
+                let data = res.data;
+                if(data.flag) {
+                    that.$Message.success(data.data || '保存成功！');
+                    that.guideAddVis = false;
+                    // 清空表单数据
+                    that.clearFormData();
+                    // 刷新数据
+                    that.getGuideData();
+                    
+                }else {
+                    that.$Message.error(data.data || '信息保存失败!');
+                }
+            }).catch(function(error){
+                that.$Message.error('数据加载失败！');
+            });
+
+        },
+        /*
+         * 删除  弹框触发事件
+         * id: 记录id
+         */
+        delGuideEvt(id) {  
+            let that = this,
+                idData;
+            that.curId = id;
+            if(id) {
+                that.delPromTips = '：确定要删除这条记录吗？';
+            }else {
+                idData = that.guideSeldArr;
+                if(idData.length == 0) {
+                    that.$Message.warning('请选择要删除的记录！');
+                    return;
+                }else {
+                    that.delPromTips = '确定要删除选中的记录吗？';
+                    that.curId = idData.join(',');
+                }
+            }
+            that.$confirm(that.delPromTips, '提示', {
+                cancelButtonText: '取 消',
+                confirmButtonText: '确 定',
+                cancelButtonClass: 'fr ml10',
+                type: 'warning'
+            }).then(() => {
+                that.sureDelEvt();
+            }).catch(() => { 
+            });
+            // that.deleteVis = true;
+        },
+         /*
+         * 确定删除选中记录项
+         * type(事项类型):1:流程 2： 指南
+         */
+        sureDelEvt() {
+            let that = this,
+                type = that.delPropType,
+                url = '/eventGuide/deleteEventGuide',  // 接口请求地址
+                param = {
+                    ids: that.curId
+                };
+            unit.ajaxMerPost('/znsj-web' + url , param, function(res) {
+                res = typeof res == 'string' ? JSON.parse(res) : res;
+                let data = res.data;
+                // 刷新数据
+                that.getGuideData();
+            },function(error) {
+                // that.deleteVis = false;
+                that.$Message.error('数据加载失败！');
+            }, that);
+        },
+        /*
+         * 指南table复选框chang事件
+         */ 
+        guideSelChange(val) {
+            let that = this;
+            that.guideSeldArr = [];
+            if(val.length >  0) {
+                for(let i in val) {
+                    that.guideSeldArr.push(val[i].id);
+                }
+            }
+        },
+        /*
+         * 获取从子组件传来的事项名称
+         */
+        getStageName() {
+            let that = this;
+            unit.ajaxMerPost('/znsj-web/stepEvent/getStepEventDict' , {
+                id: that.eventId
+            }, function(res) {
+                res = typeof res == 'string' ? JSON.parse(res) : res;
+                let data = res.data;
+                if(data.length > 0) {
+                    that.stageOptions = data;
+                    that.stageFlag = true;
+                }else {
+                    that.stageFlag = false;
+                }
+            },function(error) {
+                that.$Message.error('数据加载失败');
+            }, that);
+        },
+        /*
+         * 所属名称change事件
+         */
+        stageChange(val) {
+            let that = this;
+            that.guideFormData.subStageCode = val;
+            for(let i in that.stageOptions) {
+                if(that.stageOptions[i].value === val) {
+                    that.guideFormData.subStageName = that.stageOptions[i].label;
+                }
+            }
+        },
+        /*
+         * 初始化数据
+         */ 
+        init() {
+            let that = this;       
+            that.getGuideData();  
+            // 获取阶段名称
+            that.getStageName(); 
+        }
+    },
+    mounted() {
+        let that = this,
+            parent;
+        if(that.$parent && that.$parent.param){
+            parent = that.$parent.param;
+            that.code = parent.eventCode ? parent.eventCode : '';
+            that.version = parent.eventVersion ? parseFloat(parent.eventVersion) : 0;
+            that.eventId = parent.eventId ? parent.eventId : '';
+        }
+        that.init();  
+    }
+};
+</script>
+<style lang="less">
+@import "../../../assets/styles/theme.less";
+.v-modal {
+    z-index: 999 !important;
+}
+.el-button {
+    font-size: 14px !important;
+}
+// 超出截断
+.el-tooltip > .cell{
+    white-space: nowrap;
+    min-width: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+}
+#oneGuideConfig {
+    overflow-y: auto;
+    height: 100%;
+    background-color: #fff;
+    .el-table {
+        border: 1px solid #ddd;
+        border-bottom: none;
+    }
+    .el-dialog__body {
+        padding: 30px 0;
+    }
+    .el-row {
+        padding: 0 20px;
+    }
+    .el-dialog__header {
+        border-bottom: 1px solid #ddd;
+    }
+    // }
+    // 弹框按钮样式覆盖
+    .footer {
+        padding:10px 30px 0 0;
+        // height: 50px;
+        background: #fff;
+        text-align: right;
+        line-height: 50px;
+        border-top: 1px solid #ddd;
+    }
+    // 改弹框层级
+    .el-dialog__wrapper {
+        z-index: 1000 !important;
+    }
+    // 富文本编辑器
+    .edui-editor-bottomContainer {
+        display: none !important;
+    }
+    .editor-label {
+        // display: inline-block;
+        float: left;
+        padding-right:12px;
+        padding-right: 10px;
+        width: 80px;
+        height: 28px;
+        line-height: 28px;
+        text-align: right;
+        vertical-align: top;
+        .required {
+            display: inline-block;
+            padding: 0 3px;
+            color: red;
+        }
+    }
+    .editor-containers {
+        display: inline-block;
+        vertical-align: top;
+        margin-bottom: 30px;
+        width: 675px;
+        // margin-left: 80px;
+        .edui-editor-iframeholder {
+            height: 325px !important;
+        }
+    }
+}
+</style>

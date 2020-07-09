@@ -1,0 +1,23 @@
+.success-wrap {
+    padding: 0 0.58rem;
+    width: 100%;
+}
+
+.success-wrap .content {
+    margin-top: 1.78rem;
+}
+
+.success-wrap .content i {
+    display: inline-block;
+    height: 3.11rem;
+    width: 100%;
+    background: url("../image/icon-success.png") center / 3.33rem no-repeat;
+}
+
+.success-wrap .content span {
+    display: inline-block;
+    height: 1rem;
+    width: 100%;
+    text-align: center;
+    line-height: 2rem;
+}

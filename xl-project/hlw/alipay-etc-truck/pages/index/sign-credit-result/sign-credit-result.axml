@@ -1,0 +1,29 @@
+<view>
+	<!-- <block a:if="{{status==='ACCEPTED'}}">
+		<message
+				title="{{title}}"
+				subTitle="{{subTitle}}"
+				type="success"
+				mainButton="{{messageButton.mainButton}}"
+				onTapMain="next">
+		</message>
+	</block> -->
+	<block>
+		<message
+				title="{{waitingTitle}}"
+				subTitle="{{waitingSubtitle}}"
+        mainButton="{{waitingButton.mainButton}}"
+        onTapMain="next"
+				type="waiting">
+		</message>
+	</block>
+	<!-- <block a:if="{{status==='REFUSED'}}">
+		<message
+				title="{{refusedTitle}}"
+				subTitle="{{refusedSubtitle}}"
+				type="info"
+				mainButton="{{refusedButton.mainButton}}"
+				onTapMain="apply">
+		</message>
+	</block> -->
+</view>

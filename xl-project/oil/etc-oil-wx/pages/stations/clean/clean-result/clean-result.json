@@ -1,0 +1,10 @@
+{
+  "navigationBarBackgroundColor":"#00A170",
+  "navigationBarTitleText":"洗车结果",
+  "navigationBarTextStyle": "black",
+  "enablePullDownRefresh":false,
+  "navigationStyle":"custom",
+  "usingComponents": {
+    "navigation-bar":"/components/navigation-bar/navigation-bar"
+  }
+}

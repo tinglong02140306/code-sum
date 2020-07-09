@@ -1,0 +1,30 @@
+<view>
+	<view class="desc-area" a:if="{{!list.length}}">
+		<block>
+			<image src="/assets/images/no-punish.png" style="width:150rpx;height:150rpx;" mode="widthFix"/>
+			<view class="title">暂无惩治金</view>
+			<view class="subtitle">您的信用良好，无需缴纳惩治金</view>
+			<view class="next-btn" onTap="showHistory">查看历史</view>
+		</block>
+	</view>
+	<view a:if="{{list.length}}">
+		<view class="snack-bar" onTap="showHistory">查看历史>></view>
+		<checkbox-group bindchange="cbxChange" class="list">
+			<block a:for="{{list}}">
+				<label class="list-tile">
+					<checkbox value="{{index}}"/>
+					<image src="/assets/images/wallet.png" style="width:60rpx;height:60rpx;margin-left:30rpx;"/>
+					<view class="tile-bill">
+						<view class="bill-date">账单日期：{{item["bill_date"]}}</view>
+						<!--<view class="plate">鲁A12345</view>-->
+					</view>
+					<view class="tile-money">￥{{item["amount"]}}</view>
+				</label>
+			</block>
+		</checkbox-group>
+	</view>
+	<view class="bottom-bar" a:if="{{selected.length}}">
+		<view class="bottom-left">共计{{selected.length}}笔账单，合计￥{{sum}}</view>
+		<view class="bottom-right bg-primary" onTap="pay">缴纳惩治金</view>
+	</view>
+</view>

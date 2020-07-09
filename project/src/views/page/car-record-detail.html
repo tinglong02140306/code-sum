@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="../../../../" >
+    <meta charset="UTF-8">
+    <!-- 添加到主屏幕后，全屏显示 -->
+    <meta name="apple-touch-fullscreen" content="YES"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <!-- iphone 运行在全屏模式 -->
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="viewport" content="width=device-width"/>
+    <title>皖A 12345</title>
+    <link rel="stylesheet" type="text/css" href="../css/base.css?__inline"/>
+    <link rel="stylesheet" type="text/css" href="../css/all.css?__inline"/>
+    <link rel="stylesheet" type="text/css" href="../css/car-record-detail.css?__inline"/>
+</head>
+<body>
+    <div class="wrap record-detail-wrap">    
+        <!-- 头部 -->
+        <header class="topic-bg">
+            <div class="header-item topic-bg">
+                <a href="javascript:void(0)" class="arrow-left header-back" data-bind="click: back"></a>
+                <span class="f36 cf title"></span>
+                <a href="javascript:void(0)" class="btn-delete f30 cf tc " data-bind="click: delete">删除</a>
+            </div>
+        </header>
+        <!-- 主要内容 -->
+        <div class="record-detail-content top-7">
+            <div class="record-detail-item">
+            </div>
+        </div>
+
+        <div class="empty empty-record top-7 hide">
+            <div class="empty-ad"></div>
+            <p>恭喜您，没有交通违法记录~</p>
+        </div>
+
+        <div class="empty empty-data top-7 hide">
+            <div class="empty-ad"></div>
+            <p>暂无数据~</p>
+        </div>
+
+
+    </div>
+    <div class="mark car-detail-mask">
+        <div class="quit">
+            <div class="quit-notice">
+                <p class="f28 c6">您要删除该车辆信息吗？</p>
+                <p class="f28 c6">删除后将不会收到交通违法实时提醒</p>
+                
+            </div>
+            
+            <div class="quit-btn">
+                <span data-bind="click: cancel" class="f32 c3">取消</span>
+                <span data-bind="click: sure" class="f32 c3">确定</span>
+            </div>
+        </div>
+    </div>
+<script id="carDetailTmpl" type="text/html">
+    {{each $data as item index}}
+        <div class="record-detail-items bf">
+            <p class="c6 f26 time">{{item.wfsj}}</p>
+
+            <div class="warn-loc">
+                <p class="warn f32 c3">
+                    <span class="warn-icon"></span>
+                    <span class="warn-txt f32 c3 w-wrap">{{item.wfnr}}</span>
+                </p>
+                <p class="location f28 c6">
+                    <span class="location-icon"></span>
+                    <span class="location-txt f28 c6 w-wrap">{{item.wfdz}}</span>
+                </p>
+            </div>
+
+            <div class="fine-socre-status clearfix">
+                <div class="fines fl clearfix tc">
+                    <span class="f28 c3 fl">罚款</span>
+                    <span class="f28 corange fl pl15">{{item.fkje}}</span>
+                </div> 
+
+                <div class="scores fl clearfix tc">
+                    <span class="f28 c3 fl">扣分</span>
+                    <span class="f28 corange fl pl15">{{item.wfjfs}}</span>
+                </div>
+                <a href="javascript:void(0)" class="f24 btn-status fr tc">{{item.clbj}}</a>
+            </div>
+        </div>
+    {{/each}}
+</script>
+
+<script src="../lib/lib.js"></script>
+<script src="../app/car-record-detail.js"></script>
+</html>

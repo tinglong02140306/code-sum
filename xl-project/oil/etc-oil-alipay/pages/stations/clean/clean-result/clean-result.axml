@@ -1,0 +1,32 @@
+<!--pages/stations/clean/clean-result/clean-result.axml-->
+<import src="../../../../templates/clean/coupon-item/coupon-item.axml"></import>
+<view class="clean-result-container">
+    <!--支付失败-->
+    <view class="clean-result-box" style="display: {{status=='02'?'flex':'none'}}">
+        <view class="clean-result-box-top">
+            <image class="clean-result-box-image" src="{{icon_fail}}"></image>
+            <text class="clean-result-box-hint">支付失败</text>
+        </view>
+        <view class="clean-result-box-retry-pay theme-button" onTap="onRetryPay">重新支付</view>
+    </view>
+    <!--支付成功-->
+    <view class="clean-result-box" style="display: {{status=='01'?'flex':'none'}}">
+        <view class="clean-result-box-top">
+            <image class="clean-result-box-image" src="{{icon_success}}"></image>
+            <text class="clean-result-box-hint">洗车完成</text>
+        </view>
+        <view class="clean-result-box-retry-pay theme-button" onTap="onSeeOrder">查看订单详情</view>
+        <view class="clean-result-box-invoice disable-button" onTap="onBackHome">返回首页</view>
+    </view>
+    <!--优惠券-->
+    <view class="clean-result-coupon-box" a:if="{{couponList.length}}">
+        <view class="clean-result-coupon-line"></view>
+        <text class="clean-result-coupon-text">本次消费获得</text>
+        <view class="clean-result-coupon-line"></view>
+    </view>
+    <view class="clean-result-coupon-list" a:if="{{couponList.length}}">
+        <block a:for="{{couponList}}" a:key="coupon_item">
+            <template is="coupon_item" data="{{item}}"></template>
+        </block>
+    </view>
+</view>

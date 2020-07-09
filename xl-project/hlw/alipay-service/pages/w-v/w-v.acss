@@ -1,0 +1,42 @@
+.body-wrapper{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.ad{
+  margin-top: 20rpx;
+  height:220rpx;
+  width: 649rpx;
+}
+.btn{
+  padding: 0;
+  margin-top:40rpx;
+  height: 80rpx;
+  display: flex;
+  width: 450rpx;
+  justify-content: center;
+  align-items: center;
+  background-color: #46A36E;
+  color: white;
+  letter-spacing: 20rpx;
+  border:none;
+  border-color: transparent;
+}
+.btn-invert{
+  padding: 0;
+  margin-top:40rpx;
+  height: 80rpx;
+  display: flex;
+  width: 450rpx;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  color: #46A36E;
+  letter-spacing: 20rpx;
+  border: 1px solid #46A36E;
+}
+
+button::after {
+  border: none;
+}

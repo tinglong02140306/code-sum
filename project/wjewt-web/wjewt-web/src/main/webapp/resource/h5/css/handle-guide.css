@@ -1,0 +1,240 @@
+#liMarquee {
+    display: inline-block;
+    width: 73%;
+    height: 2.1rem;
+    font-size: 0.8rem;
+    text-align: center;
+    line-height: 2.1rem;
+    vertical-align: top;
+}
+#itemBanner {
+    position: relative;
+}
+.marquee-content-wrap {
+    float: left;
+    width: 800%;
+}
+.marquee-content, .marquee-content-copy {
+    float: left;
+}
+.marquee-content-copy {
+    padding-left: 40px;
+}
+.marquee-content, .marquee-content-copy {
+    float: left;
+}
+ .handle-guide {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    font-size: 0.71rem;
+}
+ .handle-left-button {
+    float: left;
+    height: 1.82rem;
+    width: calc((100% - 0.55rem) / 2);
+    border-radius: 4px;
+    color: #fff;
+    line-height: 1.82rem;
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+.handle-right-button {
+    float: right;
+    height: 1.82rem;
+    width: calc((100% - 0.55rem) / 2);
+    border-radius: 4px;
+    color: #fff;
+    line-height: 1.82rem;
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+.handle-none-button {
+    height: 1.82rem;
+    border-radius: 4px;
+    color: #fff;
+    line-height: 1.82rem;
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+.swiper-container {
+    height: 100%;
+}
+
+.swiper-wrapper {
+    margin-top: 2.03rem;
+    height: 100%;
+}
+
+.swiper-slide {
+    padding-bottom: 2.5rem;
+    overflow-x: auto;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    box-sizing: border-box;
+
+}
+
+.swiper-container-horizontal > .swiper-pagination-bullets {
+    top: 0;
+    bottom: -moz-calc(100% - 2.03rem);
+    bottom: -webkit-calc(100% - 2.03rem);
+    bottom: calc(100% - 2.03rem);
+}
+
+.swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet {
+    margin: 0;
+    width: 33.33%;
+    height: 2.08rem;
+    border-bottom: 1px solid #c5c5c5;
+    border-radius: 0;
+    background-color: #fff;
+    line-height: 2.08rem;
+    font-size: 0.71rem;
+    color: #666;
+    opacity: 1;
+}
+
+.swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet-active {
+    border-bottom: 2px solid #37b8d4;
+    color: #37b8d4;
+}
+
+.marquee-content-wrap {
+    float: left;
+    width: 900%;
+}
+
+.marquee-content, .marquee-content-copy {
+    float: left;
+}
+
+.marquee-content-copy {
+    padding-left: 40px;
+}
+
+.details-evaluate {
+    width: 100%;
+    height: 2.13rem;
+    background-color: white;
+    margin-top: 0.5rem;
+    text-align: center;
+}
+
+.details-sx {
+    width: 100%;
+    background-color: white;
+    height: 2.13rem;
+    /*margin-top: 0.5rem;*/
+    border-bottom: 1px solid #c5c5c5;
+}
+
+.fixed-table-line1 {
+    table-layout: fixed;
+    width: 100%;
+    height: 100%;
+}
+
+.fixed-table-line2 {
+    table-layout: fixed;
+    width: 100%;
+    height: 100%;
+    margin-left: 0.5rem;
+}
+
+.details-download1 {
+    width: 0.8rem;
+    height: 0.8rem;
+    background-size: 0.8rem 0.8rem;
+    float: left;
+    margin-left: 3px;
+    background: url(../images/handle-guide/details-download.png) no-repeat center;
+}
+
+.details-download2 {
+    width: 0.8rem;
+    height: 0.8rem;
+    background-size: 0.8rem 0.8rem;
+    float: left;
+    margin-left: 3px;
+    background: url(../images/handle-guide/details-download.png) no-repeat center;
+}
+
+.label-left-title {
+    float: left;
+    margin-left: 0.48rem;
+    padding-left: 0.4rem;
+    border-left: 3px solid #4c72ff;
+    color: #333;
+    font-size: 0.66rem;
+}
+
+.label-right-title {
+    float: right;
+    margin-right: 0.48rem;
+    padding-right: 0.4rem;
+    color: #333;
+    font-size: 0.66rem;
+}
+
+.details-star-full {
+    width: 0.8rem;
+    height: 0.8rem;
+    background-size: 0.8rem 0.8rem;
+    float: left;
+    margin-left: 3px;
+    background: url(../images/handle-guide/details-star-full.png) no-repeat center;
+}
+
+.details-star-half {
+    width: 0.8rem;
+    height: 0.8rem;
+    background-size: 0.8rem 0.8rem;
+    float: left;
+    margin-left: 3px;
+    background: url(../images/handle-guide/details-star-half.png) no-repeat center;
+}
+.icon-back .icon{
+    width: 20px;
+    height: 20px;
+    margin: 0 0 0 4px;
+    background-image: url(../images/handle-guide/back.svg);
+}
+
+.public-results {
+    border-radius: 3px;
+    width: 2.8rem;
+    text-align: center;
+}
+.label-module-title {
+    margin-left: 0.48rem;
+    padding-left: 0.4rem;
+    border-left: 3px solid #4c72ff;
+    color: #333;
+    font-size: 0.66rem;
+}
+.three-layers-content {
+    overflow-y: auto;
+    position: absolute;
+    top: 2.13rem;
+    bottom: 0rem;
+    left: 0;
+    right: 0;
+   /* height: -webkit-calc(100% - 3rem - 3rem);
+    height: calc(100% - 3rem - 3rem);*/
+    font-size: 0.71rem;
+}
+th, td {
+    padding:0;
+}
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+.border-b{
+    border-bottom: 1px solid #e5e5e5;
+}

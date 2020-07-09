@@ -1,0 +1,32 @@
+<!--
+ * @Author: sunmingmao
+ * @Date: 2020-03-26 15:42:07
+ * @LastEditors: sunmingmao
+ * @LastEditTime: 2020-04-09 15:38:17
+ * @Description: 下拉刷新 上拉加载控件
+ -->
+ <scroll-view class="scroll-list-container" 
+    scroll-y 
+    style="height: {{height}};"
+    enable-flex 
+    refresher-enabled
+    refresher-triggered="{{refresher_triggered}}"
+    refresher-threshold="{{refresher_threshold}}"
+    refresher-default-style="{{refresher_default_style}}"
+    refresher-background="{{refresher_background}}"
+    bindrefresherrefresh="onRefresh"
+    bindscrolltolower="onLoadMore">
+    <view class="scroll-list-box">
+        <!--列表-->
+        <slot></slot>
+        <!--加载中-->
+        <view class="scroll-list-load-more" wx:if="{{load_status==1}}">
+            <image class="scroll-list-loading-img" src="../../assets/static/scroll-list-loading.png"></image>
+            <text class="scroll-list-load-text">努力加载中...</text>
+        </view>
+        <!--已加载全部-->
+        <view class="scroll-list-load-more" wx:if="{{load_status==2&&show_finish}}">
+            <text class="scroll-list-load-text">已加载全部</text>
+        </view>
+    </view>
+</scroll-view>

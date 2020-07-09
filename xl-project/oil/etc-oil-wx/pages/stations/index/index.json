@@ -1,0 +1,16 @@
+{
+  "navigationBarBackgroundColor": "#00A170",
+  "navigationBarTextStyle": "black",
+  "navigationBarTitleText": "油站列表",
+  "backgroundColor": "#eeeeee",
+  "backgroundTextStyle": "light",
+  "navigationStyle":"custom",
+  "disableScroll":true,
+  "usingComponents": {
+    "scroll-list":"../../../components/scroll-list/scroll-list",
+    "station-bar":"../../../components/station-bar/station-bar",
+    "status":"../../../components/status/status",
+    "login-status":"../../../components/login-status/login-status",
+    "filter-tabs":"../components/filter-tabs/filter-tabs"
+  }
+}

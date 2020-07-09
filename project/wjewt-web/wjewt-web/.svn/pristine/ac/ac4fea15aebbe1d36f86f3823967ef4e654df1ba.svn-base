@@ -1,0 +1,67 @@
+.wrap {
+	position: relative;
+	height: 100%;
+	background: #fff;
+}
+/* .header-item .success-btn {
+	width: 25%;
+}
+.success-btn {
+	position: absolute;
+	right: 0.666667rem;
+	color: #fff;
+	font-size: 0.666667rem;
+} */
+.main-wrap {
+	/*position: absolute;
+	top: 0;
+	bottom: 0;*/
+	width: 100%;
+	/*height: 100%;*/
+}
+.img-content {
+	padding-top: 1.933333rem;
+	height: 7.822222rem;
+	text-align: center;
+}
+.img-content img {
+	width: 6.777778rem;
+	height: 4.111111rem;
+}
+.pay-success-money {
+	margin-bottom: 2.4rem;
+	text-align: center;
+	font-size: 0.577778rem;
+	color: #020202;
+}
+.pay-success-money span {
+	font-size: 1.333333rem;
+}
+.pay-success-message {
+	padding: 0 0.666667rem;
+}
+.pay-message-item {
+	margin-bottom: 0.511111rem;
+	font-size: 0.577778rem;
+	color: #999;
+}
+/*完成按钮*/
+.btn-wrap {
+	position: fixed;
+	bottom: 2.22rem;
+	/*margin-top: 2.0rem;*/
+	width: 100%;
+	height: 2.0rem;
+	text-align: center;
+}
+.btn-wrap a {
+	display: inline-block;
+	height: 100%;
+	width: 50%;
+	background: #4c72ff;
+	font-size: 0.71rem;
+	color: #fff;
+	border-radius: 0.22rem;
+	line-height: 2.0rem;
+	text-align: center;
+}

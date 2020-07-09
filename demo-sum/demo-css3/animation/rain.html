@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>rain</title>
+    <style>
+        body,
+        html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        .content {
+            position: relative;
+            height: 100%;
+            background: #b36262;
+        }
+        .yudi {
+            position: absolute;
+            height: 100%;
+            opacity: 0;
+            
+            /* 落雨样式 */
+            /* width: 4px;
+            height: 6px;
+            background: #ccc;
+            clip-path: ellipse(10% 30% at 50% 50%); 
+            animation: drops 1.4s cubic-bezier(0.41, 0.04, 0.58, 0.62) infinite;
+            */
+            /* 红包 */
+            animation: drops 3s cubic-bezier(0.41, 0.04, 0.58, 0.62) infinite;
+            width: 48px;
+            height: 48px;
+            background: url('./image/hongbao.png') no-repeat;
+        }
+        @keyframes drops {
+            0% {
+                opacity: 0;
+            }
+            10% {
+                opacity: 0;
+            }
+            20% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translate3d(10px, 100vh, -10px)
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="yudi"></div>
+    </div>
+</body>
+<script src="../js/jquery/jquery-1.8.2.min.js"></script>
+<script>
+    let $content = $('.content');
+    let initNum = 0;
+    for(let i = 0; i < 1000; i++) {
+        let lefts = Math.floor(Math.random()*5 + 2);
+        let delay = Math.floor(Math.random()*50 + 2);
+        initNum += lefts;
+        let $div = $('<div/>').addClass('yudi').css({
+            'left': `${initNum}%`,
+            'top': `${lefts}%`,
+            'animation-delay': `${delay/10}s`
+        });
+        $content.append($div)
+    }
+</script>
+</html>

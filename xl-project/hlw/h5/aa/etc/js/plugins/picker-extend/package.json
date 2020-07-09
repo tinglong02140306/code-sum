@@ -1,0 +1,53 @@
+{
+  "_from": "picker-extend",
+  "_id": "picker-extend@2.1.0",
+  "_inBundle": false,
+  "_integrity": "sha512-LWOEIxeBP3l0aGlfnS420RrUuAWGJma1bDXByQhNACzOSkca7G1yBVsNXZU/ygoupnD9kqLap3UH0yYIr4c3Qw==",
+  "_location": "/picker-extend",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "picker-extend",
+    "name": "picker-extend",
+    "escapedName": "picker-extend",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#DEV:/",
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/picker-extend/-/picker-extend-2.1.0.tgz",
+  "_shasum": "0f3aef619207c3c7812496a2f28a1258f087e330",
+  "_spec": "picker-extend",
+  "_where": "C:\\Users\\30122\\Desktop",
+  "author": {
+    "name": "majunchang"
+  },
+  "bugs": {
+    "url": "https://github.com/majunchang/picker-extend/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "A multi-function mobile phone scrolling selector, support single to multi-select, support multi-level cascade, provide custom callback function, provide update function redraw, relocation function, compatible pc drag and so on.",
+  "homepage": "https://github.com/majunchang/picker-extend#readme",
+  "keywords": [
+    "picker-extend",
+    "select-extend",
+    "select",
+    "picker"
+  ],
+  "license": "ISC",
+  "main": "picker-extend.js",
+  "name": "picker-extend",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/majunchang/picker-extend.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "2.1.0"
+}

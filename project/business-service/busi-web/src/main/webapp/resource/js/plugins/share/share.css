@@ -1,0 +1,106 @@
+.share {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+}
+.sheet {
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #fff;
+    /*opacity: 0.8;*/
+    z-index: 999;
+    transform: translate3d(0,100%,0);
+    -webkit-transform: translate3d(0,100%,0);
+}
+.sheet p {
+    padding: .73rem;
+    font-size: .62rem;
+    color: #666;
+}
+.share-list{
+    white-space: nowrap;
+    overflow-x: auto;
+    padding: 0 .67rem;
+}
+
+.share-list li {
+    /*width: 60px;
+    height: 80px;*/
+    display: inline-block;
+    white-space: nowrap;
+    margin-left: 1.42rem
+}
+.share-list li:first-child {
+    margin-left: 0;
+}
+.share-icon {
+    width: 2.55rem;
+    height: 2.55rem;
+    border-radius: 5px;
+    background-color: #fff;
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.qq {
+    background-image: url(img/qq.png);
+}
+.qzone {
+    background-image:url(img/qzone.png);
+}
+.sina {
+    background-image: url(img/sina.png);
+}
+.session {
+    background-image: url(img/session.png);
+}
+.timeline {
+    background-image: url(img/timeline.png);
+}
+.fav {
+    background-image: url(img/fav.png);
+}
+.share-name {
+    /*width: 55px;*/
+    font-size: .53rem;
+    text-align: center;
+    padding-top: .4rem;
+    color: #000;
+}
+.mask {
+    position: fixed;
+    z-index: 998;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, .4);
+    transition: all 0.4s;
+    opacity: 0;
+    visibility: hidden;
+}
+.show {
+    visibility: visible;
+    opacity: 1;
+}
+.d-none {
+    display: none;
+}
+.share .button-cancel {
+    display: block;
+    margin: 0.6rem 0 0 0;
+    padding: 0;
+    width: 100%;
+    height: 2.8rem;
+    color: #333;
+    font-size: 0.8rem;
+    border-top: 1px solid #eaeaea;
+    line-height: 2.8rem;
+    text-align: center;
+}

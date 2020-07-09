@@ -1,0 +1,77 @@
+.role-container {
+  width: 100%;
+  background-color: #f2f2f2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.role-form {
+  width: 100%;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 8px 16px;
+  margin-bottom: 16px;
+}
+
+.role-input{
+  width: 80%;
+}
+
+.role-content{
+  background-color: white;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border: solid 1px #f2f2f2;
+}
+
+.role-content-div{
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  width: 100%;
+  padding: 4px 10px;
+}
+
+.role-operate-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  min-width: 160px;
+
+  a{
+    font-size: 10px;
+    padding: 2px;
+  }
+}
+
+.role-dialog-container{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.role-table{
+  width: 100%;
+  table{
+    table-layout: fixed;
+    thead{
+      th{
+        font-weight: 600;
+        letter-spacing: 1px;
+      }
+    }
+    tbody{
+      tr{
+        td{
+          word-break: break-all;
+        }
+      }
+    }
+  }
+}

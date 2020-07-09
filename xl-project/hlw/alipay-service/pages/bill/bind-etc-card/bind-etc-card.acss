@@ -1,0 +1,78 @@
+.wrapper{
+  width: 100vw;
+  height: 100vh;
+  box-sizing: border-box;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  background-color: rgb(241,241,246);
+}
+.subtitle{
+  height: 80rpx;
+  width: 100vw;
+  box-sizing: border-box;
+  padding-left: 30rpx;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-family: SourceHanSansCN-Light;
+  font-size: 28rpx;
+  color: rgb(128,135,169);
+}
+.section-info{
+  width: 750rpx;
+  box-sizing: border-box;
+  background-color: white;
+}
+.car-owner{
+  min-height: 160rpx;
+  display: flex;
+  flex-direction: column;
+  font-size:10rpx 30rpx;
+  padding: 0rpx 30rpx;
+}
+.owner-name{
+  flex: 0 0 88rpx;
+  display: flex;
+  align-items: center;
+}
+.owner-name-left{
+  flex: 0 0 150rpx;
+  display: flex;
+  justify-content: flex-start;
+  color:#3b4257;
+}
+.owner-name-middle{
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+}
+.owner-name-right{
+  flex: 0 0 100rpx;
+  display: flex;
+  justify-content: center;
+  border-left: 1px solid #eee;
+}
+.btn{
+  margin: 54rpx 20rpx 36rpx;
+  width: 710rpx;
+  height: 88rpx;
+  font-family: SourceHanSansCN-Light;
+  font-size: 36rpx;
+  color: white;
+  background-color: rgb(51,152,255);
+  border-radius: 5rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.tips{
+  width: 750rpx;
+  box-sizing: border-box;
+  padding: 0 30rpx;
+  font-family: SourceHanSansCN-Light;
+  font-size: 26rpx;
+  color: rgb(128,135,169);
+}
+.tip{
+  line-height: 60rpx;
+}

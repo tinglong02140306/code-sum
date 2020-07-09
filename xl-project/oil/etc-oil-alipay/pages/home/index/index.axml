@@ -1,0 +1,164 @@
+<!--
+ * @Author: sunmingmao
+ * @Date: 2020-03-26 15:42:07
+ * @LastEditors: longting
+ * @LastEditTime: 2020-04-30 10:23:12
+ * @Description: 首页
+ -->
+<import src="/templates/home/loading/loading.axml"></import>
+<view class="home-container">
+    <!-- <view class="demo"></view> -->
+    <scroll-list onRefresh="onRefresh" onLoadMore="onLoadMore" load_status="{{load_status}}" show_finish="{{false}}"
+        refresher_triggered="{{refresher}}">
+        <view class="home-data-container" a:if="{{loading==2}}">
+            <!--天气 国标价-->
+            <view class="home-weather-container">
+                <!--天气-->
+                <view class="home-weather-box">
+                    <text class="home-weather-city">{{city}}</text>
+                    <image class="home-weather-pic" src="{{weathers.weather_pic}}"></image>
+                    <text class="home-weather-temperature">{{weathers.temperature||'--'}}℃</text>
+                    <text class="home-weather-sd-text">洗车指数</text>
+                    <text class="home-weather-sd" style="color: {{weathers.color}};">{{weathers.wash_car_index||'--'}}</text>
+                </view>
+                <!--国标价-->
+                <view class="home-price-box">
+                    <image class="home-price-pic" src="/assets/static/home-oil-price.png"></image>
+                    <text class="home-price-text">国标油价:</text>
+                    <!--各油品类型价格-->
+                    <swiper class="home-price-swiper" vertical autoplay circular>
+                        <block a:for="{{gboilScroll}}" a:key="price" a:for-item="item">
+                            <swiper-item class="home-price-swiper-item">
+                                <view class="home-price-item">
+                                    <block a:for="{{item}}" a:key="single" a:for-item="single">
+                                        <text class="home-price-item-type">{{single.oil_type}}</text>
+                                        <text class="home-price-item-price">￥{{single.gb_price}}</text>
+                                    </block>
+                                </view>
+                            </swiper-item>
+                        </block>
+                    </swiper>
+                    <!-- <text onTap="onRemindClick">油价提醒</text> -->
+                </view>
+            </view>
+            <!--附近服务-->
+            <view class="home-server-container" a:if="{{near}}">
+                <text class="home-server-text">附近服务</text>
+                <!--洗车详情-->
+                <view class="home-server-box card-box" onTap="onCleanDetailClick">
+                    <!--油站logo-->
+                    <image class="home-server-logo" src="{{nearClean.photo_url||icon_default_wash}}" mode="aspectFill"></image>
+                    <!--详情信息-->
+                    <view class="home-server-station-info">
+                        <text class="home-server-station-name">{{nearClean.washer_name}}</text>
+                        <text class="home-server-station-address">{{nearClean.washer_address}}</text>
+                        <view class="home-server-station-price-box">
+                            <!--油品价格-->
+                            <view class="home-server-station-price" a:if="{{nearClean.washer_price&&nearClean.washer_price}}">
+                                <text class="home-server-station-price-mark">￥</text>
+                                <text class="home-server-station-price-text">{{nearClean.washer_price||'--'}}</text>
+                                <text class="home-server-station-price-mark">/次</text>
+                            </view>
+                        </view>
+                        <view class="home-server-station-price-oil theme-button" catchTap="onCleanClick">立即洗车
+                        </view>
+                    </view>
+                    <!--距离最近-->
+                    <view class="home-server-station-near">距离最近</view>
+                </view>
+
+                <!--油站详情-->
+                <view class="home-server-box oil-box" onTap="onOilDetailClick">
+                    <!--油站logo-->
+                    <image class="home-server-logo" src="{{near.station_photo_url||icon_default_station}}"
+                        mode="aspectFill"></image>
+                    <!--详情信息-->
+                    <view class="home-server-station-info">
+                        <text class="home-server-station-name">{{near.name}}</text>
+                        <text class="home-server-station-address">{{near.address}}</text>
+                        <view class="home-server-station-price-box">
+                            <!--油品类型-->
+                            <view catchTap="onOilNoPicker">
+                                <picker mode="selector" a:if="{{near.station_price&&near.station_price.length}}"
+                                    range="{{nearPrices}}" range-key="oil_no" value="{{nearCurrentIndex}}"
+                                    onChange="onOilNoChange">
+                                    <view class="home-server-station-type">
+                                        <text class="home-server-station-type-text">{{nearOilType}}</text>
+                                        <image class="home-server-station-type-image"
+                                            src="/assets/static/drop-down-pull.png"></image>
+                                    </view>
+                                </picker>
+                            </view>
+                            <!--油品价格-->
+                            <view class="home-server-station-price" a:if="{{nearCurrent&&nearCurrent.list_price}}">
+                                <text class="home-server-station-price-mark">￥</text>
+                                <text class="home-server-station-price-text">{{nearCurrent.list_price||'--'}}</text>
+                            </view>
+                            <!--价格差-->
+                            <view class="home-server-station-diff"
+                                a:if="{{nearCurrent&&nearCurrent.oil_price_difference}}">
+                                <image class="home-server-station-diff-image"
+                                    src="/assets/static/station-item-down.png"></image>
+                                <text
+                                    class="home-server-station-diff-text">已降￥{{nearCurrent.oil_price_difference}}</text>
+                            </view>
+                        </view>
+                        <view class="home-server-station-price-oil theme-button" catchTap="onOilClick">立即加油</view>
+                        
+                    </view>
+                    <!--距离最近-->
+                    <view class="home-server-station-near">距离最近</view>
+                </view>
+
+               
+            </view>
+            <!--广告位-->
+            <view class="home-banner-container" a:if="{{banners&&banners.length}}">
+                <swiper class="home-banner-swiper" autoplay circular onChange="onBannersChange">
+                    <block a:for="{{banners}}" a:key="banners">
+                        <swiper-item class="home-banner-swiper-item">
+                            <image class="home-banner-swiper-item-image" src="{{item.url}}" catchTap="onBannerItemClick"
+                                data-item="{{item}}"></image>
+                        </swiper-item>
+                    </block>
+                </swiper>
+                <view class="home-banner-dots" a:if="{{banners&&banners.length>1}}">
+                    <block a:for="{{banners}}" a:key="banners_dots">
+                        <view class="{{banner_current==index?'home-banner-dots-item-check':'home-banner-dots-item'}}">
+                        </view>
+                    </block>
+                </view>
+            </view>
+            <!--银行优惠-->
+            <view class="home-bank-container" a:if="{{rights&&rights.length}}">
+                <text class="home-bank-text">优惠活动</text>
+                <view class="home-bank-list">
+                    <block a:for="{{rights}}" a:key="bank" a:for-item="item">
+                        <view class="home-bank-list-item card-box">
+                            <image class="home-bank-list-item-image" src="{{item.equity_logo}}"></image>
+                            <view class="home-bank-list-item-info">
+                                <view class="home-bank-list-item-info-top">
+                                    <text class="home-bank-list-item-info-top-text">{{item.name}}</text>
+                                </view>
+                                <view class="home-bank-list-item-info-bottom">
+                                    <block a:for="{{item.desc_list}}" a:key="rights" a:for-item="desc">
+                                        <text class="home-bank-list-item-info-bottom-item">{{desc}}</text>
+                                    </block>
+                                </view>
+                            </view>
+                            <view class="home-bank-list-item-see" data-item="{{item}}" catchTap="onRightItemClick">去查看</view>
+                        </view>
+                    </block>
+                </view>
+            </view>
+        </view>
+        <!--加载中-->
+        <view a:if="{{loading==1}}">
+            <template is="home-loading"></template>
+        </view>
+    </scroll-list>
+    <view class="home-online-serve">
+        <contact-button tnt-inst-id="vOI_Kbsg" scene="SCE00167654" size="168*48rpx" icon="/assets/static/icon-kefu.png"/>
+        <!-- <text style="height: 48rpx;line-height: 40rpx;">在线客服</text> -->
+    </view>
+</view>

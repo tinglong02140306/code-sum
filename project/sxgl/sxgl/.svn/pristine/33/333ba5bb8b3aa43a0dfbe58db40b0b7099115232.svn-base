@@ -1,0 +1,173 @@
+// The Vue build version to load with the `import` command
+// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
+import $ from 'expose-loader?jQuery!jquery';
+
+import 'babel-polyfill';
+import Vue from 'vue';
+import App from './App';
+import store from './store';
+import router from './router/';
+import ElementUI from 'element-ui';
+// import 'element-ui/lib/theme-chalk/index.css';
+
+import '@/assets/ueditor/ueditor.config.js';
+import '@/assets/ueditor/ueditor.all.min.js';
+import '@/assets/ueditor/lang/zh-cn/zh-cn.js';
+import '@/assets/js/jquery.tipTip.js';
+import '@/assets/js/jquery.nicescroll.js';
+
+UE.Editor.prototype._bkGetActionUrl = UE.Editor.prototype.getActionUrl;
+UE.Editor.prototype.getActionUrl = function(action) {
+    if (action == 'config') {
+        //能找到config.json文件的路径
+        return "/bog-matter-mgr/ueditor/controller?action=config";
+    } else if (action == 'uploadImage' || action == 'uploadscrawl' || action == 'uploadimage') {
+        return '/bog-matter-mgr/ueditor/uploadImage'; //在这里返回我们实际的上传图片地址
+    } else {
+        return this._bkGetActionUrl.call(this, action);
+    }
+    // else if (action == 'uploadvideo' || action == 'uploadvideo') {
+    //     return '/bog-matter-mgr/ueditor/uploadAudio'; //在这里返回我们实际的上传视频地址
+    // } 
+}
+
+import VueResource from 'vue-resource';
+import axios from 'axios'; // 第三方axios方法
+
+// import EasyScroll from 'easyscroll';
+// Vue.use(EasyScroll);
+
+import qs from 'qs'; // 参数转换
+
+import api from './api/action'; // ajax方法
+
+import iView from 'iview-mz';
+import '@/assets/styles/iview1.css';
+import '@/assets/styles/iview2.css';
+import '@/assets/styles/iview3.css';
+
+// // 主题色
+// import '@/assets/styles/my-theme.less';
+// 基础样式
+import '@/assets/styles/base.less';
+// iview样式重写
+import '@/assets/styles/iview-reset.less';
+// iconfont图标
+import '@/assets/font/iconfont.css';
+
+import '@/assets/styles/theme.less';
+
+//title提示语
+import '@/assets/styles/tipTip.css';
+
+// Vue.use(vueUploadWeb);
+Vue.use(VueResource);
+axios.defaults.withCredentials = true;
+
+Vue.prototype.$axios = axios;
+Vue.prototype.$qs = qs;
+Vue.prototype.$api = api;
+Vue.prototype.$ = $;
+Vue.use(iView);
+Vue.use(ElementUI);
+// Vue.prototype.$MockHttp = 'https://www.easy-mock.com/mock/5b193dd03f6ddd76d8ff7d11/api'; // 远程mock数据
+
+Vue.http.options.emulateJSON = true;
+Vue.http.options.xhr = { withCredentials: true };
+Vue.http.interceptors.push((request, next) => {
+    request.credentials = true
+    next()
+});
+
+
+router.beforeEach((to, from, next) => {
+    // 判断该路由是否需要登录权限
+    if (to.meta.requireAuth) {
+        if (store.getters.isLogin) {
+            next();
+        } else {
+            next({
+                path: '/login',
+                query: { redirect: to.fullPath } // 将跳转的路由path作为参数，登录成功后跳转到该路由
+            });
+        }
+    } else {
+        // if (to.fullPath.indexOf('mattCaseConfig') != -1) {
+        //     store.commit('setState', {
+        //         userUrl: '/qxpz'
+        //     });
+        // } else if (to.fullPath.indexOf('itemManagement') != -1) {
+        //     store.commit('setState', {
+        //         userUrl: '/sxgl'
+        //     });
+        // }
+        if (localStorage.fontFlag) {
+            store.commit('setState', {
+                fontFlag: localStorage.fontFlag
+            });
+        }
+        if (localStorage.colorFlag) {
+            store.commit('setState', {
+                colorFlag: localStorage.colorFlag
+            });
+        }
+        if (sessionStorage.menuState) {
+            store.commit('setState', {
+                menuState: sessionStorage.menuState
+            });
+        }
+        if (localStorage.editCurPage) {
+            store.commit('setState', {
+                editCurPage: localStorage.editCurPage
+            });
+        }
+        if (to.fullPath.indexOf('guideWrap') != -1 || to.fullPath.indexOf('receiverSuccess') != -1) {
+            store.commit('setState', {
+                isNew: false
+            });
+        } else {
+            store.commit('setState', {
+                isNew: true
+            });
+        }
+        next();
+    }
+});
+
+/* eslint-disable no-new */
+let vueVm = new Vue({
+    // 过载到 vm.$el 中
+    el: '#app',
+    // 当前 vm 使用的路由
+    router,
+    // 当前 vm 使用的数据
+    store,
+    // 模板视图
+    template: '<App/>',
+    // 组件
+    components: { App }
+});
+
+// 路由监听
+router.beforeEach((to, from, next) => {
+    if (localStorage.fontFlag) {
+        store.commit('setState', {
+            fontFlag: localStorage.fontFlag
+        });
+    }
+    if (localStorage.colorFlag) {
+        store.commit('setState', {
+            colorFlag: localStorage.colorFlag
+        });
+    }
+    if (to.fullPath.indexOf('guideWrap') != -1 || to.fullPath.indexOf('receiverSuccess') != -1) {
+        vueVm.$store.commit('setState', {
+            isNew: false
+        });
+    } else {
+        vueVm.$store.commit('setState', {
+            isNew: true
+        });
+    }
+    next();
+});

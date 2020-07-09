@@ -1,0 +1,99 @@
+{
+  "pages": [
+    "pages/home/index/index",
+    "pages/mine/etc/etc-list/etc-list",
+
+    "pages/home/rights/rights",
+    "pages/stations/index/index",
+    "pages/stations/map/map",
+    "pages/stations/details/details",
+    "pages/stations/fast-oil/fast-oil",
+    "pages/stations/fast-order/fast-order",
+    "pages/stations/qrcode/qrcode",
+    "pages/stations/qrcode-result/qrcode-result",
+    "pages/stations/filter/filter",
+    "pages/stations/search/search",
+    "pages/stations/etc-pay/etc-pay",
+    "pages/mine/index/index",
+    "pages/mine/etc/list/list",
+    "pages/mine/coupons/list/list",
+    "pages/mine/coupons/coupon/coupon",
+    "pages/mine/gold/list/list",
+    "pages/mine/invoice/index/index",
+    "pages/mine/invoice/history/history",
+    "pages/mine/invoice/details/details",
+    "pages/mine/invoice/resend/resend",
+    "pages/mine/invoice/create/create",
+    "pages/mine/invoice/result/result",
+    "pages/mine/invoice/consume/consume",
+    "pages/mine/pay/list/list",
+    "pages/mine/pay/vehicle/vehicle",
+    "pages/mine/etc/bind/bind",
+    "pages/mine/order/list/list",
+    "pages/mine/order/details/details",
+    "pages/logs/logs",
+    
+    "pages/login/login",
+    "pages/mine/test/test",
+    "pages/stations/clean/clean-details/clean-details",
+    "pages/stations/clean/park-confirm/park-confirm",
+    "pages/stations/clean/clean-order/clean-order",
+    "pages/stations/clean/clean-doing/clean-doing",
+    "pages/stations/clean/clean-notice/clean-notice",
+    "pages/stations/clean/clean-result/clean-result",
+    "pages/mine/ticket-buy/details/details",
+    "pages/mine/ticket-buy/list/list",
+    "pages/mine/pay/bank-add/bank-add",
+    "pages/mine/pay/bank-list/bank-list",
+    "pages/mine/etc/etc-bind-result/etc-bind-result"
+  ],
+  "tabBar": {
+    "borderStyle": "white",
+    "color": "#828282",
+    "selectedColor": "#00A170",
+    "list": [
+      {
+        "pagePath": "pages/home/index/index",
+        "text": "推荐",
+        "iconPath": "/assets/static/tab-home.png",
+        "selectedIconPath": "/assets/static/tab-home-select.png"
+      },
+      {
+        "pagePath": "pages/stations/index/index",
+        "text": "服务网点",
+        "iconPath": "/assets/static/tab-station.png",
+        "selectedIconPath": "/assets/static/tab-station-select.png"
+      },
+      {
+        "pagePath": "pages/mine/test/test",
+        "text": "我的",
+        "iconPath": "/assets/static/tab-persion.png",
+        "selectedIconPath": "/assets/static/tab-persion-select.png"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于获取附近加油站"
+    }
+  },
+  "window": {
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "ETC加油助手",
+    "backgroundColor": "#f8f8f8"
+  },
+  "networkTimeout": {
+    "request": 60000,
+    "uploadFile": 60000,
+    "downloadFile": 60000
+  },
+  "navigateToMiniProgramAppIdList": [
+    "wxbd687630cd02ce1d",
+    "wxd13f131b3cb452bb",
+    "wxf01f93214fe8883f",
+    "wxbcad394b3d99dac9"
+  ],
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

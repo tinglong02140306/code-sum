@@ -1,0 +1,142 @@
+div {
+    /* 解决 移动端点击div  会显示高亮   */
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.area-cascade-wrap {
+    height: auto;
+    position: relative;
+    /* opacity: 1;
+    z-index: 10000;
+    visibility: visible; */
+    z-index: 0;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.show {
+    opacity: 1;
+    z-index: 10000;
+    visibility: visible;
+}
+
+.pickerExtend div {
+    /* 解决 移动端点击div  会显示高亮   */
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.area-cascade-wrap .gray-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: #eee;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 888;
+    display: block;
+}
+
+.area-cascade-wrap .content {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 889;
+    width: 100%;
+    /* 高度暂时写死 */
+    min-height: 300px;
+    color: black;
+    background: white;
+}
+
+.area-cascade-wrap .content .btn-bar {
+    border-bottom: 1px solid #DCDCDC;
+    font-size: 0.58rem;
+    height: 1.78rem;
+    position: relative;
+    text-align: center;
+    line-height: 1.78rem;
+}
+
+.area-cascade-wrap .content .btn-bar .cancel,
+.area-cascade-wrap .content .btn-bar .ensure {
+    position: absolute;
+    top: 0;
+    height: 1.78rem;
+    width: 15%;
+    cursor: pointer;
+}
+
+.area-cascade-wrap .content .btn-bar .cancel {
+    left: 0;
+    color: #666;
+}
+
+.area-cascade-wrap .content .btn-bar .ensure {
+    right: 0;
+    color: #1e83d3;
+}
+
+.area-cascade-wrap .content .btn-bar .title {
+    font-size: 0.58rem;
+    padding: 0 15%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.selected-wrap .item {
+    height: 1.33rem;
+    font-size: 0.58rem;
+    text-indent: 0.67rem;
+    line-height: 1.33rem;
+}
+
+.selected-wrap {
+    padding: 1.11rem 0;
+    border-bottom: 1px solid #DCDCDC;
+    background-color: #eee;
+    font-size: 0.58rem;
+}
+
+.select-wrapper {
+    height: 6.67rem;
+    overflow-y: auto;
+}
+
+.select-wrap {
+    height: auto;
+    overflow-y: auto;
+}
+
+.select-wrap .item {
+    display: flex;
+    text-indent: 0.67rem;
+    width: 100%;
+    height: 1.78rem;
+}
+
+.select-wrap span,
+.select-wrap i {
+    display: inline-block;
+}
+
+.select-wrap span {
+    font-size: 0.58rem;
+    width: calc(92% - 1.33rem);
+    line-height: 1.78rem;
+}
+
+.select-wrap i {
+    width: 1.33rem;
+    height: 100%;
+}
+
+.select-active i {
+    background: url("../image/icon-sel.png") right center / 1.07rem no-repeat;
+}
+
+.select-active {
+    color: #1e83d3;
+}

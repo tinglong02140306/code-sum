@@ -1,0 +1,75 @@
+<view class="order-details-container">
+    <!--上部分信息-->
+    <view class="order-details-box">
+        <image class="order-details-image" src="{{details.logo_url?details.logo_url:details.order_type=='GAS'?'https://oss.etcsd.com/object/03e883e1f4ff4f3583d9120de429c1ae':'https://oss.etcsd.com/object/261ccf0cb5e441d591c10454842d7a93'}}"></image>
+        <text class="order-details-station">{{details.order_title}}</text>
+        <view class="order-details-money-view">
+            <text class="order-details-money-icon">￥</text>
+            <text class="order-details-money-num">{{details.actual_amount ? details.actual_amount : 0.00}}</text>
+        </view>
+        <view class="order-details-line"></view>
+        <view class="order-details-info-box">
+            <text class="order-details-info-title">支付状态</text>
+            <text class="order-details-info-content">支付成功</text>
+        </view>
+        <view class="order-details-info-box" a:if="{{create_time}}">
+            <text class="order-details-info-title">支付时间</text>
+            <text class="order-details-info-content">{{details.create_time}}</text>
+        </view>
+        <view class="order-details-info-box" a:if="{{details.order_no}}">
+            <text class="order-details-info-title">订单号</text>
+            <text class="order-details-info-content">{{details.order_no}}</text>
+        </view>
+        <view class="order-details-info-box" a:if="{{details.order_detail}}">
+            <text class="order-details-info-title">商品名称</text>
+            <text class="order-details-info-content">{{details.order_detail}}</text>
+        </view>
+        <view class="order-details-info-box" a:if="{{plate_no}}">
+            <text class="order-details-info-title">车牌号</text>
+            <text class="order-details-info-content">{{details.plate_no}}</text>
+        </view>
+        <view class="order-details-info-box" a:if="{{etc_no}}">
+            <text class="order-details-info-title">ETC卡号</text>
+            <text class="order-details-info-content">{{details.etc_no}}</text>
+        </view>
+    </view>
+    <!--中间信息-->
+    <view class="order-details-box">
+        <view class="order-details-info-box" a:if="{{details.order_type==='GAS' && details.oil_no}}">
+            <text class="order-details-info-title">油号</text>
+            <text class="order-details-info-content">{{details.oil_no}}</text>
+        </view>
+        <view class="order-details-info-box" a:if="{{details.order_type==='GAS'&&details.oil_gun_no}}">
+            <text class="order-details-info-title">油枪</text>
+            <text class="order-details-info-content">{{details.oil_gun_no}}号枪</text>
+        </view>
+        <view class="order-details-info-box" a:if="{{details.order_type==='WASH'}}">
+            <text class="order-details-info-title">洗车模式</text>
+            <text class="order-details-info-content">{{details.order_detail}}</text>
+        </view>
+        <view class="order-details-info-box" a:if="{{details.coupon_count}}">
+            <text class="order-details-info-title">洗车券数量</text>
+            <text class="order-details-info-content">{{details.coupon_count}}</text>
+        </view>
+        <view class="order-details-info-box" a:if="{{details.order_price}}">
+            <text
+                class="order-details-info-title">{{details.order_type==='GAS'?'油品单价':details.order_type==='WASH'?'洗车单价':details.order_type==='COUPON_PACKAGE'?'券包单价':'单价'}}</text>
+            <text class="order-details-info-content">{{details.order_price}}元</text>
+        </view>
+        <view class="order-details-info-box" a:if="{{details.order_quantity}}">
+            <text class="order-details-info-title">数量</text>
+            <text class="order-details-info-content">{{details.order_type==='GAS'?details.order_quantity:details.actual_amount_wash}}{{details.order_type==='GAS'?'升':details.order_type==='WASH'?'次':details.order_type==='COUPON_PACKAGE'?'包':''}}</text>
+        </view>
+    </view>
+    <!--下部分信息-->
+    <view class="order-details-box">
+        <view class="order-details-info-box" a:if="{{details.total_amount}}">
+            <text class="order-details-info-title">订单金额</text>
+            <text class="order-details-info-content">￥{{details.total_amount?details.total_amount:0.00}}</text>
+        </view>
+        <view class="order-details-info-box" a:if="{{details.discount_amount&&details.discount_amount!=0.00}}">
+            <text class="order-details-info-title">{{details.order_type==='WASH'?'洗车优惠':'ETC会员优惠'}}</text>
+            <text class="order-details-info-discount">-￥{{details.discount_amount}}</text>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,9 @@
+{
+  "navigationBarBackgroundColor": "#ededed",
+  "navigationBarTextStyle": "black",
+  "navigationBarTitleText": "ETC无感加油",
+  "backgroundColor": "#eeeeee",
+  "backgroundTextStyle": "light",
+  "usingComponents": {
+  }
+}

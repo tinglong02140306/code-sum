@@ -1,0 +1,175 @@
+.station-price-dialog-box{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+.station-price-dialog-item{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+.station-price-dialog-item-content{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 4px;
+  .ant-select{
+    width: 250px;
+  }
+  input{
+    width: 250px;
+  }
+}
+.station-price-dialog-item-label{
+  width: 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  font-weight: 600;
+  margin: 0 4px 0 0;
+  span{
+    color: red;
+  }
+}
+.price-dialog-item-placeholder{
+  align-self: flex-start;
+  margin: 0 0 2px 104px;
+  color: red;
+}
+
+.search-info-container{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 16px;
+  background-color: #f7f7f7;
+}
+.search-info-top-container{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  background-color: white;
+  padding:10px 0;
+  margin-bottom: 10px;
+}
+.search-info-form{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-info-form-item{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  label{
+    font-weight: 600;
+  }
+}
+
+.search-info-button{
+  margin: 4px;
+}
+.search-info-table-container{
+  width: 100%;
+  box-sizing: border-box;
+  //padding: 10px;
+  background-color: #f7f7f7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.search-info-table{
+  width: 100%;
+  background-color: white;
+  box-sizing: border-box;
+  table{
+    thead{
+      th{
+        font-weight: 600;
+        letter-spacing: 1px;
+      }
+    }
+  }
+}
+
+.search-info-item-input{
+  width: 200px;
+}
+
+.station-price-dialog-item-container{
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+.station-price-dialog-item-s{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+.station-price-dialog-item-input{
+  width: 90px;
+}
+.station-price-dialog-item-hint{
+  height: 22px;
+  color: red;
+  padding-left: 135px;
+  margin: 1px 0;
+}
+.station-price-dialog-price-box{
+  //width: 92%;
+  margin-left: 40px;
+  margin-right: 40px;
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: column;
+  border: 1px solid #e8e8e8;
+  border-radius: 5px;
+  padding: 20px 30px 20px 0px;
+}
+.station-price-group-dialog-container {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-around;
+}
+.station-price-group-price-title{
+  width: auto;
+  margin: 0 0 10px 90px;
+  align-self: flex-start;
+  letter-spacing: 1px;
+}
+.station-price-dialog-price-item{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.station-price-dialog--box{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}

@@ -1,0 +1,95 @@
+<view class="wrapper">
+	<!--title区域-->
+	<block>
+		<view class="banner">
+			<view class="title">{{vehicleInfo["vehicle_no"]}}</view> 
+			<view class="subtitle">请确认您的车辆信息后添加车辆</view>
+		</view>
+	</block>
+	<!--信息-->
+	<block>
+		<!-- <input-item
+			disabled="{{true}}"
+			placeholder="必填"
+			value="{{carInfo['vlp']}}"
+		>
+			车牌号码
+		</input-item>
+		<input-item
+			disabled="{{true}}"
+			placeholder="必填"
+			value="{{vehicleTypeMap[carInfo['vc']]}}"
+		>
+			车辆类型
+		</input-item>
+		<input-item
+			disabled="{{true}}"
+			placeholder="必填"
+			value="{{plateColorMap[carInfo['vlpc']]}}"
+		>
+			车牌颜色
+		</input-item> -->
+		<input-item
+			disabled="{{true}}"
+			placeholder="请填写总质量"
+			value="{{totalApproved}}"
+			onInput="onItemInput"
+		>
+			总质量kg
+		</input-item>
+		<input-item
+			placeholder="准牵引总质量"
+			value="{{tractionMass}}"
+			disabled="{{flag}}"
+			onInput="onItemInput"
+			data-field="tractionMass"
+			type="number"
+		>
+			准牵引总质量kg
+		</input-item>
+		
+		<input-item
+			disabled="{{true}}"
+			placeholder="请填写轴数"
+			value="{{axleCount}}"
+			onInput="onItemInput"
+		>
+			轴数
+		</input-item>
+		<block a:if="{{stafflag}}">
+			<input-item
+				data-field="retcode"
+				clear="{{true}}"
+				value="{{retcode}}"
+				placeholder="选填"
+				onInput="onItemInput"
+				onClear="onClear"
+				disabled="{{true}}"
+			>
+			业务推广码
+			</input-item>
+		</block>
+		<block a:if="{{!stafflag}}">
+			<input-item
+				data-field="retcode"
+				clear="{{true}}"
+				value="{{retcode}}"
+				placeholder="选填"
+				onInput="onItemInput"
+				onClear="onClear"
+				maxlength="12"
+			>
+			业务推广码
+			</input-item>
+		</block>
+		<!-- <picker-item
+			placeholder="请选择车辆颜色"
+			value="{{carColor}}"
+			onPickerTap="selectCarColor"
+		>
+			车辆颜色
+		</picker-item> -->
+	</block>
+	<button class="next-btn bg-primary" onTap="addCar">确认并提交</button>
+</view>
+

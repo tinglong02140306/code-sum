@@ -1,0 +1,50 @@
+/* pages/stations/clean/park-confirm/park-confirm.wxss */
+.park-confirm-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+.park-confirm-text-box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 90rpx;
+}
+.park-confirm-text{
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 30rpx;
+    font-family: PingFangSC-Medium;
+
+}
+.park-confirm-image-box{
+    margin-top: 50rpx;
+    width: 550rpx;
+    height: 678rpx;
+    background-color: #F2F2F2;
+}
+.park-confirm-btns{
+    width: 100vw;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    background-color: #FFFFFF;
+    padding-top: 24rpx;
+    padding-bottom: 24rpx;
+    box-shadow: 0rpx -4rpx 20rpx 0rpx rgba(0, 0, 0, 0.04);
+}
+
+.park-confirm-btn-item{
+    width: 630rpx;
+    height: 90rpx;
+    line-height: 90rpx;
+    text-align: center;
+    border-radius: 56rpx;
+    color: #ffffff;
+    font-size: 32rpx;
+}

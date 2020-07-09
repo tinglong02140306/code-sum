@@ -1,0 +1,32 @@
+<view>
+	<view class="desc-area">
+		<!--入账中-->
+		<block a:if="{{status=='wait'}}">
+			<image src="/assets/images/leave.png" style="width:150rpx;height:150rpx;" mode="widthFix"/>
+			<view class="title">还款入账中</view>
+			<view class="subtitle">正在处理您的还款，请稍候</view>
+		</block>
+		<!--成功-->
+		<block a:elif="{{status=='success'}}">
+			<image src="/assets/images/success-invert.png" style="width:150rpx;height:150rpx;" mode="widthFix"/>
+			<view class="title">还款成功</view>
+			<!--<view class="subtitle">本次还款金额：￥2000.00</view>-->
+			<!--<view class="tip color-primary">您尚有￥1000.00欠款等待还款</view>-->
+			<!--<view class="tip color-primary">您本期账单已逾期，根据协议将生成惩治金，您需缴纳惩治金后，才可正常使用ETC业务</view>-->
+		</block>
+		<!--失败-->
+		<block a:else>
+			<image src="/assets/images/fail.png" style="width:150rpx;height:150rpx;" mode="widthFix"/>
+			<view class="title">还款失败</view>
+			<view class="subtitle">失败原因：您设置的扣款方式余额不足</view>
+		</block>
+	</view>
+	<view class="btn-area">
+		<block>
+			<!--<button class="next-btn bg-primary">完成</button>-->
+			<!--<button class="next-btn bg-primary">缴纳惩治金</button>-->
+			<!--<button class="next-btn bg-primary">查看账单</button>-->
+			<!--<button class="next-btn bg-primary">再次还款</button>-->
+		</block>
+	</view>
+</view>

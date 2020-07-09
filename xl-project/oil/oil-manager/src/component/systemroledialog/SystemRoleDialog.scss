@@ -1,0 +1,83 @@
+.role-dialog-right-container{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.role-dialog-right-permission{
+  width: 100px;
+  height: 30px;
+  color: black;
+  font-size: 14px;
+  font-weight: bold;
+  margin-right: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.role-dialog-right{
+  display: flex;
+  flex-direction: row;
+}
+
+.role-dialog-right-permission-container{
+  display: flex;
+  flex-direction: column;
+}
+
+.role-dialog-item-container{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: flex-start;
+}
+
+.role-dialog-container{
+  display: flex;
+  flex-direction: column;
+  align-self:center;
+  width: 100%;
+}
+.role-dialog-left-container{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.role-dialog-item{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  div{
+    width: 80px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    color: black;
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 10px;
+    span{
+      color: #c90000;
+      margin-right: 5px;
+    }
+  }
+}
+.role-dialog-item-hint{
+  width: 100%;
+  color: red;
+  font-size: 10px;
+  padding: 2px 0 2px 90px;
+}
+.role-dialog-select-hint{
+  width: 100%;
+  color: red;
+  font-size: 10px;
+  padding: 1px 0 0 0;
+}

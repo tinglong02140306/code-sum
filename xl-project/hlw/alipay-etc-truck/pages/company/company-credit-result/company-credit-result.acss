@@ -1,0 +1,27 @@
+.wrapper{
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 100rpx;
+	flex-direction: column;
+}
+.car-container{
+	flex-direction: column;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size:36rpx;
+	font-weight: 800;
+	z-index: 999;
+}
+.next-btn{
+	width: 686rpx;
+	margin: 50rpx 75rpx;
+	outline: none;
+	position: fixed;
+	bottom: 100rpx;
+	color:#fff;
+	border-radius:10rpx;
+	font-size: 36rpx;
+}

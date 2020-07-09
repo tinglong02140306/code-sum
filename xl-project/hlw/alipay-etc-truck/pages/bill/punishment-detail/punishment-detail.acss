@@ -1,0 +1,32 @@
+.wrapper{
+  background-color: #eee;
+  font-size: 28rpx;
+}
+.next-btn{
+  width: 600rpx;
+  outline: none;
+}
+
+.btn-area{
+  width: 750rpx;
+  height: 20vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card{
+  width: 700rpx;
+  min-height: 300rpx;
+  background-color: white;
+  border-radius: 10rpx;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 10rpx 20rpx;
+}
+.row{
+  height: 90rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

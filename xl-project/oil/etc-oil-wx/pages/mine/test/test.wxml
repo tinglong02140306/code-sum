@@ -1,0 +1,147 @@
+<!--pages/mine/test/test.wxml-->
+<import src="../../../templates/mine/etc-card-add/etc-card-add.wxml"></import>
+
+<view class="mine-info-container">
+    <image class="mine-account-info-top-bg"  src="/assets/static/mine-bg-2.png"></image>
+    <navigation-bar background_style="background-color:transparent" style="position: absolute">
+        <view class="mine-navigation-bar">我的</view>
+    </navigation-bar>
+    <!--个人信息-->
+    <view class="mine-account-info-box-green" style="margin-top: {{isIphoneX?150:110}}">
+        <view class="mine-user-header-container">
+            <view class="head-image-box">
+                <open-data wx:if="{{openid}}" class="head-image" type="userAvatarUrl" mode="cover"></open-data>
+                <image wx:if="{{!openid}}" class="head-image" src="{{icon_default_head}}"></image>
+            </view>
+            <open-data wx:if="{{openid}}" class="nick-name" type="userNickName"></open-data>
+            <text wx:if="{{!openid}}" class="nick-name">未登录</text>
+            <text class="mine-login-btn" bind:tap="onChangeUserClick">{{openid?'切换账号':'注册/登录'}}</text>
+            <!--            <login-status openid="{{openid}}" bind:click="onChangeUserClick">-->
+<!--                <text class="mine-login-btn">{{openid?'切换账号':'注册/登录'}}</text>-->
+<!--            </login-status>-->
+        </view>
+    </view>
+    <!--我的账户-->
+    <view class="mine-account-info-box-white">
+<!--        <text class="mine-account-info-title">我的账户</text>-->
+        <view class="mine-account-info-items">
+            <view class="mine-account-info-item" bind:tap="onCouponsClick">
+                <text class="mine-account-info-item-number">{{unused_coupon_count}}</text>
+                <text class="mine-account-info-item-title">优惠券</text>
+            </view>
+            <view class="mine-account-info-item" bind:tap="onPaysClick">
+                <text class="mine-account-info-item-number">{{payment_way_count}}</text>
+                <text class="mine-account-info-item-title">支付方式</text>
+            </view>
+            <view class="mine-account-info-item" bind:tap="onCargoClick">
+                <text class="mine-account-info-item-number">{{account_balance}}</text>
+                <text class="mine-account-info-item-title">加油金</text>
+            </view>
+        </view>
+    </view>
+    <!--ETC卡-->
+    <view class="mine-etc-card-container">
+        <!--添加ETC卡-->
+<!--        <login-status openid="{{openid}}" bind:click="onEtcAddClick">-->
+            <view class="mine-etc-card-add-box" wx:if="{{isCardEmpty}}" bind:tap="onEtcAddClick">
+                <view class="mine-etc-card-add-top">
+                    <image class="mine-etc-card-add-icon" src="{{icon_etc_add}}"></image>
+                    <text class="mine-etc-card-add-text">添加ETC</text>
+                </view>
+                <view class="mine-etc-card-add-bottom">
+                    <view class="mine-etc-card-add-bottom-items">
+                        <view class="mine-etc-card-add-steps" >1</view>
+                        <text class="mine-etc-card-add-steps-text">添加ETC</text>
+                    </view>
+                    <view class="mine-etc-card-add-bottom-items">
+                        <view class="mine-etc-card-add-steps" >2</view>
+                        <text class="mine-etc-card-add-steps-text">签订免密协议</text>
+                    </view>
+                    <view class="mine-etc-card-add-bottom-items">
+                        <view class="mine-etc-card-add-steps" >3</view>
+                        <text class="mine-etc-card-add-steps-text">开通ETC闪付</text>
+                    </view>
+                </view>
+            </view>
+<!--        </login-status>-->
+        <!--ETC卡列表-->
+<!--        <scroll-view class="mine-etc-card-list-box" scroll-x="{{scroll}}" scroll-with-animation-->
+<!--        bindscroll="bindScrollStart"-->
+
+        <scroll-view class="mine-etc-card-list-box" scroll-x scroll-with-animation
+                     scroll-into-view="{{toView}}"
+                     bindtouchstart="touchStart"
+                     bindtouchmove="touchMove"
+                     bindtouchend="touchEnd"
+                     wx:if="{{!isCardEmpty}}"
+        >
+            <view class="hor">
+                <view wx:for="{{card_list}}"  wx:key="etc_card" class="etx-card-box" id="card_{{index}}" wx:for-index="index" wx:for-item="item">
+                    <view class="mine-etc-card-item">
+                        <etc-card list="{{item}}" height="{{item.card_height}}" bind:itemclick="onETCItemClick" bind:statusChange="statusChange"></etc-card>
+                    </view>
+                </view>
+                <view class="mine-etc-card-item-no" bind:tap="onEtcAddClick" id="card_{{card_list.length}}">
+                    <template is="etc_add" data="{{card_height}}" wx:if="{{isEnough}}"></template>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+    <!--更多服务-->
+    <view class="mine-more-serve-box">
+<!--        <text class="mine-more-serve-title">更多服务</text>-->
+        <view class="mine-account-info-items">
+            <view class="mine-account-info-item" bind:tap="onOrdersClick">
+                <image class="mine-list-item-icon" src="{{icon_orders}}"></image>
+                <text class="mine-account-info-item-title-t">我的订单</text>
+            </view>
+            <view class="mine-account-info-item" bind:tap="onInvoicesClick">
+                <image class="mine-list-item-icon" src="{{icon_invoices}}"></image>
+                <text class="mine-account-info-item-title-t">发票</text>
+            </view>
+            <view class="mine-account-info-item" open-type="contact">
+                <image class="mine-list-item-icon" src="{{icon_contact}}"></image>
+                <text class="mine-account-info-item-title-t">在线客服</text>
+                <button class="mine-account-info-item-service-btn" open-type="contact"></button>
+            </view>
+            <view class="mine-account-info-item">
+                <image class="mine-list-item-icon" src="{{icon_share}}"></image>
+                <text class="mine-account-info-item-title-t">分享</text>
+                <button class="mine-account-info-item-service-btn" open-type="share"></button>
+            </view>
+        </view>
+    </view>
+    <!--广告位-->
+<!--    //临时隐藏掉-->
+<!--    <view class="clean-share-container">-->
+<!--            <view class="clean-share-container-box" bind:tap="goBuyClick">-->
+<!--                <view class="clean-share-box-left-item">-->
+<!--                    <view class="clean-share-box-left-texts">-->
+<!--                        <text>购券洗车</text>-->
+<!--                        <text style="color: #f87117">9.9元</text>-->
+<!--                        <text>起</text>-->
+<!--                    </view>-->
+<!--                    <view class="clean-share-box-left-btns">-->
+<!--                        <text>去抢券></text>-->
+<!--                    </view>-->
+<!--                </view>-->
+<!--                <image class="clean-share-box-right-icon" src="/assets/static/mine-banner-package.png"></image>-->
+<!--            </view>-->
+<!--    </view>-->
+    <view class="mine-banner-container" style="margin-top: {{isIphoneX?240:48}}rpx">
+        <image class="mine-layer-image-big" src="/assets/static/mine-layer.png"></image>
+    </view>
+    <popup show="{{show_pop}}" tab="{{show_pop}}">
+        <view class="pop-up-container" style="padding-bottom: {{isIphoneX?32:0}}rpx;">
+            <view class="pop-up-hint-title-view" wx:if="{{click_type===3}}">
+                <text class="pop-up-hint-title">停用ETC支付后该车辆将无法使用ETC快捷支付服务，确认停用吗？</text>
+            </view>
+            <view class="pop-up-operation-view" bind:tap="onPopClick">
+                <text class="pop-up-operation" >{{click_type===1?'解绑':click_type===2?'启用':'停用'}}</text>
+            </view>
+            <view class="pop-up-cancel-view" bind:tap="onCancelClick">
+                <text class="pop-up-cancel">取消</text>
+            </view>
+        </view>
+    </popup>
+</view>

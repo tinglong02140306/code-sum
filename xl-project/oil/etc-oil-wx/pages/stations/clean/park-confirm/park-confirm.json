@@ -1,0 +1,10 @@
+{
+  "navigationBarBackgroundColor": "#ededed",
+  "navigationBarTextStyle": "black",
+  "navigationBarTitleText": "停车确认",
+  "backgroundColor": "#eeeeee",
+  "backgroundTextStyle": "light",
+  "usingComponents": {
+    "login-status":"/components/login-status/login-status"
+  }
+}

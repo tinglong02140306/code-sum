@@ -1,0 +1,12 @@
+<!--pages/stations/clean/clean-notice/clean-notice.axml-->
+<view class="clean-notice-container">
+    <view class="clean-notice-items-box">
+        <view class="clean-notice-items-row">
+            <image class="clean-notice-items-big" src="/assets/static/clean-notice.png"></image>
+        </view>
+        <text class="clean-notice-items-title">确认完成以上操作，保障洗车过程中车辆安全，洗车过程中请勿移动车辆。</text>
+    </view>
+    <view class="clean-notice-btns" style="padding-bottom: {{isIphoneX?64:24}}rpx">
+        <view class="clean-notice-btn-item theme-button" onTap="onConfirmClick"> 启动洗车 </view>
+    </view>
+</view>

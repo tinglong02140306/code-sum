@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText":"一键加油",
+  "navigationBarBackgroundColor":"#00A170",
+  "navigationBarTextStyle":"white",
+  "backgroundColor":"#00A170",
+  "usingComponents": {
+    "modal-super":"../../../components/modal-super/modal-super"
+  }
+}

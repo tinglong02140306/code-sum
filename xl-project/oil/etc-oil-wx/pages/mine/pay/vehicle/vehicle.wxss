@@ -1,0 +1,158 @@
+/* pages/mine/etc/bind/bind.wxss */
+page{
+    background-color: #ffffff;
+}
+.bind-etc-container{
+    width: 100vw;
+    background-color: #ffffff;
+    position: static;
+}
+
+.bind-vehicle-box{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.bind-etc-box{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 32rpx 0;
+}
+
+.bind-etc-content-box{
+    width: 630rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.bind-etc-image{
+    width: 630rpx;
+    height: 361rpx;
+    margin-bottom: 32rpx;
+}
+
+.bind-etc-content{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    box-sizing: border-box;
+    margin: 10rpx 0;
+}
+
+.bind-etc-input{
+    width: 100%;
+    align-self: center;
+    margin: 32rpx 0;
+}
+
+.bind-etc-plate-input{
+    width: 100%;
+    align-self: center;
+    margin: 32rpx 0;
+}
+
+.bind-etc-plate-color{
+    width: 94%;
+    align-self: center;
+    margin: 40rpx 0 16rpx 0;
+}
+
+.bind-etc-separation{
+    width: 94%;
+    height: 2rpx;
+    background-color: #f7f7f7;
+    margin-bottom: 16rpx;
+}
+
+.btn-margin{
+    width: 650rpx;
+    height: 90rpx;
+    font-size: 32rpx;
+}
+
+.bind-plate-number-list{
+    width: 100%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.bind-plate-number-list-title{
+    width: 100%;
+    height: 130rpx;
+    line-height: 130rpx;
+    text-align: center;
+    font-size: 28rpx;
+    color: #888888;
+}
+
+.bind-plate-number-list-box{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.bind-plate-number-list-item{
+    width: 100%;
+    height: 100rpx;
+    line-height: 100rpx;
+    text-align: center;
+    color: black;
+    font-size: 36rpx;
+    border-top: 2rpx solid #f7f7f7;
+}
+
+.bind-plate-number-list-cancel{
+    width: 100%;
+    height: 100rpx;
+    line-height: 100rpx;
+    text-align: center;
+    color: black;
+    font-size: 36rpx;
+    border-top: 12rpx solid #CDCDD1;
+}
+
+
+.headline-box{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.headline-separation{
+    width: 10rpx;
+    height: 26rpx;
+    background-color: black;
+}
+
+.headline-text{
+    color: black;
+    font-size: 36rpx;
+    margin-left: 10rpx;
+    font-weight: 600;
+}
+
+.bind-bottom-box{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-top: 2rpx solid rgba(0, 0, 0, 0.04);
+    position: fixed;
+    bottom: 0;
+    padding-bottom: 20rpx;
+    padding-top: 20rpx;
+}

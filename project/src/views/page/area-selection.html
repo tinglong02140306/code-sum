@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="../../../../" >
+    <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <!-- 添加到主屏幕后，全屏显示 -->
+    <meta name="apple-touch-fullscreen" content="YES"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <!-- iphone 运行在全屏模式 -->
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="viewport" content="width=device-width"/>
+    <title>选择办事区域</title>
+    <link rel="stylesheet" type="text/css" href="../css/base.css?__inline"/>
+    <link rel="stylesheet" type="text/css" href="../css/all.css?__inline"/>
+    <link rel="stylesheet" type="text/css" href="../css/area-selection.css?__inline"/>
+</head>
+<body>
+    <div class="wrap">   
+        <!-- 头部 -->
+        <header class="topic-bg">
+            <div class="header-item topic-bg">
+                <a href="javascript:void(0)" class="arrow-left header-back" data-bind="click: back"></a>
+                <span class="f36 cf title">选择办事区域</span>
+            </div>
+        </header>  
+        <!-- 主要内容 -->
+        <div class="content top-7">
+            <div class="wrapper">
+                <ul>
+                    <li><a href="javascript:;" class="fl">市辖区</a></li>
+                    <li><a href="javascript:;" class="fr">谯城区</a></li>
+                    <li><a href="javascript:;" class="fl">经开区</a></li>
+                    <li><a href="javascript:;" class="fr">涡阳县</a></li>
+                    <li><a href="javascript:;" class="fl">蒙城县</a></li>
+                    <li><a href="javascript:;" class="fr">利辛县</a></li>
+                </ul> 
+            </div>
+        </div>
+    </div>
+</body>
+<script id="typeTempl" type="text/html">
+    {{each $data as item}}
+    {{if item.value == "02"}}
+        <a class="item flex select" href="javascript:void(null);" data-value="{{item.value}}" data-text="{{item.text}}">
+            <p class=" flex-one">{{item.text}}</p>
+            <i></i>
+        </a>
+    {{else if item.value != "02" && index == 0}} 
+        <a class="item flex select"  href="javascript:void(null);" data-value="{{item.value}}" data-text="{{item.text}}">
+            <p class=" flex-one">{{item.text}}</p>
+            <i></i>
+        </a>
+    {{else}} 
+        <a class="item flex"  data-value="{{item.value}}" data-text="{{item.text}}" href="javascript:void(null);">
+            <p class=" flex-one">{{item.text}}</p>
+            <i></i>
+        </a>
+    {{/if}}
+    {{/each}}
+</script>
+
+
+<!-- <script src="../lib/lib.js"></script> -->
+<!-- <script src="../app/area-selection.js?__inline"></script> -->
+</html>

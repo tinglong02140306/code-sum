@@ -1,0 +1,39 @@
+.success-wrap {
+    padding: 0 0.58rem;
+    width: 100%;
+}
+
+.success-wrap .content {
+    margin-top: 1.78rem;
+}
+
+.success-wrap .content i {
+    display: inline-block;
+    height: 3.11rem;
+    width: 100%;
+    background: url("../image/icon-success.png") center / 3.33rem no-repeat;
+}
+
+.success-wrap .content span {
+    display: inline-block;
+    height: 1rem;
+    width: 100%;
+    text-align: center;
+    line-height: 2rem;
+}
+
+
+/* .success-wrap .btn-close {
+    margin-top: 2rem;
+    height: 2.47rem;
+    width: 100%;
+    background: url("../image/btn-sure-bg.png") center / 100% 2.47rem no-repeat;
+}
+
+.success-wrap .btn-close span {
+    display: inline-block;
+    height: 2rem;
+    width: 100%;
+    text-align: center;
+    line-height: 2rem;
+} */

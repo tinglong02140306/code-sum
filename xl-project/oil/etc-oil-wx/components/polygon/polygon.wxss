@@ -1,0 +1,163 @@
+/* pages/activity/component/polygon/polygon.wxss */
+.polygon-container{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.polygon-box{
+    width: 100%;
+    padding: 32rpx 0;
+}
+
+.polygon-top{
+    width: 100%;
+    height: 118rpx;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    left: 0;
+    top: 0;
+}
+
+.polygon-unseleted{
+    width: 100%;
+    height: 100rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #f2f2f2;
+    color: #666666;
+    font-size: 32rpx;
+    position: relative;
+    bottom: -20rpx;
+    left: 0;
+    border-top-right-radius: 16rpx;
+    border-top-left-radius: 16rpx;
+}
+
+.polygon-unseleted-item{
+   width: 50%;
+   height: 100rpx;
+   line-height: 100rpx;
+   text-align: center; 
+}
+
+.polygon-seleted{
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 200;
+}
+
+.polygon-top-left{
+    width: 48%;
+    height: 118rpx;
+    background-color: white;
+    border-top-left-radius: 20rpx;
+    border-top-right-radius: 20rpx;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 200;
+    box-shadow: 0 4rpx 24rpx 0 rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.shadow-mask{
+    width: 100%;
+    height: 24rpx;
+    position: absolute;
+    left: 0;
+    bottom: -24rpx;
+    background-color: white;
+    z-index: 300;
+}
+
+.polygon-top-left::before{
+    content: "";
+    width: 0rpx;
+    height: 0rpx;
+    position: absolute; 
+    right: -16rpx;
+    bottom: 0; 
+    border-bottom: 118rpx solid white;
+    border-right: 20rpx solid transparent; 
+}
+
+.polygon-top-right{
+    width: 48%;
+    height: 118rpx;
+    background-color: white;
+    border-top-left-radius: 20rpx;
+    border-top-right-radius: 20rpx;
+    position: absolute;
+    right: 0rpx;
+    top: 0;
+    z-index: 200;
+    box-shadow: 0 0rpx 24rpx 0 rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.polygon-top-right::before{
+    content: "";
+    width: 0rpx;
+    height: 0rpx;
+    position: absolute; 
+    left: -16rpx;
+    bottom: 0; 
+    border-bottom: 118rpx solid white;
+    border-left: 20rpx solid transparent;  
+}
+
+.polygon-tab-title{
+    height: 50rpx;
+    line-height: 50rpx;
+    color: black;
+    font-weight: 600;
+    font-size: 32rpx;
+    letter-spacing: 2rpx;
+}
+
+.polygon-tab-hint{
+    height: 40rpx;
+    line-height: 40rpx;
+    color: #afafaf;
+    font-size: 20rpx;
+}
+
+.polygon-tab-sparation{
+    width: 30%;
+    height: 6rpx;
+    border-radius: 50rpx 50rpx 0 0;
+    background-color: #05BA7D;
+
+    /* border-top:20rpx solid red; */
+    /* border-left: 8rpx solid transparent;
+    border-bottom:8rpx solid #58b0f8;
+    border-right: 8rpx solid transparent; */
+}
+
+.polygon-content{
+    width: 100%;
+    min-height: 300rpx;
+    background-color: white;
+    border-bottom-left-radius: 20rpx;
+    border-bottom-right-radius: 20rpx;
+    box-shadow:  0 4rpx 24rpx 0 rgba(0, 0, 0, 0.1);
+    padding-top: 24rpx;
+}
+
+.polygon-content-item{
+    width: 100%;
+}

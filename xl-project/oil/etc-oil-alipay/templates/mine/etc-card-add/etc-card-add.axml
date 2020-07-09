@@ -1,0 +1,23 @@
+<template name="etc-add">
+    <view class="etc-card-template-box-add" style="{{cardHeight}}">
+        <view class="etc-card-template-add-top">
+            <image class="etc-card-template-add-icon"
+                src="https://oilmag.etcsd.com.cn/oilcoreserver/static//resource/mine-etc-add1588148562560.png"></image>
+            <text class="etc-card-template-add-text">添加ETC</text>
+        </view>
+        <view class="etc-card-template-add-bottom">
+            <view class="etc-card-template-add-bottom-items">
+                <view class="etc-card-template-add-steps">1</view>
+                <text class="etc-card-template-add-steps-text">添加ETC</text>
+            </view>
+            <view class="etc-card-template-add-bottom-items">
+                <view class="etc-card-template-add-steps">2</view>
+                <text class="etc-card-template-add-steps-text">签订免密协议</text>
+            </view>
+            <view class="etc-card-template-add-bottom-items">
+                <view class="etc-card-template-add-steps">3</view>
+                <text class="etc-card-template-add-steps-text">开通ETC闪付</text>
+            </view>
+        </view>
+    </view>
+</template>

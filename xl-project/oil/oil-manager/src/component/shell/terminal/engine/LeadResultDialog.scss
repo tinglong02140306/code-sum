@@ -1,0 +1,53 @@
+.shell-lead-result-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    box-sizing: border-box;
+}
+
+.shell-lead-result-title{
+    font-size: 14px;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+.shell-lead-result-top{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    a{
+        font-size: 12px;
+    }
+}
+
+.shell-lead-result-content{
+    font-size: 14px;
+    letter-spacing: 1px;
+    font-weight: 400;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: 10px;
+    .shell-lead-success{
+        span{
+            color: green;
+        }
+    }
+
+    .shell-lead-fail{
+        span{
+            color: red;
+        }
+    }
+}
+
+.shell-lead-table{
+    font-size: 14px;
+    letter-spacing: 1px;
+    font-weight: 400;
+}

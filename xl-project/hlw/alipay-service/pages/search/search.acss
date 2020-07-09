@@ -1,0 +1,92 @@
+.search-wrapper{
+  width: 100vw;
+  min-height: 98rpx;
+  background-color: #3467eb;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 0;
+}
+
+.search-box{
+  height: 66rpx;
+  width: 690rpx;
+  margin: 52rpx auto 34rpx;
+  background-color: white;
+  border-radius: 33rpx;
+  border: 2rpx solid rgb(221,223,231);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search-input{
+  flex: 1;
+  padding-left: 20rpx;
+}
+
+input{
+  font-family: SourceHanSansCN-Regular;
+  font-size: 26rpx;
+  color: rgb(173,184,203);
+}
+
+.search-icon{
+  width: 40rpx;
+  height: 40rpx;
+  margin: 0 20rpx;
+}
+.search-tips{
+  padding-top: 160rpx;
+  margin-top: 22rpx;
+  width: 750rpx;
+  min-height: 100rpx;
+}
+.search-card{
+  background-color: white;
+  box-sizing: border-box;
+  padding: 0 30rpx;
+}
+.search-card-title{
+  padding-top: 50rpx;
+  font-family: SourceHanSansCN-Normal;
+  font-size: 32rpx;
+  color: rgb(59,66,87);
+  font-weight: bold;
+  padding-bottom: 34rpx;
+}
+.search-card-body{
+  display: flex;
+  flex-wrap: wrap;
+}
+.search-item{
+  padding: 10rpx 20rpx;
+  font-family: SourceHanSansCN-Normal;
+  font-size: 26rpx;
+  color: rgb(59,66,87);
+  background-color: rgb(247,247,247);
+  border-radius: 30rpx;
+  margin-bottom: 26rpx;
+  margin-right: 8rpx;
+  min-height: 60rpx;
+  line-height: 60rpx;
+}
+
+.search-result-wrapper{
+  background-color: white;
+  width: 100vw;
+  box-sizing: border-box;
+  padding: 24rpx;
+  padding-top: 160rpx;
+}
+.search-result-no-data{
+  background-color: white;
+  width: 100vw;
+  height: calc(100vh - 156rpx);
+  box-sizing: border-box;
+  padding: 24rpx;
+  padding-top: 160rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

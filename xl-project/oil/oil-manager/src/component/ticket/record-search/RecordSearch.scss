@@ -1,0 +1,82 @@
+.record-search-container{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.record-search-box{
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.record-more-box{
+  width: 45px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-self: flex-end;
+  margin-left: 10px;
+  padding-bottom: 10px;
+  font-size: 12px;
+  color: #1890ff;
+}
+
+.record-form-box{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.record-form-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.record-search-row{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.ant-form-item-label{
+  width: 75px;
+}
+
+.ant-form-item-control-wrapper{
+  flex: 1;
+}
+
+.ant-row{
+  display: flex;
+  flex-direction: row;
+  margin: 0 5px;
+}
+
+.ant-form-item{
+  font-weight: 700;
+}
+
+.record-btn-container{
+  width: 10%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.record-btn-search{
+  margin: 2px;
+  font-size: 12px;
+}

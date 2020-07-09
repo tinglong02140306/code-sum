@@ -1,0 +1,20 @@
+<!--
+ * @Author: sunmingmao
+ * @Date: 2020-04-03 10:52:57
+ * @LastEditors: sunmingmao
+ * @LastEditTime: 2020-04-20 15:10:43
+ * @Description: 列表为空 网路连接失败
+ -->
+ <view class="status-container">
+     <!--列表为空-->
+     <view class="status-item" wx:if="{{type==1}}">
+        <image class="status-image" mode="widthFix" src="{{url}}"></image>
+        <text class="status-text">{{text}}</text>
+     </view>
+     <!--网路连接失败-->
+     <view class="status-item" wx:if="{{type==2}}">
+        <image class="status-image" mode="widthFix" src="{{url}}"></image>
+        <text class="status-text">{{text}}</text>
+        <text class="status-item-button theme-button" bind:tap="onRetryClick">重新加载</text>
+     </view>
+ </view>

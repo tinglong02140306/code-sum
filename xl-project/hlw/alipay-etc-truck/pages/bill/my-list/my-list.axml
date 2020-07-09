@@ -1,0 +1,37 @@
+<view class="my-content">
+  <view class="my-title">
+      <image src="/images/index/car.png" alt="" style="width:160rpx;height:160rpx;" mode="widthFix"/>
+      <view>您已添加 <text style="color:#4A80FF;margin-left:5rpx;margin-right:5rpx;">{{nunm}}</text> 辆车</view>
+      <view class="my-add" onTap="addCar" a:if="{{!addFlag}}">追加车辆</view> 
+  </view>
+     <block a:for="{{list}}">
+       <view class="my-list">
+        <view class="my-list-one">
+            <view style="font-weight:400;color:#000;font-size:40rpx;">{{item["vlp"]}}</view>
+           <view class="my-operation">
+                 <view style="margin-right:20rpx;" data-vlp="{{item['vlp']}}" data-vlpc="{{item['vlpc']}}" catchTap="active">激活</view>
+            </view> 
+            <!-- <view>注销</view>-->
+        </view>
+        <view style="color:#F88834;width:23%;font-weight:400;padding:5rpx 5rpx; text-align: left;" a:if="{{item['state']=='14'}}">
+            待开卡
+        </view>
+        <view style="color:#F88834;width:23%;font-weight:400;padding:5rpx 5rpx; text-align: left;" a:if="{{item['state']=='16'}}">
+            存在旧卡
+        </view>
+         <view style="color:#F88834;width:23%;font-weight:400;padding:5rpx 5rpx; text-align: left;" a:if="{{item['state']=='1'}}">
+            审核通过
+         </view>
+		  <view style="color:#F88834;width:23%;font-weight:400;padding:5rpx 5rpx; text-align: left;" a:if="{{item['state']=='17'}}">
+            待邮寄
+         </view>
+		 <view style="color:#F88834;width:23%;font-weig
+		  ht:400;padding:5rpx 5rpx; text-align: left;" a:if="{{item['state']=='4'}}">
+           追加待审核
+         </view>
+        <view class="my-card">
+            <view><text>快递公司:{{item['courier_services_company']}}</text><text style="color:#4A80FF;margin-left:20rpx;">快递单号:{{item['courier_number']}}</text></view>
+        </view>  
+        </view>
+      </block>
+</view>

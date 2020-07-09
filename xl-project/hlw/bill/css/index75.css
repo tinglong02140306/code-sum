@@ -1,0 +1,104 @@
+.wrap {
+    background: #f1f1f6;
+}
+.pd3 {
+    padding: 0 3%;
+}
+.bill-search-wrap {
+    width: 100%;
+    height: 5.2rem;
+}
+.bill-search-wrap .title {
+    width: 100%;
+    height: 1.09rem;
+    font-size: 0.4rem;
+    color: #8087a9;
+    line-height: 1.09rem;
+}
+.bill-search-wrap .con-item {
+    display: flex;
+    width: 100%;
+    height: 1.31rem;
+    background: #fff;
+    align-items: center;
+}
+.bor-bom {
+    border-bottom: 1px solid #ededed;
+}
+.bill-search-wrap .con-item span,
+.bill-search-wrap .con-item input {
+    display: inline-block;
+    color: #3b4257;
+    font-size: 0.37rem;
+    height: 100%;
+    line-height: 1.31rem;
+}
+.bill-search-wrap .con-item span {
+    width: 14%;
+}
+.bill-search-wrap .con-item input {
+    padding-left: 0.4rem;
+    width: 86%;
+}
+/* 按钮 */
+.btn-wrap {
+    display: flex;
+    height: 1.53rem;
+    justify-content: center;
+    align-items: center;
+}
+.btn-wrap span {
+    display:inline-block;
+    height: 0.85rem;
+    width: 4rem;
+    background: #008fff;
+    border-radius: 0.67rem;
+    font-size: 0.48rem;
+    color:#fff;
+    text-align: center;
+    line-height: 0.85rem;
+}
+/* 账单列表 */
+.bill-list-wrap {
+    width: 100%;
+}
+.bill-list-wrap .tab-wrap {
+    padding: 0 3%;
+    height: 1.07rem;
+    font-size: 0;
+}
+.tab-wrap {
+    background: #fff;
+}
+.tab-wrap .swiper-pagination {
+    width: 94%;
+}
+.tab-wrap .tab-item {
+    display: inline-block;
+    width: 24%;
+    height: 1.06rem;
+    color: #3b4257;
+    border-bottom: 2px solid transparent;
+    line-height: 1.07rem;
+    text-align: center;
+}
+.tab-wrap .tab-item span {
+    font-size:0.4rem;
+}
+.tab-wrap .tab-active {
+    color: #0287ef;
+    border-color: #0287ef;
+}
+.wrapper {
+    margin-top: 0.27rem;
+}
+.swiper-list-wrap {
+    
+}
+.swiper-list-wrap .list-item{
+    padding-left: 3%;
+    min-height: 2rem;
+    background: #fff;
+    border-top: 1px solid #ececec;
+    border-bottom: 1px solid #ececec;
+}

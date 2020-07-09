@@ -1,0 +1,11 @@
+{
+  "navigationStyle":"custom",
+  "disableScroll":true,
+  "usingComponents": {
+    "scroll-list":"../../../components/scroll-list/scroll-list",
+    "search-bar":"../../../components/search-bar/search-bar",
+    "status":"../../../components/status/status",
+    "login-status":"../../../components/login-status/login-status",
+    "filter-tabs":"../components/filter-tabs/filter-tabs"
+  }
+}

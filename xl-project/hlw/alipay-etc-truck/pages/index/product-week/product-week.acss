@@ -1,0 +1,140 @@
+.wrapper{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.car-container{
+	flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size:36rpx;
+  font-weight: 800;
+  z-index: 999;
+}
+
+.next-btn{
+	width: 686rpx;
+	outline: none;
+  color:#fff;
+  
+  border-radius: 10rpx;
+ 
+}
+text{
+  line-height: 150%;
+  text-indent: 20rpx;
+  text-align: left;
+}
+
+.title{
+  text-align: center;
+  font-size: 28rpx;
+  font-weight: bold;
+  margin-top: 20rpx;
+  position: relative;
+}
+
+.item-title{
+  font-size: 26rpx;
+  font-weight: bold;
+}
+.page{
+  width:94%;
+  color: #333;
+  font-size: 28rpx;
+  background: #F7F9FC;
+  padding-bottom:30rpx;
+  margin-top: 40rpx;
+  
+}
+.Agreement{
+   display: flex;
+  justify-content: center;
+  align-items: center;
+ 
+}
+.footer{
+  margin-top: 50rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dayagreen{
+  width: 750rpx;
+  margin-left:62rpx;
+  display: flex;
+  justify-content: flex-start;
+  align-content: center;
+  color: #333;
+  font-size: 32rpx;
+  margin-bottom: 40rpx;
+}
+.dayagreen view{
+  width: 30%;
+}
+.weekday{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 12rpx;
+  font-family: "PingFangSC-Regular";
+  font-size: 28rpx;
+  color: #666666;
+}
+.textline{
+  margin-left:30rpx;
+  margin-right: 30rpx;
+  margin-top: 24rpx;
+  margin-bottom: 32rpx;
+}
+
+.pageTitle{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.titleOne{
+  font-family: "PingFangSC-Semibold";
+  font-size: 28rpx;
+  color: #666666;
+  font-weight:bold;
+}
+.spot{
+  width: 10rpx;
+  height: 10rpx;
+  border-radius: 50%;
+  background: #4868A7;
+  margin-right: 20rpx;
+}
+.footer{
+  position: fixed;
+  bottom:0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction:column;
+  z-index: 999999;
+  background: #fff;
+  height: 290rpx;
+  width: 100%;
+}
+.BackgroundColor{
+   position: absolute;
+   width: 144rpx;
+   height: 20rpx;
+   background:#B3DCDA;
+   opacity:0.6;
+   top: 52rpx;
+   left:297rpx;
+}
+.explain{
+  position: absolute;
+   top: 22rpx;
+   left:280rpx;
+  
+}

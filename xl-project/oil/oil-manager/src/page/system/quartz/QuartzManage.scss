@@ -1,0 +1,44 @@
+$background-color:#f2f2f2;
+@mixin flex-center($direction:column) {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.service-manager-container {
+  background-color: $background-color;
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  @include flex-center();
+}
+
+.service-manager-search-container{
+  width: 100%;
+  padding: 4px 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: white;
+}
+
+.service-table-container{
+  width: 100%;
+  background-color: white;
+  @include flex-center();
+}
+
+.service-manager-table{
+  width: 100%;
+  background-color: white;
+  table{
+    thead{
+      th{
+        color: black;
+        font-weight: bold;
+        font-size: 14px;
+      }
+    }
+  }
+}

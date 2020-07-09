@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="../../../../" >
+    <meta charset="UTF-8">
+    <!-- 添加到主屏幕后，全屏显示 -->
+    <meta name="apple-touch-fullscreen" content="YES"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <!-- iphone 运行在全屏模式 -->
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="viewport" content="width=device-width"/>
+    <title>皖警-搜索</title>
+    <link rel="stylesheet" type="text/css" href="../css/base.css?__inline"/>
+    <link rel="stylesheet" type="text/css" href="../css/all.css?__inline"/>
+    <link rel="stylesheet" type="text/css" href="../css/police-search-common.css?__inline"/>
+    <link rel="stylesheet" type="text/css" href="../css/police-search.css?__inline"/>
+    <link rel="stylesheet" type="text/css" href="../css/news-list.css?__inline"/>
+</head>
+<body>
+    <div class="wrap police-search-wrap search-wrap bfg">
+        <!-- 头部 -->
+        <header class="topic-bg">
+            <div class="header-item topic-bg clearfix">
+                <a href="javascript:void(0)" class="arrow-left header-back fl" data-bind="click: back"></a>
+                <div class="searchs-wrap fl">
+                    <div class="search">
+                        <div class="search-input bf clearfix">
+                            <a href="javascript:void(0)" class="btn-search fl" ></a>
+                            <input id="target" type="text" class="f26 c3 fl" maxlength="100">
+                            <label class="f26 c9" data-flag="1"></label>
+                            <a href="javascript:void(0)" class="btn-delete fl hide" data-bind="click: deleteEvent"></a>
+                        </div>  
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+
+        <!-- 搜索分类、历史 -->
+        <div class="content content-type-history top-7 hide">
+            <!-- 搜索分类、历史 -->
+            <div class="search-type-history">
+                <!-- 搜索分类 -->
+                <div class="search-type bf"> 
+                    <p class="f32 c9 tc">搜索分类</p>
+                    <div class="details tc">
+                        <a href="javascript:void(0)" class="f30">服务项</a>
+                        <span class="f30 cea">|</span>
+                        <a href="javascript:void(0)" class="f30">办事项</a>
+                        <span class="f30 cea">|</span>
+                        <a href="javascript:void(0)" class="f30">资讯</a>
+                    </div>
+                </div>
+
+                <!-- 搜索历史 -->
+                <div class="search-history bf"> 
+                    <div class="title">
+                        <span class="f32 c6 tc">搜索历史</span>
+                        <a href="javascript:void(0)" class="btn-del-his fr" data-bind="click: delHisEvent"></a>
+                    </div>
+                    <div id="hisRecord" class="f30 c3 clearfix bf">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 搜索结果列表 -->
+        <div id="content-result" class="content content-result  top-7 hide">
+        
+            <div id="serviceItem" class="service-item-list hide">
+                <p class="f28 content-result-list-p">服务项</p>
+                <div class="result-list-details service-list-detailss">
+                </div>
+                <p class="f26 c9 more hide" data-typetext="服务项" data-bind="click: moreEvent">更多服务项</p>   
+            </div> 
+
+            <div id="WorksItem" class="service-item-list hide">
+                <p class="f28 content-result-list-p">办事项</p>
+                <div class="result-list-details work-list-detailss">
+                </div>
+                <p class="f26 c9 more hide " data-typetext="办事项" data-bind="click: moreEvent">更多办事项</>   
+            </div> 
+
+            <section class="home-news hide">
+                <p class="f28 content-result-list-p">资讯</p>
+                <div class="home-notify-content">
+                    <ul class="city-news result-list-detailss">
+                    </ul>
+                </div>
+                <p class="f26 c9 more hide" data-typetext="资讯" data-bind="click: moreEvent">更多资讯</p> 
+            </section> 
+        </div>
+        <!-- 暂无数据 -->
+        <div class="empty top-7 hide">
+            <div class="empty-ad"></div>
+            <p>未搜索到相关内容</p>
+        </div> 
+    </div>
+
+    <div class="mark police-search-mark">
+        <div class="delete-mask">
+            <p>你确定清空历史记录吗？</p>
+            <div>
+                <span data-bind="click: cancel">取消</span>
+                <span data-bind="click: sure">确定</span>
+            </div>
+        </div>
+    </div>
+<!-- 资讯 -->
+
+<script id="newsInfoTmpl" type="text/html">
+    {{each $data as item index}}
+    {{if item.tag == 1}}
+    <li class="unloaded new-details" data-id="{{item.id}}" data-url="{{item.appLinkUrl}}" data-type="{{item.type}}" data-title="{{item.title}}"
+        data-img="{{item.imgUrl1}}">
+        <a class="news-banner flex type{{item.tag}}" href="javascript:void(0)">
+            <div class="ul-content flex-one">
+
+            {{if item.titleHighet}}
+                <p class="recommend-ul-theme ell" title="{{item.title}}">{{item.titleHighet}}</p>
+                {{else if item.title}}
+                <p class="recommend-ul-theme ell" title="{{item.title}}">{{item.title}}</p>
+            {{/if}}
+
+            {{if item.contentHighet}}
+                <p class="recommend-ul-theme two-ell themes f26" title="{{item.content}}">{{item.contentHighet}}</p>
+                {{else if item.content}}
+                <p class="recommend-ul-theme two-ell themes f26" title="{{item.content}}">{{item.content}}</p>
+            {{/if}}
+
+                
+                <p class="news-info clearfix"><span class="resource resource-one ell fl">{{item.infoSource}}</span><span class="time time-one fl ell">{{item.releaseTime}}</span></p>
+            </div>
+            <img src="{{item.imgUrl1}}">
+        </a>
+    </li>
+    {{else if item.tag == 0}}
+    <li class="unloaded new-details" data-id="{{item.id}}" data-url="{{item.appLinkUrl}}" data-type="{{item.type}}" data-title="{{item.title}}"
+        data-img="{{item.imgUrl1}}">
+        <a class="type{{item.tag}}" href="javascript:void(0)">
+
+            {{if item.titleHighet != ""}}
+                <p class="recommend-ul-theme two-ell">{{item.titleHighet}}</p>
+                {{else if item.title != ""}}
+                <p class="recommend-ul-theme two-ell">{{item.title}}</p>
+            {{/if}}
+
+            {{if item.contentHighet != ""}}                    
+                <p class="news-content two-ell">{{item.contentHighet}}</p>
+                {{else if item.content != ""}}
+                <p class="news-content two-ell">{{item.content}}</p>
+            {{/if}}
+
+            <p class="news-info clearfix"><span class="resource ell fl">{{item.infoSource}}</span><span class="time fl ell">{{item.releaseTime}}</span></p>
+        </a>
+    </li>
+    {{else}}
+        <li class="unloaded new-details" data-id="{{item.id}}" data-url="{{item.appLinkUrl}}" data-type="{{item.type}}" data-title="{{item.title}}"
+        data-img="{{item.imgUrl1}}">
+            <a class="type{{item.tag}}" href="javascript:void(0)">
+                {{if item.titleHighet != ""}}
+                    <p class="recommend-ul-theme two-ell">{{item.titleHighet}}</p>
+                    {{else if item.title != ""}}
+                    <p class="recommend-ul-theme two-ell">{{item.title}}</p>
+                {{/if}}
+
+                {{if item.contentHighet != ""}}                    
+                    <p class="news-content two-ell">{{item.contentHighet}}</p>
+                    {{else if item.content != ""}}
+                    <p class="news-content two-ell">{{item.content}}</p>
+                {{/if}}
+
+                <div class="img-list flex">
+                    <div class="img-item flex-one"><img src="{{item.imgUrl1}}"></div>
+                    <div class="img-item flex-one"><img src="{{item.imgUrl2}}"></div>
+                    <div class="img-item flex-one"><img src="{{item.imgUrl3}}"></div>
+                </div>
+                <p class="news-info clearfix"><span class="resource ell fl">{{item.infoSource}}</span><span class="time fl ell">{{item.releaseTime}}</span></p>
+            </a>
+        </li>
+    {{/if}}
+    {{/each}}
+</script>
+
+<!-- 办事项 -->
+<script id="workInfoTmpl" type="text/html">
+    {{each $data as item index}}
+    <a class="work-list-details-a"  data-index="{{index}}" data-id="{{item.id}}" data-type="{{item.projectYwType}}" data-title="{{item.title}}" data-url="{{item.deatilUrl}}" data-projectname="{{item.projectName}}">
+    {{if item.projectYwType ==='1'}}
+        <span class="handle fl">可办理</span>
+    {{else if item.projectYwType === '2'}}
+        <span class="searchs fl">查询</span>
+    {{else if item.projectYwType === '3'}}
+        <span class="guide fl">指南</span>
+    {{/if}}
+        <span class="f30 c3 fl detail-txt ell">{{item.projectNameHighet}}</span>
+    </a>
+    {{/each}}
+</script>
+
+<!-- 服务项 -->
+<script id="serviceInfoTmpl" type="text/html">
+    {{each $data as item index}}
+    <a class="service-link" href="javascript:void(0)" class="clearfix"  data-id="{{item.id}}" data-type="{{item.serviceAddrType}}" data-index="{{index}}">
+    {{if item.iconUrl}}
+        <img src="{{item.iconUrl}}" class="detail-icon fl">
+    {{/if}}
+        <span class="f30 c3 fl detail-txt ell" title="{{item.serviceName}}">{{item.serviceNameHighet}}</span>
+    </a>
+    {{/each}}
+</script>
+
+<!-- 历史记录 -->
+<script id="hisRecordTmpl" type="text/html">
+    {{each $data as item index}}
+    <a href="javascript:void(0)" class="ell key c3">{{item}}</a>
+    {{/each}}
+</script>
+<script>
+    var CONFIG = {
+        path: './public/wcportal/0.0.1/'
+    };
+</script>
+<script src="../lib/jquery/jquery-1.8.2.min.js"></script>
+<script src="../lib/croods/croods-1.3.1.min.js"></script>
+<!-- <script src="../lib/jquery.lazyload.min.js"></script> -->
+<script src="../lib/fly/fly.js"></script>
+<script src="../app/police-search.js?__inline"></script>
+</html>

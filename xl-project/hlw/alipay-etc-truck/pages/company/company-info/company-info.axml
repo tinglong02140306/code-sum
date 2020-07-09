@@ -1,0 +1,45 @@
+<view>
+	<view class="wrapper" a:if="{{loaded}}">
+		<view class="title">已录入企业</view>
+		<view class="hr"/>
+		<!-- 企业信息 -->
+		<block>
+			<view class="list">
+				<view class="list-tile">
+					<view class="list-tile-name">企业名称：</view>
+					<view class="list-tile-value">{{companyInfo["name"]}}</view>
+				</view>
+				<view class="list-tile">
+					<view class="list-tile-name">社会统一信用代码：</view>
+					<view class="list-tile-value">{{companyInfo["idnum"]}}</view>
+				</view>
+				<view class="list-tile">
+					<view class="list-tile-name">指定经办人姓名：</view>
+					<view class="list-tile-value">{{companyInfo["operator_name"]}}</view>
+				</view>
+				<view class="list-tile">
+					<view class="list-tile-name">指定经办人联系电话：</view>
+					<view class="list-tile-value">{{companyInfo["operator_mobile"]}}</view>
+				</view>
+				<view class="list-tile">
+					<view class="list-tile-name">地址：</view>
+					<view class="list-tile-value">{{companyInfo["addr"]}}</view>
+				</view>
+				<view class="list-tile">
+					<view class="list-tile-name">收货地址：</view>
+					<view class="list-tile-value" onTap="selectAddress">
+						<view style="flex:1;color:#999;" a:if="{{uuidAddress}}">{{uuidAddress["address"]}}</view>
+						<view style="flex:1;color:#666;" a:else >请选择收货地址</view>
+						<view class="list-tile-value-arrow"/>
+					</view>
+				</view>
+			</view>
+		</block>
+		<!-- 提交 -->
+		<view class="btn-wrapper">
+			<button type="primary" disabled="{{!uuidAddress}}"  onTap="next">提交</button>
+		</view>
+	</view>
+	<ant-skeleton a:else />
+</view>
+

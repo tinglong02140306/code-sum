@@ -1,0 +1,27 @@
+<!--<view class="etc-card-type-container" wx:if="{{card_number}}">-->
+<!--<image class="etc-card-type-bg-image" src="{{bg_img}}"></image>-->
+<!--<view class="etc-card-type-content">-->
+<!--<text class="etc-card-type-number" style="color: {{num_color}}">{{card_number}}</text>-->
+<!--<text class="etc-card-type-from">{{card_issuers}}</text>-->
+<!--</view>-->
+<!--</view>-->
+
+<view class="etc-card-type-container" wx:if="{{data.etc_card_no_str}}" wx:if="{{!data.is_click}}">
+    <view class="etc-card-type-contents" style="color: {{bg_color}}" data-item="{{data}}" bindtap="etcClick">
+        <text class="etc-card-type-name">{{card_name}}</text>
+        <text class="etc-card-plate-no" wx:if="{{data.car_plate_no}}">车牌号 {{data.car_plate_no}}</text>
+        <text class="etc-card-type-number">{{data.etc_card_no_str}}</text>
+    </view>
+</view>
+<view class="etc-card-type-container1" wx:if="{{data.etc_card_no_str}}" wx:if="{{data.is_click}}">
+    <view class="etc-card-type-contents1" style="color: {{bg_color}}" data-item="{{data}}" bindtap="etcClick">
+        <text class="etc-card-type-name">{{card_name}}</text>
+        <text class="etc-card-plate-no">车牌号 {{data.car_plate_no}}</text>
+        <text class="etc-card-type-number1">{{data.etc_card_no_str}}</text>
+    </view>
+    <view class="etc-card-type-click">
+        <text class="etc-card-type-unbind" bindtap="onUnbindClick" >ETC卡解绑</text>
+<!--        <view class="etc-card-type-click-line"></view>-->
+<!--        <text class="etc-card-type-change" bindtap="etcCarChange">车辆信息修改</text>-->
+    </view>
+</view>

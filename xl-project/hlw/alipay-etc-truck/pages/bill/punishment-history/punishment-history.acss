@@ -1,0 +1,44 @@
+.next-btn{
+  width: 600rpx;
+  height: 80rpx;
+  outline: none;
+  text-align: center;
+  margin-top: 50rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2rpx solid #eee;
+  border-radius: 10rpx;
+}
+.desc-area{
+  width: 750rpx;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.btn-area{
+  width: 750rpx;
+  height: 20vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card{
+  width: 700rpx;
+  min-height: 150rpx;
+  border: 2rpx solid #eee;
+  border-radius: 10rpx;
+  margin: 25rpx;
+  display: flex;
+  flex-direction: column;
+}
+.row{
+  flex: 1;
+  box-sizing: border-box;
+  padding: 0 30rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

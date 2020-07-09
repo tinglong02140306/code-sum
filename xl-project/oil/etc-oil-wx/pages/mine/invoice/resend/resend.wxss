@@ -1,0 +1,73 @@
+/* pages/mine/invoice/resend/resend.wxss */
+.resend-invoice-container{
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    box-sizing: border-box;
+    width: 100%;
+    overflow-x: hidden;
+}
+.resend-invoice-title-input-box{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    align-items: center;
+    position: relative;
+    background-color: #ffffff;
+    overflow: hidden;
+    padding: 0 30rpx;
+    margin-top: 30rpx;
+}
+.invoice-title-input{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    box-sizing: border-box;
+    /*padding-left: 16rpx;*/
+}
+.invoice-attention{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 30rpx;
+    margin-bottom: 150rpx;
+}
+.invoice-attention-text{
+    color: rgba(0, 0, 0, 0.45);
+    font-size: 24rpx;
+    text-align: left;
+    font-family: PingFangSC-Regular;
+}
+.create-invoice-btn-box{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    position: fixed;
+    width: 100%;
+    height: 130rpx;
+    background-color: #ffffff;
+    bottom: 0;
+    box-shadow: 0rpx -4rpx 20rpx 0rpx rgba(0, 0, 0, 0.04);
+    padding: 20rpx;
+    z-index: 5000;
+}
+.create-invoice-btn-info{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 28rpx;
+    text-align: left;
+    font-family: PingFangSC-Regular;
+    /*flex: 1;*/
+    width: 100%;
+}
+.create-invoice-btn-high{
+    width: 100%;
+    height: 90rpx;
+    font-size: 34rpx;
+    margin-right: 32rpx;
+}

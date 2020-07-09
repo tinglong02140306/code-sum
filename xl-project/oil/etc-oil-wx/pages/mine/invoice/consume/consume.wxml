@@ -1,0 +1,42 @@
+<import src="../../../../templates/mine/invoice/consume/consume.wxml"></import>
+
+<view class="consume-invoice-container">
+    <view class="consume-invoice-item-container">
+        <scroll-list
+                height="{{scroll_height}}"
+                bind:refresh="onRefresh"
+                bind:loadmore="onLoadMore"
+                load_status="{{load_status}}"
+                refresher_triggered="{{refresher}}"
+                show_finish="{{show_finish}}"
+        >
+            <view class="consume-invoice-box" wx:for="{{bill_list}}" wx:key="stations" bind:tap="onCellClick" data-item="{{item}}" data-index="{{index}}" wx:if="{{!isEmptyList}}">
+                <template is="consume-list" data="{{item,is_invoiced,isSelect}}"></template>
+            </view>
+            <status wx:if="{{status}}"  text="{{status==1?'没有账单数据哦～':'网络好像断了哦～'}}" bind:retry="onRetryClick"></status>
+        </scroll-list>
+    </view>
+    <view class="consume-invoice-btn-box" wx:if="{{isShowOpen}}" style='padding-bottom: {{isIphoneX?"40rpx":"20rpx"}}'>
+        <view class="consume-invoice-btn-info"><text style="color: #05BA7D">1</text>个订单，共<text style="color: #05BA7D">{{actual_amount?actual_amount:'0.00'}}</text>元</view>
+        <view class="consume-invoice-btn-info">
+            <text class="consume-invoice-btn-high theme-button" bind:tap="goOpenInvoice">开具发票</text>
+        </view>
+    </view>
+    <view class="consume-invoice-top-container">
+        <view class="consume-invoice-top-left"></view>
+        <view class="consume-list-top-drop-select-box" bind:tap="showType">
+            <view class="consume-invoice-top-right" >
+                <text class="consume-list-top-text">{{bill_type===2?'可开票订单':bill_type===1?'已开票订单':''}}</text>
+                <image class="consume-list-top-image2" src='https://oilmag.etcsd.com.cn/oilcoreserver/static//resource/plate-pull.png'></image>
+            </view>
+            <view class="consume-drop-down-container" wx:if="{{showConsume}}">
+                <view class="consume-drop-down-triangle"></view>
+                <view class="consume-drop-down-content">
+<!--                    <view class="{{is_invoiced===null?'consume-drop-down-item-select':'consume-drop-down-item'}}" bind:tap="onChangeType" data-item="{{null}}">全部订单</view>-->
+                    <view class="{{is_invoiced===true?'consume-drop-down-item-select':'consume-drop-down-item'}}" bind:tap="onChangeType" data-item="{{true}}">可开票订单</view>
+                    <view class="{{is_invoiced===false?'consume-drop-down-item-select':'consume-drop-down-item'}}" bind:tap="onChangeType" data-item="{{false}}">已开票订单</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Vue 测试实例</title>
+</head>
+<style>
+button {
+    width: 100px;
+    height: 30px;
+    background: #ccc;
+}
+</style>
+<body>
+<script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
+
+<div id="app">
+    <!-- p v-if="see">哈哈，被你看到了</p>
+    {{ 5+5 }} <br>
+    {{ ok? 'YES' : 'NO' }} <br>
+    {{ message.split(' ').reverse().join('-')}} <br>
+    <template v-if="seen">
+        <p>被你看到了！</p>
+        <h1>真的被你看到了</h1>
+        <span>真的被你看到了！</span>
+    </template> -->
+   <!--  <pre><a v-bind:href="url">菜鸟教程</a></pre> -->
+
+
+    <p> {{ message | capitalize}}</p>
+    <a v-bind:href="url">百度</a><br>
+    <a :href="urls">百度百度</a>
+    <!-- <p>{{ index }}</p> -->
+    <!--  <input v-model="message"> -->
+    <!-- <button v-on:click="messageClick"></button> -->
+    <ul>
+        <li v-for="arrs in arr">
+            {{ arrs }}
+        </li>
+        <!--  <li v-for="arrs in arr">
+            {{ arrs.text }}
+        </li> -->
+    </ul>
+
+    <p>{{ msg }}</p>
+    <input v-model="msg">
+
+    <!-- v-bind缩写 -->
+    <a :href="url">hahhah</a>
+    <!-- v-bind完整版 -->
+    <a v-bind:href="url">ffff</a>
+
+    <!-- v-on完整版 -->
+    <a v-on:click="doSomething"></a>
+    <!-- v-on缩写版 -->
+    <a @click="doSomething"></a>
+
+    <!-- class与style绑定 -->
+
+    <!-- 方式一 -->
+    <div class="hello"
+        v-bind:class="{active : isActive, err : isErr}">
+        class绑定基本形式
+    </div>
+
+    <!-- 方式2 -->
+    <div v-bind:class="classObject">
+        class绑定对象形式  
+    </div>
+
+    <!-- 方式3 -->
+    <div v-bind:class="[isArray, isObject]">
+        class绑定数组形式
+    </div>
+
+    <!-- 方式4 -->
+    <div v-bind:class="[isSucess ? sucClass : '', isErr]">
+        class绑定三元表达]
+    </div>
+
+    <!-- 方式5 -->
+    <div v-bind:class="[{isActiveClass: isActive}, isErrs]">
+        class绑定数组对象方法  
+    </div>
+    <a href="link://cgi-bin/authorize?returnUrl=http://61.191.24.229:5069/publicsso/thirdParty/redirect">滴滴滴滴滴滴</a>
+
+</div>
+
+
+<script>
+    var vm = new Vue({
+    	el: '#app',
+        data:{
+            /* ok: true,*/
+            message:'longting',
+            /*index: 1,*/
+            /*see: false,
+            seen: true,*/
+            msg: 'study',
+            url: 'http://www.baidu.com',
+            urls: 'http://www.baidu.com', 
+            arr: ['学习h5/css', '学习js', '学习vue.js'],
+                    /*{text: '学习h5/css' },
+                    { text: '学习js' },
+                    {text: '学习vue.js' }*/
+            isActive: true,
+            isErr: true,
+           /* 'isActive': true,   该方式也可
+            'isErr': false,*/
+            
+            classObject: {
+                'isActive': true,
+                'isErr': false
+            },
+            isSucess: true,
+            sucClass: 'sucClass',
+            isArray: 'isArrayClass',
+            isObject: 'isObjectClass',
+            isErrs: 'isErrs'
+
+        },
+        methods: {
+            messageClick: function() {
+                this.message = this.message.split('').reverse().join('');
+                this.index = this.index + 1;
+            },
+            doSomething: function() {
+                this.arr = arr[0];
+            } 
+        },
+        filters: {
+            capitalize: function(value) {
+                if(!value) return '';
+                value = value.toString()
+                return value.charAt(0).toUpperCase() + value.slice(1)
+            }
+        }
+    });
+
+</script>
+</body>
+</html>

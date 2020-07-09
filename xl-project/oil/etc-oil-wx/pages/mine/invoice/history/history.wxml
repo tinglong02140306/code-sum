@@ -1,0 +1,16 @@
+<import src="../../../../templates/mine/invoice/history/history.wxml"></import>
+
+<view class="invoice-history-container">
+  <scroll-list
+          bind:refresh="onRefresh"
+          bind:loadmore="onLoadMore"
+          load_status="{{load_status}}"
+          refresher_triggered="{{refresher}}"
+          show_finish="{{show_finish}}">
+   <view class="invoice-list-box" wx:for="{{invoice_list}}" wx:key="stations" bind:tap="onInvoiceItemClick" data-item="{{item}}" data-index="{{index}}" wx:if="{{!isEmptyList}}">
+    <template is="invoice-history" data="{{item}}"></template>
+   </view>
+      <status wx:if="{{status}}"  text="{{status==1?'没有历史数据哦～':'网络好像断了哦～'}}" bind:retry="onRetryClick"></status>
+  </scroll-list>
+
+</view>

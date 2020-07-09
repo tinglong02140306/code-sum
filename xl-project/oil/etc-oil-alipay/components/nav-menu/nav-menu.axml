@@ -1,0 +1,18 @@
+<!--
+ * @Author: sunmingmao
+ * @Date: 2020-04-02 08:54:04
+ * @LastEditors: longting
+ * @LastEditTime: 2020-04-02 10:38:53
+ * @Description: 导航菜单
+ -->
+<view class="nav-menu-container">
+    <block a:for="{{list}}" a:key="menu">
+        <view class="nav-menu-item-container" style="margin-right: {{space}}rpx;">
+            <view onTap="menuClick" 
+                data-item="{{index}}" 
+                class="nav-menu-item"
+                style="{{index==page_type?selected_style:style}}">{{item}}</view>
+            <view class="nav-menu-separation" style="{{index==page_type?selected_border_style:border_style}}"></view>
+        </view>
+    </block>
+</view>

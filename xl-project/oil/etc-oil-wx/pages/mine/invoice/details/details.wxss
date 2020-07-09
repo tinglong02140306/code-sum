@@ -1,0 +1,113 @@
+/* pages/mine/invoice/details/details.wxss */
+.invoice-details-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.invoice-content-box{
+    width: 100%;
+    background-color: #ffffff;
+    margin-top: 24rpx;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.invoice-details-top-title{
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 32rpx;
+    text-align: left;
+    font-family: PingFang-SC-Medium;
+}
+
+.invoice-details-top-box{
+    width: 100%;
+    height: 94rpx;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0 30rpx;
+    border-bottom: 2rpx solid rgba(0, 0, 0, .05);
+}
+
+.invoice-content-details{
+    width: 100%;
+    height: 80rpx;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0 30rpx;
+}
+
+.invoice-content-details-title{
+    color: rgba(0, 0, 0, 0.25);
+    font-size: 32rpx;
+    text-align: left;
+    font-family: PingFangSC-Regular;
+}
+
+.invoice-content-details-info{
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 28rpx;
+    text-align: left;
+    font-family: PingFangSC-Regular;
+    margin-left: 32rpx;
+}
+
+.invoice-details-top-more{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.invoice-details-top-more-text{
+    color: rgba(0, 0, 0, 0.45);
+    font-size: 30rpx;
+    text-align: right;
+    font-family: PingFangSC-Regular;
+}
+.invoice-details-top-more-image{
+    width: 30rpx;
+    max-height: 30rpx;
+    margin-left: 4rpx;
+}
+
+.invoice-details-btn-box{
+    width: 100%;
+    height: 130rpx;
+    background-color: #ffffff;
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    bottom: 0;
+}
+
+.invoice-details-btn-ash-view{
+    flex: 1;
+    padding: 20rpx 32rpx;
+}
+.invoice-details-btn-ash{
+    width: 100%;
+    height: 90rpx;
+    font-size: 34rpx;
+    color: rgba(0, 0, 0, 0.85);
+    border-radius: 56rpx;
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: 0rpx 5rpx 20rpx 0rpx rgba(0, 0, 0, 0.1);
+}
+
+.invoice-details-btn-high{
+    width: 100%;
+    height: 90rpx;
+    font-size: 34rpx;
+}

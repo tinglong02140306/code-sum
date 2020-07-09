@@ -1,0 +1,11 @@
+{
+    "defaultTitle": "",
+    "titleBarColor": "#00A170",
+    "backgroundColor": "#eeeeee",
+    "transparentTitle": "always",
+    "titlePenetrate": "YES",
+    "disableScroll": true,
+    "usingComponents": {
+        "map-bar": "../../../components/map-bar/map-bar"
+    }
+}

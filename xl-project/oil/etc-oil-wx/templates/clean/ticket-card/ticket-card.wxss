@@ -1,0 +1,91 @@
+
+.ticket-card-container{
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    align-items: center;
+    width: 100%;
+    margin-top: 20rpx;
+}
+.ticket-card-select-icon{
+    width: 42rpx;
+    height: 42rpx;
+    /*background-color: rgba(5, 186, 125, 1);*/
+    margin-right: 20rpx;
+}
+.ticket-card-box{
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    align-items: center;
+    width: 584rpx;
+    height: 166rpx;
+}
+.ticket-card-box-bg-img{
+    top: 0;
+    width: 100%;
+    position: relative;
+    border-top-left-radius: 24rpx;
+    border-top-right-radius: 24rpx;
+    /*background-color: #8D1233;*/
+}
+.ticket-card-box-info{
+    display: flex;
+    flex-direction: column;
+    /*width: 100%;*/
+    width: 584rpx;
+    height: 166rpx;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+}
+.ticket-card-box-info-top{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 12rpx;
+}
+.ticket-card-title-text{
+    /*height: 50rpx;*/
+    color: rgba(246, 221, 178, 1);
+    font-size: 36rpx;
+    text-align: left;
+    font-family: PingFang-SC-Heavy;
+    margin-left: 30rpx;
+}
+.ticket-card-discount-text{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 96rpx;
+    height: 42rpx;
+    border-bottom-left-radius: 16rpx;
+    border-top-left-radius: 16rpx;
+    background-color: rgba(5, 186, 125, 1);
+    color: rgba(0, 0, 0, 1);
+    font-size: 28rpx;
+    text-align: left;
+    font-family: PingFang-SC-Bold;
+}
+.ticket-card-number-text{
+    margin-left: 30rpx;
+    margin-top: 16rpx;
+    /*width: 146px;*/
+    height: 38rpx;
+    color: rgb(255, 228, 183);
+    font-size: 26rpx;
+    text-align: left;
+    font-family: PingFangSC-Regular;
+}
+.ticket-card-money-box{
+    margin-right: 20rpx;
+    /*width: 96rpx;*/
+    height: 78rpx;
+    color: rgba(255, 228, 183, 1);
+    font-size: 28rpx;
+    text-align: left;
+    font-family: PingFang-SC-Bold;
+}

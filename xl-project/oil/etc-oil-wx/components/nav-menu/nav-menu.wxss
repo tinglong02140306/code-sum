@@ -1,0 +1,32 @@
+/* components/nav-menu/nav-menu.wxss */
+.nav-menu-container{
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.nav-menu-item-container{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.nav-menu-item{
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0 16rpx;
+}
+
+.nav-menu-separation{
+    width: 100%;
+    border-top-left-radius: 10rpx;
+    border-top-right-radius: 10rpx;
+}

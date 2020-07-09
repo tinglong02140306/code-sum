@@ -1,0 +1,18 @@
+.image-loader-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.image-loader-default{
+    background-color: #e8e8e8;
+    position: relative;
+}
+
+.before-load{
+    width: 0;
+    height: 0;
+    opacity: 0;
+}

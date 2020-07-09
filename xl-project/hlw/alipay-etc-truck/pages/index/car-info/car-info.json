@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "steps": "mini-antui/es/steps/index",
+	 "picker-item": "mini-antui/es/picker-item/index",
+	 "input-item": "mini-antui/es/input-item/index"
+  },
+   "defaultTitle": "车辆信息"
+}

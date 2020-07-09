@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>marquee</title>
+    <style>
+        .marquee {
+            overflow: hidden;
+        }
+
+        .content {
+            display: flex;
+        }
+
+        .list {
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <marquee >我要好好学习，天天向上！！！</marquee> -->
+    <div class="marquee">
+        <div class="content">
+            <div class="list"><img src="./image/img3.png" alt=""></div>
+            <div class="list"><img src="./image/img7.png" alt=""></div>
+            <div class="list"><img src="./image/img8.png" alt=""></div>
+        </div>
+    </div>
+</body>
+<script src="../js/jquery/jquery-1.8.2.min.js"></script>
+<script>
+    $(() => {
+        var $marquee = $('.marquee'),
+            $content = $('.content'),
+            $list = $('.list'),
+            outerWidth = 600,
+            outerHeiht = 400,
+            listLength = $list.length,
+            contentWidth = outerWidth * listLength,
+            style = document.styleSheets,
+            speed = 6;
+        $marquee.css({
+            "width": `${outerWidth}px`,
+            "height": `${outerHeiht}px`
+        })
+        $list.css({
+            "width": `${outerWidth}px`,
+            "height": `${outerHeiht}px`
+        });
+        $content.css({
+            "width": `${contentWidth}px`,
+            "height": `${outerHeiht}px`,
+            "animation": `run ${speed}s linear infinite`
+        });
+        style[0].insertRule(`@keyframes run {
+            100% {
+                transform: translateX(-${contentWidth}px);
+            } 
+        }`);
+        var clone = $list.eq(0).clone();
+        $content.append(clone)
+
+    })
+</script>
+
+</html>

@@ -1,0 +1,16 @@
+<view >
+    <view class="wrap">
+        <view class="tip-title" style="margin-bottom:90rpx;">设置您的手机号</view>
+        <!--<view class="tip-text">请输入您当前使用的新手机号作为登录账号</view> -->
+        <!-- <input-item  label="+86" placeholder="请输入手机号码" placeholder-style="font-family: SourceHanSansCN-Normal;font-size: 48rpx;font-weight: normal;font-stretch: normal;letter-spacing: 0px;color: #8087a9;" type="number" value="{{mobile}}" maxlength="11" idx="mobile" bind:input="bindKeyInput" bind:clear="clear"/> -->
+        <view class="form-row">
+            <view class="form-row-label">+86</view>
+            <view class="form-row-content">
+                <input class="input" type="number" value="{{mobile}}" onInput="bindKeyInput" placeholder="请输入手机号码" />
+            </view>
+        </view>
+    </view>
+    <view style="width:690rpx;padding:0 30rpx;">
+        <button class="btn bg-primary" onTap="next">下一步</button>
+    </view>
+</view>

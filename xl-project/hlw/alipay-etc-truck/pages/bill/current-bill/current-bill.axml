@@ -1,0 +1,41 @@
+<view class="body-wrapper">
+	<!--top区-->
+	<block>
+		<view class="bill-info bg-primary">
+			<view class="bill-info-banner">
+				<view>本期账单</view>
+				<view style="font-size:38rpx;">￥{{billInfo["amount"]}}</view>
+			</view>
+			<view class="bill-tabs">
+				<view class="bill-tab">
+					<view>通行费</view>
+					<view>￥{{billInfo["consume_fee"]}}</view>
+				</view>
+				<view class="split"/>
+				<view class="bill-tab">
+					<view>服务费</view>
+					<view>￥{{billInfo["serv_fee"]}}</view>
+				</view>
+				<block a:if="{{type !== 'current'}}">
+					<view class="split"/>
+					<view class="bill-tab">
+						<view>滞纳金</view>
+						<view>￥{{billInfo["late_fee"]}}</view>
+					</view>
+				</block>
+			</view>
+		</view>
+	</block>
+	<!--列表区-->
+	<block>
+		<view class="container">
+			<block a:for="{{billList}}">
+				<view class="bill-item" onTap="showMore" data-idx="{{index}}">
+					<image src="/images/my/wallet.png" style="width:50rpx;height:50rpx" mode="widthFix"/>
+					<view class="bill-date">账单日期：{{item["bill_date"]}}</view>
+					<view class="bill-money">￥{{item["amount"]}}</view>
+				</view>
+			</block>
+		</view>
+	</block>
+</view>

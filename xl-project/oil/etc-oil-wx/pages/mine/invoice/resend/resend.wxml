@@ -1,0 +1,30 @@
+<!--pages/mine/invoice/resend/resend.wxml-->
+<view class="resend-invoice-container">
+    <view class="resend-invoice-title-input-box">
+        <invoice-input class="invoice-title-input"
+                       value="{{accept_email}}"
+                       label="电子邮箱"
+                       labelStyle="width:138rpx"
+                       name="accept_email"
+                       disabled="{{disabled}}"
+                       placeholder="{{disabled?'':'用于向您发送电子发票'}}"
+                       maxlength="{{30}}"
+                       type="text"
+                       input_type="{{0}}"
+                       bind:inputObserver="onAcceptEmailClick">
+        </invoice-input>
+    </view>
+
+    <view class="invoice-attention">
+        <text class="invoice-attention-text">
+            说明：
+            1.请输入新邮箱，点击提交后系统会给您重新发送电子发票；
+            2.如果没有查找到发票邮件，请检查您的邮箱的垃圾邮件文件夹。
+        </text>
+    </view>
+    <view class="create-invoice-btn-box" style='padding-bottom: {{isIphoneX?"40rpx":"20rpx"}}'>
+        <view class="create-invoice-btn-info">
+            <text class="create-invoice-btn-high theme-button" bind:tap="onResend">重发邮件</text>
+        </view>
+    </view>
+</view>

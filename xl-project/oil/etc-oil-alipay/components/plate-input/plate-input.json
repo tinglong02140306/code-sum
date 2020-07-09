@@ -1,0 +1,7 @@
+{
+    "component": true,
+    "usingComponents": {
+        "picker-multi": "../picker-multi/picker-multi",
+        "popup": "../popup/popup"
+    }
+}

@@ -1,0 +1,967 @@
+/*.wrap {
+    min-width: 1240px;
+}*/
+
+a:hover,
+a:focus,
+a:active {
+    text-decoration: none;
+    outline: none;
+}
+
+.bg-white {
+    background: #fff;
+}
+
+.wrap {
+    min-width: 820px;
+}
+
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn.active.focus {
+    outline: none;
+    color: #fff;
+}
+
+/* 表单样式 by yaoding */
+
+.form-control .radio-wrap label input,
+.form-control .checkbox-wrap label input {
+    margin-bottom: 2px;
+}
+
+.form-div {
+    position: relative;
+    padding: 0 10px 10px;
+    background: #fff;
+    border-bottom: 1px solid #eceff0;
+}
+
+.query-form {
+    width: 80%;
+}
+
+.form-btn-group {
+    margin: 5px 0;
+}
+
+.edit-form .form-control,
+.query-form .form-control {
+    margin: 5px 0;
+}
+
+.search-btn,
+.query-btn {
+    background: #0099cc;
+    border-radius: 0;
+    color: #fff;
+    line-height: 18px;
+}
+
+.search-btn:focus,
+.query-btn:focus,
+.add-btn:focus,
+.search-btn:hover,
+.query-btn:hover,
+.add-btn:hover {
+    background-color: #0085b1;
+    color: #fff;
+}
+
+.query-btn {
+    margin-left: 40px;
+    width: 58px;
+    height: 18px;
+    font-size: 14px;
+}
+
+.add-btn {
+    padding: 0;
+    width: 62px;
+    height: 28px;
+    background: #0099cc;
+    border-radius: 0;
+    line-height: 28px;
+    color: #fff;
+}
+
+.add-btn .add-icon {
+    font-size: 18px;
+    line-height: 20px;
+}
+
+.op-btn {
+    display: inline-block;
+    padding: 0 12px;
+    height: 26px;
+    background-color: #fff;
+    border: 1px solid #dbdfe3;
+    border-radius: 0;
+    line-height: 26px;
+    color: #6d6d6d;
+}
+
+.op-btn:hover {
+    background: #0099cc;
+    border-color: #0099cc;
+    color: #fff;
+}
+
+
+.widget-wrap.state-disabled {
+    background: #eee;
+}
+
+/* 表单样式 end */
+
+
+/* 表格样式 by yaoding */
+
+.result-div {
+    padding: 10px;
+    background: #f5f5f5;
+}
+
+.grid {
+    background: #fff;
+    border: 1px solid #eceff0;
+    border-top: none;
+}
+
+.grid .grid-title {
+    position: relative;
+    padding: 8px;
+    border-top: 1px solid #eceff0;
+    line-height: 40px;
+}
+
+.grid .grid-title h2 {
+    margin: 5px 0;
+    padding-left: 12px;
+    height: 20px;
+    border-left: 3px solid #0099cc;
+    line-height: 20px;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.grid-table {
+    margin: -1px 0;
+    table-layout: fixed;
+    width: 100%;
+    border: none;
+    border-collapse: collapse;
+}
+
+.grid-table tr:hover td,
+.grid-table tr.even:hover td {
+    background: #eaedf1;
+}
+
+.grid-table th,
+.grid-table td {
+    padding: 5px;
+    height: 30px;
+    border-top: 1px solid #eceff0;
+    border-collapse: collapse;
+    color: #333;
+    font-size: 12px;
+    text-align: center;
+    line-height: 30px;
+}
+
+.grid-table th {
+    background-color: #fcfcfc;
+    font-weight: normal;
+}
+
+.grid-table.break-word th,
+.grid-table.break-word td {
+    word-wrap: break-word;
+}
+
+
+/* 表格样式 end */
+
+
+/* 分页样式 by yaoding */
+
+.result-div .pagination {
+    margin: 22px 0;
+}
+
+.result-div .pagination .number {
+    height: 28px;
+}
+
+.result-div .pagination .info,
+.result-div .pagination .switch {
+    line-height: 28px;
+}
+
+.pagination .widget .input {
+    height: 18px;
+    line-height: 18px;
+}
+
+.pagination .btn-primary.current {
+    background: #0099cc;
+    border: 1px solid #0099cc;
+}
+
+.pagination .number .btn {
+    padding: 4px 7px;
+}
+
+.btn.active.focus,
+.btn.active:focus,
+.btn.active:hover,
+.btn-primary.active.focus,
+.btn-primary.active:focus,
+.btn-primary.active:hover,
+.btn-primary:active.focus,
+.btn-primary:active:focus,
+.btn-primary:active:hover,
+.open>.dropdown-toggle.btn-primary.focus,
+.open>.dropdown-toggle.btn-primary:focus,
+.open>.dropdown-toggle.btn-primary:hover {
+    color: #fff;
+    background-color: #0099cc;
+    border-color: #0099cc;
+}
+
+
+/* 分页样式 end */
+
+
+/*新增页面样式 - begin by rxsong*/
+
+.edit-form {
+    padding: 24px 0 15px 0;
+    margin: 0 auto;
+    width: 80%;
+}
+
+.edit-form-div {
+    padding: 0;
+    background: #fff;
+    border: 1px solid #eceff0;
+}
+
+
+/* 按钮组 */
+
+.btn-wrap {
+    width: 100%;
+    height: 80px;
+    line-height: 80px;
+    background-color: #fff;
+    text-align: center;
+}
+
+.bttn {
+    padding: 5px 20px;
+    border: 1px solid #dad9d9;
+    border-radius: 0;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 14px;
+    color: #000;
+    text-decoration: none;
+}
+
+.bttn:hover,
+.bttn:active,
+.bttn:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.save-btn {
+    margin-right: 40px;
+    background-color: #0099cc;
+    border: 1px solid #0099cc;
+    border-radius: 0;
+    color: #fff;
+}
+
+.cancel-btn:hover,
+.cancel-btn:active,
+.cancel-btn:focus {
+    background-color: #e0e0e0;
+}
+
+.save-btn:hover,
+.save-btn:active,
+.save-btn:focus,
+.submit-btn:active,
+.submit-btn:focus {
+    background-color: #0085b1;
+    border-color: #00769d;
+    color: #fff;
+}
+
+.submit-btn {
+    margin-right: 40px;
+}
+
+
+/*新增页面样式 - end */
+
+
+/*树样式修改 - begin by rxsong*/
+
+.treeview .plus:before {
+    content: none !important;
+    /* 覆盖flyui字体图标样式 */
+}
+
+.treeview .minus:before {
+    content: none !important;
+    /* 覆盖flyui字体图标样式 */
+}
+
+.treeview .plus {
+    width: 9px;
+    height: 10px;
+    background: url(../img/common/tree-icon.png) 1px -81px no-repeat;
+}
+
+.treeview .minus {
+    width: 9px;
+    height: 6px;
+    background: url(../img/common/tree-icon.png) -3px -72px no-repeat;
+}
+
+.treeview .checkbox {
+    margin-left: 10px;
+}
+
+
+/*树样式修改 - end*/
+
+
+/* 详情页面样式 by yaoding */
+
+.detail-div {
+    background: #fff;
+    border: 1px solid #eceff0;
+}
+
+.detail-div .tab-header {
+    height: 41px;
+}
+
+.detail-div .tab-header > a {
+    padding: 0 29px;
+    margin-right: 12px;
+    width: auto;
+    background: #fafafa;
+    border: 1px solid #ececec;
+    border-bottom: none;
+    line-height: 40px;
+    color: #666;
+}
+
+.detail-div .tab-header > a.current {
+    background: #fff;
+    border-top: solid 3px #0099cc;
+    border-bottom: none;
+    color: #000;
+}
+
+.detail-div .tab-content {
+    padding: 28px 30px;
+}
+
+.detail-div .tab-content .item-list {
+    padding: 14px 0 14px 38px;
+}
+
+.detail-content {
+    padding-bottom: 64px;
+    margin: 0 auto;
+    width: 68.6%;
+}
+
+.detail-content .title {
+    font-size: 16px;
+    line-height: 70px;
+    color: #000;
+    font-weight: 700;
+}
+
+.tab-content .item {
+    position: relative;
+    line-height: 30px;
+}
+
+.tab-content .item .label {
+    position: absolute;
+    width: 80px;
+    top: 0;
+    left: 0;
+    color: #666;
+    text-align: right;
+}
+
+.tab-content .item .item-content {
+    display: inline-block;
+    margin-left: 90px;
+    word-break: break-all;
+    color: #333;
+}
+
+.tab-content .img-detail {
+    margin-left: 100px;
+    padding: 10px 0;
+}
+
+.tab-content .img-detail .intro {
+    vertical-align: top;
+}
+
+.tab-content .img {
+    width: 98px;
+    height: 98px;
+    border: 1px solid #e7e7e7;
+}
+
+.service-item {
+    position: relative;
+    float: left;
+    margin: 10px 10px 0 0;
+    width: 138px;
+    height: 48px;
+    border: 1px solid #e7e7e7;
+}
+
+.service-item .service-name {
+    width: 124px;
+    margin-top: 7px;
+}
+
+.service-item .version-num {
+    width: 124px;
+    font-size: 12px;
+    line-height: 18px;
+    color: #bebebe;
+}
+
+.channel .service-item .service-name,
+.tag .service-item .service-name {
+    margin-top: 0;
+}
+
+.channel .service-item,
+.tag .service-item {
+    line-height: 50px;
+}
+
+.detail-div .area-list .area-item {
+    float: left;
+    padding: 0 14px;
+    margin-right: 28px;
+    border: 1px solid #ececec;
+    border-radius: 20px;
+    line-height: 36px;
+    color: #969696;
+}
+
+.detail-div .area-list .area-item.current {
+    background-color: #0099cc;
+    border-color: #0099cc;
+    color: #fff;
+}
+
+.detail-div .area-detail {
+    position: relative;
+    padding: 26px 26px 10px;
+    margin-top: 20px;
+    background-color: #fafafa;
+    border: 1px solid #eee;
+}
+
+.detail-div .area-detail .trangle {
+    position: absolute;
+    top: -12px;
+    left: 32px;
+    width: 21px;
+    height: 12px;
+    background: url(../img/common/trangle.png) 0 2px no-repeat;
+}
+
+.area-detail .area-detail-list .area-name {
+    float: left;
+    padding: 0 36px;
+    margin: 0 24px 20px;
+    height: 30px;
+    border: 1px solid #e9e9e9;
+    border-radius: 20px;
+    line-height: 30px;
+    text-align: center;
+}
+
+
+/* 详情页面样式 end */
+
+
+/*提示 - begin by rxsong*/
+
+.tip-alert {
+    position: fixed;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    text-align: center;
+}
+
+.alert {
+    padding: 8px 10px;
+}
+
+
+/*提示 - end */
+
+
+/*uploadify 插件本身样式隐藏 - begin */
+
+.uploadify-queue {
+    display: none;
+}
+
+
+/*uploadify 插件本身样式隐藏 - end */
+
+
+/*弹框样式 覆盖flyui样式 - begin by rxsong */
+
+.dialog-header {
+    font-size: 16px;
+}
+
+.dialog-title {
+    padding: 14px 15px !important;
+    font-weight: normal !important;
+}
+
+body .dialog-footer button.dialog-autofocus {
+    margin-right: 32px;
+    background-color: #0099cc;
+    border: 1px solid #0099cc;
+}
+
+.dialog-close {
+    font-weight: normal !important;
+    color: #434343 !important;
+    text-shadow: none !important;
+    opacity: 1 !important;
+}
+
+body .dialog-footer button:focus {
+    outline: none important;
+}
+
+body .dialog-button {
+    float: none;
+    text-align: center;
+}
+
+body .dialog-footer button {
+    padding: 6px 20px;
+    line-height: 16px;
+}
+
+body .dialog-footer button:hover,
+body .dialog-footer button:focus,
+body .dialog-footer button:active {
+    background: #e0e0e0;
+    border: 1px solid #dad9d9;
+    outline: none;
+}
+
+body .dialog-footer button.dialog-autofocus:hover,
+body .dialog-footer button.dialog-autofocus:focus,
+body .dialog-footer button.dialog-autofocus:active {
+    background-color: #0085b1;
+    border-color: #00769d;
+}
+
+
+/*弹框样式 - end */
+
+
+/*文本域样式*/
+
+textarea {
+    margin: 0;
+    width: 99.5%;
+    height: 80px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    font-size: 14px;
+    outline: none;
+}
+
+
+/* 遮罩样式  by yaoding */
+
+.fly-mask {
+    top: 0;
+    z-index: 9998;
+}
+
+.fly-mask-content {
+    position: absolute;
+}
+
+.fly-mask-background {
+    height: 100%;
+    background: #000;
+    filter: alpha(opacity=30);
+    opacity: 0.3;
+}
+
+.fly-mask-background iframe {
+    width: 100%;
+    height: 100%;
+    filter: alpha(opacity=0);
+    opacity: 0;
+}
+
+.fly-mask-content {
+    top: 50%;
+    left: 50%;
+    z-index: 9999;
+}
+
+.fly-mask-content div {
+    padding: 10px 20px;
+    background-color: #fff;
+    border-radius: 4px;
+    line-height: 16px;
+}
+
+.fly-mask-content div i {
+    /*display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: url(../img/common/loading.gif) no-repeat;
+    font-style: normal;
+    vertical-align: top;*/
+}
+
+.fly-mask-content div em {
+    margin-left: 8px;
+    font-size: 12px;
+    color: #333;
+    font-style: normal;
+}
+
+.fly-mask-content div em,
+.fly-mask-content div i {
+    height: 15px;
+    line-height: 2px;
+}
+
+.fly-has-mask {
+    position: relative;
+    min-height: 150px;
+}
+
+
+/* 遮罩样式  end */
+
+.empty-data {
+    padding: 50px 0;
+    margin-top: 1px;
+    height: 250px;
+    border-top: 1px solid #eceff0;
+    text-align: center;
+    background: url(../img/common/empty-data.png) center center no-repeat;
+}
+
+
+/* z-tree样式重写 - begin by rxsong*/
+
+.ztree * {
+    font-family: "Microsoft YaHei";
+    font-size: 14px;
+}
+
+.ztree li {
+    line-height: 22px;
+}
+
+.ztree li span.button.switch {
+    width: 15px;
+    height: 13px;
+}
+.ztree li span.button.root_open,
+.ztree li span.button.noline_open,
+.ztree li span.button.bottom_open {
+    background: url(../img/common/tree-icon.png) 3px -69px no-repeat;
+}
+
+.ztree li span.button.root_close,
+.ztree li span.button.bottom_close,
+.ztree li span.button.noline_close {
+    background: url(../img/common/tree-icon.png) 3px -80px no-repeat;
+}
+.ztree li span.button.root_close {
+    background-position: -76px -56px;
+}
+.ztree li a.curSelectedNode {
+    background-color: #fff;
+    border: none;
+    color: #0099cc;
+}
+
+.ztree li a:hover {
+    text-decoration: none;
+}
+
+.ztree li span:hover {
+    color: #0099cc;
+}
+
+
+/* z-tree样式重写 - end by rxsong*/
+
+
+/* 区域切换样式 - begin by rxsong*/
+
+.now-area {
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    color: #999;
+}
+
+.now-area span label {
+    color: #000;
+}
+
+.change-bttn {
+    margin-left: 10px;
+    color: #419bf9;
+}
+
+
+/* 区域切换样式 - end by rxsong*/
+
+
+/* 日历范围控制样式 start by yaoding*/
+
+.datapicker-range-wrap {
+    position: relative;
+}
+
+.datapicker-range-wrap .widget.datepicker {
+    float: left;
+    width: 47%;
+}
+
+.datapicker-range-wrap .date-split {
+    float: left;
+    width: 6%;
+    text-align: center;
+    line-height: 30px;
+}
+
+
+/* 日历范围控制样式 end by yaoding*/
+
+.widget .state-disabled input.input {
+    background: #eee;
+}
+
+.treeview .plus,
+.treeview .minus,
+.treeview .plus-disabled,
+.treeview .minus-disabled {
+    margin-left: -10px !important;
+}
+
+.treeview span.in {
+    cursor: pointer !important;
+}
+
+
+/* 富文本编辑框bug */
+
+#edui1_imagescale {
+    display: none !important;
+}
+
+
+/*去除点击图片后出现的拉伸边框*/
+
+
+/* 兼容ie10 placeholder */
+
+input::-moz-placeholder {
+    color: #a9a9aa;
+}
+
+input::-webkit-input-placeholder {
+    color: #a9a9aa;
+}
+
+input:-ms-input-placeholder {
+    color: #a9a9aa;
+}
+
+textarea::-moz-placeholder {
+    color: #a9a9aa;
+}
+
+textarea::-webkit-input-placeholder {
+    color: #a9a9aa;
+}
+
+textarea:-ms-input-placeholder {
+    color: #a9a9aa;
+}
+
+/* 修改查看部分样式 start */
+
+.update-content {
+    margin: 0 auto 20px;
+    width: 1002px;
+}
+
+.update-content.mar-auto {
+    margin: 0;
+    width: auto;
+}
+
+.update-content .update-title {
+    line-height: 76px;
+}
+
+.update-content .update-title h2 {
+    font-size: 18px;
+    line-height: 76px;
+    font-weight: 700;
+}
+
+.update-content .update-title h6 {
+    margin-left: 30px;
+    font-size: 14px;
+    line-height: 76px;
+}
+
+.update-content .grid-table th,
+.update-content .grid-table td {
+    padding: 5px 15px;
+    border: 1px solid #eceff0;
+    font-size: 14px;
+}
+
+.update-content .grid-table tr:hover td,
+.update-content .grid-table tr.even:hover td {
+    background: #fff;
+}
+
+.update-content .grid-table tr:hover td.first,
+.update-content .grid-table tr.even:hover td.first,
+.update-content .grid-table td.first {
+    background-color: #fcfcfc;
+}
+
+.update-content .grid-table td .img {
+    margin: 15px auto;
+    width: 140px;
+    height: 80px;
+    border: 1px solid #eceff0;
+}
+
+.update-content .grid-table .map-div {
+    margin: 0 16px;
+    text-align: left;
+}
+
+.update-content .grid-table .map-div p {
+    text-indent: 0;
+}
+
+.update-content .grid-table .lng {
+    margin-left: 18px;
+}
+
+.fz-12 {
+    font-size: 12px;
+}
+
+.update-content .grid-table .map {
+    width: 380px;
+    height: 144px;
+    border: 1px solid #eceff0;
+}
+
+
+/* 修改查看部分样式 end */
+
+.passwordbox .see,
+.passwordbox .confirm-see {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50px;
+    height: 28px;
+    background: #fff url(../img/common/see-open.png) center center no-repeat;
+}
+
+.mar-l-10 {
+    margin-left: 10px;
+}
+
+@font-face {
+  font-family: "iconfont";
+  src: url('../font/iconfont.eot');
+  /* IE9 */
+  src: url('../font/iconfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */ url('../font/iconfont.woff') format('woff'), /* chrome, firefox */ url('../font/iconfont.ttf') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/ url('../font/iconfont.svg#iconfont') format('svg');
+  /* iOS 4.1 - */
+}
+
+.widget .select {
+	/*line-height: 2.2rem;*/
+    line-height: 28px;
+}
+.widget .select .icon {
+    line-height: 28px; 
+}
+
+.widget:focus {
+	outline: none;
+}
+
+.icon {
+  position: relative;
+  font-family: "iconfont" !important;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+  display: inherit;
+  width: auto;
+  height: auto;
+  background: none;
+}
+
+.icon-triangle-down:before {
+    content: "\e638";
+}
+
+.icon-calendar:before {
+    content: "\e60e";
+}

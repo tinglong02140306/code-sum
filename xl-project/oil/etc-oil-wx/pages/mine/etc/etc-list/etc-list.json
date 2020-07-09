@@ -1,0 +1,12 @@
+{
+    "navigationBarTitleText":"开通ETC支付",
+    "backgroundColor":"#fff",
+  "navigationBarBackgroundColor": "#00A170",
+  "navigationBarTextStyle": "white",
+  "enablePullDownRefresh":false,
+  "usingComponents": {
+    "verify":"../component/verify/verify",
+    "identifying":"../component/identifying/identifying",
+    "modal-super":"../../../components/modal-super/modal-super"
+  }
+}

@@ -1,0 +1,41 @@
+<view class="wrap">
+	<view class="detail-item" a:if="{{loaded}}">
+		<view class="title eqwidth">
+			<image src="/images/problem/icon-success.png" lazy-load="false"/>
+			<text>您的产品建议/服务投诉已收到回复</text>
+		</view>
+		<view class="content">
+			<view class="content-item eqwidth">
+				<view class="content-step">
+					<view class="date">
+						<text class="time">{{createTime}}</text>
+						<text class="year">{{createYear}}</text>
+					</view>
+					<view class="icon">
+						<image src="/images/problem/icon-pre-dot.png"/>
+					</view>
+					<view class="descript {{content ? 'pre' : ''}}">
+						<text>投诉类型：{{msgTypeMap[compType]}}</text>
+						<text>问题描述：{{content}}</text>
+					</view>
+				</view>
+				<view class="content-step cur" a:if="{{content}}">
+					<view class="date">
+						<text class="time">{{replyTime}}</text>
+						<text class="year">{{replayYear}}</text>
+					</view>
+					<view class="icon">
+						<image src="/images/problem/icon-cur-dot.png"/>
+					</view>
+					<view class="descript {{content ? 'cur' : 'pre'}}">
+						<text>问题回复：{{replyContent}}</text>
+					</view>
+				</view>
+
+			</view>
+		</view>
+	</view>
+	<view a:else>
+		<skeleton/>
+	</view>
+</view>

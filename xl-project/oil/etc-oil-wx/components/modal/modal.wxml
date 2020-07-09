@@ -1,0 +1,46 @@
+<!--自定义modal-->
+<view class="modal-container" wx:if="{{is_show_modal}}">
+    <cover-view class="modal-content-container" wx:if="{{!custom}}">
+        <cover-view class="modal-content-title">{{title}}</cover-view>
+        <cover-view class="modal-content-box">
+            <cover-view class="modal-content-text" wx:if="{{type===0}}">{{content}}</cover-view>
+            <cover-view class="invoice-redaction-details-container" wx:if="{{type===1}}">
+                <cover-view class="invoice-redaction-details-text">以下为该发票申请的相关信息,申请提交后,原有发票将无法继续使用</cover-view>
+                <cover-view class="invoice-redaction-details-content-container">
+                    <cover-view class="invoice-redaction-details-box">
+                        <cover-view class="invoice-redaction-details-item">
+                            <cover-view class="invoice-redaction-details-item-title">申请时间:</cover-view>
+                            <cover-view class="invoice-redaction-details-item-content">{{redaction.invoice_create_time}}</cover-view>
+                        </cover-view>
+                        <cover-view class="invoice-redaction-details-item">
+                            <cover-view class="invoice-redaction-details-item-title">申请类型:</cover-view>
+                            <cover-view class="invoice-redaction-details-item-content">电子发票红冲</cover-view>
+                        </cover-view>
+                        <cover-view class="invoice-redaction-details-item">
+                            <cover-view class="invoice-redaction-details-item-title">发票内容:</cover-view>
+                            <cover-view class="invoice-redaction-details-item-content">{{redaction.invoice_detail}}</cover-view>
+                        </cover-view>
+                        <cover-view class="invoice-redaction-details-item">
+                            <cover-view class="invoice-redaction-details-item-title">发票金额:</cover-view>
+                            <cover-view class="invoice-redaction-details-item-content">{{redaction.invoice_total_money}}元</cover-view>
+                        </cover-view>
+                    </cover-view>
+                </cover-view>
+            </cover-view>
+        </cover-view>
+        <cover-view class="modal-btn-container">
+            <cover-view class="modal-separation"></cover-view>
+            <cover-view class="modal-btn-box">
+                <cover-view class="modal-btn-only" wx:if="{{!show_cancel}}" style="color:{{confirm_color}}" bind:tap="confirm">{{confirm_text}}</cover-view>
+                <cover-view class="modal-btns" wx:if="{{show_cancel}}">
+                    <cover-view class="modal-btn-style" style="color:{{cancel_color}}" bind:tap="cancel">{{cancel_text}}</cover-view>
+                    <cover-view class="modal-btn-separation"></cover-view>
+                    <cover-view class="modal-btn-style" style="color:{{confirm_color}}" bind:tap="confirm">{{confirm_text}}</cover-view>
+                </cover-view>
+            </cover-view>
+        </cover-view>
+    </cover-view>
+    <view wx:if="{{custom}}">
+        <slot></slot>
+    </view>
+</view>

@@ -1,0 +1,141 @@
+/**
+ * @author hmxue
+ * @time 2017-11-09
+ * @description 警方提示详情
+ */
+ body {
+    background-color: #fff;
+}
+ .wrap {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+}
+.header-item span {
+    width: 80%;
+    text-indent: 0;
+}
+/* ================ 警营提示详情样式 start =====================*/
+.detail-view {
+    position: absolute;
+    top: 2.7rem;
+    bottom: 0;  
+    width: 100%;
+   /* padding-top: 2.7rem;*/
+}
+.police-tip-title {
+    padding: 3% 3% 0rem 3%;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #333;
+    line-height: 1.2rem;
+    text-align: center;
+}
+.police-tip-datetime {
+	padding: 0 3%;
+    font-size: 0.58rem;
+    color: #666;
+    line-height: 1.5rem;
+    text-align: justify;
+}
+.commont-content {
+	padding: 0 3% .5rem;
+}
+.commont-content,
+.commont-content p,
+.commont-content span,
+.commont-content li,
+.commont-content ul,
+.commont-content i,
+.commont-content ol,
+.commont-content dd,
+.commont-content dt,
+.commont-content em,
+.commont-content a ,
+.commont-content td,
+.commont-content strong {
+    /*font-size: 0.62rem !important;*/
+    font-size: 0.65rem !important;
+    color: #333;
+    line-height: 1rem !important;
+}
+.commont-content p {
+    margin: 0.3rem 0;
+}
+
+.commont-content a {
+    color: #0000ff;
+    text-decoration: underline;
+}
+.commont-content img {
+    display: block;
+    padding: 0.2rem 0;
+    max-width: 100%;
+}
+.police-tip-info {
+    padding: .3rem 3% 3% 3%;
+    font-size: 0.55rem;
+    line-height: 1.5rem;
+    color: #666;
+    text-align: justify;
+}
+.police-tip-info .admissibility-unit {
+    padding-right: 0.8rem;
+    color: #666;
+}
+.interpretation-tip {
+    padding: .2rem 3%;
+    margin: 2% 0;
+    border-top: 1px solid #f5f5f5;
+    border-bottom: 1px solid #f5f5f5;
+    font-size: 0.65rem !important;
+    color: #333;
+    font-weight: 600;
+    text-align: justify;
+
+}
+/* ================ 警营提示详情样式 end =====================*/
+
+
+
+.empty p {
+    padding-top: 0.68rem;
+    font-size: 0.62rem;
+    color: #666;
+    text-align: center;
+    line-height: 0.68rem;
+}
+
+.empty-ad {
+    height: 10rem;
+    background: url(./public/wcportal/0.0.1/img/common/404.png) no-repeat 50% bottom;
+    background-size: 4.1rem 4.04rem;
+}
+
+
+.empty .refresh-btn {
+    margin: 1.64rem auto 0.70rem;
+    width: 7.1rem;
+    height: 1.78rem;
+    background: #4c72ff;
+    border: 1px solid #4c72ff;
+    border-radius: 10px;
+    text-align: center;
+    line-height: 1.78rem;
+    font-size: 0.66rem;
+    color: #fff;
+}
+
+.empty .close-btn {
+    margin: 0 auto;
+    width: 7.1rem;
+    height: 1.78rem;
+    background-color: #fff;
+    border: 1px solid #d8d8d8;
+    border-radius: 10px;
+    line-height: 1.78rem;
+    font-size: 0.66rem;
+    color: #666;
+    text-align: center;
+}

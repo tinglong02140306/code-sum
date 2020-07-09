@@ -1,0 +1,57 @@
+<view>
+  <view a:if="{{!appendCar}}">
+     <view style="height:162rpx;">
+    	<steps activeIndex="{{activeIndex}}" items="{{items}}"/>
+    </view>
+    <view style="background: #F5F5F5;height:30rpx;width:100%;">
+
+    </view>
+  </view>
+   
+	<view class="wrapper">
+		<!--title区域-->
+		<block>
+			<view class="title">车辆信息</view>
+			<view class="subtitle">请填写您的车辆信息</view>
+		</block>
+		<view style="width:100%;height:30rpx;"/>
+		<!--车辆区域-->
+		   <picker-item
+				data-field="receiverGet"
+				placeholder="请选择领取方式"
+				value="{{receiving[receiverGet]}}"
+				onPickerTap="selectAxle"
+			>
+				领取方式
+			</picker-item>	
+		<view style="width:100%;height:30rpx;"/>
+		<block a:if="{{carList.length}}">
+			<view class="car-container" style="justify-content:space-between;padding:0 50rpx;background: #E7F4FE;" a:for="{{carList}}" a:key="{{index}}">
+				<view class="color-primary" style="color: #333333;font-size: 36rpx;">{{item["vlp"]}}</view>
+				<!-- <block a:if="{{dayspecial}}">
+					<image src="/images/index/delete.png" style="width:40rpx;height:40rpx;" mode="widthFix" catchTap="deleteCar" data-idx="{{index}}"/>
+				</block> -->
+				<block a:if="{{!dayspecial}}">
+					<image src="/images/index/delete.png" style="width:40rpx;height:40rpx;" mode="widthFix" catchTap="deleteCar" data-idx="{{index}}"/>
+				</block>
+
+			</view>
+		</block>
+		<!--添加车辆-->
+		<block a:if="{{allList.length !== 5}}">
+			<block a:if="{{!dayspecial}}">
+				<view class="car-container" onTap="addCar"  style="background: #FFFFFF;border: 2rpx solid #108EE9;box-shadow: 0 2rpx 14rpx 0 rgba(0,0,0,0.10);border-radius: 4px;">
+					<!-- <image src="/images/index/add.png" style="width:40rpx;height:40rpx;margin-right:30rpx;" mode="widthFix"/> -->
+				<view class="add">+</view>
+				<view style="width:8rpx;height:1rpx;"></view>
+					<view class="color-primary add">添加车辆</view>
+				</view>
+			</block>
+				
+		</block>
+	</view>
+			<!--下一步-->
+	<button class="next-btn bg-primary" onTap="next" a:if="{{!appendCar}}">下一步</button>
+  <button class="next-btn bg-primary" onTap="next" a:if="{{appendCar}}">提交</button>
+
+</view>

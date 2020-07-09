@@ -1,0 +1,37 @@
+.activity-count-dialog-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.activity-count-dialog-left{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  //justify-content: center;
+}
+
+.activity-count-dialog-input-item{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.activity-count-dialog-input-title{
+  display: flex;
+  flex-direction: row;
+  font-weight: bold;
+  font-size: 14px;
+  color: black;
+  margin-right: 5px;
+  //width: 80px;
+}
+
+.activity-count-dialog-center{
+  background-color: #e7e7e7;
+  width: 1px;
+  height: 250px;
+  margin: 0 30px;
+  align-self: center;
+}

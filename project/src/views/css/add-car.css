@@ -1,0 +1,168 @@
+/* ========添加车辆======== start */
+.car-add-content {
+  padding-top: 0.3rem;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.car-add-content .palte-num,
+.car-add-content .engine-num,
+.car-add-content .frame-num,
+.car-add-content .car-type-num {
+    padding: 0rem 4.2%;
+    height: 2.2rem;
+    border-bottom: 1px solid #eaeaea;
+}
+.car-add-content .car-type-num  {
+    border-bottom: none;
+}
+.car-add-form .in-label {
+    width: 24.3%;
+    font-size: 0.66rem;
+    color: #333;
+    line-height: 2.2rem;
+}
+
+.car-add-form .in-value {
+    width: 67.3%;
+    height: 100%;
+}
+
+.car-add-form input {
+    margin: 0;
+    padding: 0.7rem 0rem;
+    width: 90%;
+    border: none;
+    outline: none;
+    line-height: 0.8rem;
+}
+
+.engine-num input,
+.frame-num input {
+    width: 100%;
+}
+
+.in-value span {
+    width: 10%;
+    height: 100%;
+    line-height: 2.2rem;
+}
+.car-type {
+    width: 75.7%;
+    height: 100%;
+    background: url('../img/common/car-type.png') no-repeat right center;
+    background-size: 0.33rem 0.62rem;
+}
+
+.car-type .car-text {
+    display: inline-block;
+   /* padding: 0.68rem 0;*/
+    width: 95%;
+    text-align: right;
+    line-height: 2.2rem;
+}
+
+.car-type-wrap {
+    height: auto;
+    min-height: 100%;
+    background: #fff;
+}
+.type-cont {
+    padding-top: 0.3rem;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.type-cont p {
+    height: 2.04rem;
+    font-size: 0.66rem;
+    color: #333;
+    line-height: 2.04rem;
+}
+
+.type-cont .item {
+    padding: 0 .62rem;
+    background: #fff url(./public/wcportal/0.0.1/img/common/border-icon.png) left bottom 1px repeat-x;
+}
+
+.type-cont i {
+    display: block;
+    width: 1.96rem;
+    height: 2rem;
+}
+
+.select i {
+    background: url(../img/service-hall/car-select.png) center no-repeat;
+    background-size: .84rem .84rem;
+}
+
+/* 按钮 */
+.btn-wrap {
+    padding: 2.4rem 4.2% 0;
+    width: 91.6%;
+}
+
+.btn-wrap a {
+    display: inline-block;
+    width: 100%;
+    height: 2.0rem;
+    background: #4c72ff;
+    border-radius: 0.22rem;
+    line-height: 2.0rem;
+}
+/* ========添加车辆======== end */
+
+
+/* ================ 删除确认框 start =====================*/
+
+.mark {
+    display: none;
+    position: fixed;
+    top: 0rem;
+    bottom: 0rem;
+    z-index: 100;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .3);
+}
+
+.delete-mask {
+    position: absolute;
+    top: 35%;
+    left: 14.5%;
+    width: 71%;
+    border-radius: .4rem;
+    font-size: .67rem;
+    background: #fff;
+}
+
+.delete-mask p {
+    padding: 1.4rem 0.38rem;
+    border-bottom: 1px solid #e1e1e1;
+    font-size: 0.70rem;
+    color: #333;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.delete-mask div {
+    display: flex;
+    height: 2.22rem;
+    line-height: 2.22rem;
+}
+
+.delete-mask div span {
+    flex: 1;
+    font-size: 0.66rem;
+    color: #333;
+    text-align: center;
+}
+
+.delete-mask div span:nth-child(1) {
+    border-right: 1px solid #e1e1e1;
+}
+/* ================ 删除确认框 end =====================*/

@@ -1,0 +1,9 @@
+{
+    "defaultTitle": "支付管理",
+    "backgroundColor": "#eeeeee",
+    "titleBarColor": "#ffffff",
+    "allowsBounceVertical": "NO",
+    "usingComponents": {
+        "popup": "../../../../components/popup/popup"
+    }
+}

@@ -1,0 +1,6 @@
+{
+    "defaultTitle": "智能洗车机",
+    "usingComponents": {
+        "modal-super": "../../../../components/modal-super/modal-super"
+    }
+}

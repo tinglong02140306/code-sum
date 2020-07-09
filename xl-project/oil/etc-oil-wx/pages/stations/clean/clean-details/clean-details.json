@@ -1,0 +1,12 @@
+{
+  "navigationBarBackgroundColor": "#ededed",
+  "navigationBarTextStyle": "black",
+  "navigationBarTitleText": "智能洗车机",
+  "backgroundColor": "#eeeeee",
+  "backgroundTextStyle": "light",
+  "usingComponents": {
+    "login-status":"/components/login-status/login-status",
+    "modal-super":"../../../components/modal-super/modal-super",
+    "popup":"../../../components/popup/popup"
+  }
+}

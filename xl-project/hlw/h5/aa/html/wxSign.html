@@ -1,0 +1,173 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>代扣签约</title>
+    <link rel="stylesheet" href="./resources/css/weui/weui.min.css" />
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        
+        .wrapper {
+            height: 100vh;
+            width: 100vw;
+            box-sizing: border-box;
+            padding: 5vw 2vw;
+        }
+        
+        .logo-wrapper {
+            width: 100%;
+            height: 30vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .img-logo {
+            width: 53vw;
+            height: 17vw;
+        }
+        
+        .desc-wrapper {
+            margin-bottom: 40px;
+        }
+        
+        .desc-wrapper p {
+            font-size: 15px;
+            line-height: 200%;
+            color: #666;
+        }
+        
+        .btn {
+            width: 100%;
+            height: 40px;
+            color: #fff;
+            background-color: #02ba22;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+        }
+        /*===============================toast样式开始====================================  */
+        
+        .mask {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            z-index: 9999999;
+        }
+        
+        .toast {
+            position: fixed;
+            padding: 1rem 1.5rem;
+            z-index: 99;
+            max-width: 90%;
+            /* background-color: #999; */
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            font-size: 0.7rem;
+            line-height: 1.1rem;
+            border-radius: 5px;
+        }
+        /*===============================toast样式结束====================================  */
+    </style>
+</head>
+
+<body id="body">
+    <div class="wrapper">
+        <section class="logo-wrapper">
+            <img class="img-logo" src="./resources/images/sign.png">
+        </section>
+        <section class="desc-wrapper">
+            <p>*ETC产生的通行费，以微信免密支付的方式支付；</p>
+            <p>*通行高速后，请确保以下渠道（微信余额、绑定的银行卡）可以正常使用微信代扣还款，逾期未还款的用户将列入高速联网黑名单，并依法追缴。</p>
+        </section>
+        <div style="margin-bottom:40px;font-size:15px;">
+            <input type="checkbox" name="cbx" id="cbx" onchange="agree()" />
+            <label for="cbx">我同意并遵守<a style="color:#1296db" href="wxProtocal.html">《鲁通记账卡使用协议》</a>
+            <a style="color:#1296db" href="wxProtocal2.html">《缴费代扣用户服务协议》</a></label>
+        </div>
+        <button class="btn" onclick="sign()">确认签约</button>
+    </div>
+    <div id="loadingToast" style="display: none;">
+        <div class="weui-mask_transparent"></div>
+        <div class="weui-toast">
+            <i class="weui-loading weui-icon_toast"></i>
+            <p class="weui-toast__content">数据加载中</p>
+        </div>
+    </div>
+
+
+
+    <script src="./resources/js/plugins/jquery/jquery-1.8.2.min.js"></script>
+    <script src="./resources/js/util.js"></script>
+    <script src="https://cdn.bootcss.com/vConsole/3.2.0/vconsole.min.js"></script>
+    <script type="text/javascript" src="./resources/js/util.js?t=<%=System.currentTimeMillis()%"></script>
+    <script type="text/javascript">
+        var vConsole;
+
+        function agree() {
+            var isChecked = $('#cbx').attr("checked");
+            if (isChecked) {
+                $(".btn").css("background-color", "#02ba22");
+            } else {
+                $(".btn").css("background-color", "dimgrey");
+            }
+        }
+
+        function sign() {
+            var isChecked = $('#cbx').attr("checked");
+            if (isChecked) {
+                $.ajax({
+                    url: "/wx/sign/mp/apply",
+                    type: "POST",
+                    beforeSend: function(request) {
+                        var token = localStorage.getItem('TOKEN');
+                        if (token) request.setRequestHeader("auth-token", token);
+                    },
+
+                    success: function(resp) {
+                        console.log('/wx/sign/mp/apply:::' + JSON.stringify(resp))
+                        if ("0000" == resp.code) {
+                            setTimeout(function() {
+                                window.location.href = resp.data;
+                            }, 500);
+                        } else {
+                            alert(resp.desc);
+                            $('#loadingToast').hide();
+                            $('#body').css("overflow", "auto");
+                        }
+                    },
+                    error: function(e) {
+                        alert('网络异常，请稍后重试');
+                        $('#loadingToast').hide();
+                        $('#body').css("overflow", "auto");
+                    }
+                });
+            } else {
+                alert('请先同意以上协议');
+            }
+        }
+
+        $(function() {
+            // vConsole = new VConsole();
+            var fromWxpay = window.location.href.split('from_wxpay=')[1];
+            console.log(fromWxpay)
+            console.log(window.location.href);
+            if (fromWxpay && fromWxpay == 1) {
+                console.log('fromWxpay11')
+                window.location.href = 'https://preset.etcsd.com/alipay/life/sign/success.html';
+            }
+
+            // 监听 左上角返回键和 物理键 关闭页面
+            util.pushHistory();
+            window.addEventListener("popstate", util.dealClosePage, false);
+        })
+    </script>
+</body>
+
+</html>

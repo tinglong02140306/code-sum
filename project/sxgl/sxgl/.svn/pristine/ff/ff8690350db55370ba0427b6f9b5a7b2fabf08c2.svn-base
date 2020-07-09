@@ -1,0 +1,1437 @@
+/*
+ * @Author: lhqin
+ * @Date: 2018-10-29 15:24:14
+ * @Last Modified by: kkfan2
+ * @Last Modified time: 2019-01-17 09:05:30
+ */
+
+<template>
+    <!-- <EasyScrollbar style="height: 100%;"> -->
+    <div id="receiptConfig">
+        <tabNavigate :tabs="tabs"></tabNavigate>
+        <div class="main-wrap  clearfix">
+            <!-- 查询条件（基本查询）start -->
+            <div class="search-wrap clearfix">
+                <el-row type="flex" justify="space-between">
+                    <el-col :span="6" :md="6">
+                        <label class="mr5">行政区划</label>
+                        <div class="inline-block common-width">
+                            <Cascader class="inline-block bwidth" :data="proData" :load-data="xzqhLoadData" v-model="xzqhVal" change-on-select filterable @on-change="changeXzqh" :transfer="true"></Cascader>
+                        </div>
+                    </el-col>
+                    <el-col :span="6" :md="6">
+                        <label class="mr5">所属部门</label>
+                        <div class="inline-block common-width">
+                            <el-select class="bwidth" v-model="deptVal" size="small" filterable>
+                                <el-option v-for="item in deptData" :key="item.value" :label="item.label" :value="item.value">
+                                </el-option>
+                            </el-select>
+                        </div>
+                    </el-col>
+                    <el-col :span="6" :md="6">
+                        <label class="mr5">事项名称</label>
+                        <div class="inline-block common-width">
+                            <el-input v-model="matterNameVal" :maxlength="100" placeholder="请输入事项名称" size="small" @change="changeMatterName"></el-input>
+                        </div>
+                    </el-col>
+
+                    <!-- <el-col :span="6" :md="6" :push="0">
+                        <div class="btn-search-wrap">
+                            <div class="fl">
+                                <el-button class="w70 h30" type="primary" size="mini" @click="searchEvt">查询</el-button>
+                                <a ref="higSearch" class="higher-search-a text-blue fz14" href="javascript:void(0)" @click="higSearchEvt">
+                                    <span>{{ higSerMsg }}</span>
+                                    <i class="iconfont icon-xia"></i>
+                                </a>
+                            </div>
+                            <div class="fr mr10">
+                                <el-button class="w60 h30" type="primary" size="mini" @click="goAddMattPanel()">新增</el-button>
+                            </div>
+                        </div>
+                    </el-col> -->
+                    <el-col :span="6" :md="6" :push="0">
+                        <div class="btn-search-wrap">
+                            <div class="fl">
+                                <el-button class="w70 h30" type="primary" size="mini" @click="searchEvt">查询</el-button>
+                                <a ref="higSearch" class="higher-search-a text-blue fz14" href="javascript:void(0)" @click="higSearchEvt">
+                                    <span>{{ higSerMsg }}</span>
+                                    <i class="iconfont icon-xia"></i>
+                                </a>
+                            </div>
+                            <div class="fr mr10">
+                                <el-button class="w60 h30" type="primary" size="mini" @click="goAddMattPanel()">新增</el-button>
+                                <el-button class="w60 h30" style="background: #FFF;color: #666;border: 1px solid #e0e6f1;" size="mini" @click="importFileEvt">导入</el-button>
+                            </div>
+                        </div>
+                    </el-col>
+
+                </el-row>
+            </div>
+
+            <!-- 查询条件（高级查询）start -->
+            <div class="search-wrap clearfix" v-bind:class="{hide:isHigRow}">
+                <el-row class="clearfix" type="flex" justify="space-between">
+                    <el-col :span="6" :md="6">
+                        <label class="mr5">事项分类</label>
+                        <div class="inline-block common-width matt-class">
+                            <Select v-model="matterClassifyVal" :transfer="true">
+                                <Option v-for="item in matterClaData" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                            </Select>
+                        </div>
+                    </el-col>
+                    <el-col :span="6" :md="6">
+                        <label class="mr5">事项类型</label>
+                        <div class="inline-block common-width">
+                            <Select class="bwidth" v-model="matterTypeVal" :transfer="true">
+                                <Option v-for="item in matttypeData" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                            </Select>
+                        </div>
+                    </el-col>
+                    <el-col :span="6" :md="6">
+                        <label class="mr5">事项编码</label>
+                        <div class="inline-block common-width">
+                            <el-input v-model="matterCodeVal" :maxlength="50" placeholder="请输入事项编码" size="small" @change="changeMatterCodeVal" />
+                            </el-input>
+                        </div>
+                    </el-col>
+                    <el-col :span="4" :md="3"></el-col>
+                </el-row>
+                <el-row class="mt15 clearfix">
+                    <el-col :span="6" :md="6">
+                        <div class="pl20">
+                            <label class="mr10">状态</label>
+                            <div class="inline-block status-width">
+                                <Select class="bwidth" v-model="statusVal" :transfer="true">
+                                    <Option v-for="item in statusData" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                                </Select>
+                            </div>
+                        </div>
+                    </el-col>
+                </el-row>
+            </div>
+
+            <div class="pr10">
+                <!-- <div class="btn-groups clearfix">
+                    <div class="inline-block fr">
+                        <el-button class="mr5 w60" size="small" type="primary" @click="goAddMattPanel()">新增</el-button>
+                    </div>
+                </div> -->
+
+                <!-- 事项列表start -->
+                <div class="list-wrap mt20 panel-border" id="maskPanel">
+                    <el-table :data="receiptConfigData" :row-class-name="getRowClass" style="width: 100%" tooltip-effect="light">
+                        <!-- 展开项 -->
+                        <el-table-column type="expand">
+                            <!-- prop="children" label="展/收" width="60" -->
+                            <template scope="scope">
+                                <el-table :data="scope.row.childs" tooltip-effect="light" :show-header="false">
+                                    <el-table-column label="事项名称">
+                                        <template scope="scope">
+                                            <a :title="scope.row.matterName" href="javascript:void(0);" class="mattLink" @click="goMattDetail($event,scope.row,'detail')">{{scope.row.matterName}}</a>
+                                        </template>
+                                    </el-table-column>
+                                    <el-table-column align="center" label="行政区划" width="130">
+                                        <template scope="scope">
+                                            <span :title="scope.row.adminDivName">{{scope.row.adminDivName}}</span>
+                                        </template>
+                                    </el-table-column>
+                                    <el-table-column prop="deptName" label="所属部门" width="250">
+                                        <template scope="scope">
+                                            <span :title="scope.row.deptName">{{scope.row.deptName}}</span>
+                                        </template>
+                                    </el-table-column>
+                                    <el-table-column align="center" prop="status" label="状态" width="110">
+                                        <template slot-scope="scope">
+                                            <span :title="scope.row.status === '01' ? '启用':'停用'">{{scope.row.status === '01' ? '启用':'停用'}}</span>
+                                        </template>
+                                    </el-table-column>
+                                    <el-table-column align="center" label="操作" width="230">
+                                        <template slot-scope="scope">
+                                            <el-button type="text" size="large" @click="isEnableEvt($event,scope.row)" :title="scope.row.status === '01' ? '停用':'启用'">
+                                                <span>{{scope.row.status === '01' ? '停用':'启用'}}</span>
+                                            </el-button>
+                                            <el-button title="事项配置" type="text" size="large" :disabled="isDisRevseFun(scope.row)" @click="mattConfigEvt($event,scope.row)">事项配置</el-button>
+                                            <el-button title="复制" type="text" size="large" @click="goMattDetail($event,scope.row,'copy')">复制</el-button>
+
+                                            <el-dropdown class="tab-cell-drop" trigger="click" placement="bottom">
+                                                <span class="el-dropdown-link">
+                                                    更多
+                                                    <i class="el-icon-arrow-down el-icon--center"></i>
+                                                </span>
+                                                <el-dropdown-menu slot="dropdown">
+                                                    <el-dropdown-item>
+                                                        <el-button type="text" size="large" :disabled="isDisRevseFun(scope.row)" @click="cancleEvt($event,scope.row)">注销</el-button>
+                                                    </el-dropdown-item>
+                                                    <el-dropdown-item>
+                                                        <el-button type="text" size="large" :disabled="isDisRevseFun(scope.row)" @click="goMattDetail($event,scope.row,'edit')">编辑</el-button>
+                                                    </el-dropdown-item>
+
+                                                    <el-dropdown-item>
+                                                        <el-button type="text" size="large" @click="caseCfgEvt($event,scope.row)">情形配置</el-button>
+                                                    </el-dropdown-item>
+                                                    <el-dropdown-item>
+                                                        <el-button type="text" size="large" @click="runCfgEvt($event,scope.row)">运行配置</el-button>
+                                                    </el-dropdown-item>
+                                                </el-dropdown-menu>
+                                            </el-dropdown>
+                                        </template>
+                                    </el-table-column>
+                                </el-table>
+                            </template>
+                        </el-table-column>
+                        <!-- 展开项结束 -->
+                        <el-table-column label="事项名称">
+                            <template scope="scope">
+                                <a :title="scope.row.matterName" href="javascript:void(0);" class="mattLink" @click="goMattDetail($event,scope.row,'detail')">{{scope.row.matterName}}</a>
+                            </template>
+                        </el-table-column>
+                        <el-table-column align="center" label="行政区划" width="130">
+                            <template scope="scope">
+                                <span :title="scope.row.adminDivName">{{scope.row.adminDivName}}</span>
+                            </template>
+                        </el-table-column>
+                        <el-table-column label="所属部门" width="250">
+                            <template scope="scope">
+                                <span :title="scope.row.deptName">{{scope.row.deptName}}</span>
+                            </template>
+                        </el-table-column>
+                        <el-table-column align="center" label="状态" width="110">
+                            <template slot-scope="scope">
+                                <span :title="scope.row.status === '01' ? '启用':'停用'">{{scope.row.status === '01' ? '启用':'停用'}}</span>
+                            </template>
+                        </el-table-column>
+                        <el-table-column align="center" label="操作" width="230">
+                            <template slot-scope="scope">
+                                <el-button type="text" size="large" @click="isEnableEvt($event,scope.row)" :title="scope.row.status === '01' ? '停用':'启用'">
+                                    <span>{{scope.row.status === '01' ? '停用':'启用'}}</span>
+                                </el-button>
+                                <el-button title="事项配置" type="text" size="large" :disabled="isDisRevseFun(scope.row)" @click="mattConfigEvt($event,scope.row)">事项配置</el-button>
+                                <el-button title="复制" type="text" size="large" @click="goMattDetail($event,scope.row,'copy')">复制</el-button>
+
+                                <el-dropdown class="tab-cell-drop" trigger="click" placement="bottom">
+                                    <span class="el-dropdown-link">
+                                        更多
+                                        <i class="el-icon-arrow-down el-icon--center"></i>
+                                    </span>
+                                    <el-dropdown-menu slot="dropdown">
+                                        <el-dropdown-item>
+                                            <el-button type="text" size="large" :disabled="isDisRevseFun(scope.row)" @click="cancleEvt($event,scope.row)">注销</el-button>
+                                        </el-dropdown-item>
+                                        <el-dropdown-item>
+                                            <el-button type="text" size="large" :disabled="isDisRevseFun(scope.row)" @click="goMattDetail($event,scope.row,'edit')">编辑</el-button>
+                                        </el-dropdown-item>
+                                        <el-dropdown-item>
+                                            <el-button type="text" size="large" :disabled="isDisRevseFun(scope.row)" @click="goMattDetail($event,scope.row,'addChild')">新增子项</el-button>
+                                        </el-dropdown-item>
+                                        <el-dropdown-item>
+                                            <el-button type="text" size="large" @click="caseCfgEvt($event,scope.row)">情形配置</el-button>
+                                        </el-dropdown-item>
+                                        <el-dropdown-item>
+                                            <el-button type="text" size="large" @click="runCfgEvt($event,scope.row)">运行配置</el-button>
+                                        </el-dropdown-item>
+                                    </el-dropdown-menu>
+                                </el-dropdown>
+                            </template>
+                        </el-table-column>
+                    </el-table>
+                    <div class="block fr mt10">
+                        <el-pagination :total="total" :page-size="pageSize" @size-change="cfgSizeChange" @current-change="cfgCurrentChange" :current-page.sync="currentPage" layout="total, sizes, prev, pager, next, jumper">
+                        </el-pagination>
+                    </div>
+                </div>
+                <!-- 事项列表end -->
+            </div>
+
+            <!-- 查看版本弹框 -->
+            <!-- <el-dialog title="查看版本" class="version-list" :visible.sync="versionDialog">
+            <matt-version v-bind:matterCode="matterCode" ref='verDialog'></matt-version>
+            </el-dialog> -->
+
+            <!-- 导入弹框 -->
+            <!-- :title="guideTitle" :visible.sync="guideAddVis" -->
+            <el-dialog title="事项导入" :visible.sync="importFileVis" width="700px" height="430px" custom-class="import-dialog">
+                <div class="import-wrap" v-show="!isImportSuccess">
+                    <div class="import-file-wrap fl">
+                        <div class="upload-wrap">
+                            <div class="upload-con">
+
+                                <a href="javascript:;" class="btn-upload">
+                                    <i class="icon-upload"></i>
+                                    <p>点击这里上传</p>
+                                </a>
+                                <p class="notice-msg">支持扩展名：.xls .xlsx</p>
+
+                                <!-- 上传文件插件 -->
+                                <vue-upload-web ref="upload" :auto="uploadObj.auto" :url="uploadObj.cdnUrl" :form-data="uploadObj.cdnParams" :accept="uploadObj.accept" @progress="uploadProgress" @success="uploadSuccess" @before="beforeUpload" @error="uploadError" @complete="handleComplete" :multiple="false" :fileNumLimit="1000" :upload-button="'.btn-upload'">
+                                    <!-- :upload-button="'.btn-upload'" -->
+                                </vue-upload-web>
+                            </div>
+                        </div>
+                        <!-- 进度条 -->
+                        <div class="progress-wrap">
+                            <!-- v-if="uploadPer != 0" -->
+                            <p class="file-infos">
+                                <i class="icon-mark"></i>
+                                <span :title="fileList.name">{{fileList.name}}</span>
+                                <i class="icon-del fr" :class="{hide: disable}" @click="delFileEvt"></i>
+                            </p>
+                            <el-progress :percentage="uploadPer"></el-progress>
+                        </div>
+                    </div>
+                    <div class="upload-file-wrap fr mr30" @click="uploadTmplEvt">
+                        <i></i>
+                        <span>模板下载</span>
+                    </div>
+                </div>
+                <div class="footer" v-show="!isImportSuccess">
+                    <!--@click="sureImportEvt" :disabled="uploadPer == 100 ? false: true" -->
+                    <el-button type="primary" size="small" @click="sureImportEvt" :disabled="disable">确 定</el-button>
+                    <el-button size="small" @click="closeModel">取 消</el-button>
+                </div>
+                <div class="import-result-wrap" v-show="isImportSuccess">
+                    <p class="content">
+                        <i class="icon"></i>
+                        <span class="font">共{{loadInfo.total}}条记录，导入成功{{loadInfo.sucessNum}}条，导入失败
+                            <i class="font" @click="downloadImportResult(loadInfo.resFileId)">{{loadInfo.failNum}}</i>条</span>
+                    </p>
+                </div>
+                <div class="footer" v-show="isImportSuccess">
+                    <!--@click="sureImportEvt" :disabled="uploadPer == 100 ? false: true" -->
+                    <el-button type="primary" size="small" @click="trunImport">继续导入</el-button>
+                    <el-button size="small" @click="closeModel">关 闭</el-button>
+                </div>
+            </el-dialog>
+        </div>
+    </div>
+    <!-- </EasyScrollbar> -->
+
+</template>
+<script>
+import Vue from 'vue';
+import unit from '@/api/index';
+import tabNavigate from "@/components/common/tabNavigate";   // 页签导航
+import vueUploadWeb from '@/components/upload/upload';
+export default {
+    components: {
+        tabNavigate: tabNavigate,
+        'vue-upload-web': vueUploadWeb
+    },
+    data() {
+        return {
+            tabs: ['事项管理', '事项管理'],
+            isHigRow: true,
+            higSerMsg: '更多',
+            disable: true,
+            loadInfo: [], // 上传返回信息
+            saveXzqh: [], // 暂存行政区划
+            saveFlag: true, // 暂存标志
+
+            xzqhVal: [], // 行政区划
+            deptVal: '', // 所属部门
+            matterNameVal: '', // 事项名称
+            matterClassifyVal: '', // 事项分类
+            matterTypeVal: '', // 事项类型
+            matterCodeVal: '', // 事项编号
+            statusVal: 'all', // 状态
+
+            currentPage: 1,
+            pageSize: 10,
+            total: 0,
+            receiptConfigData: [],
+
+            proData: [],
+            statusData: [],
+            deptData: [{
+                label: '全部',
+                value: ''
+            }],
+            matterClaData: [],
+            matttypeData: [],
+
+            matterCode: '',// 传给子组件（查看版本弹窗dialog的ID）
+            // 情形配置地址
+            qxpzServiceAddress: '',
+            // 运行配置地址
+            yxpzServiceAddress: '',
+
+            importFileVis: false,
+            uploadObj: { // 文件上传参数
+                cdnUrl: '/bog-matter-mgr/matterAllocation/importMatters',
+                auto: false,
+                cdnParams: { flag: '1', isPreView: '1' },
+                accept: {
+                    extensions: 'xls,xlsx',
+                    mimeTypes: 'application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+                },
+            },
+            loading: '',
+            uploadPer: 1,
+            fileList: {},
+            // 导入总条数
+            totalCount: 0,
+            // 上传成功总条数
+            successCount: 0,
+            // 上传失败总条数
+            faileCount: 0,
+            // 是否导入成功标志位
+            isImportSuccess: false
+        };
+    },
+    methods: {
+        trunImport() {
+            this.fileList = {};
+            this.disable = true;
+            this.isImportSuccess = !this.isImportSuccess;
+        },
+        // 关闭导入弹窗
+        closeModel() {
+            this.$Modal.remove();
+            this.importFileVis = false;
+            // this.$refs.upload.uploader.destroy();
+        },
+        /*
+         * 导入文件
+         */
+        importFileEvt() {
+            let that = this;
+            that.importFileVis = true;
+            that.isImportSuccess = false;
+        },
+        /*
+         * 确定导入文件
+         */
+        sureImportEvt() {
+            let that = this;
+            // $('.webuploader-element-invisible').trigger('uploadStart');
+            // var fileInput = $('.webuploader-element-invisible').get(0).files[0];
+            // if(fileInput){
+            that.$refs.upload.uploader.upload();
+            // } else {
+            //     this.$Message.error('请选择所要上传的文件！');
+            // }
+            // unit.ajaxMerPost('/bog-matter-mgr/matterAllocation/importMatters', {
+            //     file: that.fileList.path
+            // },
+            // function(res) {
+            //     that.totalCount = 0;
+            //     that.successCount = 0;
+            //     that.faileCount = 0;
+            //     that.isImportSuccess = true;
+            // },function(error) {
+            //     that.$Message.error('请求数据失败');
+            // }, that);
+        },
+        /*
+         * 模板下载
+         */
+        uploadTmplEvt() {
+            let exportUrl = '/bog-matter-mgr/matterAllocation/downloadExample';
+            exportUrl = encodeURI(exportUrl);
+            window.open(exportUrl, '_self');
+        },
+        downloadImportResult(fileName) {
+            let exportUrl = '/bog-matter-mgr/matterAllocation/downloadImportResult?fileName=' + fileName;
+            exportUrl = encodeURI(exportUrl);
+            window.open(exportUrl, '_self');
+        },
+        /*
+        * 删除文件
+        */
+        delFileEvt() {
+            let that = this;
+            that.$confirm('确定删除该文件?', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                cancelButtonClass: 'fr ml10',
+                type: 'warning'
+            }).then(() => {
+                // unit.ajaxMerPost('/bog-matter-mgr/commer/fileDelete', {
+                //     filePath: that.fileList.path,
+                //     isPreView: '1'  // 预览
+                // },function(res) {
+                //     that.fileList = {};
+                //     that.uploadPer = 0;
+                //     that.$Message.success('删除成功！');
+                // },function(error) {
+                //     that.$Message.error('删除失败！');
+                // }, that);
+                let that = this;
+                this.fileList = {};
+                this.disable = true;
+                that.$refs.upload.uploader.removeFile(that.$refs.upload.uploader.getFiles()[0], true);
+            }).catch(() => {
+            });
+        },
+        /*
+         * 上传图片之前
+         */
+        beforeUpload(file) {
+            let that = this;
+            that.uploadPer = 0;
+            if (file.size > 10485760) {
+                that.$Message.warning('上传文件大小不能10M!');
+                return;
+            }
+            if (that.$refs.upload.uploader.getFiles().length > 1) {
+                that.$refs.upload.uploader.removeFile(that.$refs.upload.uploader.getFiles()[0], true);
+            }
+            if (that.$refs.upload.uploader.getFiles().length > 0) {
+                that.disable = false;
+            } else {
+                that.disable = true;
+            }
+            this.fileList = file;
+        },
+        /*
+         * 上传进度
+         */
+        uploadProgress(file, percentage) {
+            let that = this;
+            that.loadingFun();
+            that.uploadPer = percentage;
+        },
+        /*
+         * 上传图片成功
+         */
+        uploadSuccess(file, res) {
+            let that = this,
+                data;
+            that.loading.close();
+            if (res.flag && res.data) {
+                that.isImportSuccess = true;
+                that.loadInfo = res.data;
+            } else {
+                that.$Message.warning(res.errMsg);
+            }
+        },
+
+        /*
+         * 上传图片出错
+         */
+        uploadError(data) {
+            let that = this;
+            if (data == '上传出错！请检查后重新上传！错误代码Q_TYPE_DENIED') {
+                that.$Message.warning('上传出错，请检查后重新上传！');
+            } else {
+                that.$Message.warning(data);
+            }
+        },
+        /*
+         * 上传图片结束
+         */
+        handleComplete() {
+            let that = this;
+            that.loading.close();
+        },
+        /*
+         * 遮罩
+         */
+        loadingFun() {
+            let that = this;
+            that.loading = that.$loading({
+                lock: true,
+                text: '上传中',
+                spinner: 'el-icon-loading',
+                background: 'rgba(0, 0, 0, 0.5)',
+                customClass: 'el-mask'
+            });
+        },
+        /*
+         * 修复ie记忆问题
+         */
+        changeMatterName(val) {
+            this.matterNameVal = val == '' ? '' : val;
+        },
+        /*
+         * 修复ie记忆问题
+         */
+        changeMatterCodeVal(val) {
+            this.matterCodeVal = val == '' ? '' : val;
+        },
+        /*
+         * 行政区划改变联动部门
+         */
+        changeXzqh(value, selectedData) {
+            let _that = this;
+            if (value.length === 0) { // 行政区划清空时部门和机构清空
+                _that.deptData = [];
+                _that.deptData.unshift({
+                    label: '全部',
+                    value: ''
+                });
+                _that.deptVal = '';
+            } else {
+                _that.xzqhVal = value;
+            }
+            if (!this.saveFlag) {
+                _that.getDeptData();// 联动部门
+            }
+        },
+        /*
+        ** 跳转新增页面
+        */
+        goAddMattPanel() {
+            this.$router.push(
+                {
+                    path: '/issuesManagement/addMatters',
+                    query: {
+                        type: 'addMatters',
+                        matteCode: '',
+                        matteVersion: ''
+                    }
+                }
+            );
+        },
+        /*
+        ** 点击列表中的按钮跳转相应操作
+        */
+        goMattDetail($event, row, type) {
+            let _that = this,
+                obj = {
+                    id: row.id,
+                    matteCode: row.matterCode ? row.matterCode : '', // row.matteCode
+                    matteVersion: row.matterVersion ? row.matterVersion : '' // row.matteVersion
+                };
+
+            obj.type = type;
+            if (type == 'addChild')
+                obj.parentCode = row.matterCode;
+            // } else if (type === 'copy') {
+            //     obj.type = 'copy';
+            //     if (row.isParent === '0') { // 是子项
+            //         obj.isChild = '1';
+            //     }
+            // } else if (type === 'change') {
+            //     obj.type = 'change';
+            // } else if (type === 'seeVersion') {
+            //     _that.matterCode = row.matterCode;
+            //     _that.versionDialog = true;
+            //     _that.$nextTick(() => { // 延迟执行
+            //         _that.$refs.verDialog.init();
+            //     });
+            //     return;
+            // }
+            if (type == 'edit') {
+                _that.$store.commit('setState', {
+                    editCurPage: _that.currentPage
+                });
+                localStorage.editCurPage = _that.currentPage;
+            }
+            _that.$router.push({
+                path: '/issuesManagement/addMatters',
+                query: obj
+            });
+        },
+        /*
+        ** 01 禁用按钮 02 启用按钮
+        */
+        isDisFun(row) {
+            switch (row.status) {
+                case '01':
+                    return false;
+                case '02':
+                    return true;
+            }
+        },
+        /*
+        ** 01 启用按钮 02 禁用按钮
+        */
+        isDisRevseFun(row) {
+            switch (row.status) {
+                case '01':
+                    return true;
+                case '02':
+                    return false;
+            }
+        },
+        /*
+        ** 展/收列，类的回调
+        */
+        getRowClass: function (row, rowIndex) {
+            if (row.row.childs == null || row.row.childs.length == 0) { // 无子项
+                return 'row-expand-cover';
+            }
+        },
+        /*
+        ** 切换更多、常规
+        */
+        higSearchEvt(e) {
+            this.isHigRow = this.isHigRow !== true;
+            let iEle = $(e.target)
+                .parent()
+                .find('i');
+            this.higSerMsg = this.higSerMsg === '更多' ? '常规' : '更多';
+            iEle.hasClass('icon-xia')
+                ? iEle.removeClass('icon-xia').addClass('icon-shang')
+                : iEle.removeClass('icon-shang').addClass('icon-xia');
+        },
+        /*
+        ** 获取事项配置列表数据
+        */
+        getConfigData() {
+            let _that = this,
+                jsonObj;
+            if (_that.$store.state.editCurPage != 0) {
+                _that.currentPage = parseInt(_that.$store.state.editCurPage);
+                _that.$store.commit('setState', {
+                    editCurPage: 0
+                });
+                localStorage.editCurPage = 0;
+            }
+            jsonObj = {
+                adminDiv: _that.xzqhVal[_that.xzqhVal.length - 1],
+                deptCode: _that.deptVal,
+                matterClassify: _that.matterClassifyVal === 'all' ? '' : _that.matterClassifyVal,
+                matterCode: _that.matterCodeVal.trim(),
+                matterName: _that.matterNameVal.trim(),
+                matterType: _that.matterTypeVal === 'all' ? '' : _that.matterTypeVal,
+                status: _that.statusVal === 'all' ? '' : _that.statusVal,
+                pageNum: _that.currentPage,
+                pageSize: _that.pageSize
+            };
+
+            unit.ajaxObjPost('/znsj-web/matterAllocation/getAll', jsonObj, function (res) {
+                if (res.flag == true) {
+                    let data = res.data;
+                    _that.total = data.total;
+                    _that.currentPage = data.pageNum;
+                    data = data.rows;
+                    $.each(data, function (index, item) {
+                        item.matterName =
+                            item.matterName === (null || '') ? '--' : item.matterName;
+                        item.adminDivName = item.adminDivName === null ? '--' : item.adminDivName;
+                        item.deptName = item.deptName === (null || '') ? '--' : item.deptName;
+                        item.status = item.status === (null || '') ? '--' : item.status;
+                    });
+                    _that.receiptConfigData = data;
+                } else {
+                    _that.$message.warning('请求数据失败');
+                }
+            }, function (res) {
+                _that.$message.warning('请求数据失败');
+            }, _that);
+        },
+        /*
+        ** 查询
+        */
+        searchEvt() {
+            let _that = this;
+            _that.currentPage = 1;
+            _that.getConfigData();
+        },
+        /*
+        ** 事项列表每页显示数据量变更
+        */
+        cfgSizeChange: function (val) {
+            let _that = this;
+            _that.pageSize = val;
+            _that.currentPage = 1;
+            _that.getConfigData();
+        },
+        /*
+        ** 事项列表页码变更
+        */
+        cfgCurrentChange: function (val) {
+            let _that = this;
+            _that.currentPage = val;
+            _that.getConfigData();
+        },
+        /*
+        ** 启用停用
+        */
+        isEnableEvt($event, row) { // isParent判断是否是父项
+            let _that = this;
+            if (row.status === '01') { // 停用
+                _that.$confirm(row.isParent == '1' ? '确定停用当前事项及其子事项?' : '确定停用当前事项?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    cancelButtonClass: 'fr ml10',
+                    type: 'warning'
+                }).then(() => {
+                    let obj = {
+                        matterCode: row.matterCode,
+                        version: row.matterVersion,
+                        status: '02'
+                    };
+                    unit.ajaxMerPost('/znsj-web/matterAllocation/updateStatus', obj, function (res) {
+                        if (res.flag == true && res.data === '更新成功') {
+                            _that.$message({
+                                type: 'success',
+                                message: '停用成功!'
+                            });
+                            _that.getConfigData();
+                        } else {
+                            _that.$message.warning(res.errMsg);
+                        }
+                    }, function (res) {
+                        _that.$message.warning(res.data.errMsg);
+                    }, _that);
+                }).catch(() => { });
+            } else if (row.status === '02') { // 启用
+                _that.$confirm(row.isParent == '1' ? '确定启用当前事项?' : '确定启用当前事项及其父事项?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    cancelButtonClass: 'fr ml10',
+                    type: 'warning'
+                }).then(() => {
+                    let obj = {
+                        matterCode: row.matterCode,
+                        version: row.matterVersion,
+                        status: '01'
+                    };
+                    unit.ajaxMerPost('/znsj-web/matterAllocation/updateStatus', obj, function (res) {
+                        if (res.flag == true && res.data === '更新成功') {
+                            _that.$message({
+                                type: 'success',
+                                message: '启用成功!'
+                            });
+                            _that.getConfigData();
+                        } else {
+                            _that.$message.warning(res.errMsg);
+                        }
+                    }, function (res) {
+                        _that.$message.warning(res.data.errMsg);
+                    }, _that);
+                }).catch(() => { });
+            }
+        },
+        /*
+        ** 跳转事项配置页面
+        */
+        mattConfigEvt($event, row) {
+            this.$router.push({
+                path: '/configInfoPage',
+                query: {
+                    id: row.id,
+                    name: row.matterName,
+                    matteCode: row.matterCode,
+                    matteVersion: row.matterVersion,
+                    isParent: row.isParent
+                }
+            });
+        },
+        /*
+        ** 跳转情形配置页面
+        */
+        caseCfgEvt($event, row) {
+            // http://192.168.59.95:9170  测试
+            // http://172.31.1.87:9170    开发
+            if (this.qxpzServiceAddress) {
+                window.location.href = this.qxpzServiceAddress + '#/matterSituationConfigInfos?id=' + row.id + '&name=' + row.matterName + '&matteCode=' + row.matterCode + '&matteVersion=' + row.matterVersion;
+            } else {
+                this.$router.push({
+                    path: '/matterSituationConfigInfos',
+                    query: {
+                        id: row.id,
+                        name: row.matterName,
+                        matteCode: row.matterCode,
+                        matteVersion: row.matterVersion
+                    }
+                });
+            }
+        },
+        /*
+        ** 运行配置
+        */
+        runCfgEvt($event,row) {
+            let that = this;
+            // unit.ajaxMerPost('/znsj-web/commer/getYxpzServiceAddress', {}, function (res) {
+            //     window.location.href = res.data.yxpzServiceAddress;
+            // }, function (res) {
+            //     that.$Message.warning('服务端错误');
+            // }, that);
+            // window.location.href = this.yxpzServiceAddress;
+            // id:可为空
+            // name:事项名称
+            // itemCode:事项编码
+            // itemVersion:事项版本
+            // type=edit（新增:add,编辑edit）
+            // xzqhmc=行政区划名称
+            if (that.yxpzServiceAddress) {
+                window.location.href = encodeURI(that.yxpzServiceAddress + '#/runConfig?id=' + row.id+ '&name=' + row.matterName + '&itemCode=' + row.matterCode + '&itemVersion=' + row.matterVersion + '&type=edit&xzqhmc=' + row.adminDivName);
+            } else {
+                that.$Message.warning("获取运行配置地址失败，请刷新重试！");
+            }
+        },
+        /*
+        ** 注销
+        */
+        cancleEvt($event, row) {
+            let _that = this;
+            _that.$confirm(row.isParent == '1' && row.childs.length > 0 ? '确定注销此事项及其子事项?' : '注销后不可恢复，确定注销此事项?', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                cancelButtonClass: 'fr ml10',
+                type: 'warning'
+            }).then(() => {
+                let obj = {
+                    id: row.id
+                };
+                unit.ajaxMerPost('/znsj-web/matterAllocation/deleteMatter', obj, function (res) {
+
+                    if (res.flag == true && res.data === '注销成功') {
+                        _that.$message({
+                            type: 'success',
+                            message: '注销成功!'
+                        });
+                        _that.getConfigData();
+                    }
+                }, function (res) {
+                    if (res.data.errCode == 500) {
+                        _that.$message.warning(res.data.errMsg);
+                    }
+                }, _that);
+            }).catch(() => {
+
+            });
+        },
+        /*
+        ** 获取行政区划
+        */
+        getXzqhTreeData() {
+            let _that = this,
+                obj = {
+                    value: _that.xzqhVal[0]
+                };
+            unit.ajaxMerPost('/znsj-web/commer/getXzqhTreeData', obj, function (res) {
+                if (res.flag == true) {
+                    $.each(res.data, function (index, item) {
+                        item.children = [];
+                        item.loading = false;
+                    });
+                    _that.proData = res.data;
+                    _that.proData.unshift({
+                        label: '全部',
+                        value: ''
+                    });
+                    setTimeout(function () {
+                        _that.getDefaultXzqh();
+                    }, 0);
+                } else {
+                    _that.$message.warning('服务端错误');
+                }
+            }, function (res) {
+                _that.$message.warning('服务端错误');
+            }, _that);
+        },
+        /*
+        ** 点击行政区划加载子项
+        */
+        xzqhLoadData(item, callback) {
+            let _that = this,
+                qhCode = item.value,
+                itenLen = item.__value.split(',').length;
+            item.loading = true;
+            setTimeout(() => {
+                let obj = {
+                    value: qhCode
+                };
+                unit.ajaxMerPost('/znsj-web/commer/getXzqhTreeData', obj, function (result) {
+                    if (result.flag == true) {
+                        $.each(result.data, function (i, t) {
+                            if (t.existChild) {
+                                t.children = [];
+                                t.loading = false;
+                            }
+                        });
+                        item.children = result.data;
+                        if (_that.saveFlag) {
+                            setTimeout(function () {
+                                _that.getDeptData();
+                                _that.saveFlag = false;
+                            }, 0);
+                        }
+                    } else {
+                        _that.$message.warning('服务端错误');
+                    }
+                    item.loading = false;
+                    callback();
+                }, function (result) {
+                    _that.$message.warning('服务端错误');
+                }, _that);
+            }, 300);
+        },
+        /*
+        ** 获取部门字典
+        */
+        getDeptData() {
+            let _that = this,
+                obj = {
+                    adminDiv: _that.xzqhVal[_that.xzqhVal.length - 1]
+                };
+            unit.ajaxMerPost('/znsj-web/commer/getDeptList', obj, function (res) {
+                if (res.flag == true) {
+                    _that.deptData = res.data;
+                    _that.deptData.unshift({
+                        label: '全部',
+                        value: ''
+                    });
+                    _that.deptVal = '';
+                } else {
+                    _that.$message.warning('服务端错误');
+                }
+            }, function (res) {
+                _that.$message.warning('服务端错误');
+            }, _that);
+        },
+        /*
+        ** 获取字典值公共方法
+        */
+        getDictionarys(str) {
+            let _that = this,
+                obj = {
+                    pinYinType: str
+                };
+            unit.ajaxMerPost('/znsj-web/dic/getDictionarys', obj, function (res) {
+                if (res.flag == true) {
+                    let data = res.data;
+                    if (str === 'XZQH') {
+                        _that.saveXzqh = [data[0].value, data[1].value]; // 暂存行政区划，供后面调用
+                        _that.xzqhVal = [data[0].value, data[1].value];
+                        _that.getConfigData();// 事项列表,防止行政区划接口慢，导致获取列表数据不传行政区划
+                    } else if (str === 'SXFL') {
+                        _that.matterClaData = data;
+                        _that.matterClaData.unshift({
+                            label: '全部',
+                            value: 'all'
+                        });
+                        _that.matterClassifyVal = 'all';
+                    } else if (str === 'SXLX') {
+                        _that.matttypeData = data;
+                        _that.matttypeData.unshift({
+                            label: '全部',
+                            value: 'all'
+                        });
+                        _that.matterTypeVal = 'all';
+                    } else if (str === 'SXZT') {
+                        _that.statusData = data;
+                        _that.statusData.unshift({
+                            label: '全部',
+                            value: 'all'
+                        });
+                        _that.statusVal = 'all';
+                    }
+                } else {
+                    _that.$message.warning('服务端错误');
+                }
+            }, function (res) {
+                _that.$message.warning('服务端错误');
+            }, _that);
+        },
+        /*
+        ** 获取默认行政区划
+        */
+        getDefaultXzqh() {
+            // let that = this;
+            // unit.ajaxMerPost('/znsj-web/commer/curentUserXzqh', {
+            //     pinYinType: 'XZQH'
+            // }, function (res) {
+            //     if (res.flag) {
+            //         that.saveXzqh = [];
+            //         that.xzqhVal = [];
+            //         let data = res.data;
+            //         for (let i in data) {
+            //             that.xzqhVal.push(data[i].value);
+            //             that.saveXzqh.push(data[i].value);
+            //         }
+            //         that.getConfigData();
+            //     } else {
+            //         that.$Message.warning('服务端错误');
+            //     }
+            // }, function (res) {
+            //     that.$Message.warning('服务端错误');
+            // }, that);
+
+            let that = this;
+            that.saveXzqh = [];
+            that.xzqhVal = [];
+            that.xzqhVal.push('');
+            that.saveXzqh.push('');
+            that.getConfigData();
+        },
+        /*
+        ** 事项分类字典
+        */
+        getMatterClaData() {
+            let _that = this;
+            _that.getDictionarys('SXFL');
+        },
+        /*
+        ** 事项类型字典
+        */
+        getSxlxData() {
+            let _that = this;
+            _that.getDictionarys('SXLX');
+        },
+        /*
+        ** 状态字典
+        */
+        getStatusData() {
+            let _that = this;
+            _that.getDictionarys('SXZT');
+        },
+        /*
+        ** 跳转情形配置Ip
+        */
+        getQxpzServiceAddressFunc() {
+            let that = this;
+            unit.ajaxMerPost('/znsj-web/commer/getQxpzServiceAddress', {}, function (res) {
+                if (res.flag) {
+                    that.qxpzServiceAddress = res.data.qxpzServiceAddress;
+                } else {
+                    that.$Message.warning('服务端错误');
+                }
+            }, function (res) {
+                that.$Message.warning('服务端错误');
+            }, that);
+        },
+        /*
+        ** 跳转运行配置Ip
+        */
+        getYxpzServiceAddressFunc() {
+            let that = this;
+            unit.ajaxMerPost('/znsj-web/commer/getYxpzServiceAddress', {}, function (res) {
+                if (res.flag) {
+                    that.yxpzServiceAddress = res.data.yxpzServiceAddress;
+                } else {
+                    that.$Message.warning('服务端错误');
+                }
+            }, function (res) {
+                that.$Message.warning('服务端错误');
+            }, that);
+        },
+        /*
+        ** 初始化
+        */
+        init() {
+            let _that = this;
+            // 获取行政区划
+            _that.getXzqhTreeData();
+            // 事项分类字典
+            _that.getMatterClaData();
+            // 事项类型字典
+            _that.getSxlxData();
+            // 状态字典
+            _that.getStatusData();
+            if (location.href.indexOf('bog-matter-mgr') != -1) {
+                //跳转情形配置Ip
+                _that.getQxpzServiceAddressFunc();
+                _that.getYxpzServiceAddressFunc();
+            } else {
+                _that.qxpzServiceAddress = '';
+            }
+            // 解决ie兼容性问题
+            unit.solveAnimFrame();
+        }
+    },
+    watch: {
+        importFileVis(newVal, oldVal) {
+            if (newVal) {
+                // this.$set(this,"disable",true)
+                this.disable = newVal
+                // Vue.set("disable",true);
+            } else {
+                this.fileList = {};
+            }
+        }
+    },
+    mounted() {
+        this.init();
+    }
+};
+</script>
+<style lang="less" rel="stylesheet/less">
+.v-modal {
+    z-index: 999 !important;
+}
+#receiptConfig {
+    overflow: auto;
+    height: 100%;
+    padding: 0 20px 0 20px;
+    // min-width: 1165px;
+    background-color: #edf0f6;
+    .el-dialog__wrapper {
+        z-index: 1000 !important;
+    }
+    .main-wrap {
+        padding: 20px 20px 15px 20px;
+        background-color: #fff;
+    }
+    .el-table td {
+        padding: 4px 0;
+    }
+    .el-table td .cell {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    .panel-border {
+        border: 1px solid #e0e6f1;
+        border-bottom: none;
+    }
+    .el-dropdown-menu {
+        width: 10%;
+    }
+    .clear:after {
+        content: "";
+        display: table;
+        clear: both;
+        zoom: 1;
+    }
+    .btn-search-wrap {
+        .el-button--primary {
+            color: #fff;
+            background-color: #2d8cf0;
+            border-color: #2d8cf0;
+            height: 30px;
+            float: left;
+        }
+    }
+
+    .higher-search-a {
+        float: left;
+        margin: 0 15px 0 10px;
+    }
+    .el-table__expanded-cell[class*="cell"] {
+        padding: 0;
+        border-bottom: 0 !important;
+        border: none;
+        padding-left: 50px;
+        background-color: #f8f9fb !important;
+    }
+    .btn-groups {
+        margin-top: 25px;
+    }
+    .search-wrap {
+        padding-left: 12px;
+        margin-top: 18px;
+    }
+    .list-wrap .ivu-table-body {
+        color: #515a6e;
+    }
+    .ivu-table td.matters-name {
+        .ivu-table-cell {
+            padding-left: 5px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+    }
+    .a-color-red {
+        a {
+            color: #288ff4;
+        }
+    }
+    .tab-cell-drop {
+        cursor: pointer;
+        margin-left: 10px;
+    }
+    .row-expand-cover {
+        td:first-child .el-table__expand-icon {
+            display: none;
+        }
+    }
+    .mattLink {
+        color: #409eff;
+    }
+    .common-width {
+        width: 67%;
+        .ivu-cascader {
+            width: 100%;
+        }
+    }
+    .bwidth {
+        width: 100%;
+    }
+    .common-other-width {
+        width: 40%;
+        vertical-align: middle;
+    }
+    .matt-class {
+        .el-select {
+            width: 100%;
+        }
+    }
+    .status-width {
+        width: 71.2%;
+    }
+    .btn-search-wrap {
+        margin-left: -15px;
+    }
+    body .ivu-modal .ivu-select-dropdown {
+        position: fixed !important;
+    }
+    // 导入弹框样式
+    .import-dialog {
+        .el-dialog__header {
+            border-bottom: 1px solid #ddd;
+        }
+        .el-dialog__body {
+            padding: 0;
+        }
+        .footer {
+            padding: 0 20px;
+            height: 50px;
+            background: #fff;
+            border-top: 1px solid #ddd;
+            text-align: right;
+            line-height: 50px;
+        }
+        .el-button--primary.is-disabled,
+        .el-button--primary.is-disabled:active,
+        .el-button--primary.is-disabled:focus,
+        .el-button--primary.is-disabled:hover {
+            color: #fff;
+            cursor: not-allowed;
+            background-image: none;
+            background-color: #c0c4cc;
+            border-color: #ebeef5;
+        }
+        // 导入弹框样式
+        .import-wrap {
+            padding: 0 20px;
+            width: 100%;
+            height: 405px;
+            .import-file-wrap {
+                width: 60%;
+                height: 200px;
+                .upload-wrap {
+                    margin: 50px 60px 10px;
+                    width: 400px;
+                    height: 200px;
+                    border: 1px dashed #409eff;
+                    border-radius: 5px;
+                    background: #f5f5f5;
+                    .upload-con {
+                        margin: auto;
+                        width: 160px;
+                        a:hover {
+                            color: #515a6e;
+                        }
+                        .btn-upload {
+                            .icon-upload {
+                                display: block;
+                                margin-top: 10px;
+                                width: 90px;
+                                height: 80px;
+                                background: url(../../../assets/images/common/icon-import.png)
+                                    no-repeat;
+                                background-position: center center;
+                            }
+                            p {
+                                width: 90px;
+                            }
+                        }
+                        p {
+                            line-height: 25px;
+                        }
+                        .notice-msg {
+                            color: #8a8a8a;
+                            text-indent: 15px;
+                        }
+                        .webuploader-pick {
+                            background: transparent;
+                            padding-bottom: 0;
+                            p {
+                                color: #515a6e;
+                            }
+                        }
+                    }
+                }
+                .progress-wrap {
+                    margin: 20px 60px 0;
+                    width: 450px;
+                    height: 200px;
+                    .file-infos {
+                        // height: 30px;
+                        .icon-mark {
+                            display: inline-block;
+                            height: 30px;
+                            width: 20px;
+                            background: url(../../../assets/images/common/icon-mark.png)
+                                no-repeat;
+                            background-position: center center;
+                        }
+                        span {
+                            display: inline-block;
+                            max-width: 300px;
+                            color: #d1d1bb;
+                            line-height: 20px;
+                            vertical-align: top;
+                            line-height: 30px;
+                            text-overflow: ellipsis;
+                            overflow: hidden;
+                            white-space: nowrap;
+                        }
+                        .icon-del {
+                            margin-right: 47px;
+                            width: 20px;
+                            height: 30px;
+                            background: url(../../../assets/images/common/icon-del.png)
+                                no-repeat;
+                            background-position: center 10px;
+                            cursor: pointer;
+                        }
+                    }
+                    .el-progress__text {
+                        display: none;
+                    }
+                }
+            }
+            .upload-file-wrap {
+                margin-top: 50px;
+                width: 100px;
+                height: 100px;
+                // background: #f5f5f5;
+                cursor: pointer;
+                span,
+                i {
+                    display: inline-block;
+                    width: 100%;
+                    text-align: center;
+                }
+                i {
+                    height: 30px;
+                    background: url(../../../assets/images/common/icon-template-upload.png)
+                        no-repeat;
+                    background-position: center top;
+                }
+                span {
+                    color: #515a6e;
+                }
+            }
+        }
+        // 导入结果页
+        .import-result-wrap {
+            padding-top: 160px;
+            width: 100%;
+            height: 400px;
+            .content {
+                margin: 0 auto;
+                width: 400px;
+                height: 60px;
+                // line-height: 60px;
+                .icon {
+                    display: inline-block;
+                    width: 60px;
+                    height: 60px;
+                    background: url(../../../assets/images/common/icon-import-state.png)
+                        no-repeat;
+                    background-position: center;
+                }
+                .font {
+                    font-size: 14px;
+                    line-height: 60px;
+                    vertical-align: top;
+                }
+                i.font {
+                    color: #409eff;
+                    cursor: pointer;
+                    display: inline-block;
+                    padding: 0 8px;
+                }
+            }
+        }
+    }
+}
+</style>

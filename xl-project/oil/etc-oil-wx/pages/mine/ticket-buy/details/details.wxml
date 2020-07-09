@@ -1,0 +1,76 @@
+<!--pages/mine/ticket-buy/details/details.wxml-->
+<view class="ticket-buy-details-container">
+    <!--卡片-->
+    <image class="ticket-card-details-bg-img" src="{{details.background_url?details.background_url:'https://oss.etcsd.com/object/17e7048da2fa48f89e729d0ded3250be'}}"></image>
+    <view class="ticket-card-details-box">
+        <view class="ticket-card-details-info-top">
+<!--            新用户乐透券包-->
+            <text class="ticket-card-details-name-text">{{details.package_name}}</text>
+            <view class="ticket-card-details-discount-value">{{details.discount_rate}}折</view>
+        </view>
+        <view class="ticket-card-details-info-top-2">
+            <text class="ticket-card-details-count-text">含{{details.coupon_count}}张洗车券</text>
+            <view class="ticket-card-details-money-content">
+                <text>￥</text>
+                <text style="font-size: {{'48rpx'}}">{{details.package_price}}</text>
+            </view>
+        </view>
+    </view>
+    <!--详情-->
+    <view class="ticket-card-details-info-box">
+        <text class="ticket-card-details-info-title">{{details.package_name}}</text>
+<!--        水蜡精洗4次，有效期365天-->
+        <text class="ticket-card-details-info-sub">{{details.description}}</text>
+    </view>
+    <view class="ticket-buy-details-station-container">
+        <!--适用站点-->
+        <view class="ticket-buy-details-station" wx:if="{{!isEmptyList}}">
+            <text class="ticket-buy-details-station-count">适用站点（{{amount}}家门店）</text>
+            <view class="ticket-buy-details-station-see" bind:tap="onAllClick">查看全部</view>
+        </view>
+        <!--位置-->
+        <view class="ticket-buy-details-locale-box" wx:if="{{!isEmptyList}}" bind:tap="onDetailsClick">
+            <view class="ticket-buy-details-locale-img-box">
+                <image class="ticket-buy-details-locale-img" src="{{clean_data.photo_url}}"></image>
+            </view>
+            <view class="ticket-buy-details-station-box">
+                <text class="ticket-buy-details-station-name">{{clean_data.washer_name}}</text>
+                <text class="ticket-buy-details-station-locale">{{clean_data.washer_address}}</text>
+            </view>
+            <view class="ticket-buy-details-station-distance">
+                <view class="ticket-buy-details-station-near">距离最近</view>
+                <view class="ticket-buy-station-distance-navigation">
+                    <text class="ticket-buy-station-distance">{{clean_data.distance_meter}}km</text>
+                    <image class="ticket-buy-navigation-logo" src="/assets/static/station-item-navigation.png" bind:tap="onNavigateClick"></image>
+                </view>
+            </view>
+        </view>
+    </view>
+    <!--说明-->
+    <view class="ticket-buy-details-instruct">
+        <text class="ticket-buy-details-instruct-title">使用说明</text>
+        <block wx:for="{{details.instruction}}" wx:key="index" wx:index="index">
+            <text class="ticket-buy-details-instruct-content">{{item}}</text>
+        </block>
+<!--        <text class="ticket-buy-details-instruct-content">-->
+<!--            1、购买前，请仔细查看会员卡适用站点。-->
+<!--            2、洗车期间，请按提示操作，以免发生意外。-->
+<!--            3、车辆尺寸要求，高＜2米，宽＜2米，长＜5米。-->
+<!--            4、漆面与车身无破损。-->
+<!--            5、无额外加装，如导流板、出租车标牌、车顶架等。-->
+<!--            6、无法清晰敞篷车、皮卡车等开放空间的车辆。-->
+<!--            7、无法清晰装有长天线的车辆。-->
+<!--            8、新车购置或车辆喷漆、抛光60天后，才能进行洗车，以免损伤车漆。-->
+<!--        </text>-->
+        <view class="ticket-buy-details-instruct-bottom"></view>
+    </view>
+    <!--购买-->
+    <view class="ticket-buy-confirm-box" style="padding-bottom:{{isIphoneX?42:30}}rpx">
+        <text class="ticket-buy-confirm-hint">实付款:</text>
+        <view class="ticket-buy-confirm-money-box">
+            <text class="ticket-buy-confirm-mark">￥</text>
+            <text class="ticket-buy-confirm-money">{{details.package_price}}</text>
+        </view>
+        <view class="ticket-buy-confirm-button theme-button" bind:tap="onSubmitClick">购买</view>
+    </view>
+</view>

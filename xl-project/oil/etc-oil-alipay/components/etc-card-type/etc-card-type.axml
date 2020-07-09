@@ -1,0 +1,17 @@
+<view class="etc-card-type-container" a:if="{{data.etc_card_no_str}}" a:if="{{!data.is_click}}">
+    <view class="etc-card-type-contents" style="color: {{bg_color}}" data-item="{{data}}" onTap="etcClick">
+        <text class="etc-card-type-name">{{card_name}}</text>
+        <text class="etc-card-plate-no" a:if="{{data.car_plate_no}}">车牌号 {{data.car_plate_no}}</text>
+        <text class="etc-card-type-number">{{data.etc_card_no_str}}</text>
+    </view>
+</view>
+<view class="etc-card-type-container1" a:if="{{data.etc_card_no_str}}" a:if="{{data.is_click}}">
+    <view class="etc-card-type-contents1" style="color: {{bg_color}}" data-item="{{data}}" onTap="etcClick">
+        <text class="etc-card-type-name">{{card_name}}</text>
+        <text class="etc-card-plate-no">车牌号 {{data.car_plate_no}}</text>
+        <text class="etc-card-type-number1">{{data.etc_card_no_str}}</text>
+    </view>
+    <view class="etc-card-type-click">
+        <text class="etc-card-type-unbind" onTap="onUnbindClick">ETC卡解绑</text>
+    </view>
+</view>

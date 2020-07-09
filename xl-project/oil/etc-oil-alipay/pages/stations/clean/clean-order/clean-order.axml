@@ -1,0 +1,94 @@
+<!--pages/stations/clean/clean-order/clean-order.axml-->
+<import src="../../../../templates/clean/ticket-card/ticket-card.axml"></import>
+
+<view class="clean-order-container">
+    <!--洗车订单-->
+    <view class="clean-order-details-title-box">
+        <image class="clean-order-details-icon" src="https://oss.etcsd.com/object/0e7b5db443bb493d84dae9f9fe30ef66">
+        </image>
+        <text class="clean-order-details-title">洗车订单</text>
+    </view>
+    <view class="clean-order-details-box">
+        <view class="clean-order-info-items">
+            <text class="clean-order-info-hint-text">订单状态</text>
+            <text class="clean-order-info-data-text">待付款</text>
+        </view>
+        <view class="clean-order-info-items">
+            <text class="clean-order-info-hint-text">交易订单号</text>
+            <text class="clean-order-info-data-text">{{order_no}}</text>
+        </view>
+        <view class="clean-order-info-items">
+            <text class="clean-order-info-hint-text">洗车机名称</text>
+            <text class="clean-order-info-data-text">{{station_name}}</text>
+        </view>
+        <view class="clean-order-info-items">
+            <text class="clean-order-info-hint-text">洗车模式</text>
+            <text class="clean-order-info-data-text">家用车模式</text>
+        </view>
+    </view>
+    <view class="clean-order-details-box" style="margin-top: {{'20rpx'}}">
+        <view class="clean-order-info-items">
+            <text class="clean-order-info-hint-text">订单金额</text>
+            <text class="clean-order-info-data-text">￥{{order_amount}}</text>
+        </view>
+    </view>
+    <view class="clean-order-details-box" style="margin-top: {{'20rpx'}}" onTap="onChangeCoupon">
+        <view class="clean-order-info-items">
+            <text class="clean-order-info-data-text">优惠券</text>
+            <text class="clean-order-info-hint-text"
+                style="color:{{available? '#ff0000':'#938F98'}}">{{coupon_value?'-￥'+coupon_value:preferent?available?available+'张':'无可用优惠券':'暂无优惠券'}}</text>
+        </view>
+    </view>
+    <!--支付方式-->
+    <view class="clean-order-details-title-box">
+        <text class="clean-order-details-title">支付方式</text>
+    </view>
+    <view class="clean-order-details-box" onTap="onCleanCouponsClick">
+        <view class="clean-order-info-items">
+            <view class="clean-order-coupons-select-left">
+                <image class="clean-order-coupons-select-icon" src="{{coupons_select?clean_buy_check:clean_un_check}}">
+                </image>
+                <text class="clean-order-coupons-select-text">使用洗车券支付</text>
+            </view>
+            <view class="clean-order-coupons-select-right">
+                <image class="clean-order-coupons-select-icon"
+                    src="https://oss.etcsd.com/object/ff9a341c2c03495e8e4cb88f0a8df7ab"></image>
+                <text class="clean-order-coupons-select-sub-text">剩余{{coupon_count}}张</text>
+            </view>
+        </view>
+    </view>
+    <!--洗车券-->
+    <view class="clean-order-vouchers-box" a:if="{{packageList.length}}">
+        <view class="clean-order-vouchers-view">
+            <view class="clean-order-usable-text">本单可用 </view>
+            <text class="clean-order-vouchers-text">购券洗车更划算 </text>
+        </view>
+        <view class="clean-order-vouchers-new-user">
+            <block a:for="{{packageList}}" a:key="ticket_card">
+                <template is="ticket_card" data="{{item,FastOrderCheck,FastOrderUnCheck}}"></template>
+            </block>
+        </view>
+    </view>
+    <!--确认支付-->
+    <view class="clean-order-confirm-box" style="padding-bottom:{{isIphoneX?42:30}}rpx">
+        <text class="clean-order-confirm-hint">实付款:</text>
+        <view class="clean-order-confirm-money-box">
+            <text class="clean-order-confirm-mark">￥</text>
+            <text class="clean-order-confirm-money">{{real_amount}}</text>
+        </view>
+        <button class="clean-order-confirm-button theme-button" onTap="onSubmitClick">确认支付</button>
+    </view>
+    <!--优惠券列表-->
+    <popup show="{{is_show_coupon}}" onCancel="onCloseClick" ref="popupRef">
+        <view class="fast-order-preferent-container" style="height:{{isIphoneX?1000:870}}rpx">
+            <view class="fast-order-preferent-header">
+                <text class="fast-order-preferent-header-text">优惠券</text>
+                <image class="fast-order-preferent-header-image" src="{{close_icon}}" onTap="onCloseClick"></image>
+            </view>
+            <!-- <scroll-view class="fast-order-preferent-list" scroll-y style="height:{{isIphoneX?860:730}}rpx"></scroll-view> -->
+            <view style="height:{{isIphoneX?860:730}}rpx;overflow-y: auto">
+                <perferent-container list="{{perferentList}}" onCheckPergerent="onCheckPergerent"></perferent-container>
+            </view>
+        </view>
+    </popup>
+</view>

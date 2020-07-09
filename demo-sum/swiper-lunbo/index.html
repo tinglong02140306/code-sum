@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>swiper和tab相结合</title>
+    <link rel="stylesheet" type="text/css" href="swiper/swiper.min.css" />
+    <style>
+        #swiperContainerLunbo {
+            width: 100%;
+        }
+
+        #swiperContainerLunbo .swiper-pagination-bullet-active {
+            background: #fff;
+        }
+
+        .swiper-wrapper {
+            margin-top: 70px;
+        }
+
+        .swiper-pagination {
+            width: 100%;
+            font-size: 0;
+        }
+
+        .swiper-pagination .tap-wrap {
+            display: inline-block;
+            width: 25%;
+            height: 60px;
+            font-size: 26px;
+            vertical-align: top;
+        }
+
+        .swiper-pagination .tap-wrap span {
+            display: inline-block;
+            width: 100%;
+            height: 60px;
+            text-align: center;
+            line-height: 60px;
+
+        }
+
+        .swiper-pagination .tap-wrap {
+            border-bottom: 3px solid transparent;
+        }
+
+        .swiper-pagination .active-tab {
+            border-color: #0000ff;
+            color: #0000ff;
+        }
+    </style>
+
+<body>
+    <div class="swiper-pagination"></div>
+    <div id="swiperContainerLunbo" class="swiper-container">
+        <!--分页器-->
+        <!--swiper容器[可以随意更改该容器的样式-->
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="Walks-poster.png"></div>
+            <div class="swiper-slide"><img src="Walks-poster.png"></div>
+            <div class="swiper-slide"><img src="Walks-poster.png"></div>
+            <div class="swiper-slide"><img src="Walks-poster.png"></div>
+        </div>
+    </div>
+    <script src="jquery/jquery-1.8.2.min.js"></script>
+    <script src="swiper/swiper.min.js"></script>
+
+    <script type="text/javascript">
+        var currentIndex = 0;
+        new Swiper("#swiperContainerLunbo", {
+            direction: "horizontal",/*横向滑动*/
+            // loop: true,/*形成环路（即：可以从最后一张图跳转到第一张图*/
+            pagination: ".swiper-pagination",/*分页器*/
+            // autoplay: 3000,/*每隔3秒自动播放*/
+            paginationBulletRender: function (index, className) {
+                var name = '';
+                switch (index) {
+                    case 0:
+                        name = '全部';
+                        break;
+                    case 1:
+                        name = '未支付';
+                        break;
+                    case 2:
+                        name = '支付成功';
+                        break;
+                    case 3:
+                        name = '支付失败';
+                        break;
+                    default:
+                        name = '';
+                }
+                var className = '';
+                return `<div class="tap-wrap"><span>${name}</span></div>`;
+            },
+            onTransitionEnd: function (swiper) {
+                debugger
+                console.log(swiper.activeIndex)
+                var i = swiper.activeIndex;//轮播切换完毕的事件
+                // changePage(i);
+                $('.swiper-pagination .tap-wrap').eq(swiper.activeIndex).addClass('active-tab').siblings().removeClass('active-tab')
+            }
+        })  
+        $('.swiper-pagination .tap-wrap').eq(currentIndex).addClass('active-tab').siblings().removeClass('active-tab')
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,223 @@
+/* pages/mine/invoice/consume/consume.acss */
+
+@import "../../../../templates/mine/invoice/consume/consume.acss";
+.consume-invoice-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.consume-invoice-top-container {
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 90rpx;
+    box-sizing: border-box;
+    padding: 0 32rpx;
+    border-bottom: 2rpx solid rgba(0, 0, 0, .05);
+}
+
+.consume-invoice-top-left {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+
+.consume-invoice-top-right {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    height: 90rpx;
+    width: 100%;
+}
+
+.consume-invoice-menu-box {
+    color: rgba(0, 0, 0, .45);
+}
+
+.consume-invoice-top-text {
+    color: rgba(0, 0, 0, 0.45);
+    font-size: 30rpx;
+    text-align: left;
+    font-family: PingFang-SC-Medium;
+}
+
+.consume-invoice-top-image {
+    width: 30rpx;
+    max-height: 30rpx;
+    margin-left: 4rpx;
+}
+
+.consume-invoice-item-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    position: relative;
+    margin-top: 90rpx;
+}
+
+.consume-invoice-box {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.consume-invoice-btn-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    position: fixed;
+    width: 100%;
+    height: 130rpx;
+    background-color: #ffffff;
+    bottom: 0;
+    box-shadow: 0rpx -4rpx 20rpx 0rpx rgba(0, 0, 0, 0.04);
+    padding: 20rpx;
+}
+
+.consume-invoice-btn-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 28rpx;
+    text-align: left;
+    font-family: PingFangSC-Regular;
+    /*flex: 1;*/
+    width: 100%;
+}
+
+.consume-invoice-btn-high {
+    width: 100%;
+    height: 90rpx;
+    font-size: 34rpx;
+    margin-right: 32rpx;
+}
+
+.consume-drop-down-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60%;
+    position: absolute;
+    top: 50rpx;
+}
+
+.consume-drop-down-triangle {
+    top: 2rpx;
+    position: relative;
+    width: 0;
+    height: 0;
+    border: 22rpx solid;
+    border-color: transparent transparent #f2f2f2;
+}
+
+.consume-drop-down-triangle:after {
+    content: "";
+    position: absolute;
+    top: 2rpx;
+    left: -20rpx;
+    border-width: 0 20rpx 20rpx;
+    border-style: solid;
+    border-color: transparent transparent #fff;
+}
+
+.consume-drop-down-content {
+    width: 100%;
+    /*height: 184rpx;*/
+    background-color: white;
+    border: 2rpx solid #f2f2f2;
+    border-radius: 15rpx;
+}
+
+.consume-drop-down-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 28rpx;
+    width: 100%;
+    height: 80rpx;
+    color: rgba(0, 0, 0, 0.45);
+    background-color: white;
+    border-bottom: 2rpx solid #F2F2F2;
+}
+
+.consume-drop-down-item-select {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 28rpx;
+    width: 100%;
+    height: 80rpx;
+    color: #05BA7D;
+    /*background-color: rgba(5, 186, 125, 0.22);*/
+    border-bottom: 2rpx solid #F2F2F2;
+}
+
+.consume-list-top-drop-select-box {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    position: relative;
+    height: 90rpx;
+    flex: 1;
+}
+
+.consume-list-top-text {
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 30rpx;
+    text-align: left;
+    font-family: PingFang-SC-Medium;
+}
+
+.consume-list-top-image {
+    width: 30rpx;
+    max-height: 30rpx;
+    margin-left: 4rpx;
+}
+
+.consume-list-top-image2 {
+    width: 20rpx;
+    max-height: 12rpx;
+    margin-left: 4rpx;
+}
+
+.consume-list-no-data {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    padding-top: 200rpx;
+}
+
+.consume-list-empty-image {
+    width: 290rpx;
+    height: 290rpx;
+}
+
+.consume-list-has-data {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.consume-list-empty-text {
+    margin-top: 40rpx;
+    font-size: 30rpx;
+    color: #bbbbbb;
+}

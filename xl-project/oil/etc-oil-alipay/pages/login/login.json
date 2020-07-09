@@ -1,0 +1,7 @@
+{
+    "titleBarColor": "#ffffff",
+    "backgroundColor": "#eeeeee",
+    "pullRefresh": false,
+    "defaultTitle": "登录",
+    "usingComponents": {}
+}

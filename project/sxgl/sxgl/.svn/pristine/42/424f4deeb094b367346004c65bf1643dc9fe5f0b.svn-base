@@ -1,0 +1,806 @@
+/*
+ * @Author: tinglong
+ * @Date: 2018-12-17 15:07:00
+ * @Last Modified by: kkfan2
+ * @Last Modified time: 2019-01-18 09:50:48
+ */
+<template>
+    <!-- 基本信息 -->
+    <div id="extendInfo" class="pb10">
+        <div class="basic-info-wrap">
+            <div @click="extendInfoShow = !extendInfoShow" style="cursor: pointer;display: inline-block;">
+                <i class="icon-nav inline-block"></i>
+                <span class="fz14 inline-block">扩展信息</span>
+            </div>
+            <Icon class="icon-up-down fz12 inline-block h100_" style="cursor: pointer;vertical-align: top;line-height: 32px; " :type="extendInfoShow ? 'ios-arrow-up' : 'ios-arrow-down'" :name="extendInfoShow ? 'ios-arrow-down' : 'ios-arrow-up'" @click="extendInfoShow = !extendInfoShow"/>
+        </div>
+        <div class="form-wrap" v-show="extendInfoShow">
+            <el-form :model="ruleForm" :rules="rules" ref="extendInfoForm" label-width="123px" size="small">
+                <el-row>
+                    <el-col :span="11" :push="0">
+                        <el-form-item label="高频事项" prop="isHighFrequency">
+                            <el-radio-group v-model="ruleForm.isHighFrequency" :disabled="isDisabled">
+                                <el-radio label="1">是</el-radio>
+                                <el-radio label="0">否</el-radio>
+                            </el-radio-group>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="9" :push="1">
+                        <el-form-item label="最多跑一次事项" prop="isOnce">
+                            <el-radio-group v-model="ruleForm.isOnce" :disabled="isDisabled">
+                                <el-radio label="1">是</el-radio>
+                                <el-radio label="0">否</el-radio>
+                            </el-radio-group>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+
+                <el-row>
+                    <el-col :span="11" :push="0">
+                        <el-form-item label="是否下沉社区" prop="isSink">
+                            <el-radio-group v-model="ruleForm.isSink" :disabled="isDisabled">
+                                <el-radio label="1">是</el-radio>
+                                <el-radio label="0">否</el-radio>
+                            </el-radio-group>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="10" :push="0">
+                        <el-form-item label="排序值" prop="sortNo">
+                            <el-input v-model="ruleForm.sortNo" maxlength="50" :disabled="isDisabled" placeholder="请输入排序值"></el-input>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <el-row>
+                    <el-col :span="9" :push="0">
+                        <el-form-item label="使用部门" prop="data5">
+                            <el-select v-model="ruleForm.useDeptNo"  multiple filterable :disabled="isDisabled" :multiple-limit="5" class="xzqhWt" :popper-append-to-body="false">
+                                <el-option v-for="item in useDeptNoData" :key="item.value" :label="item.label" :value="item.value">
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="10" :push="2">
+                        <el-form-item label="专题服务" prop="specialService">
+                            <el-select v-model="ruleForm.specialService" :disabled="isDisabled" placeholder="请选择" clearable filterable class="xzqhWt" :popper-append-to-body="false">
+                                <el-option-group
+                                v-for="group in specialSerData"
+                                :key="group.label"
+                                :label="group.label">
+                                <el-option
+                                    v-for="item in group.options"
+                                    :key="item.value"
+                                    :label="item.label"
+                                    :value="item.value">
+                                </el-option>
+                                </el-option-group>
+                            </el-select>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <!-- 网上办理深度 -->
+                <el-row>
+                    <el-col :span="9" :push="0">
+                        <el-form-item label="网上办理深度" prop="processingDepth">
+                            <el-select v-model="ruleForm.processingDepth" filterable :disabled="isDisabled" class="xzqhWt" :popper-append-to-body="false">
+                                <el-option v-for="(item, index) in processingDepthData" :key="index" :label="item.label" :title="item.label" :value="item.value">
+                            </el-option>
+                        </el-select>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <!-- 结果文件 -->
+                <el-row>
+                    <el-col :span="20" :push="1">
+                        <div class="result-file-wrap">
+                            <p class="result-file-title">结果文件</p>
+                            <el-table :data="ruleForm.resultFile" style="border-left: 1px solid #e0e6f1;border-right: 1px solid #e0e6f1;border-top: 1px solid #e0e6f1">
+                                <el-table-column class="font-max" align="center" prop="resultType" label="结果类型">
+                                    <template slot-scope="scope" width="100">
+                                        <el-form-item label-width="0" :prop="'resultFile.'+scope.$index+'.resultType'" :rules="rules.resultType">
+                                            <el-select v-model="scope.row.resultType" placeholder="请选择"  :disabled="isDisabled" class="xzqhWt" size="small" @change="(val)=>resultTypeChange(val, scope.$index, scope.row)" :title="titleData.resultTypeTitle" :popper-append-to-body="false">
+                                                <el-option v-for="item in resultTypeData" :key="item.value" :title="item.label" :label="item.label" :value="item.value">
+                                                </el-option>
+                                            </el-select>
+                                        </el-form-item>
+                                    </template>
+                                </el-table-column>
+
+                                <el-table-column class="font-max" align="center" prop="zzwkType" label="证照类型">
+                                    <template slot-scope="scope" width="100">
+                                        <el-form-item label-width="0" :prop="'resultFile.'+scope.$index+'.zzwkType'" :rules="rules.zzwkType" :transfer="true">
+                                            <el-select v-model="scope.row.zzwkType"  placeholder="请选择" filterable :disabled="isDisabled" class="xzqhWt" :transfer="true" size="small" @change="(val)=>zzwkTypeChange(val, scope.$index, scope.row)" :title="titleData.zzwkTypeTitle" :popper-append-to-body="false">
+                                                <el-option v-for="item in zzwkTypeData" :key="item.code" :title="item.name" :label="item.name" :value="item.code">
+                                                </el-option>
+                                            </el-select>
+                                        </el-form-item>
+                                    </template>
+                                </el-table-column>
+
+                                <el-table-column class="font-max" align="center" prop="zzwkDir" label="证照目录">
+                                    <template slot-scope="scope" width="100">
+                                        <el-form-item label-width="0" :prop="'resultFile.'+scope.$index+'.zzwkDir'" :rules="rules.zzwkDir">
+                                            <el-select :ref="'zzwkDir'+scope.$index" v-model="scope.row.zzwkDir" placeholder="请选择" filterable :disabled="isDisabled" class="xzqhWt" size="small" @change="(val)=>zzwkDirChange(val, scope.$index, scope.row)" :title="titleData.zzwkDirTitle" :popper-append-to-body="false">
+                                                <el-option v-for="item in scope.row.zzwkDirData" :key="item.code" :title="item.name" :label="item.name" :value="item.code">
+                                                </el-option>
+                                            </el-select>
+                                        </el-form-item>
+                                    </template>
+                                </el-table-column>
+
+                                <el-table-column class="font-max" align="center" prop="zzwkVersion" label="证照目录版本">
+                                    <template slot-scope="scope" width="100">
+                                        <el-form-item label-width="0" :prop="'resultFile.'+scope.$index+'.zzwkVersion'" :rules="rules.zzwkVersion">
+                                            <el-select v-model="scope.row.zzwkVersion" placeholder="请选择" :disabled="isDisabled" class="xzqhWt" size="small" :popper-append-to-body="false">
+                                                <el-option v-for="item in scope.row.zzwkVersionData" :key="item.value"  :title="item.label" :label="item.label" :value="item.value">
+                                                </el-option>
+                                            </el-select>
+                                        </el-form-item>
+                                    </template>
+                                </el-table-column>
+
+                                <el-table-column class="font-max" align="left" prop="resultName" label="结果名称">
+                                    <template slot-scope="scope" width="100">
+                                        <el-form-item label-width="0" :prop="'resultFile.'+scope.$index+'.resultName'" :rules="rules.resultName">
+                                            <el-input v-model="scope.row.resultName" :title="scope.row.resultName" maxlength="100" size="small" :disabled="isDisabled" autosize placeholder="请输入结果名称"></el-input>
+                                        </el-form-item>
+                                    </template>
+                                </el-table-column>
+
+                                <el-table-column class="font-max" align="center" prop="tdTemplate" label="套打模板">
+                                    <template slot-scope="scope" width="100">
+                                        <el-form-item label-width="0" :prop="'resultFile.'+scope.$index+'.tdTemplate'" :rules="rules.tdTemplate">
+                                            <el-select v-model="scope.row.tdTemplate" placeholder="请选择" filterable :disabled="isDisabled" class="xzqhWt" size="small" @change="(val)=>tdTemplateChange(val, scope.$index, scope.row)" :popper-append-to-body="false" >
+                                                <el-option v-for="item in tdTemplateData" :key="item.value" :label="item.label" :title="item.label"  :value="item.value">
+                                                </el-option>
+                                            </el-select>
+                                        </el-form-item>
+                                    </template>
+                                </el-table-column>
+
+                                <el-table-column class="font-max" align="center" prop="templateVersion" label="模板版本">
+                                    <template slot-scope="scope" width="100">
+                                        <el-form-item label-width="0" :prop="'resultFile.'+scope.$index+'.templateVersion'" :rules="rules.templateVersion">
+                                            <el-select v-model="scope.row.templateVersion" placeholder="请选择" :disabled="isDisabled" class="xzqhWt" size="small" :popper-append-to-body="false">
+                                                <el-option v-for="item in scope.row.templateVersionData" :key="item.value" :title="item.label"  :label="item.label" :value="item.value">
+                                                </el-option>
+                                            </el-select>
+                                        </el-form-item>
+                                    </template>
+                                </el-table-column>
+                                <el-table-column class="font-max" align="center" label="操作" width="60">
+                                    <template slot-scope="scope">
+                                        <el-form-item>
+                                            <el-button style="margin-left: 0px !important" :disabled="isDisabled" class="font-max" type="text" size="small" @click="delResultEvt(scope.row.id, scope.$index)" >删除</el-button>
+                                        </el-form-item>
+                                    </template>
+                                </el-table-column>
+                            </el-table>
+                            <!-- 添加按钮 -->
+                            <div class="btn-add-wrap mt10 w100_">
+                                <!-- iview按钮 -->
+                                <Button class="h40 w100_" type="dashed" size="large" icon="md-add" :disabled="isDisabled"  @click="addResultEvt">新增</Button>
+                            </div>
+                        </div>
+                    </el-col>
+                </el-row>
+            </el-form>
+        </div>
+    </div>
+</template>
+<script>
+import unit from '@/api/index';
+export default {
+    name:"extendInfo",
+    components: {
+        
+    },
+    props: {
+        isDisabled: {
+            type: Boolean,
+            default: false
+        },
+        matterCode:{
+            type:String,
+            default:''
+        },
+        matterVersion: {
+            type: [Number,String],
+            default: '',
+        },
+        id: {
+            type: String,
+            default: '',
+        }
+    },
+    data() {
+        let that = this,
+            validSortNum = (rule, value, callback) => {
+            if (value) {//有值才检验
+                let reg = /^[0]$|^[1-9]{1}\d{0,4}$/;
+                if (!reg.test(value)) {
+                    callback(new Error('请输入0-99999之间的正整数'));
+                } else {
+                    callback();
+                }
+            } else {
+                callback();
+            }
+        },
+        validResultName = (rule, value, callback) => { // 自定义验证
+            let flag = 0;
+            for(let i in that.ruleForm.resultFile) {
+                if(that.ruleForm.resultFile[i].resultName == value) {
+                    flag++;
+                }
+            }
+            if(flag > 1) {
+                callback(new Error('结果名称重复'));
+                that.$Message.warning('结果名称重复，请填写其他名称!');
+            } else if(value && value.length > 100) {
+                callback(new Error('长度小于100字符'));
+                let i = parseInt(rule.fullField.split('.')[1]);
+                that.ruleForm.resultFile[i].resultName = that.ruleForm.resultFile[i].resultName.substring(0, 100);
+                
+                
+            } else {
+                callback();
+            }
+        };
+        return {
+            titleData: {
+                zzwkTypeTitle: '',
+                zzwkDirTitle: '',
+            },
+            adminDiv: '',
+            tempResultFile: [],
+            ruleForm: {
+                // 事项id
+                id: '',
+                // 事项code
+                matterCode: '',
+                // 事项版本号
+                matterVersion: '',
+                // 是否是高频事项
+                isHighFrequency: '0',
+                // 最多跑一次事项
+                isOnce: '0',
+                // 是否下沉社区
+                isSink: '0',
+                // 排序值
+                sortNo: 0,
+                // 使用部门
+                useDeptNo: [],
+                // 专题服务
+                specialService: '',
+                // 结果文件
+                resultFile: [],
+                processingDepth: '01', // 网上办理深度
+            },
+            processingDepthData: [],            
+            rules: {
+                isHighFrequency: [
+                    { required: true, message: '请勾选高频事项', trigger: 'change' }
+                ],
+                isOnce: [
+                    { required: true, message: '请勾选最多跑一次事项', trigger: 'change' }
+                ],
+                isSink: [
+                    { required: true, message: '请勾选是否下沉社区', trigger: 'change' }
+                ],
+                sortNo: [
+                    { required: false, message: '请填写排序值', trigger: 'blur' },
+                    { validator: validSortNum , trigger: 'blur' }
+                ],
+                resultType: [
+                    { required: true, message: '请选择结果类型', trigger: 'change' }
+                ],
+                zzwkType: [
+                    { required: true, message: '请选择证照类型', trigger: 'change' }
+                ],
+                zzwkDir: [
+                    { required: true, message: '请选择证照目录', trigger: 'change' }
+                ],
+                resultName: [
+                    { required: true, message: '请输入结果名称', trigger: 'blur' },
+                    {validator: validResultName, trigger: 'blur'}
+                    // { min: 0, max: 100, message: '长度不大于100字符', trigger: 'blur'}
+                ],
+                processingDepth: [
+                    { required: true, message: '请选择网上办理深度', trigger: 'change' }
+                ],
+                
+            },
+            // 使用部门
+            useDeptNoData: [],
+            // 结果类型
+            resultTypeData: [],
+            // 证照库类型
+            zzwkTypeData: [],
+            // 证照目录
+            // zzwkDirData: [],
+            // 套打模板data
+            tdTemplateData: [],
+            extendInfoShow: false,
+
+
+            ruleFormData5: [],
+            // 民政社会组织：基金会、民办非企业、社会团体、慈善组织；人社综合业务：医疗业务、养老业务、就业业务
+            specialSerData: [],
+            // {
+            //     label: '民政社会组织',
+            //     options: [{
+            //         value: '00',
+            //         label: '基金会'
+            //     }, {
+            //         value: '01',
+            //         label: '民办非企业'
+            //     }, {
+            //         value: '02',
+            //         label: '社会团体'
+            //     }, {
+            //         value: '03',
+            //         label: '慈善组织'
+            //     }]
+            //     }, {
+            //     label: '人社综合业务',
+            //     options: [{
+            //         value: '10',
+            //         label: '医疗业务'
+            //     }, {
+            //         value: '11',
+            //         label: '养老业务'
+            //     }, {
+            //         value: '12',
+            //         label: '就业业务'
+            //     }]
+            // }
+            value7: '',
+            
+        }
+    },
+    methods: {
+        /** 结果类型 */
+        resultTypeChange(val, index, row) {
+            let that = this;
+            
+            for(let i in that.resultTypeData) {
+                if(that.resultTypeData[i].value == val) {
+                    // that.titleData.resultTypeTitle = that.resultTypeData[i].label;
+                    break;
+                }
+            }
+        },
+        /** 结果类型改变事件 */
+        zzwkTypeChange(val, index, row) {
+            let that = this;
+            let query = that.$refs['zzwkDir' + index].$data.query;
+            if (query) {
+                that.$refs['zzwkDir' + index].$data.query = ''
+            }
+            row.zzwkDir = '';
+            row.zzwkVersion = '';
+            that.ruleForm.resultFile[index].zzwkType = val;
+            that.getZzwkDirData(val, index);
+            for(let i in that.zzwkTypeData) {
+                if(that.zzwkTypeData[i].code == val) {
+                    // row.titleData.zzwkTypeTitle = that.zzwkTypeData[i].name;
+                    break;
+                }
+            }
+        },
+        /** 套打模板改变 */
+        tdTemplateChange(val, index, row) {
+            let that = this,
+                ind = index;
+            that.ruleForm.resultFile[ind].templateVersionData = [];
+            that.ruleForm.resultFile[ind].templateVersion = '';
+            that.getTemplateVersion(val, ind);
+        },
+        /** 证照目录改变事件 */
+        zzwkDirChange(val, index, row) {
+            let that = this,
+                flag;
+            
+            row.zzwkVersion = '';
+            for(let i in row.zzwkDirData) {
+                if(row.zzwkDirData[i].code === val) {
+                    flag = i;
+                    // that.titleData.zzwkDirTitle = row.zzwkDirData[i].name;
+                    break;
+                }
+            }
+            if(flag === undefined) {
+                that.ruleForm.resultFile[index].zzwkVersionData = [{
+                    label: 1,
+                    value: 1,
+                }];
+                return ;
+            }
+            let flg = 0;
+            for(let i in that.ruleForm.resultFile) {
+                if(that.ruleForm.resultFile[i].zzwkDir == val) {
+                    flg++;
+                }
+            }
+            if(flg > 1) {
+                that.$Message.error("已存在相同类型的证照目录!");
+                row.zzwkDir = '';
+                return ;
+            }
+            that.ruleForm.resultFile[index].zzwkVersion = (row.zzwkDirData[flag].version == null || row.zzwkDirData[flag].version == '') ? 1 : row.zzwkDirData[flag].version;
+            that.ruleForm.resultFile[index].zzwkVersionData = [{
+                label: that.ruleForm.resultFile[index].zzwkVersion,
+                value: that.ruleForm.resultFile[index].zzwkVersion,
+            }];
+        },
+        /**
+         * 添加结果文件点击事件
+         */
+        addResultEvt() {
+            if(this.ruleForm.resultFile.length == 50) {
+                this.$Message.error('结果文件超过50条的数量限制！');
+                retur ;
+            }
+            this.ruleForm.resultFile.push({
+                // 事项编码
+                matterCode: '', 
+                // 事项版本
+                matterVersion: '',
+                // 结果名称
+                resultName: '',
+                // 结果文件类型
+                resultType: '',
+                // 套打模板
+                tdTemplate: '',
+                // 模板版本
+                templateVersion: '',
+                // 证照目录
+                zzwkDir: '',
+                // 证照目录
+                zzwkDirData: [],
+                // 证照类型
+                zzwkType: '',
+                // 证照目录版本
+                zzwkVersion: '',
+                // 证照目录版本data
+                zzwkVersionData: [],
+                templateVersionData: [
+                ],
+            });
+        },
+        /**
+         * 删除结果文件点击事件
+         */
+        delResultEvt(id, ind) {
+            let that = this;
+            that.$confirm("确定要删除这条记录吗?", "提示", {
+              confirmButtonText: "确 定",
+              cancelButtonText: "取 消",
+              cancelButtonClass:'fr ml10',
+              type: "warning"
+            })
+            .then(() => {
+                that.ruleForm.resultFile.splice(ind, 1);
+            })
+            .catch(() => {});
+        },
+        /**
+         * 请求拓展信息
+         */
+        getExtendInfo() {
+            let that = this;
+            unit.ajaxMerPost('/bog-matter-mgr/result/file/findByMatter', {
+                id: that.ids,  // 事项id
+            },function(res) {
+                // that.getUseDept(res.data.adminDiv.split(','));
+                that.ruleForm.isHighFrequency = res.data.isHighFrequency;
+                that.ruleForm.isOnce = res.data.isOnce;
+                that.ruleForm.isSink = res.data.isSink;
+                that.ruleForm.sortNo = res.data.sortNo;
+                that.ruleForm.processingDepth = res.data.processingDepth == null ? '01' : res.data.processingDepth;
+
+                that.ruleForm.specialService = res.data.specialService;
+                window.setTimeout(function() {
+                    that.ruleForm.useDeptNo = res.data.useDeptNo ? res.data.useDeptNo.split(',') : [];
+                }, 2000);
+                
+                that.tempResultFile = res.data.resultFiles ? res.data.resultFiles : [];
+                for(let i = 0, len = res.data.resultFiles.length; i < len; i++) {
+                    that.tempResultFile[i].zzwkDirData = [];
+                    that.tempResultFile[i].templateVersionData = [];
+                    that.getZzwkDirData1(res.data.resultFiles[i].zzwkType, i);
+                    that.getTemplateVersion1(res.data.resultFiles[i].tdTemplate, i);
+                }
+                window.setTimeout(function() {
+                    that.ruleForm.resultFile = that.tempResultFile ? that.tempResultFile : [];
+                }, 2000);
+            },function(error) {
+                // that.$Message.error('服务端错误');
+            }, that);
+        },
+        /**
+         * 获取字典项
+         */
+        getDictionarys(key) {
+            let that = this;
+            unit.ajaxMerPost('/znsj-web/dic/getDictionarys', {
+                pinYinType: key
+            }, function (res) {
+                if(res.data && res.data.length > 0) {
+                    if(key == 'JGLX') {
+                        that.resultTypeData = res.data;
+                        that.resultTypeData.unshift({
+                            value: '',
+                            label: '请选择'
+                        });
+                    }
+                    if(key == 'WSBLSD') {
+                        that.processingDepthData = res.data;
+                    }
+                }
+            }, function (res) {
+                // that.$message.warning('服务端错误2');
+            }, that);
+        },
+        /**
+         * 所属部门  暂时 测试数据 adminDiv: 340100000000
+         */
+        // getUseDept(adminDiv) {
+        //     let that = this;
+        //     unit.ajaxMerPost('/znsj-web/commer/getDeptList', {
+        //         adminDiv: that.$parent.ruleForm.adminDiv[that.$parent.ruleForm.adminDiv.length - 1],    //340100000000
+        //     }, function (res) {
+        //         that.useDeptNoData = res.data; 
+        //     }, function (res) {
+        //         that.$message.warning('服务端错误3');
+        //     }, that);
+        // },
+        /**
+         * 证照类型 
+         */
+        getZzwkTypeData() {
+            let that = this;
+            unit.ajaxMerPost('/znsj-web/license/getLicenseType', {
+            }, function (res) {
+                that.zzwkTypeData = res.data.result;
+            }, function (res) {
+                // that.$message.warning('服务端错误4');
+            }, that);
+        },
+        /**
+         * 证照目录
+         */
+        getZzwkDirData: function(code, index) {
+            let that = this;
+            unit.ajaxMerPost('/znsj-web/license/getLicenseMenu', {
+                code: code
+            }, function (res) {
+                that.ruleForm.resultFile[index].zzwkDirData = res.data.result;
+                that.ruleForm.resultFile.push({});
+                that.ruleForm.resultFile.splice(that.ruleForm.resultFile.length - 1, 1);
+            }, function (res) {
+                // that.$message.warning('服务端错误5');
+            }, that);
+        },
+        getZzwkDirData1: function(code, index) {
+            let that = this;
+            unit.ajaxMerPost('/znsj-web/license/getLicenseMenu', {
+                code: code
+            }, function (res) {
+                that.tempResultFile[index].zzwkDirData = res.data.result;
+                for(let i in res.data.result) {
+                    if(that.tempResultFile[index].zzwkDir == res.data.result[i].code) {
+                        that.tempResultFile[index].zzwkVersionData = [];
+                        let tempAttr = res.data.result[i].version.toString().split(',');
+                        for(let j = 0, len = tempAttr.length; j < len; j++) {
+                            that.tempResultFile[index].zzwkVersionData.push({
+                                label: tempAttr[j] || '1',
+                                value: tempAttr[j] || '1'
+                            });
+                        }
+                    }
+                }
+            }, function (res) {
+                // that.$message.warning('服务端错误6');
+            }, that);
+        },
+        /**
+         * 专题服务
+         */
+        getSpecialSerData: function() {
+            let that = this;
+            unit.ajaxMerPost('/znsj-web/dic/getAssociatDictionarys', {
+                pinYinType: 'ZTWHP',
+                childPinYinType: 'ZTWH',
+            }, function (res) {
+                that.specialSerData = res.data;
+            }, function (res) {
+                // that.$message.warning('服务端错误7');
+            }, that);
+        },
+        /**
+         * 套打模板
+         */
+        getTemplateData: function() {
+            let that = this;
+            unit.ajaxMerPost('/znsj-web/matri/bill/formList', {
+                billType: '3'  // 打印表单
+            }, function (res) {
+                if(res.flag) {
+                    that.tdTemplateData = [];
+                    for(var i in res.data.rows) {
+                        let temp = {
+                            label: res.data.rows[i].name,
+                            value: res.data.rows[i].code,
+                        };
+                        that.tdTemplateData.unshift(temp);
+                    }
+                }
+                // that.tdTemplateData = res.data.result;
+            }, function (res) {
+                // that.$message.warning('服务端错误8');
+            }, that);
+        },
+        /** 获取套打模板版本 */
+        getTemplateVersion: function(val , ind) {
+            let that = this;
+            unit.ajaxMerPost('/znsj-web/matri/bill/formDetail', {
+                code: val  
+            }, function (res) {
+                for(var i in res.data) {
+                    let temp = {
+                        label: res.data[i].version,
+                        value: res.data[i].version,
+                    };
+                    that.ruleForm.resultFile[ind].templateVersionData.unshift(temp);
+                }
+                // that.tdTemplateData = res.data.result;
+            }, function (res) {
+                // that.$message.warning('服务端错误9');
+            }, that);
+        },
+        getTemplateVersion1: function(val , ind) {
+            let that = this;
+            unit.ajaxMerPost('/znsj-web/matri/bill/formDetail', {
+                code: val  
+            }, function (res) {
+                for(var i in res.data) {
+                    let temp = {
+                        label: res.data[i].version,
+                        value: res.data[i].version,
+                    };
+                    that.tempResultFile[ind].templateVersionData.unshift(temp);
+                }
+                // that.tdTemplateData = res.data.result;
+            }, function (res) {
+                // that.$message.warning('服务端错误9');
+            }, that);
+        },
+        /**
+         * 初始化信息
+         */
+        init() {
+            let that = this;
+            // that.adminDiv = that.$parent.ruleForm.adminDiv;
+            that.ids = that.$route.query.id;
+            // that.matterCode = that.$route.query.matterCode;
+            // that.matterVersion = that.$route.query.matterVersion;
+            if(that.ids != null && that.ids != '') {
+                // that.extendInfoShow = true;
+                that.getExtendInfo();
+            }
+            // 获取使用部门数据   测试数据  暂时还没字典项提供
+            // that.getUseDept();  
+            that.getDictionarys('JGLX');
+            that.getZzwkTypeData();
+            that.getSpecialSerData();
+            that.getDictionarys("WSBLSD");
+            that.getTemplateData();
+        }
+    },
+    // watch: {
+    //     // 'this.$parent.ruleForm.adminDiv': function(newName, oldName) {
+    //     //     this.getUseDept(this.$parent.ruleForm.adminDiv);
+    //     // },
+    // },
+    mounted() {
+        this.init();
+        // window.setTimeout(function() {
+        //     let $inp = $('.result-file-wrap .el-input__inner');
+        //     for(let i = 0,len = $inp.length; i < len; i++){
+        //         $inp.eq(i).attr('title', $inp.eq(i).val());
+        //     }
+        // }, 3000);
+    }
+};
+</script>
+<style lang="less">
+@import "../../../assets/styles/theme.less";
+#extendInfo {
+    // overflow-y: auto;
+    height: 100%;
+    background-color: #fff;
+    border-top: 0;
+    .xzqhWt.el-select {
+        line-height: 32px;    
+    }
+    .xzqhWt{
+        width:100%;
+    }
+    // 标题栏样式
+    .basic-info-wrap {
+        padding-bottom: 5px;
+        margin: 0 0 15px;
+        height: 35px;
+        width: 100%;
+        border-bottom: 1px dashed #d8d8d8;
+        .icon-nav {
+            width: 20px;
+            height: 30px;
+            background: url(../../../assets/images/common/icon-nav-list.png) no-repeat;
+            background-position: center center;
+            background-size: 18px;
+        }
+        span {
+            line-height: 30px;
+            font-weight: bold;
+            vertical-align: top;
+        }
+    }
+    // 说明文件表单
+    .result-file-title {
+        padding: 0px 0 6px 5px;
+        font-size: 14px;
+        color:#606266;
+    }
+    .el-table,.el-table__body-wrapper,.cell {
+        overflow:visible;
+    }
+    .el-table__row {
+        .el-form-item__content {
+            margin-left: 0px !important;
+        }
+        td {
+            padding-bottom: 0px !important;
+            padding-top: 14px !important;
+        }
+    }
+    .el-tag.el-tag--info.el-tag--mini {
+        max-width: 100%;
+        height: auto;
+        .el-select__tags-text {
+            width: 100%;
+            white-space: pre-wrap;
+        }
+    }
+}
+.el-scrollbar {
+    .el-select-dropdown__wrap {
+        .el-select-group__title {
+            font-size: 14px !important;
+            
+        }
+        .el-select-group { 
+            .el-select-dropdown__item {
+                padding-left: 40px !important;
+            }
+        }
+    }
+}
+.el-select-dropdown {
+    max-width: 500px !important;
+}
+#maskId {
+    display: none;
+}
+.ivu-modal-wrap{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .ivu-modal{
+        top: 0;
+    }
+}
+</style>
+

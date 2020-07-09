@@ -1,0 +1,519 @@
+﻿@charset "utf-8";
+
+body {
+    color: #333;
+    background-color: #f5f5f5;
+}
+
+.wrap {
+    width: 100%;
+}
+
+a {
+    color: #666;
+    text-decoration: none;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+.hide {
+    display: none !important;
+}
+
+.flex {
+    display: box;
+    /* OLD - Android 4.4- */
+    display: flex;
+    /* NEW, Spec - Opera 12.1, Firefox 20+ */
+    display: -webkit-box;
+    /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -webkit-flex;
+    /* NEW - Chrome */
+    -webkit-box-orient: horizontal;
+}
+
+.flex-one {
+    display: block;
+    -webkit-box-flex: 1;
+    /* OLD - iOS 6-, Safari 3.1-6 */
+    -webkit-flex: 1;
+    /* Chrome */
+    /* IE 10 */
+    flex: 1;
+}
+
+.flex-two {
+    display: block;
+    -webkit-box-flex: 2;
+    /* OLD - iOS 6-, Safari 3.1-6 */
+    -webkit-flex: 2;
+    /* Chrome */
+    /* IE 10 */
+    flex: 2;
+}
+
+.flex-three {
+    display: block;
+    -webkit-box-flex: 3;
+    /* OLD - iOS 6-, Safari 3.1-6 */
+    -webkit-flex: 3;
+    /* Chrome */
+    /* IE 10 */
+    flex: 3;
+}
+
+.flex-four {
+    display: block;
+    -webkit-box-flex: 4;
+    /* OLD - iOS 6-, Safari 3.1-6 */
+    -webkit-flex: 4;
+    /* Chrome */
+    /* IE 10 */
+    flex: 4;
+}
+
+.two-ell {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    /* number of lines to show */
+    -webkit-box-orient: vertical;
+}
+
+.three-ell {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    /* number of lines to show */
+    -webkit-box-orient: vertical;
+}
+
+
+/*===============================列表暂无数据样式start==================================  */
+
+.no-data {
+    height: 100%;
+}
+
+.empty {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    bottom: 0;
+    background: #f5f5f5;
+}
+
+.empty-ad {
+    height: 10rem;
+    background: url('./public/wcportal/0.0.1/img/common/search-no.png') no-repeat 50% bottom;
+    background-size: 5.73rem 6.62rem;
+}
+
+.empty p {
+    padding-bottom: 0;
+    line-height: 2.88rem;
+    font-size: 0.577rem;
+    color: #999;
+    text-align: center;
+}
+
+.nothing {
+    color: #A9A9A9 !important;
+}
+
+
+
+
+/*===============================列表暂无数据样式end====================================  */
+
+
+/*===================公用头部start============================*/
+
+.top-7 {
+    top: 3rem !important;
+}
+
+header {
+    padding-top: 0.9rem !important;
+    position: fixed;
+    /*top: 0;*/
+    width: 100%;
+    height: 2.1rem;
+    background: #4c72ff;
+    z-index: 10;
+}
+
+header a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+.header-item {
+    position: relative;
+    width: 100%;
+    height: 2.1rem;
+    background: #4c72ff;
+    font-size: 0;
+    line-height: 2.1rem;
+    color: #fff;
+    z-index: 10;
+}
+
+.header-back {
+    display: inline-block;
+    width: 12%;
+    height: 2.1rem;
+    background: url(./public/wcportal/0.0.1/img/common/back-icon.png) center center no-repeat;
+    background-size: 0.67rem 0.67rem;
+}
+
+.header-item span {
+    display: inline-block;
+    width: 63%;
+    vertical-align: top;
+    font-size: 0.8rem;
+    text-align: center;
+    text-indent: 13%;
+    line-height: 2.2rem;
+}
+
+.header-other-item span {
+    width: 68%;
+}
+
+
+
+/*===================公用头部end============================*/
+
+
+/*===============主题色相关样式start==================*/
+
+.topic-bg {
+    background: #4c72ff;
+    color: #fff !important;
+}
+
+.topic-fc {
+    color: #4c72ff !important;
+}
+
+
+
+/*===============主题色相关样式end==================*/
+
+
+/* ================ mescroll上拉下拉样式 ====================== */
+
+.mescroll-upwarp {
+    padding: 0.88rem 0;
+    background: #fff;
+    min-height: inherit;
+    font-size: 0.62rem;
+    color: #999;
+}
+
+.mescroll-downwarp .downwarp-tip,
+.mescroll-upwarp .upwarp-tip,
+.mescroll-upwarp .upwarp-nodata {
+    font-size: 0.58rem;
+}
+
+.mescroll-downwarp .downwarp-tip {
+    line-height: 0.7rem;
+}
+
+.mescroll-downwarp .downwarp-progress,
+.mescroll-upwarp .upwarp-progress {
+    width: .7rem;
+    height: .7rem;
+    background: url(./public/wcportal/0.0.1/img/common/loading.png) no-repeat;
+    background-size: 100%;
+    border-radius: inherit;
+    border: none;
+    border-bottom-color: inherit;
+}
+
+
+
+/* ============= 无网络情况start ==============*/
+
+.no-net {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    bottom: 0;
+    background: #f5f5f5;
+}
+
+.no-net .no-net-img {
+    height: 10rem;
+    background: url(./public/wcportal/0.0.1/img/common/no-net.png) center bottom no-repeat;
+    background-size: 3.66rem 5.56rem;
+}
+
+.no-net a {
+    display: block;
+    margin: 0 auto;
+}
+
+.no-net a.refresh-btn {
+    margin: 1.66rem auto 0.70rem;
+    width: 7.1rem;
+    height: 1.78rem;
+    border: 1px solid #4c72ff;
+    border-radius: .22rem;
+    text-align: center;
+    line-height: 1.78rem;
+    font-size: 0.66rem;
+    color: #fff;
+}
+
+.no-net a.close-btn {
+    margin: 0 auto;
+    width: 7.1rem;
+    height: 1.78rem;
+    background-color: #fff;
+    border: 1px solid #d8d8d8;
+    border-radius: .22rem;
+    line-height: 1.78rem;
+    font-size: 0.66rem;
+    color: #666;
+    text-align: center;
+}
+
+.sorry-warp {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+/* ============= 无网络情况end ==============*/
+
+.f24 {
+    font-size: 0.54rem;
+}
+
+.f26 {
+    font-size: 0.58rem;
+}
+
+.f28 {
+    font-size: 0.62rem;
+}
+
+.f30 {
+    font-size: 0.66rem;
+}
+
+.f32 {
+    font-size: 0.72rem;
+}
+
+.f36 {
+    font-size: 0.8rem;
+}
+
+.cf {
+    color: #fff;
+}
+
+.c3 {
+    color: #333;
+}
+
+.c6 {
+    color: #666;
+}
+
+.c9 {
+    color: #999;
+}
+
+.c0 {
+    color: #000;
+}
+
+.bf {
+    background: #fff;
+}
+
+/*===============点赞遮罩start======================*/
+#maskPraise {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 999;
+    width: 100%;
+    background: rgba(0,0,0,0);
+}
+#maskPraise .please-hold {
+    position: absolute;
+    left: 0;
+    top: calc(50% - 4.45rem);
+    z-index: 99999;
+    width: 100%;
+    height: 100%;
+}
+#maskPraise .loading {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url(../img/common/prise.gif) top center no-repeat;
+    background-size: 6.67rem 8.89rem;
+   /*  -webkit-animation: loading 1s linear infinite alternate;
+           animation: loading 1s linear infinite alternate; */
+    z-index: 1000;
+}
+#maskPraise .img-bg {
+    margin: 0rem auto;
+    width:  6.67rem;
+    height: 8.89rem;
+}
+/* @keyframes loading {
+    0% { 
+        background: url(../img/common/icon-praise0.png) top center no-repeat;
+        background-size: 6.67rem 8.89rem;
+    }
+    6% {
+        background: url(../img/common/icon-praise1.png) top center no-repeat;
+        background-size: 6.67rem 8.89rem;
+    }
+    12% { 
+        background: url(../img/common/icon-praise2.png) top center no-repeat;
+        background-size: 6.67rem 8.89rem;
+    }
+    18% { 
+        background: url(../img/common/icon-praise3.png) top center no-repeat;
+        background-size: 6.67rem 8.89rem; 
+    }
+    24% { 
+        background: url(../img/common/icon-praise4.png) top center no-repeat;
+        background-size: 6.67rem 8.89rem;
+    }
+    30% {
+        background: url(../img/common/icon-praise5.png) top center no-repeat;
+        background-size: 6.67rem 8.89rem;
+    }
+    36% { 
+        background: url(../img/common/icon-praise6.png) top center no-repeat;
+        background-size: 6.67rem 8.89rem;
+    }
+    42% { 
+        background: url(../img/common/icon-praise7.png) top center no-repeat;
+        background-size: 6.67rem 8.89rem; 
+    }
+    48% { 
+        background: url(../img/common/icon-praise8.png) top center no-repeat;
+        background-size: 6.67rem 8.89rem;
+    }
+    54% {
+        background: url(../img/common/icon-praise9.png) top center no-repeat;
+        background-size: 6.67rem 8.89rem;
+    }
+    60% { 
+        background: url(../img/common/icon-praise10.png) top center no-repeat;
+        background-size: 6.67rem 8.89rem;
+    }
+    66% { 
+        background: url(../img/common/icon-praise11.png) top center no-repeat;
+        background-size: 6.67rem 8.89rem; 
+    }
+    72% { 
+        background: url(../img/common/icon-praise12.png) top center no-repeat;
+        background-size: 6.67rem 8.89rem;
+    }
+    78% {
+        background: url(../img/common/icon-praise13.png) top center no-repeat;
+        background-size: 6.67rem 8.89rem;
+    }
+    84% { 
+        background: url(../img/common/icon-praise14.png) top center no-repeat;
+        background-size: 6.67rem 8.89rem;
+    }
+    100% { 
+        background: url(../img/common/icon-praise15.png) top center no-repeat;
+        background-size: 6.67rem 8.89rem; 
+    }
+}
+@-webkit-keyframes loading {
+    0% { 
+        background: url(../img/common/icon-praise0.png) top center no-repeat;
+        background-size: 6.67rem 8.89rem;
+    }
+    6% {
+        background: url(../img/common/icon-praise1.png) top center no-repeat;
+        background-size: 6.67rem 8.89rem;
+    }
+    12% { 
+        background: url(../img/common/icon-praise2.png) top center no-repeat;
+        background-size: 6.67rem 8.89rem;
+    }
+    18% { 
+        background: url(../img/common/icon-praise3.png) top center no-repeat;
+        background-size: 6.67rem 8.89rem; 
+    }
+    24% { 
+        background: url(../img/common/icon-praise4.png) top center no-repeat;
+        background-size: 6.67rem 8.89rem;
+    }
+    30% {
+        background: url(../img/common/icon-praise5.png) top center no-repeat;
+        background-size: 6.67rem 8.89rem;
+    }
+    36% { 
+        background: url(../img/common/icon-praise6.png) top center no-repeat;
+        background-size: 6.67rem 8.89rem;
+    }
+    42% { 
+        background: url(../img/common/icon-praise7.png) top center no-repeat;
+        background-size: 6.67rem 8.89rem; 
+    }
+    48% { 
+        background: url(../img/common/icon-praise8.png) top center no-repeat;
+        background-size: 6.67rem 8.89rem;
+    }
+    54% {
+        background: url(../img/common/icon-praise9.png) top center no-repeat;
+        background-size: 6.67rem 8.89rem;
+    }
+    60% { 
+        background: url(../img/common/icon-praise10.png) top center no-repeat;
+        background-size: 6.67rem 8.89rem;
+    }
+    66% { 
+        background: url(../img/common/icon-praise11.png) top center no-repeat;
+        background-size: 6.67rem 8.89rem; 
+    }
+    72% { 
+        background: url(../img/common/icon-praise12.png) top center no-repeat;
+        background-size: 6.67rem 8.89rem;
+    }
+    78% {
+        background: url(../img/common/icon-praise13.png) top center no-repeat;
+        background-size: 6.67rem 8.89rem;
+    }
+    84% { 
+        background: url(../img/common/icon-praise14.png) top center no-repeat;
+        background-size: 6.67rem 8.89rem;
+    }
+    100% { 
+        background: url(../img/common/icon-praise15.png) top center no-repeat;
+        background-size: 6.67rem 8.89rem; 
+    }
+} */
+.blog-news-item {
+    position: relative;
+}
+.blog-con-line {
+    line-height: .9rem !important;
+}
+/*===============点赞遮罩end======================*/
+
+

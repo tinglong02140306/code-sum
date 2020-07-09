@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+
+    <bean id="fastdfsTransform" class="com.iflytek.sgy.wjewt.services.fastdfs.FastdfsTransform">
+        <property name="location" value="${fdfs_conf_path}"/>
+    </bean>
+
+</beans>

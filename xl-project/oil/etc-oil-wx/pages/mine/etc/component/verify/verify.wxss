@@ -1,0 +1,57 @@
+.input {
+    padding: 0 60rpx;
+    position: relative;
+    caret-color:#00A170;
+}
+.input-item {
+    position: relative;
+    display: inline-block;
+    width: 62rpx;
+    height: 62rpx;
+    border: 2rpx solid #00A170;
+}
+.input-item:not(:first-child) {
+    margin-left: 12rpx;
+}
+.input-value {
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 28rpx;
+}
+.input-password {
+    position: absolute;
+    left: -360rpx;
+    top: 0;
+    height: 90rpx;
+    width: 880rpx;
+    opacity: 0;
+}
+.focus {
+    width: 2rpx;
+    height: 50rpx;
+    background-color: #333;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+.show {
+    display: block;
+    animation: blink 1s linear infinite;
+}
+.hide {
+    display: none;
+}
+
+@keyframes blink {
+    0%, 50% {
+        opacity: 1;
+    }
+
+    50.01%, to {
+        opacity: 0;
+    }
+}

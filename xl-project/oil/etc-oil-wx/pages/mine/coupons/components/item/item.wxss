@@ -1,0 +1,314 @@
+.preference-item-container{
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 10rpx 32rpx;
+}
+
+.preference-item{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    box-shadow: 0 0 6rpx 10rpx #f1f1f1;
+    background-color: white;
+    border-radius: 8rpx;
+}
+
+.preference-item-content{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.preference-item-content-left{
+    width: 194rpx;
+    height: 216rpx;
+    position: relative;
+    left: 0;
+    top: 0;
+    background: linear-gradient(to bottom right, #73D4FE, #1378ff);
+    border-top-left-radius: 8rpx;
+    border-bottom-left-radius: 8rpx;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    
+}
+
+.preference-item-content-left-image{
+    width: 108rpx;
+    height: 124rpx;
+}
+
+.preference-item-content-left-text{
+    position: absolute;
+    font-size: 64rpx;
+    color: #fff;
+    font-weight: 500;
+    /*text-shadow:6px 6px 12px #1d85ff;*/
+}
+
+.preference-item-content-left-text-small{
+    margin-left: 8rpx;
+    font-size: 24rpx;
+    color: #fff;
+}
+.preference-item-content-new-right{
+    flex: 1;
+    height: 216rpx;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 16rpx;
+    border-top-right-radius: 8rpx;
+    border-bottom-right-radius: 8rpx;
+    border-bottom: 2rpx dashed #dfe2ea;
+}
+.ptcr-left{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
+    box-sizing: border-box;
+    padding: 16rpx;
+    border-top-right-radius: 8rpx;
+    border-bottom-right-radius: 8rpx;
+    /*border-bottom: 2rpx solid #eeeeee;*/
+}
+.ptcr-bottom-time-center{
+    font-size: 12px;
+    color: #aaaaaa;
+    margin: 6rpx 0rpx;
+}
+.preference-item-content-right{
+    flex: 1;
+    height: 216rpx;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
+    box-sizing: border-box;
+    padding: 16rpx;
+    border-top-right-radius: 8rpx;
+    border-bottom-right-radius: 8rpx;
+    border-bottom: 2rpx solid #eeeeee;
+}
+
+.ptcr-top{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    border-bottom: 2rpx dashed #dfe2ea;
+    padding-bottom: 20rpx;
+}
+
+.ptcr-top-left{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.ptcr-top-left-title{
+    color: #333333;
+    font-size: 36rpx;
+    font-weight: 600;
+}
+
+.ptcr-top-left-mark{
+    color: #666666;
+    font-size: 26rpx;
+    margin-top: 4rpx;
+}
+
+.ptcr-top-right{
+    min-width: 160rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    position: relative;
+    left: 0;
+    top: 0;
+}
+
+.ptcr-top-right-oil{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.ptcr-top-right-oil-default{
+    font-size: 24rpx;
+    color: white;
+    background-color: #FA5F50;
+    border-radius: 24rpx;
+    padding: 6rpx 24rpx;
+    align-self: flex-end;
+}
+
+.ptcr-top-right-oil-check{
+    font-size: 24rpx;
+    color: #FA5F50;
+    background-color: white;
+    border-radius: 24rpx;
+    padding: 6rpx 24rpx;
+    align-self: flex-end;
+    border:2rpx solid #FA5F50;
+}
+
+.ptcr-top-right-finish{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    position: relative;
+    right: 6px;
+    bottom: -8px;
+}
+
+.ptcr-top-right-finish-image{
+    width: 110rpx;
+    height: 84rpx;
+}
+
+.ptcr-top-right-product{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    position: relative;
+    right: -6rpx;
+    top: -12rpx;
+}
+
+.ptcr-top-right-product-image{
+    width: 100rpx;
+    height: 100rpx;
+}
+
+.ptcr-top-right-product-check{
+    width: 130rpx;
+    font-size: 24rpx;
+    color: #FA5F50;
+    background-color: white;
+    border-radius: 24rpx;
+    padding: 6rpx 0;
+    align-self: flex-end;
+    border:2rpx solid #FA5F50;
+    text-align: center;
+    position: absolute;
+    right: 0;
+    top: 40rpx;
+}
+
+.ptcr-bottom{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    margin-top: 10rpx;
+}
+
+.ptcr-bottom-time{
+    font-size: 12px;
+    color: #aaaaaa;
+}
+
+.ptcr-bottom-rule{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.ptcr-bottom-rule-new{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.ptcr-bottom-rule-text{
+    font-size: 12px;
+    color: #aaaaaa;
+}
+
+.ptcr-bottom-rule-image{
+    width: 40rpx;
+    height: 40rpx;
+    margin-left: 4rpx;
+}
+
+.preference-item-show-footer{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    background-color: #F8F8F8 ;
+    padding: 10rpx 20rpx;
+    border-bottom-left-radius: 8rpx;
+    border-bottom-right-radius: 8rpx;
+}
+
+.preference-item-footer{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    max-height: 0;
+    transition: all 300ms;
+    overflow: hidden;
+    background-color: #F8F8F8 ;
+    padding: 0 16rpx;
+    border-bottom-left-radius: 8rpx;
+    border-bottom-right-radius: 8rpx;
+}
+
+.preference-item-footer-content{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 16rpx 0;
+}
+
+.preference-item-footer-text{
+    font-size: 24rpx;
+    color: #999999;
+    margin-top: 8rpx;
+}

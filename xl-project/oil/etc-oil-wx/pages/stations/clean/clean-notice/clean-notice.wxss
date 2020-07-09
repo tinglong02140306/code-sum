@@ -1,0 +1,145 @@
+/* pages/stations/clean/clean-notice/clean-notice.wxss */
+.page{
+    background-color: #FFFFFF;
+    height: 100%;
+}
+/*导航栏*/
+.back-box{
+    width: 100%;
+    padding: 0 20rpx;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.navigation-title{
+    flex: 1;
+    font-size: 30rpx;
+    text-align: center;
+}
+.back-image{
+    width: 32rpx;
+    height: 32rpx;
+}
+
+.clean-notice-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #FFFFFF;
+    padding-bottom: 210rpx;
+}
+.clean-notice-alert-box{
+    margin-top: 80rpx;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 500rpx;
+    height: 110rpx;
+    background-color: #05BA7D;
+    padding: 30rpx;
+    border-radius: 16rpx;
+}
+.clean-notice-alert-icon{
+    width: 42rpx;
+    height: 42rpx;
+    background-color: #FFE4B7;
+}
+
+.clean-notice-alert-text-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    font-size: 26rpx;
+    margin-left: 14rpx;
+}
+.clean-notice-alert-text-title{
+    width: 100%;
+    text-align: left;
+    font-size: 32rpx;
+}
+.clean-notice-alert-text-sub{
+    width: 100%;
+    text-align: left;
+}
+.clean-notice-items-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    box-sizing: border-box;
+    /*background-color: #ffffff;*/
+    border-radius: 10rpx;
+    margin-top: 40rpx;
+    width: 100%;
+}
+.clean-notice-items-row{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 20rpx;
+    margin: 10rpx;
+}
+.clean-notice-items-big{
+    width: 664rpx;
+    height: 744rpx;
+}
+.clean-notice-items-title{
+    margin: 90rpx 90rpx 100rpx 90rpx;
+    text-align: center;
+    color: #7e7e7e;
+    font-size: 28rpx;
+}
+.clean-notice-item{
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    /*margin: 10rpx;*/
+}
+.clean-notice-item-icon{
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: 100%;
+    background-color: rgba(5, 186, 125, 0.32);
+}
+.clean-notice-item-text{
+    margin-left: 8rpx;
+    width: 100%;
+    font-size: 26rpx;
+    text-align: left;
+    /*margin-top: 8rpx;*/
+    color: rgba(28, 26, 36, 0.88);
+}
+/*启动洗车*/
+.clean-notice-btns{
+    width: 100vw;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFFFFF;
+    padding-top: 24rpx;
+    padding-bottom: 24rpx;
+    box-shadow: 0rpx -4rpx 20rpx 0rpx rgba(0, 0, 0, 0.04);
+}
+.clean-notice-btn-item{
+    width: 630rpx;
+    height: 90rpx;
+    line-height: 90rpx;
+    text-align: center;
+    border-radius: 56rpx;
+    color: #ffffff;
+    font-size: 32rpx;
+}

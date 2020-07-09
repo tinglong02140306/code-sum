@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "添加银行卡",
+  "navigationBarTextStyle":"black",
+  "usingComponents": {
+    "label-input":"../../../../components/label-input/label-input",
+    "plate-input":"../../../../components/plate-input/plate-input",
+    "popup":"../../../../components/popup/popup",
+    "identify-button":"../../../../components/identify-button/identify-button"
+  }
+}

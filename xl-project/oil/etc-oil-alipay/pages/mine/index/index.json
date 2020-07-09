@@ -1,0 +1,14 @@
+{
+    "titleBarColor": "#00A170",
+    "defaultTitle": "",
+    "backgroundColor": "#eeeeee",
+    "transparentTitle": "always",
+    "titlePenetrate": "YES",
+
+    "disableScroll": true,
+    "usingComponents": {
+        "popup": "../../../components/popup/popup",
+        "etc-card": "../../../components/etc-card/etc-card",
+        "navigation-bar": "/components/navigation-bar/navigation-bar"
+    }
+}

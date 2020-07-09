@@ -1,0 +1,61 @@
+#liMarquee {
+	display: inline-block;
+    width: 73%;
+    height: 2.1rem;
+    font-size: 0.8rem;
+    text-align: center;
+    line-height: 2.1rem;
+    vertical-align: top;
+}
+.handle-guide-wrap .header-item .share-btn {
+	display: inline-block;
+    width: 15%;
+    height: 2.1rem;
+    background: url(./public/wcportal/0.0.1/img/news-detail/share.png) no-repeat center center;
+    background-size: 0.68rem 0.68rem;
+}
+.handle-wrap {
+	position: absolute;
+    width: 100%;
+}
+
+.handle-wrap .step-items-wrap {
+	display: inline-block;
+	width: 100%;
+	border-bottom: 1px solid #eaeaea;
+}
+.step-items {
+	padding: 0.34rem 4.2%;
+}
+.step-items p {
+	padding: 0.12rem 0;
+}
+.underline {
+	display: inline-block;
+	color: #259cf7;
+    text-decoration: underline;
+}
+.handle-guide-wrap .share {
+	z-index: 2;
+}
+/*无网络样式*/
+.wrap .no-net {
+    position: relative;
+    z-index: 2;
+}
+
+/*轮播布局*/
+#itemBanner {
+    position: relative;
+}
+.marquee-content-wrap {
+    float: left;
+    width: 800%;
+}
+.marquee-content,
+.marquee-content-copy {
+    float: left;
+}
+.marquee-content-copy {
+    padding-left: 40px;
+}

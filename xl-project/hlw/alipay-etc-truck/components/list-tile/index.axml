@@ -1,0 +1,6 @@
+<view class="wrapper">
+	<image src="{{src}}" class="img" mode="widthFix" a:if="{{src}}"/>
+	<view class="txt">{{text}}</view>
+	<view class="txt-2">{{tip}}</view>
+	<view class="right" a:if="{{showRight}}"><view class="right-arrow"/></view>
+</view>

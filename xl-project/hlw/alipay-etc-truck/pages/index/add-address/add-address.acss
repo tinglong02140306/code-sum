@@ -1,0 +1,4 @@
+.next-btn{
+  width: 690rpx;
+  margin: 100rpx 30rpx 50rpx;
+}

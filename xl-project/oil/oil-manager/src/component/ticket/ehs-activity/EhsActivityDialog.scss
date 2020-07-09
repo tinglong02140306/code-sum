@@ -1,0 +1,50 @@
+.e-single-dialog-container{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.permission-dialog-input{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.e-single-dialog-item-container{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-end;
+
+}
+.e-single-dialog-item{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  div{
+    width: 150px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    color: black;
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 10px;
+    span{
+      color: #c90000;
+      margin-right: 5px;
+    }
+  }
+}
+.e-single-dialog-empty-hint{
+  width: 390px;
+  font-size: 10px;
+  color: red;
+  padding-left: 130px;
+  margin: 2px;
+}
+
+

@@ -1,0 +1,23 @@
+<!--
+ * @Author: sunmingmao
+ * @Date: 2020-03-26 15:42:07
+ * @LastEditors: longting
+ * @LastEditTime: 2020-04-09 15:38:17
+ * @Description: 下拉刷新 上拉加载控件
+ -->
+<scroll-view class="scroll-list-container" scroll-y style="height: {{height}};"
+    lower-threshold="{{refresher_threshold}}" scroll-top="0" scroll-with-animation onScrollToLower="onLoadMore">
+    <view class="scroll-list-box">
+        <!--列表-->
+        <slot></slot>
+        <!--加载中-->
+        <view class="scroll-list-load-more" a:if="{{load_status==1}}">
+            <image class="scroll-list-loading-img" src="../../assets/static/scroll-list-loading.png"></image>
+            <text class="scroll-list-load-text">努力加载中...</text>
+        </view>
+        <!--已加载全部-->
+        <view class="scroll-list-load-more" a:if="{{load_status==2&&show_finish}}">
+            <text class="scroll-list-load-text">已加载全部</text>
+        </view>
+    </view>
+</scroll-view>

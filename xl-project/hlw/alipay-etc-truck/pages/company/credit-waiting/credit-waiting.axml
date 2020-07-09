@@ -1,0 +1,13 @@
+<view>
+	<block a:if="{{loaded}}">
+		<view class="wrapper">
+			<view class="car-container">
+				<view class="spinner"/>
+				<view class="txt">
+					{{timer}}
+				</view>
+			</view>
+		</view>
+		<view class="tip">信用评估中，请耐心等待</view>
+	</block>
+</view>

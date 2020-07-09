@@ -1,0 +1,23 @@
+<!--coupon-->
+<view class="coupon-container">
+    <view class="coupon-container-box">
+        <text class="coupon-container-box-title">加油站提货券</text>
+        <text class="coupon-container-box-code">券码: {{code}}</text>
+        <view class="coupon-container-qrcode">
+            <!--            <canvas class="coupon-container-box-canvas" canvas-id="qrcode" style="width: {{qrcodewidth}}px;height:{{qrcodewidth}}px"></canvas>-->
+            <image class="coupon-container-box-canvas" src="{{qr_code_image}}"></image>
+            <cover-view class="coupon-container-qrcode-result" wx:if='{{payment_status=="01"||payment_status=="02"}}'>
+                <cover-image class="coupon-container-qrcode-result-image" src="{{result_image}}"></cover-image>
+                <cover-view class="coupon-container-qrcode-result-text">{{result_text}}</cover-view>
+            </cover-view>
+        </view>
+        <text class="coupon-container-box-hint">向商家出示二维码即可消费</text>
+        <view class="coupon-left"></view>
+        <view class="coupon-right"></view>
+        <view class="coupon-container-bottom">
+            <block wx:for="{{16}}" wx:key="key">
+                <view class="coupon-container-bottom-item"></view>
+            </block>
+        </view>
+    </view>
+</view>

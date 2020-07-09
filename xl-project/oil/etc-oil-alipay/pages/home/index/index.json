@@ -1,0 +1,9 @@
+{
+    "titleBarColor": "#ffffff",
+    "backgroundColor": "#eeeeee",
+    "pullRefresh": true,
+    "defaultTitle": "推荐",
+    "usingComponents": {
+        "scroll-list": "../../../components/scroll-list/scroll-list"
+    }
+}

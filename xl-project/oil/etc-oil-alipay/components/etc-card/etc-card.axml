@@ -1,0 +1,22 @@
+<view class="etc-card-component-box" style="{{height}}">
+    <view class="etc-card-component-top" onTap="etcClick" data-item="{{list}}">
+        <text class="etc-card-plate-no-text">{{list.car_plate_no?list.car_plate_no:''}}</text>
+        <view class="etc-card-type">
+            <text class="etc-card-type-text">{{card_name?card_name:''}}</text>
+        </view>
+    </view>
+    <view class="etc-card-component-center" onTap="etcClick" data-item="{{list}}">
+        <text>{{list.etc_card_no_str?list.etc_card_no_str:''}}</text>
+    </view>
+    <view class="etc-card-component-bottom-line"></view>
+    <view class="etc-card-component-bottom" onTap="statusChange" data-item="{{list}}">
+        <view class="etc-card-component-bottom-left">
+            <image class="etc-card-component-bottom-left-icon"
+                src="{{!list.enabled ? 'https://oss.etcsd.com/object/a0e439792beb41d6bfb7c80c27ee807a':'https://oss.etcsd.com/object/963f1f0d9083491e89cb484e4de999bd'}}">
+            </image>
+            <text class="etc-card-component-bottom-left-text">{{list.enabled ? '已启用' : '已停用'}}</text>
+        </view>
+        <image class="etc-card-component-bottom-right-icon"
+            src="https://oilmag.etcsd.com.cn/oilcoreserver/static/resource/icon-person-next.png"></image>
+    </view>
+</view>

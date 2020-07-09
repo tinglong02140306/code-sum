@@ -1,0 +1,233 @@
+.organization-dialog-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.organization-dialog-center{
+  width: 1px;
+  height: 450px;
+  background-color: #e8e8e8;
+  margin: 10px 10px 50px 30px;
+  align-self: center;
+}
+
+.organization-dialog-container-left{
+  display: flex;
+  flex-direction: column;
+  align-items: center
+}
+
+.organization-dialog-item-container{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.organization-dialog-item-input{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: black;
+  font-size: 14px;
+  font-weight: bold;
+  div{
+    margin-right: 10px;
+    span{
+      color: #c90000;
+      margin-right: 2px;
+    }
+  }
+}
+
+.organization-dialog-special-item-input{
+  display: flex;
+  flex-direction: row;
+  font-weight: bold;
+  font-size: 14px;
+  color: black;
+  font-weight: bold;
+  margin-right: 5px;
+  justify-content: flex-end;
+  width: 100px;
+  div{
+    //margin-right: 10px;
+    span{
+      color: #c90000;
+      margin-right: 2px;
+    }
+  }
+}
+
+.organization-dialog-item-input-special{
+  //width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.organization-dialog-item-input-special-hint{
+  //margin-right: 10px;
+  display: flex;
+  flex-direction: row;
+  font-weight: bold;
+  font-size: 14px;
+  color: black;
+  margin-right: 5px;
+  justify-content: flex-end;
+  width: 100px;
+  span{
+    color: #c90000;
+    margin-right: 2px;
+  }
+}
+
+.organization-dialog-item-hint{
+  font-size: 10px;
+  width: 100%;
+  color: red;
+  padding-left: 110px;
+  margin: 2px;
+}
+
+.organization-dialog-container-right{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.organization-dialog-right-item{
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+.organization-dialog-right-content{
+  margin-right: 10px;
+  color: black;
+  font-size: 14px;
+  font-weight: bold;
+  span{
+    color: #c90000;
+    margin-right: 2px;
+  }
+}
+
+.organization-image-container{
+  display: flex;
+  flex-direction: column;
+}
+
+.organization-image-item{
+  display: flex;
+  flex-direction: row;
+
+}
+
+.organization-image-hint{
+  display: flex;
+  flex-direction: row;
+  color: black;
+  font-weight: bold;
+  margin-right: 10px;
+  height: 35px;
+  span {
+    color: #c90000;
+  }
+}
+
+.organization-image-empty-hint{
+  margin-top: 2px;
+  margin-left: 110px;
+  span {
+    color: #c90000;
+    font-size: 10px;
+  }
+}
+
+.organization-dialog-upload {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  height: 200px;
+  border: dashed 1px #d1d1d1;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  color: black;
+  padding: 30px;
+}
+
+$upload-image-size:170px;
+
+.organization-content{
+  position: relative;
+  outline: none;
+  width: $upload-image-size;
+  height: $upload-image-size;
+  background-color: transparent;
+}
+
+.organization-input {
+  position: absolute;
+  outline: none;
+  background-color: transparent;
+  width: $upload-image-size;
+  height: $upload-image-size;
+  filter: alpha(opacity=0);
+  -moz-opacity: 0;
+  -khtml-opacity: 0;
+  opacity: 0;
+}
+
+.organization-hint{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.organization-image-div{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  outline: none;
+  top: 0;
+  left: 0;
+}
+
+.upload-image{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  outline: none;
+}
+
+.organization-overlay{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  outline: none;
+  padding: 40px;
+  top: 0;
+  left: 0;
+  background-color: rgba(19, 19, 19, 0.7);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}

@@ -1,0 +1,652 @@
+/* pages/stations/clean-details/clean-details.acss */
+
+.clean-details-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.clean-details-image {
+    width: 100%;
+    height: 350rpx;
+}
+
+.clean-details-box {
+    width: 100%;
+    position: relative;
+    left: 0;
+    top: -40rpx;
+    z-index: 2;
+    padding: 0 32rpx;
+    box-sizing: border-box;
+}
+
+.clean-details-info {
+    width: 690rpx;
+    padding: 24rpx;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    box-shadow: 0rpx 4rpx 10rpx 0rpx rgba(0, 0, 0, 0.05);
+}
+
+.clean-details-info-top {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    overflow: hidden;
+    align-items: center;
+}
+
+.clean-details-name {
+    color: #333333;
+    font-size: 42rpx;
+    font-weight: bolder;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+/*地址*/
+
+.clean-details-address {
+    width: 100%;
+    height: 96rpx;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.clean-details-address-text {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #999999;
+    font-size: 26rpx;
+}
+
+.clean-details-navigation {
+    min-width: 100rpx;
+    margin-left: 32rpx;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.clean-details-distance {
+    color: #333333;
+    font-size: 24rpx;
+}
+
+.clean-details-navigation-logo {
+    width: 52rpx;
+    height: 52rpx;
+    margin-left: 16rpx;
+}
+
+
+/**价格状态**/
+
+.clean-item-box-bottom {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    box-sizing: border-box;
+    align-items: flex-end;
+    overflow: hidden;
+    margin-top: -20rpx;
+}
+
+.clean-item-box-bottom-left {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+
+
+/**价格**/
+
+.clean-item-price-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.clean-item-price-marker {
+    font-size: 24rpx;
+    color: rgba(0, 0, 0, .85);
+}
+
+.clean-item-price-money {
+    font-weight: bold;
+    font-size: 42rpx;
+    color: rgba(0, 0, 0, .85);
+    position: relative;
+    bottom: -6rpx;
+}
+
+
+/**状态**/
+
+.clean-item-status-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-left: 20rpx;
+}
+
+.clean-item-status-image {
+    width: 29rpx;
+    height: 29rpx;
+}
+
+.clean-item-box-bottom-right {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.clean-item-status-image-refresh {
+    margin: 0 32rpx 0 14rpx;
+    width: 28rpx;
+    height: 28rpx;
+}
+
+.clean-item-status-text {
+    font-size: 24rpx;
+    color: rgba(0, 0, 0, .85);
+    margin-left: 4rpx;
+}
+
+
+/*停车*/
+
+.clean-item-stop-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-end;
+    margin-top: 14rpx;
+}
+
+.clean-details-stop-bg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 82rpx;
+    height: 40rpx;
+    border-radius: 2rpx;
+    background-color: rgba(5, 127, 255, 0.05);
+    border: 2rpx solid rgba(22, 136, 255, 0.25);
+    color: rgba(5, 127, 255, 1);
+    font-size: 24rpx;
+    text-align: left;
+    font-family: PingFangSC-Regular;
+}
+
+.clean-details-stop {
+    height: 40rpx;
+    color: rgba(5, 127, 255, 1);
+    font-size: 26rpx;
+    text-align: left;
+    font-family: PingFang-SC-Medium;
+    margin-left: 10rpx;
+}
+
+
+/*洗车模式*/
+
+.clean-model-box {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    align-items: center;
+    padding: 32rpx;
+}
+
+.clean-model-box-top {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    box-sizing: border-box;
+    align-items: center;
+}
+
+.clean-model-bottom-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+    align-items: center;
+    width: 330rpx;
+    height: 186rpx;
+    border-radius: 8rpx;
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: 0rpx 2rpx 12rpx 0rpx rgba(0, 161, 112, 0.45);
+    border: 2rpx solid rgba(5, 186, 125, 1);
+    margin-top: 24rpx;
+}
+
+.clean-model-bottom-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+    align-items: center;
+    width: 330rpx;
+    height: 186rpx;
+    border-radius: 8rpx;
+    background-color: rgba(255, 255, 255, 1);
+    margin-top: 24rpx;
+}
+
+.clean-model-bottom-icon {
+    width: 160rpx;
+    height: 98rpx;
+    background-color: #F2F2F2;
+}
+
+.clean-model-bottom-text {
+    color: rgba(167, 167, 167, 1);
+    font-size: 24rpx;
+    text-align: center;
+    font-family: PingFangSC-Medium;
+}
+
+.clean-model-sub-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    box-sizing: border-box;
+    align-items: center;
+}
+
+.clean-model-title {
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 32rpx;
+    font-weight: bolder;
+}
+
+.clean-model-title-hint {
+    color: rgba(0, 0, 0, 0.45);
+    font-size: 26rpx;
+    font-family: PingFangSC-Regular;
+    margin-right: 14rpx;
+}
+
+.clean-model-hint-img {
+    width: 24rpx;
+    height: 24rpx;
+    background-color: rgba(0, 0, 0, 0.45);
+}
+
+.clean-share-activity-box {
+    margin: 0 30rpx 30rpx 30rpx;
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 32rpx;
+    text-align: left;
+    font-family: PingFangSC-Medium;
+}
+
+
+/*分享好友*/
+
+.clean-share-container {
+    /*margin-top: 10rpx;*/
+    /*width: 100%;*/
+    padding: 0 30rpx;
+}
+
+.clean-share-container-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    /*position: relative;*/
+    height: 180rpx;
+    border-radius: 20rpx;
+    box-shadow: 0rpx 2rpx 10rpx 0rpx rgba(0, 0, 0, 0.05);
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.clean-share-box-left-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    text-align: left;
+}
+
+.clean-share-box-left-texts {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: left;
+    color: rgba(0, 0, 0, 1);
+    font-size: 36rpx;
+    font-family: PingFangSC-Medium;
+}
+
+.clean-share-box-left-btns {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    width: 102rpx;
+    height: 36rpx;
+    margin-top: 10rpx;
+    border-radius: 20rpx;
+    background-color: rgba(1, 161, 112, 1);
+    color: #FFFFFF;
+    font-size: 22rpx;
+    text-align: left;
+    font-family: PingFangSC-Regular;
+}
+
+.clean-share-box-left-icon {
+    width: 16rpx;
+    height: 8rpx;
+    background-color: #e1e1e1;
+}
+
+.clean-share-box-right-icon {
+    width: 225rpx;
+    height: 141rpx;
+    /*background-color: #05BA7D;*/
+}
+
+.clean-share-image-big {
+    /*border-radius: 8rpx;*/
+    width: 684rpx;
+    height: 160rpx;
+}
+
+.clean-share-box-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.clean-share-box-img {
+    width: 300rpx;
+    height: 188rpx;
+    /*background-color: #F2F2F2;*/
+}
+
+.clean-share-service-btn {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+}
+
+.clean-share-box-left-text {
+    width: 100%;
+    color: #333333;
+    font-size: 42rpx;
+    text-align: left;
+    font-weight: bolder;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.clean-share-box-left-sub {
+    width: 100%;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #999999;
+    font-size: 26rpx;
+}
+
+
+/*一键洗车*/
+
+.clean-details-btns {
+    width: 100vw;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    background-color: #FFFFFF;
+    padding-top: 24rpx;
+    padding-bottom: 24rpx;
+    box-shadow: 0rpx -4rpx 20rpx 0rpx rgba(0, 0, 0, 0.04);
+}
+
+.clean-details-btn-item {
+    width: 630rpx;
+    height: 90rpx;
+    line-height: 90rpx;
+    text-align: center;
+    border-radius: 56rpx;
+}
+
+.left-theme {
+    background-color: #ffffff;
+    box-shadow: 0rpx 5rpx 20rpx 0rpx rgba(0, 0, 0, 0.1);
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 32rpx;
+}
+
+.right-theme {
+    color: #ffffff;
+    font-size: 32rpx;
+}
+
+
+/*距离太远*/
+
+.fast-oil-far-container {
+    width: 620rpx;
+    background-color: white;
+    border-radius: 20rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0 70rpx 40rpx 70rpx;
+}
+
+.fast-oil-far-name {
+    color: #333333;
+    font-size: 36rpx;
+    margin-top: 40rpx;
+    margin-bottom: 60rpx;
+    text-align: center;
+}
+
+.fast-oil-far-hint {
+    color: #FA5F50;
+    font-size: 26rpx;
+    margin-bottom: 90rpx;
+}
+
+.fast-oil-far-btns {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 64rpx 0 30rpx 0;
+}
+
+.fast-oil-far-go {
+    width: 206rpx;
+    height: 70rpx;
+    font-size: 30rpx;
+    color: #666666;
+    border-radius: 34rpx;
+    border: 2rpx solid rgba(194, 194, 194, 1);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.fast-oil-far-return {
+    width: 206rpx;
+    height: 70rpx;
+    font-size: 30rpx;
+    text-align: center;
+    line-height: 70rpx;
+}
+
+
+/*不支持车辆*/
+
+.clean-no-support-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    background-color: #FFFFFF;
+    width: 670rpx;
+    height: 960rpx;
+    border-radius: 10rpx;
+}
+
+.clean-no-support-title-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    background-color: #FFFFFF;
+}
+
+.clean-no-support-title-line {
+    width: 100%;
+    height: 12rpx;
+    background-color: rgba(5, 187, 126, 0.87);
+    margin-bottom: 0;
+    margin-top: 50rpx;
+}
+
+.clean-no-support-title-text {
+    color: #333333;
+    font-size: 42rpx;
+    text-align: center;
+    font-weight: bolder;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-top: -50rpx;
+}
+
+.clean-no-support-title {
+    margin: 30rpx;
+    width: 200rpx;
+    height: 30rpx;
+}
+
+.clean-no-support-text {
+    /*width: 90%;*/
+    text-align: left;
+    color: #7e7e7e;
+    font-size: 30rpx;
+    margin-left: 42rpx;
+    margin-righ: 42rpx;
+}
+
+.clean-no-support-text-m {
+    /*width: 90%;*/
+    text-align: left;
+    color: #000000;
+    font-size: 30rpx;
+    margin-righ: 42rpx;
+}
+
+.clean-no-support-text-row {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-top: 24rpx;
+    /*margin-bottom: 40rpx;*/
+}
+
+.clean-no-support-text-items {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 20rpx;
+}
+
+.clean-no-support-image-row {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.clean-no-support-image-items {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20rpx;
+}
+
+.clean-no-support-image-text {
+    margin-top: 28rpx;
+    margin-bottom: 12rpx;
+}
+
+.clean-no-support-image-1 {
+    width: 240rpx;
+    height: 108rpx;
+}
+
+.clean-no-support-image-2 {
+    width: 224rpx;
+    height: 88rpx;
+}
+
+.clean-no-support-image-3 {
+    width: 218rpx;
+    height: 68rpx;
+}
+
+.clean-no-support-image-4 {
+    width: 192rpx;
+    height: 74rpx;
+}
+
+.clean-no-support-btn-item {
+    width: 490rpx;
+    height: 90rpx;
+    line-height: 90rpx;
+    text-align: center;
+    border-radius: 56rpx;
+    background-color: #05BA7D;
+    color: white;
+    font-size: 32rpx;
+    box-shadow: 0rpx 10rpx 40rpx 0rpx rgba(79, 221, 128, 0.3);
+}

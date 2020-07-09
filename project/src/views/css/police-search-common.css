@@ -1,0 +1,205 @@
+/* 主体内容 */
+.content {
+    padding: 0 4.2%;
+}
+/* 搜索框 660 65*/
+.searchs-wrap {
+    width: 76%;
+    height: 2.1rem;
+}
+.search {
+    padding: 0.35rem 0;
+}
+.search-input {
+    width: 100%;
+    height: 1.4rem;
+    border-radius: 1rem;
+}
+.searchs-wrap .btn-search {
+    width: 10%;
+    height: 1.4rem;
+    background: url(../img/home/search-icon.png) no-repeat center right;
+    background-size: 0.58rem 0.58rem; 
+}
+.searchs-wrap input {
+    width: 80%;
+    height: 1.4rem;
+    padding:0;
+    margin: 0;
+    border: none;
+    font-size: 0.58rem;
+    line-height: normal background: transparent;
+    line-height: normal;
+    outline: none;
+    text-indent: 4%;
+    -webkit-appearance: none;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+}
+.searchs-wrap label {
+    position: absolute;
+    top: 0.40rem;
+    padding: 0.40rem 0 0.38rem;
+    left: 23%;
+    width: 60%;
+    height: 0.58rem;
+    background: transparent;
+    line-height: 0.58rem;
+}
+.searchs-wrap input::-webkit-input-placeholder {
+    vertical-align: middle;
+}
+.police-search-wrap .btn-delete {
+    display: inline-block;
+    width: 10%;
+    height: 1.4rem;
+    background: url(../img/service-hall/btn-delete.png) no-repeat center left;
+    background-size: 0.68rem 0.68rem;
+}
+.police-search-wrap header {
+    width: 100%;
+}
+.police-search-wrap {
+    position: absolute;
+    top: 0rem;
+    bottom: 0rem;
+    overflow-x: hidden;
+}
+
+.police-search-wrap .content-result {
+    position: absolute;
+    top: 2.1rem;
+    bottom: 0rem;
+    padding: 0rem;
+    overflow-y: scroll;
+   -webkit-overflow-scrolling: touch; 
+    width: 100%;
+   
+}
+.police-search-wrap .themes {
+    font-size: 0.58rem;
+}
+/*搜索结果列表*/
+.service-item-list {
+    margin-top: 0.44rem;
+    background: #fff;
+}
+.content-result-list-p {
+    padding-left: 4.2%;
+    height: 1.9rem;
+    border-bottom: 1px solid #eaeaea;
+    line-height: 2.1rem;
+}
+.police-search-wrap .content-result-list-p {
+    color: #222 !important;
+}
+.result-list-details {
+    padding: 0 4.2%;
+}
+.result-list-details a {
+    display: flex;
+    height: 2.68rem;
+    width: 100%;
+    border-bottom: 1px solid #eaeaea;
+    line-height: 2.68rem;
+    flex-align: center;
+    align-items: center; /*图片垂直居中*/
+}
+.detail-icon {
+    display: inline-block;
+    padding: 0 0.68rem 0 0;
+    width: 2.22rem;
+    height: 2.22rem;   
+}
+.detail-txt {
+    margin-left: 3%;
+    padding: 0 0.66rem 0 0;
+    width: calc(77% - 1.32rem);
+}
+.more {
+    display: inline-block;
+    width: 100%;
+    height: 2.0rem;
+    line-height: 2.0rem;
+    text-align: center;
+}
+
+.work-list-detailss .detail-txt,
+.service-list-detailss .detail-txt {
+    padding: 0;
+}
+/***资讯样式 start***/
+.police-search-wrap .new-detail a {
+    width: 100%;
+}
+
+.home-news {
+    margin-top: 0.44rem;
+    background-color: #fff;
+}
+.home-notify-content {
+    padding: 0 4.2%;
+}
+.city-news li a {
+    display: block;
+}
+.city-news li a.type3 .img-list img {
+    width: calc(33% - 0.44rem);
+}
+.new-details .ul-content {
+    height: 4.87rem;
+}
+.ul-content {
+    width: 50%;
+}
+
+.city-news li a.type1 img {
+    margin-top: 0.67rem;
+}
+/***资讯样式 end***/
+
+.empty {
+    background: transparent;
+}
+.empty-ad {
+    height: 10rem;
+    background: url(./public/wcportal/0.0.1/img/service-hall/search-emptys.png) no-repeat center bottom;
+    background-size: 3.92rem 4.56rem;
+}
+.empty p {
+    line-height: 1.56rem;
+}
+
+.service-item-list a.visited .detail-txt,
+.service-item-list a.visited .detail-txt  font,
+.city-news li.visited .recommend-ul-theme font,
+.city-news li.visited .news-content,
+.city-news li.visited .news-content font {
+    color: #888!important;
+}
+.work-list-details-a .handle,
+.work-list-details-a .guide,
+.work-list-details-a .searchs {
+    display: inline-block;
+    padding: 0.2rem 0rem;
+    width: 20%;
+    border-radius: 0.2rem;
+    font-size: 0.62rem;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 1.02rem;
+}
+.work-list-details-a .handle {
+    border: 1px solid #94aaff;
+    background-color: #edf1ff;
+    color: #4c72ff;
+}
+.work-list-details-a .guide {
+    background-color: #fef7e7;
+    border: 1px solid #f9c766;
+    color: #f5a100;
+}
+.work-list-details-a .searchs {
+    background-color: #e9f9e9;
+    border: 1px solid #7fda7f;
+    color: #3fc63f;
+}

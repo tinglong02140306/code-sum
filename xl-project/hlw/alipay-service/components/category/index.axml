@@ -1,0 +1,13 @@
+<view class="category-wrapper">
+  <view class="category-info-wrapper">
+    <view class="category-title">
+      <slot name="category-title"></slot>
+    </view>
+    <view class="category-subtitle">
+      <slot name="category-subtitle"></slot>
+    </view>
+  </view>
+  <view class="category-icon-wrapper">
+    <slot name="category-icon"></slot>
+  </view>
+</view>

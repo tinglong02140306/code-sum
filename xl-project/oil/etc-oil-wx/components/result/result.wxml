@@ -1,0 +1,27 @@
+<!--
+ * @Author: sunmingmao
+ * @Date: 2020-04-14 11:10:48
+ * @LastEditors: sunmingmao
+ * @LastEditTime: 2020-04-27 14:06:00
+ * @Description: 结果页面
+ -->
+ <view class="result-container">
+    <!--支付失败-->
+    <view class="result-box" style="display: {{status==2?'flex':'none'}}">
+        <view class="result-box-top">
+            <image class="result-box-image" src="{{icon_fail}}"></image>
+            <text class="result-box-hint">支付失败</text>
+        </view>
+        <view class="result-box-retry-pay theme-button" bind:tap="onFailClick">{{fail}}</view>
+    </view>
+    <!--支付成功-->
+    <view class="result-box" style="display: {{status==1?'flex':'none'}}">
+        <view class="result-box-top">
+            <image class="result-box-image" src="{{icon_success}}"></image>
+            <text class="result-box-hint">支付成功</text>
+        </view>
+        <view class="result-box-retry-pay theme-button" bind:tap="onSuccess1Click">{{success1}}</view>
+        <view class="result-box-invoice disable-button" bind:tap="onSuccess2Click">{{success2}}</view>
+    </view>
+</view>
+

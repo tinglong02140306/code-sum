@@ -1,0 +1,232 @@
+/* pages/mine/invoice/create/create.acss */
+
+.create-invoice-container {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    box-sizing: border-box;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.create-invoice-btn-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    position: fixed;
+    width: 100%;
+    height: 130rpx;
+    background-color: #ffffff;
+    bottom: 0;
+    box-shadow: 0rpx -4rpx 20rpx 0rpx rgba(0, 0, 0, 0.04);
+    padding: 20rpx;
+    z-index: 5000;
+}
+
+.create-invoice-btn-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 28rpx;
+    text-align: left;
+    font-family: PingFangSC-Regular;
+    /*flex: 1;*/
+    width: 100%;
+}
+
+.create-invoice-btn-high {
+    width: 100%;
+    height: 90rpx;
+    font-size: 34rpx;
+    margin-right: 32rpx;
+}
+
+.create-invoice-top-container {
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 90rpx;
+    box-sizing: border-box;
+    padding: 0 32rpx;
+    border-bottom: 2rpx solid rgba(0, 0, 0, .05);
+    background-color: #f8f8f8;
+}
+
+.create-invoice-input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 0 30rpx;
+    margin-top: 90rpx;
+    box-sizing: border-box;
+}
+
+.create-invoice-type-box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: 108rpx;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.create-invoice-type-left {
+    color: rgba(0, 0, 0, 0.65);
+    font-size: 32rpx;
+    text-align: left;
+    font-family: PingFangSC-Regular;
+    margin-right: 10rpx;
+}
+
+.create-invoice-type-right {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    flex: 1;
+    /*margin-left: 32rpx;*/
+}
+
+.create-invoice-title-type-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: 20rpx;
+}
+
+.create-invoice-title-type-icon {
+    width: 40rpx;
+    height: 40rpx;
+    margin-right: 8rpx;
+}
+
+.create-invoice-title-type-text {
+    color: rgba(0, 0, 0, 0.65);
+    font-size: 32rpx;
+    text-align: left;
+    font-family: PingFangSC-Regular;
+}
+
+.create-invoice-top-left {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.create-invoice-top-left-text {
+    color: rgba(0, 0, 0, 0.45);
+    font-size: 28rpx;
+    text-align: left;
+    font-family: PingFang-SC-Medium;
+}
+
+.create-invoice-top-text {
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 30rpx;
+    text-align: left;
+    font-family: PingFang-SC-Medium;
+}
+
+.create-invoice-top-image {
+    width: 30rpx;
+    max-height: 30rpx;
+    margin-left: 4rpx;
+}
+
+.create-invoice-input-line {
+    height: 2rpx;
+    margin-left: 20rpx;
+    width: 100%;
+    background-color: #F2F2F2;
+}
+
+.invoice-title-input-box {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    align-items: center;
+    position: relative;
+    background-color: #ffffff;
+    overflow: hidden;
+    padding: 0 30rpx;
+}
+
+.invoice-title-input {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    box-sizing: border-box;
+    /*padding-left: 16rpx;*/
+}
+
+.create-invoice-more {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 20rpx;
+}
+
+.create-invoice-more-text {
+    color: rgba(0, 0, 0, 0.45);
+    font-size: 24rpx;
+    text-align: center;
+    font-family: PingFangSC-Regular;
+}
+
+.create-invoice-more-icon {
+    margin-left: 10rpx;
+    width: 16rpx;
+    height: 16rpx;
+    max-width: 20rpx;
+}
+
+.invoice-attention {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 30rpx;
+    margin-bottom: 150rpx;
+}
+
+.invoice-attention-text {
+    /*display: -webkit-box;*/
+    /*line-height: 40rpx;*/
+    /*word-break: break-all;*/
+    /*-webkit-box-orient: vertical;*/
+    /*overflow: hidden;*/
+    /*text-overflow:ellipsis;*/
+    /*margin-top: 10rpx;*/
+    color: rgba(0, 0, 0, 0.45);
+    font-size: 24rpx;
+    text-align: left;
+    font-family: PingFangSC-Regular;
+    line-height: 40rpx;
+}
+
+.invoice-title-associate-container {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    border-radius: 8rpx;
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: 0rpx 4rpx 20rpx 0rpx rgba(0, 0, 0, 0.2);
+    width: 80%;
+    top: 306rpx;
+    margin-left: 140rpx;
+    margin-right: 20rpx;
+    z-index: 2000;
+}

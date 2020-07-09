@@ -1,0 +1,62 @@
+.circle { 
+	position: absolute;
+
+	width: 70px; 
+	height: 70px; 
+	border-radius: 50%; 
+	background: #2a98ff; 
+} 
+.circle-red {
+	background: red;
+}
+.pie_left, .pie_right { 
+	position: absolute; 
+	top: 0;
+	left: 0; 
+	width: 70px; 
+	height: 70px; 	
+} 
+.left, .right { 
+	display: block; 
+	position: absolute; 
+	top: 0; 
+	left: 0; 
+	transform: rotate(30deg); 
+
+	width:70px; 
+	height:70px; 
+	background:#ccc; 
+	border-radius: 50%; 
+	
+} 
+.pie_right, .right { 
+	clip:rect(0,auto,auto,35px); 
+} 
+.pie_left, .left { 
+	clip:rect(0,35px,auto,0); 
+} 
+
+
+
+
+.mask { 
+	width: 60px; 
+	height: 60px; 
+	border-radius: 50%; 
+	left: 5px; 
+	top: 5px; 
+	background: #FFF; 
+	position: absolute; 
+	text-align: center; 
+	font-size: 18px; 
+}
+.mask span{
+	margin-top: 10px;
+	display: inline-block;
+}
+.mask p{
+	margin: 0;
+	font-size: 12px;
+	width: 60px;
+	height: 20px;
+}

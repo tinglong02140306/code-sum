@@ -1,0 +1,19 @@
+/* components/map-bar/map-bar.wxss */
+.map-back-box{
+    height: 100%;
+    padding: 0 20rpx;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.map-back-image{
+    width: 32rpx;
+    height: 32rpx;
+}
+
+.map-bar{
+    font-size:38rpx;
+    font-weight: bold;
+}

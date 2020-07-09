@@ -1,0 +1,29 @@
+.wx-recharge-footer{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 16px;
+}
+
+.wx-recharge-footer-top{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+}
+
+.wx-recharge-footer-bottom{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    box-sizing: border-box;
+}
+
+.wx-recharge-footer-text{
+    font-size: 15px;
+    margin: 0;
+    color: rgba(0, 0, 0, 0.85);
+    letter-spacing: 1px;
+}

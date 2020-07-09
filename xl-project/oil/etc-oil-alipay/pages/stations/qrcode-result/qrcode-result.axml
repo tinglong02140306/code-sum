@@ -1,0 +1,38 @@
+<!--
+ * @Author: sunmingmao
+ * @Date: 2020-04-11 10:27:30
+ * @LastEditors: longting
+ * @LastEditTime: 2020-04-27 16:46:29
+ * @Description: 二维码支付界面
+ -->
+<import src="../../../templates/clean/coupon-item/coupon-item.axml"></import>
+<view class="qrcode-result-container">
+    <!--支付失败-->
+    <view class="qrcode-result-box" style="display: {{status=='02'?'flex':'none'}}">
+        <view class="qrcode-result-box-top">
+            <image class="qrcode-result-box-image" src="{{icon_fail}}"></image>
+            <text class="qrcode-result-box-hint">支付失败</text>
+        </view>
+        <view class="qrcode-result-box-retry-pay theme-button" onTap="onRetryPay">重新支付</view>
+    </view>
+    <!--支付成功-->
+    <view class="qrcode-result-box" style="display: {{status=='01'?'flex':'none'}}">
+        <view class="qrcode-result-box-top">
+            <image class="qrcode-result-box-image" src="{{icon_success}}"></image>
+            <text class="qrcode-result-box-hint">支付成功</text>
+        </view>
+        <view class="qrcode-result-box-retry-pay theme-button" onTap="onSeeOrder">查看订单详情</view>
+        <view class="qrcode-result-box-invoice disable-button" onTap="onOpenInvoice">开具发票</view>
+    </view>
+    <!--优惠券-->
+    <view class="clean-result-coupon-box" a:if="{{couponList.length}}">
+        <view class="clean-result-coupon-line"></view>
+        <text class="clean-result-coupon-text">本次消费获得</text>
+        <view class="clean-result-coupon-line"></view>
+    </view>
+    <view class="clean-result-coupon-list" a:if="{{couponList.length}}" onTap="goCouponClick">
+        <block a:for="{{couponList}}" a:key="coupon_item">
+            <template is="coupon_item" data="{{item}}"></template>
+        </block>
+    </view>
+</view>

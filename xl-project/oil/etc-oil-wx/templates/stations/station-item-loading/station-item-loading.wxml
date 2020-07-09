@@ -1,0 +1,24 @@
+<!--
+ * @Author: sunmingmao
+ * @Date: 2020-04-11 21:53:24
+ * @LastEditTime: 2020-04-11 22:00:55
+ * @LastEditors: sunmingmao
+ * @Description: 加油站item loading 
+ -->
+
+ <template name="station-item-loading">
+    <view class="station-item-loading-box card-box">
+        <view class="station-item-loading-left-box"></view>
+        <view class="station-item-loading-center-box">
+            <view class="station-item-loading-center-item"></view>
+            <view class="station-item-loading-center-item"></view>
+            <view class="station-item-loading-center-item"></view>
+        </view>
+        <view class="station-item-loading-right-box">
+            <view class="station-item-loading-center-item"></view>
+            <view class="station-item-loading-center-item"></view>
+        </view>
+    </view>
+ </template>
+
+

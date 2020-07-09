@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <!-- 添加到主屏幕后，全屏显示 -->
+    <meta name="apple-touch-fullscreen" content="YES" />
+    <meta name="format-detection" content="telephone=no" />
+    <!-- iphone 运行在全屏模式 -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+    <title>货车ETC</title>
+    <script type="text/javascript" src="./js/plugins/remCacul/remCacul.js"></script>
+    <link rel="stylesheet" href="./js/plugins/picker-extend/picker-extend.css">
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/infos-collect.css">
+    <script type="text/javascript" src="./js/cityData.js"></script>
+</head>
+
+<body>
+    <input id="hight" type="hidden" style="height: 2rem;">
+    <div class="wrap bf">
+        <img src="./image/pic.png" alt="">
+        <div class="infos-wrap">
+            <div class="car-info-wrap">
+                <p><span class="f30 c3b">车辆信息&nbsp;&nbsp;</span><span class="f26 c80">(最多可连续添加20辆)</span></p>
+                <div class="carno-wrap"></div>
+                <!-- 添加车辆按钮 -->
+                <div class="btn-add-car">
+                    <span class="f36 c427">添加车辆</span>
+                </div>
+            </div>
+
+            <!-- 收件人信息 -->
+            <div class="recipient-info-wrap">
+                <div class="info-item">
+                    <label class="f30" for="">收件人</label>
+                    <input class="f28 recip-name item" data-name="receiver" type="text" maxlength="16" placeholder="请输入收件人姓名">
+                </div>
+                <div class="info-item">
+                    <label class="f30" for="">联系电话</label>
+                    <input class="f28 tel item" data-name="mobile" type="number" maxlength="11" placeholder="请输入联系人手机号">
+                </div>
+
+                <div class="info-item">
+                    <label class="f30" for="">收件地址</label>
+                    <div class="content">
+                        <!-- <span id="trigger" class="f28">请选择所在地区</span> -->
+                        <input id="trigger" class="f28" readonly type="text" placeholder="请选择所在地区">
+                        <i></i>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <label class="f30" for="">详细地址</label>
+                    <input class="detail-address f28 tel item" data-name="address" type="text" maxlength="32" placeholder="请输入详细地址">
+                </div>
+                <div class="info-item">
+                    <label class="f30" for="">营销代码</label>
+                    <input class="f28 tel item" data-name="agent_code" type="number" maxlength="10" placeholder="营销人员代码（选填）">
+                </div>
+            </div>
+
+            <div class="btn-submit">
+                <span class="f36 cf">确认提交</span>
+            </div>
+        </div>
+
+    </div>
+</body>
+<script type="text/javascript" src="./js/plugins/jquery/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="./js/plugins/picker-extend/picker-extend.js"></script>
+<script type="text/javascript" src="./js/util.js"></script>
+<script type="text/javascript" src="./js/app/infos-collect.js"></script>
+
+</html>

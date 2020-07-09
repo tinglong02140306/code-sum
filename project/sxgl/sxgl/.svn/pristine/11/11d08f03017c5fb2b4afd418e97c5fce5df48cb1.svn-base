@@ -1,0 +1,922 @@
+/*
+ * @Author: tinglong 
+ * @Date: 2018-10-29 10:52:06 
+ * @Last Modified by: qijiang
+ * @Last Modified time: 2019-01-27 14:47:47
+ */
+<template>
+    <!-- 基本信息 -->
+    <div id="accConConfig">
+        <!-- 受理条件列表 -->
+        <div class="list-wrap">
+            <el-table :row-class-name="getRowClass" :data="acceConData" @selection-change="acceConSelectChange">
+                <!-- 展开项start -->
+                <el-table-column type="expand" width="40">
+                    <template scope="scope">
+                        <el-table row-class-name="child-table" :data="scope.row.data" tooltip-effect="dark" :show-header="false">
+                            <el-table-column width="40">
+                            </el-table-column>
+                            <el-table-column class="font-max" prop="judgeCond" label="判断条件">
+                                <template slot-scope="scope">
+                                    <span :title="scope.row.judgeCond" class="cell el-tooltip item-text" v-if="scope.row.status == '1'">{{scope.row.judgeCond}}</span>
+                                    <el-input @change="(val)=>changeInputOut(val,scope.$index,'judgeCond',scope.row)" class="" v-if="scope.row.status == '0'" v-model="scope.row.judgeCond" placeholder="请输入" maxlength="500"></el-input>
+                                </template>
+                            </el-table-column>
+                            <el-table-column class="font-max" prop="judgeStd" label="判断标准">
+                                <template slot-scope="scope">
+                                    <span :title="scope.row.judgeStd" class="cell el-tooltip item-text" v-if="scope.row.status == '1'">{{scope.row.judgeStd}}</span>
+                                    <el-input class="" @change="(val)=>changeInputOut(val,scope.$index,'judgeStd',scope.row)" v-if="scope.row.status == '0'" v-model="scope.row.judgeStd" placeholder="请输入" maxlength="500"></el-input>
+                                </template>
+                            </el-table-column>
+                            <el-table-column class="font-max" prop="groupName" label="关联组">
+                                <template slot-scope="scope">
+                                    <el-select @focus="showSelect" class="m150" v-model="scope.row.groupId" v-if="scope.row.status == '0'" placeholder="请选择" maxlength="200" :clearable="true">
+                                        <el-option v-for="item in manageData" :key="item.id" :label="item.groupName" :title="item.groupName" :value="item.id">
+                                        </el-option>
+                                    </el-select>
+                                </template>
+                            </el-table-column>
+                            <el-table-column class="font-max" label="服务配置">
+                                <template slot-scope="scope">
+                                    <span class="item-text blue" style="cursor:pointer" v-if="scope.row.isServerConfigured=='1'" @click="goServerConfig('child', scope.row,true)">已配置</span>
+                                    <span class="item-text" style="cursor:pointer" v-if="scope.row.isServerConfigured=='0'" @click="goServerConfig('child', scope.row,false)">未配置</span>
+                                    <span class="item-text blue" style="cursor:pointer" v-if="scope.row.isServerConfigured=='1'" @click="resetConfig(scope.row.id)">重置</span>
+                                    <el-button type="text" disabled v-if="scope.row.isServerConfigured=='0'">重置</el-button>
+                                </template>
+                            </el-table-column>
+
+                            <el-table-column align="center" label="操作" width="200" v-if="operType !== 'detail'">
+                                <template slot-scope="scope">
+                                    <el-button class="font-max" type="text" size="small" v-if="scope.row.status == 1" @click="editAcceEvent(scope.row, scope.$index)">编辑</el-button>
+                                    <el-button class="font-max" type="text" size="small" v-if="scope.row.status == 0" @click="editAcceEvent(scope.row, scope.$index)">保存</el-button>
+                                    <el-button class="font-max" type="text" size="small" @click="delAcceEvt(scope.row, scope.row.isNew)">删除</el-button>
+                                </template>
+                            </el-table-column>
+                        </el-table>
+                    </template>
+                </el-table-column>
+                <!-- 展开项end -->
+                <el-table-column class="font-max" prop="judgeCond" align="left" label="判断条件">
+                    <template slot-scope="scope">
+                        <span class="cell el-tooltip item-text tip-title" :title="acceConData[scope.$index].judgeCond" v-if="acceConData[scope.$index].status == '1'">{{acceConData[scope.$index].judgeCond}}</span>
+                        <el-input class="" v-if="acceConData[scope.$index].status == '0'" v-model="acceConData[scope.$index].judgeCond" placeholder="请输入" maxlength="500" @change="(val)=>changeInput(val,scope.$index,'judgeCond')"></el-input>
+                    </template>
+                </el-table-column>
+                <el-table-column class="font-max" prop="judgeStd" align="left" label="判断标准">
+                    <template class="cell el-tooltip" slot-scope="scope">
+                        <span class="cell el-tooltip item-text tip-title" :title="acceConData[scope.$index].judgeStd" v-if="acceConData[scope.$index].status == '1'">{{acceConData[scope.$index].judgeStd}}</span>
+                        <el-input class="" v-if="acceConData[scope.$index].status == '0'" v-model="acceConData[scope.$index].judgeStd" placeholder="请输入" maxlength="500" @change="(val)=>changeInput(val,scope.$index,'judgeStd')"></el-input>
+                    </template>
+                </el-table-column>
+                <el-table-column class="font-max" prop="groupName" align="left" label="关联组">
+                    <template class="cell el-tooltip" slot-scope="scope">
+                        <span class="cell el-tooltip item-text" :title="acceConData[scope.$index].groupName" v-if="acceConData[scope.$index].status == '1'">{{acceConData[scope.$index].groupName}}</span>
+                        <el-select @focus="showSelect" class="m150" v-model="checkManage" v-if="acceConData[scope.$index].status == '0'" placeholder="请选择" maxlength="200" :clearable="true">
+                            <el-option v-for="item in manageData" :key="item.id" :label="item.groupName" :value="item.id" :title="item.groupName">
+                            </el-option>
+                        </el-select>
+                    </template>
+                </el-table-column>
+                <el-table-column class="font-max" label="服务配置">
+                    <template slot-scope="scope">
+                        <span class="item-text blue" style="cursor:pointer" v-if="acceConData[scope.$index].group==false&&acceConData[scope.$index].isServerConfigured == '1'" @click="goServerConfig('parent',scope.row,true)">已配置</span>
+
+                        <el-button type="text" class="item-text" style="color:#c0c4cc" v-if="acceConData[scope.$index].group==false&&acceConData[scope.$index].isServerConfigured == '0' && acceConData[scope.$index].status == '0' &&acceConData[scope.$index].group == false" @click="goServerConfig('parent', scope.row,false)" :disabled="acceConData[scope.$index].status == '0' &&acceConData[scope.$index].group == false">未配置</el-button>
+                        <el-button type="text" class="item-text" style="color:#606266" v-else-if="acceConData[scope.$index].group==false&&acceConData[scope.$index].isServerConfigured == '0'" @click="goServerConfig('parent', scope.row,false)" :disabled="acceConData[scope.$index].status == '0' &&acceConData[scope.$index].group == false">未配置</el-button>
+
+                        <span class="item-text blue" style="cursor:pointer;margin-left: 7px;" v-if="acceConData[scope.$index].group==false&&acceConData[scope.$index].isServerConfigured == '1'" @click="resetConfig(scope.row.id)">重置</span>
+                        <el-button type="text" disabled v-if="acceConData[scope.$index].group==false&&acceConData[scope.$index].isServerConfigured == '0'">重置</el-button>
+                    </template>
+                </el-table-column>
+                <el-table-column align="center" label="操作" width="200" v-if="operType !== 'detail'">
+                    <template slot-scope="scope">
+                        <el-button class="font-max" type="text" size="small" @click="upSortEvt(acceConData[scope.$index].id)" :disabled="acceConData[scope.$index].disable == '0' ? true : false">上移</el-button>
+                        <el-button class="font-max" type="text" size="small" @click="downSortEvt(acceConData[scope.$index].id)" :disabled="acceConData[scope.$index].disable == '0' ? true : false">下移</el-button>
+                        <el-button class="font-max" type="text" size="small" @click="editAcceEvent(scope.row, scope.$index)" v-if="acceConData[scope.$index].status == '1' &&acceConData[scope.$index].group == false">编辑</el-button>
+                        <el-button class="font-max" type="text" size="small" @click="editAcceEvent(scope.row, scope.$index)" v-if="acceConData[scope.$index].status == '0' &&acceConData[scope.$index].group == false">保存</el-button>
+                        <el-button class="font-max" type="text" size="small" @click="delAcceEvt(scope.row, scope.row.isNew)" v-if="acceConData[scope.$index].group == false">删除</el-button>
+                        <!-- :disabled="acceConData[scope.$index].isNew == '0' && acceConData[scope.$index].status == '0' ? true : false" -->
+                    </template>
+                </el-table-column>
+            </el-table>
+            <!-- 添加按钮 -->
+            <div class="btn-add-wrap">
+                <!-- iview按钮 -->
+                <Button type="dashed" size="large" icon="md-add" @click="addAccConEvt">新增</Button>
+            </div>
+        </div>
+        <el-dialog :close-on-click-modal="false" title="关联组管理" :visible.sync="showDialog" width="600px" height="600px">
+            <el-table :data="manageData">
+                <el-table-column class="font-max" label="关联组名称" prop="judgeStd" align="center">
+                    <template slot-scope="scope">
+                        <span class="cell el-tooltip" :title="scope.row.groupName" v-if="scope.row.status == '1'">{{scope.row.groupName}}</span>
+                        <el-input v-if="scope.row.status == '0'" class="" v-model="scope.row.groupName" maxlength="200" placeholder="请输入"></el-input>
+                    </template>
+                </el-table-column>
+                <el-table-column align="center" label="操作" width="200">
+                    <template slot-scope="scope">
+                        <el-button class="font-max" type="text" size="small" @click="editManage(scope.row, scope.$index)" :disabled="scope.row.status =='0'">编辑</el-button>
+                        <el-button class="font-max" type="text" size="small" @click="deleteManage(scope.row)">删除</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+            <!-- 添加按钮 -->
+            <div class="btn-add-wrap">
+                <!-- iview按钮 -->
+                <Button style="width:100%;margin-top:5px" type="dashed" size="large" icon="md-add" @click="addManage">新增</Button>
+            </div>
+            <!-- 指南内容 -->
+            <div class="footer" style="text-align:right">
+                <el-button type="primary" size="small" @click="submitManage">确 定</el-button>
+                <el-button size="small" @click="showDialog = false">取 消</el-button>
+            </div>
+            <!-- </el-form> -->
+        </el-dialog>
+        <!-- 配置事项 -->
+        <el-dialog :title="modelTitle" :visible.sync="modelFlag" width="1270px" :close-on-click-modal="false" @close="closeDialog">
+            <serverSetCommonSet v-if="modelFlag" ref='modelFlag' @closeDialog="closeDialog" :param="serverParam"></serverSetCommonSet>
+        </el-dialog>
+    </div>
+</template>
+<script>
+import unit from "@/api";   // 公共工具方法
+import serverSetCommonSet from "@/components/serverSet/serverSetCommonSet";
+export default {
+    components: {
+        serverSetCommonSet: serverSetCommonSet
+    },
+    data() {
+        return {
+            version: 1.0,
+            code: 'cssx1', // 默认值 测试用
+            operType: '',  // 操作类型  查看 编辑等
+            deleteVis: false, // 受理条件 删除弹框 显示/隐藏标志位
+            acceConSelectdArr: [],  // 前置删除选中项 id
+            acceConData: [],   // 前置条件数据
+            curId: '',  // 当前被操作事项id  存储 删除 编辑项
+            delPromTips: '确定要删除选中的记录吗?',  // 删除提示语
+            // 受理条件表单数据
+            condFormData: {
+                judgeCond: '',
+                judgeStd: '',
+                groupId: ''
+            },
+            // 受理表单条件验证规则
+            condRules: {
+                judgeCond: [
+                    { required: true, message: '请填写判断条件', trigger: 'blur' },
+                    { min: 0, max: 500, message: '长度在 0 到 500 个字符', trigger: 'blur' }
+                ],
+                judgeStd: [
+                    { required: true, message: '请填写判断标准', trigger: 'blur' },
+                    { min: 0, max: 500, message: '长度在 0 到 500 个字符', trigger: 'blur' }
+                ]
+            },
+            accRules: {
+                groupName: [
+                    { required: true, message: '关联组名称不能为空', trigger: 'blur' },
+                ]
+            },
+            labelPosition: 'right',
+            notSaveFlag: false,
+            showDialog: false,
+            showInput: false,
+            manageData: [],  //关联组数据
+            checkManage: null,  //选中的关联组
+
+            modelFlag: false,
+            modelTitle: '服务配置',
+            serverParam: {
+
+            }
+        };
+    },
+    methods: {
+        /** 重置配置 */
+        resetConfig(id) {
+            let that = this;
+            that.$confirm("确定要清除已配置的服务吗?", "提示", {
+                confirmButtonText: "确 定",
+                cancelButtonText: "取 消",
+                cancelButtonClass: 'fr ml10',
+                type: "warning"
+            })
+                .then(() => {
+                    var url = '/data/server/cleanAll';
+                    unit.ajaxMerPost('/znsj-web' + url, {
+                        id: id,
+                        type: "2"
+                    }, function (res) {
+                        res = typeof res == 'string' ? JSON.parse(res) : res;
+                        that.$Message.success('重置成功！');
+                        if (res.errMsg == 'success') {
+                            that.getAccConData();
+                        }
+                    }, function (error) {
+                        that.$Message.error(error.errMsg || '数据加载失败！');
+                    }, that);
+                })
+                .catch(() => { });
+        },
+        //服务配置
+        goServerConfig(type, row, flag) {
+            this.serverParam.dataTemplateId = row.id;
+            this.serverParam.linkId = row.id;
+            this.serverParam.tempAttrId = row.id;
+            this.serverParam.templateType = '2';
+            this.serverParam.isMult = 0;
+            this.serverParam.flag = flag;
+            this.serverParam.name = '';
+            this.modelFlag = true;
+        },
+        //关闭弹框
+        closeDialog() {
+            this.getAccConData();
+            this.modelFlag = false;
+        },
+        getRowClass(row) {
+            if (row.row.group == false) {
+                return "row-expand-cover"
+            }
+        },
+        //修复ie记忆问题
+        changeInput(val, index, attr) {
+            this.acceConData[index][attr] = val == '' ? '' : val;
+        },
+        //展开项ie记忆问题
+        changeInputOut(val, index, attr,row){
+            row[attr] = val == ''?'':val;
+        },
+        /**
+         * 关联组窗口显示
+         */
+        showManageDialog() {
+            let that = this;
+            that.showDialog = true;
+            that.getManageData();
+        },
+        /**
+         * 获取关联组数据
+         */
+        getManageData() {
+            let that = this;
+            let url = "/condition/group/getAllGroupByMatter";
+            let param = {
+                matteCode: that.code,
+                matteVersion: that.version
+            }
+            unit.ajaxMerPost('/znsj-web' + url, param, function (res) {
+                res = typeof res == 'string' ? JSON.parse(res) : res;
+                let data = res.data;
+                if (res.flag) {
+                    that.manageData = res.data;
+                    for (let item of that.manageData) {
+                        that.$set(item, 'status', '1')
+                    }
+                } else {
+                    that.$Message.error(data.data || '数据加载失败！');
+                }
+            }, function (error) {
+                that.$Message.error(error.data.errMsg || '数据加载失败！');
+            }, that);
+
+        },
+        /**
+         * 增加关联组管理
+         */
+        addManage() {
+            let that = this;
+            let data = {
+                groupName: '',
+                id: '',
+                status: '0',
+                matteCode: that.code,
+                matteVersion: that.version
+            };
+            that.manageData.push(data);
+        },
+        /**
+         * 删除关联组管理
+         */
+        deleteManage(row) {
+            let that = this;
+            let url = "/condition/group/delete";
+            let ids = row.id
+            let param = {
+                ids: ids
+            };
+
+            that.$confirm("确定要删除这条记录吗?", "提示", {
+                confirmButtonText: "确 定",
+                cancelButtonText: "取 消",
+                cancelButtonClass: 'fr ml10',
+                type: "warning"
+            })
+                .then(() => {
+                    if (row.id == "") {   //如果是新加的关联组则不调用接口
+                        let index = that.manageData.indexOf(row);
+                        that.manageData.splice(index, 1)
+                        return
+                    }
+                    unit.ajaxMerPost('/znsj-web' + url, param, function (res) {
+                        res = typeof res == 'string' ? JSON.parse(res) : res;
+                        let data = res.data;
+                        if (res.flag) {
+                            that.getManageData()
+                        } else {
+                            that.$Message.error(data.data || '数据加载失败！');
+                        }
+                    }, function (error) {
+                        that.$Message.error(error.data.errMsg || '数据加载失败！');
+                    }, that);
+                })
+                .catch(() => { });
+        },
+        /**
+         * 编辑单个
+         */
+        editManage(row, index) {
+            let that = this;
+            that.manageData[index].status = "0";
+        },
+        /**
+         * 提交关联组
+         */
+        submitManage() {
+            let that = this;
+            // that.$refs["accForm"].validate((valid) => {
+            // if(valid){
+            // return
+            let url = "/condition/group/addOrUpdateForAll";
+            let param = [];
+            for (let item of that.manageData) {
+                param.push({
+                    matterCode: that.code,
+                    matterVersion: that.version,
+                    groupName: item.groupName,
+                    id: item.id
+                })
+                if (!item.groupName) {
+                    that.$Message.error("关联组名称不能为空")
+                    return
+                }
+            }
+
+            unit.ajaxObjPost('/znsj-web' + url, param, function (res) {
+                res = typeof res == 'string' ? JSON.parse(res) : res;
+                let data = res.data;
+                if (res.flag) {
+                    that.getManageData()
+                    that.getAccConData()
+                    that.showDialog = false
+                } else {
+                    that.$Message.error(data.errMsg || '数据加载失败！');
+                }
+            }, function (error) {
+                that.$Message.error(error.data.errMsg || '数据加载失败！');
+            }, that);
+            //     }else{
+            //         return false
+            //     }
+            // })    
+
+        },
+        /*
+         * 上移
+         * id: 记录id
+         */
+        upSortEvt(id) {
+            let that = this,
+                url;
+            unit.ajaxMerPost('/sxgl/conditon/upSort', {
+                id: id
+            }, function (res) {
+                res = typeof res == 'string' ? JSON.parse(res) : res;
+                let data = res.data;
+                // 刷新数据
+                if (res.data && res.flag) {
+                    that.$Message.success("操作成功");
+                    // 重新渲染列表数据
+                    that.getAccConData();
+                    that.notSaveFlag = false;
+                } else {
+                    that.$Message.error(data.errMsg || '已经是最高层！');
+                }
+
+            }, function (error) {
+                that.$Message.error(error.data.errMsg || '数据加载失败！');
+            }, that);
+        },
+        /*
+         * 下移
+         * id: 记录idi
+         */
+        downSortEvt(id) {
+            let that = this;
+            unit.ajaxMerPost('/sxgl/conditon/downSort', {
+                id: id
+            }, function (res) {
+                res = typeof res == 'string' ? JSON.parse(res) : res;
+                let data = res.data;
+                // 刷新数据
+                if (res.data && res.flag) {
+                    that.$Message.success("操作成功");
+                    // 重新渲染列表数据
+                    that.notSaveFlag = false;
+                    that.getAccConData();
+                } else {
+                    that.$Message.error(data.errMsg || '已经是最底层！');
+                }
+            }, function (error) {
+                that.$Message.error(error.data.errMsg || '数据加载失败！');
+            }, that);
+
+        },
+        // 是否可选择
+        checkSelectable(row) {
+            if (row.status == '1') {
+                return 1;
+            } else {
+                return 0;
+            }
+        },
+        /*
+         * 获取受理条件数据列表
+         */
+        getAccConData() {
+            let that = this,
+                url = '/conditon/getAllByMatter',
+                param = {
+                    matteVersion: that.version, //1.0,
+                    matteCode: that.code //'cssx1'   
+                };
+            unit.ajaxMerPost('/znsj-web' + url, param, function (res) {
+                res = typeof res == 'string' ? JSON.parse(res) : res;
+                let data = res.data;
+                if (res.flag) {
+                    that.acceConData = [];
+                    for (let i in data) {
+                        data[i].status = '1';
+                        data[i].disable = "1";
+                        data[i].isNew = '0';
+                        data[i].judgeCond = "";
+                        data[i].judgeStd = "";
+                        data[i].isServerConfigured = "";
+                        for (let item of data[i].data) {
+                            data[i].judgeCond += item.judgeCond + '/'
+                            data[i].judgeStd += item.judgeStd + '/'
+                            data[i].isServerConfigured += item.isServerConfigured;
+                            item.status = "1";
+                            item.disable = "1";
+                            item.isNew = "0";
+                            item.groupName = data[i].groupName;
+                        }
+                        data[i].judgeCond = data[i].judgeCond.slice(0, data[i].judgeCond.length - 1)
+                        data[i].judgeStd = data[i].judgeStd.slice(0, data[i].judgeStd.length - 1)
+                    }
+                    that.acceConData = data;
+                    that.getManageData();
+
+                    setTimeout(() => {
+                        let tips = $('.tip-title');
+                        $(tips).each(function (index, obj) {
+                            if (tips.eq(index).html().length > 510) {
+                                tips.eq(index).tipTip();
+                            }
+                        });
+                    }, 100);
+                } else {
+                    that.$Message.error(data.data || '数据加载失败！');
+                }
+            }, function (error) {
+                that.$Message.error(error.data.errMsg || '数据加载失败！');
+            }, that);
+        },
+        /*
+         * 编辑 新增点击事件
+         * id有值就是编辑 为空为新增
+         * type(事项类型):1:条件 2： 原始材料 3： 颗粒化材料
+         */
+
+        editAcceEvent(row, index) {
+            let that = this;
+            that.curId = row.id;
+            let url = that.curId ? '/conditon/updateCondition' : '/conditon/addCondition',
+                param = that.condFormData,
+                status = row.status
+            if (status == '0') {
+                if (!row.judgeCond) {
+                    that.$Message.warning('请填写判断条件！');
+                    return;
+                }
+                if (!row.judgeStd) {
+                    that.$Message.warning('请填写判断标准！');
+                    return;
+                }
+                param.judgeCond = row.judgeCond;
+                param.judgeStd = row.judgeStd;
+                param.situationMattCode = that.code;  //  事项版本 
+                param.situationMattVerison = that.version;  // 事项code
+                param.groupId = that.checkManage || row.groupId;//关联组id
+                if (that.curId) {  // 受理条件 表单形式 json对象 编辑
+                    param.id = that.curId;  // 记录id
+                    that.saveObjType(url, param, '1');
+                } else {  // 受理条件 新增 json 字符串
+                    that.saveJsonType(url, param, '1');
+                }
+            } else if (status == '1') {
+                let flag = 0;
+                for (var i in that.acceConData) {
+                    if (that.acceConData[i].status == '0') {
+                        flag = 1;
+                        that.notSaveFlag = true;
+                    }
+                    for (let item of that.acceConData[i].data) {
+                        if (item.status == "0") {
+                            flag = 1;
+                            that.notSaveFlag = true;
+                        }
+                    }
+                }
+                if (!flag) that.notSaveFlag = false;
+                if (that.notSaveFlag) {
+                    that.$Message.warning('有尚未保存的数据');
+                    return;
+                }
+                row.status = '0';
+                row.disable = '0';
+                for (var i in that.acceConData) {
+                    for (let item of that.acceConData[i].data) {
+                        if (item.disable == "0") {
+                            that.acceConData[i].disable = "0"
+                        }
+                    }
+                }
+                that.notSaveFlag = true;
+            }
+        },
+
+        /*
+         * 增加受理条件
+         */
+        addAccConEvt: function () {
+            let that = this, flag = 0;
+            for (let i = 0, len = that.acceConData.length; i < len; i++) {
+                if (that.acceConData[i].status == '0') {
+                    flag = 1;
+                    that.notSaveFlag = true;
+                }
+                for (let item of that.acceConData[i].data) {
+                    if (item.status == "0") {
+                        flag = 1;
+                        that.notSaveFlag = true;
+                    }
+                }
+            }
+            if (!flag) that.notSaveFlag = false;
+            if (!that.notSaveFlag) {
+                var data = {
+                    data: [],
+                    judgeCond: '',
+                    judgeStd: '',
+                    groupName: '',
+                    group: false,
+                    isServerConfigured: "0",
+                    status: '0',
+                    id: null,
+                    disable: '0',
+                    isNew: '1'
+                };
+                that.acceConData.push(data);
+                let url = "/condition/group/getAllGroupByMatter";
+                let param = {
+                    matteCode: that.code,
+                    matteVersion: that.version
+                }
+                unit.ajaxMerPost('/znsj-web' + url, param, function (res) {
+                    res = typeof res == 'string' ? JSON.parse(res) : res;
+                    let data = res.data;
+                    if (res.flag) {
+                        that.manageData = res.data
+                    } else {
+                        that.$Message.error(data.data || '数据加载失败！');
+                    }
+                }, function (error) {
+                    // that.deleteVis = false;
+                    that.$Message.error(error.data.errMsg || '数据加载失败！');
+                }, that);
+                that.notSaveFlag = true;
+            } else {
+                that.$Message.warning('有尚未保存的数据');
+            }
+        },
+        /*
+         * 清空表单数据
+         */
+        clearFormData() {
+            let that = this;
+            // 对整个表单进行重置，将所有字段值重置为空并移除校验结果
+            if (that.$refs['condForm'] !== undefined) {
+                that.$refs['condForm'].resetFields();
+                for (var key in that.condFormData) {
+                    that.condFormData[key] = '';
+                }
+            }
+            that.checkManage = null
+            that.condFormData = {
+                judgeCond: '',
+                judgeStd: '',
+                groupId: ''
+            }
+        },
+        /*
+         * 保存原始材料
+        */
+        saveFormData(formName, type) {
+            var that = this,
+                url,
+                param;
+            that.$refs[formName].validate((valid) => {
+                if (!valid) {
+                    return;
+                }
+                let that = this;
+                url = that.curId ? '/conditon/updateCondition' : '/conditon/addCondition';
+                param = that.condFormData;
+                param.situationMattCode = that.code;  //  事项版本 
+                param.situationMattVerison = that.version;  // 事项code
+
+                if (that.curId) {  // 受理条件 表单形式 json对象 编辑
+                    param.id = that.curId;  // 记录id
+                    that.saveObjType(url, param, type);
+                } else {  // 受理条件 新增 json 字符串
+                    that.saveJsonType(url, param, type);
+                }
+            });
+        },
+        /*
+         * 保存数据json字符串形式 编辑
+         * id: 记录id
+         * type(事项类型):1:条件 2： 原始材料 3： 颗粒化材料
+         */
+        saveJsonType(url, param, type) {
+            let that = this;
+            unit.ajaxPost('/znsj-web' + url, param).then(function (res) {
+                res = typeof res == 'string' ? JSON.parse(res) : res;
+                let data = res.data;
+                if (data.flag) {
+                    that.notSaveFlag = false;
+                    that.$Message.success(data.data || '保存成功！');
+                    // 清空表单数据
+                    that.clearFormData();
+                    // 刷新数据
+                    that.getAccConData();
+                } else {
+                    that.$Message.warning(data.errMsg || '保存失败!');
+                }
+            }).catch(function (error) {
+                that.$Message.error(error.data.errMsg || '数据加载失败！');
+            });
+
+        },
+        /*
+         * 保存数据json对象形式 添加
+         * id: 记录id
+         * type(事项类型):1:条件 2： 原始材料 3： 颗粒化材料
+         */
+        saveObjType(url, param, type) {
+            let that = this;
+            unit.ajaxMerPost('/znsj-web' + url, param, function (res) {
+                res = typeof res === 'string' ? JSON.parse(res) : res;
+                if (res.flag) {
+                    that.notSaveFlag = false;
+                    that.$Message.success(res.data || '保存成功！');
+                    that.clearFormData()
+                    // 刷新数据
+                    that.getAccConData();
+                } else {
+                    that.$Message.warning(data.errMsg || '保存失败!');
+                    that.clearFormData()
+                }
+            }, function (error) {
+                that.$Message.error(error.data.errMsg || '数据加载失败！');
+            }, that);
+
+        },
+
+        /*
+         * 删除  弹框触发事件
+         * id: 记录id
+         * type(事项类型):1:条件 2： 原始材料 3： 颗粒化材料
+         */
+        delAcceEvt(row, isNew) {
+            let that = this,
+                idData, tips = '确定要删除这条记录吗？';
+            if (row.isServerConfigured == '1') {
+                tips = '该受理条件有绑定的服务，确定要删除吗？';
+            }
+            that.curId = row.id;
+            if (isNew == '0') {
+                if (row.id) {
+                    that.delPromTips = tips;
+                    // tips="确定删除该记录？";
+                } else {
+                    idData = that.acceConSelectdArr;
+                    if (idData.length == 0) {
+                        that.$Message.warning('请选择要删除的记录！');
+                        return;
+                    } else {
+                        that.delPromTips = '确定要删除选中的记录吗？';
+                        //  tips="确定要删除选中的记录吗？";
+                        that.curId = idData.join(',');
+                    }
+                }
+            }
+
+            // that.deleteVis = true;
+            that.$confirm(that.delPromTips, '提示', {
+                confirmButtonText: '确 定',
+                cancelButtonText: '取 消',
+                cancelButtonClass: 'fr ml10',
+                type: 'warning'
+            }).then(() => {
+                if (isNew == '1') {
+                    that.acceConData.splice(that.acceConData.length - 1, 1);
+                    that.notSaveFlag = false;
+                    that.checkManage = ""
+                } else {
+                    that.sureDelEvt();
+                }
+                // that.sureDelEvt();
+
+            }).catch(() => {
+
+            });
+
+        },
+        /*
+         * 确定删除选中记录项
+         */
+        sureDelEvt() {
+            let that = this,
+                url = '/conditon/deleteCondition',
+                param = {
+                    ids: that.curId
+                };
+            unit.ajaxMerPost('/znsj-web' + url, param, function (res) {
+                res = typeof res == 'string' ? JSON.parse(res) : res;
+                let data = res.data;
+                if (res.flag) {
+                    //  that.deleteVis = false;
+                    that.notSaveFlag = false;
+                    that.$Message.success('删除成功！');
+                    // 刷新数据
+                    that.getAccConData();
+                } else {
+                    // that.deleteVis = false;
+                    that.$Message.error(res.data.errMsg || '数据加载失败！');
+                }
+            }, function (error) {
+                // that.deleteVis = false;
+                that.$Message.error(err.data.errMsg || '数据加载失败！');
+            }, that);
+        },
+        /*
+         * 受理条件table复选框chang事件
+         */
+        acceConSelectChange(val) {
+            let that = this;
+            that.acceConSelectdArr = [];
+            if (val.length > 0) {
+                for (let i in val) {
+                    that.acceConSelectdArr.push(val[i].id);
+                }
+            }
+        },
+        showSelect() {
+            $(".el-select-dropdown__item").css('width', "200px")
+        },
+        /*
+         *  初始化页面数据
+         */
+        init() {
+            let that = this;
+            that.getAccConData();
+        },
+    },
+    mounted() {
+        let that = this,
+            parent;
+        if (that.$parent && that.$parent.param) {
+            parent = that.$parent.param;
+            that.code = parent.matterCode ? parent.matterCode : '';
+            that.version = parent.matterVersion ? parseFloat(parent.matterVersion) : 0;
+        }
+        that.init();
+    }
+};
+</script>
+<style lang="less">
+// @import "../../../assets/styles/theme.less";
+.v-modal {
+    z-index: 999 !important;
+}
+.el-button {
+    font-size: 14px !important;
+}
+#accConConfig {
+    overflow-y: auto;
+    height: 100%;
+    background-color: #fff;
+    .el-table {
+        border-top: 1px solid #e4e4e4;
+        border-left: 1px solid #e4e4e4;
+        border-right: 1px solid #e4e4e4;
+        overflow: hidden;
+        th {
+            height: 40px;
+            padding: 0;
+            font-weight: bold;
+            color: #515a6e;
+        }
+        .tip-title {
+            display: inline-block;
+            max-width: 100%;
+        }
+    }
+
+    // 弹框头部样式覆盖
+    .el-dialog__header {
+        border-bottom: 1px solid #ddd;
+    }
+    .el-dialog__header .el-dialog__title,
+    .el-dialog__headerbtn .el-dialog__close {
+        // color: #fff;
+    }
+    .el-dialog__body {
+        padding: 10px 10px 20px 10px;
+        color: #606266;
+        font-size: 14px;
+    }
+    // 改弹框层级
+    .el-dialog__wrapper {
+        z-index: 1000 !important;
+    }
+    // 选择下拉框样式修改
+    .el-select {
+        width: 235px !important;
+    }
+    // 弹框按钮样式覆盖
+    .footer {
+        height: 50px;
+        background: #fff;
+        text-align: center;
+        line-height: 50px;
+        background: #fff;
+        .el-button {
+            // height: 30px;
+            width: 70px;
+        }
+    }
+    .list-wrap {
+        .btn-add-wrap {
+            margin-top: 10px;
+            width: 100%;
+            .ivu-btn {
+                width: 100%;
+                height: 40px;
+            }
+        }
+    }
+    .row-expand-cover {
+        td:nth-child(1) .el-table__expand-icon {
+            visibility: hidden;
+        }
+    }
+    .el-table__expanded-cell[class*="cell"] {
+        background-color: #fff !important;
+        padding: 0;
+    }
+    .el-table__expanded-cell tr.el-table__row {
+        background-color: #fff !important;
+    }
+    .el-table__expanded-cell .el-table {
+        border: none !important;
+        overflow: hidden;
+        tr:last-of-type {
+            td {
+                border-bottom: none !important;
+            }
+        }
+    }
+    .el-table__expanded-cell .el-table::before {
+        z-index: -1;
+    }
+    .m150 {
+        max-width: 150px;
+    }
+    .blue {
+        color: #409eff;
+    }
+}
+</style>

@@ -1,0 +1,41 @@
+<import src="../../../../templates/mine/order/order-list/list.axml"></import>
+<view class="order-list-container">
+    <view class="order-list-item-container">
+        <scroll-list 
+            height="{{scroll_height}}" 
+            onRefresh="onRefresh" 
+            onLoadMore="onLoadMore"
+            load_status="{{load_status}}" 
+            refresher_triggered="{{refresher}}" 
+            show_finish="{{show_finish}}">
+            <view class="order-list-box" a:for="{{bill_list}}" a:key="stations" onTap="onCellClick" data-item="{{item}}"
+                data-index="{{index}}" a:if="{{!isEmptyList}}">
+                <template is="order-list" data="{{item}}"></template>
+            </view>
+            <status a:if="{{status}}" text="{{status==1?'没有订单数据哦～':'网络好像断了哦～'}}" onRetryClick="onRetryClick"></status>
+        </scroll-list>
+    </view>
+    <view class="order-list-top-container">
+        <view class="order-list-top-drop-select-box" onTap="showType">
+            <view class="order-list-top-left">
+             <text class="order-list-top-text">{{order_type==null?'全部类型':order_type=='GAS'?'加油消费':order_type=='WASH'?'洗车消费':order_type==='COUPON_PACKAGE'?'券包消费':'消费类型'}}</text>
+                <image class="order-list-top-image2" src='https://oilmag.etcsd.com.cn/oilcoreserver/static//resource/plate-pull.png'></image>
+            </view>
+            <view class="drop-down-container" a:if="{{showConsume}}">
+                <view class="drop-down-triangle"></view>
+                <view class="drop-down-content">
+                    <view class="{{order_type===null?'drop-down-item-select':'drop-down-item'}}" onTap="onChangeType" data-item="{{null}}">全部类型</view>
+                    <view class="{{order_type==='GAS'?'drop-down-item-select':'drop-down-item'}}" onTap="onChangeType" data-item="{{'GAS'}}">加油消费</view>
+                    <view class="{{order_type==='WASH'?'drop-down-item-select':'drop-down-item'}}" onTap="onChangeType" data-item="{{'WASH'}}">洗车消费</view>
+                    <view class="{{order_type==='COUPON_PACKAGE'?'drop-down-item-select':'drop-down-item'}}" onTap="onChangeType" data-item="{{'COUPON_PACKAGE'}}">券包消费</view>
+                </view>
+            </view>
+        </view>
+        <view class="order-list-top-right" onTap="goInvoice">
+            <text class="order-list-top-text">开具发票</text>
+            <image class="order-list-top-image"
+                src="https://oilmag.etcsd.com.cn/oilcoreserver/static//resource/icon-invoice-next1587007642632.png">
+            </image>
+        </view>
+    </view>
+</view>

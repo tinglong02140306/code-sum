@@ -1,0 +1,10 @@
+{
+    "defaultTitle": "开具发票",
+    "backgroundColor": "#eeeeee",
+    "backgroundTextStyle": "light",
+    "titleBarColor": "#ffffff",
+    "usingComponents": {
+        "invoice-input": "../../../../components/invoice-input/invoice-input",
+        "input-associate": "../../../../components/input-associate/input-associate"
+    }
+}

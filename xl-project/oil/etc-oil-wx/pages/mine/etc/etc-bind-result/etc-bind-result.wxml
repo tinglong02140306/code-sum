@@ -1,0 +1,19 @@
+<!--pages/mine/etc/etc-bind-result/etc-bind-result.wxml-->
+<view class="qrcode-result-container">
+    <!--签约失败-->
+    <view class="qrcode-result-box" style="display: {{status=='02'?'flex':'none'}}">
+        <view class="qrcode-result-box-top">
+            <image class="qrcode-result-box-image" src="{{icon_fail}}"></image>
+            <text class="qrcode-result-box-hint">开通失败</text>
+        </view>
+        <view class="qrcode-result-box-retry-pay theme-button" bind:tap="onBack">重新签约</view>
+    </view>
+    <!--签约成功-->
+    <view class="qrcode-result-box" style="display: {{status=='01'?'flex':'none'}}">
+        <view class="qrcode-result-box-top">
+            <image class="qrcode-result-box-image" src="{{icon_success}}"></image>
+            <text class="qrcode-result-box-hint">开通成功</text>
+        </view>
+        <view class="qrcode-result-box-retry-pay theme-button" bind:tap="onBackHome">返回首页</view>
+    </view>
+</view>

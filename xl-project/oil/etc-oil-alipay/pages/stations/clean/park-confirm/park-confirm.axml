@@ -1,0 +1,11 @@
+<!--pages/stations/clean/park-confirm/park-confirm.axml-->
+<view class="park-confirm-container">
+    <view class="park-confirm-text-box">
+        <text class="park-confirm-text">请按照语音提示</text>
+        <text class="park-confirm-text">将您的爱车停在灰色区域内</text>
+    </view>
+    <image class="park-confirm-image-box" src="https://oss.etcsd.com/object/5a3a3c9d4ea245999b9720b383febd48"></image>
+    <view class="park-confirm-btns" style="padding-bottom: {{isIphoneX?64:24}}rpx;">
+        <view class="park-confirm-btn-item theme-button" onTap="onConfirmClick"> 停车确认完毕 </view>
+    </view>
+</view>

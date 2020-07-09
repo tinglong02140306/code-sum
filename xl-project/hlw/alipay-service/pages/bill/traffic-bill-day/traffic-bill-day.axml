@@ -1,0 +1,47 @@
+<view class="wrapper" a:if="{{loaded}}">
+	<view class="header">
+		<view style="font-size:32rpx;">{{plateNo}}</view>
+		<view style="font-size:30rpx;">
+			<picker mode="date" value="{{gmtDate}}" start="2020-01-01" end="{{maxDate}}" bindchange="bindDateChange">
+				<view class="picker">
+					{{gmtDate}}
+					<view class="item-arrow">
+						<image src="/images/bill/arrow.png" style="width:14rpx;height:24rpx;padding-left:15rpx;"/>
+					</view>
+				</view>
+			</picker>
+		</view>
+	</view>
+	<view class="body">
+		<scroll-view class="scroll-view" bindscrolltolower="scrollToLower" scroll-y="{{true}}">
+			<block a:if="{{list.length}}">
+				<block a:for="{{list}}">
+					<view class="scroll-view-item">
+						<view class="item-head">
+							<view class="icon-wrapper">
+								<image class="icon-parking" src="/images/bill/station.png"/>
+							</view>
+							<text class="item-head-text">{{item["deal_addr"]}}({{item["gmt_exit"]}})</text>
+						</view>
+						<view class="item-foot">
+							<text class="item-foot-text">￥{{item["toll"]}}</text>
+						</view>
+					</view>
+				</block>
+				<block a:if="{{!hasMore}}">
+					<view class="no-more">没有更多了</view>
+				</block>
+			</block>
+			<block a:else>
+				<view class="no-data">
+					<image src="/images/bill/no-data.png" style="width:280rpx;height:208rpx;"/>
+					<view class="no-data-1">暂无账单</view>
+					<view class="no-data-2">您还没有账单可显示~</view>
+				</view>
+			</block>
+		</scroll-view>
+	</view>
+	<view class="footer">
+		<view class="btn" bindtap="showMonthBill">查看月账单</view>
+	</view>
+</view>

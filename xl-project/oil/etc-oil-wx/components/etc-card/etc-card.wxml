@@ -1,0 +1,46 @@
+
+<!--<view class="etc-card-component-box" wx:if="{{!list.is_enough}}">-->
+<view class="etc-card-component-box" style="{{height}}">
+    <view class="etc-card-component-top" bindtap="etcClick" data-item="{{list}}">
+        <text class="etc-card-plate-no-text">{{list.car_plate_no?list.car_plate_no:''}}</text>
+        <view class="etc-card-type">
+<!--            <view class="etc-card-type-poi"></view>-->
+            <text class="etc-card-type-text">{{card_name?card_name:''}}</text>
+        </view>
+    </view>
+    <view class="etc-card-component-center" bindtap="etcClick" data-item="{{list}}">
+        <text>{{list.etc_card_no_str?list.etc_card_no_str:''}}</text>
+    </view>
+    <view class="etc-card-component-bottom-line"></view>
+    <view class="etc-card-component-bottom" bind:tap="statusChange" data-item="{{list}}">
+        <view class="etc-card-component-bottom-left">
+            <image class="etc-card-component-bottom-left-icon"
+                   src="{{list.bind_status===0?'https://oss.etcsd.com/object/a0e439792beb41d6bfb7c80c27ee807a':'https://oss.etcsd.com/object/963f1f0d9083491e89cb484e4de999bd'}}"></image>
+            <text class="etc-card-component-bottom-left-text">{{list.bind_status===0?'已停用':'已启用'}}</text>
+        </view>
+        <image class="etc-card-component-bottom-right-icon"
+               src="https://oilmag.etcsd.com.cn/oilcoreserver/static/resource/icon-person-next.png"></image>
+    </view>
+</view>
+<!--<view class="etc-card-component-box" wx:if="{{list.is_enough}}">-->
+<!--    <view class="mine-etc-card-add-top">-->
+<!--        <image class="mine-etc-card-add-icon"-->
+<!--               src="https://oilmag.etcsd.com.cn/oilcoreserver/static//resource/mine-etc-add1588148562560.png"></image>-->
+<!--        <text class="mine-etc-card-add-text">添加ETC</text>-->
+<!--    </view>-->
+<!--    <view class="component-etc-card-add-bottom">-->
+<!--        <view class="component-etc-card-add-bottom-items">-->
+<!--            <view class="mine-etc-card-add-steps">1</view>-->
+<!--            <text class="mine-etc-card-add-steps-text">添加ETC</text>-->
+<!--        </view>-->
+<!--        <view class="component-etc-card-add-bottom-items">-->
+<!--            <view class="mine-etc-card-add-steps">2</view>-->
+<!--            <text class="mine-etc-card-add-steps-text">签订免密协议</text>-->
+<!--        </view>-->
+<!--        <view class="component-etc-card-add-bottom-items">-->
+<!--            <view class="mine-etc-card-add-steps">3</view>-->
+<!--            <text class="mine-etc-card-add-steps-text">开通ETC闪付</text>-->
+<!--        </view>-->
+<!--    </view>-->
+<!--</view>-->
+

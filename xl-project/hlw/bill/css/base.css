@@ -1,0 +1,114 @@
+@charset "utf-8";
+html {
+    font-size: 20px;
+}
+* {
+	-webkit-backface-visibility:hidden;         /*ios闪屏*/
+	box-sizing: border-box;
+}
+/* Reset
+---------------------------------------------------------------------*/
+body, div, p,
+dl, dt, dd, ul, ol,
+h1, h2, h3, h4, h5, h6, 
+form {
+	margin: 0;
+	padding: 0;
+}
+body, div,span, p,
+dl, dt, dd, ul, ol,
+h1, h2, h3, h4, h5, h6, 
+form,img,abbr,em,i,ins,ol,ul,section {
+	-webkit-tap-highlight-color: transparent;
+}
+img, abbr {
+	border: none;
+}
+cite, em, i, ins {
+	font-style: normal;
+	font-weight: normal;
+}
+ol, ul {
+	list-style: none;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+}
+body {
+	word-break: break-all;
+}
+a, img {
+   -webkit-touch-callout:none;  /* 禁止长按链接与图片弹出菜单 */
+}
+input {
+	padding: 0;
+    margin: 0;
+	border:none;
+	outline: none;
+	-webkit-appearance: none;
+    -webkit-tap-highlight-color: rgba(255,255,255,0);
+}
+input, textarea {
+    -webkit-touch-callout: text;
+    -webkit-user-select: text;
+    user-select: text;
+}
+/*********************   common css   ******************************/
+a {
+	color: #252525;
+	text-decoration: none;
+	outline-style: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,.1);
+    -webkit-user-modify:read-only;     
+}
+a:hover {
+	text-decoration: none;
+}
+a img {
+	border: 0;
+}
+.fl {
+	float: left;
+}
+.fr {
+	float: right;
+}
+.clear { 
+	clear: both;
+}
+.tl {
+	text-align: left;
+}
+.tc {
+	text-align: center;
+}
+.db {
+	display: block;
+}
+.dlb { 
+	display: inline-block;
+}
+.ell {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.two-ell {
+	overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* number of lines to show */
+    -webkit-box-orient: vertical;
+}
+.three-ell {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* number of lines to show */
+    -webkit-box-orient: vertical;
+}
+.fw {
+	font-weight: bold;
+}
+
+

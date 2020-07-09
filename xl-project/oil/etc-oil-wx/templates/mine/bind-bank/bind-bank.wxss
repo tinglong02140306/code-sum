@@ -1,0 +1,110 @@
+.bind-bank-container{
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    box-sizing: border-box;
+}
+
+.bind-bank-box{
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    background-color: white; 
+    padding: 0 32rpx 0rpx 48rpx;
+    box-sizing: border-box;
+}
+
+.bind-bank-input{
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.bind-bank-next-icon{
+    width: 11rpx;
+    height: 22rpx;
+    margin-right: 10rpx;
+}
+
+.bank-type-list-box{
+    width: 100%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    padding-top: 10rpx;
+}
+
+.bank-type-item{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 30rpx 32rpx;
+}
+
+.bank-type-text{
+    font-size: 30rpx;
+    color: #000000;
+    letter-spacing: 2rpx;
+    margin: 0 50rpx;
+    justify-self: center;
+}
+
+.bank-type-image{
+    width: 32rpx;
+    height: 24rpx;
+}
+
+.bind-bank-button{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10rpx 32rpx 100rpx 32rpx;
+}
+
+.bind-bank-checkbox-box{
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 100rpx 0 0 0;
+    letter-spacing: 2rpx;
+}
+
+.bind-bank-checkbox-group{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-right: 4rpx;
+}
+
+.bind-bank-checkbox{
+    transform: scale(0.8,0.8);
+}
+
+.bind-back-agree-text{
+    font-size: 26rpx;
+    color: #000000;
+    position: relative;
+    /* left: -8rpx; */
+}
+
+.bind-bank-proxy-text{
+    font-size: 26rpx;
+    color: #08CC8A;
+    position: relative;
+    /* left: -8rpx; */
+}
+.bind-bank-input-line{
+    width: 100%;
+    height: 2rpx;
+    background-color: #F8F8F8;
+}

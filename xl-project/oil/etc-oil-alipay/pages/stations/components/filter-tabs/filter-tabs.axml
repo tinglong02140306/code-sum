@@ -1,0 +1,44 @@
+<!--
+ * @Author: sunmingmao
+ * @Date: 2020-04-20 08:51:56
+ * @LastEditors: longting
+ * @LastEditTime: 2020-05-20 09:42:09
+ * @Description: 油站 筛选条件
+ -->
+<view class="filter-tabs-container" catchTouchMove="preventTouchMove">
+    <view class="filter-tabs-top-container" style="height: {{tab_height}}rpx;">
+        <block a:for="{{list}}" a:key="menu">
+            <view class="filter-tabs-top-item" onTap="onMenuClick" data-item="{{index}}">
+                <text
+                    style="color:{{select_tab_index==index&&showMark?'#05BA7D':'rgba(0,0,0,.45)'}};">{{item.default_title}}</text>
+                <image class="filter-tabs-icon" mode="widthFix"
+                    src="{{select_tab_index==index&&showMark?icon_up:icon_pull}}"></image>
+            </view>
+        </block>
+    </view>
+    <view class="filter-mask-container" style="height: {{height}};top: {{tab_list_top}};" a:if="{{showMark}}"
+        onTap="onMarskClick">
+        <scroll-view class="filter-mask-box" scroll-y>
+            <!--垂直列表模式-->
+            <view class="filter-mask-v" a:if="{{mask_data.style==1}}">
+                <block a:for="{{mask_data.list}}" a:key="key" a:item="item" a:index="index">
+                    <view class="filter-mask-v-item" catchTap="onItemClick" data-item="{{item}}">
+                        <text
+                            style="color:{{mask_data.default_id==item.id?'#05BA7D':'rgba(0,0,0,.45)'}};">{{item.title}}</text>
+                        <image class="filter-mask-v-icon" a:if="{{mask_data.default_id==item.id}}" mode="widthFix"
+                            src="{{icon_check}}"></image>
+                    </view>
+                </block>
+            </view>
+            <!--横向列表模式-->
+            <view class="filter-mask-h" a:if="{{mask_data.style==2}}">
+                <block a:for="{{mask_data.list}}" a:key="key" a:item="item" a:index="index">
+                    <view class="filter-mask-h-item" catchTap="onItemClick" data-item="{{item}}">
+                        <text
+                            class="filter-mask-h-item-text {{mask_data.default_id==item.id?'check':'uncheck'}}">{{item.title}}</text>
+                    </view>
+                </block>
+            </view>
+        </scroll-view>
+    </view>
+</view>

@@ -1,0 +1,17 @@
+
+ <view class="invoice-result-container">
+     <view class="invoice-result-image-box">
+         <image class="invoice-result-image" src="{{result_image}}"></image>
+         <text class="invoice-result-text">{{result}}</text>
+     </view>
+
+     <view class="invoice-result-button">
+         <view class="invoice-result-theme-button" wx:if="{{isSuccess}}" bind:tap="onSeeInvoiceClick">查看发票</view>
+         <view class="invoice-result-theme-button" wx:if="{{!isSuccess}}" bind:tap="onResendClick">重新开具</view>
+     </view>
+     <view class="invoice-result-button">
+         <view class="invoice-result-disable-button" wx:if="{{isSuccess}}" bind:tap="onHistoryClick">开票历史</view>
+         <view class="invoice-result-disable-button" wx:if="{{!isSuccess}}" open-type="contact">联系客服</view>
+     </view>
+
+ </view>

@@ -1,0 +1,199 @@
+@import "./color.less";
+.layout[type='big'] {
+    .font-max {
+        font-size: @baseSize16 !important;
+    }
+    .font-min {
+        font-size: @baseSize14 !important;
+    }
+    
+    .ivu-menu, .ivu-menu-item {
+        font-size: @baseSize16;
+    }
+
+    .el-button {
+        font-size: @baseSize14 !important;
+    }
+    
+    .el-table {
+        font-size: @baseSize14;
+    }
+
+    .ivu-table  {
+        font-size: @baseSize14;
+        .ivu-checkbox-wrapper {
+            font-size: @baseSize14;
+        }
+    }
+    // .ivu-radio-wrapper,
+    // .ivu-btn,
+    // .ivu-btn-primary,
+    // .el-select-dropdown__item,
+    // .el-input input,
+    // .el-form-item label,
+    // .ivu-cascader-label,
+    // .ivu-cascader-menu-item {
+    //     font-size: @baseSize14 !important;
+    // }
+    
+    .el-pager li ,
+    // .ivu-form-item-label,
+    // .el-input__inner,
+    .el-pagination__total,
+    .el-pagination__jump{
+        font-size: @baseSize16;
+    }
+    .ivu-page li a,.ivu-page-total,.ivu-page-options-elevator{
+        font-size: @baseSize14;
+    }
+    #receiptDetails {
+        font-size: @baseSize14 !important;
+        .ivu-radio-wrapper {
+            font-size: @baseSize14 !important;
+        }
+        .ivu-checkbox-wrapper {
+            font-size: @baseSize14 !important;
+        }
+        .detail-title {
+            font-size: @baseSize16 !important;
+        }
+        .item {
+            .item-title {
+                font-size: @baseSize16 !important;
+            }
+        }
+    }
+    // el 弹框标题
+    .el-dialog__header {
+        .el-dialog__title {
+            font-size: @baseSize16;
+        }
+    }
+    // el 弹框样式覆盖
+    .el-dialog {
+        font-size: @baseSize14;
+        border-radius: 5px;
+        .el-dialog__header {
+            font-size: @baseSize16;
+            border-radius: 5px 5px 0 0;
+            border-bottom: 1px solid #ddd;
+            background-color: #fff;
+            .el-dialog__title,
+            .el-dialog__close {
+                color: @baseFontColor
+            }
+            .el-dialog__footer {
+                border-top: 1px solid #ddd;
+            }
+        }
+    }
+    // iview textarea 
+    .ivu-input-wrapper {
+        textarea.ivu-input {
+            font-size: @baseSize14;
+        }
+    }
+    #receiptConfig {
+        .el-dropdown {
+            font-size: @baseSize14;
+        }
+    }
+    
+    
+}
+.layout[type='normal'] {
+    .font-max {
+        font-size: @baseSize14 !important;
+    }
+    .font-min {
+        font-size: @baseSize12 !important;
+    }
+    
+    .ivu-menu, .ivu-menu-item {
+        font-size: @baseSize14;
+    }
+    
+    .el-button {
+        font-size: @baseSize12 !important;
+    }
+
+    .el-table {
+        font-size: @baseSize12;
+    }
+
+    .ivu-table  {
+        font-size: @baseSize12;
+        .ivu-checkbox-wrapper {
+            font-size: @baseSize12;
+        }
+    }
+    
+    .el-pager li ,
+    // .ivu-form-item-label,
+    // .el-input__inner,
+    .el-pagination__total,
+    .el-pagination__jump{
+        font-size: @baseSize14;
+    }
+    .ivu-page li a,.ivu-page-total,.ivu-page-options-elevator{
+        font-size: @baseSize12;
+    }
+    // .ivu-radio-wrapper,
+    // .ivu-btn,
+    // .ivu-btn-primary,
+    // .el-select-dropdown__item,
+    // .el-input input,
+    // .el-form-item label,
+    // .ivu-cascader-label,
+    // .ivu-cascader-menu-item {
+    //     font-size: @baseSize12 !important;
+    // }
+    #receiptDetails {
+        font-size: @baseSize12;
+        .ivu-radio-wrapper {
+            font-size: @baseSize12 !important;
+        }
+        .ivu-checkbox-wrapper {
+            font-size: @baseSize12 !important;
+        }
+        .detail-title {
+            font-size: @baseSize14;
+        }
+        .item {
+            .item-title {
+                font-size: @baseSize14;
+            }
+        }
+    }
+    // el 弹框标题
+    .el-dialog__header {
+        .el-dialog__title {
+            font-size: @baseSize14;
+        }
+    }
+    // iview textarea 
+    .ivu-input-wrapper {
+        textarea.ivu-input {
+            font-size: @baseSize12;
+        }
+    }
+
+    #receiptConfig {
+        .el-dropdown {
+            font-size: @baseSize12;
+        }
+    }
+}
+
+
+
+.layout[color='light'] {
+    .bg-header-base {
+        background: @baseColor;
+    }
+}
+.layout[color='dark'] {
+    .bg-header-base {
+        background: @baseDarkColor;
+    }
+}

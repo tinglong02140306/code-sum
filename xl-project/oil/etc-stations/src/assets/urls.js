@@ -1,0 +1,10 @@
+export const StationNavigation = 'https://oilmag.etcsd.com.cn/oilcoreserver/static//resource/icon-gas-navigation.png'
+export const StationBrandDefault = 'https://oilmag.etcsd.com.cn/oilcoreserver/static/resource/icon-logo-default.png'
+export const StationPhotoDefault = "https://oilmag.etcsd.com.cn/oilcoreserver/static/resource/icon-station.png"
+export const StationToMap = 'https://oilmag.etcsd.com.cn/oilcoreserver/static//resource/icon-gas-map.png'
+export const StationNavigator='https://oilmag.etcsd.com.cn/oilcoreserver/static/resource/icon-navigator.png'
+export const StationEmpty = 'https://oilmag.etcsd.com.cn/oilcoreserver/static/resource/icon-stations-empty.png'
+export const StationMap = 'https://oilmag.etcsd.com.cn/oilcoreserver/static//resource/icon-gas-map.png'
+export const PopDownRight = 'https://oilmag.etcsd.com.cn/oilcoreserver/static//resource/etc-popdown-right.png'
+export const PopDownUp = 'https://oilmag.etcsd.com.cn/oilcoreserver/static//resource/etc-popdown-up.png'
+export const PopDownDown = 'https://oilmag.etcsd.com.cn/oilcoreserver/static//resource/etc-popdown-down.png'

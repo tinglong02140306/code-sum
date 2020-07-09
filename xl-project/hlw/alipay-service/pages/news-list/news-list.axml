@@ -1,0 +1,41 @@
+<view a:if="{{loaded}}">
+	<block a:if="{{!logined}}">
+		<button class="login-btn" open-type="getUserInfo" bind:getuserinfo="onGetUserInfo">请先登录</button>
+	</block>
+	<block a:else>
+		<block>
+			<view class="head">
+				<button  class="active-btn-1" style="background-color:transparent;border:none;height:100rpx;line-height:100rpx;font-family: SourceHanSansCN-Normal;font-size:28rpx;color:rgb(135,141,156);" plain="{{true}}" data-idx="read" bindtap="readAll">一键标记已读</button>
+				<view class="ring"/>
+				<button  class="active-btn-2" style="background-color:transparent;border:none;height:100rpx;line-height:100rpx;font-family: SourceHanSansCN-Normal;font-size: 28rpx;color:rgb(135,141,156)" plain="{{true}}" data-idx="0" bindtap="clickTap" a:if="{{readStatus=='' || readStatus == '1'}}">仅显示未读</button>
+				<button  class="active-btn-2" style="background-color:transparent;border:none;height:100rpx;line-height:100rpx;font-family: SourceHanSansCN-Normal;font-size: 28rpx;color:rgb(135,141,156)" plain="{{true}}" data-idx="" a:if="{{readStatus == '0'}}" bindtap="clickTap">显示全部</button>
+			</view>
+			<block  a:if="{{list.length}}">
+				<!--内容-->
+				<scroll-view scroll-y bindscrolltolower="scrollToLower" a:if="{{loaded}}">
+					<view class="main">
+						<block  a:for="{{list}}">
+							<view class="scroll-view-item" bindtap="showDetail" data-item="{{item}}" data-id="{{item['msg_id']}}">
+								<image a:if="{{item['msg_type']=='1'}}" src="/images/news-photo.png" class="news-logo"/>
+								<image a:if="{{item['msg_type']=='2'}}" src="/images/news-edit.png" class="news-logo"/>
+								<text class="round" a:if="{{item['read_status']=='0' || !item['read_status']}}"/>
+								<view class="item-body">
+									<view class="item-body-title-box">
+										<view class="item-body-title" a:if="{{item['msg_type']=='1'}}">系统消息</view>
+										<view class="item-body-title" a:if="{{item['msg_type']=='2'}}">建议或投诉反馈</view>
+										<view class="item-body-title">{{item['gmt_create']}}</view>
+									</view>
+									<view class="item-body-subtitle">{{item['desc']}}</view>
+								</view>
+							</view>
+						</block>
+					</view>
+				</scroll-view>
+			</block>
+			<block a:else>
+				<view class="no-data">暂无消息~</view>
+			</block>
+		</block>
+	</block>
+	<!--标题导航-->
+</view>

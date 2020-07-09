@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="../../../../" >
+    <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <!-- 添加到主屏幕后，全屏显示 -->
+    <meta name="apple-touch-fullscreen" content="YES"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <!-- iphone 运行在全屏模式 -->
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="viewport" content="width=device-width"/>
+    <title>添加车辆</title>
+    <link rel="stylesheet" type="text/css" href="../css/base.css?__inline"/>
+    <link rel="stylesheet" type="text/css" href="../css/all.css?__inline"/>
+    <link rel="stylesheet" type="text/css" href="../css/add-car.css?__inline"/>
+</head>
+<body>
+    <div class="wrap car-add-wrap">   
+        <!-- 头部 -->
+        <header class="topic-bg">
+            <div class="header-item topic-bg">
+                <a href="javascript:void(0)" class="arrow-left header-back" data-bind="click: back"></a>
+                <span class="f36 cf title">添加车辆</span>
+            </div>
+        </header>  
+        <!-- 主要内容 -->
+        <div class="car-add-content top-7">
+            <!-- form表单 -->
+            <div class="car-add-form f30 bf">
+                <form id="carAddForm">
+                    <!-- 车牌号 -->
+                    <div class="palte-num clearfix">
+                        <span class="c3 tl in-label fl">车牌号</span>
+                        <div class="in-value fl clearfix">
+                            <span class="c3 f30 fl tl wan-span">皖</span>
+                            <input type="text" class="c3 f30 fl"  name="licensePlateNum" placeholder="输入车牌号码" maxlength="7"> 
+                        </div>
+                    </div>
+
+                    <!-- 发动机号 -->
+                    <div class="engine-num clearfix hide">
+                        <span class="c3 tl in-label fl">发动机号</span>
+                        <div class="in-value fl">
+                            <input type="text" class="f30 c3"  name="engineNum"  placeholder="请输入发动机号" maxlength="5">
+                        </div>
+                        
+                    </div>
+
+                    <!-- 车架号 -->
+                    <div class="frame-num clearfix">
+                        <span class="c3 tl in-label fl">车架号</span>
+                        <div class="in-value fl">
+                            <input type="text" class=" f30 c3 frameNum"   name="frameNum" placeholder="请输入车架号后4位" maxlength="4" >  
+                        </div>
+                    </div>
+
+                    <!-- 车辆类型 -->
+                    <div class="car-type-num clearfix">
+                        <span class="c3 tl in-label fl">车辆类型</span>
+                        <div class="car-type fl" data-index="1" data-bind="click: carTypeClick">
+                           <label class="car-text c3"> </label>
+                        </div>
+                    </div>
+                </form> 
+            </div>
+            <!-- 按钮 -->
+            <div class="btn-wrap">
+                <a href="javascript:void(0)" class="cf f36 tc btn-save-search" data-bind="click: saveSearchEvent">保存并查询</a>
+            </div>
+        </div>
+    </div>
+    <div class="car-type-wrap hide top-7">
+        <!-- 头部 -->
+        <header class="topic-bg">
+            <div class="header-item topic-bg">
+                <a href="javascript:void(0)" class="arrow-left header-back" data-index="2" data-bind="click: carTypeClick"></a>
+                <span class="f36 cf title">车辆类型</span>
+            </div>
+        </header>  
+        <div class="type-cont top-7"></div>
+    </div>
+    <div class="mark">
+        <div class="delete-mask">
+            <p>该车牌已被其他车主绑定，你确认取消之前的绑定后重新绑定吗？</p>
+            <div>
+                <span data-bind="click: cancel">取消</span>
+                <span data-bind="click: sureSaveCarInfo">重新绑定</span>
+            </div>
+        </div>
+    </div>
+</body>
+<script id="typeTempl" type="text/html">
+    {{each $data as item}}
+    {{if item.value == "02"}}
+        <a class="item flex select" href="javascript:void(null);" data-value="{{item.value}}" data-text="{{item.text}}">
+            <p class=" flex-one">{{item.text}}</p>
+            <i></i>
+        </a>
+    {{else if item.value != "02" && index == 0}} 
+        <a class="item flex select"  href="javascript:void(null);" data-value="{{item.value}}" data-text="{{item.text}}">
+            <p class=" flex-one">{{item.text}}</p>
+            <i></i>
+        </a>
+    {{else}} 
+        <a class="item flex"  data-value="{{item.value}}" data-text="{{item.text}}" href="javascript:void(null);">
+            <p class=" flex-one">{{item.text}}</p>
+            <i></i>
+        </a>
+    {{/if}}
+    {{/each}}
+</script>
+
+
+<script src="../lib/lib.js"></script>
+<script src="../app/add-car.js?__inline"></script>
+</html>

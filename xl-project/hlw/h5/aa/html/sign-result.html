@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- 添加到主屏幕后，全屏显示 -->
+    <meta name="apple-touch-fullscreen" content="YES" />
+    <meta name="format-detection" content="telephone=no" />
+    <!-- iphone 运行在全屏模式 -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+    <link href="./resources/css/base.css" rel="stylesheet" />
+    <link href="./resources/css/sign-result.css" rel="stylesheet" />
+    <script type="text/javascript" src="./resources/js/plugins/remCacul/remCacul.js"></script>
+    <title></title>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="content">
+            <div class="bg-wrap bg-alipay"></div>
+            <div class="info-item">
+                <label>签约号:</label>
+                <span class="sign-num"></span>
+            </div>
+            <div class="info-item">
+                <label>签约时间:</label>
+                <span class="valid-date"></span>
+            </div>
+            <div class="info-item">
+                <label>失效时间:</label>
+                <span class="invalid-date"></span>
+            </div>
+        </div>
+
+        <div class="btn-wrap alipay-btn-wrap hide">
+            <p>已同意<a onclick="javascript:ap.pushWindow('wxProtocal.html');">《支付宝缴费代扣协议》</a></p>
+            <span>返回</span>
+        </div>
+
+        <div class="btn-wrap wx-btn-wrap hide">
+            <p>已同意<a href="wxProtocal.html">《微信缴费代扣协议》</a></p>
+            <span>返回</span>
+        </div>
+    </div>
+    <script src="https://gw.alipayobjects.com/as/g/h5-lib/alipayjsapi/3.1.1/alipayjsapi.min.js"></script>
+    <script type="text/javascript" src="./resources/js/plugins/jquery/jquery-1.8.2.min.js"></script>
+    <script src="https://cdn.bootcss.com/vConsole/3.2.0/vconsole.min.js"></script>
+    <script type="text/javascript" src="./resources/js/util.js?t=<%=System.currentTimeMillis()%"></script>
+    <script type="text/javascript" src="./resources/js/sign-result.js?t=<%=System.currentTimeMillis()%"></script>
+</body>
+
+</html>

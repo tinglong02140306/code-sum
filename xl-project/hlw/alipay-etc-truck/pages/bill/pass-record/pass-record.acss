@@ -1,0 +1,58 @@
+.top-area{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  margin: 0 30rpx;
+  padding: 10rpx 0 50rpx;
+  border-bottom: 2rpx solid #eee;
+}
+.top-title{
+  font-size: 28rpx;
+  padding: 20rpx 0 10rpx;
+}
+.top-money{
+  font-size: 38rpx;
+  font-weight: bold;
+  padding: 10rpx 0;
+}
+.list{
+  width: 750rpx;
+  box-sizing: border-box;
+  padding: 0 30rpx;
+  display: flex;
+  flex-direction: column;
+  font-size: 28rpx;
+}
+.list-tile{
+  min-height: 80rpx;
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.tile-label{
+  flex: 0 0 150rpx;
+  color: #999;
+}
+.tile-val{
+  flex: 1;
+  margin-left: 20rpx;
+  color: #666;
+}
+.distance{
+  display: flex;
+  flex-direction: column;
+}
+.distance-item{
+  flex: 0 0 80rpx;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.split{
+  width: 100%;
+  height: 2rpx;
+  background-color: #eee;
+}

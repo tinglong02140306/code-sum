@@ -1,0 +1,3 @@
+<view class="identify-button-box" bind:tap="onIdentifyClick">
+    <text class="identify-text">{{value}}</text>
+</view>

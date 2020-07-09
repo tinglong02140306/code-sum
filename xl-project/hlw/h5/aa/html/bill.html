@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- 添加到主屏幕后，全屏显示 -->
+    <meta name="apple-touch-fullscreen" content="YES" />
+    <meta name="format-detection" content="telephone=no" />
+    <!-- iphone 运行在全屏模式 -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+    <link href="./resources/js/plugins/mescroll/mescroll.min.css" rel="stylesheet" />
+    <link href="./resources/js/plugins/swiper/swiper.min.css" rel="stylesheet" />
+    <link href="./resources/js/plugins/picker/picker.min.css" rel="stylesheet" />
+    <link href="./resources/css/base.css" rel="stylesheet" />
+    <link href="./resources/css/bill.css" rel="stylesheet" />
+    <script type="text/javascript" src="./resources/js/plugins/remCacul/remCacul.js"></script>
+    <title>通行账单</title>
+
+</head>
+
+<body>
+    <div id="wrapper" class="wrap mescroll">
+        <!-- 账单查询 -->
+        <div class="bill-search-wrap">
+            <p class="title pd3">通行账单查询</p>
+            <div class="con-item pd3 bor-bom">
+                <span class="">卡号</span>
+                <select id="cardNo" class="card-no"></select>
+            </div>
+            <div class="con-item pd3">
+                <span>账期</span>
+                <input id="time" class="time" type="text" value="">
+            </div>
+            <div class="btn-wrap">
+                <span>查询</span>
+            </div>
+        </div>
+        <!-- 账单列表 -->
+        <div class="bill-list-wrap">
+            <div id="tabWrap" class="tab-wrap">
+                <div class="tab-content">
+                    <!--分页器-->
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+            <div id="swiperContainer" class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div id="listWrap0" class="swiper-list-wrap"></div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div id="listWrap1" class="swiper-list-wrap"></div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div id="listWrap2" class="swiper-list-wrap"></div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div id="listWrap3" class="swiper-list-wrap"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://gw.alipayobjects.com/as/g/h5-lib/alipayjsapi/3.1.1/alipayjsapi.min.js"></script>
+    <!-- <script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script> -->
+    <script type="text/javascript" src="./resources/js/plugins/jquery/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="./resources/js/plugins/mescroll/mescroll.min.js"></script>
+    <script type="text/javascript" src="./resources/js/plugins/swiper/swiper.min.js"></script>
+    <script type="text/javascript" src="./resources/js/plugins/picker/picker.js"></script>
+    <script type="text/javascript" src="./resources/js/util.js"></script>
+    <script type="text/javascript" src="./resources/js/bill.js?t=<%=System.currentTimeMillis()%"></script>
+    <script src="https://cdn.bootcss.com/vConsole/3.2.0/vconsole.min.js"></script>
+</body>
+
+</html>

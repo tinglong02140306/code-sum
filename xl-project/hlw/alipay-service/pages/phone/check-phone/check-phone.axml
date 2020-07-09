@@ -1,0 +1,12 @@
+<view >
+    <view class="wrap">
+        <view class="tip-title">已绑定手机号</view>
+        <view class="phone">{{mobile}}</view>
+        <view class="tip-text">
+            绑定手机号将作为您身份验证的重要方式，请谨慎操作！
+        </view>
+    </view>
+    <view style="width:690rpx;padding:0 30rpx;">
+        <button class="btn bg-primary" onTap="next">更换手机号</button>
+    </view>
+</view>

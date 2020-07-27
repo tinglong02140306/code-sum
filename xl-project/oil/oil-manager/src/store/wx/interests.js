@@ -45,7 +45,7 @@ class InterestStore {
             page_num: page_num,
             page_size: page_size,
         }
-        http.post('/website/coupon/activity-query',params,response=>{
+        http.post('/website/equity/activity-query',null,response=>{
             this.activityList = response.data;
             // console.log(JSON.stringify(response.data))
             const pagination = {};
@@ -67,7 +67,7 @@ class InterestStore {
     @action addInterests(params){
         console.log(params);
         this.setShowLoadingPage(true);
-        http.post('/website/equity/equity-add',params,response=>{
+        http.postFile("/website/equity/equity-add",params,res=>{
             this.setShowLoadingPage(false);
             this.setIsShowDialog(false);
             message.info("添加成功");
@@ -76,8 +76,17 @@ class InterestStore {
             message.error(err);
             this.setShowLoadingPage(false);
         });
-    }
 
+        // http.post('/website/equity/equity-add',params,response=>{
+        //     this.setShowLoadingPage(false);
+        //     this.setIsShowDialog(false);
+        //     message.info("添加成功");
+        //     this.getInterestsList(1,15);
+        // },err=>{
+        //     message.error(err);
+        //     this.setShowLoadingPage(false);
+        // });
+    }
     
     //优惠权益删除
     @action deleteInterests(id){
@@ -96,9 +105,12 @@ class InterestStore {
 
     //优惠权益修改
     @action updateInterests(params){
-        console.log(params);
+        // console.log('params==',params);
+        for (var value of params.values()) {
+            console.log('params',value);
+        }
         this.setShowLoadingPage(true);
-        http.post('/website/equity/equity-update',params,response=>{
+        http.postFile("/website/equity/equity-update",params,res=>{
             this.setShowLoadingPage(false);
             this.setIsShowDialog(false);
             message.info("修改成功");
@@ -107,6 +119,18 @@ class InterestStore {
             message.error(err);
             this.setShowLoadingPage(false);
         });
+
+
+        // this.setShowLoadingPage(true);
+        // http.post('/website/equity/equity-update',params,response=>{
+        //     this.setShowLoadingPage(false);
+        //     this.setIsShowDialog(false);
+        //     message.info("修改成功");
+        //     this.getInterestsList(1,15);
+        // },err=>{
+        //     message.error(err);
+        //     this.setShowLoadingPage(false);
+        // });
     }
 
     //数据列表
@@ -127,7 +151,8 @@ class InterestStore {
                 return `总共 ${response.amount} 条数据`;
             }
             this.setPagination(pagination);
-            response.data&&response.data.map(item=>{item.key=item.id});
+            response.data&&response.data.map((item,index)=>{item.key = index;});
+            // response.data&&response.data.map(item=>{item.key=item.id});
             this.interestsList = response.data;
         },err=>{
             message.error(err);

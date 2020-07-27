@@ -1,19 +1,19 @@
 import React from 'react';
 import "./Order.scss";
-import {Input, Button, Table, DatePicker, Select, Icon, Modal,Popconfirm,message} from 'antd';
-import {observer, inject} from 'mobx-react';
+import { Input, Button, Table, DatePicker, Select, Icon, Modal, Popconfirm, message } from 'antd';
+import { observer, inject } from 'mobx-react';
 import ExportDialog from "../../../component/order/ExportDialog";
 import ExportResultDialog from "../../../component/order/ExportResultDialog";
 import OrderDialog from "../../../component/order/OrderDialog";
 import OrderChildrenDialog from "../../../component/order/OrderChildrenDialog";
 import moment from 'moment';
-import {isEmpty} from "../../../utils/isEmpty";
-import {isSpecialChart} from "../../../utils/isSpecialChart";
+import { isEmpty } from "../../../utils/isEmpty";
+import { isSpecialChart } from "../../../utils/isSpecialChart";
 
 let page_num = 0;
 let orderStore = {};
 let nowTime = moment();
-let startTime = moment().add(-7,'days');
+let startTime = moment().add(-7, 'days');
 
 @inject("orderStore")
 @observer
@@ -22,7 +22,7 @@ class Order extends React.Component {
     constructor() {
         super();
         this.state = {
-            user_mobile:'',
+            user_mobile: '',
             channel: 4,
             partner_id: "",
             user_id: "",
@@ -37,7 +37,7 @@ class Order extends React.Component {
             endOpen: false,
             collapsed: false,
             width: 0,
-            order_status:"",
+            order_status: "",
             selectedRowKeys: [],
             start_export: startTime,
             end_export: nowTime,
@@ -50,28 +50,28 @@ class Order extends React.Component {
     }
 
     fetch = () => {
-        const {etc_card_no,channel,user_mobile,start_date, end_date, partner_id, user_id, order_no, card_id, out_user_id, out_order_no, oil_type, terminal_id,order_status} = this.state;
-        this.props.orderStore.getOrderList(1, page_num, start_date, end_date, partner_id, order_no, card_id, out_user_id, out_order_no, oil_type, terminal_id,order_status,etc_card_no,channel,user_mobile);
+        const { etc_card_no, channel, user_mobile, start_date, end_date, partner_id, user_id, order_no, card_id, out_user_id, out_order_no, oil_type, terminal_id, order_status } = this.state;
+        this.props.orderStore.getOrderList(1, page_num, start_date, end_date, partner_id, order_no, card_id, out_user_id, out_order_no, oil_type, terminal_id, order_status, etc_card_no, channel, user_mobile);
         this.props.orderStore.getPartnerList();
     }
 
     handleTableChange = (pagination) => {
-        const pager = {...this.props.orderStore.pagination};
+        const pager = { ...this.props.orderStore.pagination };
         pager.current = pagination.current;
         this.props.orderStore.setPagination(pager);
-        const {etc_card_no,channel,user_mobile,start_date, end_date, partner_id, user_id, order_no, card_id, out_user_id, out_order_no, oil_type, terminal_id,order_status} = this.state;
-        this.props.orderStore.getOrderList(pager.current, page_num, start_date, end_date, partner_id, order_no, card_id, out_user_id, out_order_no, oil_type, terminal_id,order_status,etc_card_no,channel,user_mobile,);
+        const { etc_card_no, channel, user_mobile, start_date, end_date, partner_id, user_id, order_no, card_id, out_user_id, out_order_no, oil_type, terminal_id, order_status } = this.state;
+        this.props.orderStore.getOrderList(pager.current, page_num, start_date, end_date, partner_id, order_no, card_id, out_user_id, out_order_no, oil_type, terminal_id, order_status, etc_card_no, channel, user_mobile,);
     }
 
     //合作方ID
     onChangePartnerId = (e) => {
-        this.setState({partner_id: e.target.value});
+        this.setState({ partner_id: e.target.value });
     }
     onChangeBrandId = (value) => {
-        this.setState({partner_id: value});
+        this.setState({ partner_id: value });
     };
     selectBrandOption = () => {
-        const {partnerList} = this.props.orderStore;
+        const { partnerList } = this.props.orderStore;
         // console.log("brandList"+JSON.stringify(brandList))
         if (partnerList.length) {
             return partnerList && partnerList.map((item, index) => {
@@ -82,47 +82,47 @@ class Order extends React.Component {
     };
     //用户号
     onChangeUserId = (e) => {
-        this.setState({user_id: e.target.value});
+        this.setState({ user_id: e.target.value });
     }
     //消费订单号
     onChangeOrderNo = (e) => {
-        this.setState({order_no: e.target.value});
+        this.setState({ order_no: e.target.value });
     }
     //加油卡卡号
     onChangeCardId = (e) => {
-        this.setState({card_id: e.target.value});
+        this.setState({ card_id: e.target.value });
     }
     //手机号
     onChangeUserMobile = (e) => {
-        this.setState({user_mobile: e.target.value});
+        this.setState({ user_mobile: e.target.value });
     }
     //第三方用户号
     onChangeOutUserId = (e) => {
-        this.setState({out_user_id: e.target.value});
+        this.setState({ out_user_id: e.target.value });
     }
     //第三方订单号
     onChangeOutOrderNo = (e) => {
-        this.setState({out_order_no: e.target.value});
+        this.setState({ out_order_no: e.target.value });
     }
     //油品类型
     onChangeOilType = (value) => {
-        this.setState({oil_type: value});
+        this.setState({ oil_type: value });
     }
     //订单类型
-    onChangeOrderStatus =(value)=>{
-        this.setState({order_status:value});
+    onChangeOrderStatus = (value) => {
+        this.setState({ order_status: value });
     }
     //订单渠道
-    onChangeChannel =(value)=>{
-        this.setState({channel:value});
+    onChangeChannel = (value) => {
+        this.setState({ channel: value });
     }
     //终端号
     onChangeTerminalId = (e) => {
-        this.setState({terminal_id: e.target.value});
+        this.setState({ terminal_id: e.target.value });
     }
     //etc卡号
     onChangeEtcCardNo = (e) => {
-        this.setState({etc_card_no: e.target.value});
+        this.setState({ etc_card_no: e.target.value });
     }
 
     onChangeCollapse = () => {
@@ -133,7 +133,7 @@ class Order extends React.Component {
         //     pagination.pageSize = page_num-6;
         // }
         // this.props.orderStore.setPagination({pagination});
-        this.setState({collapsed: !this.state.collapsed});
+        this.setState({ collapsed: !this.state.collapsed });
     }
 
     disabledStartDate = (startValue) => {
@@ -192,7 +192,7 @@ class Order extends React.Component {
     }
     //查询
     onReach = () => {
-        const {terminal_id, partner_id, user_id, order_no, card_id, out_user_id, out_order_no} = this.state;
+        const { terminal_id, partner_id, user_id, order_no, card_id, out_user_id, out_order_no } = this.state;
         if (!isEmpty(terminal_id)) {
             if (isSpecialChart(terminal_id) || terminal_id.length > 20) {
                 Modal.error({
@@ -262,7 +262,7 @@ class Order extends React.Component {
     //重置
     onReset = () => {
         this.setState({
-            user_mobile:'',
+            user_mobile: '',
             channel: 0,
             partner_id: "",
             user_id: "",
@@ -275,14 +275,14 @@ class Order extends React.Component {
             start_date: null,
             end_date: null,
             endOpen: false,
-            order_status:"",
+            order_status: "",
             start_export: startTime,
             end_export: nowTime,
         });
     }
 
     onSelectChange = (selectedRowKeys) => {
-        this.setState({selectedRowKeys});
+        this.setState({ selectedRowKeys });
     }
     // //勾选导出
     // onExportSome = () => {
@@ -295,7 +295,7 @@ class Order extends React.Component {
     }
     //全部导出
     onExportAll = () => {
-        const {start_export,end_export,etc_card_no,channel,user_mobile,start_date, end_date, partner_id,  order_no, card_id, out_user_id, out_order_no, oil_type, terminal_id,order_status} = this.state;
+        const { start_export, end_export, etc_card_no, channel, user_mobile, start_date, end_date, partner_id, order_no, card_id, out_user_id, out_order_no, oil_type, terminal_id, order_status } = this.state;
         //
         // if (start_date != null){
         //     this.setState({
@@ -317,32 +317,32 @@ class Order extends React.Component {
 
     }
 
-    header=()=>{
-        const {isShowButtonLoading,orderList} = this.props.orderStore;
-        const {selectedRowKeys} = this.state;
-        return<div className="order-export-container-box">
+    header = () => {
+        const { isShowButtonLoading, orderList } = this.props.orderStore;
+        const { selectedRowKeys } = this.state;
+        return <div className="order-export-container-box">
             <div className="order-export-container">
                 {/*<Button type="primary"*/}
-                        {/*className="export-button"*/}
-                        {/*loading={isShowButtonLoading}*/}
-                        {/*onClick={this.onExportAll }*/}
-                        {/*disabled={!orderList.length}*/}
-                        {/*style={{width: 100, marginRight: 10}}>全部导出</Button>*/}
+                {/*className="export-button"*/}
+                {/*loading={isShowButtonLoading}*/}
+                {/*onClick={this.onExportAll }*/}
+                {/*disabled={!orderList.length}*/}
+                {/*style={{width: 100, marginRight: 10}}>全部导出</Button>*/}
                 {/*<Button type="primary" style={{width: 100}}*/}
-                        {/*onClick={this.onExportSome}*/}
-                        {/*disabled={selectedRowKeys.length === 0 ? true : false}>勾选导出</Button>*/}
+                {/*onClick={this.onExportSome}*/}
+                {/*disabled={selectedRowKeys.length === 0 ? true : false}>勾选导出</Button>*/}
                 <Button type="primary"
-                        className="export-button"
-                        loading={isShowButtonLoading}
-                        onClick={this.onExportAll }
-                        disabled={!orderList.length}
-                        style={{width: 100, marginRight: 10}}>导出</Button>
+                    className="export-button"
+                    loading={isShowButtonLoading}
+                    onClick={this.onExportAll}
+                    disabled={!orderList.length}
+                    style={{ width: 100, marginRight: 10 }}>导出</Button>
                 <Button type="primary"
-                        className="export-button"
-                        // loading={isShowButtonLoading}
-                        onClick={this.onExportDownload }
-                        disabled={!orderList.length}
-                        style={{width: 100, marginRight: 10}}>文件下载</Button>
+                    className="export-button"
+                    // loading={isShowButtonLoading}
+                    onClick={this.onExportDownload}
+                    disabled={!orderList.length}
+                    style={{ width: 100, marginRight: 10 }}>文件下载</Button>
                 <div className="order-export-label-text">注：壳牌显示为红色(总金额=应付金额，折扣金额=信联折扣)</div>
             </div>
             <div className="order-export-text">（导出：由于数据量较大，请先去生成导出文件，然后去"文件下载"下载生成的文件。） </div>
@@ -352,8 +352,8 @@ class Order extends React.Component {
     }
 
     render() {
-        const {isShowExportResultDialog,isShowExportDialog,isShowOrderLoading, orderList, isShowOrderDialog, isShowOrderChildrenDialog, pagination,partnerList} = this.props.orderStore;
-        const {etc_card_no,channel,user_mobile,partner_id,selectedRowKeys, order_status,terminal_id, collapsed, start_date, end_date, order_no, card_id, out_user_id, out_order_no, oil_type, endOpen} = this.state;
+        const { isShowExportResultDialog, isShowExportDialog, isShowOrderLoading, orderList, isShowOrderDialog, isShowOrderChildrenDialog, pagination, partnerList } = this.props.orderStore;
+        const { etc_card_no, channel, user_mobile, partner_id, selectedRowKeys, order_status, terminal_id, collapsed, start_date, end_date, order_no, card_id, out_user_id, out_order_no, oil_type, endOpen } = this.state;
         orderStore = this.props.orderStore;
         const rowSelection = {
             selectedRowKeys,
@@ -370,42 +370,43 @@ class Order extends React.Component {
                                     <Select
                                         size="small"
                                         value={channel}
-                                        style={{width: 150}}
+                                        style={{ width: 150 }}
                                         onChange={this.onChangeChannel}>
                                         <Select.Option value={0}>企业加油</Select.Option>
                                         <Select.Option value={1}>e-高速</Select.Option>
                                         <Select.Option value={2}>微信会员卡</Select.Option>
                                         <Select.Option value={3}>ETC加油</Select.Option>
-                                        <Select.Option value={4}>小程序二维码</Select.Option>
+                                        <Select.Option value={4}>微信二维码</Select.Option>
                                         <Select.Option value={5}>聚合码</Select.Option>
                                         <Select.Option value={7}>ETC无感</Select.Option>
-                                        <Select.Option value={8}>一键加油</Select.Option>
-                                        <Select.Option value={9}>支付宝</Select.Option>
+                                        <Select.Option value={8}>微信一键加油</Select.Option>
+                                        <Select.Option value={9}>支付宝二维码</Select.Option>
+                                        <Select.Option value={10}>支付宝一键加油</Select.Option>
                                     </Select>
                                 </div>
                                 {/*<div className="order-input-container">*/}
-                                    {/*<div>手机号:</div>*/}
-                                    {/*<Input size="small"*/}
-                                           {/*value={user_mobile}*/}
-                                           {/*maxLength={9}*/}
-                                           {/*style={{width: 150, margin: 0}}*/}
-                                           {/*onChange={this.onChangeUserMobile}/>*/}
+                                {/*<div>手机号:</div>*/}
+                                {/*<Input size="small"*/}
+                                {/*value={user_mobile}*/}
+                                {/*maxLength={9}*/}
+                                {/*style={{width: 150, margin: 0}}*/}
+                                {/*onChange={this.onChangeUserMobile}/>*/}
                                 {/*</div>*/}
                                 <div className="order-input-container">
                                     <div>加油卡卡号:</div>
                                     <Input size="small"
-                                           value={card_id}
-                                           style={{width: 150, margin: 0}}
-                                           maxLength={20}
-                                           onChange={this.onChangeCardId}/>
+                                        value={card_id}
+                                        style={{ width: 150, margin: 0 }}
+                                        maxLength={20}
+                                        onChange={this.onChangeCardId} />
                                 </div>
                                 <div className="order-input-container">
                                     <div>消费订单号:</div>
                                     <Input size="small"
-                                           value={order_no}
-                                           style={{width: 150, margin: 0}}
-                                           maxLength={30}
-                                           onChange={this.onChangeOrderNo}/>
+                                        value={order_no}
+                                        style={{ width: 150, margin: 0 }}
+                                        maxLength={30}
+                                        onChange={this.onChangeOrderNo} />
                                 </div>
                             </div>
                             <div className="order-search-first">
@@ -414,7 +415,7 @@ class Order extends React.Component {
                                     <Select
                                         size="small"
                                         value={order_status}
-                                        style={{width: 150}}
+                                        style={{ width: 150 }}
                                         onChange={this.onChangeOrderStatus}>
                                         <Select.Option value="">无</Select.Option>
                                         <Select.Option value="00">订单创建</Select.Option>
@@ -438,7 +439,7 @@ class Order extends React.Component {
                                         value={start_date}
                                         placeholder="开始日期"
                                         onChange={this.onStartChange}
-                                        className="order-data-picker"/>
+                                        className="order-data-picker" />
                                 </div>
                                 <div className="order-input-container">
                                     <div>&nbsp;&nbsp;&nbsp;&nbsp;结束日期:</div>
@@ -449,44 +450,44 @@ class Order extends React.Component {
                                         value={end_date}
                                         placeholder="结束日期"
                                         onChange={this.onEndChange}
-                                        className="order-data-picker"/>
+                                        className="order-data-picker" />
                                 </div>
                                 <div onClick={this.onChangeCollapse} className="order-more">
                                     <a>更多</a>
-                                    <Icon type={collapsed ? "up" : "down"} style={{marginRight: 5}}/>
+                                    <Icon type={collapsed ? "up" : "down"} style={{ marginRight: 5 }} />
                                 </div>
                             </div>
                         </div>
-                        <div className="order-search-open" style={{display: collapsed ? "flex" : "none"}}>
-                            <div className="order-search-first" style={{visibility: channel!==0&&channel!==3 ? "visible" : "hidden",width: channel!==0&&channel!==3 ? "100%" : "0",height: channel!==0&&channel!==3 ? "100%" : "0"}}>
+                        <div className="order-search-open" style={{ display: collapsed ? "flex" : "none" }}>
+                            <div className="order-search-first" style={{ visibility: channel !== 0 && channel !== 3 ? "visible" : "hidden", width: channel !== 0 && channel !== 3 ? "100%" : "0", height: channel !== 0 && channel !== 3 ? "100%" : "0" }}>
                                 <div className="order-input-container">
                                     <div>终端编号:</div>
                                     <Input size="small"
-                                           value={terminal_id}
-                                           style={{width: 150, margin: 0}}
-                                           maxLength={20}
-                                           onChange={this.onChangeTerminalId}/>
+                                        value={terminal_id}
+                                        style={{ width: 150, margin: 0 }}
+                                        maxLength={20}
+                                        onChange={this.onChangeTerminalId} />
                                 </div>
                                 <div className="order-input-container">
                                     <div>ETC卡号:</div>
                                     <Input size="small"
-                                           value={etc_card_no}
-                                           style={{width: 150, margin: 0}}
-                                           maxLength={50}
-                                           onChange={this.onChangeEtcCardNo}/>
+                                        value={etc_card_no}
+                                        style={{ width: 150, margin: 0 }}
+                                        maxLength={50}
+                                        onChange={this.onChangeEtcCardNo} />
                                 </div>
                             </div>
                         </div>
 
-                        <div className="order-search-open" style={{display: collapsed ? "none" : "flex"}} >
-                            <div className="order-search-first" style={{visibility: channel===0 ? "visible" : "hidden",width: channel===0 ? "100%" : "0",height: channel===0 ? "100%" : "0"}}>
+                        <div className="order-search-open" style={{ display: collapsed ? "none" : "flex" }} >
+                            <div className="order-search-first" style={{ visibility: channel === 0 ? "visible" : "hidden", width: channel === 0 ? "100%" : "0", height: channel === 0 ? "100%" : "0" }}>
                                 <div className="order-input-container">
                                     <div>终端编号:</div>
                                     <Input size="small"
-                                           value={terminal_id}
-                                           style={{width: 150, margin: 0}}
-                                           maxLength={20}
-                                           onChange={this.onChangeTerminalId}/>
+                                        value={terminal_id}
+                                        style={{ width: 150, margin: 0 }}
+                                        maxLength={20}
+                                        onChange={this.onChangeTerminalId} />
                                 </div>
                                 <div className="order-input-special">
                                     <div className="order-input-hint">合作方:</div>
@@ -494,7 +495,7 @@ class Order extends React.Component {
                                         size="small"
                                         defaultValue={partner_id}
                                         value={partner_id}
-                                        style={{width: 150}}
+                                        style={{ width: 150 }}
                                         onChange={this.onChangeBrandId}>
                                         {this.selectBrandOption()}
                                     </Select>
@@ -502,15 +503,15 @@ class Order extends React.Component {
                                 <div className="order-input-container">
                                     <div>第三方订单号:</div>
                                     <Input size="small"
-                                           value={out_order_no}
-                                           style={{width: 150, margin: 0}}
-                                           maxLength={50}
-                                           onChange={this.onChangeOutOrderNo}/>
+                                        value={out_order_no}
+                                        style={{ width: 150, margin: 0 }}
+                                        maxLength={50}
+                                        onChange={this.onChangeOutOrderNo} />
                                 </div>
                             </div>
                             {/*<div className="order-search-first" style={{visibility: channel==0 ? "visible" : "hidden",width: channel===0 ? "100%" : "0",height: channel===0 ? "100%" : "0"}}>*/}
 
-                            <div className="order-search-first" style={{visibility: channel===3 ? "visible" : "hidden",width: channel===3 ? "100%" : "0",height: channel===3 ? "100%" : "0"}}>
+                            <div className="order-search-first" style={{ visibility: channel === 3 ? "visible" : "hidden", width: channel === 3 ? "100%" : "0", height: channel === 3 ? "100%" : "0" }}>
                                 {/*<div className="order-input-special">*/}
                                 {/*<div className="order-input-hint">油品类型:*/}
                                 {/*</div>*/}
@@ -527,19 +528,19 @@ class Order extends React.Component {
                                 <div className="order-input-container">
                                     <div>终端编号:</div>
                                     <Input size="small"
-                                           value={terminal_id}
-                                           style={{width: 150, margin: 0}}
-                                           maxLength={20}
-                                           onChange={this.onChangeTerminalId}/>
+                                        value={terminal_id}
+                                        style={{ width: 150, margin: 0 }}
+                                        maxLength={20}
+                                        onChange={this.onChangeTerminalId} />
                                 </div>
 
                                 <div className="order-input-container">
                                     <div>ETC卡号:</div>
                                     <Input size="small"
-                                           value={etc_card_no}
-                                           style={{width: 150, margin: 0}}
-                                           maxLength={50}
-                                           onChange={this.onChangeEtcCardNo}/>
+                                        value={etc_card_no}
+                                        style={{ width: 150, margin: 0 }}
+                                        maxLength={50}
+                                        onChange={this.onChangeEtcCardNo} />
                                 </div>
                             </div>
 
@@ -547,14 +548,14 @@ class Order extends React.Component {
                     </div>
                     <div className="order-btn-container">
                         <Button type="primary"
-                                size="small"
-                                disabled={isShowOrderLoading ? true : false}
-                                style={{marginBottom: 5, width: 80}}
-                                onClick={this.onReach}>查询</Button>
+                            size="small"
+                            disabled={isShowOrderLoading ? true : false}
+                            style={{ marginBottom: 5, width: 80 }}
+                            onClick={this.onReach}>查询</Button>
                         <Button type="primary"
-                                size="small"
-                                style={{width: 80}}
-                                onClick={this.onReset}>重置</Button>
+                            size="small"
+                            style={{ width: 80 }}
+                            onClick={this.onReset}>重置</Button>
                     </div>
                 </div>
                 <div className="order-table-container">
@@ -563,20 +564,20 @@ class Order extends React.Component {
                         bordered
                         size="small"
                         // columns={columns}
-                        columns={localStorage.getItem('partner_id')==='null'?columns:columns2}
+                        columns={localStorage.getItem('partner_id') === 'null' ? columns : columns2}
                         loading={isShowOrderLoading}
                         dataSource={orderList}
-                        scroll={{x: '120%'}}
+                        scroll={{ x: '120%' }}
                         pagination={pagination}
                         onChange={this.handleTableChange}
                         // rowSelection={rowSelection}
-                        rowClassName={(record, index) => record.model_flag ===2?'row-class':''}
-                        title={this.header}/>
+                        rowClassName={(record, index) => record.model_flag === 2 ? 'row-class' : ''}
+                        title={this.header} />
                 </div>
-                {isShowOrderDialog ? <OrderDialog/> : null}
-                {isShowOrderChildrenDialog ? <OrderChildrenDialog/> : null}
-                {isShowExportDialog ? <ExportDialog/> : null}
-                {isShowExportResultDialog ? <ExportResultDialog/> : null}
+                {isShowOrderDialog ? <OrderDialog /> : null}
+                {isShowOrderChildrenDialog ? <OrderChildrenDialog /> : null}
+                {isShowExportDialog ? <ExportDialog /> : null}
+                {isShowExportResultDialog ? <ExportResultDialog /> : null}
             </div>
         );
     }
@@ -1438,7 +1439,7 @@ const columns = [
                 margin: 0
             }}>{record}</p>);
         },
-    },{
+    }, {
         title: '订单状态',
         dataIndex: 'order_status',
         key: 'order_status',
@@ -1450,21 +1451,21 @@ const columns = [
                 orderStatus = "订单创建";
             } else if (record === "01") {
                 orderStatus = "支付成功";
-            }else if (record === "02") {
+            } else if (record === "02") {
                 orderStatus = "支付失败";
-            }else if (record === "03") {
+            } else if (record === "03") {
                 orderStatus = "消费成功";
             } else if (record === "04") {
                 orderStatus = "消费失败";
             } else if (record === "05") {
                 orderStatus = "订单取消";
-            }else if (record === "06") {
+            } else if (record === "06") {
                 orderStatus = "冲正成功";
-            }else if (record === "07") {
+            } else if (record === "07") {
                 orderStatus = "冲正失败";
-            }else if (record === "08") {
+            } else if (record === "08") {
                 orderStatus = "撤销失败";
-            }else if (record === "09") {
+            } else if (record === "09") {
                 orderStatus = "订单退款";
             }
             return (<p style={{
@@ -1495,9 +1496,9 @@ const columns = [
                 payWay = "微信支付";
             } else if (record === "05") {
                 payWay = "合作方支付";
-            }else if (record === "07") {
+            } else if (record === "07") {
                 payWay = "微信车主";
-            }else if (record === "08") {
+            } else if (record === "08") {
                 payWay = "建行龙支付";
             }
             return (<p style={{
@@ -1601,7 +1602,7 @@ const columns = [
                 oilType = "汽油";
             } else if (record === '1') {
                 oilType = "柴油";
-            }else {
+            } else {
                 oilType = "--"
             }
             return (<p style={{
@@ -1773,7 +1774,7 @@ const columns = [
                 margin: 0
             }}>{record}</p>);
         },
-    },{
+    }, {
         title: 'ETC卡号',
         dataIndex: 'etc_card_no',
         key: 'etc_card_no',
@@ -1836,7 +1837,7 @@ const columns = [
                     onConfirm={() => {
                         orderStore.billFixPrintTicket(record.order_no)
                     }}>
-                    <a><Icon type="form" style={{marginRight: 2}}/>打印</a>
+                    <a><Icon type="form" style={{ marginRight: 2 }} />打印</a>
                 </Popconfirm>
             </div>);
         },
@@ -1859,7 +1860,7 @@ const columns = [
                 onClick={() => {
                     orderStore.setIsShowOrderDialog(true);
                     orderStore.setOrderChildrenObject(record);
-                }}><a><Icon type="eye-o" style={{marginRight: 2, color: '#1890ff'}}/>查看</a></div>);
+                }}><a><Icon type="eye-o" style={{ marginRight: 2, color: '#1890ff' }} />查看</a></div>);
         },
     },
 ];
@@ -1879,7 +1880,7 @@ const columns2 = [
                 margin: 0
             }}>{record}</p>);
         },
-    },{
+    }, {
         title: '订单状态',
         dataIndex: 'order_status',
         key: 'order_status',
@@ -1891,21 +1892,21 @@ const columns2 = [
                 orderStatus = "订单创建";
             } else if (record === "01") {
                 orderStatus = "支付成功";
-            }else if (record === "02") {
+            } else if (record === "02") {
                 orderStatus = "支付失败";
-            }else if (record === "03") {
+            } else if (record === "03") {
                 orderStatus = "消费成功";
             } else if (record === "04") {
                 orderStatus = "消费失败";
             } else if (record === "05") {
                 orderStatus = "订单取消";
-            }else if (record === "06") {
+            } else if (record === "06") {
                 orderStatus = "冲正成功";
-            }else if (record === "07") {
+            } else if (record === "07") {
                 orderStatus = "冲正失败";
-            }else if (record === "08") {
+            } else if (record === "08") {
                 orderStatus = "撤销失败";
-            }else if (record === "09") {
+            } else if (record === "09") {
                 orderStatus = "订单退款";
             }
             return (<p style={{
@@ -1936,9 +1937,9 @@ const columns2 = [
                 payWay = "微信支付";
             } else if (record === "05") {
                 payWay = "合作方支付";
-            }else if (record === "07") {
+            } else if (record === "07") {
                 payWay = "微信车主";
-            }else if (record === "08") {
+            } else if (record === "08") {
                 payWay = "建行龙支付";
             }
             return (<p style={{
@@ -2042,7 +2043,7 @@ const columns2 = [
                 oilType = "汽油";
             } else if (record === '1') {
                 oilType = "柴油";
-            }else {
+            } else {
                 oilType = "--"
             }
             return (<p style={{
@@ -2214,7 +2215,7 @@ const columns2 = [
                 margin: 0
             }}>{record}</p>);
         },
-    },{
+    }, {
         title: 'ETC卡号',
         dataIndex: 'etc_card_no',
         key: 'etc_card_no',
@@ -2248,7 +2249,7 @@ const columns2 = [
                 onClick={() => {
                     orderStore.setIsShowOrderDialog(true);
                     orderStore.setOrderChildrenObject(record);
-                }}><a><Icon type="eye-o" style={{marginRight: 2, color: '#1890ff'}}/>查看</a></div>);
+                }}><a><Icon type="eye-o" style={{ marginRight: 2, color: '#1890ff' }} />查看</a></div>);
         },
     },
 ];

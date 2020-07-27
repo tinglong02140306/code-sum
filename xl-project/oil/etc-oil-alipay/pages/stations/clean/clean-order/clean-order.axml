@@ -85,7 +85,6 @@
                 <text class="fast-order-preferent-header-text">优惠券</text>
                 <image class="fast-order-preferent-header-image" src="{{close_icon}}" onTap="onCloseClick"></image>
             </view>
-            <!-- <scroll-view class="fast-order-preferent-list" scroll-y style="height:{{isIphoneX?860:730}}rpx"></scroll-view> -->
             <view style="height:{{isIphoneX?860:730}}rpx;overflow-y: auto">
                 <perferent-container list="{{perferentList}}" onCheckPergerent="onCheckPergerent"></perferent-container>
             </view>

@@ -1,4 +1,5 @@
 import { getAuthCode } from "./utils/login";
+import { getQueryString } from "./utils/util";
 import { OPENID, CODE_WASHER } from './constants/global';
 App({
     onLaunch(options) {
@@ -58,16 +59,25 @@ App({
         }
     },
     onShow(options) {
+        console.log('options onshow', JSON.stringify(options))
         let scene = options.scene;
-        if (scene === 1047 || scene === 1048 || scene === 1049) {
+        if (scene == 1011) {
             //扫码进入小程序停车确认页面
             my.setStorageSync({key: CODE_WASHER, data: true});
+            if (options && options.query && options.query.qrCode) {
+                let url = options.query.qrCode.split("?")[1],
+                    id = getQueryString(url, 'id'),
+                    marketCode = getQueryString(url, 'marketCode');
+                console.log(id, marketCode)
+                my.setStorageSync({key: 'marketCode', data: marketCode});
+                my.setStorageSync({key: 'WASHID', data: id});
+            }
         }else {
             my.setStorageSync({key: CODE_WASHER, data: false});
         }
         // TODO
         // my.setStorageSync({ key: 'avatar', data: "https://tfs.alipayobjects.com/images/partner/T1d.xCXotaXXXXXXXX" });
         // my.setStorageSync({ key: 'nickName', data: "polly" });
-        // my.setStorageSync({ key: OPENID, data: "OTNlZTA5MjdjMzk1NDdkNWFhOWJiM2ZlMjgyNFlYNjU="})
+        my.setStorageSync({ key: OPENID, data: "YWE4NmNiNTNmNTY5NGY3MmI5OTlhZGUzNTUyNlNYNzQ="})
     }
 });

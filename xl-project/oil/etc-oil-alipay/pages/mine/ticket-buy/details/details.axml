@@ -8,7 +8,9 @@
         <view class="ticket-card-details-info-top">
             <!--新用户乐透券包-->
             <text class="ticket-card-details-name-text">{{details.package_name}}</text>
-            <view class="ticket-card-details-discount-value">{{details.discount_rate}}折</view>
+            <!-- <view class="ticket-card-details-discount-value">{{details.discount_rate}}折</view> -->
+            <view class="ticket-card-details-discount-value" a:if="{{(!details.time_limit_flag && !details.count_limit_flag)}}">{{item.discount_rate}}折</view>
+            <view class="ticket-card-details-discount-value icon-buy-bg" a:else>抢购</view>
         </view>
         <view class="ticket-card-details-info-top-2">
             <text class="ticket-card-details-count-text">含{{details.coupon_count}}张洗车券</text>
@@ -23,7 +25,36 @@
         <text class="ticket-card-details-info-title">{{details.package_name}}</text>
         <!--水蜡精洗4次，有效期365天-->
         <text class="ticket-card-details-info-sub">{{details.description}}</text>
+        <view class="ticket-panic-buy" a:if="{{(details.time_limit_flag && details.leftTime > 0) || details.count_limit_flag}}">
+            <view class="left">
+                <view a:if="{{details.time_limit_flag}}">
+                    <image class="icon-clock" src="/assets/static/icon-clock.png"></image>
+                    <text class="notice">距离活动结束</text>
+                    <text class="time">{{item.showTime}}</text>
+                </view>
+                <view a:else>
+                        <image class="icon-clock" src="/assets/static/icon-clock.png"></image>
+                    <text class="notice">不限时抢购</text>
+                </view>
+            </view>
+            <view class="right">
+                <view a:if="{{details.count_limit_flag}}" style="display: flex;">
+                    <text style="color: #a0a0a0;">已抢购{{details.saled_count}}</text>
+                    <view class="rate-wrap">
+                        <view class="top" style="width: {{(details.saled_count / details.total_count)* 100}}%;"></view>
+                    </view>
+                </view>
+            </view>
+        </view>
     </view>
+    <!-- 抢购倒计时 -->
+    <view class="ticket-card-details-info-box"> 
+        
+    </view>
+    
+    
+
+
     <view class="ticket-buy-details-station-container">
         <!--适用站点-->
         <view class="ticket-buy-details-station" a:if="{{!isEmptyList}}">

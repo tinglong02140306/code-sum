@@ -20,18 +20,24 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    // align-items: center;
     padding: 20px 0;
 }
 
-.ticket-bag-create-content-box{
+.ticket-bag-create-warpper {
     display: flex;
+}
+
+.ticket-bag-create-content-box {
+    display: flex;
+    flex: 1;
     flex-direction: column;
-    justify-content: center;
+    // justify-content: center;
     align-items: center;
     box-sizing: border-box;
-    padding-left: 10%;
-    .ant-form-item-with-help{
+    padding-left: 5%;
+    width: 45%;
+    .ant-form-item-with-help {
         margin-bottom: 0;
     }
 }
@@ -52,49 +58,98 @@
         font-weight: bolder;
         min-width: 138px;
         margin-right: 10px;
-    } 
+    }
 }
 
-.margin-input{
-    .ant-input-number{
+.margin-input {
+    .ant-input-number {
         margin-right: 6px;
     }
-    input{
+    input {
         margin: 0 6px;
     }
 }
 
-.ticket-bag-create-box-item-btns{
+.ticket-bag-create-box-item-btns {
     width: 100%;
     text-align: center;
-    button{
+    button {
         margin: 16px 10px 0 10px;
     }
 }
 
 .other {
     padding-left: 0;
-    .ant-form-item-control{
+    .ant-form-item-control {
         min-width: 300px;
     }
 }
 
-.number{
-    input{
+.number {
+    input {
         width: 100px;
     }
 }
 
-#hint{
+#hint {
     color: #ffa515;
     margin-left: 4px;
 }
 
-.ticket-bag-create-box-item-detail{
+.ticket-bag-create-box-item-detail {
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
     white-space: nowrap;
+}
+
+.tree-drop-wrap {
+    height: 300px;
+}
+
+.datepicker-line,
+.timePicker-line {
+    color: #d9d9d9;
+    margin: 0 5px;
+}
+
+.date-picker-wrap {
+    display: inline-block;
+}
+
+.radio-input-wrap {
+    display: flex;
+}
+
+.ticket-num-input-wrap {
+    .ant-input-number {
+        width: 200px;
+    }
+    span {
+        margin-left: 5px;
+    }
+}
+
+.err-msg {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: middle;
+    margin: 0px 10px;
+}
+
+.tip-msg {
+    position: relative;
+    top: -15px;
+    color: rgb(245, 34, 45);
+}
+
+.title {
+    font-weight: bold;
+}
+
+.ticket-num-input-wrap {
+    position: relative;
+    top: -10px;
 }

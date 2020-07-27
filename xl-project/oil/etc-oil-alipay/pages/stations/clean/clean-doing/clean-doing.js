@@ -27,12 +27,14 @@ Page({
         washer_id: '',
         order_no: '',
         isFinish: false,
-        rangeHeight: '80px'
+        rangeHeight: '80px',
+        isCanStop: true
     },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad(options) {
+        // this.isCanStop({washer_id: '18'});
         try {
             this.dealStyleData();
             params = JSON.parse(decodeURIComponent(options.params));
@@ -42,11 +44,15 @@ Page({
                 order_no: params.order_no,
                 start_time: params.start_time,
             });
+            // 查询洗车机有没有 停止的功能
+            this.isCanStop({washer_id: params.washer_id});
             if (params.start_time) {
                 this.computationTime(params.start_time);
             } else {
                 this.getSetTimer();
-                this.getWasherTimer();
+                setTimeout(()=> {
+                    this.getWasherTimer();
+                },10000)
             }
         } catch (error) {
             console.log(error)
@@ -54,7 +60,6 @@ Page({
                 url: '/pages/home/index/index'
             });
         }
-
     },
     /**
      * 生命周期函数--监听页面显示
@@ -112,18 +117,39 @@ Page({
             }
         });
     },
+    // 查询洗车机能否立即停止
+    isCanStop(params) {
+        getHttpPost(cleanApi.queryCanStop, params, res => {
+            console.log(res)
+            hideLoading();
+            if (res.result_code === "00000") {
+                this.setData({
+                    isCanStop: res.can_stop ? true : false
+                })
+            }
+        }, err => {
+            hideLoading();
+            showToast(err.msg);
+        });
+
+    },
     onConfirmClick() {
         let that = this;
-        my.confirm({
-            title: '提示',
-            content: '确定要停止洗车机吗？',
-            confirmColor: '#05BA7D',
-            success(res) {
-                if (!that.data.isFinish && res.confirm) {
-                    that.stopWasher();
+        if(!this.data.isCanStop) {
+            my.makePhoneCall({ number: '4008609599' });
+        } else {
+            my.confirm({
+                title: '提示',
+                content: '确定要停止洗车机吗？',
+                confirmColor: '#05BA7D',
+                success(res) {
+                    if (!that.data.isFinish && res.confirm) {
+                        that.stopWasher();
+                    }
                 }
-            }
-        });
+            });
+        }
+        
     },
 
     onBackClick() {
@@ -171,7 +197,10 @@ Page({
                 stopTime: 480000 - alreadyTime[4] * 60 * 1000 - alreadyTime[4] * 1000,
             })
             this.getSetTimer();
-            this.getWasherTimer();
+            setTimeout(()=> {
+                this.getWasherTimer();
+            },10000)
+            
         }
     },
     
@@ -231,29 +260,29 @@ Page({
         }
         getHttpPost(cleanApi.check, paramsData, res => {
             hideLoading();
-            if (res.result_code === "00000") {
-                if (res.washer_status !== '2') {
-                    this.setData({
-                        isFinish: true
-                    });
-                    clearInterval(washerTimer);
-                    washerTimer = null;
-                    clearInterval(setTimer);
-                    setTimer = null;
-                    clearInterval(stopTimer);
-                    stopTimer = null;
-                    const resData = {
-                        washer_id: washer_id,
-                        order_no: order_no,
-                        status: '01',
-                    }
-                    this.removeCache();
-                    const details = encodeURIComponent(JSON.stringify(resData));
-                    my.navigateTo({
-                        url: `/pages/stations/clean/clean-result/clean-result?params=${details}`
-                    });
+            // if (res.result_code === "00000") {
+            if (res.washer_status != 2) {
+                this.setData({
+                    isFinish: true
+                });
+                clearInterval(washerTimer);
+                washerTimer = null;
+                clearInterval(setTimer);
+                setTimer = null;
+                clearInterval(stopTimer);
+                stopTimer = null;
+                const resData = {
+                    washer_id: washer_id,
+                    order_no: order_no,
+                    status: '01',
                 }
+                this.removeCache();
+                const details = encodeURIComponent(JSON.stringify(resData));
+                my.navigateTo({
+                    url: `/pages/stations/clean/clean-result/clean-result?params=${details}`
+                });
             }
+            // }
         }, err => {
             hideLoading();
             showToast(err.msg);

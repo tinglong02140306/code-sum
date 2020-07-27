@@ -102,11 +102,11 @@ Page({
         getHttpPost(cleanApi.check, paramsData, res => {
             hideLoading();
             console.log('洗车机状态' + res.washer_status)
-            if (res.washer_status === '1') {
+            if (res.washer_status == '1') {
                 showToast("车辆未停好");
-            } else if (res.washer_status === '2') {
+            } else if (res.washer_status == '2') {
                 showToast("洗车机正忙");
-            } else if (res.washer_status === '3') {
+            } else if (res.washer_status == '3') {
                 showToast("洗车机维护中");
             } else {
                 this.startWasher();

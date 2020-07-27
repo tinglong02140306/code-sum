@@ -58,6 +58,7 @@ class VehicleOrderStore {
     @action exportOrder(params, callback) {
         this.loadingExport = true;
         http.post('/website/wash/export-order', params, res => {
+            this.loadingExport = false;
             this.export_file_name = res.file_name;
             const washOrder = {
                 file_name: res.file_name,

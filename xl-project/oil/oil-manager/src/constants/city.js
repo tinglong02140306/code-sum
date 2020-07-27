@@ -3,7 +3,7 @@ const options = [
         "code": "110000",
         "value": "北京市",
         "label": "北京市",
-        "children":[
+        "children": [
             {
                 "code": "110000",
                 "value": "北京市",
@@ -99,7 +99,7 @@ const options = [
         "code": "120000",
         "value": "天津市",
         "label": "天津市",
-        "children":[
+        "children": [
             {
                 "code": "120000",
                 "value": "天津市",
@@ -4107,7 +4107,7 @@ const options = [
         "code": "310000",
         "value": "上海市",
         "label": "上海市",
-        "children":[
+        "children": [
             {
                 "code": "310000",
                 "value": "上海市",
@@ -10207,52 +10207,52 @@ const options = [
                 "label": "深圳市",
                 "children":
                     [
-                    {
-                        "code": "440303",
-                        "value": "罗湖区",
-                        "label": "罗湖区"
-                    },
-                    {
-                        "code": "440304",
-                        "value": "福田区",
-                        "label": "福田区"
-                    },
-                    {
-                        "code": "440305",
-                        "value": "南山区",
-                        "label": "南山区"
-                    },
-                    {
-                        "code": "440306",
-                        "value": "宝安区",
-                        "label": "宝安区"
-                    },
-                    {
-                        "code": "440307",
-                        "value": "龙岗区",
-                        "label": "龙岗区"
-                    },
-                    {
-                        "code": "440308",
-                        "value": "盐田区",
-                        "label": "盐田区"
-                    },
-                    {
-                        "code": "440309",
-                        "value": "龙华区",
-                        "label": "龙华区"
-                    },
-                    {
-                        "code": "440310",
-                        "value": "坪山区",
-                        "label": "坪山区"
-                    },
-                    {
-                        "code": "440311",
-                        "value": "光明区",
-                        "label": "光明区"
-                    }
-                ]
+                        {
+                            "code": "440303",
+                            "value": "罗湖区",
+                            "label": "罗湖区"
+                        },
+                        {
+                            "code": "440304",
+                            "value": "福田区",
+                            "label": "福田区"
+                        },
+                        {
+                            "code": "440305",
+                            "value": "南山区",
+                            "label": "南山区"
+                        },
+                        {
+                            "code": "440306",
+                            "value": "宝安区",
+                            "label": "宝安区"
+                        },
+                        {
+                            "code": "440307",
+                            "value": "龙岗区",
+                            "label": "龙岗区"
+                        },
+                        {
+                            "code": "440308",
+                            "value": "盐田区",
+                            "label": "盐田区"
+                        },
+                        {
+                            "code": "440309",
+                            "value": "龙华区",
+                            "label": "龙华区"
+                        },
+                        {
+                            "code": "440310",
+                            "value": "坪山区",
+                            "label": "坪山区"
+                        },
+                        {
+                            "code": "440311",
+                            "value": "光明区",
+                            "label": "光明区"
+                        }
+                    ]
             },
             {
                 "code": "440400",
@@ -11648,7 +11648,7 @@ const options = [
         "code": "500000",
         "value": "重庆市",
         "label": "重庆市",
-        "children":[
+        "children": [
             {
                 "code": "500000",
                 "value": "重庆市",
@@ -15670,8 +15670,8 @@ const options = [
             },
             {
                 "code": "622900",
-                "value": "临夏回族自治州",
-                "label": "临夏回族自治州",
+                "value": "宁夏回族自治州",
+                "label": "宁夏回族自治州",
                 "children": [
                     {
                         "code": "622901",

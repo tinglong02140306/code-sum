@@ -280,3 +280,80 @@ export const uuid = () => {
     var uuid = s.join("");
     return uuid;
 }
+
+
+/**
+ * [获取普通二维码传过来的参数]
+ * @author longting
+ * @DateTime 2020-07-17
+ * @return   {string}      [返回参数值]
+ */
+export const getQueryString = (url, name) => {
+    // url ->  'id=1222&old=12'
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    var r = url.match(reg);
+    if (r != null) {
+        return r[2]
+        // return unescape(r[2]);     //  英文情况下
+    }
+    return '';
+}
+
+/**
+ * [时间格式转换 1天 23:39:10 leftTime 秒单位]
+ * @author longting
+ * @DateTime 2020-07-27
+ * @return   {string}      [返回参数值]
+ */
+export const formatTimes = (leftTime) => {
+    let days = parseInt(leftTime / 60 / 60 / 24), //计算剩余的天数 
+        hours = parseInt(leftTime / 60 / 60 % 24), //计算剩余的小时 
+        min = parseInt(leftTime / 60 % 60),//计算剩余的分钟 
+        sec = parseInt(leftTime % 60);//计算剩余的秒数 
+    let timeStr = days > 0 ? days + '天 ' : "";
+    timeStr = timeStr + addZone(hours) + ':' + addZone(min) + ':' + addZone(sec)
+    return timeStr;
+}
+/**
+ * [获取倒计时时间差]
+ * @author longting
+ * @DateTime 100 s
+ * @return   {string}      [返回参数值]
+ */
+export const getDifferTime = (time) => {
+    let endTime = getCurrentDate() + ' ' + time,    
+        curTime = getCurrentTime();
+    console.log(endTime, curTime);
+    let differTime = (new Date(endTime).getTime() - new Date(curTime).getTime()) / 1000;
+    console.log(differTime)
+    return differTime;
+}
+
+/**
+ * 获取当前时间 2020-07-27
+ */
+export const getCurrentDate = () => {
+    const myDate = new Date();
+    const year = myDate.getFullYear();
+    const month = myDate.getMonth() + 1;
+    const date = myDate.getDate();
+    return `${year}-${addZone(month)}-${addZone(date)}`
+}
+
+/**
+ * 获取当前时间 2020-07-27 08:30
+ */
+export const getCurrentTime = () => {
+    let myDate = new Date(),
+        year = myDate.getFullYear(),
+        month = myDate.getMonth() + 1,
+        date = myDate.getDate(),
+        hour = myDate.getHours(),
+        min = myDate.getMinutes();
+    return `${year}-${addZone(month)}-${addZone(date)} ${addZone(hour)}:${addZone(min)}`
+}
+export const addZone = (str) => {
+    let newTime = "0" + str;
+    return newTime.substring(newTime.length - 2, newTime.length);
+}
+

@@ -164,6 +164,8 @@ export const cleanApi = {
     start: "/aliapplet/wash/start-washer",
     //停止洗车机
     stop: "/aliapplet/wash/stop-washer",
+    // 查询洗车机能否停止
+    queryCanStop: "/aliapplet/wash/can-stop", 
 }
 
 

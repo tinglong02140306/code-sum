@@ -52,6 +52,7 @@ class Interests extends React.Component {
                 pagination={pagination}
                 dataSource={interestsList}
                 loading={showLoadingPage}
+                  scroll={{x: '120%'}}
                 onChange={this.handleTableChange}>
             </Table>
             {isShowDialog? <InterestsDialog></InterestsDialog>:null}
@@ -84,9 +85,42 @@ const columns = [{
         </Tooltip>:"无"
     }
 }, {
+    title: '活动类目',
+    dataIndex: 'equit_type',
+    key: 'equit_type',
+    align: 'center',
+    render: (record) => {
+        let status = "";
+        if (record === 2) {
+            status = "洗车";
+        } else {
+            status = "加油";
+        }
+        return (<p style={optionStyle.container}>{status}</p>);
+    },
+}, {
+    title: '活动类型',
+    dataIndex: 'target_type',
+    key: 'target_type',
+    align: 'center',
+    render: (record) => {
+        let status = "";
+        if (record === 1) {
+            status = "绑卡领取";
+        } else {
+            status = "优惠券领取";
+        }
+        return (<p style={optionStyle.container}>{status}</p>);
+    },
+}, {
+    title: '活动简介',
+    dataIndex: 'description',
+    key: 'description',
+    align: 'center',
+},{
     title: '权益内容',
-    dataIndex: 'desc_list',
-    key: 'desc_list',
+    dataIndex: 'equit_rule_desc_list',
+    key: 'equit_rule_desc_list',
     align: 'center',
     render:record=>{
         return record&&record.length?<Tooltip placement="bottom" title={record}>
@@ -97,39 +131,12 @@ const columns = [{
         </div>
     </Tooltip>:"无"
     }
-},{
-    title: '子活动页面',
-    dataIndex: 'sub_activity_url',
-    key: 'sub_activity_url',
-    align: 'center',
-    render:record=>{
-        return <Tooltip placement="bottom" title={record}>
-            <div className="interests-td-page">
-                <span>{record}</span>
-            </div>
-        </Tooltip>
-    }
 },
-    {
-        title: '活动名称',
-        dataIndex: 'activity_name',
-        key: 'activity_name',
-        align: 'center',
-        render: (record) => {
-            return (<p style={{
-                minWidth: 45,
-                overflow: "hidden",
-                whiteSpace: "nowrap",
-                textOverflow: "ellipsis",
-                padding: 0,
-                margin: 0
-            }}>{record}</p>);
-        },
-    },
     {
     title: '操作',
     key: 'operation',
     align: 'center',
+        fixed: 'right',
     render: (record) => {
        return <CRUD  
             onCheckClick={()=>{interestStore.setIsShowDialog(true,1);interestStore.setShowData(record)}} 
@@ -138,3 +145,16 @@ const columns = [{
     }
 }
 ];
+const optionStyle = {
+    container: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minWidth: 30,
+        overflow: "hidden",
+        whiteSpace: "nowrap",
+        textOverflow: "ellipsis",
+        padding: 0,
+        margin: 0
+    },}

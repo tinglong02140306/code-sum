@@ -5,7 +5,7 @@ import Login from "../page/login/Login";
 
 class Rooter extends Component {
     render() {
-        return (<Router>
+        return (<Router basename='/manager/'>
             <Switch>
                 <Route path="/login" component={Login} />
                 <Route path="/"

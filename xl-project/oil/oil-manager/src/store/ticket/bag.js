@@ -37,15 +37,22 @@ class TickerBagStore {
 
     //查询活动（券包）
     @observable act_list = [];
-    @action queryAct() {
+    @action queryAct(callback) {
+        this.loadingAdd = true;
         http.post('/website/coupon/query-package-act', null, res => {
+            setTimeout(() => {
+                this.loadingAdd = false;
+            })
+
             const data = res.data;
             data && data.map(item => {
                 item.key = item.id;
                 return item;
             });
             this.act_list = data;
+            callback && callback();
         }, err => {
+            this.loadingAdd = false;
             console.log(err);
         });
     }
@@ -73,6 +80,18 @@ class TickerBagStore {
     @action updateBag(params, callback) {
         this.loadingAdd = true;
         http.post('/website/coupon/package/update', params, res => {
+            this.loadingAdd = false;
+            message.info("洗车券包更新成功");
+            callback();
+        }, err => {
+            this.loadingAdd = false;
+            message.error(err);
+        });
+    }
+    // 上下架券包
+    @action offOnSelfBag(params, callback) {
+        this.loadingAdd = true;
+        http.post('/website/coupon/package/update-coupon-package-status', params, res => {
             this.loadingAdd = false;
             message.info("洗车券包更新成功");
             callback();

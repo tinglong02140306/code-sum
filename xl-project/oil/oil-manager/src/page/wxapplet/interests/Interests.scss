@@ -73,7 +73,7 @@ $interests-container:interests-container;
 .interests-td-coupon{
     display: flex;
     flex-direction: column;
-
+    max-width: 500px;
     span{
         display: inline-block;
         overflow: hidden;

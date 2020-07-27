@@ -3,7 +3,8 @@ import { getHttpPost } from "../../../../http/http";
 import { cleanApi, couponPackageApi } from "../../../../http/api";
 import { getLocation } from "../../../../utils/location";
 import { OPENID, STATIONPAGE } from "../../../../constants/global";
-import { keepDecimalFull } from '../../../../utils/util';
+import { keepDecimalFull, formatTimes} from '../../../../utils/util';
+// import { keepDecimalFull, keepTwoDecimalFull, dateFormat, formatTimes, getDifferTime} from "../../../../utils/util";
 import { showLoading, hideLoading, showToast } from '../../../../utils/my';
 const app = getApp();
 let timer = null;
@@ -44,6 +45,7 @@ Page({
 
         try {
             params = JSON.parse(decodeURIComponent(options.details));
+            this.dealResponse(params)
             this.setData({
                 details: params
             });
@@ -62,6 +64,38 @@ Page({
     },
     onHide() {
         timer && clearTimeout(timer);
+    },
+    // 数据处理
+    dealResponse(data) {
+        data.showTime = data.leftTime > 0 ? formatTimes(data.leftTime) : "00:00:00";
+        this.setData({
+            details: data
+        });
+        if(data.time_limit_flag && data.leftTime > 0) this.countDown();
+        
+    },
+    // 倒计时
+    countDown() {
+        let { details } = this.data,
+            step = 1000,
+            that = this,
+            leftTime = "";
+        var timer = setInterval(function () {
+            leftTime = details.leftTime;
+            if(details.time_limit_flag) {
+                if(leftTime > 0) {
+                    details.leftTime = leftTime - 1;
+                    details.showTime = formatTimes(details.leftTime);
+                } else {
+                    details.leftTime = -1;
+                    clearInterval(timer); //清空计时
+                }  
+            }
+            that.setData({
+                details: details
+            });
+        }, step);
+
     },
     //全部洗车站点
     onAllClick() {
@@ -97,9 +131,11 @@ Page({
 
     //购买
     onSubmitClick() {
-        const {
-            details
-        } = this.data;
+        const { details } = this.data;
+        if(details.time_limit_flag && data.leftTime <= 0) {
+            showToast('商品已下架');
+            return;
+        }
         showLoading("请稍候...");
         const params = {
             package_id: details.package_id,

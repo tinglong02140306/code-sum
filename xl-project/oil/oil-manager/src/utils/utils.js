@@ -16,13 +16,13 @@ const XLSXLead = (file, headData, multiSheet, success, fail) => {
     let isError = false;
     fileReader.onload = (e) => {//文件读取完成
         const data = e.target.result;
-        const wb = XLSX.read(data, {type: rABS ? 'binary' : 'array'}); //XLSX将文件读取为指定格式
+        const wb = XLSX.read(data, { type: rABS ? 'binary' : 'array' }); //XLSX将文件读取为指定格式
         if (wb && wb.SheetNames) {
             if (multiSheet) {//多个sheet
                 for (let i = 0; i < wb.SheetNames.length; i++) {
                     const sheetName = wb.SheetNames[i];//获取SheetName
                     const sheet = wb.Sheets[sheetName];//获取该SheetName下的内容
-                    const sheetData = XLSX.utils.sheet_to_json(sheet, {header: 1});//将内容转为json，第一行为标题栏
+                    const sheetData = XLSX.utils.sheet_to_json(sheet, { header: 1 });//将内容转为json，第一行为标题栏
                     const sheetTitles = sheetData && sheetData.splice(0, 1);//获取该sheet表的头部
                     const isRightSheetTitles = checkXLSXHead(headData, sheetTitles);
                     if (isRightSheetTitles) {
@@ -36,7 +36,7 @@ const XLSXLead = (file, headData, multiSheet, success, fail) => {
             } else {//单个sheet
                 const sheetName = wb && wb.SheetNames && wb.SheetNames[0];//获取第一个sheet
                 const sheet = wb.Sheets[sheetName];
-                const sheetData = XLSX.utils.sheet_to_json(sheet, {header: 1});//将内容转为json，第一行为标题栏
+                const sheetData = XLSX.utils.sheet_to_json(sheet, { header: 1 });//将内容转为json，第一行为标题栏
                 const sheetTitles = sheetData && sheetData.splice(0, 1);//获取该sheet表的头部
                 const isRightSheetTitles = checkXLSXHead(headData, sheetTitles);
                 if (isRightSheetTitles) {
@@ -71,7 +71,7 @@ const checkXLSXHead = (provideHead, fileHead) => {
  * @param value: [] xlsx的返回值
  */
 const sheetToJson = (key, value) => {
-    if (key&&value){
+    if (key && value) {
         const jsonData = [];
         value && value.map(valueItem => {
             const jsonItem = {};
@@ -93,9 +93,9 @@ const sheetToJson = (key, value) => {
  * @param fileName 导出的file名字
  * @constructor
  */
-const  XLSXExport = (sheetData,sheetName,fileName)=>{
+const XLSXExport = (sheetData, sheetName, fileName) => {
     console.log(sheetData);
-    
+
     const ws = XLSX.utils.aoa_to_sheet(sheetData);
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, sheetName);
@@ -109,7 +109,7 @@ const  XLSXExport = (sheetData,sheetName,fileName)=>{
  * @param fileName 导出的file名字
  * @constructor
  */
-const  CSVExport = (sheetData,sheetName,fileName)=>{
+const CSVExport = (sheetData, sheetName, fileName) => {
     console.log(sheetData);
 
     const ws = XLSX.utils.aoa_to_sheet(sheetData);
@@ -125,13 +125,13 @@ const  CSVExport = (sheetData,sheetName,fileName)=>{
  * @param data
  * @returns {Array}
  */
-const jsonToSheet = (titles,jsonTitle,data)=>{
-    if (titles&&jsonTitle&&data){
+const jsonToSheet = (titles, jsonTitle, data) => {
+    if (titles && jsonTitle && data) {
         const sheetData = [];
         sheetData.push(titles);
-        data&&data.map(item=>{
+        data && data.map(item => {
             const sheetItem = [];
-            jsonTitle&&jsonTitle.map(title=>{
+            jsonTitle && jsonTitle.map(title => {
                 sheetItem.push(item[title]);
             });
             sheetData.push(sheetItem);
@@ -146,11 +146,11 @@ const jsonToSheet = (titles,jsonTitle,data)=>{
  * 判断输入的是否为money
  * @param {} money
  */
-const isMoney = (money)=> {
+const isMoney = (money) => {
     const reg = /(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/;
     if (reg.test(money)) {
         return true
-    }else {
+    } else {
         return false
     }
 }
@@ -158,16 +158,16 @@ const isMoney = (money)=> {
 /**
  * 将对像转为 id:price&id:price
  */
-const oilIdSplit =(oilID)=>{
+const oilIdSplit = (oilID) => {
     let oil_id_split = '';
-    if(oilID){
+    if (oilID) {
         for (const key in oilID) {
             if (oilID.hasOwnProperty(key)) {
                 const id = oilID[key];
-                if(id)oil_id_split = oil_id_split+`${key}:${id}&`;
+                if (id) oil_id_split = oil_id_split + `${key}:${id}&`;
             }
         }
-        return oil_id_split.length?oil_id_split.slice(0,oil_id_split.length-1):'';
+        return oil_id_split.length ? oil_id_split.slice(0, oil_id_split.length - 1) : '';
     }
     return oil_id_split;
 }
@@ -176,9 +176,9 @@ const oilIdSplit =(oilID)=>{
  * 将id:price&id:price 转为json对象
  * @param {*} oilIDStr
  */
-const oilIdJson = (oilIDStr) =>{
+const oilIdJson = (oilIDStr) => {
     const oilId = {};
-    if(oilIDStr){
+    if (oilIDStr) {
         const arr = oilIDStr.split('&');
         for (const item of arr) {
             const objArr = item.split(':');
@@ -193,16 +193,16 @@ const oilIdJson = (oilIDStr) =>{
  * 将moment对象转为string 2019-09-09 00:00:00
  * @param {*} moment
  */
-const formatTime = (moment,isDay)=>{
-    if(moment){
+const formatTime = (moment, isDay) => {
+    if (moment) {
         const time = new Date(moment);
         const year = time.getFullYear();
-        const month = time.getMonth()+1;
+        const month = time.getMonth() + 1;
         const date = time.getDate();
         const hours = time.getHours();
         const minutes = time.getMinutes();
         const seconds = time.getSeconds();
-        return isDay?`${year}-${add0(month)}-${add0(date)}`:`${year}-${add0(month)}-${add0(date)} ${add0(hours)}:${add0(minutes)}:${add0(seconds)}`
+        return isDay ? `${year}-${add0(month)}-${add0(date)}` : `${year}-${add0(month)}-${add0(date)} ${add0(hours)}:${add0(minutes)}:${add0(seconds)}`
     }
     return null;
 }
@@ -211,25 +211,25 @@ const formatTime = (moment,isDay)=>{
  * 将string转为moment对象
  * @param {} str
  */
-const stringToMoment =(str,format)=>{
-  return  moment(str,format).isValid()?moment(str,format):null
+const stringToMoment = (str, format) => {
+    return moment(str, format).isValid() ? moment(str, format) : null
 }
 
 /**
  * 对 月 日  时 分 秒  如0-9 则前面加0
  */
-const add0 =(str)=>{
-    let newTime = "0"+str;
-    return newTime.substring(newTime.length-2,newTime.length);
+const add0 = (str) => {
+    let newTime = "0" + str;
+    return newTime.substring(newTime.length - 2, newTime.length);
 }
 
 /**
  * 获取当前时间
  */
-const getCurrentDate=()=>{
+const getCurrentDate = () => {
     const myDate = new Date();
     const year = myDate.getFullYear();
-    const month = myDate.getMonth()+1;
+    const month = myDate.getMonth() + 1;
     const date = myDate.getDate();
     return `${year}-${add0(month)}-${add0(date)}`
 }
@@ -237,22 +237,34 @@ const getCurrentDate=()=>{
 /**
  * 获取当前前7天
  */
-const getCurrentWeekDate=()=>{
+const getCurrentWeekDate = () => {
     const myDate = new Date();
     const year = myDate.getFullYear();
-    const month = myDate.getMonth()+1;
+    const month = myDate.getMonth() + 1;
     const date = myDate.getDate();
-    const newDate = date-6;
+    const newDate = date - 6;
     return `${year}-${add0(month)}-${newDate}`
+}
+/**
+ * 获取当前后20天
+ */
+const getCurAfterDate = () => {
+    const myDate = new Date();
+    const dateAfter = new Date(myDate);
+    dateAfter.setDate(myDate.getDate() + 20)
+    const year = dateAfter.getFullYear();
+    const month = dateAfter.getMonth() + 1;
+    const date = dateAfter.getDate();
+    return `${year}-${add0(month)}-${add0(date)}`
 }
 
 /**
  * 获取当前月的第一天
  */
-const getCurrentFirstDate=()=>{
+const getCurrentFirstDate = () => {
     const myDate = new Date();
     const year = myDate.getFullYear();
-    const month = myDate.getMonth()+1;
+    const month = myDate.getMonth() + 1;
     return `${year}-${add0(month)}-01`
 }
 
@@ -261,17 +273,17 @@ const getCurrentFirstDate=()=>{
  * @param {} start 
  * @param {} end 
  */
-const getDifferDate =(start,end)=>{
+const getDifferDate = (start, end) => {
     const startDay = new Date(start).getTime();
     const endDay = new Date(end).getTime();
     let day = 0;
-    if(startDay===endDay){
+    if (startDay === endDay) {
         day = 0;
-    }else if(startDay>endDay){
-		day = (startDay-endDay)/1000/60/60/24;
-	}else if(endDay>startDay){
-        day = (endDay-startDay)/1000/60/60/24;
-	}
+    } else if (startDay > endDay) {
+        day = (startDay - endDay) / 1000 / 60 / 60 / 24;
+    } else if (endDay > startDay) {
+        day = (endDay - startDay) / 1000 / 60 / 60 / 24;
+    }
     return day;
 }
 /**
@@ -282,7 +294,7 @@ function isVehicleNumber(str) {
 }
 
 // 判断是否为手机号
- function isPoneAvailable(pone) {
+function isPoneAvailable(pone) {
     let myreg = /^[1][3,4,5,7,8][0-9]{9}$/;
     if (!myreg.test(pone)) {
         return false;
@@ -291,21 +303,21 @@ function isVehicleNumber(str) {
     }
 }
 // 判断是否为电话号码
-  function isTelAvailable(tel) {
-      let myreg = /^(([0\+]\d{2,3}-)?(0\d{2,3})-)(\d{7,8})(-(\d{3,}))?$/;
-      if (!myreg.test(tel)) {
-          return false;
-      } else {
-          return true;
-      }
-  }
+function isTelAvailable(tel) {
+    let myreg = /^(([0\+]\d{2,3}-)?(0\d{2,3})-)(\d{7,8})(-(\d{3,}))?$/;
+    if (!myreg.test(tel)) {
+        return false;
+    } else {
+        return true;
+    }
+}
 
-  //拆分数组
+//拆分数组
 function chunk(arr, size) {
 
-    let arr2=[];
-    for(let i=0;i<arr.length;i=i+size){
-        arr2.push(arr.slice(i,i+size));
+    let arr2 = [];
+    for (let i = 0; i < arr.length; i = i + size) {
+        arr2.push(arr.slice(i, i + size));
     }
     return arr2;
 }
@@ -314,14 +326,14 @@ function addTreeKeyBrand(dataSource) {
     let array = [];
     array = dataSource;
     let childrenArray = [];
-    for (let i = 0; i <array.length; i++) {
+    for (let i = 0; i < array.length; i++) {
         let obj = {};
-        obj.key=array[i].id;
-        obj.title =array[i].name;
+        obj.key = array[i].id;
+        obj.title = array[i].name;
         childrenArray.push(obj);
     }
     let treeData = [];
-    let treeObject = {title: "全部", key: "all", children: []};
+    let treeObject = { title: "全部", key: "all", children: [] };
     treeObject.children = childrenArray;
     treeData = treeData.concat(treeObject);
     return treeData;
@@ -332,14 +344,14 @@ function addTreeProvence(dataSource) {
     let array = [];
     array = dataSource;
     let childrenArray = [];
-    for (let i = 0; i <array.length; i++) {
+    for (let i = 0; i < array.length; i++) {
         let obj = {};
-        obj.key=array[i].code;
-        obj.title =array[i].value;
+        obj.key = array[i].code;
+        obj.title = array[i].value;
         childrenArray.push(obj);
     }
     let treeData = [];
-    let treeObject = {title: "全部", key: "all", children: []};
+    let treeObject = { title: "全部", key: "all", children: [] };
     treeObject.children = childrenArray;
     treeData = treeData.concat(treeObject);
     return treeData;
@@ -358,6 +370,7 @@ export {
     formatTime,
     stringToMoment,
     getCurrentDate,
+    getCurAfterDate,
     getCurrentFirstDate,
     getDifferDate,
     isVehicleNumber,

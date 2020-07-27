@@ -123,7 +123,8 @@ class Create extends React.Component {
                                     {getFieldDecorator('push_count',{rules: [ { required: true, message: '请输入每人发放该券数量' }]})
                                      (<div className="ticket-grant-create-box-item-detail margin-input">
                                         <InputNumber placeholder="请输入"/>
-                                        <span>张</span></div>)}
+                                        <span>张</span>
+                                     </div>)}
                                 </Form.Item>
                                 <Form.Item className="ticket-grant-create-box-item" label="投放依据">
                                     {getFieldDecorator('push_type')
@@ -211,7 +212,8 @@ class Create extends React.Component {
                                     {getFieldDecorator('coupon_count',{rules: [ { required: true, message: '请输入每人发放该券数量' }]})
                                      (<div className="ticket-grant-create-box-item-detail margin-input">
                                         <InputNumber placeholder="请输入"/>
-                                        <span>张</span></div>)}
+                                        <span>张</span>
+                                     </div>)}
                                 </Form.Item>
                                 <Form.Item className="ticket-grant-create-box-item number" label="投放最大数量">
                                     {getFieldDecorator('limit_cnt',{rules: [ { required: true, message: '请输入投放最大数量' }]})

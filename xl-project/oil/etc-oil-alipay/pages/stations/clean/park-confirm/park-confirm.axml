@@ -8,4 +8,51 @@
     <view class="park-confirm-btns" style="padding-bottom: {{isIphoneX?64:24}}rpx;">
         <view class="park-confirm-btn-item theme-button" onTap="onConfirmClick"> 停车确认完毕 </view>
     </view>
+
+    <modal-super show="{{isFistShow}}" ref="modalSuperRefFirst">
+        <view class="clean-no-support-container">
+            <view style="margin: 30rpx">
+                <view class="clean-no-support-title-box">
+                    <view class="clean-no-support-title-line"></view>
+                    <text class="clean-no-support-title-text">服务车型说明</text>
+                </view>
+            </view>
+            <text class="clean-no-support-text">1.以下车型或加特殊物件车辆，容易清洗损坏，请不要清洗！</text>
+            <view class="clean-no-support-image-row">
+                <view class="clean-no-support-image-items">
+                    <image class="clean-no-support-image-1"
+                        src="https://oss.etcsd.com/object/a13307520c114f878f438aa6ef89cc64"></image>
+                    <text class="clean-no-support-image-text">车顶行李箱</text>
+                </view>
+                <view class="clean-no-support-image-items">
+                    <image class="clean-no-support-image-1"
+                        src="https://oss.etcsd.com/object/59b910d088a940c4aafd748c9d5e990a"></image>
+                    <text class="clean-no-support-image-text">尾翼/后备胎</text>
+                </view>
+            </view>
+            <view class="clean-no-support-image-row">
+                <view class="clean-no-support-image-items">
+                    <image class="clean-no-support-image-1"
+                        src="https://oss.etcsd.com/object/9c5aa74dfdd14b91af117bfd5bedb7f4"></image>
+                    <text class="clean-no-support-image-text">拖车钩</text>
+                </view>
+                <view class="clean-no-support-image-items">
+                    <image class="clean-no-support-image-1"
+                        src="https://oss.etcsd.com/object/93083f313c31436999446594171cf146"></image>
+                    <text class="clean-no-support-image-text">皮卡车</text>
+                </view>
+            </view>
+            <view class="clean-no-support-text-row">
+                <text class="clean-no-support-text">2.车辆尺寸限制:</text>
+                <!--<text class="clean-no-support-text">高度小于2.0m</text>-->
+                <view class="clean-no-support-text-items">
+                    <text class="clean-no-support-text-m">高度 小于 2.0m</text>
+                    <text class="clean-no-support-text-m">宽度 小于 2.0m</text>
+                </view>
+            </view>
+            <view class="fast-oil-far-btns">
+                <text class="theme-button clean-no-support-btn-item" onTap="onHideFirst">确 定</text>
+            </view>
+        </view>
+    </modal-super>
 </view>

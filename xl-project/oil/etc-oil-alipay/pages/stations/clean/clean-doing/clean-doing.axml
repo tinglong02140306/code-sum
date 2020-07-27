@@ -9,6 +9,6 @@
     </view>
     <text class="clean-doing-hint-text">非常紧急的情况下，不要触碰紧急停车按钮，复位请重新付费使用！</text>
     <view class="clean-doing-btn">
-        <view class="clean-doing-btn-item theme-button" onTap="onConfirmClick"> {{isFinish?'洗车停止':'紧急停止'}} </view>
+        <view class="clean-doing-btn-item theme-button" onTap="onConfirmClick"> {{isCanStop ? '紧急停止' : '联系客服'}} </view>
     </view>
 </view>

@@ -80,7 +80,7 @@ class Create extends React.Component {
                                     <Form.Item className="ticket-manage-create-box-item number" label="消费门槛">
                                         {getFieldDecorator('limit_amt',{rules: [ { required: true, message: '请输入消费门槛' }]})
                                         (<div className="ticket-manage-create-box-item-detail margin-input">
-                                            <span>消费金额大于</span>
+                                            <span>消费金额满</span>
                                             <Input placeholder="请输入"/>
                                             <span>元</span></div>)}
                                     </Form.Item>:null}

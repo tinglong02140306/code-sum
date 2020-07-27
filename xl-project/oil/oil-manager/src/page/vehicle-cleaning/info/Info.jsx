@@ -200,8 +200,6 @@ class Info extends React.Component {
 									rules: [ { required: true, message: '服务电话' } ]
 								})(<Input placeholder="请输入服务电话" disabled={disabled} />)}
 							</Form.Item>
-						</div>
-						<div className="vehicle-info-modal-form-box-side">
 							{options_type !== 1&&options_obj && options_obj.qr_url ? (
 								<Form.Item className="vehicle-info-modal-form-item" label="二维码链接">
 									{getFieldDecorator('qr_url', { initialValue: options_obj && options_obj.qr_url })(
@@ -213,19 +211,29 @@ class Info extends React.Component {
 								{getFieldDecorator('brandId', { initialValue: options_obj && options_obj.brand_id })(
 									<Select placeholder="请选择洗车机品牌" disabled={disabled}>
 										{brandList &&
-											brandList.map((item) => {
-												return (
-													<Select.Option key={item.id} value={item.id}>
-														{item.brand_name}
-													</Select.Option>
-												);
-											})}
+										brandList.map((item) => {
+											return (
+												<Select.Option key={item.id} value={item.id}>
+													{item.brand_name}
+												</Select.Option>
+											);
+										})}
 									</Select>
 								)}
 							</Form.Item>
-							<Form.Item className="vehicle-info-modal-form-item" label="洗车机归属">
+						</div>
+						<div className="vehicle-info-modal-form-box-side">
+							<Form.Item className="vehicle-info-modal-form-item" label="结算归属">
 								{getFieldDecorator('belong', { initialValue: options_obj && options_obj.belong })(
-									<Select placeholder="请选择洗车机归属" disabled={disabled}>
+									<Select placeholder="请选择结算归属" disabled={disabled}>
+										<Select.Option value={1}>信联</Select.Option>
+										<Select.Option value={2}>小睿</Select.Option>
+									</Select>
+								)}
+							</Form.Item>
+							<Form.Item className="vehicle-info-modal-form-item" label="启动方式">
+								{getFieldDecorator('startMethod', { initialValue: options_obj && options_obj.start_method })(
+									<Select placeholder="请选择启动方式" disabled={disabled}>
 										<Select.Option value={1}>信联</Select.Option>
 										<Select.Option value={2}>小睿</Select.Option>
 									</Select>
@@ -358,7 +366,7 @@ class Info extends React.Component {
 					新增洗车机
 				</Button>
 				<Button size="small" type="primary" style={{marginLeft:10}} onClick={() => this.onSyncWasher()}>
-					同步洗车机
+					同步小睿洗车机
 				</Button>
 			</div>
 		);
@@ -458,9 +466,19 @@ class Info extends React.Component {
 			key: 'washer_price',
 			align: 'center'
 		},{
-			title: '归属',
+			title: '结算归属',
 			dataIndex: 'belong',
 			key: 'belong',
+			align: 'center',
+			render:(record)=>{
+				const belong = record===1?"信联":record===2?"小睿":"--"
+				return <div>{belong}</div>
+			}
+		},
+		{
+			title: '启动方式',
+			dataIndex: 'start_method',
+			key: 'start_method',
 			align: 'center',
 			render:(record)=>{
 				const belong = record===1?"信联":record===2?"小睿":"--"
@@ -474,13 +492,13 @@ class Info extends React.Component {
 			align: 'center',
 			render: (record) => {
 				const status =
-					record === 1 ? '正常' : record === 2 ? '使用中' : record === 3 ? '维护中' : record === 1 ? '已停车' : '未知';
+					record === 1 ? '正常' : record === 2 ? '使用中' : record === 3 ? '维护中' : record === 4 ? '停车' : '未知';
 				const color =
 					record === 1
 						? '#1890ff'
 						: record === 2
-							? '#00CC00'
-							: record === 3 ? '#FF3333' : record === 1 ? '#FF9933' : 'rgba(0,0,0,0.65)';
+						? '#00CC00'
+						: record === 3 ? '#FF3333' : record === 1 ? '#FF9933' : 'rgba(0,0,0,0.65)';
 				return <div style={{ color: color }}>{status}</div>;
 			}
 		},

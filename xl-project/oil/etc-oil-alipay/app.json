@@ -34,8 +34,8 @@
         "pages/stations/clean/clean-notice/clean-notice",
         "pages/stations/clean/clean-result/clean-result",
         "pages/stations/clean/clean-details/clean-details",
-        "pages/mine/ticket-buy/details/details",
         "pages/mine/ticket-buy/list/list",
+        "pages/mine/ticket-buy/details/details",
         "pages/login/login"
     ],
     "window": {
@@ -43,7 +43,6 @@
         "titleBarColor": "#ffffff",
         "transparentTitle": "none",
         "titlePenetrate": "YES"
-
     },
     "tabBar": {
         "textColor": "#828282",

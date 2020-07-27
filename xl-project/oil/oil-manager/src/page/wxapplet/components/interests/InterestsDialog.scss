@@ -11,7 +11,7 @@ $width-parent:390px;
     align-items: flex-start; 
     
     .ant-form-item-control-wrapper{
-        min-height: 60px;
+        min-height: 30px;
     }
 
     .ant-form-item-with-help {
@@ -113,4 +113,30 @@ $width-parent:390px;
 
 .interests-footer-btn{
     margin-right: 10px;
+}
+
+.interests-file-add{
+    width: 80px;
+    height: 80px;
+    z-index: 100;
+}
+
+.interests-file-image{
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 200;
+}
+
+.interests-file-input{
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    z-index: 300;
 }

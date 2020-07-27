@@ -64,7 +64,7 @@ class Update extends React.Component {
 								{coupon_type==="0"||coupon_type==="1"?
                                     <Form.Item className="ticket-manage-update-box-item number" label="消费门槛">
                                         <div className="ticket-manage-update-box-item-detail margin-input">
-                                            <span>消费金额大于</span>
+                                            <span>消费金额满</span>
                                             <Input disabled value={limit_amt}/>
                                             <span>元</span>
 										</div>

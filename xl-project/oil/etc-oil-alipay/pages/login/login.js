@@ -29,6 +29,7 @@ Page({
     },
 
     onUnload() {
+        hideLoading();
         clearInterval(timer);
         timer = null;
     },
@@ -76,9 +77,11 @@ Page({
                 let param = {
                     response: data.response,
                     sign: data.sign,
-                    auth_code: my.getStorageSync({ key: CODE }).data
+                    auth_code: my.getStorageSync({ key: CODE }).data,
+                    invite_code: my.getStorageSync({ key: 'marketCode' }).data
                 }
-                showToast("登录中...");
+                showLoading("登录中...");
+                // showToast("登录中...");
                 this.login(param);
             },
             fail: err => reject({
@@ -88,7 +91,7 @@ Page({
     },
     //登录
     login(params) {
-        showLoading("登录中...");
+        // showLoading("登录中...");
         getPostPromise(loginApi.userLogin, params).then(res => {
             hideLoading();
             showToast("登录成功");

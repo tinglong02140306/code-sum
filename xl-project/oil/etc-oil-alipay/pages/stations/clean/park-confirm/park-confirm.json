@@ -1,5 +1,7 @@
 {
     "defaultTitle": "停车确认",
     "backgroundColor": "#eeeeee",
-    "usingComponents": {}
+    "usingComponents": {
+        "modal-super": "../../../../components/modal-super/modal-super"
+    }
 }

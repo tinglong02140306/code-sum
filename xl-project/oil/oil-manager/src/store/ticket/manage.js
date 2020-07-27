@@ -28,6 +28,12 @@ class TickerManageStore {
         this.pagination = pagination;
     }
 
+    // drawer分页
+    @observable detailPagination = {};
+    @action setDetailPagination(detailPagination) {
+        this.detailPagination = detailPagination;
+    }
+
     //Table加载状态
     @observable loading = false;
     @action setLoading(isShow) {
@@ -79,6 +85,20 @@ class TickerManageStore {
             message.error(err);
         });
     }
+    // 撤销优惠券
+    @action revokeCoupon(params, callback) {
+        this.loadingAdd = true;
+        http.post('/website/coupon/update-coupon', params, res => {
+            message.info("优惠券撤销成功");
+            this.loadingAdd = false;
+            callback();
+        }, err => {
+            this.loadingAdd = false;
+            message.error(err);
+        });
+    }
+
+
 
     //列表
     @observable list = [];
@@ -107,6 +127,33 @@ class TickerManageStore {
                 showTotal: () => `总共 ${res.amount} 条数据`
             };
             this.setPagination(pagination);
+        }, err => {
+            this.loading = false;
+            message.error(err);
+        });
+    }
+
+
+    // drawer明细列表
+    @observable detailList = [];
+    @action detailQuery(params) {
+        this.loading = true;
+        http.post('/website/coupon/query-push', params, res => {
+            this.loading = false;
+            const data = res.data;
+            data && data.map((item, index) => {
+                item.key = index;
+                return item
+            })
+            this.detailList = data;
+            let pagination = {
+                total: res.amount,
+                pageSize: params.page_size,
+                current: params.page_num,
+                showQuickJumper: true,
+                showTotal: () => `总共 ${res.amount} 条数据`
+            };
+            this.setDetailPagination(pagination);
         }, err => {
             this.loading = false;
             message.error(err);

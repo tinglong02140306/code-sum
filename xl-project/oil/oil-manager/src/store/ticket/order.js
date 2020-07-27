@@ -71,6 +71,7 @@ class TickerBagOrderStore {
         this.loadingExport = true;
         http.post('/website/coupon/package/order/export', params, res => {
             this.export_file_name = res.file_name;
+            this.loadingExport = false;
             const washOrder = {
                 file_name: res.file_name,
                 time: new Date().getTime()

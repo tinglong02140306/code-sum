@@ -5,6 +5,7 @@ import { cleanApi } from "../../../../http/api";
 import { showLoading, hideLoading, showToast } from "../../../../utils/my";
 import { getLocation } from "../../../../utils/location";
 
+
 let params = null;
 const app = getApp();
 let locations = null;
@@ -20,6 +21,7 @@ Page({
         details: null,
         center_lng: null,
         center_lat: null,
+        isFistShow: false
     },
     /**
      * 生命周期函数--监听页面加载
@@ -37,15 +39,20 @@ Page({
         });
         try {
             if (my.getStorageSync({ key : CODE_WASHER }).data) {
-                if (options && options.scene) {
-                    const scene = decodeURIComponent(options.scene);
-                    const index = scene.indexOf("=");
-                    if (index != -1) {
-                        const washer_id = scene.slice(index + 1, scene.length);
-                        console.log(washer_id);
+                if(options.params) {
+                    params = JSON.parse(decodeURIComponent(options.params));
+                    this.setData({
+                        details: params,
+                        washer_id: params.washer_id
+                    });
+                } else {
+                    let washId = my.getStorageSync({ key : 'WASHID' }).data
+                    if(washId) {
                         this.setData({
-                            washer_id: washer_id
+                            washer_id: washId
                         });
+                    } else {
+                        showToast('二维码无效');
                     }
                 }
             } else {
@@ -71,11 +78,27 @@ Page({
         this.setData({
             openid: my.getStorageSync({ key : OPENID }).data
         });
+        setTimeout(()=> {
+            this.setData({
+                isFistShow: true
+            });
+            this.modalSuperFirst.fadeIn();
+        })
     },
     dealStyleData() {
         this.setData({
             isIphoneX: app.globalData.isIphoneX
         })
+    },
+    modalSuperRefFirst(ref) {
+        this.modalSuperFirst = ref;
+    },
+    //首次进入
+    onHideFirst() {
+        this.setData({
+            isFistShow: false
+        });
+        this.modalSuperFirst.fadeOut();
     },
     //停车确认完毕
     onConfirmClick() {
@@ -153,11 +176,11 @@ Page({
         getHttpPost(cleanApi.check, paramsData, res => {
             hideLoading();
             console.log('洗车机状态' + res.washer_status)
-            if (res.washer_status === '1') {
+            if (res.washer_status == '1') {
                 showToast("车辆未停好");
-            } else if (res.washer_status === '2') {
+            } else if (res.washer_status == '2') {
                 showToast("洗车机正忙");
-            } else if (res.washer_status === '3') {
+            } else if (res.washer_status == '3') {
                 showToast("洗车机维护中");
             } else {
                 this.createOrder();
@@ -214,7 +237,7 @@ Page({
         }, err => {
             hideLoading();
             showToast(err.msg);
-            my.setStorageSync({key:STATIONPAGE, data:1});
+            my.setStorageSync({key:STATIONPAGE, data:0});
             my.switchTab({
                 url: `/pages/stations/index/index`
             })

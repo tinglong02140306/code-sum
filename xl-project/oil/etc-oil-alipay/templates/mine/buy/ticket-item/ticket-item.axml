@@ -6,7 +6,8 @@
         <view class="ticket-card-template-box">
             <view class="ticket-card-template-info-top">
                 <text class="ticket-card-name-text">{{item.package_name}}</text>
-                <view class="ticket-card-discount-value">{{item.discount_rate}}折</view>
+                <view class="ticket-card-discount-value" a:if="{{(!item.time_limit_flag && !item.count_limit_flag)}}">{{item.discount_rate}}折</view>
+                <view class="ticket-card-discount-value icon-buy-bg" a:else>抢购</view>
             </view>
             <view class="ticket-card-template-info-top-2">
                 <text class="ticket-card-count-text">含{{item.coupon_count}}张洗车券</text>
@@ -20,6 +21,28 @@
             <!--水蜡精洗10次，有效期365天-->
             <text class="ticket-card-template-introduce">{{item.description}}</text>
             <view class="ticket-card-template-button theme-button">购买</view>
+        </view>
+        <!-- 抢购倒计时 -->
+        <view class="ticket-panic-buy" a:if="{{(item.time_limit_flag && item.leftTime > 0) || item.count_limit_flag}}">
+            <view class="left">
+                <view a:if="{{item.time_limit_flag}}">
+                    <image class="icon-clock" src="/assets/static/icon-clock.png"></image>
+                    <text class="notice">距离活动结束</text>
+                    <text class="time">{{item.showTime}}</text>
+                </view>
+                <view a:else>
+                     <image class="icon-clock" src="/assets/static/icon-clock.png"></image>
+                    <text class="notice">不限时抢购</text>
+                </view>
+            </view>
+            <view class="right">
+               <view a:if="{{item.count_limit_flag}}" style="display: flex;">
+                    <text style="color: #a0a0a0;">已抢购{{item.saled_count}}</text>
+                    <view class="rate-wrap">
+                        <view class="top" style="width: {{(item.saled_count / item.total_count)* 100}}%;"></view>
+                    </view>
+               </view>
+            </view>
         </view>
     </view>
 </template>

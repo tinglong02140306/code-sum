@@ -71,12 +71,12 @@ Page({
         this.setData({
             openid: openid
         });
-        setTimeout(()=> {
-            this.setData({
-                isFistShow: true
-            });
-            this.modalSuperFirst.fadeIn();
-        })
+        // setTimeout(()=> {
+        //     this.setData({
+        //         isFistShow: true
+        //     });
+        //     this.modalSuperFirst.fadeIn();
+        // })
         
     },
     modalSuperRefFar(ref) {

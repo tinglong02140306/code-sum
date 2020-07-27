@@ -196,7 +196,7 @@ class Order extends React.Component {
 				message.error('最多导出31天');
 			} else {
 				const params = {
-					order_status: order_status,
+					order_status: order_status || null,
 					start_date: moment(start).format('YYYY-MM-DD'),
 					end_date: moment(end).format('YYYY-MM-DD')
 				};
@@ -451,7 +451,7 @@ class Order extends React.Component {
 			key: 'order_payment',
 			align: 'center',
 			render: (record) => {
-				return <div>{record === '04' ? '微信支付' : record === '09' ? '洗车券支付' : '--'}</div>;
+				return <div>{record === '03' ? '支付宝支付' : record === '04' ? '微信支付' : record === '09' ? '洗车券支付' : '--'}</div>;
 			}
 		},
 		{

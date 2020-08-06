@@ -104,7 +104,7 @@ Page({
         const {
             target_url
         } = e.currentTarget.dataset.item;
-        const tabUrl = ['/pages/stations/index/index', '/pages/mine/test/test'];
+        const tabUrl = ['/pages/stations/index/index', '/pages/mine/index/index'];
         if (target_url) {
             if (!checkUrl(target_url)) { //本地路径
                 if (tabUrl.indexOf(target_url) != -1) {

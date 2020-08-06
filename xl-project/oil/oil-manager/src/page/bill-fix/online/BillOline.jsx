@@ -397,6 +397,16 @@ const columns = [
                         <p style={optionStyle.update}>订单差调</p>
                     </div>
                 </Popconfirm>
+                <Popconfirm
+                    title="确定修复该条订单吗？" okText="是的" cancelText="取消"
+                    onConfirm={() => {
+                        store.fixRepeatOrder(record.order_no)
+                    }}>
+                    <div style={optionStyle.item}>
+                        <Icon type="snippets" style={{color: "#1890ff"}}/>
+                        <p style={optionStyle.update}>修复</p>
+                    </div>
+                </Popconfirm>
             </div>
         }
     }];

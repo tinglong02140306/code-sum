@@ -3,6 +3,7 @@ import { accountApi } from "../../../../http/api";
 import { keepDecimalFull } from '../../../../utils/util';
 import { OPENID, STATIONPAGE } from "../../../../constants/global";
 import { showLoading, hideLoading, showToast } from "../../../../utils/my";
+import { PreferenceMoney, PerferPull, PerferUsed, PerferLose, PerferQrcode, PreferenceCar } from '../../../../assets/url/url'
 const app = getApp();
 let PAGE_OIL = 1; //加油券
 let PAGE_COUPON = 1; //提货券
@@ -48,7 +49,8 @@ Page({
         finish_load_status: 0, //上拉加载状态 0: 已加载完成 1:正在加载中 2:已加载全部
         finish_refresher: false, //下拉刷新状态
         finish_status: 0, //1:列表为空 2:网络连接失败
-        coupon_code: '' //券码
+        coupon_code: '', //券码
+        oilStyleObj: {}
     },
 
     /**
@@ -109,30 +111,34 @@ Page({
 
     //立即使用
     onSetSelect(item) {
-        if (item.coupon_type === '0') {
+        if (item.coupon_type == '0') {
             PAGE_OIL = 1; //未使用
             my.setStorageSync({key: STATIONPAGE, data: 1});
             //加油优惠券
             my.switchTab({
                 url: `/pages/stations/index/index`
             })
-        } else if (item.coupon_type === '1') {
+        } else if (item.coupon_type == '1' || item.coupon_type == '4') {
             PAGE_OIL = 1; //未使用
             my.setStorageSync({key: STATIONPAGE, data: 0});
             //洗车优惠券
             my.switchTab({
                 url: `/pages/stations/index/index`
             })
-        } else if (item.coupon_type === '4') {
-            PAGE_OIL = 1; //未使用
-            my.setStorageSync({key: STATIONPAGE, data: 0});
-            //洗车抵用券
-            my.switchTab({
-                url: `/pages/stations/index/index`
-            })
         }
     },
-
+    onSetSelectClick(e) {
+        this.onSetSelect(e.currentTarget.dataset.item);
+    },
+    onSeeRuleClick(e) {
+        let dataset = e.currentTarget.dataset,
+            index = dataset.index,
+            { oil_list } = this.data;
+            oil_list[index].showRules = !oil_list[index].showRules;
+        this.setData({
+            oil_list: oil_list,
+        });
+    },
     //查看券码
     onSeeCoupon(item) {
         my.navigateTo({
@@ -294,7 +300,7 @@ Page({
         }
         getPostPromise(accountApi.couponList, params).then(res => {
             hideLoading();
-            const data = this.dealResponse(res.data);
+            const data = this.dealResponse(res.data, 1);
             const list = PAGE_OIL == 1 ? data : this.data.oil_list.concat(data);
             this.setData({
                 oil_list: list,
@@ -303,6 +309,7 @@ Page({
                 oil_status: !list || !list.length ? 1 : 0,
                 coupon_code: null,
             });
+            this.dealOilStyle()
         }).catch(err => {
             console.log(err);
             hideLoading();
@@ -317,6 +324,31 @@ Page({
             });
         });
     },
+    dealOilStyle() {
+        let oilStyleObj = {
+                type: 1,
+                money_icon: PreferenceMoney,
+                car_icon: PreferenceCar,
+                pull_icon: PerferPull,
+                finish_icon: PerferUsed,
+                prefer_qrcode: PerferQrcode,
+                // showRules: false, //是否展示使用规则 
+                titleColor: `color:#333`,
+                contentColor: `color:#333`,
+                moneyStyle: `text-shadow:6px 6px 12px #B34E23;`,
+                borderRadius: `border-bottom-left-radius: 8rpx;`,
+                background: `background:linear-gradient(to bottom right, ${'#FFC854'}, ${'#B34E23'});`,
+                backgroundG: `background:linear-gradient(to bottom right, ${'#44B291'}, ${'#164D3F'});`,
+                backgroundB: `background:linear-gradient(to bottom right, ${'#5BC7FF'}, ${'#074DB4'});`,
+                backgroundY: `background:linear-gradient(to bottom right, ${'#FFC854'}, ${'#B34E23'});`,
+                backgroundGray: `background:linear-gradient(to bottom right, ${'#999'}, ${'#333'});`,
+                finish_icon: PerferLose,
+            };
+        this.setData({
+            oilStyleObj: oilStyleObj
+        })
+    },
+
 
     //获取提货券==>已使用
     getCouponList() {
@@ -390,7 +422,7 @@ Page({
     /**
      * 数据处理
      */
-    dealResponse(data) {
+    dealResponse(data, type) {
         return data && data.map(item => {
             const y = item.invalid_time.substr(0, 4);
             const m = item.invalid_time.substr(5, 2);
@@ -398,22 +430,40 @@ Page({
             item.invalid_time = y + '/' + m + '/' + d;
             let coupon_amt = keepDecimalFull(item.coupon_amt, 0).toString();
             item.coupon_amt = coupon_amt.replace('.', '');
+            // if(type && type == 1) item.showRules = false;
             return item;
         })
-    }
-    // onPullDownRefresh() {
-    //     const { type } = this.data;
-    //     showLoading("正在加载...");
-    //     switch (type) {
-    //         case 0:
-    //             this.onOilRefresh();
-    //             break;
-    //         case 1:
-    //             this.onCouponRefresh();
-    //             break;
-    //         case 2:
-    //             this.onFinishRefresh();
-    //             break;
+    },
+    // onShareAppMessage(options) {
+    //     console.log("longting", JSON.stringify(options))
+    //     var that = this;
+    //     var shareObj = {
+    //         desc: "送你一张洗车券",
+    //         path: 'pages/home/index/index', // 默认是当前页面，必须是以‘/’开头的完整路径
+    //         imageUrl: 'https://oss.etcsd.com/object/98ee5b8b6ba64624ac12d075a8e75475', //自定义图片路径，可以是本地文件路径、代码包文件路径或者网络图片路径，支持PNG及JPG，不传入 imageUrl 则使用默认截图。显示图片长宽比是 5:4
+    //         success(res) {
+    //             // 转发成功之后的回调
+    //             // if (res.errMsg == 'shareAppMessage:ok') {}
+    //             console.log(JSON.stringify(res))
+    //         },
+    //         fail(res) {
+    //             console.log(JSON.stringify(res))
+    //             // // 转发失败之后的回调
+    //             // if (res.errMsg == 'shareAppMessage:fail cancel') {
+    //             //     // 用户取消转发
+    //             // } else if (res.errMsg == 'shareAppMessage:fail') {
+    //             //     // 转发失败，其中 detail message 为详细失败信息
+    //             // }
+    //         },
+    //     };
+    //     // 来自页面内的按钮的转发
+    //     if (options.from == 'button') {
+    //         var target = options.target.dataset;
+    //         console.log(target.item); // shareBtn
+    //         // 此处可以修改 shareObj 中的内容
+    //         shareObj.path = 'pages/home/index/index?item=' + target.item;
     //     }
+    //     return shareObj;
+
     // },
 })

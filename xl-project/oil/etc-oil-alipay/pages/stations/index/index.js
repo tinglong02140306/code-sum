@@ -66,9 +66,9 @@ Page({
         this.getList();
     },
     getList() {
-        let page = my.getStorageSync({key: STATIONPAGE}).data;
+        let page = my.getStorageSync({key: STATIONPAGE}).data || 0;
         this.setData({
-            page_type: page || 0
+            page_type: page
         })
         if (page == 0 && this.data.clean_list == null) {
             this.setData({
@@ -371,6 +371,8 @@ Page({
             hideLoading();
             const data = this.dealCleanResponse(res.data);
             let list = page_num_clean == 1 ? data : this.data.clean_list.concat(data);
+
+            
             this.setData({
                 clean_list: list,
                 refresher_clean: false,
@@ -399,6 +401,9 @@ Page({
             item.longitude_tx = Number(item.longitude_tx);
             item.distance_meter = keepDecimalFull(item.distance_meter, 1);
             item.washer_price = keepDecimalFull(item.washer_price, 0).replace('.', '');
+            if(item.hours_begin && item.hours_end) {
+                item.time = item.hours_begin.substr(0,2) < 1 && item.hours_end.substr(0,2) > 22 ? "24小时营业" : item.hours_begin + "-" + item.hours_end;
+            }
             return item;
         });
     },

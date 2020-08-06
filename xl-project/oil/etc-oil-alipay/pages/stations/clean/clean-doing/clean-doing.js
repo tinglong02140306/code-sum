@@ -124,7 +124,8 @@ Page({
             hideLoading();
             if (res.result_code === "00000") {
                 this.setData({
-                    isCanStop: res.can_stop ? true : false
+                    isCanStop: res.can_stop ? true : false,
+                    tel: res.tel
                 })
             }
         }, err => {
@@ -134,9 +135,10 @@ Page({
 
     },
     onConfirmClick() {
-        let that = this;
+        let that = this,
+            tel = this.data.tel;
         if(!this.data.isCanStop) {
-            my.makePhoneCall({ number: '4008609599' });
+            my.makePhoneCall({ number: tel ? tel : "4008609599" });
         } else {
             my.confirm({
                 title: '提示',

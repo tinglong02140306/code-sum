@@ -118,36 +118,4 @@ Page({
             }, 60000 * 5)
         });
     },
-
-
-
-    //获取手机号权限
-    // getPhoneNumber(e) {
-    //     console.log('llll');
-    //     const {
-    //         encryptedData,
-    //         iv,
-    //         errMsg
-    //     } = e.detail;
-    //     const code = my.getStorageSync(CODE);
-    //     const {
-    //         source
-    //     } = this.data;
-    //     if (errMsg === "getPhoneNumber:ok") { //用户允许获取手机号
-    //         this.setData({
-    //             show: false
-    //         });
-    //         this.getLogin(code, encryptedData, iv, source);
-    //     } else {
-    //         this.setData({
-    //             show: false
-    //         });
-    //         my.showModal({
-    //             title: '提示',
-    //             content: '需要授权才能继续,请重新点击并授权',
-    //             showCancel: false,
-    //             success(res) {}
-    //         });
-    //     }
-    // },
 })

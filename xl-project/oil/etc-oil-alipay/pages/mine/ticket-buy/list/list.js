@@ -1,11 +1,13 @@
 // pages/mine/ticket-buy/list/list.js
 import { couponPackageApi, invoiceApi } from '../../../../http/api';
 import { getHttpPost } from '../../../../http/http';
+import { getLocation } from '../../../../utils/location';
 import { keepDecimalFull, keepTwoDecimalFull, dateFormat, formatTimes, getDifferTime} from "../../../../utils/util";
 import { showLoading, hideLoading, showToast } from "../../../../utils/my";
 const app = getApp();
 let page_num = 1;
 const PAGESIZE = 10;
+let timer = null;
 Page({
 
     /**
@@ -19,18 +21,29 @@ Page({
         load_status: 0, //上拉加载状态 0: 已加载完成 1:正在加载中 2:已加载全部
         refresher: true, //下拉刷新状态
         status: 0, //1:列表为空 2:网络连接失败
-        timeLimitCount: 0
+        timeLimitCount: 0,
+        area_code: "370100"
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad(options) {
+    onLoad(options) {},
+    onShow() {
+        getLocation(true, location => {
+            this.setData({
+                area_code: location.area_code
+            });
+            app.globalData.location = location;
+            showLoading("加载中...")
+            this.getCouponPackageList();
+        }, err => {
+            showToast(err);
+        });
         
     },
-    onShow() {
-        showLoading("加载中...")
-        this.getCouponPackageList()
+    onHide() {
+        timer && clearInterval(timer);
     },
     /**
      * 点击详情
@@ -45,63 +58,8 @@ Page({
      * 列表查询
      */
     getCouponPackageList() {
-        // hideLoading();
-        // let data = [{
-        //     "background_url":"https://oss.etcsd.com/object/17e7048da2fa48f89e729d0ded3250be",
-        //     "coupon_count":1,
-        //     "description":"11",
-        //     "discount_rate":"0.20",
-        //     "instruction":["11111111111111111111111"],
-        //     "package_id":17,
-        //     "package_name":"11",
-        //     "package_price":"10.00",
-        //     "time_limit_flag": true,
-        //     count_limit_flag: true,
-        //     start_flag: true,
-        //     start_time: "",
-        //     end_time: "20:00",
-        //     total_count: 100,
-        //     saled_count: 50
-        // }, {
-        //     "background_url":"https://oss.etcsd.com/object/17e7048da2fa48f89e729d0ded3250be",
-        //     "coupon_count":1,
-        //     "description":"112222",
-        //     "discount_rate":"0.20",
-        //     "instruction":["11111111111111111111111"],
-        //     "package_id":17,
-        //     "package_name":"11",
-        //     "package_price":"10.00",
-        //     "time_limit_flag": true,
-        //     count_limit_flag: true,
-        //     start_flag: true,
-        //     start_time: "",
-        //     end_time: "22:21",
-        //     total_count: 100,
-        //     saled_count: 50
-        // }, {
-        //     "background_url":"https://oss.etcsd.com/object/17e7048da2fa48f89e729d0ded3250be",
-        //     "coupon_count":1,
-        //     "description":"55555",
-        //     "discount_rate":"0.20",
-        //     "instruction":["11111111111111111111111"],
-        //     "package_id":17,
-        //     "package_name":"11",
-        //     "package_price":"10.00",
-        //     "time_limit_flag": true,
-        //     count_limit_flag: true,
-        //     start_flag: true,
-        //     start_time: "",
-        //     end_time: "19:56",
-        //     total_count: 100,
-        //     saled_count: 50
-        // }  ]
-        // this.dealResponse(data);
-        // return;
-        const params = {
-            page_num: page_num,
-            page_size: PAGESIZE
-        }
-        getHttpPost(couponPackageApi.list, {}, res => {
+        const { area_code } = this.data;
+        getHttpPost(couponPackageApi.list, { area_code: area_code }, res => {
             hideLoading();
             this.dealResponse(res.data);
         }, err => {
@@ -122,42 +80,26 @@ Page({
             step = 1000,
             that = this,
             leftTime = "";
-        var timer = setInterval(function () {
-
+        timer = setInterval(function () {
             card_list && card_list.map((item, key) => {
                 leftTime = item.leftTime;
-                if(item.time_limit_flag) {
-                    if(leftTime > 0) {
-                        item.leftTime = leftTime - 1;
-                        item.showTime = formatTimes(item.leftTime);
-                    } else {
-                        item.leftTime = -1;
-                        card_list.splice(key, 1)
-                    }  
-                }
+                if(leftTime > 0) {
+                    item.leftTime = leftTime - 1;
+                    item.showTime = formatTimes(item.leftTime);
+                } else {
+                    item.leftTime = 0;
+                    card_list.splice(key, 1)
+                }  
                 return item;
             });
             let interList = card_list && card_list.filter((item) => {
-                return item.time_limit_flag && item.leftTime < 0;
+                return item.time_limit_flag && item.leftTime <= 0;
             })
             if(interList.length == timeLimitCount) clearInterval(timer);//清空计时
 
             that.setData({
                 card_list: card_list
             });
-
-            // if (leftTime >= 0) {
-            //     that.formatTimes(leftTime),
-            //         leftTime = leftTime - step;
-            //     that.setData({
-            //         leftTime: leftTime
-            //     })
-            // } else {
-            //     that.setData({
-            //         leftTime: 0
-            //     })
-            //     clearInterval(timer);//清空计时
-            // }
         }, step);
     },
 
@@ -196,9 +138,16 @@ Page({
             item.distance_meter = keepDecimalFull(item.distance_meter, 1);
             item.package_price = keepTwoDecimalFull(item.package_price);
             item.description = item.description.replace(/[\r\n]/g, "");
-            item.leftTime = getDifferTime(item.end_time);
-            item.showTime = formatTimes(item.leftTime);
-            if(item.time_limit_flag) timeLimitCount++;
+
+            if(item.time_limit_flag) {
+                if(item.start_flag) {
+                    item.leftTime = item.end_time ? getDifferTime(item.end_time, true) : 0;
+                } else {
+                    item.leftTime = item.start_time ? getDifferTime(item.start_time, false) : 0;
+                }
+                item.showTime = item.leftTime ? formatTimes(item.leftTime) : "00:00:00";
+                if(item.leftTime) timeLimitCount++;
+            }
             return item;
         });
         const list = page_num == 1 ? data : this.data.card_list.concat(data);

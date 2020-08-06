@@ -7,7 +7,7 @@ Component({
         list: []
     },
     didMount() {
-        this.dealData();
+        this.dealData();   
     },
     /**
      * 组件的方法列表

@@ -320,11 +320,18 @@ export const formatTimes = (leftTime) => {
  * @DateTime 100 s
  * @return   {string}      [返回参数值]
  */
-export const getDifferTime = (time) => {
+export const getDifferTime = (time, flag) => {
     let endTime = getCurrentDate() + ' ' + time,    
         curTime = getCurrentTime();
-    console.log(endTime, curTime);
-    let differTime = (new Date(endTime).getTime() - new Date(curTime).getTime()) / 1000;
+    // console.log(endTime, curTime);
+    let differTime;
+    endTime = new Date(endTime).getTime();
+    curTime = new Date(curTime).getTime();
+    if(flag) {
+        differTime = (endTime - curTime) / 1000;
+    } else {
+        differTime = (curTime - endTime) / 1000;
+    }
     console.log(differTime)
     return differTime;
 }
@@ -337,7 +344,7 @@ export const getCurrentDate = () => {
     const year = myDate.getFullYear();
     const month = myDate.getMonth() + 1;
     const date = myDate.getDate();
-    return `${year}-${addZone(month)}-${addZone(date)}`
+    return `${year}/${addZone(month)}/${addZone(date)}`
 }
 
 /**
@@ -349,8 +356,9 @@ export const getCurrentTime = () => {
         month = myDate.getMonth() + 1,
         date = myDate.getDate(),
         hour = myDate.getHours(),
-        min = myDate.getMinutes();
-    return `${year}-${addZone(month)}-${addZone(date)} ${addZone(hour)}:${addZone(min)}`
+        min = myDate.getMinutes(),
+        second = myDate.getSeconds();
+    return `${year}/${addZone(month)}/${addZone(date)} ${addZone(hour)}:${addZone(min)}:${addZone(second)}`;
 }
 export const addZone = (str) => {
     let newTime = "0" + str;

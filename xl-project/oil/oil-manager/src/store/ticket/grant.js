@@ -76,7 +76,7 @@ class TickerGrantStore {
     // 撤销优惠券
     @action revokeCoupon(params, callback) {
         this.loadingAdd = true;
-        http.post('/website/coupon/update-coupon', params, res => {
+        http.post('/website/stat/coupon-invalid', params, res => {
             message.info("优惠券撤销成功");
             this.loadingAdd = false;
             callback();

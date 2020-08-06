@@ -6,13 +6,9 @@
  * @Description: 
  */
 import http from "../../http/http";
-import {
-    action,
-    observable
-} from "mobx";
-import {
-    message
-} from "antd/lib/index";
+import { action, observable } from "mobx";
+import { message } from "antd/lib/index";
+import XLSX from 'xlsx';
 
 class VehicleInfoStore {
 
@@ -28,6 +24,11 @@ class VehicleInfoStore {
     @action setLoading(isShow) {
         this.loading = isShow;
     }
+    // TODO
+    // @observable isShowExportLoading = false;
+    // @observable setIsShowExportLoading(isShowExportSomeLoading) {
+    //     this.isShowExportLoading = isShowExportSomeLoading;
+    // }
 
     //modal中 提交状态
     @observable modalLoading = false;
@@ -139,7 +140,25 @@ class VehicleInfoStore {
             });
             this.brandList = data;
         }, err => {
-            console.log(err);
+            message.error(err);
+        });
+    }
+
+    // 导出
+    @action exportDetail(params) {
+        http.post('/website/wash/export-washer-station', params, res => {
+            window.location.href = res.file_url;
+        }, err => {
+            message.error(err);
+        });
+    }
+
+    // 上线/下线
+    @action offOnLine(params, callback) {
+        http.post('/website/wash/update-washer-online', params, res => {
+            callback && callback();
+        }, err => {
+            message.error(err);
         });
     }
 }

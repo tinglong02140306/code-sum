@@ -29,14 +29,14 @@ class ExportDialog extends React.Component{
         if(params.start_date != null || params.end_date != null ){
 
             const differ = getDifferDate(params.start_date, params.end_date);
-            if (differ < 31) {
+            if (differ < 90) {
                 this.setState({
                     // start_export: moment(params.start_date,dateFormat),
                     start_export: moment(params.start_date),
                     end_export: moment(params.end_date),
                 });
             } else {
-                message.error("导出日期最大跨度为31天");
+                message.error("导出日期最大跨度为90天");
             }
 
 
@@ -57,26 +57,25 @@ class ExportDialog extends React.Component{
     }
 
     onOk=()=>{
-        const {start_export,end_export,showSuccess} = this.state;
+        this.props.orderStore.getConsumeFlowDownload();
 
-        if (showSuccess) {
-            this.props.orderStore.setIsShowExportDialog(false);
-        }else {
-
-            // this.props.orderStore.getConsumeFlowDownload(start_export,end_export);
-            const differ = getDifferDate(start_export, end_export);
-            if (differ < 31) {
-                this.props.orderStore.getConsumeFlowDownload(start_export,end_export);
-            } else {
-                message.error("导出日期最大跨度为31天");
-            }
-
-            // this.setState({
-            //     showSuccess:true,
-            // })
-            // this.props.orderStore.setIsShowEngineLoading(false);
-
-        }
+        // const {start_export,end_export,showSuccess} = this.state;
+        // if (showSuccess) {
+        //     this.props.orderStore.setIsShowExportDialog(false);
+        // }else {
+        //     const differ = getDifferDate(start_export, end_export);
+        //     if (differ < 90) {
+        //         // this.props.orderStore.getConsumeFlowDownload(start_export,end_export);
+        //         this.props.orderStore.getConsumeFlowDownload(start_export,end_export);
+        //     } else {
+        //         message.error("导出日期最大跨度为90天");
+        //     }
+        //
+        //     // this.setState({
+        //     //     showSuccess:true,
+        //     // })
+        //     // this.props.orderStore.setIsShowEngineLoading(false);
+        // }
     }
 
     onCancel=()=>{
@@ -116,10 +115,10 @@ class ExportDialog extends React.Component{
 
     onEndChange = (value) => {
         const differ = getDifferDate(this.state.start_export, value);
-        if (differ < 31) {
+        if (differ < 90) {
             this.onChange('end_export', value);
         } else {
-            message.error("导出日期最大跨度为31天");
+            message.error("导出日期最大跨度为90天");
         }
         // this.setState({
         //     end_export: value,
@@ -138,14 +137,14 @@ class ExportDialog extends React.Component{
      */
     onPickerChange = (dateStrings) => {
         const differ = getDifferDate(dateStrings[0], dateStrings[1]);
-        if (differ < 31) {
+        if (differ < 90) {
             this.setState({
                 start_export: dateStrings[0],
                 end_export: dateStrings[1]
             });
 
         } else {
-            message.error("所属日期查询最大跨度为31天");
+            message.error("所属日期查询最大跨度为90天");
         }
     };
 
@@ -184,29 +183,30 @@ class ExportDialog extends React.Component{
                        <Form className='export-date-container'
                              onSubmit={this.handleSubmit}>
                            <div className="export-header-date">
-                               <p className="export-header-text">选择导出区间：</p>
-                               <div className="export-header-date-item">
-                                   <DatePicker
-                                       size="small"
-                                       disabledDate={this.disabledStartDate}
-                                       format="YYYY-MM-DD"
-                                       value={start_export}
-                                       placeholder="开始日期"
-                                       onChange={this.onStartChange}
-                                       className="order-data-picker"/>
-                               </div>
-                               <div className="export-header-date">
-                                   <DatePicker
-                                       size="small"
-                                       disabledDate={this.disabledEndDate}
-                                       format="YYYY-MM-DD"
-                                       value={end_export}
-                                       placeholder="结束日期"
-                                       onChange={this.onEndChange}
-                                       className="order-data-picker"/>
-                               </div>
+                               <p className="export-header-text">确定要导出所选区间文件吗？</p>
+                               {/*<p className="export-header-text">选择导出区间：</p>*/}
+                               {/*<div className="export-header-date-item">*/}
+                               {/*    <DatePicker*/}
+                               {/*        size="small"*/}
+                               {/*        disabledDate={this.disabledStartDate}*/}
+                               {/*        format="YYYY-MM-DD"*/}
+                               {/*        value={start_export}*/}
+                               {/*        placeholder="开始日期"*/}
+                               {/*        onChange={this.onStartChange}*/}
+                               {/*        className="order-data-picker"/>*/}
+                               {/*</div>*/}
+                               {/*<div className="export-header-date">*/}
+                               {/*    <DatePicker*/}
+                               {/*        size="small"*/}
+                               {/*        disabledDate={this.disabledEndDate}*/}
+                               {/*        format="YYYY-MM-DD"*/}
+                               {/*        value={end_export}*/}
+                               {/*        placeholder="结束日期"*/}
+                               {/*        onChange={this.onEndChange}*/}
+                               {/*        className="order-data-picker"/>*/}
+                               {/*</div>*/}
                            </div>
-                           <div className="order-export-hint">（注：默认导出当前月流水,最大可导出31天的数据） </div>
+                           {/*<div className="order-export-hint">（注：默认导出最近7天的数据,最大可导出90天的数据） </div>*/}
                        </Form>
 
                    </div>

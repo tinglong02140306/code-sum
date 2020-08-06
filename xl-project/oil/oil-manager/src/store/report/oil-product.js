@@ -1,13 +1,13 @@
-import {observable, action} from 'mobx';
+import { observable, action } from 'mobx';
 import http from "../../http/http";
-import {formatData} from "../../utils/formatDate";
+import { formatData } from "../../utils/formatDate";
 import saveAs from "../../utils/saveAs.min";
 import xlsxUtils from "../../utils/xlsx.utils.min";
 import utils from "../../utils/utils";
-import { exportMergeCell} from '../../utils/utils';
+import { exportMergeCell } from '../../utils/utils';
 
-import {message} from "antd/lib/index";
-import {isEmpty} from "../../utils/isEmpty";
+import { message } from "antd/lib/index";
+import { isEmpty } from "../../utils/isEmpty";
 
 class OilProduct {
 
@@ -45,17 +45,17 @@ class OilProduct {
             pagination.showQuickJumper = true;
             this.setPagination(pagination);
             let dicArray = response["data"];
-            dicArray && dicArray.map((item,index) => {
+            dicArray && dicArray.map((item, index) => {
                 const business_type = item["business_type"];
                 this.business_type_array[index] = business_type;
                 // 获取 business_data
                 this.product_data = this.product_data.concat(item["business_data"]);
                 // 获取 business_data 的 count
                 this.business_data_count_array[index] = item["business_data"].length;
-                this.product_data&&this.product_data.map((item,index)=>{
+                this.product_data && this.product_data.map((item, index) => {
                     item.key = index;
                 });
-                this.oilProductList=this.product_data;
+                this.oilProductList = this.product_data;
             })
         }, err => {
             this.setIsShowOilLoading(false);
@@ -75,43 +75,43 @@ class OilProduct {
         let B = "B";
         let Bk = B + k;
         const head = {
-            "A1": {"v": "业务类型"},
-            "B1": {"v": "产品类型"},
-            "C1": {"v": "         本金消费"},
-            "D1": {"v": ""},
-            "E1": {"v": ""},
-            "F1": {"v": "         积分消费"},
-            "G1": {"v": ""},
-            "H1": {"v": ""},
-            "I1": {"v": "           合计"},
-            "J1": {"v": ""},
-            "K1": {"v": ""},
-            "A2": {"v": ""},
-            "B2": {"v": ""},
-            "C2": {"v": "消费金额"},
-            "D2": {"v": "折扣金额"},
-            "E2": {"v": "实际金额"},
-            "F2": {"v": "消费金额"},
-            "G2": {"v": "折扣金额"},
-            "H2": {"v": "实际金额"},
-            "I2": {"v": "消费金额"},
-            "J2": {"v": "折扣金额"},
-            "K2": {"v": "实际金额"},
-            "A3": {"v": this.business_type_array[0]},
-            [Aj]: {"v": this.business_type_array[1]},
-            [Ak]: {"v": "      总计"},
-            [Bk]: {"v": ""},
+            "A1": { "v": "业务类型" },
+            "B1": { "v": "产品类型" },
+            "C1": { "v": "         本金消费" },
+            "D1": { "v": "" },
+            "E1": { "v": "" },
+            "F1": { "v": "         积分消费" },
+            "G1": { "v": "" },
+            "H1": { "v": "" },
+            "I1": { "v": "           合计" },
+            "J1": { "v": "" },
+            "K1": { "v": "" },
+            "A2": { "v": "" },
+            "B2": { "v": "" },
+            "C2": { "v": "消费金额" },
+            "D2": { "v": "折扣金额" },
+            "E2": { "v": "实际金额" },
+            "F2": { "v": "消费金额" },
+            "G2": { "v": "折扣金额" },
+            "H2": { "v": "实际金额" },
+            "I2": { "v": "消费金额" },
+            "J2": { "v": "折扣金额" },
+            "K2": { "v": "实际金额" },
+            "A3": { "v": this.business_type_array[0] },
+            [Aj]: { "v": this.business_type_array[1] },
+            [Ak]: { "v": "      总计" },
+            [Bk]: { "v": "" },
 
             /*s为开始,e结束 c:开始/结束列 r:开始/结束取值范围; */
             "!merges": [
-                {"s": {"c": 2, "r": 0}, "e": {"c": 4, "r": 0}},
-                {"s": {"c": 5, "r": 0}, "e": {"c": 7, "r": 0}},
-                {"s": {"c": 8, "r": 0}, "e": {"c": 10, "r": 0}},
-                {"s": {"c": 1, "r": 0}, "e": {"c": 1, "r": 1}},
-                {"s": {"c": 0, "r": 0}, "e": {"c": 0, "r": 1}},
-                {"s": {"c": 0, "r": 2}, "e": {"c": 0, "r": i - 1}},
-                {"s": {"c": 0, "r": i}, "e": {"c": 0, "r": j - 1}},
-                {"s": {"c": 0, "r": k - 1}, "e": {"c": 1, "r": k - 1}},
+                { "s": { "c": 2, "r": 0 }, "e": { "c": 4, "r": 0 } },
+                { "s": { "c": 5, "r": 0 }, "e": { "c": 7, "r": 0 } },
+                { "s": { "c": 8, "r": 0 }, "e": { "c": 10, "r": 0 } },
+                { "s": { "c": 1, "r": 0 }, "e": { "c": 1, "r": 1 } },
+                { "s": { "c": 0, "r": 0 }, "e": { "c": 0, "r": 1 } },
+                { "s": { "c": 0, "r": 2 }, "e": { "c": 0, "r": i - 1 } },
+                { "s": { "c": 0, "r": i }, "e": { "c": 0, "r": j - 1 } },
+                { "s": { "c": 0, "r": k - 1 }, "e": { "c": 1, "r": k - 1 } },
             ]
         };
 
@@ -147,7 +147,6 @@ class OilProduct {
             }
 
         }
-
         if (this.product_data.length > 0) {
             const data = xlsxUtils.format2Sheet(this.product_data, 1, 2, keyMap);//偏移2行按keyMap顺序转换
             const dataKeys = Object.keys(data);
@@ -158,8 +157,6 @@ class OilProduct {
         } else {
             message.info("无可导出的数据");
         }
-
-
     };
 
 }

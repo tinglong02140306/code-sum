@@ -10,6 +10,7 @@ const app = getApp();
 let timer = null;
 let params = null;
 let locations = null;
+let details = null;
 
 Page({
 
@@ -45,10 +46,8 @@ Page({
 
         try {
             params = JSON.parse(decodeURIComponent(options.details));
-            this.dealResponse(params)
-            this.setData({
-                details: params
-            });
+            details = params;
+            this.dealResponse(params);
         } catch (error) {
             console.log(error)
             my.switchTab({
@@ -63,11 +62,11 @@ Page({
         });
     },
     onHide() {
-        timer && clearTimeout(timer);
+        timer && clearInterval(timer);
     },
     // 数据处理
     dealResponse(data) {
-        data.showTime = data.leftTime > 0 ? formatTimes(data.leftTime) : "00:00:00";
+        data.showTime = data.leftTime && data.leftTime > 0 ? formatTimes(data.leftTime) : "00:00:00";
         this.setData({
             details: data
         });
@@ -80,14 +79,14 @@ Page({
             step = 1000,
             that = this,
             leftTime = "";
-        var timer = setInterval(function () {
+        timer = setInterval(function () {
             leftTime = details.leftTime;
             if(details.time_limit_flag) {
                 if(leftTime > 0) {
                     details.leftTime = leftTime - 1;
                     details.showTime = formatTimes(details.leftTime);
                 } else {
-                    details.leftTime = -1;
+                    details.leftTime = 0;
                     clearInterval(timer); //清空计时
                 }  
             }
@@ -129,43 +128,30 @@ Page({
         });
     },
 
-    //购买
+    //购买--- 创建订单
     onSubmitClick() {
         const { details } = this.data;
-        if(details.time_limit_flag && data.leftTime <= 0) {
-            showToast('商品已下架');
+        if(details.time_limit_flag && details.leftTime <= 0) {
+            showToast('活动已结束');
             return;
         }
         showLoading("请稍候...");
         const params = {
-            package_id: details.package_id,
-            wash_order_no: null,
+            package_id: details.package_id
         };
-        getHttpPost(couponPackageApi.order, params, response => {
+        getHttpPost(couponPackageApi.createOrder, params, res => {
             hideLoading();
-            this.goPay(response.pay_params)
+            details.order_no = res.order_no;
+            let param = encodeURIComponent(JSON.stringify(details));
+            my.navigateTo({
+                url: `/pages/mine/ticket-buy/order/order?params=${param}`
+            });
+            // this.goPay(response.pay_params)
         }, err => {
             hideLoading();
             showToast(`${err.msg}:${err.code}`);
         });
     },
-
-    //调起支付 
-    goPay(tradeNO) {
-        try {
-            my.tradePay({
-                tradeNO: tradeNO,
-                success(res) {
-                    my.navigateBack();
-                },
-                fail(err) {
-                }
-            })
-        } catch (err) {
-            showToast("参数格式错误");
-        }
-    },
-
     //洗车查询
     getCleanList() {
         const {

@@ -1,6 +1,6 @@
 import React from 'react';
 import "./Order.scss";
-import { Input, Button, Table, DatePicker, Select, Icon, Modal, Popconfirm, message } from 'antd';
+import { Input, Button, Table, DatePicker, Select, Icon, Modal, Popconfirm, message, Drawer } from 'antd';
 import { observer, inject } from 'mobx-react';
 import ExportDialog from "../../../component/order/ExportDialog";
 import ExportResultDialog from "../../../component/order/ExportResultDialog";
@@ -9,11 +9,17 @@ import OrderChildrenDialog from "../../../component/order/OrderChildrenDialog";
 import moment from 'moment';
 import { isEmpty } from "../../../utils/isEmpty";
 import { isSpecialChart } from "../../../utils/isSpecialChart";
+import 'moment/locale/zh-cn';
+import StationSearchDialog from "../../../component/order/StationSearch";
+import { getDifferDate } from "../../../utils/utils";
 
 let page_num = 0;
 let orderStore = {};
-let nowTime = moment();
-let startTime = moment().add(-7, 'days');
+// let nowTime = moment();
+// let startTime = moment().add(-1, 'days');
+let nowTime = moment(new Date(new Date(new Date().toLocaleDateString()).getTime() + 24 * 60 * 60 * 1000 - 1));
+let startTime = moment(new Date(new Date(new Date().toLocaleDateString()).getTime()));
+const { RangePicker } = DatePicker;
 
 @inject("orderStore")
 @observer
@@ -22,18 +28,19 @@ class Order extends React.Component {
     constructor() {
         super();
         this.state = {
-            user_mobile: '',
-            channel: 4,
+            mobile: '',
+            channel: localStorage.getItem('partner_id') === 'null' ? 8 : 0,
             partner_id: "",
             user_id: "",
             order_no: "",
+            xlpay_order_no: "",
             card_id: "",
             out_user_id: "",
             out_order_no: "",
             terminal_id: "",
             oil_type: 2,//0-汽油；1-柴油 2-无
-            start_date: null,
-            end_date: null,
+            start_date: startTime,
+            end_date: nowTime,
             endOpen: false,
             collapsed: false,
             width: 0,
@@ -41,17 +48,25 @@ class Order extends React.Component {
             selectedRowKeys: [],
             start_export: startTime,
             end_export: nowTime,
+
         }
     }
 
     componentDidMount() {
-        page_num = 10;
+        console.log('nowTime===', nowTime)
+        page_num = 15;
         this.fetch();
     }
 
+    componentWillUnmount() {
+        if (this.props.orderStore.searchData) {
+            this.props.orderStore.setSearchData(null);
+        }
+    }
+
     fetch = () => {
-        const { etc_card_no, channel, user_mobile, start_date, end_date, partner_id, user_id, order_no, card_id, out_user_id, out_order_no, oil_type, terminal_id, order_status } = this.state;
-        this.props.orderStore.getOrderList(1, page_num, start_date, end_date, partner_id, order_no, card_id, out_user_id, out_order_no, oil_type, terminal_id, order_status, etc_card_no, channel, user_mobile);
+        const { etc_card_no, channel, mobile, start_date, end_date, partner_id, user_id, order_no, card_id, out_user_id, out_order_no, oil_type, terminal_id, order_status, xlpay_order_no } = this.state;
+        this.props.orderStore.getOrderList(1, page_num, start_date, end_date, partner_id, order_no, card_id, out_user_id, out_order_no, oil_type, terminal_id, order_status, etc_card_no, channel, mobile, xlpay_order_no);
         this.props.orderStore.getPartnerList();
     }
 
@@ -59,8 +74,8 @@ class Order extends React.Component {
         const pager = { ...this.props.orderStore.pagination };
         pager.current = pagination.current;
         this.props.orderStore.setPagination(pager);
-        const { etc_card_no, channel, user_mobile, start_date, end_date, partner_id, user_id, order_no, card_id, out_user_id, out_order_no, oil_type, terminal_id, order_status } = this.state;
-        this.props.orderStore.getOrderList(pager.current, page_num, start_date, end_date, partner_id, order_no, card_id, out_user_id, out_order_no, oil_type, terminal_id, order_status, etc_card_no, channel, user_mobile,);
+        const { etc_card_no, channel, mobile, start_date, end_date, partner_id, user_id, order_no, card_id, out_user_id, out_order_no, oil_type, terminal_id, order_status, xlpay_order_no } = this.state;
+        this.props.orderStore.getOrderList(pager.current, page_num, start_date, end_date, partner_id, order_no, card_id, out_user_id, out_order_no, oil_type, terminal_id, order_status, etc_card_no, channel, mobile, xlpay_order_no);
     }
 
     //合作方ID
@@ -88,13 +103,17 @@ class Order extends React.Component {
     onChangeOrderNo = (e) => {
         this.setState({ order_no: e.target.value });
     }
+    //聚合订单号
+    onChangeXlpayOrderNo = (e) => {
+        this.setState({ xlpay_order_no: e.target.value });
+    }
     //加油卡卡号
     onChangeCardId = (e) => {
         this.setState({ card_id: e.target.value });
     }
     //手机号
     onChangeUserMobile = (e) => {
-        this.setState({ user_mobile: e.target.value });
+        this.setState({ mobile: e.target.value });
     }
     //第三方用户号
     onChangeOutUserId = (e) => {
@@ -163,12 +182,26 @@ class Order extends React.Component {
         });
     }
 
-    onStartChange = (value) => {
-        this.onChange('start_date', value);
-        this.setState({
-            start_date: value,
-            start_export: value,
-        });
+    onStartChange = (value, dateString) => {
+        // this.onChange('start_date', value);
+        // this.setState({
+        //     start_date: value,
+        //     start_export: value,
+        // });
+        if (value[0] != null || value[0] != null) {
+
+            const differ = getDifferDate(value[0], value[1]);
+            this.setState({
+                start_date: value[0],
+                end_date: value[1],
+            });
+            if (differ < 91) {
+
+            } else {
+                message.error("查询区间最大跨度为90天");
+            }
+        }
+
     }
 
 
@@ -190,9 +223,33 @@ class Order extends React.Component {
     handleEndOpenChange = (open) => {
         // this.setState({endOpen: open});
     }
+
+    onChangeName = (e) => {
+        // this.props.orderStore.setTypeModal(3);
+        this.props.orderStore.setIsShowSearchDialog(true);
+    };
+
     //查询
     onReach = () => {
-        const { terminal_id, partner_id, user_id, order_no, card_id, out_user_id, out_order_no } = this.state;
+        const { start_date, end_date, terminal_id, partner_id, user_id, order_no, card_id, out_user_id, out_order_no, xlpay_order_no } = this.state;
+
+        if (start_date == null || end_date == null) {
+            Modal.error({
+                title: '时间区间错误',
+                content: '请重新选择时间区间',
+            });
+            return
+        }
+        const differ = getDifferDate(start_date, end_date);
+        console.log('differ', differ)
+        if (differ > 90) {
+            Modal.error({
+                title: '查询区间最大跨度为90天',
+                content: '请重新选择时间区间',
+            });
+            return
+        }
+
         if (!isEmpty(terminal_id)) {
             if (isSpecialChart(terminal_id) || terminal_id.length > 20) {
                 Modal.error({
@@ -229,6 +286,15 @@ class Order extends React.Component {
                 return
             }
         }
+        if (!isEmpty(xlpay_order_no)) {
+            if (isSpecialChart(xlpay_order_no) || xlpay_order_no.length > 30) {
+                Modal.error({
+                    title: '聚合订单号输入错误',
+                    content: '请输入正确的聚合订单号(不包含特殊字符)',
+                });
+                return
+            }
+        }
 
         if (!isEmpty(card_id)) {
             if (isSpecialChart(card_id) || card_id.length > 20) {
@@ -259,14 +325,16 @@ class Order extends React.Component {
         }
         this.fetch();
     }
+
     //重置
     onReset = () => {
         this.setState({
-            user_mobile: '',
-            channel: 0,
+            mobile: '',
+            channel: localStorage.getItem('partner_id') === 'null' ? 8 : 0,
             partner_id: "",
             user_id: "",
             order_no: "",
+            xlpay_order_no: "",
             card_id: "",
             out_user_id: "",
             out_order_no: "",
@@ -288,6 +356,7 @@ class Order extends React.Component {
     // onExportSome = () => {
     //     this.props.orderStore.getExportSomeData(this.state.selectedRowKeys);
     // }
+
     //文件下载
     onExportDownload = () => {
         this.props.orderStore.getConsumeFlowDownloadUrl();
@@ -295,7 +364,7 @@ class Order extends React.Component {
     }
     //全部导出
     onExportAll = () => {
-        const { start_export, end_export, etc_card_no, channel, user_mobile, start_date, end_date, partner_id, order_no, card_id, out_user_id, out_order_no, oil_type, terminal_id, order_status } = this.state;
+        // const {start_export, end_export, etc_card_no, channel, user_mobile, start_date, end_date, partner_id, order_no, card_id, out_user_id, out_order_no, oil_type, terminal_id, order_status, xlpay_order_no} = this.state;
         //
         // if (start_date != null){
         //     this.setState({
@@ -309,12 +378,62 @@ class Order extends React.Component {
         // }
         // const differ = getDifferDate(start_export,end_export);
         // if (differ < 32) {
-        //     this.props.orderStore.getExportAllData(etc_card_no,channel,user_mobile,start_export,end_export, partner_id, order_no, card_id, out_user_id, out_order_no, oil_type, terminal_id,order_status);
+        //     this.props.orderStore.getExportAllData(etc_card_no,channel,user_mobile,start_export,end_export, partner_id, order_no, card_id, out_user_id, out_order_no, oil_type, terminal_id,order_status,xlpay_order_no);
         // } else {
         //     message.error("最多可导出31天的数据");
         // }
         this.props.orderStore.setIsShowExportDialog(true);
 
+    }
+
+
+    onClose = () => {
+        this.props.orderStore.setIsShowDrawer(false);
+    }
+
+    renderDrawer = () => {
+        const { consumeCouponList, isShowOrderLoading, isShowDrawer, consumePagination } = this.props.orderStore;
+        const { } = this.state;
+        orderStore = this.props.orderStore;
+        return <Drawer
+            className='consume-coupon-drawer'
+            placement="right"
+            closable={true}
+            maskClosable={false}
+            onClose={this.onClose}
+            visible={isShowDrawer}
+            getContainer={false}
+            width={'110%'}
+            height={200}
+            style={{ position: 'absolute' }}
+        >
+            <Table
+                className="order-drawer-table"
+                bordered
+                size="small"
+                columns={columns3}
+                loading={isShowOrderLoading}
+                dataSource={consumeCouponList}
+                pagination={consumePagination}
+                scroll={'100%'}
+            // onChange={this.handleTableChange}
+            />
+        </Drawer>
+    }
+
+    renderApplyUrl = () => {
+        const { showAUrl, applyUrl } = this.props.orderStore;
+        return <Modal visible={showAUrl}
+            onCancel={() => this.props.orderStore.showAUrl = false}
+            onOk={() => this.props.orderStore.showAUrl = false}
+            title="开票地址">
+            <div className="apply-psw-container">
+                <div className="apply-psw-item">
+                    <span>开票地址:</span>
+                    <div>{applyUrl}</div>
+                </div>
+            </div>
+        </Modal>
     }
 
     header = () => {
@@ -336,24 +455,44 @@ class Order extends React.Component {
                     loading={isShowButtonLoading}
                     onClick={this.onExportAll}
                     disabled={!orderList.length}
-                    style={{ width: 100, marginRight: 10 }}>导出</Button>
+                    style={{ width: 90, marginRight: 10, fontSize: 12 }}>导出</Button>
                 <Button type="primary"
                     className="export-button"
                     // loading={isShowButtonLoading}
                     onClick={this.onExportDownload}
                     disabled={!orderList.length}
-                    style={{ width: 100, marginRight: 10 }}>文件下载</Button>
+                    style={{ width: 90, marginRight: 10, fontSize: 12 }}>文件下载</Button>
                 <div className="order-export-label-text">注：壳牌显示为红色(总金额=应付金额，折扣金额=信联折扣)</div>
             </div>
-            <div className="order-export-text">（导出：由于数据量较大，请先去生成导出文件，然后去"文件下载"下载生成的文件。） </div>
+            {/*<div className="order-export-text">（导出：由于数据量较大，请先去生成导出文件，然后去"文件下载"下载生成的文件。） </div>*/}
             {/*<div className="order-export-text">（全部导出：默认导出最近7天，最大可导出31天的数据） </div>*/}
         </div>
-
     }
 
+    drawerHeader = () => {
+        const { isShowButtonLoading, orderList } = this.props.orderStore;
+        const { selectedRowKeys } = this.state;
+        return <div className="order-export-container-box">
+            <div className="order-export-container">
+                <Button type="primary"
+                    className="export-button"
+                    loading={isShowButtonLoading}
+                    // onClick={this.onExportAll}
+                    disabled={!orderList.length}
+                    style={{ width: 90, marginRight: 10, fontSize: 12 }}>查询</Button>
+                <Button type="primary"
+                    className="export-button"
+                    loading={isShowButtonLoading}
+                    // onClick={this.onExportAll}
+                    disabled={!orderList.length}
+                    style={{ width: 90, marginRight: 10, fontSize: 12 }}>查询</Button>
+
+            </div>
+        </div>
+    }
     render() {
-        const { isShowExportResultDialog, isShowExportDialog, isShowOrderLoading, orderList, isShowOrderDialog, isShowOrderChildrenDialog, pagination, partnerList } = this.props.orderStore;
-        const { etc_card_no, channel, user_mobile, partner_id, selectedRowKeys, order_status, terminal_id, collapsed, start_date, end_date, order_no, card_id, out_user_id, out_order_no, oil_type, endOpen } = this.state;
+        const { isShowExportResultDialog, isShowExportDialog, isShowOrderLoading, orderList, isShowOrderDialog, isShowOrderChildrenDialog, pagination, partnerList, searchData, isShowSearchDialog, isShowDrawer } = this.props.orderStore;
+        const { etc_card_no, channel, mobile, partner_id, selectedRowKeys, order_status, terminal_id, collapsed, start_date, end_date, order_no, card_id, out_user_id, out_order_no, oil_type, endOpen, xlpay_order_no } = this.state;
         orderStore = this.props.orderStore;
         const rowSelection = {
             selectedRowKeys,
@@ -365,12 +504,13 @@ class Order extends React.Component {
                     <div className="order-collapsed">
                         <div className="order-search-open">
                             <div className="order-search-first">
-                                <div className="order-input-special">
+                                <div className="order-input-special"
+                                    style={{ display: localStorage.getItem('partner_id') === 'null' ? 'flex' : 'none' }}>
                                     <div className="order-input-hint">订单渠道:</div>
                                     <Select
                                         size="small"
                                         value={channel}
-                                        style={{ width: 150 }}
+                                        style={{ width: 150, fontSize: 12 }}
                                         onChange={this.onChangeChannel}>
                                         <Select.Option value={0}>企业加油</Select.Option>
                                         <Select.Option value={1}>e-高速</Select.Option>
@@ -384,29 +524,23 @@ class Order extends React.Component {
                                         <Select.Option value={10}>支付宝一键加油</Select.Option>
                                     </Select>
                                 </div>
-                                {/*<div className="order-input-container">*/}
-                                {/*<div>手机号:</div>*/}
-                                {/*<Input size="small"*/}
-                                {/*value={user_mobile}*/}
-                                {/*maxLength={9}*/}
-                                {/*style={{width: 150, margin: 0}}*/}
-                                {/*onChange={this.onChangeUserMobile}/>*/}
-                                {/*</div>*/}
-                                <div className="order-input-container">
-                                    <div>加油卡卡号:</div>
-                                    <Input size="small"
-                                        value={card_id}
-                                        style={{ width: 150, margin: 0 }}
-                                        maxLength={20}
-                                        onChange={this.onChangeCardId} />
-                                </div>
-                                <div className="order-input-container">
-                                    <div>消费订单号:</div>
-                                    <Input size="small"
-                                        value={order_no}
-                                        style={{ width: 150, margin: 0 }}
-                                        maxLength={30}
-                                        onChange={this.onChangeOrderNo} />
+                                <div className="order-input-special">
+                                    <div className="order-input-hint-1">导出区间：</div>
+                                    <div className="order-input-date-special">
+                                        <RangePicker
+                                            ranges={{
+                                                '当前月': [moment().startOf('month'), moment().endOf('month')],
+                                            }}
+                                            size='small'
+                                            allowClear={false}
+                                            showTime
+                                            defaultValue={[start_date, end_date]}
+                                            format="YYYY/MM/DD HH:mm:ss"
+                                            style={{ width: 385, height: 15, fontSize: 12 }}
+                                            onChange={this.onStartChange}
+                                        />
+                                        <div className="ant-input-hint">（默认查询当天的数据,最大查询区间90天）</div>
+                                    </div>
                                 </div>
                             </div>
                             <div className="order-search-first">
@@ -415,9 +549,9 @@ class Order extends React.Component {
                                     <Select
                                         size="small"
                                         value={order_status}
-                                        style={{ width: 150 }}
+                                        style={{ width: 150, fontSize: 12 }}
                                         onChange={this.onChangeOrderStatus}>
-                                        <Select.Option value="">无</Select.Option>
+                                        <Select.Option value="">全部</Select.Option>
                                         <Select.Option value="00">订单创建</Select.Option>
                                         <Select.Option value="01">支付成功</Select.Option>
                                         <Select.Option value="02">支付失败</Select.Option>
@@ -425,32 +559,35 @@ class Order extends React.Component {
                                         <Select.Option value="04">消费失败</Select.Option>
                                         <Select.Option value="05">订单取消</Select.Option>
                                         <Select.Option value="06">冲正成功</Select.Option>
-                                        <Select.Option value="07">冲正失败</Select.Option>
-                                        <Select.Option value="08">撤销失败</Select.Option>
+                                        {/*<Select.Option value="07">冲正失败</Select.Option>*/}
+                                        {/*<Select.Option value="08">撤销失败</Select.Option>*/}
                                         <Select.Option value="09">订单退款</Select.Option>
                                     </Select>
                                 </div>
                                 <div className="order-input-container">
-                                    <div>&nbsp;&nbsp;&nbsp;&nbsp;开始日期:</div>
-                                    <DatePicker
-                                        size="small"
-                                        disabledDate={this.disabledStartDate}
-                                        format="YYYY-MM-DD"
-                                        value={start_date}
-                                        placeholder="开始日期"
-                                        onChange={this.onStartChange}
-                                        className="order-data-picker" />
+                                    <div>订单号:</div>
+                                    <Input size="small"
+                                        value={order_no}
+                                        style={{ width: 150, margin: 0, fontSize: 12 }}
+                                        maxLength={50}
+                                        onChange={this.onChangeOrderNo} />
                                 </div>
                                 <div className="order-input-container">
-                                    <div>&nbsp;&nbsp;&nbsp;&nbsp;结束日期:</div>
-                                    <DatePicker
-                                        size="small"
-                                        disabledDate={this.disabledEndDate}
-                                        format="YYYY-MM-DD"
-                                        value={end_date}
-                                        placeholder="结束日期"
-                                        onChange={this.onEndChange}
-                                        className="order-data-picker" />
+                                    <div>聚合订单:</div>
+                                    <Input size="small"
+                                        value={xlpay_order_no}
+                                        style={{ width: 150, margin: 0, fontSize: 12 }}
+                                        maxLength={50}
+                                        onChange={this.onChangeXlpayOrderNo} />
+                                </div>
+                                <div className="order-input-container" style={{ display: localStorage.getItem('partner_id') === 'null' ? 'flex' : 'none' }}>
+                                    <div>油站:</div>
+                                    <Input size="small"
+                                        value={searchData ? searchData.name : ""}
+                                        style={{ width: 150, margin: 0, fontSize: 12 }}
+                                        maxLength={50}
+                                        onClick={this.onChangeName}
+                                    />
                                 </div>
                                 <div onClick={this.onChangeCollapse} className="order-more">
                                     <a>更多</a>
@@ -458,103 +595,56 @@ class Order extends React.Component {
                                 </div>
                             </div>
                         </div>
-                        <div className="order-search-open" style={{ display: collapsed ? "flex" : "none" }}>
-                            <div className="order-search-first" style={{ visibility: channel !== 0 && channel !== 3 ? "visible" : "hidden", width: channel !== 0 && channel !== 3 ? "100%" : "0", height: channel !== 0 && channel !== 3 ? "100%" : "0" }}>
-                                <div className="order-input-container">
-                                    <div>终端编号:</div>
-                                    <Input size="small"
-                                        value={terminal_id}
-                                        style={{ width: 150, margin: 0 }}
-                                        maxLength={20}
-                                        onChange={this.onChangeTerminalId} />
-                                </div>
-                                <div className="order-input-container">
-                                    <div>ETC卡号:</div>
-                                    <Input size="small"
-                                        value={etc_card_no}
-                                        style={{ width: 150, margin: 0 }}
-                                        maxLength={50}
-                                        onChange={this.onChangeEtcCardNo} />
-                                </div>
+                        <div className="order-search-first" style={{ display: collapsed ? "flex" : "none" }}>
+                            {/*<div className="order-search-first" style={{visibility: channel!==0&&channel!==3 ? "visible" : "hidden",width: channel!==0&&channel!==3 ? "100%" : "0",height: channel!==0&&channel!==3 ? "100%" : "0"}}>*/}
+                            {/*</div>*/}
+                            <div className="order-input-special" style={{ display: localStorage.getItem('partner_id') === 'null' ? 'none' : 'flex' }}>
+                                <div className="order-input-hint">油站:</div>
+                                <Input size="small"
+                                    value={searchData ? searchData.name : ""}
+                                    style={{ width: 150, margin: 0, fontSize: 12 }}
+                                    maxLength={50}
+                                    onClick={this.onChangeName}
+                                />
                             </div>
-                        </div>
-
-                        <div className="order-search-open" style={{ display: collapsed ? "none" : "flex" }} >
-                            <div className="order-search-first" style={{ visibility: channel === 0 ? "visible" : "hidden", width: channel === 0 ? "100%" : "0", height: channel === 0 ? "100%" : "0" }}>
-                                <div className="order-input-container">
-                                    <div>终端编号:</div>
-                                    <Input size="small"
-                                        value={terminal_id}
-                                        style={{ width: 150, margin: 0 }}
-                                        maxLength={20}
-                                        onChange={this.onChangeTerminalId} />
-                                </div>
-                                <div className="order-input-special">
-                                    <div className="order-input-hint">合作方:</div>
-                                    <Select
-                                        size="small"
-                                        defaultValue={partner_id}
-                                        value={partner_id}
-                                        style={{ width: 150 }}
-                                        onChange={this.onChangeBrandId}>
-                                        {this.selectBrandOption()}
-                                    </Select>
-                                </div>
-                                <div className="order-input-container">
-                                    <div>第三方订单号:</div>
-                                    <Input size="small"
-                                        value={out_order_no}
-                                        style={{ width: 150, margin: 0 }}
-                                        maxLength={50}
-                                        onChange={this.onChangeOutOrderNo} />
-                                </div>
+                            <div className="order-input-container">
+                                <div>终端编号:</div>
+                                <Input size="small"
+                                    value={terminal_id}
+                                    style={{ width: 150, margin: 0, fontSize: 12 }}
+                                    maxLength={20}
+                                    onChange={this.onChangeTerminalId} />
                             </div>
-                            {/*<div className="order-search-first" style={{visibility: channel==0 ? "visible" : "hidden",width: channel===0 ? "100%" : "0",height: channel===0 ? "100%" : "0"}}>*/}
-
-                            <div className="order-search-first" style={{ visibility: channel === 3 ? "visible" : "hidden", width: channel === 3 ? "100%" : "0", height: channel === 3 ? "100%" : "0" }}>
-                                {/*<div className="order-input-special">*/}
-                                {/*<div className="order-input-hint">油品类型:*/}
-                                {/*</div>*/}
-                                {/*<Select*/}
-                                {/*size="small"*/}
-                                {/*value={oil_type}*/}
-                                {/*style={{width: 150}}*/}
-                                {/*onChange={this.onChangeOilType}>*/}
-                                {/*<Select.Option value={0}>汽油</Select.Option>*/}
-                                {/*<Select.Option value={1}>柴油</Select.Option>*/}
-                                {/*<Select.Option value={2}>无</Select.Option>*/}
-                                {/*</Select>*/}
-                                {/*</div>*/}
-                                <div className="order-input-container">
-                                    <div>终端编号:</div>
-                                    <Input size="small"
-                                        value={terminal_id}
-                                        style={{ width: 150, margin: 0 }}
-                                        maxLength={20}
-                                        onChange={this.onChangeTerminalId} />
-                                </div>
-
-                                <div className="order-input-container">
-                                    <div>ETC卡号:</div>
-                                    <Input size="small"
-                                        value={etc_card_no}
-                                        style={{ width: 150, margin: 0 }}
-                                        maxLength={50}
-                                        onChange={this.onChangeEtcCardNo} />
-                                </div>
+                            <div className="order-input-special" style={{ display: localStorage.getItem('partner_id') === 'null' ? 'flex' : 'none' }}>
+                                <div className="order-input-hint">合作方:</div>
+                                <Select
+                                    size="small"
+                                    defaultValue={partner_id}
+                                    value={partner_id}
+                                    style={{ width: 150, fontSize: 12 }}
+                                    onChange={this.onChangeBrandId}>
+                                    {this.selectBrandOption()}
+                                </Select>
                             </div>
-
+                            <div className="order-input-container">
+                                <div>手机号:</div>
+                                <Input size="small"
+                                       value={mobile}
+                                       maxLength={11}
+                                       style={{width: 150, margin: 0}}
+                                       onChange={this.onChangeUserMobile}/>
+                            </div>
                         </div>
                     </div>
                     <div className="order-btn-container">
                         <Button type="primary"
                             size="small"
                             disabled={isShowOrderLoading ? true : false}
-                            style={{ marginBottom: 5, width: 80 }}
+                            style={{ marginBottom: 5, width: 80, fontSize: 12 }}
                             onClick={this.onReach}>查询</Button>
                         <Button type="primary"
                             size="small"
-                            style={{ width: 80 }}
+                            style={{ width: 80, fontSize: 12 }}
                             onClick={this.onReset}>重置</Button>
                     </div>
                 </div>
@@ -563,869 +653,34 @@ class Order extends React.Component {
                         className="order-table"
                         bordered
                         size="small"
-                        // columns={columns}
                         columns={localStorage.getItem('partner_id') === 'null' ? columns : columns2}
                         loading={isShowOrderLoading}
                         dataSource={orderList}
-                        scroll={{ x: '120%' }}
+                        scroll={{ x: '160%' }}
                         pagination={pagination}
                         onChange={this.handleTableChange}
                         // rowSelection={rowSelection}
-                        rowClassName={(record, index) => record.model_flag === 2 ? 'row-class' : ''}
+                        // rowClassName={(record, index) => record.model_flag === 2 ? 'row-class' : ''}
+                        rowClassName={(record, index) => record.is_shell ? 'row-class' : ''}
                         title={this.header} />
+                    {isShowDrawer ? this.renderDrawer() : null}
                 </div>
                 {isShowOrderDialog ? <OrderDialog /> : null}
                 {isShowOrderChildrenDialog ? <OrderChildrenDialog /> : null}
                 {isShowExportDialog ? <ExportDialog /> : null}
                 {isShowExportResultDialog ? <ExportResultDialog /> : null}
+                {this.props.orderStore.showAUrl ? this.renderApplyUrl() : null}
+                {isShowSearchDialog ? <StationSearchDialog /> : null}
             </div>
         );
     }
 }
 
 export default Order;
-
-//一键加油
-// const columns = [
-//     {
-//         title: '消费订单号',
-//         dataIndex: 'order_no',
-//         key: 'order_no',
-//         align: 'center',
-//         render: (record) => {
-//             return (<p style={{
-//                 minWidth: 75,
-//                 overflow: "hidden",
-//                 whiteSpace: "nowrap",
-//                 textOverflow: "ellipsis",
-//                 padding: 0,
-//                 margin: 0
-//             }}>{record}</p>);
-//         },
-//     },{
-//         title: '订单状态',
-//         dataIndex: 'order_status',
-//         key: 'order_status',
-//         align: 'center',
-//         render: (record) => {
-//             //00-订单创建，01-支付成功, 02-支付失败， 03-消费成功，04-消费失败，05-订单取消，06-冲正成功，07-冲正失败
-//             let orderStatus = "";
-//             if (record === "00") {
-//                 orderStatus = "订单创建";
-//             } else if (record === "01") {
-//                 orderStatus = "支付成功";
-//             }else if (record === "02") {
-//                 orderStatus = "支付失败";
-//             }else if (record === "03") {
-//                 orderStatus = "消费成功";
-//             } else if (record === "04") {
-//                 orderStatus = "消费失败";
-//             } else if (record === "05") {
-//                 orderStatus = "订单取消";
-//             }else if (record === "06") {
-//                 orderStatus = "冲正成功";
-//             }else if (record === "07") {
-//                 orderStatus = "冲正失败";
-//             }else if (record === "08") {
-//                 orderStatus = "撤销失败";
-//             }else if (record === "09") {
-//                 orderStatus = "订单退款";
-//             }
-//             return (<p style={{
-//                 minWidth: 60,
-//                 overflow: "hidden",
-//                 whiteSpace: "nowrap",
-//                 textOverflow: "ellipsis",
-//                 padding: 0,
-//                 margin: 0
-//             }}>{orderStatus}</p>);
-//         },
-//     },
-//     {
-//         title: '支付方式',
-//         dataIndex: 'order_payment',
-//         key: 'order_payment',
-//         align: 'center',
-//         render: (record) => {
-//             //01-余额，02-银联支付，03-支付宝支付，04-微信支付，05-合作方支付 07-微信车主，08-建行龙支付
-//             let payWay = "";
-//             if (record === "01") {
-//                 payWay = "余额支付";
-//             } else if (record === "02") {
-//                 payWay = "银联支付";
-//             } else if (record === "03") {
-//                 payWay = "支付宝支付";
-//             } else if (record === "04") {
-//                 payWay = "微信支付";
-//             } else if (record === "05") {
-//                 payWay = "合作方支付";
-//             }else if (record === "07") {
-//                 payWay = "微信车主";
-//             }else if (record === "08") {
-//                 payWay = "建行龙支付";
-//             }
-//             return (<p style={{
-//                 minWidth: 60,
-//                 overflow: "hidden",
-//                 whiteSpace: "nowrap",
-//                 textOverflow: "ellipsis",
-//                 padding: 0,
-//                 margin: 0
-//             }}>{payWay}</p>);
-//         },
-//     },
-//     {
-//         title: '消费时间',
-//         dataIndex: 'consume_time',
-//         key: 'consume_time',
-//         align: 'center',
-//         render: (record) => {
-//             return (<p style={{
-//                 minWidth: 60,
-//                 overflow: "hidden",
-//                 whiteSpace: "nowrap",
-//                 textOverflow: "ellipsis",
-//                 padding: 0,
-//                 margin: 0
-//             }}>{record}</p>);
-//         },
-//     },
-//     {
-//         title: '总金额',
-//         dataIndex: 'total_amount',
-//         key: 'total_amount',
-//         align: 'center',
-//         render: (record) => {
-//             return (<p style={{
-//                 minWidth: 45,
-//                 overflow: "hidden",
-//                 whiteSpace: "nowrap",
-//                 textOverflow: "ellipsis",
-//                 padding: 0,
-//                 margin: 0
-//             }}>{record}</p>);
-//         },
-//     },
-//     {
-//         title: '折扣金额',
-//         dataIndex: 'discount_amount',
-//         key: 'discount_amount',
-//         align: 'center',
-//         render: (record) => {
-//             return (<p style={{
-//                 minWidth: 60,
-//                 overflow: "hidden",
-//                 whiteSpace: "nowrap",
-//                 textOverflow: "ellipsis",
-//                 padding: 0,
-//                 margin: 0
-//             }}>{record}</p>);
-//         },
-//     },
-//     {
-//         title: '实际金额',
-//         dataIndex: 'actual_amount',
-//         key: 'actual_amount',
-//         align: 'center',
-//         render: (record) => {
-//             return (<p style={{
-//                 minWidth: 60,
-//                 overflow: "hidden",
-//                 whiteSpace: "nowrap",
-//                 textOverflow: "ellipsis",
-//                 padding: 0,
-//                 margin: 0
-//             }}>{record}</p>);
-//         },
-//     },
-//     {
-//         title: '油品类型',
-//         dataIndex: 'oil_type',
-//         key: 'oil_type',
-//         align: 'center',
-//         render: (record) => {
-//             let oilType = "";
-//             if (record === '0') {
-//                 oilType = "汽油";
-//             } else if (record === '1') {
-//                 oilType = "柴油";
-//             }else {
-//                 oilType = "--"
-//             }
-//             return (<p style={{
-//                 minWidth: 60,
-//                 overflow: "hidden",
-//                 whiteSpace: "nowrap",
-//                 textOverflow: "ellipsis",
-//                 padding: 0,
-//                 margin: 0
-//             }}>{oilType}</p>);
-//         },
-//     },
-//     {
-//         title: '油品单价',
-//         dataIndex: 'oil_price',
-//         key: 'oil_price',
-//         align: 'center',
-//         render: (record) => {
-//             return (<p style={{
-//                 minWidth: 60,
-//                 overflow: "hidden",
-//                 whiteSpace: "nowrap",
-//                 textOverflow: "ellipsis",
-//                 padding: 0,
-//                 margin: 0
-//             }}>{record}</p>);
-//         },
-//     },
-//     {
-//         title: '油品数量',
-//         dataIndex: 'oil_num',
-//         key: 'oil_num',
-//         align: 'center',
-//         render: (record) => {
-//             return (<p style={{
-//                 minWidth: 60,
-//                 overflow: "hidden",
-//                 whiteSpace: "nowrap",
-//                 textOverflow: "ellipsis",
-//                 padding: 0,
-//                 margin: 0
-//             }}>{record}</p>);
-//         },
-//     },
-//     {
-//         title: '油品详情',
-//         dataIndex: 'oil_detail',
-//         key: 'oil_detail',
-//         align: 'center',
-//         render: (record) => {
-//             return (<p style={{
-//                 minWidth: 60,
-//                 overflow: "hidden",
-//                 whiteSpace: "nowrap",
-//                 textOverflow: "ellipsis",
-//                 padding: 0,
-//                 margin: 0
-//             }}>{record}</p>);
-//         },
-//     },
-//     {
-//         title: '终端编号',
-//         dataIndex: 'terminal_id',
-//         key: 'terminal_id',
-//         align: 'center',
-//         render: (record) => {
-//             return (<p style={{
-//                 minWidth: 60,
-//                 overflow: "hidden",
-//                 whiteSpace: "nowrap",
-//                 textOverflow: "ellipsis",
-//                 padding: 0,
-//                 margin: 0
-//             }}>{record}</p>);
-//         },
-//     },
-//     {
-//         title: '商户名称',
-//         dataIndex: 'terminal_name',
-//         key: 'terminal_name',
-//         align: 'center',
-//         render: (record) => {
-//             return (<p style={{
-//                 minWidth: 60,
-//                 overflow: "hidden",
-//                 whiteSpace: "nowrap",
-//                 textOverflow: "ellipsis",
-//                 padding: 0,
-//                 margin: 0
-//             }}>{record}</p>);
-//         },
-//     },
-//     {
-//         title: '卡号',
-//         dataIndex: 'card_id',
-//         key: 'card_id',
-//         align: 'center',
-//         render: (record) => {
-//             return (<p style={{
-//                 minWidth: 30,
-//                 overflow: "hidden",
-//                 whiteSpace: "nowrap",
-//                 textOverflow: "ellipsis",
-//                 padding: 0,
-//                 margin: 0
-//             }}>{record}</p>);
-//         },
-//     },
-//     {
-//         title: '用户手机号',
-//         dataIndex: 'user_mobile',
-//         key: 'user_mobile',
-//         align: 'center',
-//         render: (record) => {
-//             return (<p style={{
-//                 minWidth: 75,
-//                 overflow: "hidden",
-//                 whiteSpace: "nowrap",
-//                 textOverflow: "ellipsis",
-//                 padding: 0,
-//                 margin: 0
-//             }}>{record}</p>);
-//         },
-//     },
-//     {
-//         title: '用户名',
-//         dataIndex: 'user_name',
-//         key: 'user_name',
-//         align: 'center',
-//         render: (record) => {
-//             return (<p style={{
-//                 minWidth: 45,
-//                 overflow: "hidden",
-//                 whiteSpace: "nowrap",
-//                 textOverflow: "ellipsis",
-//                 padding: 0,
-//                 margin: 0
-//             }}>{record}</p>);
-//         },
-//     },
-//     {
-//         title: '合作方名称',
-//         dataIndex: 'partner_name',
-//         key: 'partner_name',
-//         align: 'center',
-//         render: (record) => {
-//             return (<p style={{
-//                 minWidth: 75,
-//                 overflow: "hidden",
-//                 whiteSpace: "nowrap",
-//                 textOverflow: "ellipsis",
-//                 padding: 0,
-//                 margin: 0
-//             }}>{record}</p>);
-//         },
-//     },
-//     {
-//         title: '第三方订单号',
-//         dataIndex: 'out_order_no',
-//         key: 'out_order_no',
-//         align: 'center',
-//         render: (record) => {
-//             return (<p style={{
-//                 minWidth: 90,
-//                 overflow: "hidden",
-//                 whiteSpace: "nowrap",
-//                 textOverflow: "ellipsis",
-//                 padding: 0,
-//                 margin: 0
-//             }}>{record}</p>);
-//         },
-//     },{
-//         title: 'ETC卡号',
-//         dataIndex: 'etc_card_no',
-//         key: 'etc_card_no',
-//         align: 'center',
-//         render: (record) => {
-//             return (<p style={{
-//                 minWidth: 90,
-//                 overflow: "hidden",
-//                 whiteSpace: "nowrap",
-//                 textOverflow: "ellipsis",
-//                 padding: 0,
-//                 margin: 0
-//             }}>{record}</p>);
-//         },
-//     },
-//     // {
-//     //     title: '子流水单',
-//     //     key: 'children',
-//     //     fixed: 'right',
-//     //     align: 'center',
-//     //     render: (record) => {
-//     //         return (<div
-//     //             style={{
-//     //                 minWidth: 80,
-//     //                 display: 'flex',
-//     //                 flexDirection: 'row',
-//     //                 alignItems: 'center',
-//     //                 justifyContent: 'center',
-//     //                 fontSize: 12
-//     //             }}
-//     //             onClick={
-//     //                 () => {
-//     //                     if (record.sub_bill_array){
-//     //                         orderStore.setIsShowOrderChildrenDialog(true);
-//     //                         orderStore.setOrderChildrenObject(record);
-//     //                     }else {
-//     //                         message.info("无子流水单");
-//     //                     }
-//     //                 }}>
-//     //             <a><Icon type="eye-o" style={{marginRight: 2, color: '#1890ff'}}/>子流水单</a></div>);
-//     //     },
-//     // },
-//     {
-//         title: '打印小票',
-//         key: 'ticket',
-//         fixed: 'right',
-//         align: 'center',
-//         render: (record) => {
-//             return (<div style={{
-//                 minWidth: 50,
-//                 display: 'flex',
-//                 flexDirection: 'row',
-//                 alignItems: 'center',
-//                 justifyContent: 'center',
-//                 fontSize: 12
-//             }}
-//             >
-//                 <Popconfirm
-//                     title="确定要申请打印小票吗？" okText="确定" cancelText="取消"
-//                     onConfirm={() => {
-//                         orderStore.billFixPrintTicket(record.order_no)
-//                     }}>
-//                     <a><Icon type="form" style={{marginRight: 2}}/>打印</a>
-//                 </Popconfirm>
-//             </div>);
-//         },
-//     },
-//     {
-//         title: '操作',
-//         key: 'operation',
-//         fixed: 'right',
-//         align: 'center',
-//         render: (record) => {
-//             return (<div
-//                 style={{
-//                     minWidth: 50,
-//                     display: 'flex',
-//                     flexDirection: 'row',
-//                     alignItems: 'center',
-//                     justifyContent: 'center',
-//                     fontSize: 12
-//                 }}
-//                 onClick={() => {
-//                     orderStore.setIsShowOrderDialog(true);
-//                     orderStore.setOrderChildrenObject(record);
-//                 }}><a><Icon type="eye-o" style={{marginRight: 2, color: '#1890ff'}}/>查看</a></div>);
-//         },
-//     },
-// ];
-// const columns2 = [
-//     {
-//         title: '消费订单号',
-//         dataIndex: 'order_no',
-//         key: 'order_no',
-//         align: 'center',
-//         render: (record) => {
-//             return (<p style={{
-//                 minWidth: 75,
-//                 overflow: "hidden",
-//                 whiteSpace: "nowrap",
-//                 textOverflow: "ellipsis",
-//                 padding: 0,
-//                 margin: 0
-//             }}>{record}</p>);
-//         },
-//     },{
-//         title: '订单状态',
-//         dataIndex: 'order_status',
-//         key: 'order_status',
-//         align: 'center',
-//         render: (record) => {
-//             //00-订单创建，01-支付成功, 02-支付失败， 03-消费成功，04-消费失败，05-订单取消，06-冲正成功，07-冲正失败
-//             let orderStatus = "";
-//             if (record === "00") {
-//                 orderStatus = "订单创建";
-//             } else if (record === "01") {
-//                 orderStatus = "支付成功";
-//             }else if (record === "02") {
-//                 orderStatus = "支付失败";
-//             }else if (record === "03") {
-//                 orderStatus = "消费成功";
-//             } else if (record === "04") {
-//                 orderStatus = "消费失败";
-//             } else if (record === "05") {
-//                 orderStatus = "订单取消";
-//             }else if (record === "06") {
-//                 orderStatus = "冲正成功";
-//             }else if (record === "07") {
-//                 orderStatus = "冲正失败";
-//             }else if (record === "08") {
-//                 orderStatus = "撤销失败";
-//             }else if (record === "09") {
-//                 orderStatus = "订单退款";
-//             }
-//             return (<p style={{
-//                 minWidth: 60,
-//                 overflow: "hidden",
-//                 whiteSpace: "nowrap",
-//                 textOverflow: "ellipsis",
-//                 padding: 0,
-//                 margin: 0
-//             }}>{orderStatus}</p>);
-//         },
-//     },
-//     {
-//         title: '订单渠道',
-//         dataIndex: 'channel',
-//         key: 'channel',
-//         align: 'center',
-//         render: (record) => {
-//             //0-企业加油 1-e高速 2-微信会员卡 3-ETC加油 4-小程序二维码 5-聚合码 7-ETC无感 8-一键加油
-//             let orderStatus = "";
-//             if (record === "0") {
-//                 orderStatus = "企业加油";
-//             } else if (record === "1") {
-//                 orderStatus = "e高速";
-//             }else if (record === "2") {
-//                 orderStatus = "微信会员卡";
-//             }else if (record === "3") {
-//                 orderStatus = "ETC加油";
-//             } else if (record === "4") {
-//                 orderStatus = "小程序二维码";
-//             } else if (record === "5") {
-//                 orderStatus = "聚合码";
-//             }else if (record === "6") {
-//                 orderStatus = "ETC无感";
-//             }else if (record === "7") {
-//                 orderStatus = "ETC无感";
-//             }else if (record === "8") {
-//                 orderStatus = "一键加油";
-//             }
-//             return (<p style={{
-//                 minWidth: 60,
-//                 overflow: "hidden",
-//                 whiteSpace: "nowrap",
-//                 textOverflow: "ellipsis",
-//                 padding: 0,
-//                 margin: 0
-//             }}>{orderStatus}</p>);
-//         },
-//     },
-//     {
-//         title: '支付方式',
-//         dataIndex: 'order_payment',
-//         key: 'order_payment',
-//         align: 'center',
-//         render: (record) => {
-//             //01-余额，02-银联支付，03-支付宝支付，04-微信支付，05-合作方支付 07-微信车主，08-建行龙支付
-//             let payWay = "";
-//             if (record === "01") {
-//                 payWay = "余额支付";
-//             } else if (record === "02") {
-//                 payWay = "银联支付";
-//             } else if (record === "03") {
-//                 payWay = "支付宝支付";
-//             } else if (record === "04") {
-//                 payWay = "微信支付";
-//             } else if (record === "05") {
-//                 payWay = "合作方支付";
-//             }else if (record === "07") {
-//                 payWay = "微信车主";
-//             }else if (record === "08") {
-//                 payWay = "建行龙支付";
-//             }
-//             return (<p style={{
-//                 minWidth: 60,
-//                 overflow: "hidden",
-//                 whiteSpace: "nowrap",
-//                 textOverflow: "ellipsis",
-//                 padding: 0,
-//                 margin: 0
-//             }}>{payWay}</p>);
-//         },
-//     },
-//     {
-//         title: '消费时间',
-//         dataIndex: 'consume_time',
-//         key: 'consume_time',
-//         align: 'center',
-//         render: (record) => {
-//             return (<p style={{
-//                 minWidth: 60,
-//                 overflow: "hidden",
-//                 whiteSpace: "nowrap",
-//                 textOverflow: "ellipsis",
-//                 padding: 0,
-//                 margin: 0
-//             }}>{record}</p>);
-//         },
-//     },
-//     {
-//         title: '总金额',
-//         dataIndex: 'total_amount',
-//         key: 'total_amount',
-//         align: 'center',
-//         render: (record) => {
-//             return (<p style={{
-//                 minWidth: 45,
-//                 overflow: "hidden",
-//                 whiteSpace: "nowrap",
-//                 textOverflow: "ellipsis",
-//                 padding: 0,
-//                 margin: 0
-//             }}>{record}</p>);
-//         },
-//     },
-//     {
-//         title: '折扣金额',
-//         dataIndex: 'discount_amount',
-//         key: 'discount_amount',
-//         align: 'center',
-//         render: (record) => {
-//             return (<p style={{
-//                 minWidth: 60,
-//                 overflow: "hidden",
-//                 whiteSpace: "nowrap",
-//                 textOverflow: "ellipsis",
-//                 padding: 0,
-//                 margin: 0
-//             }}>{record}</p>);
-//         },
-//     },
-//     {
-//         title: '实际金额',
-//         dataIndex: 'actual_amount',
-//         key: 'actual_amount',
-//         align: 'center',
-//         render: (record) => {
-//             return (<p style={{
-//                 minWidth: 60,
-//                 overflow: "hidden",
-//                 whiteSpace: "nowrap",
-//                 textOverflow: "ellipsis",
-//                 padding: 0,
-//                 margin: 0
-//             }}>{record}</p>);
-//         },
-//     },
-//     {
-//         title: '油品类型',
-//         dataIndex: 'oil_type',
-//         key: 'oil_type',
-//         align: 'center',
-//         render: (record) => {
-//             let oilType = "";
-//             if (record === '0') {
-//                 oilType = "汽油";
-//             } else if (record === '1') {
-//                 oilType = "柴油";
-//             }else {
-//                 oilType = "--"
-//             }
-//             return (<p style={{
-//                 minWidth: 60,
-//                 overflow: "hidden",
-//                 whiteSpace: "nowrap",
-//                 textOverflow: "ellipsis",
-//                 padding: 0,
-//                 margin: 0
-//             }}>{oilType}</p>);
-//         },
-//     },
-//     {
-//         title: '油品单价',
-//         dataIndex: 'oil_price',
-//         key: 'oil_price',
-//         align: 'center',
-//         render: (record) => {
-//             return (<p style={{
-//                 minWidth: 60,
-//                 overflow: "hidden",
-//                 whiteSpace: "nowrap",
-//                 textOverflow: "ellipsis",
-//                 padding: 0,
-//                 margin: 0
-//             }}>{record}</p>);
-//         },
-//     },
-//     {
-//         title: '油品数量',
-//         dataIndex: 'oil_num',
-//         key: 'oil_num',
-//         align: 'center',
-//         render: (record) => {
-//             return (<p style={{
-//                 minWidth: 60,
-//                 overflow: "hidden",
-//                 whiteSpace: "nowrap",
-//                 textOverflow: "ellipsis",
-//                 padding: 0,
-//                 margin: 0
-//             }}>{record}</p>);
-//         },
-//     },
-//     {
-//         title: '油品详情',
-//         dataIndex: 'oil_detail',
-//         key: 'oil_detail',
-//         align: 'center',
-//         render: (record) => {
-//             return (<p style={{
-//                 minWidth: 60,
-//                 overflow: "hidden",
-//                 whiteSpace: "nowrap",
-//                 textOverflow: "ellipsis",
-//                 padding: 0,
-//                 margin: 0
-//             }}>{record}</p>);
-//         },
-//     },
-//     {
-//         title: '终端编号',
-//         dataIndex: 'terminal_id',
-//         key: 'terminal_id',
-//         align: 'center',
-//         render: (record) => {
-//             return (<p style={{
-//                 minWidth: 60,
-//                 overflow: "hidden",
-//                 whiteSpace: "nowrap",
-//                 textOverflow: "ellipsis",
-//                 padding: 0,
-//                 margin: 0
-//             }}>{record}</p>);
-//         },
-//     },
-//     {
-//         title: '商户名称',
-//         dataIndex: 'terminal_name',
-//         key: 'terminal_name',
-//         align: 'center',
-//         render: (record) => {
-//             return (<p style={{
-//                 minWidth: 60,
-//                 overflow: "hidden",
-//                 whiteSpace: "nowrap",
-//                 textOverflow: "ellipsis",
-//                 padding: 0,
-//                 margin: 0
-//             }}>{record}</p>);
-//         },
-//     },
-//     {
-//         title: '卡号',
-//         dataIndex: 'card_id',
-//         key: 'card_id',
-//         align: 'center',
-//         render: (record) => {
-//             return (<p style={{
-//                 minWidth: 30,
-//                 overflow: "hidden",
-//                 whiteSpace: "nowrap",
-//                 textOverflow: "ellipsis",
-//                 padding: 0,
-//                 margin: 0
-//             }}>{record}</p>);
-//         },
-//     },
-//     {
-//         title: '用户手机号',
-//         dataIndex: 'user_mobile',
-//         key: 'user_mobile',
-//         align: 'center',
-//         render: (record) => {
-//             return (<p style={{
-//                 minWidth: 75,
-//                 overflow: "hidden",
-//                 whiteSpace: "nowrap",
-//                 textOverflow: "ellipsis",
-//                 padding: 0,
-//                 margin: 0
-//             }}>{record}</p>);
-//         },
-//     },
-//     {
-//         title: '用户名',
-//         dataIndex: 'user_name',
-//         key: 'user_name',
-//         align: 'center',
-//         render: (record) => {
-//             return (<p style={{
-//                 minWidth: 45,
-//                 overflow: "hidden",
-//                 whiteSpace: "nowrap",
-//                 textOverflow: "ellipsis",
-//                 padding: 0,
-//                 margin: 0
-//             }}>{record}</p>);
-//         },
-//     },
-//     {
-//         title: '合作方名称',
-//         dataIndex: 'partner_name',
-//         key: 'partner_name',
-//         align: 'center',
-//         render: (record) => {
-//             return (<p style={{
-//                 minWidth: 75,
-//                 overflow: "hidden",
-//                 whiteSpace: "nowrap",
-//                 textOverflow: "ellipsis",
-//                 padding: 0,
-//                 margin: 0
-//             }}>{record}</p>);
-//         },
-//     },
-//     {
-//         title: '第三方订单号',
-//         dataIndex: 'out_order_no',
-//         key: 'out_order_no',
-//         align: 'center',
-//         render: (record) => {
-//             return (<p style={{
-//                 minWidth: 90,
-//                 overflow: "hidden",
-//                 whiteSpace: "nowrap",
-//                 textOverflow: "ellipsis",
-//                 padding: 0,
-//                 margin: 0
-//             }}>{record}</p>);
-//         },
-//     },{
-//         title: 'ETC卡号',
-//         dataIndex: 'etc_card_no',
-//         key: 'etc_card_no',
-//         align: 'center',
-//         render: (record) => {
-//             return (<p style={{
-//                 minWidth: 90,
-//                 overflow: "hidden",
-//                 whiteSpace: "nowrap",
-//                 textOverflow: "ellipsis",
-//                 padding: 0,
-//                 margin: 0
-//             }}>{record}</p>);
-//         },
-//     },
-//     {
-//         title: '操作',
-//         key: 'operation',
-//         fixed: 'right',
-//         align: 'center',
-//         render: (record) => {
-//             return (<div
-//                 style={{
-//                     minWidth: 50,
-//                     display: 'flex',
-//                     flexDirection: 'row',
-//                     alignItems: 'center',
-//                     justifyContent: 'center',
-//                     fontSize: 12
-//                 }}
-//                 onClick={() => {
-//                     orderStore.setIsShowOrderDialog(true);
-//                     orderStore.setOrderChildrenObject(record);
-//                 }}><a><Icon type="eye-o" style={{marginRight: 2, color: '#1890ff'}}/>查看</a></div>);
-//         },
-//     },
-// ];
-
-// 一键加油之后上线
+//商户号部分不展示
 const columns = [
     {
-        title: '消费订单号',
+        title: '订单号',
         dataIndex: 'order_no',
         key: 'order_no',
         align: 'center',
@@ -1439,7 +694,8 @@ const columns = [
                 margin: 0
             }}>{record}</p>);
         },
-    }, {
+    },
+    {
         title: '订单状态',
         dataIndex: 'order_status',
         key: 'order_status',
@@ -1528,23 +784,7 @@ const columns = [
         },
     },
     {
-        title: '总金额',
-        dataIndex: 'total_amount',
-        key: 'total_amount',
-        align: 'center',
-        render: (record) => {
-            return (<p style={{
-                minWidth: 45,
-                overflow: "hidden",
-                whiteSpace: "nowrap",
-                textOverflow: "ellipsis",
-                padding: 0,
-                margin: 0
-            }}>{record}</p>);
-        },
-    },
-    {
-        title: '折扣',
+        title: '折扣金额',
         dataIndex: 'discount_amount',
         key: 'discount_amount',
         align: 'center',
@@ -1560,7 +800,39 @@ const columns = [
         },
     },
     {
-        title: '第三方折扣',
+        title: '订单金额',
+        dataIndex: 'total_amount',
+        key: 'total_amount',
+        align: 'center',
+        render: (record) => {
+            return (<p style={{
+                minWidth: 45,
+                overflow: "hidden",
+                whiteSpace: "nowrap",
+                textOverflow: "ellipsis",
+                padding: 0,
+                margin: 0
+            }}>{record}</p>);
+        },
+    },
+    {
+        title: '实际金额',
+        dataIndex: 'actual_amount',
+        key: 'actual_amount',
+        align: 'center',
+        render: (record) => {
+            return (<p style={{
+                minWidth: 60,
+                overflow: "hidden",
+                whiteSpace: "nowrap",
+                textOverflow: "ellipsis",
+                padding: 0,
+                margin: 0
+            }}>{record}</p>);
+        },
+    },
+    {
+        title: '三方折扣',
         dataIndex: 'partner_discount',
         key: 'partner_discount',
         align: 'center',
@@ -1576,23 +848,7 @@ const columns = [
         },
     },
     {
-        title: '实付',
-        dataIndex: 'actual_amount',
-        key: 'actual_amount',
-        align: 'center',
-        render: (record) => {
-            return (<p style={{
-                minWidth: 60,
-                overflow: "hidden",
-                whiteSpace: "nowrap",
-                textOverflow: "ellipsis",
-                padding: 0,
-                margin: 0
-            }}>{record}</p>);
-        },
-    },
-    {
-        title: '油品',
+        title: '油品类型',
         dataIndex: 'oil_type',
         key: 'oil_type',
         align: 'center',
@@ -1616,7 +872,7 @@ const columns = [
         },
     },
     {
-        title: '单价',
+        title: '油品单价',
         dataIndex: 'oil_price',
         key: 'oil_price',
         align: 'center',
@@ -1632,7 +888,7 @@ const columns = [
         },
     },
     {
-        title: '数量',
+        title: '油品数量',
         dataIndex: 'oil_num',
         key: 'oil_num',
         align: 'center',
@@ -1664,7 +920,7 @@ const columns = [
         },
     },
     {
-        title: '终端编号',
+        title: '终端',
         dataIndex: 'terminal_id',
         key: 'terminal_id',
         align: 'center',
@@ -1680,13 +936,29 @@ const columns = [
         },
     },
     {
-        title: '商户名称',
-        dataIndex: 'terminal_name',
-        key: 'terminal_name',
+        title: '油站',
+        dataIndex: 'station_name',
+        key: 'station_name',
         align: 'center',
         render: (record) => {
             return (<p style={{
-                minWidth: 60,
+                minWidth: 45,
+                overflow: "hidden",
+                whiteSpace: "nowrap",
+                textOverflow: "ellipsis",
+                padding: 0,
+                margin: 0
+            }}>{record}</p>);
+        },
+    },
+    {
+        title: '合作方',
+        dataIndex: 'partner_name',
+        key: 'partner_name',
+        align: 'center',
+        render: (record) => {
+            return (<p style={{
+                minWidth: 75,
                 overflow: "hidden",
                 whiteSpace: "nowrap",
                 textOverflow: "ellipsis",
@@ -1712,9 +984,9 @@ const columns = [
         },
     },
     {
-        title: '用户手机号',
-        dataIndex: 'user_mobile',
-        key: 'user_mobile',
+        title: '手机号',
+        dataIndex: 'mobile',
+        key: 'mobile',
         align: 'center',
         render: (record) => {
             return (<p style={{
@@ -1725,121 +997,6 @@ const columns = [
                 padding: 0,
                 margin: 0
             }}>{record}</p>);
-        },
-    },
-    {
-        title: '用户名',
-        dataIndex: 'user_name',
-        key: 'user_name',
-        align: 'center',
-        render: (record) => {
-            return (<p style={{
-                minWidth: 45,
-                overflow: "hidden",
-                whiteSpace: "nowrap",
-                textOverflow: "ellipsis",
-                padding: 0,
-                margin: 0
-            }}>{record}</p>);
-        },
-    },
-    {
-        title: '合作方名称',
-        dataIndex: 'partner_name',
-        key: 'partner_name',
-        align: 'center',
-        render: (record) => {
-            return (<p style={{
-                minWidth: 75,
-                overflow: "hidden",
-                whiteSpace: "nowrap",
-                textOverflow: "ellipsis",
-                padding: 0,
-                margin: 0
-            }}>{record}</p>);
-        },
-    },
-    {
-        title: '第三方订单号',
-        dataIndex: 'out_order_no',
-        key: 'out_order_no',
-        align: 'center',
-        render: (record) => {
-            return (<p style={{
-                minWidth: 90,
-                overflow: "hidden",
-                whiteSpace: "nowrap",
-                textOverflow: "ellipsis",
-                padding: 0,
-                margin: 0
-            }}>{record}</p>);
-        },
-    }, {
-        title: 'ETC卡号',
-        dataIndex: 'etc_card_no',
-        key: 'etc_card_no',
-        align: 'center',
-        render: (record) => {
-            return (<p style={{
-                minWidth: 90,
-                overflow: "hidden",
-                whiteSpace: "nowrap",
-                textOverflow: "ellipsis",
-                padding: 0,
-                margin: 0
-            }}>{record}</p>);
-        },
-    },
-    // {
-    //     title: '子流水单',
-    //     key: 'children',
-    //     fixed: 'right',
-    //     align: 'center',
-    //     render: (record) => {
-    //         return (<div
-    //             style={{
-    //                 minWidth: 80,
-    //                 display: 'flex',
-    //                 flexDirection: 'row',
-    //                 alignItems: 'center',
-    //                 justifyContent: 'center',
-    //                 fontSize: 12
-    //             }}
-    //             onClick={
-    //                 () => {
-    //                     if (record.sub_bill_array){
-    //                         orderStore.setIsShowOrderChildrenDialog(true);
-    //                         orderStore.setOrderChildrenObject(record);
-    //                     }else {
-    //                         message.info("无子流水单");
-    //                     }
-    //                 }}>
-    //             <a><Icon type="eye-o" style={{marginRight: 2, color: '#1890ff'}}/>子流水单</a></div>);
-    //     },
-    // },
-    {
-        title: '打印小票',
-        key: 'ticket',
-        fixed: 'right',
-        align: 'center',
-        render: (record) => {
-            return (<div style={{
-                minWidth: 50,
-                display: 'flex',
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: 12
-            }}
-            >
-                <Popconfirm
-                    title="确定要申请打印小票吗？" okText="确定" cancelText="取消"
-                    onConfirm={() => {
-                        orderStore.billFixPrintTicket(record.order_no)
-                    }}>
-                    <a><Icon type="form" style={{ marginRight: 2 }} />打印</a>
-                </Popconfirm>
-            </div>);
         },
     },
     {
@@ -1848,25 +1005,32 @@ const columns = [
         fixed: 'right',
         align: 'center',
         render: (record) => {
-            return (<div
-                style={{
-                    minWidth: 50,
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontSize: 12
-                }}
-                onClick={() => {
-                    orderStore.setIsShowOrderDialog(true);
-                    orderStore.setOrderChildrenObject(record);
-                }}><a><Icon type="eye-o" style={{ marginRight: 2, color: '#1890ff' }} />查看</a></div>);
+            return (<div style={optionStyle.container}>
+                <div style={optionStyle.item} onClick={() => {
+                    // orderStore.setIsShowDrawer(true);
+                    orderStore.consumeCoupon(record.order_no)
+                }}>
+                    <Icon type="edit" style={{ color: "#1890ff" }} />
+                    <p style={optionStyle.update}>查看返券</p>
+                </div>
+                <Popconfirm
+                    title="确定查看开票地址吗？" okText="是的" cancelText="取消"
+                    onConfirm={() => {
+                        orderStore.invoiceApplyUrl(record.order_no)
+                    }}>
+                    <div style={optionStyle.item}>
+                        <Icon type="eye-o" style={{ color: "#379b7f" }} />
+                        <p style={optionStyle.see}>开票地址</p>
+                    </div>
+                </Popconfirm>
+            </div>
+            );
         },
     },
 ];
 const columns2 = [
     {
-        title: '消费订单号',
+        title: '订单号',
         dataIndex: 'order_no',
         key: 'order_no',
         align: 'center',
@@ -1880,7 +1044,8 @@ const columns2 = [
                 margin: 0
             }}>{record}</p>);
         },
-    }, {
+    },
+    {
         title: '订单状态',
         dataIndex: 'order_status',
         key: 'order_status',
@@ -1969,23 +1134,7 @@ const columns2 = [
         },
     },
     {
-        title: '总金额',
-        dataIndex: 'total_amount',
-        key: 'total_amount',
-        align: 'center',
-        render: (record) => {
-            return (<p style={{
-                minWidth: 45,
-                overflow: "hidden",
-                whiteSpace: "nowrap",
-                textOverflow: "ellipsis",
-                padding: 0,
-                margin: 0
-            }}>{record}</p>);
-        },
-    },
-    {
-        title: '折扣',
+        title: '折扣金额',
         dataIndex: 'discount_amount',
         key: 'discount_amount',
         align: 'center',
@@ -2001,13 +1150,13 @@ const columns2 = [
         },
     },
     {
-        title: '第三方折扣',
-        dataIndex: 'partner_discount)',
-        key: 'partner_discount)',
+        title: '订单金额',
+        dataIndex: 'total_amount',
+        key: 'total_amount',
         align: 'center',
         render: (record) => {
             return (<p style={{
-                minWidth: 75,
+                minWidth: 45,
                 overflow: "hidden",
                 whiteSpace: "nowrap",
                 textOverflow: "ellipsis",
@@ -2017,7 +1166,7 @@ const columns2 = [
         },
     },
     {
-        title: '实付',
+        title: '实际金额',
         dataIndex: 'actual_amount',
         key: 'actual_amount',
         align: 'center',
@@ -2033,7 +1182,23 @@ const columns2 = [
         },
     },
     {
-        title: '油品',
+        title: '三方折扣',
+        dataIndex: 'partner_discount',
+        key: 'partner_discount',
+        align: 'center',
+        render: (record) => {
+            return (<p style={{
+                minWidth: 75,
+                overflow: "hidden",
+                whiteSpace: "nowrap",
+                textOverflow: "ellipsis",
+                padding: 0,
+                margin: 0
+            }}>{record}</p>);
+        },
+    },
+    {
+        title: '油品类型',
         dataIndex: 'oil_type',
         key: 'oil_type',
         align: 'center',
@@ -2057,7 +1222,7 @@ const columns2 = [
         },
     },
     {
-        title: '单价',
+        title: '油品单价',
         dataIndex: 'oil_price',
         key: 'oil_price',
         align: 'center',
@@ -2073,7 +1238,7 @@ const columns2 = [
         },
     },
     {
-        title: '数量',
+        title: '油品数量',
         dataIndex: 'oil_num',
         key: 'oil_num',
         align: 'center',
@@ -2105,7 +1270,7 @@ const columns2 = [
         },
     },
     {
-        title: '终端编号',
+        title: '终端',
         dataIndex: 'terminal_id',
         key: 'terminal_id',
         align: 'center',
@@ -2121,13 +1286,29 @@ const columns2 = [
         },
     },
     {
-        title: '商户名称',
-        dataIndex: 'terminal_name',
-        key: 'terminal_name',
+        title: '油站',
+        dataIndex: 'station_name',
+        key: 'station_name',
         align: 'center',
         render: (record) => {
             return (<p style={{
-                minWidth: 60,
+                minWidth: 45,
+                overflow: "hidden",
+                whiteSpace: "nowrap",
+                textOverflow: "ellipsis",
+                padding: 0,
+                margin: 0
+            }}>{record}</p>);
+        },
+    },
+    {
+        title: '合作方',
+        dataIndex: 'partner_name',
+        key: 'partner_name',
+        align: 'center',
+        render: (record) => {
+            return (<p style={{
+                minWidth: 75,
                 overflow: "hidden",
                 whiteSpace: "nowrap",
                 textOverflow: "ellipsis",
@@ -2153,9 +1334,106 @@ const columns2 = [
         },
     },
     {
-        title: '用户手机号',
-        dataIndex: 'user_mobile',
-        key: 'user_mobile',
+        title: '手机号',
+        dataIndex: 'mobile',
+        key: 'mobile',
+        align: 'center',
+        render: (record) => {
+            return (<p style={{
+                minWidth: 75,
+                overflow: "hidden",
+                whiteSpace: "nowrap",
+                textOverflow: "ellipsis",
+                padding: 0,
+                margin: 0
+            }}>{record}</p>);
+        },
+    },
+    // {
+    //     title: '商户名称',
+    //     dataIndex: 'terminal_name',
+    //     key: 'terminal_name',
+    //     align: 'center',
+    //     render: (record) => {
+    //         return (<p style={{
+    //             minWidth: 60,
+    //             overflow: "hidden",
+    //             whiteSpace: "nowrap",
+    //             textOverflow: "ellipsis",
+    //             padding: 0,
+    //             margin: 0
+    //         }}>{record}</p>);
+    //     },
+    // },
+    // {
+    //     title: '用户名',
+    //     dataIndex: 'user_name',
+    //     key: 'user_name',
+    //     align: 'center',
+    //     render: (record) => {
+    //         return (<p style={{
+    //             minWidth: 45,
+    //             overflow: "hidden",
+    //             whiteSpace: "nowrap",
+    //             textOverflow: "ellipsis",
+    //             padding: 0,
+    //             margin: 0
+    //         }}>{record}</p>);
+    //     },
+    // },
+    // {
+    //     title: '打印小票',
+    //     key: 'ticket',
+    //     fixed: 'right',
+    //     align: 'center',
+    //     render: (record) => {
+    //         return (<div style={{
+    //             minWidth: 50,
+    //             display: 'flex',
+    //             flexDirection: 'row',
+    //             alignItems: 'center',
+    //             justifyContent: 'center',
+    //             fontSize: 12
+    //         }}
+    //         >
+    //             <Popconfirm
+    //                 title="确定要申请打印小票吗？" okText="确定" cancelText="取消"
+    //                 onConfirm={() => {
+    //                     orderStore.billFixPrintTicket(record.order_no)
+    //                 }}>
+    //                 <a><Icon type="form" style={{marginRight: 2}}/>打印</a>
+    //             </Popconfirm>
+    //         </div>);
+    //     },
+    // },
+    // {
+    //     title: '操作',
+    //     key: 'operation',
+    //     fixed: 'right',
+    //     align: 'center',
+    //     render: (record) => {
+    //         return (<div
+    //             style={{
+    //                 minWidth: 50,
+    //                 display: 'flex',
+    //                 flexDirection: 'row',
+    //                 alignItems: 'center',
+    //                 justifyContent: 'center',
+    //                 fontSize: 12
+    //             }}
+    //             onClick={() => {
+    //                 orderStore.setIsShowOrderDialog(true);
+    //                 orderStore.setOrderChildrenObject(record);
+    //             }}><a><Icon type="eye-o" style={{marginRight: 2, color: '#1890ff'}}/>查看</a></div>);
+    //     },
+    // },
+];
+//明细table
+const columns3 = [
+    {
+        title: '券名称',
+        dataIndex: 'coupon_name',
+        key: 'coupon_name',
         align: 'center',
         render: (record) => {
             return (<p style={{
@@ -2169,25 +1447,9 @@ const columns2 = [
         },
     },
     {
-        title: '用户名',
-        dataIndex: 'user_name',
-        key: 'user_name',
-        align: 'center',
-        render: (record) => {
-            return (<p style={{
-                minWidth: 45,
-                overflow: "hidden",
-                whiteSpace: "nowrap",
-                textOverflow: "ellipsis",
-                padding: 0,
-                margin: 0
-            }}>{record}</p>);
-        },
-    },
-    {
-        title: '合作方名称',
-        dataIndex: 'partner_name',
-        key: 'partner_name',
+        title: '创建时间',
+        dataIndex: 'coupon_create_time',
+        key: 'coupon_create_time',
         align: 'center',
         render: (record) => {
             return (<p style={{
@@ -2201,13 +1463,13 @@ const columns2 = [
         },
     },
     {
-        title: '第三方订单号',
-        dataIndex: 'out_order_no',
-        key: 'out_order_no',
+        title: '券创建人',
+        dataIndex: 'coupon_operator',
+        key: 'coupon_operator',
         align: 'center',
         render: (record) => {
             return (<p style={{
-                minWidth: 90,
+                minWidth: 60,
                 overflow: "hidden",
                 whiteSpace: "nowrap",
                 textOverflow: "ellipsis",
@@ -2215,14 +1477,127 @@ const columns2 = [
                 margin: 0
             }}>{record}</p>);
         },
-    }, {
-        title: 'ETC卡号',
-        dataIndex: 'etc_card_no',
-        key: 'etc_card_no',
+    },
+    {
+        title: '发放名称',
+        dataIndex: 'act_name',
+        key: 'act_name',
         align: 'center',
         render: (record) => {
             return (<p style={{
-                minWidth: 90,
+                minWidth: 60,
+                overflow: "hidden",
+                whiteSpace: "nowrap",
+                textOverflow: "ellipsis",
+                padding: 0,
+                margin: 0
+            }}>{record}</p>);
+        },
+    },
+    {
+        title: '发放时间',
+        dataIndex: 'push_time',
+        key: 'push_time',
+        align: 'center',
+        render: (record) => {
+            return (<p style={{
+                minWidth: 60,
+                overflow: "hidden",
+                whiteSpace: "nowrap",
+                textOverflow: "ellipsis",
+                padding: 0,
+                margin: 0
+            }}>{record}</p>);
+        },
+    },
+    {
+        title: '发放人',
+        dataIndex: 'act_operator',
+        key: 'act_operator',
+        align: 'center',
+        render: (record) => {
+            return (<p style={{
+                minWidth: 60,
+                overflow: "hidden",
+                whiteSpace: "nowrap",
+                textOverflow: "ellipsis",
+                padding: 0,
+                margin: 0
+            }}>{record}</p>);
+        },
+    },
+    {
+        title: '投放状态',
+        dataIndex: 'push_status',
+        key: 'push_status',
+        align: 'center',
+        render: (record) => {
+            return (<p style={{
+                minWidth: 75,
+                overflow: "hidden",
+                whiteSpace: "nowrap",
+                textOverflow: "ellipsis",
+                padding: 0,
+                margin: 0
+            }}>{record}</p>);
+        },
+    },
+    {
+        title: '核销订单号',
+        dataIndex: 'use_order_no',
+        key: 'use_order_no',
+        align: 'center',
+        render: (record) => {
+            return (<p style={{
+                minWidth: 60,
+                overflow: "hidden",
+                whiteSpace: "nowrap",
+                textOverflow: "ellipsis",
+                padding: 0,
+                margin: 0
+            }}>{record}</p>);
+        },
+    },
+    {
+        title: '核销站点',
+        dataIndex: 'use_station_name',
+        key: 'use_station_name',
+        align: 'center',
+        render: (record) => {
+            return (<p style={{
+                minWidth: 60,
+                overflow: "hidden",
+                whiteSpace: "nowrap",
+                textOverflow: "ellipsis",
+                padding: 0,
+                margin: 0
+            }}>{record}</p>);
+        },
+    },
+    {
+        title: '核销时间',
+        dataIndex: 'use_time',
+        key: 'use_time',
+        align: 'center',
+        render: (record) => {
+            return (<p style={{
+                minWidth: 60,
+                overflow: "hidden",
+                whiteSpace: "nowrap",
+                textOverflow: "ellipsis",
+                padding: 0,
+                margin: 0
+            }}>{record}</p>);
+        },
+    },
+    {
+        title: '券类型',
+        dataIndex: 'coupon_type',
+        key: 'coupon_type',
+        align: 'center',
+        render: (record) => {
+            return (<p style={{
+                minWidth: 60,
                 overflow: "hidden",
                 whiteSpace: "nowrap",
                 textOverflow: "ellipsis",
@@ -2234,7 +1609,7 @@ const columns2 = [
     {
         title: '操作',
         key: 'operation',
-        fixed: 'right',
+        // fixed: 'right',
         align: 'center',
         render: (record) => {
             return (<div
@@ -2244,12 +1619,65 @@ const columns2 = [
                     flexDirection: 'row',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    fontSize: 12
-                }}
-                onClick={() => {
-                    orderStore.setIsShowOrderDialog(true);
-                    orderStore.setOrderChildrenObject(record);
-                }}><a><Icon type="eye-o" style={{ marginRight: 2, color: '#1890ff' }} />查看</a></div>);
+                    fontSize: 13
+                }}>
+                <Popconfirm
+                    title="确定要撤销此券吗？" okText="是的" cancelText="取消"
+                    onConfirm={() => {
+                        orderStore.couponInvalid(record.id)
+                    }}>
+                    <div><a>撤销</a></div>
+                </Popconfirm>
+                <Popconfirm
+                    title="确定要核销此券吗？" okText="是的" cancelText="取消"
+                    style={{ display: record.coupon_type == '提货券' ? 'flex' : 'none' }}
+                    onConfirm={() => {
+                        orderStore.couponWriteOff(record.id)
+                    }}>
+                    <div style={{ display: record.push_status == '已使用' ? 'none' : 'flex' }}><a> | </a><a style={{ color: '#FF291F' }}> 核销</a></div>
+                </Popconfirm>
+                <div style={{ display: record.push_status == '已使用' ? 'flex' : 'none' }}><a> | </a><a style={{ color: '#FF291F' }}> 已核销</a></div>
+            </div>
+
+
+            );
         },
     },
 ];
+const optionStyle = {
+    container: {
+        minWidth: 50,
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontSize: 13
+    },
+    item: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginRight: 4,
+        cursor: 'pointer'
+    },
+    update: {
+        margin: 0,
+        color: "#1890ff"
+    },
+    delete: {
+        margin: 0,
+        color: "#ff5501"
+    },
+    see: {
+        margin: 0,
+        color: "#379b7f"
+    },
+    text: {
+        overflow: "hidden",
+        whiteSpace: "nowrap",
+        textOverflow: "ellipsis",
+        padding: 0,
+        margin: 0,
+    }
+}

@@ -650,3 +650,8 @@
     font-size: 32rpx;
     box-shadow: 0rpx 10rpx 40rpx 0rpx rgba(79, 221, 128, 0.3);
 }
+
+.time {
+    font-size: 24rpx;
+    color: #333;
+}

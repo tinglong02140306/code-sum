@@ -273,3 +273,7 @@
     color: #999999;
     margin-top: 8rpx;
 }
+
+.ptcr-top-left-mark {
+    line-height: 40rpx;
+}

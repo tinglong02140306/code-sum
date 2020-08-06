@@ -29,24 +29,35 @@ class Create extends React.Component {
         buyTipMsg: false,  // 卷包限购 提示语是否显示标志位
         buy_limit_count: "",
         package_total: "",
-        area_name: "",
+        area_name: null,
         // 时间复选框
-        timeCheckVal: []
+        timeCheckVal: [],
+        optionType: "", // 1 新增 2 编辑 3 查看
+        disabled: false
     };
 
     componentDidMount() {
+        let optionType = this.props.tickerBagStore.optionType;
+        this.setState({
+            optionType: optionType,
+            disabled: optionType == 3 ? true : false
+        })
         this.props.tickerBagStore.queryAct(() => {
             this.didMountDealData();
         });
     }
 
     onSubmitClick = (e) => {
-
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                const { timeInterValue, timeInterList, buy_limit_count, package_total, area_name, modify_flag } = this.state;
+                const { timeInterValue, timeInterList, buy_limit_count, package_total, area_name, modify_flag, optionType } = this.state;
                 const record = this.props.tickerBagStore.record;
+                // 查看
+                if (optionType == 3) {
+                    this.props.history.push('/ticket-bag');
+                    return;
+                }
                 let len = Object.keys(record).length,
                     params = {};
                 if (len == 0 || (len > 0 && modify_flag)) {
@@ -61,10 +72,12 @@ class Create extends React.Component {
                         let arr = timeInterList.filter((item) => {
                             return item.isChecked;
                         });
+                        // timeObj.time_interval = timeInterValue == 1 ? JSON.stringify(arr) : null;
                         timeObj.time_interval = JSON.stringify(arr);
                         timeObj.start_date = formatData(values.date[0]);
                         timeObj.end_date = formatData(values.date[1]);
                     } else {
+                        // timeObj.time_interval = null;
                         timeObj.start_date = "";
                         timeObj.end_date = "";
                     }
@@ -103,12 +116,11 @@ class Create extends React.Component {
                     }
                 }
                 console.log(params)
-
-                if (Object.keys(record).length == 0) {
+                if (optionType == 1) {
                     this.props.tickerBagStore.addBag(params, () => {
                         this.props.history.push('/ticket-bag');
                     });
-                } else {
+                } else if (optionType == 2) {
                     this.props.tickerBagStore.updateBag(params, () => {
                         this.props.history.push('/ticket-bag');
                     });
@@ -153,7 +165,7 @@ class Create extends React.Component {
     // 限时抢购
     limitTimePayChange = (e) => {
         this.setState({
-            limitTimeStatus: e.target.value == '0' ? true : false
+            limitTimeStatus: e.target.value == '1' ? true : false
         });
     }
 
@@ -166,25 +178,47 @@ class Create extends React.Component {
         });
     }
     // 时间选择 复选框改变
-    timeCheckChange = (value) => {
-        console.log('timeCheckChange', value)
-        let timeInterList = this.state.timeInterList,
-            selectFlag = false;
-        value && value.map((item) => {
-            timeInterList[item].isChecked = true;
-            selectFlag = true;
-        });
-        if (value.length == 0) {
-            timeInterList.map((item) => {
-                item.isChecked = false;
-            });
-            selectFlag = false
-        }
+    // timeCheckChange = (value, val1, val2) => {
+    //     console.log('timeCheckChange', value, val1, val2)
+    //     let { timeInterList, timeCheckVal } = this.state,
+    //         selectFlag = false;
+    //     value && value.map((item) => {
+    //         timeInterList[item].isChecked = true;
+    //         selectFlag = true;
+    //     });
+    //     if (value.length == 0) {
+    //         timeInterList.map((item) => {
+    //             item.isChecked = false;
+    //         });
+    //         selectFlag = false;
+    //         // timeCheckVal = [];
+    //     } else {
+    //         // timeCheckVal.push(value[0])
+    //     }
+
+    //     this.setState({
+    //         timeInterList: timeInterList,
+    //         timeSelectFlag: selectFlag
+    //     });
+    //     console.log(timeInterList)
+    // }
+    timeItemChange = (e) => {
+        let { timeInterList } = this.state,
+            selectFlag = false,
+            target = e.target,
+            index = target.value,
+            checked = target.checked;
+
+        timeInterList[index].isChecked = checked;
+        let arr = timeInterList.filter((item) => {
+            return item.isChecked;
+        })
+        selectFlag = arr.length > 0 ? true : false;
         this.setState({
             timeInterList: timeInterList,
             timeSelectFlag: selectFlag
         });
-        console.log(timeInterList)
+
     }
     // 开始时间
     timeStartChange = (val, strVal, index) => {
@@ -267,22 +301,20 @@ class Create extends React.Component {
                 timeSelectFlag: len > 0 ? true : false,   // 判断时区数据 有 true  无 false
                 timeInterValue: len > 0 ? '1' : '0',  //  时区选择的文本值 0 不限  1 自定义
                 modify_flag: record.modify_flag ? true : false,
-
-                // TODO
                 buy_limit_count: record.buy_limit_count,
                 package_total: record.package_total,
                 numTipMsg: record.package_limit_type,
                 buyTipMsg: record.buy_limit_type,
                 coupon_count: record.coupon_count,
                 timeCheckVal: arrVal,
-                area_name: record.area_name.split(',')
+                area_name: record.area_name ? record.area_name.split(',') : null
             });
             if (!record.start_date && !record.end_date) {
                 record.start_date = getCurrentDate();
                 record.end_date = getCurAfterDate();
             }
 
-            record.area_code = record.area_code.split(',');
+            record.area_code = record.area_code ? record.area_code.split(',') : null;
             // record.timeCheckVal = arrVal;
             // console.log(record.coupon_package_type, record.timeCheckVal, arrVal)
             record.coupon_package_type = record.coupon_package_type;
@@ -298,7 +330,24 @@ class Create extends React.Component {
     render() {
         const { getFieldDecorator, getFieldsValue } = this.props.form;
         const { loadingAdd, act_list } = this.props.tickerBagStore;
-        const { record, limitTimeStatus, timeInterStatus, timeInterList, timeSelectFlag, timeInterValue, modify_flag, coupon_count, numTipMsg, buyTipMsg, buy_limit_count, package_total, timeCheckVal } = this.state;
+        const {
+            record,
+            limitTimeStatus,
+            timeInterStatus,
+            timeInterList,
+            timeSelectFlag,
+            timeInterValue,
+            modify_flag,
+            coupon_count,
+            numTipMsg,
+            buyTipMsg,
+            buy_limit_count,
+            package_total,
+            timeCheckVal,
+            optionType,
+            disabled,
+            area_name
+        } = this.state;
         const { act_id } = getFieldsValue(['act_id']);
         let item = this.getActObj(act_id);
 
@@ -320,18 +369,18 @@ class Create extends React.Component {
         return (
             <Spin spinning={loadingAdd}>
                 <div className="ticket-bag-create-container">
-                    <div className="ticket-bag-create-title">{Object.keys(record).length == 0 ? '新增洗车券包' : '修改洗车券包'}</div>
+                    <div className="ticket-bag-create-title">{optionType == 1 ? '新增洗车券包' : optionType == 2 ? '修改洗车券包' : "查看洗车券包"}</div>
                     <Form className="ticket-bag-create-box" layout="inline" onSubmit={this.onSubmitClick}>
                         <div className="ticket-bag-create-warpper">
                             <div className="ticket-bag-create-content-box">
                                 <Form.Item className="ticket-bag-create-box-item other" label="券包名称">
                                     {getFieldDecorator('package_name', {
                                         rules: [{ required: true, message: '请输入券包名称' }], initialValue: record.package_name
-                                    })(<Input placeholder="请输入洗车券包名称，用于对用户展示洗车券包名称" />)}
+                                    })(<Input placeholder="请输入洗车券包名称，用于对用户展示洗车券包名称" disabled={disabled} />)}
                                 </Form.Item>
                                 <Form.Item className="ticket-bag-create-box-item other" label="选择发放活动">
                                     {getFieldDecorator('act_id', { rules: [{ required: true, message: '请选择发放活动' }], initialValue: record.act_id })(
-                                        <Select placeholder="请选择发放活动" disabled={!modify_flag} onChange={this.actChange}>
+                                        <Select placeholder="请选择发放活动" disabled={disabled || !modify_flag} onChange={this.actChange}>
                                             {act_list && act_list.map((item) => {
                                                 return (<Select.Option key={item.id} value={item.id}>
                                                     {item.act_name}
@@ -347,7 +396,7 @@ class Create extends React.Component {
 
                                 <Form.Item className="ticket-bag-create-box-item other" label="券包价格">
                                     {getFieldDecorator('package_price', { rules: [{ required: true, message: '请选择发放活动' }], initialValue: record.package_price })
-                                        (<Input placeholder="请输入券包价格" />)}
+                                        (<Input placeholder="请输入券包价格" disabled={disabled} />)}
                                 </Form.Item>
 
                                 <Form.Item className="ticket-bag-create-box-item other" label="折扣率">
@@ -356,42 +405,44 @@ class Create extends React.Component {
                                             { required: true, message: '请输入券包折扣率,取值范围(0-1)' },
                                             { validator: this.validateDiscountRate }], initialValue: record.discount_rate
                                     })
-                                        (<Input placeholder="请输入券包折扣率,用于展示,取值范围(0-1)" />)}
+                                        (<Input placeholder="请输入券包折扣率,用于展示,取值范围(0-1)" disabled={disabled} />)}
                                 </Form.Item>
                                 <Form.Item className="ticket-bag-create-box-item other" label="是否限制新用户购买">
                                     {getFieldDecorator('buy_limit', { initialValue: record.buy_limit })
-                                        (<Radio.Group>
+                                        (<Radio.Group disabled={disabled}>
                                             <Radio value="NEW_USER">是</Radio>
                                             <Radio value="">否</Radio>
                                         </Radio.Group>)}
                                 </Form.Item>
                                 <Form.Item className="ticket-bag-create-box-item other" label="排列顺序">
                                     {getFieldDecorator('sequence', { rules: [{ required: true, message: '请输入排列顺序' }], initialValue: record.sequence })
-                                        (<Input placeholder="按数字自小到大排列优惠券包的展示顺序，例：1，2，3" />)}
+                                        (<Input disabled={disabled} placeholder="按数字自小到大排列优惠券包的展示顺序，例：1，2，3" />)}
                                 </Form.Item>
                                 <Form.Item className="ticket-bag-create-box-item other" label="背景图">
                                     {getFieldDecorator('background_url', { rules: [{ required: true, message: '请输入背景图地址' }], initialValue: record.background_url })
-                                        (<Input placeholder="请输入背景图地址" />)}
+                                        (<Input disabled={disabled} placeholder="请输入背景图地址" />)}
                                 </Form.Item>
                                 <Form.Item className="ticket-bag-create-box-item other" label="所属区域">
-                                    {getFieldDecorator('area_code', { rules: [{ required: true, message: '请选择所属区域' }], initialValue: record.area_code })(
-                                        <TreeSelect {...AreaProps} />
-                                    )}
+                                    <div className="tree-select-wrap">
+                                        {getFieldDecorator('area_code', { rules: [{ required: true, message: '请选择所属区域' }], initialValue: record.area_code })(
+                                            <TreeSelect disabled={disabled} {...AreaProps} />
+                                        )}
+                                    </div>
                                 </Form.Item>
                                 <Form.Item className="ticket-bag-create-box-item other" label="描述">
                                     {getFieldDecorator('description', { rules: [{ required: true, message: '请输入券包描述' }], initialValue: record.description })
-                                        (<Input.TextArea rows={4} placeholder="请输入券包描述，可分行输入" />)}
+                                        (<Input.TextArea disabled={disabled} rows={4} placeholder="请输入券包描述，可分行输入" />)}
                                 </Form.Item>
                                 <Form.Item className="ticket-bag-create-box-item other" label="使用说明">
                                     {getFieldDecorator('instruction', { rules: [{ required: true, message: '请输入券包使用说明' }], initialValue: record.instruction })
-                                        (<Input.TextArea rows={4} placeholder="请输入券包使用说明" />)}
+                                        (<Input.TextArea disabled={disabled} rows={4} placeholder="请输入券包使用说明" />)}
                                 </Form.Item>
                             </div>
 
                             <div className="ticket-bag-create-content-box">
                                 <Form.Item className="ticket-bag-create-box-item other" label="限时抢购">
                                     {getFieldDecorator('coupon_package_type', { rules: [{ required: true }], initialValue: record.coupon_package_type })
-                                        (<Radio.Group onChange={this.limitTimePayChange} disabled={!modify_flag}>
+                                        (<Radio.Group onChange={this.limitTimePayChange} disabled={disabled || !modify_flag}>
                                             <div><Radio value={1}>不限</Radio></div>
                                             <div>
                                                 <Radio value={2}>限制</Radio>
@@ -399,14 +450,14 @@ class Create extends React.Component {
                                                     (<DatePicker.RangePicker
                                                         size="small"
                                                         showTime
-                                                        disabled={!modify_flag || limitTimeStatus}
+                                                        disabled={disabled || !modify_flag || limitTimeStatus}
                                                         format="YYYY-MM-DD"
                                                         placeholder="请选择日期" />)}
 
                                                 {limitTimeStatus ? null :
                                                     <div className="time-inter-wrap">
                                                         <div className="title">时间区间</div>
-                                                        <Radio.Group onChange={this.handleTimeInterChange} value={timeInterValue} disabled={!modify_flag}>
+                                                        <Radio.Group onChange={this.handleTimeInterChange} value={timeInterValue} disabled={disabled || !modify_flag}>
                                                             <Radio.Button value="0">不限</Radio.Button>
                                                             <Radio.Button value="1">自定义</Radio.Button>
                                                         </Radio.Group>
@@ -414,19 +465,20 @@ class Create extends React.Component {
                                                             {timeInterList && timeInterList.map((item) => {
                                                                 return (
                                                                     <div key={item.index} value={item.index}>
-                                                                        <Checkbox.Group onChange={this.timeCheckChange} disabled={!modify_flag} defaultValue={timeCheckVal}>
-                                                                            <Checkbox value={item.index}>{item.weekday}</Checkbox>
+                                                                        {/* onChange={this.timeCheckChange} */}
+                                                                        <Checkbox.Group disabled={disabled || !modify_flag} defaultValue={timeCheckVal}>
+                                                                            <Checkbox onChange={this.timeItemChange} value={item.index}>{item.weekday}</Checkbox>
                                                                             <div className="date-picker-wrap">
                                                                                 <TimePicker
                                                                                     allowClear={false}
-                                                                                    disabled={!modify_flag || !item.isChecked}
+                                                                                    disabled={disabled || !modify_flag || !item.isChecked}
                                                                                     value={moment(item.startTime, 'HH:mm')}
                                                                                     format="HH:mm"
                                                                                     onChange={(val, strVal) => this.timeStartChange(val, strVal, item.index)} />
                                                                                 <span className="timePicker-line">-</span>
                                                                                 <TimePicker
                                                                                     allowClear={false}
-                                                                                    disabled={!modify_flag || !item.isChecked}
+                                                                                    disabled={disabled || !modify_flag || !item.isChecked}
                                                                                     value={moment(item.endTime, 'HH:mm')}
                                                                                     format="HH:mm"
                                                                                     onChange={(val, strVal) => this.timeEndChange(val, strVal, item.index)} />
@@ -468,7 +520,7 @@ class Create extends React.Component {
                                 <Form.Item className="ticket-bag-create-box-item other" label="卷包限量">
 
                                     {getFieldDecorator('package_limit_type', { rules: [{ required: true }], initialValue: record.package_limit_type })
-                                        (<Radio.Group onChange={(e) => { this.setState({ numTipMsg: e.target.value }) }} disabled={!modify_flag}>
+                                        (<Radio.Group onChange={(e) => { this.setState({ numTipMsg: e.target.value }) }} disabled={disabled || !modify_flag}>
                                             <div><Radio value={false}>不限</Radio></div>
                                             <div className="radio-input-wrap">
                                                 <Radio value={true}>限制</Radio>
@@ -476,7 +528,7 @@ class Create extends React.Component {
                                                     <InputNumber
                                                         placeholder="请输入券包最大售卖数量"
                                                         value={package_total}
-                                                        disabled={!modify_flag || !numTipMsg}
+                                                        disabled={disabled || !modify_flag || !numTipMsg}
                                                         max={9999}
                                                         min={1}
                                                         onChange={(value) => { this.setState({ package_total: value }); }} />
@@ -491,7 +543,7 @@ class Create extends React.Component {
                                 <Form.Item className="ticket-bag-create-box-item other" label="卷包限购">
 
                                     {getFieldDecorator('buy_limit_type', { rules: [{ required: true }], initialValue: record.buy_limit_type })
-                                        (<Radio.Group onChange={(e) => { this.setState({ buyTipMsg: e.target.value }); }} disabled={!modify_flag}>
+                                        (<Radio.Group onChange={(e) => { this.setState({ buyTipMsg: e.target.value }); }} disabled={disabled || !modify_flag}>
                                             {/* 不限的话 传给后台9999 */}
                                             <div><Radio value={false}>不限</Radio></div>
                                             <div className="radio-input-wrap">
@@ -500,7 +552,7 @@ class Create extends React.Component {
                                                     <InputNumber
                                                         placeholder="请输入券包单用户限购数量"
                                                         value={buy_limit_count}
-                                                        disabled={!modify_flag || !buyTipMsg}
+                                                        disabled={disabled || !modify_flag || !buyTipMsg}
                                                         max={9999}
                                                         min={1}
                                                         onChange={(value) => { this.setState({ buy_limit_count: value }); }} />
@@ -514,10 +566,10 @@ class Create extends React.Component {
                             </div>
                         </div>
                         <Form.Item className="ticket-bag-create-box-item-btns">
-                            <Button onClick={() => this.props.history.push('/ticket-bag/list')}>取 消</Button>
+                            <Button style={{ visibility: optionType == 3 ? 'hidden' : 'visible' }} onClick={() => this.props.history.push('/ticket-bag/list')}>取 消</Button>
                             <Button type="primary" htmlType="submit">
-                                提 交
-							</Button>
+                                {optionType == 3 ? "确 定" : "提 交"}
+                            </Button>
                         </Form.Item>
                     </Form>
                 </div>

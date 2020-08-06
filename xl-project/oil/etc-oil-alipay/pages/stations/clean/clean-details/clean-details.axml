@@ -35,6 +35,7 @@
                             class="clean-item-status-text">{{details.washer_status=='2'?'使用中':details.washer_status=='3'?'维护中':'空闲'}}</text>
                     </view>
                 </view>
+                <view class="time">{{details.time}}</view> 
             </view>
             <view class="clean-item-stop-box" a:if="{{details.free_parking_min}}">
                 <view class="clean-details-stop-bg">停车场</view>

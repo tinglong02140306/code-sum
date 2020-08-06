@@ -30,7 +30,7 @@
                 <view a:if="{{details.time_limit_flag}}">
                     <image class="icon-clock" src="/assets/static/icon-clock.png"></image>
                     <text class="notice">距离活动结束</text>
-                    <text class="time">{{item.showTime}}</text>
+                    <text class="time">{{details.showTime}}</text>
                 </view>
                 <view a:else>
                         <image class="icon-clock" src="/assets/static/icon-clock.png"></image>
@@ -90,11 +90,13 @@
     </view>
     <!--购买-->
     <view class="ticket-buy-confirm-box" style="padding-bottom:{{isIphoneX?42:30}}rpx">
-        <text class="ticket-buy-confirm-hint">实付款:</text>
-        <view class="ticket-buy-confirm-money-box">
-            <text class="ticket-buy-confirm-mark">￥</text>
-            <text class="ticket-buy-confirm-money">{{details.package_price}}</text>
-        </view>
-        <view class="ticket-buy-confirm-button theme-button" onTap="onSubmitClick">购买</view>
+        <!--
+            <text class="ticket-buy-confirm-hint">实付款:</text>
+            <view class="ticket-buy-confirm-money-box">
+                <text class="ticket-buy-confirm-mark">￥</text>
+                <text class="ticket-buy-confirm-money">{{details.package_price}}</text>
+            </view>
+         --> 
+        <view class="ticket-buy-confirm-button theme-button" onTap="onSubmitClick">立即抢购</view>
     </view>
 </view>

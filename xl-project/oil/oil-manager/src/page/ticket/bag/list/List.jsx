@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Button, Popconfirm, Form } from 'antd';
+import { Table, Button, Popconfirm, Form, Tooltip } from 'antd';
 import { inject, observer } from 'mobx-react/index';
 import './List.scss';
 
@@ -54,7 +54,7 @@ class List extends React.Component {
 
     //修改洗车券包
     updateBag = (record) => {
-        this.props.tickerBagStore.setRecord(record);
+        this.props.tickerBagStore.setRecord(record, 2);
         this.props.history.push("/ticket-bag-create");
     }
     // 删除券包
@@ -65,16 +65,22 @@ class List extends React.Component {
     }
     // 上/下架卷包
     offOnSelfBag = (record) => {
-        this.props.tickerBagStore.offOnSelfBag({ id: record.id, package_status: record.status == '0' ? '1' : '0' }, () => {
+        this.props.tickerBagStore.offOnSelfBag({ id: record.id, package_status: record.status == 1 ? 2 : 1 }, () => {
             this.fetch();
         });
+    }
+    // 查看
+    viewBag = (record) => {
+        // 1 新增 2 编辑 3 查看
+        this.props.tickerBagStore.setRecord(record, 3);
+        this.props.history.push("/ticket-bag-create");
     }
 
     //Table 表头
     header = () => {
         return (
             <Button icon="plus" size="small" type="primary"
-                onClick={() => { this.props.history.push("/ticket-bag-create"); this.props.tickerBagStore.record = {} }}>新增洗车券包</Button>
+                onClick={() => { this.props.history.push("/ticket-bag-create"); this.props.tickerBagStore.setRecord({}, 1) }}>新增洗车券包</Button>
         );
     };
 
@@ -92,6 +98,7 @@ class List extends React.Component {
                     dataSource={list}
                     pagination={pagination}
                     loading={loading} />
+                {/* scroll={{ x: '110%' }} */}
             </div>
         );
     }
@@ -140,7 +147,6 @@ class List extends React.Component {
             dataIndex: 'create_time',
             key: 'create_time',
             align: 'center'
-            // TODO
         }, {
             title: '操作人',
             dataIndex: 'operator',
@@ -150,7 +156,10 @@ class List extends React.Component {
             title: '展示地区',
             dataIndex: 'area_name',
             key: 'area_name',
-            align: 'center'
+            align: 'center',
+            render: (record) => {
+                return (<Tooltip placement="bottom" title={record}><span className="area-text">{record}</span></Tooltip>);
+            },
         }, {
             title: '限时',
             dataIndex: 'coupon_package_type',
@@ -181,28 +190,29 @@ class List extends React.Component {
             key: 'status',
             align: 'center',
             render: (record) => {
-                // 0-上架，1-下架，2-过期
-                return (<span>{record == '0' ? "上架" : record == '1' ? "下架" : record == '2' ? "过期" : ""}</span>);
+                // 1-上架，2-下架，3-过期
+                return (<span style={{ color: record == 1 ? "#0d965d" : "rgb(183, 181, 181)" }}>{record == 1 ? "上架" : record == 2 ? "下架" : record == 3 ? "过期" : ""}</span>);
             },
         }, {
             title: '操作',
             key: 'options',
             align: 'center',
-            width: "150px",
+            width: "200px",
+            // fixed: 'right',
             render: (record) => {
                 return (
                     <div className="ticket-bag-options-box">
                         <div
                             className="ticket-bag-options-item"
-                            onClick={() => this.updateBag(record)}>修改 |
-						</div>
-                        {record.status != '2' ? <Popconfirm
-                            title={record.status == '0' ? "确定要下架该券包吗？" : "确定要上架该券包吗？"}
+                            onClick={() => this.updateBag(record)}>{record.status != 2 ? "" : "修改 |"}
+                        </div>
+                        {record.status != 3 ? <Popconfirm
+                            title={record.status == 1 ? "确定要下架该券包吗？" : "确定要上架该券包吗？"}
                             onConfirm={() => this.offOnSelfBag(record)}
                             okText="确定"
                             cancelText="取消">
                             <div
-                                className="ticket-bag-options-item">{record.status == '0' ? "下架 | " : record.status == '1' ? "上架  | " : ""}
+                                className="ticket-bag-options-item">{record.status == 1 ? "下架 | " : record.status == 2 ? "上架  | " : ""}
                             </div>
                         </Popconfirm> : null}
 
@@ -212,9 +222,14 @@ class List extends React.Component {
                             okText="确定"
                             cancelText="取消">
                             <div
-                                className="ticket-bag-options-item">删除
+                                className="ticket-bag-options-item">删除 |
                             </div>
                         </Popconfirm>
+
+                        <div
+                            className="ticket-bag-options-item"
+                            onClick={() => this.viewBag(record)}>查看
+                        </div>
                     </div>
                 );
             }

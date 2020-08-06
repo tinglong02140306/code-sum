@@ -224,3 +224,10 @@
     font-family: PingFang-SC-Medium;
     margin-left: 10rpx;
 }
+
+.time {
+    display: inline-block;
+    margin-top: 15rpx;
+    font-size: 24rpx;
+    color: #333;
+}

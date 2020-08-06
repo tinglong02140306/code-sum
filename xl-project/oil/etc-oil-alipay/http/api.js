@@ -103,6 +103,13 @@ export const couponPackageApi = {
     list: "/aliapplet/coupon/query-package",
     //提交订单（券包）
     order: "/aliapplet/coupon/submit-package-order",
+    // 创建订单
+    createOrder: "/aliapplet/coupon/create-package-order",
+    //查询优惠券
+    couponQuery: "/aliapplet/coupon/query",
+
+    //计算优惠券
+    calculateCoupon: "/aliapplet/coupon/calculate-coupon",
 };
 
 //二维码

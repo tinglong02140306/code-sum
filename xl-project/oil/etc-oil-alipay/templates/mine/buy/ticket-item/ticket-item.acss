@@ -1,5 +1,5 @@
 .ticket-card-template-container {
-    width: 650rpx;
+    width: 690rpx;
     height: 286rpx;
     background-color: #FFFFFF;
     box-sizing: border-box;
@@ -12,7 +12,7 @@
 }
 
 .ticket-card-template-box {
-    width: 650rpx;
+    width: 690rpx;
     height: 206rpx;
     border-top-right-radius: 24rpx;
     border-top-left-radius: 24rpx;
@@ -25,8 +25,8 @@
 }
 
 .ticket-card-template-bg-img {
-    width: 650rpx;
-    height: 204rpx;
+    width: 690rpx;
+    height: 205rpx;
     border-top-right-radius: 24rpx;
     border-top-left-radius: 24rpx;
     /* position: relative; */
@@ -120,6 +120,7 @@
 .ticket-card-template-button {
     width: 110rpx;
     height: 48rpx;
+    box-shadow: rgba(79, 221, 128, 0.3) 0 0 0 0;
 }
 
 
@@ -138,8 +139,8 @@
 }
 
 .icon-clock {
-    width: 24rpx;
-    height: 24rpx;
+    width: 22rpx;
+    height: 22rpx;
     vertical-align: top;
 }
 

@@ -1,4 +1,4 @@
-.ticket-bag-list-container{
+.ticket-bag-list-container {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -7,7 +7,7 @@
     padding: 16px;
 }
 
-.ticket-bag-list-form{
+.ticket-bag-list-form {
     width: 100%;
     background-color: white;
     margin-bottom: 16px;
@@ -21,27 +21,26 @@
     box-sizing: border-box;
 }
 
-.ticket-bag-list-form-item{
+.ticket-bag-list-form-item {
     flex: 0 0 30%;
     text-align: center;
-    .ant-form-item-control{
+    .ant-form-item-control {
         min-width: 250px;
         box-sizing: border-box;
     }
-
-    .ant-form-item-label{
+    .ant-form-item-label {
         font-weight: bolder;
         min-width: 70px;
     }
 }
 
-.range-picker{
-    .ant-form-item-control{
+.range-picker {
+    .ant-form-item-control {
         width: 250px;
     }
 }
 
-.ticket-bag-list-form-btns{
+.ticket-bag-list-form-btns {
     width: 30%;
     position: absolute;
     right: 16px;
@@ -53,15 +52,15 @@
     align-items: center;
 }
 
-.ticket-bag-list-table{
+.ticket-bag-list-table {
     width: 100%;
     background-color: white;
-    thead{
+    thead {
         background-color: #fafafa;
     }
 }
 
-.ticket-bag-options-box{
+.ticket-bag-options-box {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -69,26 +68,26 @@
     box-sizing: border-box;
 }
 
-.ticket-bag-options-item{
+.ticket-bag-options-item {
     margin-right: 10px;
     cursor: pointer;
 }
 
-.see{
+.see {
     color: #1890ff;
 }
 
-.update{
+.update {
     color: #0d965d;
 }
 
-.delete{
+.delete {
     color: #e73838;
 }
 
-.ticket-bag-modal-container{
+.ticket-bag-modal-container {
     box-sizing: border-box;
-    .ant-modal-body{
+    .ant-modal-body {
         padding-bottom: 0;
         padding-left: 8px;
         padding-right: 0;
@@ -96,22 +95,22 @@
     }
 }
 
-.ticket-bag-modal-add-form{
+.ticket-bag-modal-add-form {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
-    .ant-form-item-with-help{
+    .ant-form-item-with-help {
         margin-bottom: 0;
-    }  
+    }
 }
 
-.ticket-bag-modal-add-form-item{
+.ticket-bag-modal-add-form-item {
     min-width: 200px;
 }
 
-.ticket-bag-modal-submit{
+.ticket-bag-modal-submit {
     width: 100%;
     display: flex !important;
     flex-direction: row;
@@ -121,4 +120,14 @@
     margin-top: 20px;
     border-top: 1px solid #e8e8e8;
     box-sizing: border-box;
+}
+
+.area-text {
+    width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    /*超出3行部分显示省略号，去掉该属性 显示全部*/
+    -webkit-box-orient: vertical;
 }

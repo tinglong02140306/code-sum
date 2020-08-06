@@ -3,7 +3,9 @@ import XLSX from 'xlsx';
 import {isEmpty} from '../../utils/isEmpty';
 import http from "../../http/http";
 import {formatData} from "../../utils/formatDate";
+import {formatTime} from "../../utils/formatTime";
 import {message} from 'antd';
+import {menus} from "../../page/login/menus";
 class OrderStore {
 
     @observable isShowOrderDialog= false;
@@ -37,37 +39,44 @@ class OrderStore {
 
     @observable orderList=[];
     @action getOrderList(page_num,page_size,start_date,end_date,partner_id,
-                         order_no,card_id,out_user_id,out_order_no,oil_type,terminal_id,order_status,etc_card_no,channel,user_mobile){
+                         order_no,card_id,out_user_id,out_order_no,oil_type,terminal_id,order_status,etc_card_no,channel,user_mobile,xlpay_order_no){
         this.setIsShowOrderLoading(true);
         let reqData = {
             page_num: page_num,
             page_size: page_size,
             channel:isEmpty(channel)?null:channel,
-            card_id:isEmpty(card_id)?null:card_id,
+            // card_id:isEmpty(card_id)?null:card_id,
             order_no:isEmpty(order_no)?null:order_no,
             terminal_id:isEmpty(terminal_id)?null:terminal_id,
             order_status:isEmpty(order_status)?null:order_status,
-            start_date:isEmpty(start_date)?null:formatData(start_date),
-            end_date:isEmpty(end_date)?null:formatData(end_date),
-            // user_mobile:isEmpty(user_mobile)?null:user_mobile,
+            // start_date:isEmpty(start_date)?null:formatData(start_date),
+            // end_date:isEmpty(end_date)?null:formatData(end_date),
+
+            start_time:isEmpty(start_date)?null:formatTime(start_date),
+            end_time:isEmpty(end_date)?null:formatTime(end_date),
+            station_id: isEmpty(this.searchData)?null:this.searchData.id,
+            mobile:isEmpty(user_mobile)?null:user_mobile,
+            xlpay_order_no:isEmpty(xlpay_order_no)?null:xlpay_order_no,
+
             // oil_type:oil_type===2?null:oil_type,
         };
         if (channel===0){
             let reqData0 = {
                 partner_id:isEmpty(partner_id)?null:partner_id,
-                out_order_no:isEmpty(out_order_no)?null:out_order_no,
+                // out_order_no:isEmpty(out_order_no)?null:out_order_no,
                 // out_user_id:isEmpty(out_user_id)?null:out_user_id,
             };
             reqData={...reqData,...reqData0};
         }
-        if (channel===3){
-            let reqData3 = {
-                etc_card_no:isEmpty(etc_card_no)?null:etc_card_no,
-            };
-            reqData={...reqData,...reqData3};
-        }
+        // if (channel===3){
+        //     let reqData3 = {
+        //         etc_card_no:isEmpty(etc_card_no)?null:etc_card_no,
+        //     };
+        //     reqData={...reqData,...reqData3};
+        // }
 
         this.setParams(reqData);
+        console.log('sss==',reqData);
 
         http.post('/website/stat/consume-flow-query',reqData,response=>{
             const pagination = {};
@@ -109,38 +118,31 @@ class OrderStore {
     }
 
     //全部导出
-    @action getExportAllData(etc_card_no,channel,user_mobile,start_date,end_date,partner_id,order_no,card_id,out_user_id,out_order_no,oil_type,terminal_id,order_status) {
+    @action getExportAllData(page_num,page_size,start_date,end_date,partner_id,
+                             order_no,card_id,out_user_id,out_order_no,oil_type,terminal_id,order_status,etc_card_no,channel,user_mobile,xlpay_order_no) {
         this.setIsShowButtonLoading(true);
         let reqData = {
-            page_num: 1,
-            page_size: 0,
+            page_num: page_num,
+            page_size: page_size,
             channel:isEmpty(channel)?null:channel,
-            card_id:isEmpty(card_id)?null:card_id,
             order_no:isEmpty(order_no)?null:order_no,
             terminal_id:isEmpty(terminal_id)?null:terminal_id,
             order_status:isEmpty(order_status)?null:order_status,
-            start_date:isEmpty(start_date)?null:formatData(start_date),
-            end_date:isEmpty(end_date)?null:formatData(end_date),
-            // user_mobile:isEmpty(user_mobile)?null:user_mobile,
-            // oil_type:oil_type===2?null:oil_type,
+            start_time:isEmpty(start_date)?null:formatTime(start_date),
+            end_time:isEmpty(end_date)?null:formatTime(end_date),
+            station_id: isEmpty(this.searchData)?null:this.searchData.id,
+            mobile:isEmpty(user_mobile)?null:user_mobile,
+            xlpay_order_no:isEmpty(xlpay_order_no)?null:xlpay_order_no,
         };
 
-        if (channel==0){
+        if (channel===0){
             let reqData0 = {
                 partner_id:isEmpty(partner_id)?null:partner_id,
-                out_order_no:isEmpty(out_order_no)?null:out_user_id,
-                // out_user_id:isEmpty(out_user_id)?null:out_user_id,
             };
             reqData={...reqData,...reqData0};
         }
-        if (channel==3){
-            let reqData3 = {
-                etc_card_no:isEmpty(etc_card_no)?null:etc_card_no,
-            };
-            reqData={...reqData,...reqData3};
-        }
 
-        http.post('/website/stat/consume-flow-query',reqData,response=>{
+        http.post('/website/stat/consume-flow-query',this.params,response=>{
             this.setIsShowButtonLoading(false);
             response.data&&response.data.map(item=>{item.key= item.id;});
             this.exportFile(this.getExcelData(response.data), 1);
@@ -274,6 +276,45 @@ class OrderStore {
         this.params = params;
     }
 
+    //开票地址
+    @observable showAUrl = false;
+    @action setShowAUrl(showAUrl){this.showAUrl = showAUrl;}
+    @observable applyUrl = '';
+    @action setApplyUrl(applyUrl){this.applyUrl = applyUrl;}
+
+    //返券明细
+    @observable isShowDrawer = false;
+    @action setIsShowDrawer(isShowDrawer){this.isShowDrawer = isShowDrawer;}
+    @observable consumeCouponList = null;
+    @action setIsConsumeCouponList(consumeCouponList){this.consumeCouponList = consumeCouponList;}
+
+    //油站查询信息
+    @observable isShowSearchDialog = false;
+    @action setIsShowSearchDialog(isShowSearchDialog){this.isShowSearchDialog = isShowSearchDialog;}
+    @observable searchData = null;
+    @action setSearchData(searchData){this.searchData = searchData;}
+    @observable isShowSearchLoading = false;
+    @action setIsShowSearchLoading(isShowSearchLoading) {
+        this.isShowSearchLoading = isShowSearchLoading;
+    }
+    @observable searchPagination = {};
+    @action setSearchPagination(searchPagination) {
+        this.searchPagination = searchPagination;
+    }
+    @observable search_page_size = 5;
+    @action setSearchPageSize(search_page_size) {
+        this.search_page_size = search_page_size;
+    }
+    @observable search_page_num = 0;
+    @action setSearchPageNum(search_page_num) {
+        this.search_page_num = search_page_num;
+    }
+    @observable searchParams = null;
+    @action setSearchParams(searchParams){
+        this.searchParams = searchParams;
+    }
+
+    //导出所选区间文件
     @action getConsumeFlowDownload(start_date,end_date){
         this.setIsShowEngineLoading(true);
         let reqData = {
@@ -304,7 +345,7 @@ class OrderStore {
         }
 
         console.log("reqData==",JSON.stringify(reqData));
-        http.post('/website/stat/consume-flow-download',reqData,response=>{
+        http.post('/website/stat/consume-flow-download',this.params,response=>{
 
             this.check_result_file_url = response.check_result_file_url;
             this.setIsShowEngineLoading(false);
@@ -348,6 +389,127 @@ class OrderStore {
         },err=>{
             this.setIsShowOrderLoading(false);
             message.error(err);
+        });
+    }
+
+    //开票地址
+    @action invoiceApplyUrl(order_no){
+        this.setIsShowOrderLoading(true);
+        http.post('/website/stat/invoice-apply-url',{order_no:order_no},response=>{
+            this.setIsShowOrderLoading(false);
+            if (response.apply_url){
+                this.setApplyUrl(response.apply_url);
+                this.setShowAUrl(true);
+            }else {
+                message.info("获取失败");
+            }
+
+        },err=>{
+            this.setIsShowOrderLoading(false);
+            message.error(err);
+        });
+    }
+
+    @observable order_no = '';
+    @action setOrderNo(order_no){
+        this.order_no = order_no;
+    }
+    //返券明细
+    @observable consumePagination = {};
+    @action setConsumePagination(consumePagination) {
+        this.consumePagination = consumePagination;
+    }
+    @action consumeCoupon(order_no){
+        this.setIsShowOrderLoading(true);
+        this.setOrderNo(order_no);
+        http.post('/website/stat/consume-coupon',{order_no:order_no},response=>{
+            const pagination = {};
+            pagination.pageSize = 99;
+            pagination.hideOnSinglePage = true;
+            pagination.showQuickJumper = true;
+            this.setConsumePagination(pagination);
+            this.setIsShowOrderLoading(false);
+            this.setIsShowDrawer(true);
+            response.data&&response.data.map((item,index)=>item.key=index);
+            this.consumeCouponList = response.data;
+        },err=>{
+            this.setIsShowOrderLoading(false);
+            message.error(err);
+        });
+    }
+
+    //核销
+    @action couponWriteOff(id){
+        this.setIsShowOrderLoading(true);
+        http.post('/website/stat/coupon-write-off',{id:id},response=>{
+            this.setIsShowOrderLoading(false);
+            message.info("操作成功");
+        },err=>{
+            this.setIsShowOrderLoading(false);
+            message.error(err);
+        });
+    }
+
+    //撤销
+    @action couponInvalid(id){
+        this.setIsShowOrderLoading(true);
+        http.post('/website/stat/coupon-invalid',{id:id},response=>{
+            this.setIsShowOrderLoading(false);
+            message.info("操作成功");
+            this.consumeCoupon(this.order_no);
+        },err=>{
+            this.setIsShowOrderLoading(false);
+            message.error(err);
+        });
+    }
+
+
+    //合作伙伴列表查询
+    @observable companyList = [];
+    @action getCompanyQuery() {
+        if (!this.isShowSearchLoading) {
+            this.setIsShowSearchLoading(true);
+        }
+        const params = {
+            page_num:0,
+            page_size:0
+        }
+        http.post('/website/gasstation/company-query',params,response=>{
+            this.setIsShowSearchLoading(false);
+            response.data&&response.data.map((item,index)=>{item.key = index;});
+            this.companyList = response.data;
+        },err=>{
+            message.error(err);
+            this.setIsShowSearchLoading(false);
+        });
+    }
+
+    //油站列表查询
+    @observable stationList = [];
+    @action getStationQuery(params) {
+        // this.params = params;
+        if (!this.isShowSearchLoading) {
+            this.setIsShowSearchLoading(true);
+        }
+        console.log(JSON.stringify(params));
+        http.post('/website/gasstation/station-query',params,response=>{
+            this.setIsShowSearchLoading(false);
+            const pagination = {};
+            pagination.total = response.amount;
+            pagination.pageSize = this.search_page_size;
+            pagination.current = this.search_page_num;
+            pagination.showQuickJumper = true;
+            pagination.showTotal=()=>{
+                return `总共 ${response.amount} 条数据`;
+            }
+            this.setSearchPagination(pagination);
+            response.data&&response.data.map((item,index)=>{
+                item.key = index;
+            });
+            this.stationList = response.data;
+        },err=>{
+            message.error(err);
+            this.setIsShowSearchLoading(false);
         });
     }
 

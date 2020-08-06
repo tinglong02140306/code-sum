@@ -148,7 +148,7 @@ class List extends React.Component {
     };
     // 撤销
     revokeCoupon = (record) => {
-        this.props.tickerGrantStore.revokeCoupon(record.id, () => {
+        this.props.tickerGrantStore.revokeCoupon({ id: record.push_id }, () => {
             this.detailFetch();
         });
     };
@@ -160,14 +160,14 @@ class List extends React.Component {
             <div className="ticket-grant-list-container">
                 <Form className="ticket-grant-list-form" layout="inline" onSubmit={this.onModalClick}>
                     <Form.Item className="ticket-grant-list-form-item" label="发放批次号">
-                        {getFieldDecorator('id')(<Input size="small" placeholder="请输入您要查询的发放批次号" />)}
+                        {getFieldDecorator('id')(<Input placeholder="请输入您要查询的发放批次号" />)}
                     </Form.Item>
                     <Form.Item className="ticket-grant-list-form-item" label="活动名称">
-                        {getFieldDecorator('act_name')(<Input size="small" placeholder="请输入您要查询的活动名称" />)}
+                        {getFieldDecorator('act_name')(<Input placeholder="请输入您要查询的活动名称" />)}
                     </Form.Item>
                     <Form.Item className="ticket-grant-list-form-item" label="发放方式">
                         {getFieldDecorator('push_type', { initialValue: '' })(
-                            <Select size="small">
+                            <Select>
                                 <Select.Option value="">全部</Select.Option>
                                 <Select.Option value="券码兑换">券码兑换</Select.Option>
                                 <Select.Option value="指定发放">指定发放</Select.Option>
@@ -178,7 +178,7 @@ class List extends React.Component {
                     </Form.Item>
                     <Form.Item className="ticket-grant-list-form-item range-picker" label="活动状态">
                         {getFieldDecorator('act_status', { initialValue: '' })(
-                            <Select size="small">
+                            <Select>
                                 <Select.Option value="">全部</Select.Option>
                                 <Select.Option value="暂停">暂停</Select.Option>
                                 <Select.Option value="启用">启用</Select.Option>
@@ -217,7 +217,14 @@ class List extends React.Component {
                 >
                     <Form className="ticket-manage-list-form" layout="inline" onSubmit={this.onDetailQueryClick}>
                         <Form.Item className="ticket-manage-list-form-item" label="状态">
-                            {getFieldDecorator('push_status')(<Input size="small" placeholder="请输入状态" />)}
+                            {getFieldDecorator('push_status', { initialValue: null })(<Select>
+                                <Select.Option value={null}>全部</Select.Option>
+                                <Select.Option value="待投放">待投放</Select.Option>
+                                <Select.Option value="已投放">已投放</Select.Option>
+                                <Select.Option value="已使用">已使用 </Select.Option>
+                                <Select.Option value="已过期">已过期</Select.Option>
+                                <Select.Option value="已失效">已失效</Select.Option>
+                            </Select>)}
                         </Form.Item>
                         <div className="ticket-manage-list-form-btns">
                             <Form.Item>
@@ -297,6 +304,11 @@ class List extends React.Component {
             align: 'center'
         },
         {
+            title: '最近发放时间',
+            dataIndex: 'modify_time',
+            key: 'modify_time',
+            align: 'center'
+        }, {
             title: '操作',
             key: 'options',
             align: 'center',
@@ -325,7 +337,6 @@ class List extends React.Component {
     ];
     drawerColumns = [
         {
-            // TOD
             title: '券ID',
             dataIndex: 'coupon_id',
             key: 'coupon_id',
@@ -337,7 +348,6 @@ class List extends React.Component {
             align: 'center'
 
         }, {
-            // TODO
             title: '券类型',
             dataIndex: 'coupon_type',
             key: 'coupon_type',
@@ -353,7 +363,6 @@ class List extends React.Component {
             key: 'coupon_creator',
             align: 'center'
         }, {
-            // TODO
             title: '活动ID',
             dataIndex: 'act_id',
             key: 'act_id',
@@ -374,13 +383,11 @@ class List extends React.Component {
             key: 'act_creator',
             align: 'center'
         }, {
-            // TODO
             title: '发放ID',
             dataIndex: 'push_id',
             key: 'push_id',
             align: 'center'
         }, {
-            // TODO
             title: '投放方式',
             dataIndex: 'push_type',
             key: 'push_type',

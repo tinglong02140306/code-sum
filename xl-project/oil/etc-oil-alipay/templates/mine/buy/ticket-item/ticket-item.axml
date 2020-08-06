@@ -26,8 +26,8 @@
         <view class="ticket-panic-buy" a:if="{{(item.time_limit_flag && item.leftTime > 0) || item.count_limit_flag}}">
             <view class="left">
                 <view a:if="{{item.time_limit_flag}}">
-                    <image class="icon-clock" src="/assets/static/icon-clock.png"></image>
-                    <text class="notice">距离活动结束</text>
+                    <image class="icon-clock" src="{{item.start_flag ? '/assets/static/icon-clock.png' : '/assets/static/icon-clock-ye.png'}}"></image>
+                    <text class="notice">{{item.start_flag ? "距离活动结束": "距离活动结束"}}</text>
                     <text class="time">{{item.showTime}}</text>
                 </view>
                 <view a:else>
@@ -39,7 +39,7 @@
                <view a:if="{{item.count_limit_flag}}" style="display: flex;">
                     <text style="color: #a0a0a0;">已抢购{{item.saled_count}}</text>
                     <view class="rate-wrap">
-                        <view class="top" style="width: {{(item.saled_count / item.total_count)* 100}}%;"></view>
+                        <view class="top" style="width: {{(item.saled_count / item.total_count).toFixed(2)* 100}}%;"></view>
                     </view>
                </view>
             </view>

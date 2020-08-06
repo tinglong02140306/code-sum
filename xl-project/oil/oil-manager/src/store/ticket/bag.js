@@ -17,10 +17,12 @@ import {
 
 class TickerBagStore {
 
-    //修改的优惠券实体
+    //修改的优惠券实体  1 新增 2 编辑 3 查看
+    @observable optionType = "";
     @observable record = {};
-    @action setRecord(record) {
+    @action setRecord(record, optionType) {
         this.record = record;
+        this.optionType = optionType;
     }
 
     //分页
@@ -82,6 +84,18 @@ class TickerBagStore {
         http.post('/website/coupon/package/update', params, res => {
             this.loadingAdd = false;
             message.info("洗车券包更新成功");
+            callback();
+        }, err => {
+            this.loadingAdd = false;
+            message.error(err);
+        });
+    }
+    // 撤销优惠券
+    @action revokeCoupon(params, callback) {
+        this.loadingAdd = true;
+        http.post('/website/stat/coupon-write-off', params, res => {
+            message.info("优惠券撤销成功");
+            this.loadingAdd = false;
             callback();
         }, err => {
             this.loadingAdd = false;

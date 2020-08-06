@@ -180,6 +180,20 @@ class BillOnlineStore {
         });
     }
 
+    //重复支付修复
+    @action fixRepeatOrder(order_id){
+        // console.log(out_order_no)
+        this.setIsShowLoading(true);
+        http.post('/active-scan/fix-repeat-order',{order_id:order_id},response=>{
+            this.setIsShowLoading(false);
+            message.info("差调成功");
+            this.getOrderOnlineQuery(this.params);
+        },err=>{
+            this.setIsShowLoading(false);
+            message.error(err);
+        });
+    }
+
 }
 
 export default BillOnlineStore;

@@ -293,6 +293,7 @@ class Login extends React.Component {
                             className="identify-input"
                             placeholder="验证码"
                             value={identify}
+                            onKeyDown={this.onKeydown}
                             onChange={this.onChangeIdentify}></Input>
                         <canvas 
                             ref={this.canvas}

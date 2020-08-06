@@ -1,4 +1,11 @@
-import { PreferenceMoney, PerferPull, PerferUsed, PerferLose, PerferQrcode, PreferenceCar } from '../../../../../assets/url/url'
+import {
+    PreferenceMoney,
+    PerferPull,
+    PerferUsed,
+    PerferLose,
+    PerferQrcode,
+    PreferenceCar
+} from '../../../../../assets/url/url'
 Component({
     options: {
         multipleSlots: true
@@ -31,26 +38,43 @@ Component({
     methods: {
         //设置默认使用优惠券
         onSetDefaultClick() {
-            const { item } = this.props;
+            const {
+                item
+            } = this.props;
             this.props.onSetDefault(item);
         },
 
         //选择去使用跳转
         onSetSelectClick() {
-            const { item } = this.props;
+            const {
+                item
+            } = this.props;
             this.props.onSetSelect(item);
+        },
+        // 转增好友
+        onGiveFriendClick() {
+            const {
+                item
+            } = this.props;
+            this.props.onGiveFriend(item);
         },
 
         //查看优惠券
         onSeeCouponClick() {
-            const { item } = this.props;
+            const {
+                item
+            } = this.props;
             this.props.onSeeCoupon(item.put_id);
         },
 
         //使用规则点击
         onSeeRuleClick() {
-            const { item } = this.props;
-            const { showRules } = this.data;
+            const {
+                item
+            } = this.props;
+            const {
+                showRules
+            } = this.data;
             this.setData({
                 showRules: !showRules,
                 borderRadius: `border-bottom-left-radius: ${showRules?8:0}rpx;`
@@ -77,6 +101,8 @@ Component({
                 backgroundGray: `background:linear-gradient(to bottom right, ${'#999999'}, ${'#333333'});`,
                 finish_icon: type == 2 ? PerferUsed : PerferLose,
             });
-        }
-    }
+        },
+        
+    },
+    
 })

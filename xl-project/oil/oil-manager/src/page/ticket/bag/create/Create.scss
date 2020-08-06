@@ -5,6 +5,9 @@
     flex-direction: column;
     margin-top: 16px;
     border-radius: 2px;
+    input.ant-input {
+        height: 30px;
+    }
 }
 
 .ticket-bag-create-title {
@@ -152,4 +155,9 @@
 .ticket-num-input-wrap {
     position: relative;
     top: -10px;
+}
+
+.tree-select-wrap {
+    max-width: 300px;
+    margin-bottom: 10px;
 }

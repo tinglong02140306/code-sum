@@ -24,7 +24,9 @@
                 </view>
                 <view class="ptcr-top-right">
                     <view class="ptcr-top-right-oil" a:if="{{type==1&&item.coupon_type!=='3'}}">
-                        <text class="ptcr-top-right-oil-check" catchTap="onSetSelectClick">立即使用</text>
+                        <text class="ptcr-top-right-oil-check btn-use" catchTap="onSetSelectClick">立即使用</text>
+                        <!--  <button class="ptcr-top-right-oil-check btn-give" data-item="{{item}}" open-type="share">转赠好友</button>-->
+                        <!-- <text class="ptcr-top-right-oil-check btn-give" catchTap="onGiveFriendClick">转赠好友</text>--> 
                     </view>
                     <view class="ptcr-top-right-product" a:if="{{type==1&&item.coupon_type==='3'}}">
                         <image class="ptcr-top-right-product-image" src="{{prefer_qrcode}}"></image>

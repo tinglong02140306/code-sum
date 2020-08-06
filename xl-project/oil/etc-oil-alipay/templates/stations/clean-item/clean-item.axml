@@ -23,7 +23,12 @@
                     <view></view>
                 </view>
                 <!--立即洗车-->
-                <view class="clean-item-clean" data-item="{{item}}" catchTap="toCleanClick">立即洗车</view>
+                <view>
+                    <!-- catchTap="toCleanClick"--> 
+                    <view class="clean-item-clean" data-item="{{item}}">立即洗车</view>
+                    <text class="time">{{item.time}}</text>
+                </view>
+                
             </view>
             <view class="clean-item-stop-box" a:if="{{item.free_parking_min !== 0}}">
                 <view class="clean-details-stop-bg">停车场</view>

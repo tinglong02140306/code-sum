@@ -75,9 +75,12 @@ App({
         }else {
             my.setStorageSync({key: CODE_WASHER, data: false});
         }
+        
+
+
         // TODO
         // my.setStorageSync({ key: 'avatar', data: "https://tfs.alipayobjects.com/images/partner/T1d.xCXotaXXXXXXXX" });
         // my.setStorageSync({ key: 'nickName', data: "polly" });
-        my.setStorageSync({ key: OPENID, data: "YWE4NmNiNTNmNTY5NGY3MmI5OTlhZGUzNTUyNlNYNzQ="})
+        // my.setStorageSync({ key: OPENID, data: "YWE4NmNiNTNmNTY5NGY3MmI5OTlhZGUzNTUyNlNYNzQ="})
     }
 });

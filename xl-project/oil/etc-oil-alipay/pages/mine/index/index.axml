@@ -14,13 +14,7 @@
                     <image a:if="{{openid}}" class="head-image" src="{{avatar ? avatar : iconDefaultHead}}"></image>
                     <image a:else class="head-image" src="{{iconDefaultHead}}"></image>
                 </view>
-                <!--TODO --> 
                 <button a:if="{{!openid}}" class="nick-name un-login" hover-class="none" open-type="getAuthorize" onGetAuthorize="onGetAuthorize" onError="onAuthError" scope='userInfo'>未登录</button>
-                <!--
-                <view a:else="{{openid}}" class="name-wrap">
-                    <text>{{nickName}}</text>
-                    <text class="phone-num">15665426798</text>
-                </view> --> 
                 <text a:else class="nick-name">{{nickName}}</text>
                 <!-- scope userInfo(getOpenUserInfo)  phoneNumber(getPhoneNumber) -->
                 <button a:if="{{!openid}}" class="mine-login-btn" hover-class="none" open-type="getAuthorize" onGetAuthorize="onGetAuthorize" onError="onAuthError" scope='userInfo'>注册/登录</button>
@@ -127,8 +121,8 @@
             </view>
         </view>
     </view>
-    <!--广告位-->
-    <view class="clean-share-container">
+    <!--广告位 TODO-->
+    <!-- <view class="clean-share-container">
         <view class="clean-share-container-box" onTap="goBuyClick">
             <view class="clean-share-box-left-item">
                 <view class="clean-share-box-left-texts">
@@ -142,7 +136,7 @@
             </view>
             <image class="clean-share-box-right-icon" src="/assets/static/mine-banner-package.png"></image>
         </view>
-    </view>
+    </view> -->
     <view class="mine-banner-container" style="margin-top: {{isIphoneX?88:48}}rpx">
         <image class="mine-layer-image-big" src="/assets/static/mine-layer.png"></image>
     </view>

@@ -6,7 +6,6 @@ import { getPostPromise } from '../../http/http';
 import { showLoading, hideLoading, showToast } from "../../utils/my";
 let timer = null;
 Page({
-
     /**
      * 页面的初始数据
      */
@@ -37,22 +36,11 @@ Page({
     async onGetAuthorize() {
         try {
             this.getPhoneNumber();
-            // console.log('phoneNum', JSON.stringift(phoneNum))
-            // TODO 模拟登陆 待删除
-            // my.setStorageSync({ key: OPENID, data: 'dsfgdfgdf' });
-            // let userInfo = await this.getOpenUserInfo();
-            // my.setStorageSync({ key: 'avatar', data: userInfo.avatar });
-            // my.setStorageSync({ key: 'nickName', data: userInfo.nickName });
-            // if (this.data.type == 'mine') {
-            //     my.switchTab({
-            //         url: `/pages/mine/index/index`
-            //     });
-            // } else {
-            //     my.navigateBack();
-            // }
-            // return;
         } catch (e) {
         }
+    },
+    onAuthError() {
+
     },
     // 获取会员基本信息 姓名 头像
     getOpenUserInfo() {
@@ -69,9 +57,6 @@ Page({
     getPhoneNumber() {
         my.getPhoneNumber({
             success: res => {
-                // my.alert({
-                //     content: 'longting111'+ JSON.stringify(JSON.parse(res.response))
-                // })
                 // response sign
                 let data = JSON.parse(res.response);
                 let param = {
@@ -81,22 +66,19 @@ Page({
                     invite_code: my.getStorageSync({ key: 'marketCode' }).data
                 }
                 showLoading("登录中...");
-                // showToast("登录中...");
                 this.login(param);
             },
-            fail: err => reject({
-                message: "请授权小程序获取您的基本信息"
-            })
+            fail: err => {
+                showToast("请授权小程序获取您的基本信息");
+            }
         });
     },
     //登录
     login(params) {
-        // showLoading("登录中...");
         getPostPromise(loginApi.userLogin, params).then(res => {
             hideLoading();
             showToast("登录成功");
             my.setStorageSync({ key: OPENID, data: res.token });
-            // console.log('res.token:::' + res.token)
             // 手机号脱敏
             // a.substring(0,3) + '******' + a.substring(9,11)
             timer && clearInterval(timer);
@@ -111,7 +93,6 @@ Page({
             hideLoading();
             showToast(`${err.msg}:${err.code}`)
             timer && clearInterval(timer);
-            // timer = null;
             getAuthCode();
             timer = setInterval(() => {
                 getAuthCode();

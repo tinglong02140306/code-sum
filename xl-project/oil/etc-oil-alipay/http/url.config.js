@@ -22,4 +22,4 @@ const base = {
     
 };
 
-export default base.dev;
+export default base.pro;

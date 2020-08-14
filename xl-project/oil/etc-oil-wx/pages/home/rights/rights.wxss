@@ -357,8 +357,9 @@
 }
 
 .rights-footer-introduction-image{
-    width: 618rpx;
-    margin-top: 32rpx;
+    width: 680rpx;
+    height: 244rpx;
+    /*margin-top: 32rpx;*/
 }
 
 .rights-footer-introduction-content{

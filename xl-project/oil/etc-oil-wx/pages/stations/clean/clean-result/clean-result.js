@@ -1,7 +1,7 @@
 // pages/stations/clean/clean-result/clean-result.js
 import {QrcodePaySuccess, QrcodePayFail} from '../../../../assets/url/url';
 let details = null;
-import {cleanApi} from "../../../../http/api";
+import {billApi, cleanApi} from "../../../../http/api";
 import {getHttpPost} from "../../../../http/http";
 const app = getApp();
 
@@ -55,6 +55,7 @@ Page({
     const details = {
       order_type:'WASH',
       order_no:this.data.order_no,
+      from:'1',
     }
     const params = encodeURIComponent(JSON.stringify(details));
     wx.navigateTo({url: `/pages/mine/order/details/details?details=`+params});
@@ -77,13 +78,11 @@ Page({
       order_no:order_no,
     }
     getHttpPost(cleanApi.couponListByOrder,paramsData,res=> {
-      wx.hideLoading();
       const data = this.dealResponse(res.data);
       this.setData({
         couponList:data,
       });
     },err=> {
-      wx.hideLoading();
       wx.showToast({title: err.msg, icon: "none"});
     })
   },
@@ -98,4 +97,5 @@ Page({
       return item;
     })
   },
+
 })

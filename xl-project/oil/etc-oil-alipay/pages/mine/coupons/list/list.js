@@ -25,7 +25,6 @@ const tabs = [
         key: 4
     },
 ]
-
 Page({
 
     /**
@@ -49,8 +48,7 @@ Page({
         finish_load_status: 0, //上拉加载状态 0: 已加载完成 1:正在加载中 2:已加载全部
         finish_refresher: false, //下拉刷新状态
         finish_status: 0, //1:列表为空 2:网络连接失败
-        coupon_code: '', //券码
-        oilStyleObj: {}
+        coupon_code: '' //券码
     },
 
     /**
@@ -309,7 +307,6 @@ Page({
                 oil_status: !list || !list.length ? 1 : 0,
                 coupon_code: null,
             });
-            this.dealOilStyle()
         }).catch(err => {
             console.log(err);
             hideLoading();
@@ -324,32 +321,6 @@ Page({
             });
         });
     },
-    dealOilStyle() {
-        let oilStyleObj = {
-                type: 1,
-                money_icon: PreferenceMoney,
-                car_icon: PreferenceCar,
-                pull_icon: PerferPull,
-                finish_icon: PerferUsed,
-                prefer_qrcode: PerferQrcode,
-                // showRules: false, //是否展示使用规则 
-                titleColor: `color:#333`,
-                contentColor: `color:#333`,
-                moneyStyle: `text-shadow:6px 6px 12px #B34E23;`,
-                borderRadius: `border-bottom-left-radius: 8rpx;`,
-                background: `background:linear-gradient(to bottom right, ${'#FFC854'}, ${'#B34E23'});`,
-                backgroundG: `background:linear-gradient(to bottom right, ${'#44B291'}, ${'#164D3F'});`,
-                backgroundB: `background:linear-gradient(to bottom right, ${'#5BC7FF'}, ${'#074DB4'});`,
-                backgroundY: `background:linear-gradient(to bottom right, ${'#FFC854'}, ${'#B34E23'});`,
-                backgroundGray: `background:linear-gradient(to bottom right, ${'#999'}, ${'#333'});`,
-                finish_icon: PerferLose,
-            };
-        this.setData({
-            oilStyleObj: oilStyleObj
-        })
-    },
-
-
     //获取提货券==>已使用
     getCouponList() {
         PAGE_COUPON == 1 && showLoading("正在加载中...");
@@ -430,40 +401,45 @@ Page({
             item.invalid_time = y + '/' + m + '/' + d;
             let coupon_amt = keepDecimalFull(item.coupon_amt, 0).toString();
             item.coupon_amt = coupon_amt.replace('.', '');
-            // if(type && type == 1) item.showRules = false;
             return item;
         })
     },
-    // onShareAppMessage(options) {
-    //     console.log("longting", JSON.stringify(options))
-    //     var that = this;
-    //     var shareObj = {
-    //         desc: "送你一张洗车券",
-    //         path: 'pages/home/index/index', // 默认是当前页面，必须是以‘/’开头的完整路径
-    //         imageUrl: 'https://oss.etcsd.com/object/98ee5b8b6ba64624ac12d075a8e75475', //自定义图片路径，可以是本地文件路径、代码包文件路径或者网络图片路径，支持PNG及JPG，不传入 imageUrl 则使用默认截图。显示图片长宽比是 5:4
-    //         success(res) {
-    //             // 转发成功之后的回调
-    //             // if (res.errMsg == 'shareAppMessage:ok') {}
-    //             console.log(JSON.stringify(res))
-    //         },
-    //         fail(res) {
-    //             console.log(JSON.stringify(res))
-    //             // // 转发失败之后的回调
-    //             // if (res.errMsg == 'shareAppMessage:fail cancel') {
-    //             //     // 用户取消转发
-    //             // } else if (res.errMsg == 'shareAppMessage:fail') {
-    //             //     // 转发失败，其中 detail message 为详细失败信息
-    //             // }
-    //         },
-    //     };
-    //     // 来自页面内的按钮的转发
-    //     if (options.from == 'button') {
-    //         var target = options.target.dataset;
-    //         console.log(target.item); // shareBtn
-    //         // 此处可以修改 shareObj 中的内容
-    //         shareObj.path = 'pages/home/index/index?item=' + target.item;
-    //     }
-    //     return shareObj;
 
-    // },
+    onShareAppMessage(options) {
+        console.log("longting", JSON.stringify(options))
+        var that = this;
+        var shareObj = {
+            title: "ETC加油助手",
+            desc: "送你一张洗车券",
+            path: 'pages/home/donate/index/index',
+            //自定义图片路径，可以是本地文件路径、代码包文件路径或者网络图片路径，支持PNG及JPG，不传入 imageUrl 则使用默认截图。显示图片长宽比是 5:4
+            imageUrl: 'https://oss.etcsd.com/object/cb46e8c6f7fe42cb8229e87715c6bfa5',
+            bgImgUrl: 'https://oss.etcsd.com/object/a7d73297c8ac4ee4baed1c1cd9736f1e',
+            success(res) {
+                // 转发成功之后的回调
+                // if (res.errMsg == 'shareAppMessage:ok') {}
+                console.log(JSON.stringify(res))
+            },
+            fail(res) {
+                console.log(JSON.stringify(res))
+                // // 转发失败之后的回调
+                // if (res.errMsg == 'shareAppMessage:fail cancel') {
+                //     // 用户取消转发
+                // } else if (res.errMsg == 'shareAppMessage:fail') {
+                //     // 转发失败，其中 detail message 为详细失败信息
+                // }
+            },
+        };
+        // 来自页面内的按钮的转发
+        if (options.from == 'button') {
+            var target = options.target.dataset;
+            console.log(target.item); // shareBtn
+            // 此处可以修改 shareObj 中的内容
+            shareObj.path = 'pages/home/donate/index/index?item=' + target.item;
+        } else {
+            shareObj = {};
+        }
+        return shareObj;
+
+    }
 })

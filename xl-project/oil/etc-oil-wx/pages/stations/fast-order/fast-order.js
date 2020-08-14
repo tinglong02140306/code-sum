@@ -40,6 +40,7 @@ Page({
         try {
             const details = JSON.parse(decodeURIComponent(options.details));
             this.setData({
+                details:details,
                 order_no: details.order_no || '',//订单编号
                 order_status: details.order_status || '',//订单状态
                 station_name: details.station_name || '',//油站名称
@@ -166,6 +167,7 @@ Page({
 
     //调起支付
     goPay: function (params) {
+        const { order_no,real_amount } = this.data;
         const that = this;
         try {
             const data = JSON.parse(params);
@@ -177,13 +179,18 @@ Page({
                     signType: data.signType,
                     paySign: data.paySign,
                     success: function () {
-                        wx.hideLoading();
-                        wx.navigateBack({delta: 2})
+                        let payment_details = {
+                            payment_status:'01',
+                            order_no:order_no,
+                            payment_amount:real_amount,
+                            order_type:'GAS'
+                        };
+                        const details = encodeURIComponent(JSON.stringify(payment_details));
+                        wx.navigateTo({url: `/pages/stations/qrcode-result/qrcode-result?details=${details}`})
+                        // wx.navigateBack({delta: 2})
                     },
                     fail: function (err) {
                         console.log(err)
-                        wx.hideLoading();
-                        console.log(err.errMsg)
                         if (err.errMsg == 'requestPayment:fail cancel'){
                             wx.navigateBack();
                         }

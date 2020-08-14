@@ -30,6 +30,7 @@ import GroupStore from "./shell/groups";
 import SummaryReportStore from "./shell/summary-report";
 import ShellPriceStore from "./shell/price";
 import OilPriceStore from "./shell/oil-price";
+import NonActiveStatisticsStore from "./shell/statistics";
 import PosUserStore from "./wx-member-card/pos-user";
 import ImageStore from "./station/station-image";
 import CompanyStore from "./station/company";
@@ -95,6 +96,7 @@ class Stores {
         this.shellPriceStore = new ShellPriceStore();
         this.posUserStore = new PosUserStore();
         this.oilPriceStore = new OilPriceStore();
+        this.NonActiveStatisticsStore = new NonActiveStatisticsStore();
         this.imageStore = new ImageStore();
         this.companyStore = new CompanyStore();
         this.brandStore = new BrandStore();

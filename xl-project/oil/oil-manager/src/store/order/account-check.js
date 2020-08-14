@@ -38,7 +38,7 @@ class AccountCheckStore {
             page_num: 1,
             page_size: 0,
         };
-        http.post("/website/partner/top-query", reqData, (response) => {
+        http.post("/website/partner/top-simple-query", reqData, (response) => {
             response.data&&response.data.map(item=>{item.key = item.partner_id});
             this.partnerList = response.data
         }, (err) => {

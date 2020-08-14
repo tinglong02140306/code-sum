@@ -5,6 +5,7 @@
   "backgroundColor": "#eeeeee",
   "backgroundTextStyle": "light",
   "usingComponents": {
-    "login-status":"/components/login-status/login-status"
+    "login-status":"/components/login-status/login-status",
+    "modal-super":"../../../components/modal-super/modal-super"
   }
 }

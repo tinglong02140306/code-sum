@@ -227,7 +227,7 @@
 
 .time {
     display: inline-block;
-    margin-top: 15rpx;
+    margin-top: 17rpx;
     font-size: 24rpx;
     color: #333;
 }

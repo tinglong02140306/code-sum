@@ -18,7 +18,9 @@ const base = {
     genglong_ip : "http://10.186.106.194:8080/oilcoreserver",//耿龙
     dongtingting : "http://dongtingting.test.etcsd.cn/oilcoreserver",//董婷婷
     zhaozhihai : "http://10.186.106.124:8300/oilcoreserver",//赵志海
-    slave : "https://oil-test.etcsd.cn/slave/oilcoreserver",//代理测试环境
+    sunpengcheng : "http://spc.test.etcsd.cn/oilcoreserver",//孙鹏程
+    wangdaohui : "http://10.186.106.135:8200/oilcoreserver",//王道辉ip
+
 };
 
-export default base.dev_oil;
+export default base.dev;

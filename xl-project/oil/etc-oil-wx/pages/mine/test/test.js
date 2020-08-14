@@ -2,7 +2,7 @@
 import {MOBILE, OPENID} from '../../../constants/global';
 import {MineDefaultHead, MineNext, MineShareH, MineOrdersH, MineContactH, MineInvoicesH,MineEtcAdd} from '../../../assets/url/url';
 const DEFAULT_PAGE = 0;
-import {formatPlateNumber, formatSpaceId, formatSpacePlate, isEmpty, trim} from "../../../utils/util";
+import {formatPlateNumber, formatSpaceId, formatSpacePlate, isEmpty, trim,descentMobile} from "../../../utils/util";
 import {getHttpPost,getPostPromise} from "../../../http/http";
 import {etcApi,userApi} from "../../../http/api";
 import {SUPPORT_TYPE} from "../../../constants/etc-type";
@@ -12,6 +12,44 @@ const obj = {bind_status: 1, car_plate_color: '',car_plate_no: "",etc_card_no: "
 const card_height_big='height:260rpx';
 const card_height_small='height:230rpx';
 const card_type = SUPPORT_TYPE;
+
+const  signData = [
+    {
+  // 静默签约测试数据
+      user_name:'耿龙',//用户名
+  cert_type:'01',//证件类型
+  cert_no:'370481199111068142',//证件号
+  bank_name:'农业银行',//银行名称
+  bank_corp_org:'ABC',//银行简称
+  card_type:'0',//银行卡类型
+  card_no:'370181199207252714',//签约银行卡卡号
+  card_tel:'18315418931',//银行预留手机
+  etc_card_no:'37011901230204015058',//银行预留手机
+  // palate_number:'鲁AR67G9',//车牌号
+      car_plate_no:'鲁AR67G9',//车牌号
+      car_plate_color:'0',//车牌颜色
+  sign_type:'0',//签约类型 0-银联静默模式，1-普通模式
+  etcIsBank:true,
+  select:false,
+},
+  {
+    // 静默签约测试数据
+    user_name:'耿龙',//用户名
+    cert_type:'01',//证件类型
+    cert_no:'370481199111068142',//证件号
+    bank_name:'农业银行',//银行名称
+    bank_corp_org:'ABC',//银行简称
+    card_type:'0',//银行卡类型
+    bank_account:'370181199207252714',//签约银行卡卡号
+    card_tel:'18315418931',//银行预留手机
+    etc_card_no:'37011901230204015059',//银行预留手机
+    car_plate_no:'鲁AR67G9',//车牌号
+    car_plate_color:'0',//车牌颜色
+    sign_type:'0',//签约类型 0-银联静默模式，1-普通模式
+    etcIsBank:true,
+    select:false,
+  },
+]
 
 Page({
 
@@ -49,7 +87,7 @@ Page({
     card_height:'height:260rpx',
     scroll:false,
     isRefreshCard:false,//ETC列表刷新
-    mobile:wx.getStorageSync(MOBILE)
+    mobile:descentMobile(wx.getStorageSync(MOBILE))
   },
 
   /**
@@ -68,7 +106,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow:function(){
-    this.setData({openid:wx.getStorageSync(OPENID)});
+    this.setData({
+      openid:wx.getStorageSync(OPENID),
+      mobile:descentMobile(wx.getStorageSync(MOBILE)),
+    });
     if(wx.getStorageSync(OPENID)){
       this.getAllInfo();
       this.setData({isRefreshCard:true});
@@ -225,11 +266,11 @@ Page({
     const openid = wx.getStorageSync(OPENID);
     this.setData({openid:openid});
     if (openid){
-      // wx.navigateTo({
-      //   url: '/pages/mine/etc/bind/bind'
-      // });
+      wx.navigateTo({
+        url: '/pages/mine/etc/bind/bind'
+      });
       //notice银联接入(暂不上线)
-      this.getOwnedList()
+      // this.getOwnedList()
     }else {
       wx.navigateTo({url:`/pages/login/login`});
     }
@@ -517,9 +558,10 @@ Page({
         let params = encodeURIComponent(JSON.stringify(data));
         wx.navigateTo({url: `/pages/mine/etc/etc-list/etc-list?params=${params}`});
       }else {
-        wx.navigateTo({
-          url: '/pages/mine/etc/bind/bind'
-        });
+        wx.navigateTo({url: '/pages/mine/etc/bind/bind'});
+        //静默签约测试
+        // let params = encodeURIComponent(JSON.stringify(signData));
+        // wx.navigateTo({url: `/pages/mine/etc/etc-list/etc-list?params=${params}`});
       }
     }).catch(err=>{
       // wx.hideLoading();
@@ -549,7 +591,7 @@ Page({
         item.card_name="未知卡";
       }
       item.select = false;
-      if (!isEmpty(item.car_plate_no)&&!isEmpty(item.car_plate_color)&&!isEmpty(item.etc_card_no)&&!isEmpty(item.bank_account)&&!isEmpty(item.bank_card_type)&& !isEmpty(item.user_name) &&!isEmpty(item.mobile)){
+      if (!isEmpty(item.car_plate_no)&&!isEmpty(item.car_plate_color)&&!isEmpty(item.etc_card_no)&&!isEmpty(item.bank_account)&&!isEmpty(item.bank_card_type)&& !isEmpty(item.user_name) &&!isEmpty(item.mobile) &&!isEmpty(item.cert_no)){
         //处理银行卡数据  脱敏、空格
         item.bank_account_before = item.bank_account.substr(0, 6);
         item.bank_account_after = item.bank_account.substr(item.bank_account.length - 4);

@@ -30,7 +30,7 @@ page{
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  box-shadow: 0rpx 10rpx 40rpx 0rpx rgba(79, 221, 128, 0.3);
+  /*box-shadow: 0rpx 10rpx 40rpx 0rpx rgba(79, 221, 128, 0.3);*/
 }
 
 .disable-button{

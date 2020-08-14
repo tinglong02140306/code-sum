@@ -91,7 +91,7 @@
     </view>
     <!--快捷加油 ETC加油-->
     <view class="station-details-btns" wx:if="{{!is_support_no_sense}}" style="padding-bottom: {{isIphoneX?64:24}}rpx;"> 
-        <view class="station-details-btn-item left-theme" bind:tap="onEtcClick">ETC加油</view>
+        <view class="station-details-btn-item left-theme" bind:tap="onOilClick">扫码加油</view>
 <!--        <login-status bind:click="onOilClick" openid="{{openid}}">-->
             <view class="station-details-btn-item theme-button right-theme" bind:tap="onOilClick">快捷加油</view>
 <!--        </login-status>-->

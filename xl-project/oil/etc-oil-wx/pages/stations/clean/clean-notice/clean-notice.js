@@ -86,11 +86,11 @@ Page({
     getHttpPost(cleanApi.check,paramsData,res=>{
       wx.hideLoading();
       console.log('洗车机状态'+res.washer_status)
-      if (res.washer_status === '1'){
+      if (res.washer_status == 1){
         wx.showToast({title:'车辆未停好',icon:"none"});
-      }else if (res.washer_status === '2'){
+      }else if (res.washer_status == 2){
         wx.showToast({title:'洗车机正忙',icon:"none"});
-      }else if (res.washer_status === '3'){
+      }else if (res.washer_status == 3){
         wx.showToast({title:'洗车机维护中',icon:"none"});
       }else {
         this.startWasher();

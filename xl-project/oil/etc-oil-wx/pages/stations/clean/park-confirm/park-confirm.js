@@ -1,8 +1,9 @@
 // pages/stations/clean/park-confirm/park-confirm.js
-import {OPENID, CODE_WASHER, STATIONPAGE} from "../../../../constants/global";
+import {OPENID, CODE_WASHER, STATIONPAGE,WASHER_ID,FROM_CODE} from "../../../../constants/global";
 import {getHttpPost} from "../../../../http/http";
 import {cleanApi} from "../../../../http/api";
 import {getLocation} from "../../../../utils/location";
+import {getUrlParam} from "../../../../utils/util";
 let params = null;
 const app = getApp();
 let location = null;
@@ -15,10 +16,18 @@ Page({
   data: {
     isIphoneX: app.globalData.isIphoneX,
     openid:'',
-    washer_id:19,//洗车机ID
+    washer_id:'',//洗车机ID
     details:null,
     center_lng: null,
     center_lat:null,
+    isFistShow:false,
+  },
+
+  //首次进入
+  onHideFirst:function(){
+    this.setData({
+      isFistShow:false
+    })
   },
 
   //停车确认完毕
@@ -27,11 +36,12 @@ Page({
     const openid = wx.getStorageSync(OPENID);
     this.setData({openid:openid});
     if (openid){
-      if (wx.getStorageSync(CODE_WASHER)){
-        this.onCleanClick();
-      }else {
-        this.getOrder();
-      }
+      // if (wx.getStorageSync(CODE_WASHER)){
+      //   this.onCleanClick();
+      // }else {
+      //   this.getOrder();
+      // }
+      this.onCleanClick();
     }else {
       wx.navigateTo({url:`/pages/login/login`});
     }
@@ -41,40 +51,55 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    location = app.globalData.location;
-    if(location){
+    //获取当前位置的经纬度信息
+    getLocation(true,location=>{
       this.setData({
         center_lng:location.longitude,
         center_lat:location.latitude,
       });
-    }else{
-      //获取当前位置的经纬度信息
-      getLocation(true,location=>{
-        this.setData({
-          center_lng:location.longitude,
-          center_lat:location.latitude,
-        });
-      },err=>{
-        wx.showToast({
-          title:err,
-          icon:"none"
-        });
+    },err=>{
+      wx.showToast({
+        title:err,
+        icon:"none"
       });
-    }
+    });
+    this.setData({isFistShow:true})
     try {
+      // console.log('washer_id');
       if (wx.getStorageSync(CODE_WASHER)){
-        if(options&&options.scene){
-          const scene = decodeURIComponent(options.scene);
-          const index = scene.indexOf("=");
-          if(index!=-1){
-            const washer_id = scene.slice(index+1,scene.length);
-            console.log(washer_id);
-            this.setData({
-              washer_id:washer_id
-            });
+        //扫描小程序码进入首页
+        if (options.params){
+          params = JSON.parse(decodeURIComponent(options.params));
+          this.setData({
+            details:params,
+            washer_id:params.washer_id
+          });
+        }else {
+          //扫描小程序码进入洗车机
+          if(options&&options.scene){
+            const scene = decodeURIComponent(options.scene);
+            const index = scene.indexOf("=");
+            if(index!=-1){
+
+              const washer_id = scene.slice(index+1,scene.length);
+              console.log(washer_id);
+              this.setData({
+                washer_id:washer_id
+              });
+              wx.setStorageSync(CODE_WASHER, false);
+            }
           }
         }
-      }else {
+      }else if (wx.getStorageSync(FROM_CODE)){
+        //扫描普通二维码进入
+        if (wx.getStorageSync(WASHER_ID)){
+          this.setData({
+            washer_id:wx.getStorageSync(WASHER_ID)
+          });
+        }else {
+          wx.showToast({title: '二维码无效',icon:'none'})
+        }
+      } else {
         params = JSON.parse(decodeURIComponent(options.params));
         this.setData({
           details:params,
@@ -151,7 +176,7 @@ Page({
 
   //检查洗车机状态
   onCleanCheck:function(){
-    console.log('res.检查洗车机状态'+JSON.stringify(this.data.washer_id))
+    // console.log('res.检查洗车机状态'+JSON.stringify(this.data.washer_id))
     wx.showLoading({
       title: '检查洗车机状态中...',
       icon: 'none',
@@ -165,11 +190,11 @@ Page({
     getHttpPost(cleanApi.check,paramsData,res=>{
       wx.hideLoading();
       console.log('洗车机状态'+res.washer_status)
-      if (res.washer_status === '1'){
+      if (res.washer_status == 1){
         wx.showToast({title:'车辆未停好',icon:"none"});
-      }else if (res.washer_status === '2'){
+      }else if (res.washer_status == 2){
         wx.showToast({title:'洗车机正忙',icon:"none"});
-      }else if (res.washer_status === '3'){
+      }else if (res.washer_status == 3){
         wx.showToast({title:'洗车机维护中',icon:"none"});
       }else {
         this.createOrder();
@@ -199,6 +224,8 @@ Page({
           wash_coupon_count:res.wash_coupon_count,
         }
         wx.setStorageSync(CODE_WASHER, false);
+        wx.setStorageSync(FROM_CODE, false);
+        wx.setStorageSync(WASHER_ID, '');
         const params = encodeURIComponent(JSON.stringify(resData));
         wx.navigateTo({url:`/pages/stations/clean/clean-order/clean-order?params=${params}`});
       } else {

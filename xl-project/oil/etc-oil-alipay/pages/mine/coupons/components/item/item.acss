@@ -180,7 +180,7 @@
     font-size: 26rpx;
     color: #FA5F50;
     background-color: white;
-    border-radius: 24rpx;
+    border-radius: 32rpx;
     padding: 6rpx 24rpx;
     align-self: flex-end;
     border: 2rpx solid #FA5F50;
@@ -188,15 +188,20 @@
     text-align: center;
 }
 
-
-/* .btn-use {
+.btn-use {
     color: #01A170;
+    padding: 0 !important;
     border-color: #01A170;
 }
 
 .btn-give {
     margin-top: 35rpx;
-} */
+    padding: 0 !important;
+    display: inline-block;
+    width: 154rpx !important;
+    height: 46rpx !important;
+    line-height: 46rpx;
+}
 
 .ptcr-top-right-finish {
     display: flex;

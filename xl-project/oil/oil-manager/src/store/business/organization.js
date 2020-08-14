@@ -85,7 +85,7 @@ class Organization extends Store{
             page_num: 1,
             page_size: 999
         }
-        http.post("/website/partner/top-query", reqData, response => {
+        http.post("/website/partner/top-simple-query", reqData, response => {
             this.partnerList = response.data;
         }, err => {
             message.error(err)
@@ -145,7 +145,7 @@ class Organization extends Store{
             org_link_name: trim(org_link_name),
             org_link_mobile: trim(org_link_mobile),
             org_tax_no: org_tax_no,
-            org_cert_img_base64: org_cert_img_base64,
+            // org_cert_img_base64: org_cert_img_base64,
             org_bank_name: trim(org_bank_name),
             org_bank_account_id: org_back_account_id,
             invoice_amtlmt: invoice_amtlmt
@@ -176,7 +176,7 @@ class Organization extends Store{
             org_link_name: trim(org_link_name),
             org_link_mobile: org_link_mobile,
             org_tax_no: org_tax_no,
-            org_cert_img_base64: org_cert_img_base64,
+            // org_cert_img_base64: org_cert_img_base64,
             org_bank_name: trim(org_bank_name),
             org_bank_account_id: org_bank_account_id,
             invoice_amtlmt: invoice_amtlmt

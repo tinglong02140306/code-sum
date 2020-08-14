@@ -189,7 +189,7 @@ var CryptoJS = CryptoJS || function(u, p) {
       d = [];
       for (var r = 0; r < p; r += 3)
         for (var w = (l[r >>> 2] >>> 24 - 8 * (r % 4) & 255) << 16 | (l[r + 1 >>> 2] >>> 24 - 8 * ((r + 1) % 4) & 255) << 8 | l[r + 2 >>> 2] >>> 24 - 8 * ((r + 2) % 4) & 255, v = 0; 4 > v && r + 0.75 * v < p; v++) d.push(t.charAt(w >>> 6 * (3 - v) & 63));
-      if (l = t.charAt(64))
+      if (l == t.charAt(64))
         for (; d.length % 4;) d.push(l);
       return d.join("")
     },

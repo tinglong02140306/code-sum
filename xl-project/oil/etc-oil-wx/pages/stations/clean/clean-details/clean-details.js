@@ -90,27 +90,19 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    location = app.globalData.location;
-    if(location){
+    //获取当前位置的经纬度信息
+    getLocation(true,location=>{
       this.setData({
         center_lng:location.longitude,
         center_lat:location.latitude,
       });
-    }else{
-      //获取当前位置的经纬度信息
-      getLocation(true,location=>{
-        this.setData({
-          center_lng:location.longitude,
-          center_lat:location.latitude,
-        });
-      },err=>{
-        wx.showToast({
-          title:err,
-          icon:"none"
-        });
+    },err=>{
+      wx.showToast({
+        title:err,
+        icon:"none"
       });
-    }
-    this.setData({isFistShow:true})
+    });
+    // this.setData({isFistShow:true})
     try {
       params = JSON.parse(decodeURIComponent(options.params));
       this.setData({details:params});

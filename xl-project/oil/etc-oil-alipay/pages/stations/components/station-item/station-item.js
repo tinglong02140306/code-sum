@@ -24,7 +24,6 @@ Component({
             this.props.onPayClick(e.currentTarget.dataset.item)
         },
         onNavigationClick(e) {
-            debugger
             this.props.onNavigationClick(e.currentTarget.dataset.item)
         }
     }

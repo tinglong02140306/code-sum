@@ -158,7 +158,20 @@
     margin-left: 4rpx;
 }
 
-
+.clean-item-box-info-btn{
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    overflow: hidden;
+    margin-right: 32rpx;
+}
+.clean-item-clean-time{
+    /*height: 30rpx;*/
+    color: rgba(51, 51, 51, 1);
+    font-size: 24rpx;
+    text-align: right;
+    font-family: PingFang-SC-Medium;
+}
 /*停车*/
 .clean-item-stop-box{
     display: flex;

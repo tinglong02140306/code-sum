@@ -6,7 +6,8 @@
  * @Description: app
  */
 import {login_wx} from "./utils/login"
-import {STATIONPAGE,CODE_WASHER,MARKET_CODE} from "./constants/global";
+import {STATIONPAGE,CODE_WASHER,MARKET_CODE,WASHER_ID,FROM_CODE} from "./constants/global";
+import {getQueryVariable} from  "./utils/util"
 App({
   onLaunch: function (data) {
     this.dealUpdate();
@@ -40,17 +41,31 @@ App({
     }else {
       wx.setStorageSync(CODE_WASHER, false);
     }
-    // todo 代理--普通二维码进入
+    // 代理--普通二维码进入
     if (res.scene === 1011||res.scene === 1012||res.scene === 1013) {
       //扫普通二维码码进入小程序授权推广码
-        const query = decodeURIComponent(res.query.q);
-        const index = query.indexOf("=");
-        if(index!=-1){
-          const marketCode = query.slice(index+1,query.length);
-          wx.setStorageSync(MARKET_CODE, marketCode);
-        }
+      //   const query = decodeURIComponent(res.query.q);
+      //   const index = query.indexOf("=");
+      //   if(index!=-1){
+      //     const marketCode = query.slice(index+1,query.length);
+      //     wx.setStorageSync(MARKET_CODE, marketCode);
+      //   }
+
+      const query = decodeURIComponent(res.query.q);
+      // console.log('query',query)
+      // console.log("marketCode",getQueryVariable(query,'marketCode'))
+      // console.log("id",getQueryVariable(query,'id'))
+      wx.setStorageSync(FROM_CODE, true);
+      // const marketCode = query.marketCode;
+      // const washerId = query.id;
+      wx.setStorageSync(MARKET_CODE, getQueryVariable(query,'marketCode'));
+      wx.setStorageSync(WASHER_ID, getQueryVariable(query,'id'));
+
     }else {
+
+      wx.setStorageSync(FROM_CODE, false);
       wx.setStorageSync(MARKET_CODE, '');
+      wx.setStorageSync(WASHER_ID, '');
     }
   },
 

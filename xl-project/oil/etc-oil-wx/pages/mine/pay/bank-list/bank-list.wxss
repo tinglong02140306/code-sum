@@ -21,9 +21,10 @@ page{
 }
 .bank-card-add{
     /*background-color: #1C1A24;*/
-    position: fixed;
-    flex: 1;
-    bottom: 40rpx;
+    /*position: fixed;*/
+    /*flex: 1;*/
+    /*bottom: 40rpx;*/
+    margin-top: 50rpx;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -121,7 +122,192 @@ page{
 
 }
 .click-text3{
-
     background-color: rgba(255, 255, 255, 1);
+}
 
+
+/*银行优惠*/
+.home-bank-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40rpx;
+    padding: 0 32rpx;
+    box-sizing: border-box;
+}
+
+.home-bank-text{
+    font-size: 32rpx;
+    color: rgba(0, 0, 0, .85);
+    align-self: flex-start;
+    font-weight: bolder;
+}
+
+.home-bank-list{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40rpx;
+    box-sizing: border-box;
+}
+
+.home-bank-list-item{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    padding: 32rpx;
+    overflow: hidden;
+    margin-bottom: 32rpx;
+    align-items: center;
+}
+
+.home-bank-list-item-image{
+    width: 64rpx;
+    height: 64rpx;
+    background-color: #f8f8f8;
+    border-radius: 50rpx;
+}
+
+.home-bank-list-item-info{
+    /*flex: 1;*/
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    box-sizing: border-box;
+    margin-left: 32rpx;
+    width: 100%;
+}
+
+.home-bank-list-item-info-top{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /*justify-content: space-between;*/
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.home-bank-list-item-info-top-view{
+    /*flex: 1;*/
+    /*max-width: 300rpx;*/
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+.home-bank-list-item-info-top-text{
+    /*flex: 1;*/
+    max-width: 300rpx;
+    /*width: 260rpx;*/
+    font-size: 36rpx;
+    color: rgba(0, 0, 0, .85);
+    font-weight: bolder;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+
+.home-bank-list-item-info-top-mark{
+    background-color: rgba(255, 147, 0, 0.1);
+    color: #FF9300;
+    font-size: 26rpx;
+    margin-left: 6rpx;
+    border-radius: 6rpx;
+    padding: 2rpx 10rpx;
+}
+
+.home-bank-list-item-info-bottom-row{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.home-bank-list-item-info-bottom{
+    /*width: 100%;*/
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+.home-bank-list-item-info-bottom-provence{
+    color: rgba(0, 0, 0, 0.65);
+    font-size: 28rpx;
+    margin-top: 8rpx;
+    margin-right: 10rpx;
+}
+.home-bank-list-item-info-bottom-item{
+    /*width: 100%;*/
+    box-sizing: border-box;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    color: rgba(0, 0, 0, 0.65);
+    font-size: 28rpx;
+    margin-top: 8rpx;
+    max-width: 450rpx;
+}
+
+/*去查看*/
+.home-bank-list-item-see{
+    right: 42rpx;
+    width: 154rpx;
+    height: 52rpx;
+    line-height: 52rpx;
+    color: #ffffff;
+    font-size: 28rpx;
+    text-align: center;
+    box-shadow: 0rpx 2rpx 4rpx 0rpx rgba(0, 0, 0, 0.1);
+    background-color: #E3C283;
+    border-radius: 32rpx;
+    position: fixed;
+}
+
+.home-online-serve{
+    position: fixed;
+    bottom: 80rpx;
+    right: 0;
+    width: 198rpx;
+    height: 80rpx;
+    border-top-left-radius: 50rpx;
+    border-bottom-left-radius: 50rpx;
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: 0px 2rpx 4rpx 0px rgba(0, 0, 0, 0.05);
+    z-index: 5;
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 28rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.home-online-image{
+    width: 48rpx;
+    height: 48rpx;
+    margin-right: 6rpx;
+}
+
+.home-online-serve-btn{
+    width: 198rpx;
+    height: 80rpx;
+    position: absolute;
+    z-index: 6;
+    left: 0;
+    top: 0;
+    opacity: 0;
+}
+.person-pay-bank-left{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: white;
+}
+.pay-bank-right{
+    width: 14rpx;
+    height: 26rpx;
+    margin-right: 46rpx;
 }

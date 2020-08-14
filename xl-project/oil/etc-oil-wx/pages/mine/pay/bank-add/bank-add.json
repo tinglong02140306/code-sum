@@ -5,6 +5,7 @@
     "label-input":"../../../../components/label-input/label-input",
     "plate-input":"../../../../components/plate-input/plate-input",
     "popup":"../../../../components/popup/popup",
-    "identify-button":"../../../../components/identify-button/identify-button"
+    "identify-button":"../../../../components/identify-button/identify-button",
+    "modal-super":"../../../components/modal-super/modal-super"
   }
 }

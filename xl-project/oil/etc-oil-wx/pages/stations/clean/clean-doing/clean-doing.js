@@ -26,6 +26,8 @@ Page({
     washer_id:'',
     order_no:'',
     isFinish:false,
+    isCanStop:false,//能否停止
+    telephone:'',//客服电话
     rangeHeight: `${navigationBarHeight}px`,
     // scroll_height:`calc(100vh - ${navigationBarHeight}px - ${tabHeight}rpx - 20rpx)`,
 
@@ -34,19 +36,29 @@ Page({
   //停止
   onConfirmClick: function (e) {
     // let item = e.detail;
+    const {isCanStop,telephone} = this.data;
     let that = this;
-    wx.showModal({
-      title: '提示',
-      content: '确定要停止洗车机吗？',
-      confirmColor: '#05BA7D',
-      success: function (res) {
-        if (res.confirm) {
-          if (!that.data.isFinish){
-            that.stopWasher();
+    if (isCanStop){
+      wx.showModal({
+        title: '提示',
+        content: '确定要停止洗车机吗？',
+        confirmColor: '#05BA7D',
+        success: function (res) {
+          if (res.confirm) {
+            if (!that.data.isFinish){
+              that.stopWasher();
+            }
           }
         }
-      }
-    });
+      });
+    }else {
+      wx.makePhoneCall({
+        phoneNumber: telephone?telephone:'4008609599'
+      }).catch((msg)=>{
+        console.log(msg)
+      })
+    }
+
   },
 
   onBackClick: function(){
@@ -72,11 +84,16 @@ Page({
         order_no:params.order_no,
         start_time:params.start_time,
       });
+      this.isCanStop();
       if (params.start_time){
         this.computationTime(params.start_time);
       }else {
         this.getSetTimer();
-        this.getWasherTimer();
+        this.timer = setTimeout(()=>{
+          clearTimeout(this.timer);
+          //延时10秒检查洗车机状态
+          this.getWasherTimer();
+        },1000*10);
       }
     } catch (error) {
       console.log(error)
@@ -191,28 +208,25 @@ Page({
       washer_id:washer_id,
     }
     getHttpPost(cleanApi.check,paramsData,res=>{
-      wx.hideLoading();
-      if (res.result_code === "00000") {
-        if (res.washer_status !== '2'){
-          this.setData({isFinish:true});
-          clearInterval(washerTimer);
-          washerTimer=null;
-          clearInterval(setTimer);
-          setTimer=null;
-          clearInterval(stopTimer);
-          stopTimer=null;
-          const resData = {
-            washer_id:washer_id,
-            order_no:order_no,
-            status:'01',
-          }
-          this.removeCache();
-          const details = encodeURIComponent(JSON.stringify(resData));
-          wx.navigateTo({url:`/pages/stations/clean/clean-result/clean-result?params=${details}`});
+      console.log('洗车机状态res:',res)
+      if (res.washer_status != 2){
+        this.setData({isFinish:true});
+        clearInterval(washerTimer);
+        washerTimer=null;
+        clearInterval(setTimer);
+        setTimer=null;
+        clearInterval(stopTimer);
+        stopTimer=null;
+        const resData = {
+          washer_id:washer_id,
+          order_no:order_no,
+          status:'01',
         }
+        this.removeCache();
+        const details = encodeURIComponent(JSON.stringify(resData));
+        wx.navigateTo({url:`/pages/stations/clean/clean-result/clean-result?params=${details}`});
       }
     },err=>{
-      wx.hideLoading();
       wx.showToast({title:err.msg,icon:"none"});
     });
   },
@@ -271,9 +285,23 @@ Page({
       washer_id:washer_id,
     }
     getHttpPost(cleanApi.removeCache,paramsData,res=>{
-      wx.hideLoading();
     },err=>{
-      wx.hideLoading();
+      wx.showToast({title:err.msg,icon:"none"});
+    });
+  },
+
+  //洗车机能否停止
+  isCanStop:function(){
+    const {washer_id} = this.data;
+    const paramsData = {
+      washer_id:washer_id,
+    }
+    getHttpPost(cleanApi.isCanStop,paramsData,res=>{
+      this.setData({
+        isCanStop:res.can_stop,
+        telephone:res.tel?res.tel:'4008609599'
+      })
+    },err=>{
       wx.showToast({title:err.msg,icon:"none"});
     });
   },

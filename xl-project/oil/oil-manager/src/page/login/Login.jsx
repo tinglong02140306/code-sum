@@ -7,6 +7,7 @@ import {inject, observer} from 'mobx-react';
 import {withRouter} from 'react-router-dom';
 import {isSpecialChart} from "../../utils/isSpecialChart";
 import ChangePasswordDialog from '../../component/usermenu/ChangePasswordDialog';
+import baseUrl from '../../url.config';
 
 @inject("loginStore")
 @observer
@@ -36,6 +37,7 @@ class Login extends React.Component {
             contentWidth: 96,
             contentHeight: 38,
             showError: false, // 默认不显示验证码的错误信息
+            identifyCode:baseUrl.concat('/website/user/get-check-code')
         };
     }
 
@@ -84,25 +86,27 @@ class Login extends React.Component {
                 isEmptyPassword: false
             });
         }
-        if(this.state.identify.toUpperCase()!==this.state.code.toUpperCase()){
+        // if(this.state.identify.toUpperCase()!==this.state.code.toUpperCase()){
+        if(!this.state.identify){
             this.setState({showError: true});
-            this.reloadPic();
+            // this.reloadPic();
         }else{
             this.setState({
                 showError: false
             });
         }
         const {history} = this.props;
-        if (this.state.username && this.state.password &&(this.state.identify.toUpperCase()===this.state.code.toUpperCase())) {
-            const username = this.state.username;
-            const password = this.state.password;
-            localStorage.setItem('username', username);
-            if (this.state.isCheck) {
-                localStorage.setItem('password', password);
-            } else {
-                localStorage.setItem('password', "");
-            }
-            this.props.loginStore.getLogin(this.state.username, this.state.password, (isSuccess,menus)=> {
+        // if (this.state.username && this.state.password &&(this.state.identify.toUpperCase()===this.state.code.toUpperCase())) {
+        if (this.state.username && this.state.password && this.state.identify) {
+            // const username = this.state.username;
+            // const password = this.state.password;
+            // localStorage.setItem('username', username);
+            // if (this.state.isCheck) {
+            //     localStorage.setItem('password', password);
+            // } else {
+            //     localStorage.setItem('password', "");
+            // }
+            this.props.loginStore.getLogin(this.state.username, this.state.password, this.state.identify, (isSuccess,menus)=> {
                 if(isSuccess){
                     if (menus&&menus[0].sub) {
                         let openKey = menus[0].key;
@@ -117,7 +121,7 @@ class Login extends React.Component {
                         message.error('菜单解析出错')
                     }
                 }else{
-                    this.reloadPic();
+                    this.changeCode();
                     if(menus==='50003'){//需强制用户修改密码
                         this.setState({changePsw:true})
                     }
@@ -131,7 +135,19 @@ class Login extends React.Component {
     }
 
     componentDidMount() {
-        this.drawPic();
+        // var nd = new Date();
+        // nd.setSeconds(nd.getSeconds() + 60);
+        // document.cookie = "cookietest=1; expires=" + nd.toGMTString();
+        // var cookiesEnabled = document.cookie.indexOf("cookietest=") != -1;
+        // if(!cookiesEnabled) {
+        //     //没有启用cookie
+        //     alert("没有启用cookie ");
+        // } else {
+        //     //已经启用cookie
+        //     alert("已经启用cookie ");
+        // }
+
+        // this.drawPic();
         if (!isEmpty(localStorage.getItem('username'))) {
             this.setState({username: localStorage.getItem('username')});
             if (!isEmpty(localStorage.getItem('password'))) {
@@ -248,12 +264,19 @@ class Login extends React.Component {
     }
 
     onChangeSuccess = () =>{
-        this.reloadPic();
+        this.changeCode();
         this.setState({changePsw:false,identify:""});
     }
 
+    changeCode = () =>{
+        const {identifyCode} = this.state;
+        let num=Math.ceil(Math.random()*10);//生成一个随机数（防止缓存）
+        let codeImg = identifyCode+'?'+num;
+        this.setState({identifyCode:codeImg})
+    }
+
     render() {
-        const {username,password,identify,changePsw, showError} = this.state;
+        const {username,password,identify,changePsw, showError,identifyCode} = this.state;
         const suffixUserName = username ?
             <Icon type="close-circle" onClick={this.emitEmptyUserName} style={{color: "#d5d5d5"}}/> : null;
         const suffixPassword = password ?
@@ -261,7 +284,7 @@ class Login extends React.Component {
         return (
             <div className="login-div">
                 <div className="login-container">
-                    <img src={Logo} alt="山东高速"/>
+                    <img style={{marginBottom:20}} src={Logo} alt="山东高速"/>
                     {/*<a id="name">加油后台管理系统</a>*/}
                     <Input
                         type="text"
@@ -295,20 +318,21 @@ class Login extends React.Component {
                             value={identify}
                             onKeyDown={this.onKeydown}
                             onChange={this.onChangeIdentify}></Input>
-                        <canvas 
-                            ref={this.canvas}
-                            width='100'
-                            height='40'
-                            onClick={this.reloadPic}>
-                        </canvas>
+                        <img id='codeImage' onClick={this.changeCode} src={identifyCode}  alt="验证码加载失败" ></img>
+                        {/*<canvas */}
+                        {/*    ref={this.canvas}*/}
+                        {/*    width='100'*/}
+                        {/*    height='40'*/}
+                        {/*    onClick={this.reloadPic}>*/}
+                        {/*</canvas>*/}
                     </div>
                     <div style={{visibility: showError ? "visible" : "hidden"}}>请输入正确的验证码</div>
-                    <div className="login-check-container">
-                        <Checkbox
-                            className="login-check-box"
-                            checked={this.state.isCheck}
-                            onChange={this.onChangeCheckBox}>记住密码</Checkbox>
-                    </div>
+                    {/*<div className="login-check-container">*/}
+                    {/*    <Checkbox*/}
+                    {/*        className="login-check-box"*/}
+                    {/*        checked={this.state.isCheck}*/}
+                    {/*        onChange={this.onChangeCheckBox}>记住密码</Checkbox>*/}
+                    {/*</div>*/}
                     <Button type="primary"
                             className="login-button"
                             onClick={this.enterLoading}

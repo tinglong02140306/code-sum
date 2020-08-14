@@ -43,7 +43,7 @@
             </view>
         </view>
     </view>
-    <view class="clean-share-activity-box">热门活动</view>
+    <!-- <view class="clean-share-activity-box">热门活动</view>
     <view class="clean-share-container">
         <view class="clean-share-container-box" onTap="goBuyClick">
             <view class="clean-share-box-left-item">
@@ -58,7 +58,7 @@
             </view>
             <image class="clean-share-box-right-icon" src="/assets/static/mine-banner-package.png"></image>
         </view>
-    </view>
+    </view> -->
     <!--一键洗车-->
     <view class="clean-details-btns" style="padding-bottom: {{isIphoneX?64:24}}rpx">
         <view class="clean-details-btn-item theme-button right-theme" onTap="onCleanClick"> 一键洗车 </view>

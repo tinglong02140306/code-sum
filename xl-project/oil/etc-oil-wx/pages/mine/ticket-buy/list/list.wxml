@@ -10,7 +10,7 @@
                 show_finish="{{show_finish}}"
         >
             <view wx:for="{{card_list}}" wx:for-index="index" wx:for-item="item" wx:key="etc_card" data-item="{{item}}" bind:tap="onCellClick"class="ticket-list-container" wx:if="{{!is_empty}}">
-                <template is="ticket_item" data="{{item}}"></template>
+                <template is="ticket_item" data="{{item,rush_time}}"></template>
             </view>
             <status wx:if="{{status}}"  text="{{status==1?'暂时还没有洗车券哦～':'网络好像断了哦～'}}" bind:retry="onRetryClick"></status>
         </scroll-list>

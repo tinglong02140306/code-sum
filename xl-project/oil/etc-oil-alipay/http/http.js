@@ -28,11 +28,9 @@ export const getHttpPost = (url, params, success, fail) => {
             method: 'post',
             timeout: 60000,
             success: (res) => {
-                console.log(res);
                 dealResponse(res, success, fail);
             },
             fail: (res) => {
-                console.log(res);
                 const err = {
                     msg: res.errorMessage,
                     code: 10
@@ -68,7 +66,6 @@ export const getPostPromise = (url, params) => {
                     dealResponse(res, resolve, reject);
                 },
                 fail: (res) => {
-                    console.log(res);
                     const err = {
                         msg: res.errorMessage,
                         code: 10
@@ -92,8 +89,7 @@ export const getPostPromise = (url, params) => {
 				success: res => {
 					dealResponse(res, resolve, reject);
 				},
-				fail: error => {
-					console.log(res);
+				fail: res => {
                     const err = {
                         msg: res.errorMessage,
                         code: 10
@@ -119,15 +115,6 @@ const dealResponse = (res, success, fail) => {
                     my.setStorageSync({ key: 'avatar', data: ''});
                     my.setStorageSync({ key: 'nickName', data: ''});
                     my.switchTab({url: '/pages/home/index/index'});
-                    // 以上注释需要放开
-                    // TODO 以下代码删除
-                    // setTimeout(function(){ 
-                    //     my.hideLoading();
-                    // },800)
-                    // success({
-                    //     data: []
-                    // });
-                    
                 } else {
                     //业务处理失败
                     const err = {

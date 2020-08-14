@@ -151,7 +151,7 @@ class OrganizationDialog extends React.Component {
             isEmptyOrgBackId: isSpecialChart(org_bank_account_id),
             isEmptyOrgLinkName: isSpecialChart(org_link_name),
             isEmptyOrgLinkMobile: !isPhoneRight(org_link_mobile),
-            isEmptyImage: isEmpty(org_image_base64) && isEmpty(org_cert_img_url),
+            // isEmptyImage: isEmpty(org_image_base64) && isEmpty(org_cert_img_url),
             isEmptyInvoiceAmtlmt: !isRangeNum(invoice_amtlmt,5000000.00)
         });
     }
@@ -171,8 +171,9 @@ class OrganizationDialog extends React.Component {
             && isPhoneRight(org_link_mobile)
             && !isSpecialChart(org_bank_name)
             && !isSpecialChart(org_bank_account_id)
-            && isRangeNum(invoice_amtlmt,5000000.00)
-            && (!isEmpty(org_image_base64) || !isEmpty(org_cert_img_url))) {
+            && isRangeNum(invoice_amtlmt,5000000.00))
+            // && (!isEmpty(org_image_base64) || !isEmpty(org_cert_img_url)))
+        {
             if (this.props.organization.type === 2) {//增加
                 this.props.organization.getAddUser(partner_id, invoice_type, org_name, org_address, org_legal_entity,
                     org_mobile, org_link_name, org_link_mobile, org_tax_no, org_image_base64, org_bank_name, org_bank_account_id, getFixed(invoice_amtlmt));
@@ -525,53 +526,7 @@ class OrganizationDialog extends React.Component {
                                      style={{visibility: isEmptyOrgAddress ? "visible" : "hidden"}}>请输入地址(不包含特殊字符)
                                 </div>
                             </div>
-                            <div className="organization-image-container">
-                                <div className="organization-image-item">
-                                    <div className="organization-image-hint">
-                                        <span>*</span>三证合一照片&nbsp;:
-                                    </div>
-                                    <div className="organization-dialog-upload"
-                                         onMouseOver={this.onMouseUp}
-                                         onMouseOut={this.onMouseLeave}>
-                                        <div className="organization-content">
-                                            <div className="organization-hint"
-                                                 style={{visibility: isEmpty(org_cert_img_url) ? "visible" : "hidden"}}>
-                                                <Icon type="plus"/>
-                                                上传
-                                            </div>
-                                            <div className="organization-image-div">
-                                                <img src={org_cert_img_url}
-                                                     style={{visibility: !isEmpty(org_cert_img_url) ? "visible" : "hidden"}}
-                                                     alt="三证合一照片" className="upload-image"/>
-                                                <div className="organization-overlay"
-                                                     style={{visibility: this.state.isVisiblePre}}>
-                                                    <div onClick={this.onPreviewImage}><Icon type="eye-o"
-                                                                                             style={{color: "#fff"}}/>
-                                                    </div>
-                                                    <div onClick={this.onDeleteImage}
-                                                         style={{display: type !== 3 ? "block" : "none"}}>
-                                                        <Icon type="delete"
-                                                              style={{color: "#fff"}}/></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <input className="organization-input"
-                                               type="file"
-                                               multiple="multiple"
-                                               value=""
-                                               onChange={this.onChangeImage}
-                                               style={{display: isEmpty(org_cert_img_url) ? "block" : "none"}}
-                                               accept="image/png, image/jpeg, image/gif, image/jpg"/>
-                                        <Modal visible={this.state.isCanPreview} footer={null}
-                                               onCancel={this.handleCancel}>
-                                            <img alt="example" style={{width: '100%'}} src={org_cert_img_url}/>
-                                        </Modal>
-                                    </div>
-                                </div>
-                                <div className="organization-image-empty-hint"
-                                     style={{visibility: isEmptyImage ? "visible" : "hidden"}}>
-                                    <span>{this.state.isImageHint}</span></div>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -581,3 +536,51 @@ class OrganizationDialog extends React.Component {
 }
 
 export default OrganizationDialog;
+
+// <div className="organization-image-container">
+//     <div className="organization-image-item">
+//         <div className="organization-image-hint">
+//             <span>*</span>三证合一照片&nbsp;:
+//         </div>
+//         <div className="organization-dialog-upload"
+//              onMouseOver={this.onMouseUp}
+//              onMouseOut={this.onMouseLeave}>
+//             <div className="organization-content">
+//                 <div className="organization-hint"
+//                      style={{visibility: isEmpty(org_cert_img_url) ? "visible" : "hidden"}}>
+//                     <Icon type="plus"/>
+//                     上传
+//                 </div>
+//                 <div className="organization-image-div">
+//                     <img src={org_cert_img_url}
+//                          style={{visibility: !isEmpty(org_cert_img_url) ? "visible" : "hidden"}}
+//                          alt="三证合一照片" className="upload-image"/>
+//                     <div className="organization-overlay"
+//                          style={{visibility: this.state.isVisiblePre}}>
+//                         <div onClick={this.onPreviewImage}><Icon type="eye-o"
+//                                                                  style={{color: "#fff"}}/>
+//                         </div>
+//                         <div onClick={this.onDeleteImage}
+//                              style={{display: type !== 3 ? "block" : "none"}}>
+//                             <Icon type="delete"
+//                                   style={{color: "#fff"}}/></div>
+//                     </div>
+//                 </div>
+//             </div>
+//             <input className="organization-input"
+//                    type="file"
+//                    multiple="multiple"
+//                    value=""
+//                    onChange={this.onChangeImage}
+//                    style={{display: isEmpty(org_cert_img_url) ? "block" : "none"}}
+//                    accept="image/png, image/jpeg, image/gif, image/jpg"/>
+//             <Modal visible={this.state.isCanPreview} footer={null}
+//                    onCancel={this.handleCancel}>
+//                 <img alt="example" style={{width: '100%'}} src={org_cert_img_url}/>
+//             </Modal>
+//         </div>
+//     </div>
+//     <div className="organization-image-empty-hint"
+//          style={{visibility: isEmptyImage ? "visible" : "hidden"}}>
+{/*        <span>{this.state.isImageHint}</span></div>*/}
+{/*</div>*/}

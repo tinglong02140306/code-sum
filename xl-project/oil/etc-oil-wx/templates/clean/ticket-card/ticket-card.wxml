@@ -6,7 +6,9 @@
             <view class="ticket-card-box-info">
                 <view class="ticket-card-box-info-top">
                     <text class="ticket-card-title-text">{{item.package_name}}</text>
-                    <view class="ticket-card-discount-text">{{item.discount_rate}}折</view>
+<!--                    <view class="ticket-card-discount-text">{{item.discount_rate}}折</view>-->
+                    <view class="ticket-card-discount-text-rush" wx:if="{{item.time_limit_flag||item.count_limit_flag}}">抢购</view>
+                    <view class="ticket-card-discount-text" wx:if="{{!item.time_limit_flag && !item.count_limit_flag}}">{{item.discount_rate}}折</view>
                 </view>
                <view class="ticket-card-box-info-top">
                    <text class="ticket-card-number-text">含{{item.coupon_count}}张洗车券</text>

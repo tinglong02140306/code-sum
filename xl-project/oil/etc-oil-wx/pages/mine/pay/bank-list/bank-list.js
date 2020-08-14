@@ -1,10 +1,14 @@
 // pages/person/payment/bank-list/bank-list.js
 // let card_data=[];
 import {formatPlateNumber, formatSpaceId, trim} from "../../../../utils/util";
-import {getHttpPost} from "../../../../http/http";
-import {paymentApi,payApi} from "../../../../http/api";
+import {getHttpPost, getPostPromise} from "../../../../http/http";
+import {paymentApi, payApi, homeApi} from "../../../../http/api";
+import {getLocation} from "../../../../utils/location";
+import {PersionNext} from "../../../../assets/url/url";
+import {OPENID} from "../../../../constants/global";
 
 const app = getApp();
+let location = null;
 
 Page({
 
@@ -21,6 +25,14 @@ Page({
     tail_no:'',
     sign_bank_name:'',
     sign_account_type:'',
+    area_code:'370100',
+    next_icon:PersionNext,
+    rightsData:{
+      logo_url:'https://oilmag.etcsd.com.cn/oilcoreserver/static//resource/icon-ZHYT-logo1578985473037.png',
+      name:'中航易通加油优惠',
+      equit_type:1,
+      desc_list:["所有ETC用户都可领取，加油满200减10", "限济南中航易通前屯加油站使用，每人限领一张"]
+    }
   },
 
   /**
@@ -28,6 +40,23 @@ Page({
    */
   onLoad: function (options) {
     this.getPaymentList();
+    location = app.globalData.location;
+    if(location){
+      const {area_code} = location;
+      this.setData({area_code:area_code});
+      this.getRights(area_code);
+    }else {
+      getLocation(true,location=>{
+        this.setData({area_code:location.area_code});
+        app.globalData.location = location;
+        this.getRights(location.area_code);
+      },err=>{
+        wx.showToast({
+          title:err,
+          icon:"none"
+        });
+      });
+    }
   },
 
   /**
@@ -55,6 +84,42 @@ Page({
     this.getPaymentList();
   },
 
+  //获取权益 银行优惠
+  getRights:function(area_code){
+    const params = {
+      page_num:1,
+      page_size:0,
+      area_code:area_code
+    }
+    getPostPromise(homeApi.rights,params).then(res=>{
+      this.setData({rights:res.data,});
+    }).catch(err=>{
+      console.log(err);
+    });
+  },
+
+  //权益 银行优惠 item点击（仅中航易通）
+  onRightItemClick:function(e){
+    this.setData({open_id:wx.getStorageSync(OPENID)});
+    if (wx.getStorageSync(OPENID)){
+      wx.navigateTo({url:`/pages/home/rights/rights`})
+    }else {
+      wx.navigateTo({url:`/pages/login/login`});
+    }
+  },
+
+  //权益 银行优惠 item点击
+  onRightRequestClick:function(e){
+    console.log(e)
+    this.setData({open_id:wx.getStorageSync(OPENID)});
+    if (wx.getStorageSync(OPENID)){
+      let item = e.currentTarget.dataset.item;
+      const params = encodeURIComponent(JSON.stringify(item));
+      wx.navigateTo({url:`/pages/home/rights-request/rights-request?params=${params}`})
+    }else {
+      wx.navigateTo({url:`/pages/login/login`});
+    }
+  },
   //点击card事件
   onCardClick:function(e){
     // const bank_card_data = JSON.stringify(e.currentTarget.dataset.item);
@@ -79,10 +144,8 @@ Page({
 
   //支付信息列表
   getPaymentList:function () {
-    wx.showLoading({mask:true,});
     getHttpPost(paymentApi.paymentList,{},response=> {
       wx.stopPullDownRefresh();
-      wx.hideLoading();
       this.setData({
         is_refresh:false,
       });
@@ -119,7 +182,6 @@ Page({
       }
     }, fail => {
       wx.stopPullDownRefresh();
-      wx.hideLoading();
       wx.showToast({
         title:fail,
         icon:'none'

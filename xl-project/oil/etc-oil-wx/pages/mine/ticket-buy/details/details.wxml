@@ -6,7 +6,8 @@
         <view class="ticket-card-details-info-top">
 <!--            新用户乐透券包-->
             <text class="ticket-card-details-name-text">{{details.package_name}}</text>
-            <view class="ticket-card-details-discount-value">{{details.discount_rate}}折</view>
+            <view class="ticket-card-details-discount-value-rush" wx:if="{{details.time_limit_flag||details.count_limit_flag}}">抢购</view>
+            <view class="ticket-card-details-discount-value" wx:if="{{!details.time_limit_flag && !details.count_limit_flag}}">{{details.discount_rate}}折</view>
         </view>
         <view class="ticket-card-details-info-top-2">
             <text class="ticket-card-details-count-text">含{{details.coupon_count}}张洗车券</text>
@@ -22,6 +23,28 @@
 <!--        水蜡精洗4次，有效期365天-->
         <text class="ticket-card-details-info-sub">{{details.description}}</text>
     </view>
+    <!--抢购-->
+    <view class="ticket-rush-buy-bottom" wx:if="{{details.time_limit_flag||details.count_limit_flag}}">
+        <view class="ticket-rush-buy-bottom-item" wx:if="{{details.time_limit_flag}}">
+            <image class="rush-buy-time-img" wx:if="{{details.start_flag}}" src="https://oss.etcsd.com/object/b66d9b71490e40c49daa4fc043ec7a8f"/>
+            <text class="rush-buy-time-hint" wx:if="{{details.start_flag}}">距活动结束</text>
+            <image class="rush-buy-time-img" wx:if="{{!details.start_flag}}" src="https://oss.etcsd.com/object/ea6d795b3a694256b258876c24955bd4"/>
+            <text class="rush-buy-time-hint" wx:if="{{!details.start_flag}}">距活动开始</text>
+            <text class="rush-buy-time">{{details.show_time}}</text>
+        </view>
+
+        <view class="ticket-rush-buy-bottom-item" wx:if="{{!details.time_limit_flag}}">
+            <image class="rush-buy-time-img" src="https://oss.etcsd.com/object/b66d9b71490e40c49daa4fc043ec7a8f"/>
+            <text class="rush-buy-time-hint">不限时抢购</text>
+        </view>
+        <view class="ticket-rush-buy-bottom-item-1" wx:if="{{details.count_limit_flag}}">
+            <text class="rush-buy-number">已抢{{details.saled_count}}</text>
+            <view style="width: 50%;margin-left: 8rpx;border: 2rpx solid #ffdb39;border-radius: 10rpx">
+                <progress percent="{{details.percent}}" color="#F6D923"  backgroundColor="white" active border-radius="5"></progress>
+            </view>
+        </view>
+    </view>
+
     <view class="ticket-buy-details-station-container">
         <!--适用站点-->
         <view class="ticket-buy-details-station" wx:if="{{!isEmptyList}}">

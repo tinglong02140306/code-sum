@@ -413,20 +413,32 @@ export const ZHYD = {
     background_color:"#eb6200",
     selling_area:"",
     url:"",
-    activity_url:"https://oilmag.etcsd.com.cn/oilcoreserver/static//resource/icon-ZHYT1578984607169.png",
+    // activity_url:"https://oilmag.etcsd.com.cn/oilcoreserver/static//resource/icon-ZHYT1578984607169.png",
+    activity_url:"https://oss.etcsd.com/object/b246f93b9ecc45ac8e19a19b972fe8e9",
     btn_title:"领取优惠券",
     introduction:[
-      {
-        title:"ETC加油优惠",
-        content:"全国ETC用户，通过ETC加油助手开通加油功能并绑定ETC卡，即可领取一张“ETC无感加油200-10”优惠券，于济南中航易通前屯加油站通过ETC无感加油方式进行加油即可自动抵扣。",
-        hint:"",
-        image:""
-      },{
-        title:"中航易通加油站",
-        content:"中航易通加油站是国内首家上线“ETC无感支付”系统的民营加油站。车主无需下车，ETC自动完成加油支付，用ETC加油助手自动开具电子发票。",
-        hint:"",
-        image:""
-      },{
+      // {
+      //   title:"ETC加油优惠",
+      //   content:"全国ETC用户，通过ETC加油助手开通加油功能并绑定ETC卡，即可领取一张“ETC无感加油200-10”优惠券，于济南中航易通前屯加油站通过ETC无感加油方式进行加油即可自动抵扣。",
+      //   hint:"",
+      //   image:""
+      // },
+      //   {
+      //   title:"中航易通加油站",
+      //   content:"中航易通加油站是国内首家上线“ETC无感支付”系统的民营加油站。车主无需下车，ETC自动完成加油支付，用ETC加油助手自动开具电子发票。",
+      //   hint:"",
+      //   image:""
+      // },
+      //   {
+      //       title:"优惠券领取",
+      //       content:"",
+      //       hint:"",
+      //       //30、20（3张）、10 未领取
+      //       image:['https://oss.etcsd.com/object/1b30940a6a104184bfacc6559dd3dd34','https://oss.etcsd.com/object/d19cfd6ddba940dba575b89a4811a1c7','https://oss.etcsd.com/object/d19cfd6ddba940dba575b89a4811a1c7','https://oss.etcsd.com/object/d19cfd6ddba940dba575b89a4811a1c7','https://oss.etcsd.com/object/a03b3bf4d09743dd8ed12501121092c0'],
+      //       //已领取
+      //       image_al:['https://oss.etcsd.com/object/38ddcb7718254029a1ffe0aa7da00cc8','https://oss.etcsd.com/object/f54689d6e28447e98f69c0adddf17071','https://oss.etcsd.com/object/f54689d6e28447e98f69c0adddf17071','https://oss.etcsd.com/object/f54689d6e28447e98f69c0adddf17071','https://oss.etcsd.com/object/5d2da77b974f4114896e7a310418ffc7'],
+      //   },
+        {
         title:"活动说明",
         content:"",
         hint:'1.活动对象：全国ETC用户;\n2.活动地点：济南中航易通前屯加油站;\n3.参与方式：用户领券后，到站告知加油员通过ETC支付，并在加油员的引导下，完成首次"ETC无感加油"体验，且加油订单金额满200元，则优惠券自动抵用。;\n4.每个ETC加油助手客户限使用一张优惠券，重复领券也不会自动抵扣。;\n5.发票金额：发票金额以订单的实付金额为准，优惠部分不予开票。',

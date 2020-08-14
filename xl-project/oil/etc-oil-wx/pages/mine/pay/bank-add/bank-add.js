@@ -1,6 +1,6 @@
 // pages/person/payment/bank-add/bank-add.js
 import {checkPlateNumber, isEmpty, checkBankNo, checkIdCard, checkMobile, descentMobile, trim} from '../../../../utils/util';
-import {UnionPay, BankSubmitSuccess, EtcSelected, EtcUnSelected} from "../../../../assets/url/url";
+import {UnionPay, BankSubmitSuccess, EtcSelected, EtcUnSelected, VerifyClose} from "../../../../assets/url/url";
 import {MOBILE} from "../../../../constants/global";
 import {getPostPromise} from "../../../../http/http";
 import {payApi} from "../../../../http/api";
@@ -37,6 +37,16 @@ Page({
     icon_select:EtcSelected,
     icon_unselect:EtcUnSelected,
     params:null,
+    isShowHint:false,
+    icon_close:VerifyClose,
+    rightsData:{
+      logo_url:'https://oilmag.etcsd.com.cn/oilcoreserver/static/resource/权益专区-建行logo1574147191852.png',
+      name:'中航易通加油优惠',
+      equit_type:1,
+      area_name:'山东',
+      description:'山东丨加油满100减20，每月1次',
+      equit_explain:'绑定山东建行ETC银行卡，使用ETC支付加油满100立减20元，每月可参加一次，活动2020年12月截止。'
+    }
   },
 
   /**
@@ -122,7 +132,7 @@ Page({
       cert_type:'01',//证件类型
       cert_no:trim(user_id_card),//证件号
       bank_name:null,//银行名称
-      bank_code:null,//银行编码
+      bank_corp_org:null,//银行简称
       card_type:bank_card_type,//银行卡类型
       card_no:trim(sign_account_no),//签约银行卡卡号
       card_tel:trim(bank_reserve_mobile),//银行预留手机
@@ -174,6 +184,20 @@ Page({
     }
   },
 
+  //关闭弹框
+  onCloseClick: function (options) {
+    this.setData({
+      isShowHint:false
+    })
+    const pages = getCurrentPages();
+    const prePage = pages[pages.length-2];
+    if(prePage.route=='pages/mine/pay/bank-list/bank-list'){
+      prePage.getPaymentList();
+      prePage.setData({is_refresh:true});
+    }
+    wx.navigateBack();
+  },
+
   //签约银行 网络请求
   getBindBank:function(params){
     wx.showLoading({
@@ -185,13 +209,32 @@ Page({
     getPostPromise(payApi.signUnion,params).then(res=>{
       wx.hideLoading();
       wx.showToast({title:"签约成功",icon:"none"});
-      const pages = getCurrentPages();
-      const prePage = pages[pages.length-2];
-      if(prePage.route=='pages/mine/pay/bank-list/bank-list'){
-        // prePage.getPaymentList();
-        prePage.setData({is_refresh:true});
-        wx.navigateBack();
+
+      if (res.name){
+        let rightsData = {
+          name:res.name,
+          logo_url:res.logo_url,
+          equit_type:res.equit_type,
+          area_name:res.area_name,
+          description:res.description,
+          equit_explain:res.equit_explain,
+        }
+        this.setData({
+          rightsData:rightsData,
+          isShowHint:true,
+        })
+      }else {
+        const pages = getCurrentPages();
+        const prePage = pages[pages.length-2];
+        if(prePage.route=='pages/mine/pay/bank-list/bank-list'){
+          prePage.getPaymentList();
+          prePage.setData({is_refresh:true});
+          wx.navigateBack();
+        }else {
+          wx.navigateBack({delta:2});
+        }
       }
+
     }).catch(err=>{
       wx.hideLoading();
       wx.showToast({

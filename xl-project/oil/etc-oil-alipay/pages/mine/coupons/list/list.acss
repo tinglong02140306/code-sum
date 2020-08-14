@@ -1,5 +1,3 @@
-/* @import "../../../../templates/mine/coupons/item.acss"; */
-
 .perference-container {
     width: 100vw;
     display: flex;

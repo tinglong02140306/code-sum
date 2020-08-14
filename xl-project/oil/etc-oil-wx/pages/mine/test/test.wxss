@@ -58,6 +58,16 @@
     width: 100%;
     box-sizing: border-box;
 }
+.nick-name-phone-box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    box-sizing: border-box;
+    flex: 1;
+    margin-left: 24rpx;
+    margin-right: 10rpx;
+}
 .head-image-box{
     margin-left: 36rpx;
     width: 86rpx;
@@ -232,7 +242,7 @@
 /*我的账户*/
 .mine-account-info-box-white{
     width: 100%;
-    top: 220rpx;
+    top: 230rpx;
     /*height: 328rpx;*/
     /*background-color: #ffffff;*/
     display: flex;

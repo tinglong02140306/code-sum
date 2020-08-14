@@ -13,12 +13,13 @@
                 <open-data wx:if="{{openid}}" class="head-image" type="userAvatarUrl" mode="cover"></open-data>
                 <image wx:if="{{!openid}}" class="head-image" src="{{icon_default_head}}"></image>
             </view>
-            <open-data wx:if="{{openid}}" class="nick-name" type="userNickName"></open-data>
-            <text wx:if="{{!openid}}" class="nick-name">未登录</text>
+            <open-data wx:if="{{openid}}" class="nick-name" style="width: 100%" type="userNickName"></open-data>
+<!--            <view class="nick-name-phone-box">-->
+<!--                <open-data wx:if="{{openid}}" class="nick-name" style="width: 100%" type="userNickName"></open-data>-->
+<!--                <text wx:if="{{openid}}" class="nick-name" style="width: 100%" >{{mobile}}</text>-->
+<!--            </view>-->
+            <text wx:if="{{!openid}}" class="nick-name" bind:tap="onChangeUserClick">未登录</text>
             <text class="mine-login-btn" bind:tap="onChangeUserClick">{{openid?'切换账号':'注册/登录'}}</text>
-            <!--            <login-status openid="{{openid}}" bind:click="onChangeUserClick">-->
-<!--                <text class="mine-login-btn">{{openid?'切换账号':'注册/登录'}}</text>-->
-<!--            </login-status>-->
         </view>
     </view>
     <!--我的账户-->
@@ -113,21 +114,21 @@
     </view>
     <!--广告位-->
 <!--    //临时隐藏掉-->
-<!--    <view class="clean-share-container">-->
-<!--            <view class="clean-share-container-box" bind:tap="goBuyClick">-->
-<!--                <view class="clean-share-box-left-item">-->
-<!--                    <view class="clean-share-box-left-texts">-->
-<!--                        <text>购券洗车</text>-->
-<!--                        <text style="color: #f87117">9.9元</text>-->
-<!--                        <text>起</text>-->
-<!--                    </view>-->
-<!--                    <view class="clean-share-box-left-btns">-->
-<!--                        <text>去抢券></text>-->
-<!--                    </view>-->
-<!--                </view>-->
-<!--                <image class="clean-share-box-right-icon" src="/assets/static/mine-banner-package.png"></image>-->
-<!--            </view>-->
-<!--    </view>-->
+    <view class="clean-share-container">
+            <view class="clean-share-container-box" bind:tap="goBuyClick">
+                <view class="clean-share-box-left-item">
+                    <view class="clean-share-box-left-texts">
+                        <text>购券洗车</text>
+                        <text style="color: #f87117">9.9元</text>
+                        <text>起</text>
+                    </view>
+                    <view class="clean-share-box-left-btns">
+                        <text>去抢券></text>
+                    </view>
+                </view>
+                <image class="clean-share-box-right-icon" src="/assets/static/mine-banner-package.png"></image>
+            </view>
+    </view>
     <view class="mine-banner-container" style="margin-top: {{isIphoneX?240:48}}rpx">
         <image class="mine-layer-image-big" src="/assets/static/mine-layer.png"></image>
     </view>

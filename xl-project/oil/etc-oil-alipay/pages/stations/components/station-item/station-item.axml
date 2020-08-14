@@ -14,7 +14,7 @@
             <view class="station-item-center-top">
                 <!--油站名称-->
                 <text class="station-item-center-name">{{item.name}}</text>
-                <view catchTap="preventTap">
+                <view>
                     <!--立即加油-->
                     <view class="station-item-center-oil theme-button" catchTap="onPayClick" data-item="{{item}}">立即加油
                     </view>

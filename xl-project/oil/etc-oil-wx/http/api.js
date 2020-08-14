@@ -41,6 +41,8 @@ export const homeApi = {
     rightsStatus:"/wxapplet/equity/query-coupon-get-status",
     //优惠券领取（中航易通）
     rightsGet:"/wxapplet/equity/get-coupon",
+    //查看油站（中航易通）
+    rightsGetStation:"/wxapplet/equity/get-coupon-station",
     //获取国标价格
     gboilprice:"/wxapplet/anon/gboilprice-query",
     //天气状况
@@ -88,6 +90,8 @@ export const cleanApi = {
     distance:"/wxapplet/wash/check-washer-distance",
     //检查洗车机状态
     check:"/wxapplet/wash/check-washer",
+    //检查洗车机能否停止
+    isCanStop:"/wxapplet/wash/can-stop",
     //检查用户在该洗车点的订单信息
     getOrder:"/wxapplet/wash/get-order-by-station",
     //删除用户在该洗车点的订单缓存

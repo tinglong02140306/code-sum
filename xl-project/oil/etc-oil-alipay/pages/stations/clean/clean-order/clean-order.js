@@ -1,6 +1,7 @@
 // pages/stations/clean/clean-order/clean-order.js
 import { PerferPull, FastOrderUnCheck, FastUnCheck, FastOrderCheck, FastOrderClose,PerferUsed } from '../../../../assets/url/url'
 import { getHttpPost } from "../../../../http/http";
+import { getLocation } from '../../../../utils/location';
 import { stationsApi, couponPackageApi, cleanApi } from "../../../../http/api";
 import { CODE_WASHER, PAYBACK, OPENID } from "../../../../constants/global";
 import { keepTwoDecimalFull } from "../../../../utils/util";
@@ -40,7 +41,7 @@ Page({
         coupon_count: 0, //剩余洗车券数
         coupons_select: true, //洗车券选中状态
         // is_show_coupon:true
-        package_id: '', //选中的券包
+        package_id: null, //选中的券包
         payBack: false, //支付回调
     },
     /**
@@ -61,8 +62,15 @@ Page({
                 real_amount: count > 0 ? '0.00' : params.order_amount, //最终支付金额
                 coupons_select: count > 0 ? true : false, //最终支付金额
             });
-            this.getCouponPackageList();
-            this.getPerferent();
+            getLocation(true, location => {
+                this.getCouponPackageList({
+                    area_code: location.area_code
+                });
+                this.getPerferent();
+            }, err => {
+                showToast(err);
+            });
+            
         } catch (error) {
             console.log(error)
             my.switchTab({
@@ -109,7 +117,6 @@ Page({
 
     //使用洗车券支付
     onCleanCouponsClick() {
-        console.log('enter onCleanCouponsClick');
         const { coupons_select, coupon_count, packageList, new_order_amount, order_amount, coupon_value } = this.data;
         let select = coupons_select; //洗车券选中状态
         let is_bag = false; //券包选中状态
@@ -142,40 +149,66 @@ Page({
             }
         }
     },
+    // 检查优惠券有没有被选中的
+    checkPerferentSelect(list) {
+        let { perferentList } = this.data,
+            selected = false;
+        perferentList && perferentList.map(item => {
+            if(item.isCheck) {
+                selected = true;
+                return selected;
+            }
+        });
+        return selected;
+    },
+    // 检查卷包有没有被选中
+    checkPakageSelected() {
+        let { packageList } = this.data,
+            selected = false;
+        packageList && packageList.map(item => {
+            if(item.isSelect) {
+                selected = true;
+                return selected;
+            }
+        });
+        return selected;
+    },
 
     //选择洗车券包
     onPackageClick(e) {
-        const {
-            wash_coupon_count,
-            new_order_amount,
-            order_amount,
-            packageList,
-            coupon_value
-        } = this.data
+        const { wash_coupon_count, coupon_count, new_order_amount, order_amount, packageList, coupon_value, order_no, coupon_put_id } = this.data
         let packageData = packageList;
         let count = wash_coupon_count;
         let item = e.currentTarget.dataset.item;
         packageData.map(items => {
             if (items.package_id === item.package_id) {
                 items.isSelect = !items.isSelect;
+                
                 if (items.isSelect == true) {
                     this.setData({
                         coupons_select: true,
-                        coupon_value: '',
+                        // coupon_value: '',
                         real_amount: items.package_price,
                         coupon_count: wash_coupon_count + items.coupon_count,
                         package_id: items.package_id,
                     })
                 } else {
-                    if (this.data.coupon_count > 0) {
+                    if (coupon_count > 0) {
                         this.setData({
                             coupons_select: false,
                             coupon_count: wash_coupon_count,
                             real_amount: coupon_value ? new_order_amount ? new_order_amount : order_amount : order_amount,
-                            package_id: '',
+                            package_id: null,
                         })
                     }
                 }
+
+                const params = {
+                    order_no: order_no,
+                    package_id: items.isSelect ? items.package_id : null,
+                    coupon_put_id: this.checkPerferentSelect() ? coupon_put_id : null,
+                }
+                this.getCalculateCoupon(params);
             } else {
                 items.isSelect = false;
             }
@@ -184,11 +217,37 @@ Page({
         this.setData({
             packageList: packageData
         });
-        if(this.data.coupons_select) {
-            this.data.perferentList.map(item => {
-                item.isCheck = false;
-            })
+        // if(this.data.coupons_select) {
+        //     this.data.perferentList.map(item => {
+        //         item.isCheck = false;
+        //     })
+        // }
+    },
+
+    //优惠券选择
+    onCheckPergerent(item, list) {
+        const { perferentList, order_no, new_order_amount, order_amount, package_id } = this.data;
+        const { index, status } = item;
+        this.setData({
+            is_show_coupon: false,
+            coupon_value: status ? perferentList[index].coupon_amt : '',
+            coupon_put_id: status ? perferentList[index].coupon_push_id : null,
+            perferentList: list || []
+        });
+        this.popup.fadeOut();
+
+        const params = {
+            order_no: order_no,
+            coupon_put_id: status ? perferentList[index].coupon_push_id : null,
+            package_id: this.checkPakageSelected() ? package_id : null,
         }
+        this.getCalculateCoupon(params);
+        console.log(this.checkPakageSelected())
+        if (status && !this.checkPakageSelected()) {
+            this.setData({
+                coupons_select: false
+            });
+        } 
     },
 
     //选择优惠券
@@ -209,43 +268,7 @@ Page({
         this.popup.fadeOut();
     },
 
-    //优惠券选择
-    onCheckPergerent(item, list) {
-        const {
-            perferentList,
-            order_no,
-            new_order_amount,
-            order_amount
-        } = this.data;
-        const {
-            index,
-            status
-        } = item;
-        this.setData({
-            is_show_coupon: false,
-            coupons_select: false,
-            coupon_value: status ? perferentList[index].coupon_amt : '',
-            coupon_put_id: status ? perferentList[index].coupon_push_id : null,
-            perferentList: list || []
-        });
-        this.popup.fadeOut();
-        
-        if (status) {
-            const params = {
-                order_no: order_no,
-                coupon_put_id: status ? perferentList[index].coupon_push_id : null
-            }
-            this.getCalculateCoupon(params);
-            this.setData({
-                coupons_select: false
-            });
-        } else {
-            this.setData({
-                real_amount: status ? new_order_amount ? new_order_amount : order_amount : order_amount,
-            })
-        }
-
-    },
+    
 
     //优惠券计算
     getCalculateCoupon(params) {
@@ -267,11 +290,7 @@ Page({
     //提交订单(不选券包)
     submitOrder() {
         showLoading("支付中...");
-        const {
-            coupons_select,
-            order_no,
-            coupon_put_id
-        } = this.data;
+        const { coupons_select, order_no, coupon_put_id } = this.data;
         const paramsData = {
             order_no: order_no,
             coupon_put_id: coupons_select ? null : coupon_put_id,
@@ -380,8 +399,8 @@ Page({
     },
 
     //洗车券包列表查询
-    getCouponPackageList() {
-        getHttpPost(couponPackageApi.list, {}, res => {
+    getCouponPackageList(params) {
+        getHttpPost(couponPackageApi.list, params, res => {
             hideLoading();
             const data = this.dealPackageResponse(res.data);
             this.setData({

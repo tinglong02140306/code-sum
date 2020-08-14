@@ -98,7 +98,7 @@ Page({
                     const pages = getCurrentPages();
                     if (pages.length >= 2) {
                         const prePage = pages[pages.length - 2];
-                        if (prePage.route = "pages/mine/coupons/list/list") {
+                        if (prePage.route == "pages/mine/coupons/list/list") {
                             prePage.onRefreshCoupon();
                             resultCount = 2;
                             setTimeout(() => {

@@ -31,6 +31,30 @@ export const keepDecimalFull = (num,n) => {
   return s_x;
  }
 
+// export const getQueryString = (url, name) => {
+//   // url ->  'id=1222&old=12'
+//   let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+//   let r = url.match(reg);
+//   if (r != null) {
+//     return r[2]
+//     // return unescape(r[2]);     //  英文情况下
+//   }
+//   return '';
+// }
+
+export const getQueryVariable = (query,name) =>
+{
+  // var query = window.location.search.substring(1);
+  let idx = query.indexOf('?')
+  query=query.substring(idx+1)
+  console.log(idx + ' '+query)
+  let vars = query.split("&");
+  for (let i=0;i<vars.length;i++) {
+    let pair = vars[i].split("=");
+    if(pair[0] == name){return pair[1];}
+  }
+  return(false);
+}
 
 /**
  * @description: 校验金额是否正确
@@ -125,6 +149,85 @@ export const getDifferenceTime = (time1,time2) => {
   return [year,month,day,hour,minute,second];
 }
 
+//字符串转日期格式，strDate要转为日期格式的字符串
+
+export function getDate(strDate) {
+      var st = strDate;
+      var a = st.split(" ");
+      var b = a[0].split("-");
+      var c = a[1].split(":");
+      var date = new Date(b[0], b[1], b[2], c[0], c[1], c[2]);
+      console.log(date)
+      return date;
+    }
+//测试
+/**
+ * [时间格式转换 1天 23:39:10 leftTime 秒单位]
+ * @author longting
+ * @DateTime 2020-07-27
+ * @return   {string}      [返回参数值]
+ */
+export const formatTimes = (leftTime) => {
+  let days = parseInt(leftTime / 60 / 60 / 24), //计算剩余的天数
+      hours = parseInt(leftTime / 60 / 60 % 24), //计算剩余的小时
+      min = parseInt(leftTime / 60 % 60),//计算剩余的分钟
+      sec = parseInt(leftTime % 60);//计算剩余的秒数
+  let timeStr = days > 0 ? days + '天 ' : "";
+  timeStr = timeStr + addZone(hours) + ':' + addZone(min) + ':' + addZone(sec)
+  return timeStr;
+}
+/**
+ * [获取倒计时时间差]
+ * @author longting
+ * @DateTime 100 s
+ * @return   {string}      [返回参数值]
+ */
+export const getDifferTime = (time) => {
+  let endTime = getCurrentDate() + ' ' + time,
+      curTime = getCurrentTime();
+  let differTime = (new Date(endTime).getTime() - new Date(curTime).getTime()) / 1000;
+  return differTime;
+}
+
+/**
+ * 获取当前时间 2020-07-27
+ */
+export const getCurrentDate = () => {
+  const myDate = new Date();
+  const year = myDate.getFullYear();
+  const month = myDate.getMonth() + 1;
+  const date = myDate.getDate();
+  return `${year}/${addZone(month)}/${addZone(date)}`
+}
+
+/**
+ * 获取当前时间 2020-07-27 08:30
+ */
+export const getCurrentTime = () => {
+  let myDate = new Date(),
+      year = myDate.getFullYear(),
+      month = myDate.getMonth() + 1,
+      date = myDate.getDate(),
+      hour = myDate.getHours(),
+      min = myDate.getMinutes(),
+  second = myDate.getSeconds();
+  return `${year}/${addZone(month)}/${addZone(date)} ${addZone(hour)}:${addZone(min)}:${addZone(second)}`;
+}
+export const addZone = (str) => {
+  let newTime = "0" + str;
+  return newTime.substring(newTime.length - 2, newTime.length);
+}
+/**
+ * 计算百分比
+ */
+export function GetPercent(num, total) {
+  num = parseFloat(num);
+  total = parseFloat(total);
+  if (isNaN(num) || isNaN(total)) {
+    return "-";
+  }
+  return total <= 0 ? "0%" : (Math.round(num / total * 100) / 100.00);
+}
 /**
  * @description:校验车牌号
  * @param  {string} plateNumber [车牌号,必须为大写]

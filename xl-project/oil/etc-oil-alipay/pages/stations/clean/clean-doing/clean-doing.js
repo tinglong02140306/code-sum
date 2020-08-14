@@ -75,8 +75,14 @@ Page({
     },
     onUnload() {
         my.navigateTo({
-            url: `/pages/stations/index/index/`
+            url: `/pages/stations/index/index`
         });
+        clearInterval(washerTimer);
+        washerTimer = null;
+        clearInterval(setTimer);
+        setTimer = null;
+        clearInterval(stopTimer);
+        stopTimer = null;
     },
     /**
      * 生命周期函数--监听页面隐藏
@@ -86,14 +92,6 @@ Page({
     /**
      * 生命周期函数--监听页面卸载
      */
-    onUnload() {
-        clearInterval(washerTimer);
-        washerTimer = null;
-        clearInterval(setTimer);
-        setTimer = null;
-        clearInterval(stopTimer);
-        stopTimer = null;
-    },
     dealStyleData() {
         var textHeight = 0,
             bgHeight = 0;

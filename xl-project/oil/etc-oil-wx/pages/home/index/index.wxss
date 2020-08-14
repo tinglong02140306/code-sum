@@ -417,6 +417,7 @@
     padding: 32rpx;
     overflow: hidden;
     margin-bottom: 32rpx;
+    align-items: center;
 }
 
 .home-bank-list-item-image{
@@ -427,13 +428,15 @@
 }
 
 .home-bank-list-item-info{
-    flex: 1;
+    /*flex: 1;*/
     overflow: hidden;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     box-sizing: border-box;
-    margin: 0 32rpx;
+    margin-left: 32rpx;
+    width: 100%;
+    justify-content: space-around;
 }
 
 .home-bank-list-item-info-top{
@@ -441,12 +444,22 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: space-around;
     box-sizing: border-box;
     overflow: hidden;
 }
 
+.home-bank-list-item-info-top-view{
+    /*flex: 1;*/
+    /*max-width: 300rpx;*/
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
 .home-bank-list-item-info-top-text{
     flex: 1;
+    max-width: 300rpx;
+    /*width: 260rpx;*/
     font-size: 36rpx;
     color: rgba(0, 0, 0, .85);
     font-weight: bolder;
@@ -459,32 +472,48 @@
     background-color: rgba(255, 147, 0, 0.1);
     color: #FF9300;
     font-size: 26rpx;
-    margin-left: 10rpx;
+    margin-left: 6rpx;
     border-radius: 6rpx;
     padding: 2rpx 10rpx;
+    width: 52rpx;
+}
+
+.home-bank-list-item-info-bottom-row{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
 }
 
 .home-bank-list-item-info-bottom{
-    width: 100%;
+    /*width: 100%;*/
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
     overflow: hidden;
 }
-
+.home-bank-list-item-info-bottom-provence{
+    color: rgba(0, 0, 0, 0.65);
+    font-size: 28rpx;
+    margin-top: 8rpx;
+    margin-right: 10rpx;
+}
 .home-bank-list-item-info-bottom-item{
-    width: 100%;
+    /*width: 100%;*/
+    box-sizing: border-box;
     overflow: hidden;
     text-overflow:ellipsis;
     white-space: nowrap;
     color: rgba(0, 0, 0, 0.65);
     font-size: 28rpx;    
     margin-top: 8rpx;
+    max-width: 450rpx;
 }
 
 /*去查看*/
 .home-bank-list-item-see{
-    width: 164rpx;
+    /*right: 32rpx;*/
+    margin-left: 6rpx;
+    width: 154rpx;
     height: 52rpx;
     line-height: 52rpx;
     color: #ffffff;
@@ -493,6 +522,7 @@
     box-shadow: 0rpx 2rpx 4rpx 0rpx rgba(0, 0, 0, 0.1);
     background-color: #E3C283;
     border-radius: 32rpx;
+    /*position: fixed;*/
 }
 
 .home-online-serve{

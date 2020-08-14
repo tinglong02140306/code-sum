@@ -107,6 +107,7 @@
 
             <!--广告位-->
             <view class="home-banner-container" wx:if="{{banners&&banners.length}}">
+<!--                <login-status openid="{{open_id}}" >-->
                     <swiper class="home-banner-swiper" autoplay circular bindchange="onBannersChange">
                         <block wx:for="{{banners}}" wx:key="banners">
                             <swiper-item class="home-banner-swiper-item" bind:tap="onBannerItemClick" data-item="{{item}}">
@@ -121,24 +122,42 @@
                     </view>
             </view>
             <!--银行优惠-->
-            <view class="home-bank-container" wx:if="{{rights&&rights.length}}">
+            <view class="home-bank-container">
                 <text class="home-bank-text">优惠活动</text>
                 <view class="home-bank-list">
-                    <block wx:for="{{rights}}" wx:key="bank" wx:for-item="item">
-                        <view class="home-bank-list-item card-box"  >
-                            <image class="home-bank-list-item-image" src="{{item.equity_logo}}"></image>
-                            <view class="home-bank-list-item-info">
-                                <view class="home-bank-list-item-info-top">
-                                    <text class="home-bank-list-item-info-top-text">{{item.name}}</text>
-                                    <!-- <text class="home-bank-list-item-info-top-mark">加油</text> -->
-                                </view>
+                    <!--中航易通固定数据-->
+                    <view class="home-bank-list-item card-box"  >
+                        <image class="home-bank-list-item-image" src="{{rightsData.equity_logo}}"></image>
+                        <view class="home-bank-list-item-info" bind:tap="onRightItemClick">
+                            <view class="home-bank-list-item-info-top">
+                                <text class="home-bank-list-item-info-top-text">{{rightsData.name}}</text>
+                                <text class="home-bank-list-item-info-top-mark">{{rightsData.equit_type==2?'洗车':'加油'}}</text>
+                                <view class="home-bank-list-item-see">立享优惠</view>
+                            </view>
+                            <view class="home-bank-list-item-info-bottom-row">
+<!--                               <text class="home-bank-list-item-info-bottom-provence">|</text>-->
                                 <view class="home-bank-list-item-info-bottom">
-                                    <block wx:for="{{item.desc_list}}" wx:key="rights" wx:for-item="desc">
+                                    <block wx:for="{{rightsData.desc_list}}" wx:key="rights" wx:for-item="desc">
                                         <text class="home-bank-list-item-info-bottom-item">{{desc}}</text>
                                     </block>
                                 </view>
                             </view>
-                            <view class="home-bank-list-item-see" data-item="{{item}}" bind:tap="onRightItemClick">去查看</view>
+                        </view>
+                    </view>
+                    <block wx:for="{{rights}}" wx:key="bank" wx:for-item="item" wx:if="{{rights&&rights.length}}">
+                        <view class="home-bank-list-item card-box" data-item="{{item}}" bind:tap="onRightRequestClick" >
+                            <image class="home-bank-list-item-image" src="{{item.logo_url}}"></image>
+                            <view class="home-bank-list-item-info">
+                                <view class="home-bank-list-item-info-top">
+                                    <text class="home-bank-list-item-info-top-text">{{item.name}}</text>
+                                    <text class="home-bank-list-item-info-top-mark" wx:if="{{item.equit_type}}">{{item.equit_type==1?'加油':'洗车'}}</text>
+                                    <view class="home-bank-list-item-see">立享优惠</view>
+                                </view>
+                                <view class="home-bank-list-item-info-bottom-row">
+                                    <text class="home-bank-list-item-info-bottom-provence">{{item.description}}</text>
+                                </view>
+
+                            </view>
                         </view>
                     </block>
                 </view>

@@ -26,7 +26,8 @@
                         <swiper-item>
                             <view class="rights-header-swiper-item">
                                 <image class="rights-header-swiper-item-image" src="{{item.url}}"></image>
-                                <text>{{item.name}}车主激活{{item.amount}}元优惠券</text>
+<!--                                <text>{{item.name}}车主激活{{item.amount}}元优惠券</text>-->
+                                <text>{{item.name}}车主激活20元优惠券</text>
                             </view>
                         </swiper-item>
                     </block>
@@ -34,7 +35,7 @@
                 <view class="rights-header-function-share-box">
                     <image class="rights-header-function-share-image" src="{{icon_share}}"></image>
                     <text>分享</text>
-                    <button open-type="share" class="rights-header-function-share-btn">fenxiang</button>
+                    <button open-type="share" size="mini" class="rights-header-function-share-btn"></button>
                 </view>
             </view>
         </view>
@@ -42,12 +43,24 @@
         <view class="rights-footer-box">
             <!--激活权益-->
             <view class="rights-footer-activate-box">
-                <text class="{{status?'disable-button':'theme-button'}} rights-footer-activate-btn" bind:tap="onRightsClick">{{status?'已领取':'领取优惠券'}}</text>
+<!--                <text class="{{status?'disable-button':'theme-button'}} rights-footer-activate-btn" bind:tap="onRightsClick">{{status?'已领取':'领取优惠券'}}</text>-->
+                <text class="theme-button rights-footer-activate-btn" bind:tap="onRightsClick">查看油站</text>
             </view>
             <!--tab-->
             <view class="rights-footer-tabs-box">
                 <polygon>
                     <view class="rights-footer-tabs-item" slot="left">
+                        <view class="rights-footer-introduction-title">
+                            <image class="rights-footer-introduction-title-image" src="{{icon_left_mark}}"></image>
+                            <text>优惠券领取</text>
+                            <image class="rights-footer-introduction-title-image" src="{{icon_right_mark}}"></image>
+                        </view>
+                        <block wx:for="{{image_list}}" wx:for-item="item" wx:key="image_key" >
+                            <view data-item="{{item}}" bind:tap="onImageClick" >
+                                <image class="rights-footer-introduction-image"  src="{{item.image}}"></image>
+                            </view>
+                        </block>
+
                         <block wx:for="{{bankInfo.introduction}}" wx:key="introduction">
                             <view class="rights-footer-introduction-box">
                                 <view class="rights-footer-introduction-title">
@@ -55,7 +68,6 @@
                                     <text>{{item.title}}</text>
                                     <image class="rights-footer-introduction-title-image" src="{{icon_right_mark}}"></image>
                                 </view>
-                                <image class="rights-footer-introduction-image" wx:if="{{item.image.url}}" src="{{item.image.url}}" style="width: {{item.image.width}};height: {{item.image.height}};"></image>
                                 <text class="rights-footer-introduction-content" wx:if="{{item.content}}">{{item.content}}</text>
                                 <text class="rights-footer-introduction-hint" wx:if="{{item.hint}}">{{item.hint}}</text>
                             </view>

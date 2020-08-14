@@ -46,6 +46,19 @@
     box-sizing: border-box;
     overflow: hidden;
 }
+.clean-item-box-info-btn{
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+.clean-item-clean-time{
+    /*height: 30rpx;*/
+    color: rgba(51, 51, 51, 1);
+    font-size: 24rpx;
+    text-align: right;
+    font-family: PingFang-SC-Medium;
+}
 
 /**名称**/
 .clean-item-name{

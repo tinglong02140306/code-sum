@@ -62,16 +62,16 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "pages/stations/clean/park-confirm/park-confirm",
+					"name": "小程序码",
 					"pathName": "pages/stations/clean/park-confirm/park-confirm",
 					"query": "scene= washerId%3D0123456",
 					"scene": 1047
 				},
 				{
 					"id": 1,
-					"name": "pages/home/index/index",
-					"pathName": "pages/home/index/index",
-					"query": "https://eos.etcsd.com/zhywcarsafe/miniprogram?marketCode=JY01000016",
+					"name": "普通二维码",
+					"pathName": "pages/stations/clean/park-confirm/park-confirm",
+					"query": "https://oilmag.etcsd.com.cn/appletqr/washer?a&id=1&marketCode=123456",
 					"scene": 1011
 				}
 			]

@@ -7,6 +7,54 @@
             <template is="bank-card" data="{{...item}}"/>
         </view>
     </view>
+    <view class="bank-card-add" bindtap="onCardAdd" style='bottom: {{isIphoneX?"68rpx":"40rpx"}}'>
+        <image class="bank-card-add-img" src="https://oilmag.etcsd.com.cn/oilcoreserver/static/resource/bank-card-add.png"></image>
+        <text class="bank-card-add-text">添加银行卡</text>
+    </view>
+    <!--银行优惠-->
+    <view class="home-bank-container" wx:if="{{rights&&rights.length}}">
+        <text class="home-bank-text">优惠活动</text>
+        <view class="home-bank-list">
+            <!--中航易通固定数据-->
+            <view class="home-bank-list-item card-box" bind:tap="onRightItemClick" >
+                <image class="home-bank-list-item-image" src="{{rightsData.logo_url}}"></image>
+                <view class="home-bank-list-item-info">
+                    <view class="home-bank-list-item-info-top">
+                        <text class="home-bank-list-item-info-top-text">{{rightsData.name}}</text>
+                        <text class="home-bank-list-item-info-top-mark">{{rightsData.equit_type==2?'洗车':'加油'}}</text>
+                    </view>
+                    <view class="home-bank-list-item-info-bottom-row">
+                        <view class="home-bank-list-item-info-bottom">
+                            <block wx:for="{{rightsData.desc_list}}" wx:key="rights" wx:for-item="desc">
+                                <text class="home-bank-list-item-info-bottom-item">{{desc}}</text>
+                            </block>
+                        </view>
+                    </view>
+                </view>
+                <view class="person-pay-bank-left">
+                    <image class="pay-bank-right" src="{{next_icon}}"></image>
+                </view>
+            </view>
+            <block wx:for="{{rights}}" wx:key="bank" wx:for-item="item">
+                <view class="home-bank-list-item card-box" data-item="{{item}}" bind:tap="onRightRequestClick" >
+                    <image class="home-bank-list-item-image" src="{{item.logo_url}}"></image>
+                    <view class="home-bank-list-item-info">
+                        <view class="home-bank-list-item-info-top">
+                            <text class="home-bank-list-item-info-top-text">{{item.name}}</text>
+                            <text class="home-bank-list-item-info-top-mark" wx:if="{{item.equit_type}}">{{item.equit_type==1?'加油':'洗车'}}</text>
+                        </view>
+                        <view class="home-bank-list-item-info-bottom-row">
+                            <text class="home-bank-list-item-info-bottom-provence">{{item.description}}</text>
+                        </view>
+                    </view>
+                    <view class="person-pay-bank-left">
+                        <image class="pay-bank-right" src="{{next_icon}}"></image>
+                    </view>
+                </view>
+            </block>
+        </view>
+    </view>
+
     <popup show="{{is_show_modal}}">
         <view class="bank-card-click-box" style='padding-bottom: {{isIphoneX?"30rpx":"10rpx"}}'>
             <view class="bank-card-click-item">
@@ -22,13 +70,13 @@
             </view>
         </view>
     </popup>
-    <view class="result-container" wx:if="{{is_empty}}">
-        <image class="no-card-image" src="https://oilmag.etcsd.com.cn/oilcoreserver/static/resource/icon-bank-none.png"></image>
-        <text class="no-card-text">您尚未添加银行卡</text>
-    </view>
-    <view class="card-bottom-blank"></view>
-    <view class="bank-card-add" bindtap="onCardAdd" style='bottom: {{isIphoneX?"68rpx":"40rpx"}}'>
-        <image class="bank-card-add-img" src="https://oilmag.etcsd.com.cn/oilcoreserver/static/resource/bank-card-add.png"></image>
-        <text class="bank-card-add-text">添加银行卡</text>
-    </view>
+<!--    <view class="result-container" wx:if="{{is_empty}}">-->
+<!--        <image class="no-card-image" src="https://oilmag.etcsd.com.cn/oilcoreserver/static/resource/icon-bank-none.png"></image>-->
+<!--        <text class="no-card-text">您尚未添加银行卡</text>-->
+<!--    </view>-->
+<!--    <view class="card-bottom-blank"></view>-->
+<!--    <view class="bank-card-add" bindtap="onCardAdd" style='bottom: {{isIphoneX?"68rpx":"40rpx"}}'>-->
+<!--        <image class="bank-card-add-img" src="https://oilmag.etcsd.com.cn/oilcoreserver/static/resource/bank-card-add.png"></image>-->
+<!--        <text class="bank-card-add-text">添加银行卡</text>-->
+<!--    </view>-->
 </view>

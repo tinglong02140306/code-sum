@@ -71,7 +71,7 @@ Page({
         const pages = getCurrentPages();
         if (pages.length >= 2) {
             const prePage = pages[pages.length - 2];
-            if (prePage.route = "pages/stations/map/map") {
+            if (prePage.route == "pages/stations/map/map") {
                 prePage.setData({
                     oil_type_name: select_oil_no,
                     oil_brand: select_brand,

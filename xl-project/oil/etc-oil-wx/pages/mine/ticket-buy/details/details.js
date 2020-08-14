@@ -3,7 +3,7 @@ import {getHttpPost} from "../../../../http/http";
 import {cleanApi, couponPackageApi} from "../../../../http/api";
 import {getLocation} from "../../../../utils/location";
 import {OPENID, STATIONPAGE} from "../../../../constants/global";
-import {keepDecimalFull} from '../../../../utils/util';
+import {getDifferTime, GetPercent, keepDecimalFull, keepTwoDecimalFull} from '../../../../utils/util';
 const app = getApp();
 let timer = null;
 let params = null;
@@ -22,6 +22,53 @@ Page({
     clean_data:{},
     center_lng:117.12009,//默认经度
     center_lat:36.65184,//默认纬度
+  },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    location = app.globalData.location;
+    if(location){
+      this.setData({
+        center_lng:location.longitude,
+        center_lat:location.latitude,
+      });
+      this.setData({load_page_oil:1});
+      this.getCleanList();
+    }else{
+      //获取当前位置的经纬度信息
+      getLocation(true,location=>{
+        this.setData({
+          center_lng:location.longitude,
+          center_lat:location.latitude,
+        });
+        this.getCleanList();
+      },err=>{
+        wx.showToast({
+          title:err,
+          icon:"none"
+        });
+        this.getCleanList();
+      });
+    }
+
+    try {
+      params = JSON.parse(decodeURIComponent(options.details));
+      this.setData({details:this.dealResponse(params)});
+    } catch (error) {
+      console.log(error)
+      wx.switchTab({url: '/pages/home/index/index'});
+    }
+  },
+
+  onShow: function () {
+    const openid = wx.getStorageSync(OPENID);
+    this.setData({openid:openid});
+  },
+
+  onHide:function(){
+    // timer&&clearTimeout(timer);
+    timer&&clearInterval(timer);
   },
 
   //全部洗车站点
@@ -86,6 +133,7 @@ Page({
 
   //调起支付
   goPay: function (params) {
+    const that=this;
     try {
       const data = JSON.parse(params);
       wx.requestPayment(
@@ -96,13 +144,12 @@ Page({
             signType: data.signType,
             paySign: data.paySign,
             success: function () {
-              wx.hideLoading();
               // wx.navigateBack({delta: 2})
-              wx.navigateBack();
+              // wx.navigateBack();
+              that.paySuccess();
             },
             fail: function (err) {
               console.log(err)
-              wx.hideLoading();
             },
             complete: function () {
 
@@ -112,52 +159,21 @@ Page({
       console.log(err);
       wx.showToast({title:"参数格式错误",icon:"none"});
     }
-
-  },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    location = app.globalData.location;
-    if(location){
-      this.setData({
-        center_lng:location.longitude,
-        center_lat:location.latitude,
-      });
-      this.setData({load_page_oil:1});
-      this.getCleanList();
-    }else{
-      //获取当前位置的经纬度信息
-      getLocation(true,location=>{
-        this.setData({
-          center_lng:location.longitude,
-          center_lat:location.latitude,
-        });
-        this.getCleanList();
-      },err=>{
-        wx.showToast({
-          title:err,
-          icon:"none"
-        });
-        this.getCleanList();
-      });
-    }
-
-    try {
-      params = JSON.parse(decodeURIComponent(options.details));
-      this.setData({details:params});
-    } catch (error) {
-      console.log(error)
-      wx.switchTab({url: '/pages/home/index/index'});
-    }
   },
 
-  onShow: function () {
-    const openid = wx.getStorageSync(OPENID);
-    this.setData({openid:openid});
-  },
-  onHide:function(){
-    timer&&clearTimeout(timer);
+  //购买完成
+  paySuccess:function(){
+    wx.showModal({
+      title: '购买成功',
+      content: '购买成功，优惠券已发放，请前往我的-优惠券查看',
+      success (res) {
+        if (res.confirm) {
+          wx.navigateBack();
+        } else if (res.cancel) {
+          wx.navigateBack();
+        }
+      }
+    })
   },
 
   //洗车查询
@@ -200,5 +216,80 @@ Page({
       clean_list:near,
       clean_data:near,
     });
+  },
+  /**
+   * 数据处理
+   */
+  dealResponse:function(item){
+
+    let current = new Date().getTime() / 1000;
+    if (item.time_limit_flag){//限时
+      if (item.start_flag){//开始
+        let random = item.end_time ? getDifferTime(item.end_time) : getDifferTime('23:59:59');
+        item.timer = setInterval(() => {
+          //截止时间
+          let time = current + random;
+          time--;
+          let now = new Date().getTime();
+          let diff = parseInt(time - now / 1000);
+          if (diff < 0) {
+            let details = this.data.details;
+            clearInterval(item.timer)
+            this.setData({details})
+          } else {
+            let date = this.formattime(diff * 1000);
+            item.show_time = date;
+            this.setData({details: item});
+          }
+        }, 1000)
+      }else {
+        let random = item.start_time ? getDifferTime(item.start_time) : getDifferTime('23:59:59');
+        item.timer = setInterval(() => {
+          //截止时间
+          let time = current + random;
+          time--;
+          let now = new Date().getTime();
+          let diff = parseInt(time - now / 1000);
+          if (diff < 0) {
+            let details = this.data.details;
+            clearInterval(item.timer)
+            this.setData({details})
+          } else {
+            let date = this.formattime(diff * 1000);
+            item.show_time = date;
+            this.setData({details: item});
+          }
+        }, 1000)
+      }
+    }
+    return item;
+    // return  data&&data.map((item,index)=>{
+    //   let discount = item.discount_rate.toString().replace('0','').replace('.','');
+    //   item.discount_rate = discount.replace('0','');
+    //   item.distance_meter = keepDecimalFull(item.distance_meter,1);
+    //   item.package_price = keepTwoDecimalFull(item.package_price);
+    //   item.description = item.description.replace(/[\r\n]/g,"");
+    //   // item.oil_consume_money = keepTwoDecimalFull(item.oil_consume_money);
+    //   item.percent = GetPercent(item.saled_count,item.total_count);
+    //
+    //   // let random = Math.random().toFixed(2) * 10000;
+    //   return item;
+    // })
+  },
+  //时间计算处理
+  formattime(time) {
+    let leave1 = time % (24 * 3600 * 1000) //计算小时
+    let hour = Math.floor(leave1 / (3600 * 1000))
+
+    let leave2 = leave1 % (3600 * 1000) //计算分钟
+    let minute = Math.floor(leave2 / (60 * 1000))
+
+    let leave3 = leave2 % (60 * 1000) //计算秒
+    let second = Math.round(leave3 / 1000) == '60' ? '00' : Math.round(leave3 / 1000)
+    return [hour, minute, second].map(this.formatNumber).join(':')
+  },
+  formatNumber(n) {
+    n = n.toString()
+    return n[1] ? n : '0' + n
   },
 })

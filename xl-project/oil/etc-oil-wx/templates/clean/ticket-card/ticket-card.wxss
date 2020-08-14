@@ -70,6 +70,21 @@
     text-align: left;
     font-family: PingFang-SC-Bold;
 }
+.ticket-card-discount-text-rush{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 96rpx;
+    height: 42rpx;
+    border-bottom-left-radius: 16rpx;
+    border-top-left-radius: 16rpx;
+    background-color: rgba(255, 228, 183, 1);
+    color: rgba(0, 0, 0, 1);
+    font-size: 28rpx;
+    text-align: left;
+    font-family: PingFang-SC-Bold;
+}
 .ticket-card-number-text{
     margin-left: 30rpx;
     margin-top: 16rpx;

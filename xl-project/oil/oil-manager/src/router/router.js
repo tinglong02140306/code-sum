@@ -30,6 +30,8 @@ import Groups from "../page/shell/groups/Groups";
 import PosUser from "../page/wx-member-card/pos-user/PosUser";
 import Price from '../page/shell/price/Price';
 import OilPrice from '../page/shell/oil-price/OilPrice';
+// TODO
+import nonActivestatistics from '../page/shell/statistics/Statistics';
 import StationImage from '../page/station/station-image/StationImage';
 import Company from '../page/station/company/Company';
 import Brand from '../page/station/brand/Brand';
@@ -96,6 +98,8 @@ class Rooter extends Component {
             <Route path="/shell-terminal-group" component={Groups} />
             <Route path='/shell-oil-price-updata' component={Price} />
             <Route path='/shell-oil-price' component={OilPrice} />
+            {/* TODO */}
+            <Route path='/shell-non-statistics' component={nonActivestatistics} />
             <Route path="/wx-pos-user" component={PosUser} />
             <Route path="/station-image" component={StationImage} />
             <Route path="/station-company" component={Company} />

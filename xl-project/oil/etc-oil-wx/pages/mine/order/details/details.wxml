@@ -67,7 +67,7 @@
              <text class="order-details-info-content">￥{{details.total_amount?details.total_amount:0.00}}</text>
          </view>
          <view class="order-details-info-box" wx:if="{{details.discount_amount&&details.discount_amount!=0.00}}">
-             <text class="order-details-info-title">{{details.order_type==='WASH'?'洗车抵用券':'ETC会员优惠'}}</text>
+             <text class="order-details-info-title">{{details.order_type==='WASH'?'洗车优惠':'ETC会员优惠'}}</text>
              <text class="order-details-info-discount">-￥{{details.discount_amount}}</text>
          </view>
      </view>

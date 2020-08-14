@@ -27,7 +27,7 @@ Page({
         oil_brand: brands[0].id, //加油 品牌
         clean_sort_class: clean_sort[0].id, //洗车 1-距离，2-价格
         clean_enable: clean_enable[0].id, //洗车 1-全部 2-可停车
-        clean_status: clean_status[0].id, //洗车 1-空闲，2-使用中
+        // clean_status: clean_status[0].id, //洗车 1-空闲，2-使用中
         station_list: null, //油站列表
         clean_list: null, //洗车列表
         tabs_oil: oil_filter_tabs, //加油筛选条件

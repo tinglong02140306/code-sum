@@ -461,32 +461,6 @@ Page({
 
     //获取etc列表
     getCardData() {
-        // TODO
-        // let list =[{
-        //     "enabled": true,
-        //     "car_plate_color": 0,
-        //     "car_plate_no": "鲁A11111",
-        //     "etc_card_no": "37012222222222222222",
-        // }];
-        // ,{
-        //     "enabled": true,
-        //     "car_plate_color": 0,
-        //     "car_plate_no": "鲁A12345",
-        //     "etc_card_no": "37012222222222229999",
-        // },{
-        //     "enabled": true,
-        //     "car_plate_color": 0,
-        //     "car_plate_no": "鲁A789654",
-        //     "etc_card_no": "37012222222222220000",
-        // },{
-        //     "enabled": true,
-        //     "car_plate_color": 0,
-        //     "car_plate_no": "鲁A46859",
-        //     "etc_card_no": "3701222222222221234",
-        // }
-        // this.dealCardData(list);
-        // return;
-        
         getHttpPost(etcApi.query, {}, res => {
             hideLoading();
             if (res.result_code === "00000") {

@@ -200,6 +200,28 @@ page{
     text-align: left;
     font-family: PingFang-SC-Medium;
 }
+.pay-discount-label{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ff9f46;
+    border: 2rpx solid rgb(255, 159, 70);
+    font-size: 24rpx;
+    margin-left: 16rpx;
+    border-radius: 4rpx;
+    padding: 0 4rpx;
+}
+.pay-add-discount-label{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+    background-color: #006e4c;
+    font-size: 24rpx;
+    margin-left: 16rpx;
+    padding: 0 8rpx;
+    border-radius: 15rpx 15rpx 15rpx 0;
+}
 .pay-list-right{
     margin-right: 46rpx;
     width: 48rpx;

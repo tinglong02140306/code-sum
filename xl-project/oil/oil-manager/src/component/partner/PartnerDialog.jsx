@@ -122,8 +122,9 @@ class PartnerDialog extends React.Component {
                 // && isRangeNum(risk_amount, 99999999.99)
                 && !isNaN(single_consume_limit)
                 && !isNaN(risk_amount)
-                && isRange(risk_amount_warn_scale)
-                && !isEmpty(partner_image_base64)) {
+                && isRange(risk_amount_warn_scale))
+                // && !isEmpty(partner_image_base64))//取消照片上传
+            {
                 this.props.partner.getAdd(partner_name, partner_legal_entity, partner_mobile, partner_address,
                     partner_tax_no, partner_link_name, partner_link_mobile, partner_mode, oil_limit,
                     isCanCancel, partner_image_base64, getFixed(single_consume_limit), getFixed(risk_amount), getFixed(risk_amount_warn_scale), partner_type, nick_name);
@@ -133,6 +134,7 @@ class PartnerDialog extends React.Component {
                     partner_link_mobile, partner_image_base64, single_consume_limit, risk_amount_warn_scale, risk_amount, partner_cert_img_url);
             }
         } else {
+
             if (!isSpecialChart(partner_name)
                 && !isSpecialChart(partner_legal_entity)
                 && isPhoneRight(partner_mobile)
@@ -143,8 +145,9 @@ class PartnerDialog extends React.Component {
                 // && isRangeNum(single_consume_limit, 9999.99)
                 && !isNaN(single_consume_limit)
                 && !isNaN(risk_amount)
-                && isRange(risk_amount_warn_scale)
-                && (!isEmpty(partner_cert_img_url) || !isEmpty(partner_image_base64))) {
+                && isRange(risk_amount_warn_scale))
+                // && (!isEmpty(partner_cert_img_url) || !isEmpty(partner_image_base64))) //取消照片上传
+            {
                 this.props.partner.getUpdate(partner_id, partner_name, partner_legal_entity, partner_mobile, partner_address,
                     partner_tax_no, partner_link_name, partner_link_mobile, partner_mode, oil_limit, isCanCancel, partner_image_base64,
                     getFixed(single_consume_limit), getFixed(risk_amount_warn_scale), partner_type, nick_name, getFixed(risk_amount))
@@ -166,7 +169,7 @@ class PartnerDialog extends React.Component {
         this.setState({ isEmptyPartnerTax: !isRightTax(partner_tax_no) ? true : false });
         this.setState({ isEmptyPartnerLinkName: isSpecialChart(partner_link_name) ? true : false });
         this.setState({ isEmptyPartnerLinkMobile: !isPhoneRight(partner_link_mobile) ? true : false });
-        this.setState({ isEmptyImage: isEmpty(partner_image_base64) && isEmpty(partner_cert_img_url) ? true : false });
+        // this.setState({ isEmptyImage: isEmpty(partner_image_base64) && isEmpty(partner_cert_img_url) ? true : false });//照片取消上传
         // this.setState({isEmptySingleConsumeLimit: isRangeNum(single_consume_limit, 9999.99) ? false : true});
         // this.setState({isEmptyRiskAmountLimit: isRangeNum(risk_amount, 99999999.99) ? false : true});
         this.setState({ isEmptySingleConsumeLimit: !isNaN(single_consume_limit) ? false : true });
@@ -474,76 +477,7 @@ class PartnerDialog extends React.Component {
                             <span style={{ visibility: isEmptyPartnerLinkMobile ? "visible" : "hidden" }}>请输入联系人手机</span>
                         </div>
                     </div>
-                    <div className="partner-dialog-input-item">
-                        <div style={{
-                            display: 'flex',
-                            flexDirection: 'row',
-                            justifyContent: 'center',
-                            alignItems: 'center'
-                        }}>
-                            <div className="partner-dialog-input-hint">
-                                <span>*</span>模式:
-                            </div>
-                            <Select
-                                value={partner_mode}
-                                style={{ margin: 0, width: 250 }}
-                                onChange={this.onChangeMode}
-                                disabled={typeDialog !== 2 && isCanUpdata ? false : true}>
-                                <Select.Option value={1}>拆单</Select.Option>
-                                <Select.Option value={2}>不拆单</Select.Option>
-                            </Select>
-                        </div>
-                        <div className="partner-dialog-input-empty">
-                            <span style={{ visibility: "hidden" }}>请输入地址(不包含特殊字符)</span>
-                        </div>
-                    </div>
-                    <div className="partner-dialog-input-item">
-                        <div style={{
-                            display: 'flex',
-                            flexDirection: 'row',
-                            justifyContent: 'center',
-                            alignItems: 'center'
-                        }}>
-                            <div className="partner-dialog-input-hint">
-                                <span>*</span>油品:
-                            </div>
-                            <Select
-                                value={oil_limit}
-                                onChange={this.onChangeOil}
-                                style={{ margin: 0, width: 250 }}
-                                disabled={typeDialog === 2 ? true : false}>
-                                <Select.Option value={1}>汽油</Select.Option>
-                                <Select.Option value={2}>柴油</Select.Option>
-                                <Select.Option value={0}>汽油柴油</Select.Option>
-                            </Select>
-                        </div>
-                        <div className="partner-dialog-input-empty">
-                            <span style={{ visibility: "hidden" }}>请输入地址(不包含特殊字符)</span>
-                        </div>
-                    </div>
-                    <div className="partner-dialog-input-item">
-                        <div style={{
-                            display: 'flex',
-                            flexDirection: 'row',
-                            justifyContent: 'center',
-                            alignItems: 'center'
-                        }}>
-                            <div className="partner-dialog-input-hint">
-                                <span>*</span>地址:
-                            </div>
-                            <Input.TextArea
-                                value={partner_address}
-                                style={{ width: 250 }}
-                                autosize={{ minRows: 2 }}
-                                placeholder="最多200字"
-                                maxLength={200}
-                                onChange={this.onChangePartnerAddress}
-                                disabled={typeDialog === 2 ? true : false} />
-                        </div>
-                        <div className="partner-dialog-input-empty">
-                            <span style={{ visibility: isEmptyPartnerAddress ? "visible" : "hidden" }}>请输入地址(不包含特殊字符)</span>
-                        </div>
-                    </div>
+
                 </div>
                 <div className="partner-dialog-center">
                 </div>
@@ -628,55 +562,76 @@ class PartnerDialog extends React.Component {
                             </Radio.Group>
                         </div>
                     </div>
-
-                    <div className="partner-image-container">
-                        <div className="partner-image-item">
-                            <div className="partner-image-hint">
-                                <span>*</span>三证合一照片&nbsp;:
+                    <div className="partner-dialog-input-item">
+                        <div style={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            justifyContent: 'center',
+                            alignItems: 'center'
+                        }}>
+                            <div className="partner-dialog-input-hint">
+                                <span>*</span>模式:
                             </div>
-                            <div className="partner-dialog-upload"
-                                style={{ width: 250 }}
-                                onMouseOver={this.onMouseUp}
-                                onMouseOut={this.onMouseLeave}>
-                                <div className="upload-content">
-                                    <div className="upload-hint"
-                                        style={{ visibility: isEmpty(this.state.partner_cert_img_url) ? "visible" : "hidden" }}>
-                                        <Icon type="plus" />
-                                        上传
-                                    </div>
-                                    <div className="upload-image-div">
-                                        <img src={this.state.partner_cert_img_url}
-                                            style={{ visibility: !isEmpty(this.state.partner_cert_img_url) ? "visible" : "hidden" }}
-                                            alt="三证合一照片" className="upload-image" />
-                                        <div className="upload-overlay"
-                                            style={{ visibility: this.state.isVisiblePre }}>
-                                            <div onClick={this.onPreviewImage}><Icon type="eye-o"
-                                                style={{ color: "#fff" }} /></div>
-                                            <div onClick={this.onDeleteImage}
-                                                style={{ display: typeDialog !== 2 && isCanUpdata ? "block" : "none" }}>
-                                                <Icon
-                                                    type="delete"
-                                                    style={{ color: "#fff" }} /></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <input className="organization-input"
-                                    type="file"
-                                    value=""
-                                    // id="file"
-                                    onChange={this.onChangeImage}
-                                    style={{ display: isEmpty(this.state.partner_cert_img_url) ? "block" : "none" }}
-                                    accept="image/png, image/jpeg, image/gif, image/jpg" />
-                                <Modal visible={this.state.isCanPreview} footer={null} onCancel={this.handleCancel}>
-                                    <img alt="example" style={{ width: '100%' }} src={this.state.partner_cert_img_url} />
-                                </Modal>
-                            </div>
+                            <Select
+                                value={partner_mode}
+                                style={{ margin: 0, width: 250 }}
+                                onChange={this.onChangeMode}
+                                disabled={typeDialog !== 2 && isCanUpdata ? false : true}>
+                                <Select.Option value={1}>拆单</Select.Option>
+                                <Select.Option value={2}>不拆单</Select.Option>
+                            </Select>
                         </div>
-                        <div className="partner-image-empty-hint"
-                            style={{ visibility: isEmptyImage ? "visible" : "hidden" }}>
-                            <span>{this.state.isImageHint}</span></div>
+                        <div className="partner-dialog-input-empty">
+                            <span style={{ visibility: "hidden" }}>请输入地址(不包含特殊字符)</span>
+                        </div>
                     </div>
-
+                    <div className="partner-dialog-input-item">
+                        <div style={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            justifyContent: 'center',
+                            alignItems: 'center'
+                        }}>
+                            <div className="partner-dialog-input-hint">
+                                <span>*</span>油品:
+                            </div>
+                            <Select
+                                value={oil_limit}
+                                onChange={this.onChangeOil}
+                                style={{ margin: 0, width: 250 }}
+                                disabled={typeDialog === 2 ? true : false}>
+                                <Select.Option value={1}>汽油</Select.Option>
+                                <Select.Option value={2}>柴油</Select.Option>
+                                <Select.Option value={0}>汽油柴油</Select.Option>
+                            </Select>
+                        </div>
+                        <div className="partner-dialog-input-empty">
+                            <span style={{ visibility: "hidden" }}>请输入地址(不包含特殊字符)</span>
+                        </div>
+                    </div>
+                    <div className="partner-dialog-input-item">
+                        <div style={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            justifyContent: 'center',
+                            alignItems: 'center'
+                        }}>
+                            <div className="partner-dialog-input-hint">
+                                <span>*</span>地址:
+                            </div>
+                            <Input.TextArea
+                                value={partner_address}
+                                style={{ width: 250 }}
+                                autosize={{ minRows: 2 }}
+                                placeholder="最多200字"
+                                maxLength={200}
+                                onChange={this.onChangePartnerAddress}
+                                disabled={typeDialog === 2 ? true : false} />
+                        </div>
+                        <div className="partner-dialog-input-empty">
+                            <span style={{ visibility: isEmptyPartnerAddress ? "visible" : "hidden" }}>请输入地址(不包含特殊字符)</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </Modal>);
@@ -684,3 +639,51 @@ class PartnerDialog extends React.Component {
 }
 
 export default PartnerDialog;
+
+// <div className="partner-image-container">
+//     <div className="partner-image-item">
+//         <div className="partner-image-hint">
+//             <span>*</span>三证合一照片&nbsp;:
+//         </div>
+//         <div className="partner-dialog-upload"
+//              style={{ width: 250 }}
+//              onMouseOver={this.onMouseUp}
+//              onMouseOut={this.onMouseLeave}>
+//             <div className="upload-content">
+//                 <div className="upload-hint"
+//                      style={{ visibility: isEmpty(this.state.partner_cert_img_url) ? "visible" : "hidden" }}>
+//                     <Icon type="plus" />
+//                     上传
+//                 </div>
+//                 <div className="upload-image-div">
+//                     <img src={this.state.partner_cert_img_url}
+//                          style={{ visibility: !isEmpty(this.state.partner_cert_img_url) ? "visible" : "hidden" }}
+//                          alt="三证合一照片" className="upload-image" />
+//                     <div className="upload-overlay"
+//                          style={{ visibility: this.state.isVisiblePre }}>
+//                         <div onClick={this.onPreviewImage}><Icon type="eye-o"
+//                                                                  style={{ color: "#fff" }} /></div>
+//                         <div onClick={this.onDeleteImage}
+//                              style={{ display: typeDialog !== 2 && isCanUpdata ? "block" : "none" }}>
+//                             <Icon
+//                                 type="delete"
+//                                 style={{ color: "#fff" }} /></div>
+//                     </div>
+//                 </div>
+//             </div>
+//             <input className="organization-input"
+//                    type="file"
+//                    value=""
+//                 // id="file"
+//                    onChange={this.onChangeImage}
+//                    style={{ display: isEmpty(this.state.partner_cert_img_url) ? "block" : "none" }}
+//                    accept="image/png, image/jpeg, image/gif, image/jpg" />
+//             <Modal visible={this.state.isCanPreview} footer={null} onCancel={this.handleCancel}>
+//                 <img alt="example" style={{ width: '100%' }} src={this.state.partner_cert_img_url} />
+//             </Modal>
+//         </div>
+//     </div>
+//     <div className="partner-image-empty-hint"
+//          style={{ visibility: isEmptyImage ? "visible" : "hidden" }}>
+{/*        <span>{this.state.isImageHint}</span></div>*/}
+{/*</div>*/}

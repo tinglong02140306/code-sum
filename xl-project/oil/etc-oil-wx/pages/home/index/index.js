@@ -40,7 +40,13 @@ Page({
     open_id:"",
     navigationBarHeight:app.globalData.navigationBarHeight,
     icon_default_station:StationPhotoDefault,
-    icon_default_wash:'https://oss.etcsd.com/object/69342d074c0c4b40a26cc8ef959e851a'
+    icon_default_wash:'https://oss.etcsd.com/object/69342d074c0c4b40a26cc8ef959e851a',
+    rightsData:{
+      equity_logo:'https://oilmag.etcsd.com.cn/oilcoreserver/static//resource/icon-ZHYT-logo1578985473037.png',
+      name:'中航易通加油优惠',
+      equit_type:1,
+      desc_list:["所有ETC用户都可领取，加油满200减10", "限济南中航易通前屯加油站使用，每人限领一张"]
+    }
   },
 
   /**
@@ -200,21 +206,46 @@ Page({
     }
   },
 
-  //权益 银行优惠 item点击
+  //权益 银行优惠 item点击（仅中航易通）
   onRightItemClick:function(e){
     this.setData({open_id:wx.getStorageSync(OPENID)});
     if (wx.getStorageSync(OPENID)){
+        wx.navigateTo({url:`/pages/home/rights/rights`})
+    }else {
+      wx.navigateTo({url:`/pages/login/login`});
+    }
+      //
+      // wx.requestSubscribeMessage({ //获取下发权限
+      //     tmplIds: ['cwAuWqN-TRyRNM9y1yYnOpEbocbqeRn8p5mJ1j6DCyY'], //优惠券过期提醒
+      //     success: (res) => {
+      //       console.log('消息提醒：',res);
+      //         if (res['cwAuWqN-TRyRNM9y1yYnOpEbocbqeRn8p5mJ1j6DCyY'] == 'accept') { //优惠券过期提醒
+      //
+      //
+      //         } else {
+      //             wx.showModal({
+      //                 title: '温馨提示',
+      //                 content: '您已拒绝授权，将无法在微信中收到消息通知！',
+      //                 showCancel: false,
+      //                 success: res => {
+      //                     if (res.confirm) {
+      //                         // 这里可以写自己的逻辑
+      //                     }
+      //                 }
+      //             })
+      //         }
+      //     }
+      // })
+
+  },
+
+  //权益 银行优惠 item点击
+  onRightRequestClick:function(e){
+    this.setData({open_id:wx.getStorageSync(OPENID)});
+    if (wx.getStorageSync(OPENID)){
       let item = e.currentTarget.dataset.item;
-      let url = item.sub_activity_url;//子活动页面url
       const params = encodeURIComponent(JSON.stringify(item));
-      if(url){
-        wx.navigateTo({url:`/pages/home/rights/rights?params=${params}`})
-      }else{//活动暂未上线
-        wx.showToast({
-          title:"活动即将上线,敬请期待",
-          icon:"none"
-        })
-      }
+      wx.navigateTo({url:`/pages/home/rights-request/rights-request?params=${params}`})
     }else {
       wx.navigateTo({url:`/pages/login/login`});
     }
@@ -253,8 +284,7 @@ Page({
     if(hours>1){//时间间隔大于1小时 再次请求天气
       console.log("时间间隔大于1小时");
       getPostPromise(homeApi.weather,{area_name:city}).then(res=>{
-        console.log('res==='+res)
-        console.log('res.wash_car_index==='+res.wash_car_index)
+        // console.log('res.wash_car_index==='+res.wash_car_index)
         res.sd = res.sd&&res.sd.substring(0,res.sd.length-1);
         // res.color = res.sd<20?"#00A170":res.sd<40?"#88D600":res.sd<60?"#F59F00":res.sd<80?"#FF5311":"#FF0000";
         res.color = res.wash_car_index=='适宜'?"#00A170":res.wash_car_index=='较适宜'?"#88D600":res.wash_car_index=='较不宜'?"#F59F00":res.wash_car_index=='较不适宜'?"#F59F00":res.wash_car_index=='不适宜'?"#FF5311":res.wash_car_index=='不宜'?"#FF0000":"#88D600";
@@ -283,7 +313,7 @@ Page({
       flag++;
       this.dealStatus()
       this.setData({banners:res.data||[]});
-      console.log(res.data);
+      // console.log(res.data);
     }).catch(err=>{
       flag++;
       this.dealStatus()
@@ -376,6 +406,11 @@ Page({
     if(near){
       near.distance_meter = keepDecimalFull(near.distance_meter,1);
       near.washer_price = keepDecimalFull(near.washer_price,0).replace('.','');
+      if (near.hours_begin.substr(0,2)<1 && near.hours_end.substr(0,2)>22){
+        near.is_hours = true;
+      }else {
+        near.is_hours = false;
+      }
       // near.washer_price = keepDecimalFull(near.washer_price,1);
       // console.log('near===='+JSON.stringify(near))
       this.setData({

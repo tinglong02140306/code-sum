@@ -32,6 +32,14 @@ export const ActivityMarkLeft = "https://oilmag.etcsd.com.cn/oilcoreserver/stati
 export const ActivityMarkRight = "https://oilmag.etcsd.com.cn/oilcoreserver/static//resource/icon-right-mark1578984489246.png";
 export const ActivityNoActivate = "https://oilmag.etcsd.com.cn/oilcoreserver/static//resource/icon-no-activate1571878925192.png";
 export const ActivityBackground = "https://oilmag.etcsd.com.cn/oilcoreserver/static//resource/weihai-background1572339738952.png";
+
+export const ZhytCoupon30 = "https://oss.etcsd.com/object/1b30940a6a104184bfacc6559dd3dd34";
+export const ZhytCoupon20 = "https://oss.etcsd.com/object/d19cfd6ddba940dba575b89a4811a1c7";
+export const ZhytCoupon10 = "https://oss.etcsd.com/object/a03b3bf4d09743dd8ed12501121092c0";
+
+export const ZhytCouponAl30 = "https://oss.etcsd.com/object/38ddcb7718254029a1ffe0aa7da00cc8";
+export const ZhytCouponAl20 = "https://oss.etcsd.com/object/f54689d6e28447e98f69c0adddf17071";
+export const ZhytCouponAl10 = "https://oss.etcsd.com/object/5d2da77b974f4114896e7a310418ffc7";
 //二维码支付
 export const QrcodeIcon = "https://oilmag.etcsd.com.cn/oilcoreserver/static//resource/qrcode-title-icon1577685367097.png";
 export const QrcodePerfer = "https://oilmag.etcsd.com.cn/oilcoreserver/static//resource/qrcode-perfer.png";

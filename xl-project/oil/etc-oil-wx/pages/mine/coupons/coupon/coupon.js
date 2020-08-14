@@ -67,6 +67,8 @@ Page({
       const qr_code = res.qr_code;
       this.setData({code:qr_code});
       this.drawImg(qr_code);
+      //获取该二维码对应的状态
+      this.getResult(qr_code);
       // if(qr_code){//二维码获取成功
       //   qrApi.draw(qr_code, "qrcode", qrcodewidth, qrcodewidth, null, null);
       //   this.setData({code:qr_code});
@@ -84,7 +86,6 @@ Page({
       wx.showToast({title:`${err.msg}:${err.code}`,icon:"none"});
     });
   },
-
   drawImg: function (qr_code) {
     let imgData = QR.drawImg(qr_code, {
       typeNumber: 4,
@@ -95,7 +96,6 @@ Page({
       qr_code_image: imgData
     })
   },
-
   /**
    * 获取核销结果
    */

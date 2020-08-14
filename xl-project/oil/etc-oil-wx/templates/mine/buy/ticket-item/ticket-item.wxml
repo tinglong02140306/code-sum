@@ -1,10 +1,12 @@
 <template name="ticket_item">
-    <view class="ticket-card-template-container">
+<!--    <view class="ticket-card-template-container-rush">-->
+    <view class="{{item.time_limit_flag||item.count_limit_flag?'ticket-card-template-container-rush':'ticket-card-template-container'}}" >
         <image class="ticket-card-template-bg-img" src="{{item.background_url?item.background_url:'https://oss.etcsd.com/object/17e7048da2fa48f89e729d0ded3250be'}}"></image>
         <view class="ticket-card-template-box">
             <view class="ticket-card-template-info-top">
                 <text class="ticket-card-name-text">{{item.package_name}}</text>
-                <view class="ticket-card-discount-value">{{item.discount_rate}}折</view>
+                <view class="ticket-card-discount-value-rush" wx:if="{{item.time_limit_flag||item.count_limit_flag}}">抢购</view>
+                <view class="ticket-card-discount-value" wx:if="{{!item.time_limit_flag && !item.count_limit_flag}}">{{item.discount_rate}}折</view>
             </view>
             <view class="ticket-card-template-info-top-2">
                 <text class="ticket-card-count-text">含{{item.coupon_count}}张洗车券</text>
@@ -18,6 +20,25 @@
 <!--            水蜡精洗10次，有效期365天-->
             <text class="ticket-card-template-introduce">{{item.description}}</text>
             <view class="ticket-card-template-button theme-button">购买</view>
+        </view>
+        <view class="ticket-card-template-bottom">
+            <view class="ticket-card-template-bottom-item" wx:if="{{item.time_limit_flag}}">
+                <image class="rush-buy-time-img" wx:if="{{item.start_flag}}" src="https://oss.etcsd.com/object/b66d9b71490e40c49daa4fc043ec7a8f"/>
+                <text class="rush-buy-time-hint" wx:if="{{item.start_flag}}">距活动结束</text>
+                <image class="rush-buy-time-img" wx:if="{{!item.start_flag}}" src="https://oss.etcsd.com/object/ea6d795b3a694256b258876c24955bd4"/>
+                <text class="rush-buy-time-hint" wx:if="{{!item.start_flag}}">距活动开始</text>
+                <text class="rush-buy-time">{{item.show_time}}</text>
+            </view>
+            <view class="ticket-card-template-bottom-item" wx:if="{{!item.time_limit_flag}}">
+                <image class="rush-buy-time-img" src="https://oss.etcsd.com/object/b66d9b71490e40c49daa4fc043ec7a8f"/>
+                <text class="rush-buy-time-hint">不限时抢购</text>
+            </view>
+            <view class="ticket-card-template-bottom-item-1" wx:if="{{item.count_limit_flag}}">
+                <text class="rush-buy-number">已抢{{item.saled_count}}</text>
+                <view style="width: 50%;margin-left: 8rpx;border: 2rpx solid #ffdb39;border-radius: 10rpx">
+                    <progress percent="{{item.percent}}" color="#F6D923"  backgroundColor="white" active border-radius="5"></progress>
+                </view>
+            </view>
         </view>
     </view>
 </template>

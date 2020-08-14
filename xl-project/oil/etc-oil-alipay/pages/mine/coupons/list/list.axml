@@ -5,7 +5,6 @@
  * @LastEditTime: 2020-05-20 15:07:15
  * @Description: 优惠券
  -->
- <import src="../../../../templates/mine/coupons/item.axml"/>
 <view class="perference-container">
     <view class="perference-tab-container">
         <block a:for="{{tabs}}" a:key="coupon">
@@ -22,9 +21,8 @@
             show_finish="{{oil_status==1?false:true}}">
             <view class="perference-list-box">
                 <block a:for="{{oil_list}}" a:key="oil">
-                    <template is="coupons_item" data="{{item, index, oilStyleObj}}"></template>
                     <item type="{{1}}" item="{{item}}" onSetDefault="onSetDefault" onSetSelect="onSetSelect"
-                        onSeeCoupon="onSeeCoupon"></item>
+                    onSeeCoupon="onSeeCoupon"></item>
                 </block>
                 <status a:if="{{oil_status}}" type="{{oil_status}}" text="{{oil_status==1?'没有未使用的优惠券哦～':'网络好像断了哦～'}}"
                     onRetryClick="onRetryClick"></status>

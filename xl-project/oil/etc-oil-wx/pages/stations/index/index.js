@@ -419,6 +419,11 @@ Page({
       item.longitude_tx = Number(item.longitude_tx);
       item.distance_meter = keepDecimalFull(item.distance_meter,1);
       item.washer_price = keepDecimalFull(item.washer_price,0).replace('.','');
+      if (item.hours_begin.substr(0,2)<1 && item.hours_end.substr(0,2)>22){
+        item.is_hours = true;
+      }else {
+        item.is_hours = false;
+      }
       return item;
     });
   },

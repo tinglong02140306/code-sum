@@ -112,8 +112,8 @@
 
                
             </view>
-            <!--广告位-->
-            <view class="home-banner-container" a:if="{{banners&&banners.length}}">
+            <!--广告位 TODO-->
+            <!-- <view class="home-banner-container" a:if="{{banners&&banners.length}}">
                 <swiper class="home-banner-swiper" autoplay circular onChange="onBannersChange">
                     <block a:for="{{banners}}" a:key="banners">
                         <swiper-item class="home-banner-swiper-item">
@@ -128,7 +128,7 @@
                         </view>
                     </block>
                 </view>
-            </view>
+            </view> -->
             <!--银行优惠-->
             <view class="home-bank-container" a:if="{{rights&&rights.length}}">
                 <text class="home-bank-text">优惠活动</text>

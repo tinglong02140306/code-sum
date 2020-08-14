@@ -28,6 +28,8 @@ export const STATIONPAGE = "STATIONPAGE";
 export const CODE_WASHER = "CODEWASHER";
 //支付返回
 export const PAYBACK = "PAYBACK";
-//扫普通码进入(推广码)
+//扫普通码进入(推广码、洗车机ID)
+export const FROM_CODE = "FROMCODE";
 export const MARKET_CODE = "MARKETCODE";
+export const WASHER_ID = "WASHERID";
 

@@ -2,6 +2,9 @@
     "pages": [
         "pages/home/index/index",
         "pages/home/rights/rights",
+        "pages/home/donate/index/index",
+        "pages/home/donate/success/success",
+        "pages/home/donate/fail/fail",
         "pages/stations/index/index",
         "pages/stations/map/map",
         "pages/stations/details/details",
@@ -38,13 +41,7 @@
         "pages/mine/ticket-buy/list/list",
         "pages/mine/ticket-buy/order/order",
         "pages/login/login",
-        "pages/mine/ticket-buy/order/order",
-        "pages/home/donate/index/index",
-        "pages/home/donate/success/success",
-        "pages/home/donate/fail/fail",
-        "pages/home/donate/fail/fail",
-        "pages/home/donate/success/success",
-        "pages/home/donate/index/index"
+        "pages/mine/ticket-buy/order/order"
     ],
     "window": {
         "defaultTitle": "ETC加油助手",

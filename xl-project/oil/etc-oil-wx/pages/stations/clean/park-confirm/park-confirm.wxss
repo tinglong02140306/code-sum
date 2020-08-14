@@ -48,3 +48,129 @@
     color: #ffffff;
     font-size: 32rpx;
 }
+
+/*不支持车辆*/
+.fast-oil-far-btns{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 64rpx 0 30rpx 0;
+}
+.clean-no-support-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    background-color: #FFFFFF;
+    width: 670rpx;
+    height: 960rpx;
+    border-radius: 10rpx;
+}
+.clean-no-support-title-box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    background-color: #FFFFFF;
+}
+.clean-no-support-title-line{
+    width: 100%;
+    height: 12rpx;
+    background-color: rgba(5, 187, 126, 0.87);
+    margin-bottom: 0;
+    margin-top: 50rpx;
+}
+.clean-no-support-title-text{
+    color: #333333;
+    font-size: 42rpx;
+    text-align: center;
+    font-weight: bolder;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    margin-top: -50rpx;
+}
+.clean-no-support-title{
+    margin: 30rpx;
+    width: 200rpx;
+    height: 30rpx;
+}
+.clean-no-support-text{
+    /*width: 90%;*/
+    text-align: left;
+    color: #7e7e7e;
+    font-size: 30rpx;
+    margin-left: 42rpx;
+    margin-righ: 42rpx;
+}
+.clean-no-support-text-m{
+    /*width: 90%;*/
+    text-align: left;
+    color: #000000;
+    font-size: 30rpx;
+    margin-righ: 42rpx;
+}
+.clean-no-support-text-row{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-top: 24rpx;
+    /*margin-bottom: 40rpx;*/
+}
+.clean-no-support-text-items{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 20rpx;
+}
+.clean-no-support-image-row{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+.clean-no-support-image-items{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20rpx;
+}
+.clean-no-support-image-text{
+    margin-top: 28rpx;
+    margin-bottom: 12rpx;
+}
+.clean-no-support-image-1{
+    width: 240rpx;
+    height: 108rpx;
+}
+.clean-no-support-image-2{
+    width: 224rpx;
+    height: 88rpx;
+}
+.clean-no-support-image-3{
+    width: 218rpx;
+    height: 68rpx;
+}
+.clean-no-support-image-4{
+    width: 192rpx;
+    height: 74rpx;
+}
+.clean-no-support-btn-item{
+    width: 490rpx;
+    height: 90rpx;
+    line-height: 90rpx;
+    text-align: center;
+    border-radius: 56rpx;
+    background-color: #05BA7D;
+    color: white;
+    font-size: 32rpx;
+    box-shadow: 0rpx 10rpx 40rpx 0rpx rgba(79, 221, 128, 0.3);
+}

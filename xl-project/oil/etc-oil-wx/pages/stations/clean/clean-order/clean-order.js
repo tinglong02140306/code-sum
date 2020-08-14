@@ -4,6 +4,7 @@ import {getHttpPost} from "../../../../http/http";
 import {stationsApi,couponPackageApi,cleanApi} from "../../../../http/api";
 import {CODE_WASHER, PAYBACK,OPENID} from "../../../../constants/global";
 import {keepTwoDecimalFull} from "../../../../utils/util";
+import {getLocation} from "../../../../utils/location";
 const app = getApp();
 let timer = null;
 let params = null;
@@ -76,7 +77,7 @@ Page({
         real_amount:count>0?'0.00':params.order_amount,//最终支付金额
         coupons_select:count>0?true:false,//最终支付金额
       });
-      this.getCouponPackageList();
+      this.getLocationInfo();
       this.getPerferent();
     } catch (error) {
       console.log(error)
@@ -105,9 +106,14 @@ Page({
 
   //使用洗车券支付
   onCleanCouponsClick: function(){
-    const {coupons_select,coupon_count,packageList,new_order_amount,order_amount,coupon_value} = this.data;
+    const {coupons_select,coupon_count,packageList,new_order_amount,order_amount,coupon_value,perferentList} = this.data;
     let select = coupons_select;//洗车券选中状态
     let is_bag = false;//券包选中状态
+    //取消优惠券选择
+    let perferentData = perferentList;
+    perferentData.map(item=>{item.isSelect = false;return item;})
+    this.setData({perferentList:perferentData})
+    //券包选中洗车券勾选不可取消
     packageList.map(item=>{
       if (item.isSelect){
         is_bag = true;
@@ -133,8 +139,13 @@ Page({
 
   //选择洗车券包
   onPackageClick: function(e){
-    const {wash_coupon_count,new_order_amount,order_amount,packageList,coupon_value} = this.data
+    const {wash_coupon_count,new_order_amount,order_amount,packageList,coupon_value,perferentList} = this.data
     let packageData = packageList;
+    //取消优惠券选择
+    let perferentData = perferentList;
+    perferentData.map(item=>{item.isSelect = false;return item;})
+    this.setData({perferentList:perferentData})
+
     let count = wash_coupon_count;
     let item = e.currentTarget.dataset.item;
     packageData.map(items=>{
@@ -182,19 +193,32 @@ Page({
 
   //优惠券选择
   onCheckPergerent: function (e) {
-    const { perferentList, order_no ,new_order_amount,order_amount} = this.data;
+    const { perferentList, order_no ,new_order_amount,order_amount,packageList,wash_coupon_count} = this.data;
     const { index, status } = e.detail;
+    let packageData = packageList;
     this.setData({
       is_show_coupon: false,
       coupons_select: false,
       coupon_value: status ? perferentList[index].coupon_amt : '',
       coupon_put_id: status ? perferentList[index].coupon_push_id : null
     });
+
     if (status){
       const params = {
         order_no:order_no,
         coupon_put_id:status ? perferentList[index].coupon_push_id : null
       }
+      //取消券包选择
+      packageData.map(item=>{
+        item.isSelect = false;
+        return item;
+      })
+      this.setData({
+        coupons_select:false,
+        coupon_count:wash_coupon_count,
+        package_id:'',
+        packageList:packageData
+      })
       this.getCalculateCoupon(params);
     }else {
       this.setData({
@@ -227,7 +251,6 @@ Page({
 
   //获取优惠券数据
   getPerferent: function () {
-    console.log('order_amount=='+this.data.order_amount)
     const params = {
       washer_id: this.data.washer_id,
       payable_amount: this.data.order_amount,
@@ -341,7 +364,6 @@ Page({
               wx.navigateTo({url:`/pages/stations/clean/clean-notice/clean-notice?params=${details}`});
               },
             fail: function (errMsg) {
-              wx.hideLoading();
               // console.log(errMsg.errMsg)
               that.setData({payBack:true})
               if (errMsg.errMsg == 'requestPayment:fail cancel'){
@@ -358,16 +380,42 @@ Page({
     }
   },
 
+  //获取当前的位置信息
+  getLocationInfo:function(){
+    location = app.globalData.location;
+    if(location){
+      const {area_code} = location;
+      this.setData({
+        area_code:area_code,
+      });
+      this.getCouponPackageList();
+    }else{
+      getLocation(true,location=>{
+        this.setData({
+          area_code:location.area_code,
+        });
+        app.globalData.location = location;
+        this.getCouponPackageList();
+      },err=>{
+        wx.showToast({
+          title:err,
+          icon:"none"
+        });
+      });
+    }
+  },
+
   //洗车券包列表查询
   getCouponPackageList:function(){
-    getHttpPost(couponPackageApi.list,{},res=> {
-      wx.hideLoading();
+    const params = {
+      area_code:this.data.area_code
+    }
+    getHttpPost(couponPackageApi.list,params,res=> {
       const data = this.dealPackageResponse(res.data);
       this.setData({
         packageList:data,
       });
     },err=> {
-      wx.hideLoading();
       wx.showToast({title: err.msg, icon: "none"});
     })
   },

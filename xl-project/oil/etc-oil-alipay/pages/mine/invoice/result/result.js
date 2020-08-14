@@ -15,12 +15,6 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad(options) {
-        // TODO
-        // this.setData({
-        //     result_image: 'https://oilmag.etcsd.com.cn/oilcoreserver/static//resource/apply-invoice-fail1570766119624.png',
-        //     result: "开具失败",
-        //     isSuccess: false
-        // });
         try {
             if (options && options.result) {
                 const {

@@ -25,7 +25,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    // etc_list:[{select:false,etc_card_no:1},{select:false,etc_card_no:2},{select:false,etc_card_no:3}],
     etc_list:[],
     item:{},//选中的item
     icon_select:EtcSelected,
@@ -70,15 +69,12 @@ Page({
     }
   },
 
-  onUnload:function(){
-   // this.clearTimer();
-  },
-
   //输入完成发送验证
   onInput:function(e){
     this.setData({verify_code:e.detail.value})
     const {item} = this.data;
-    // const  aa = '370126199311217121'
+    console.log(item);
+    // const  aa = '370481199111068142'
     if (e.detail.value === item.cert_no.substr(12, item.cert_no.length)){
     // if (e.detail.value === aa.substr(12, aa.length)){
       this.bindETC();
@@ -101,16 +97,6 @@ Page({
           }
         }
       });
-    }
-
-    // this.checkCode();
-  },
-
-  //重新发送验证码
-  onResent:function(){
-    if (this.data.countText==='重新获取'){
-      // this.setData({verify_code:''})
-      this.getVerifyCode();
     }
   },
 
@@ -152,38 +138,6 @@ Page({
     });
   },
 
-  //开始验证码计时
-  getCountTimer:function(){
-    count = 60;
-    this.setData({isShowVerify:true})
-    countTimer = setInterval(()=>{
-      if(count===1){
-        clearInterval(countTimer);
-        this.setData({
-          countText:`重新获取`,
-          isCanClick:true,
-          again:false
-        });
-      }else{
-        count--;
-        this.setData({
-          countText:`${count}秒`,
-          isCanClick:false
-        });
-      }
-    },1000);
-  },
-
-  //清除倒计时
-  clearTimer:function(){
-    clearInterval(countTimer);
-    countTimer = null;
-    count = 59;
-    this.setData({
-      countText:`${count}秒`,
-      isCanClick:false
-    });
-  },
 
   //关闭验证码
   onCloseClick: function (options) {
@@ -202,6 +156,7 @@ Page({
   //下一步
   onNextClick:function(){
     const {serverAgree,etcIsSelected,etcIsBank} = this.data;
+    this.setData({isShowVerify:true})
     if (etcIsSelected){
       if (serverAgree){
         this.bindETC();
@@ -209,7 +164,6 @@ Page({
         // if (etcIsBank){
         //   //银行卡签约
         // this.setData({isShowVerify:true})
-        //   this.getVerifyCode();
         // }else {
         //   this.bindETC();
         // }
@@ -246,53 +200,6 @@ Page({
     });
   },
 
-  //发送验证码 网络请求
-  getVerifyCode:function(){
-    const params = {
-      mobile:this.data.item.mobile
-    }
-    wx.showLoading({title:"正在发送验证码...",mask:true});
-    getPostPromise(payApi.verifyCode,params).then(res=>{
-      wx.hideLoading();
-      wx.showToast({title:"已发送",icon:"none"});
-      if (count=59){
-        this.getCountTimer();
-      }
-    }).catch(err=>{
-      wx.hideLoading();
-      if (err.code==='10024'){
-        // 重复发送验证码
-        this.setData({isShowVerify:true})
-      }else {
-        wx.showToast({
-          title:`${err.msg}:${err.code}`,
-          icon:'none'
-        });
-      }
-
-    });
-  },
-
-  //校验验证码 网络请求
-  checkCode:function(){
-    const params = {
-      verify_code:this.data.verify_code,
-      mobile:this.data.item.mobile,
-    }
-    wx.showLoading({title:"正在验证...",mask:true});
-    getPostPromise(payApi.checkCode,params).then(res=>{
-      wx.hideLoading();
-      this.setData({isShowVerify:false})
-      this.bindETC();
-    }).catch(err=>{
-      wx.hideLoading();
-      wx.showToast({
-        title:`${err.msg}`,
-        icon:'none'
-      });
-    });
-  },
-
   //绑定ETC
   bindETC:function(){
     wx.showLoading({title:'正在提交...',mask:true});
@@ -306,13 +213,13 @@ Page({
     }
     getPostPromise(etcApi.bind,params).then(res=>{
       wx.hideLoading();
-      //暂不上线
+      //静默签约暂不上线
       // if (etcIsBank){
       //   this.signUnion();
       // }else {
       //   this.dealPay(1);
       // }
-      // wx.showToast({title:`绑定成功`,icon:'none'});
+      wx.showToast({title:`绑定成功`,icon:'none'});
       this.dealPay(1);
     }).catch(err=>{
       wx.hideLoading();
@@ -329,28 +236,16 @@ Page({
     const params = {
       customer_name:item.user_name,//用户名
       cert_type:item.cert_type,//证件类型
+      etc_card_no:item.etc_card_no,//etc卡号
       cert_no:item.cert_no,//证件号
       bank_name:item.bank_name?item.bank_name:null,//银行名称
-      bank_code:item.bank_code?item.bank_code:null,//银行编码
+      bank_corp_org:item.bank_corp_org?item.bank_corp_org:null,//银行简称
       card_type:item.bank_card_type,//银行卡类型
       card_no:item.bank_account,//签约银行卡卡号
       card_tel:mobile,//银行预留手机
       palate_number:item.car_plate_no?trim(item.car_plate_no):null,//车牌号
       palate_color:item.car_plate_color,//车牌颜色
       sign_type:'0',//签约类型 0-银联静默模式，1-普通模式
-
-      // 静默签约测试数据
-      // customer_name:'王敏',//用户名
-      // cert_type:'01',//证件类型
-      // cert_no:'370481199111068142',//证件号
-      // bank_name:'',//银行名称
-      // bank_code:'',//银行编码
-      // card_type:'0',//银行卡类型
-      // card_no:'6228480259048856373',//签约银行卡卡号
-      // card_tel:'15552866455',//银行预留手机
-      // palate_number:'鲁AY3333',//车牌号
-      // palate_color:'0',//车牌颜色
-      // sign_type:'0',//签约类型 0-银联静默模式，1-普通模式
     }
     wx.showLoading({title:"请稍候...",mask:true});
     getPostPromise(payApi.signUnion,params).then(res=>{
@@ -409,7 +304,7 @@ Page({
         item.card_name="未知卡";
       }
       item.select = false;
-      if (!isEmpty(item.car_plate_no)&&!isEmpty(item.car_plate_color)&&!isEmpty(item.etc_card_no)&&!isEmpty(item.bank_account)&&!isEmpty(item.bank_card_type)&& !isEmpty(item.user_name) &&!isEmpty(item.mobile)){
+      if (!isEmpty(item.car_plate_no)&&!isEmpty(item.car_plate_color)&&!isEmpty(item.etc_card_no)&&!isEmpty(item.bank_account)&&!isEmpty(item.bank_card_type)&& !isEmpty(item.user_name) &&!isEmpty(item.mobile)&&!isEmpty(item.cert_no)){
         //处理银行卡数据  脱敏、空格
         item.bank_account_before = item.bank_account.substr(0, 6);
         item.bank_account_after = item.bank_account.substr(item.bank_account.length - 4);

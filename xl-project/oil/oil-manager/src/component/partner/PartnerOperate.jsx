@@ -13,7 +13,7 @@ class PartnerOperate extends React.Component{
     }
 
     render(){
-        return(<div style={{display:'flex',flexDirection:'row',minWidth:140,fontSize:10}}>
+        return(<div style={{display:'flex',flexDirection:'row',minWidth:90,fontSize:10}}>
             <a style={{padding:2}}
                 onClick={()=>{
                     // if (isEmpty(this.props.record.xlcore_user_id)){}
@@ -35,22 +35,22 @@ class PartnerOperate extends React.Component{
                     <div style={{fontSize:12,marginLeft:2}}>查看</div>
                 </div>
             </a>
-            {isEmpty(this.props.record.xlcore_user_id)? <Popconfirm
-                title="确定要开户么？" okText="是的" cancelText="取消"
-                disabled={isEmpty(this.props.record.xlcore_user_id)?false:true}
-                onConfirm={()=>{this.onConfirmUser(this.props.record.partner_id)}}>
-                <a style={{color:"#ff5501",padding:2}}>
-                    <div style={{display:'flex',flexDirection:'row',alignItems:'center'}}>
-                        <Icon type="usergroup-add" style={{color:"#ff5501"}}/>
-                        <div style={{fontSize:12,marginLeft:2}}>开户</div>
-                    </div>
-                </a>
-            </Popconfirm>: <a style={{color:"#b7b5b5",padding:2}}>
-                <div style={{display:'flex',flexDirection:'row',alignItems:'center'}}>
-                    <Icon type="usergroup-add" style={{color:"#b7b5b5"}}/>
-                    <div style={{fontSize:12,marginLeft:2}}>已开户</div>
-                </div>
-            </a>}
+            {/*{isEmpty(this.props.record.xlcore_user_id)? <Popconfirm*/}
+            {/*    title="确定要开户么？" okText="是的" cancelText="取消"*/}
+            {/*    disabled={isEmpty(this.props.record.xlcore_user_id)?false:true}*/}
+            {/*    onConfirm={()=>{this.onConfirmUser(this.props.record.partner_id)}}>*/}
+            {/*    <a style={{color:"#ff5501",padding:2}}>*/}
+            {/*        <div style={{display:'flex',flexDirection:'row',alignItems:'center'}}>*/}
+            {/*            <Icon type="usergroup-add" style={{color:"#ff5501"}}/>*/}
+            {/*            <div style={{fontSize:12,marginLeft:2}}>开户</div>*/}
+            {/*        </div>*/}
+            {/*    </a>*/}
+            {/*</Popconfirm>: <a style={{color:"#b7b5b5",padding:2}}>*/}
+            {/*    <div style={{display:'flex',flexDirection:'row',alignItems:'center'}}>*/}
+            {/*        <Icon type="usergroup-add" style={{color:"#b7b5b5"}}/>*/}
+            {/*        <div style={{fontSize:12,marginLeft:2}}>已开户</div>*/}
+            {/*    </div>*/}
+            {/*</a>}*/}
         </div> );
     }
 }

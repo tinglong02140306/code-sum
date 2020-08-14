@@ -23,6 +23,7 @@
                             <view class="pay-list-box-left">
                                 <image class="pay-list-icon" src="{{movableViewInfo.data.bank_title_logo}}"></image>
                                 <text class="pay-list-text">{{movableViewInfo.data.title}}</text>
+                                <view class="pay-discount-label" wx:if="{{item.pay_discount_label}}">{{item.pay_discount_label}}</view>
                             </view>
                             <view class="pay-list-box-left">
                                 <view class="pay-discounts-view" wx:if="{{movableViewInfo.data.activity_message}}">
@@ -41,6 +42,7 @@
                                 <view class="pay-list-box-left" style='display: {{pageInfo.readyPlaceIndex == index ? "none" : "visibility"}}'>
                                     <image class="pay-list-icon" src="{{item.bank_title_logo}}"></image>
                                     <text class="pay-list-text">{{item.title}}</text>
+                                    <view class="pay-discount-label" wx:if="{{item.pay_discount_label}}">{{item.pay_discount_label}}</view>
                                 </view>
                                 <view class="pay-list-box-left" style='display: {{pageInfo.readyPlaceIndex == index ? "none" : "visibility"}}'>
                                     <view class="pay-discounts-view" wx:if="{{item.activity_message}}">
@@ -71,6 +73,7 @@
             <view class="person-pay-bank-left">
                 <image class="pay-bank-left-image" src="{{union_icon}}"  mode="widthFix"></image>
                 <text class="pay-bank-left-text">管理/添加银行卡</text>
+                <view class="pay-add-discount-label">银行优惠</view>
             </view>
             <view class="person-pay-bank-left">
                 <image class="pay-bank-right" src="{{next_icon}}"></image>

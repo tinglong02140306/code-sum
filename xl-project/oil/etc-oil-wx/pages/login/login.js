@@ -73,7 +73,7 @@ Page({
       js_code:code,
       encrypted_data:encrypted,
       iv:iv,
-      //todo 代理--普通二维码进入
+      // 代理--普通二维码进入
       invite_code:wx.getStorageSync(MARKET_CODE)?wx.getStorageSync(MARKET_CODE):null
     }
     wx.showLoading({title:"登录中...",mask:true});
@@ -82,7 +82,7 @@ Page({
       wx.showToast({title:"登录成功",icon:"none"});
       wx.setStorageSync(OPENID,res.openid);
       wx.setStorageSync(MOBILE,res.mobile);
-      //todo 代理--普通二维码进入
+      // 代理--普通二维码进入
       wx.setStorageSync(MARKET_CODE,'');
       clearInterval(timer);
       timer = null;

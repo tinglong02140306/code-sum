@@ -78,6 +78,7 @@ Page({
         // this.setData({refresher:true})
         this.getCardData();
     },
+    onLoadMore(){},
 
     //网络连接失败 重新加载
     onRetryClick() {

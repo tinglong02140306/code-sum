@@ -30,6 +30,14 @@
                         <text class="clean-item-status-text">{{details.washer_status=='2'?'使用中':details.washer_status=='3'?'维护中':'空闲'}}</text>
                     </view>
                 </view>
+                <view class="clean-item-box-info-btn">
+                    <view style="margin-top: 20rpx" wx:if="{{!details.is_hours}}">
+                        <text class="clean-item-clean-time">{{details.hours_begin?details.hours_begin:'-'}}</text><text class="clean-item-clean-time">-</text><text class="clean-item-clean-time">{{details.hours_end?details.hours_end:'-'}}</text>
+                    </view>
+                    <view style="margin-top: 20rpx" wx:if="{{details.is_hours}}">
+                        <text class="clean-item-clean-time">24小时营业</text>
+                    </view>
+                </view>
 <!--                <view class="clean-item-box-bottom-right" bind:tap="onRefreshClick">-->
 <!--                    <text class="clean-item-price-marker">刷新</text>-->
 <!--                    <image class="clean-item-status-image-refresh" src="https://oss.etcsd.com/object/d8048ebb9b1b4a4fa1e7d61d461bd426"></image>-->

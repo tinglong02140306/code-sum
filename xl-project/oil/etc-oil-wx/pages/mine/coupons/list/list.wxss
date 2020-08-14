@@ -1,4 +1,5 @@
-.perference-container{
+@import "../../../../templates/mine/coupons/item.wxss";
+.perference-container {
     width: 100vw;
     display: flex;
     flex-direction: column;
@@ -6,7 +7,7 @@
     box-sizing: border-box;
 }
 
-.perference-tab-container{
+.perference-tab-container {
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -16,7 +17,7 @@
     background-color: #ffffff;
 }
 
-.perference-tab-item{
+.perference-tab-item {
     flex: 1;
     display: flex;
     flex-direction: row;
@@ -24,7 +25,7 @@
     align-items: center;
 }
 
-.perference-tab-item-text{
+.perference-tab-item-text {
     width: 140rpx;
     display: flex;
     flex-direction: row;
@@ -36,10 +37,11 @@
     border-bottom: 4rpx solid #08CC8A;
 }
 
-.perference-list{
+.perference-list {
     margin-bottom: 120rpx;
 }
-.perference-list-box{
+
+.perference-list-box {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -49,8 +51,10 @@
     padding-top: 16rpx;
 }
 
+
 /*兑换码*/
-.exchange-code-box{
+
+.exchange-code-box {
     width: 100vw;
     position: fixed;
     bottom: 0;
@@ -65,7 +69,8 @@
     padding-bottom: 24rpx;
     box-shadow: 0rpx -4rpx 20rpx 0rpx rgba(0, 0, 0, 0.04);
 }
-.exchange-code-input-box{
+
+.exchange-code-input-box {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -75,19 +80,22 @@
     border-radius: 12rpx;
     background-color: rgba(237, 237, 237, 1);
 }
-.exchange-code-input{
+
+.exchange-code-input {
     margin-left: 32rpx;
     width: 364rpx;
     height: 72rpx;
     border-radius: 12rpx;
 }
-.code-input-placeholder{
+
+.code-input-placeholder {
     color: rgba(0, 0, 0, 0.45);
     font-size: 30rpx;
     text-align: left;
     font-family: PingFang-SC-Medium;
 }
-.exchange-code-scan-box{
+
+.exchange-code-scan-box {
     width: 84rpx;
     height: 72rpx;
     border-top-right-radius: 12rpx;
@@ -98,11 +106,13 @@
     justify-content: center;
     align-items: center;
 }
-.exchange-code-scan-icon{
+
+.exchange-code-scan-icon {
     width: 36rpx;
     height: 36rpx;
 }
-.exchange-code-btn{
+
+.exchange-code-btn {
     text-align: center;
     line-height: 72rpx;
     width: 180rpx;
@@ -111,4 +121,8 @@
     color: #FFFFFF;
     background-color: rgba(5, 186, 125, 1);
     box-shadow: 0rpx 10rpx 40rpx 0rpx rgba(5, 186, 125, 0.2);
+}
+
+.line-st text {
+    line-height: 40rpx;
 }

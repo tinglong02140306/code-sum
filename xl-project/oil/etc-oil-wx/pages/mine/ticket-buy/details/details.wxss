@@ -15,13 +15,13 @@
     box-sizing: border-box;
 }
 .ticket-buy-details-card{
-    width: 650rpx;
+    width: 690rpx;
     height: 206rpx;
     border-radius: 24rpx;
     background-color: #FFFFFF;
 }
 .ticket-card-details-bg-img{
-    width: 650rpx;
+    width: 690rpx;
     height: 206rpx;
     border-top-right-radius: 24rpx;
     border-top-left-radius: 24rpx;
@@ -30,7 +30,7 @@
 }
 .ticket-card-details-box{
     margin-top: 32rpx;
-    width: 650rpx;
+    width: 690rpx;
     height: 206rpx;
     border-top-right-radius: 24rpx;
     border-top-left-radius: 24rpx;
@@ -77,6 +77,21 @@
     text-align: left;
     font-family: PingFang-SC-Bold;
 }
+.ticket-card-details-discount-value-rush{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 96rpx;
+    height: 42rpx;
+    border-bottom-left-radius: 16rpx;
+    border-top-left-radius: 16rpx;
+    background-color: rgba(255, 228, 183, 1);
+    color: rgba(0, 0, 0, 1);
+    font-size: 28rpx;
+    text-align: left;
+    font-family: PingFang-SC-Bold;
+}
 .ticket-card-details-count-text{
     margin-left: 42rpx;
     margin-top: 20rpx;
@@ -118,7 +133,7 @@
     font-size: 26rpx;
     text-align: left;
     font-family: PingFangSC-Regular;
-    padding: 10rpx 40rpx 24rpx 30rpx;
+    padding: 10rpx 40rpx 0rpx 30rpx;
 }
 
 /*站点*/
@@ -328,4 +343,67 @@
     background-color: rgba(5, 186, 125, 1);
     box-shadow: 0rpx 10rpx 40rpx 0rpx rgba(5, 186, 125, 0.2);
     font-size: 32rpx;
+}
+/*抢购*/
+.ticket-rush-buy-bottom{
+    width: 100%;
+    height: 60rpx;
+    background-color: #FFFFFF;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0 40rpx;
+}
+.ticket-rush-buy-bottom-item{
+    width: 60%;
+    /*height: 89rpx;*/
+    background-color: #FFFFFF;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    box-sizing: border-box;
+}
+.ticket-rush-buy-bottom-item-1{
+    width: 40%;
+    /*height: 89rpx;*/
+    background-color: #FFFFFF;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    box-sizing: border-box;
+}
+.rush-buy-time-img{
+    width: 20rpx;
+    height: 20rpx;
+    /*background-color: rgba(51, 51, 51, 1);*/
+    margin-right: 5rpx;
+    margin-top: 4rpx;
+}
+.rush-buy-time-hint{
+    /*width: 120rpx;*/
+    height: 33rpx;
+    color: rgba(0, 0, 0, 0.65);
+    font-size: 24rpx;
+    text-align: left;
+    margin-right: 8rpx;
+    font-family: PingFangSC-Regular;
+}
+.rush-buy-time{
+    /*width: 100rpx;*/
+    height: 33rpx;
+    color: rgba(5, 186, 125, 1);
+    font-size: 24rpx;
+    text-align: left;
+    font-family: PingFang-SC-Bold;
+
+}
+.rush-buy-number{
+    color: rgba(0, 0, 0, 0.45);
+    font-size: 22rpx;
+    text-align: left;
+    font-family: PingFangSC-Regular;
 }

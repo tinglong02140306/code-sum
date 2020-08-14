@@ -34,7 +34,7 @@ Page({
   onLoad: function (options) {
     try {
       const details = JSON.parse(decodeURIComponent(options.details));
-      if (details.order_type!=='GAS'){
+      if (details.from==='1'){//从消费结果进入
         this.getBillDetails(details)
       }else {
         this.setData({

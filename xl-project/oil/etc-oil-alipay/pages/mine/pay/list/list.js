@@ -98,7 +98,6 @@ Page({
         getHttpPost(paymentApi.sign, {}, res => {
             hideLoading();
             if (res.result_code === "00000") {
-                console.log('res.sign_params',res.sign_params)
                 this.paySignCenter(res.sign_params); 
             }
         },
